@@ -67,8 +67,14 @@ var HeroTable = React.createClass({
         />
         <Column
           label="DOB"
-          width={200}
+          width={400}
           dataKey="date"
+        />
+        <Column
+          flexGrow={1}
+          dataKey="city"
+          label="City"
+          width={400}
         />
       </Table>
     );
@@ -76,4 +82,3 @@ var HeroTable = React.createClass({
 });
 
 module.exports = HeroTable;
-
