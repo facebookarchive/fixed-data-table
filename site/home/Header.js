@@ -61,6 +61,7 @@ var Header = React.createClass({
     return (
       <div className="heroContainer" style={{top: TABLE_OFFSET}}>
         <HeroTable
+          scrollLeft={0.5 * this.state.scroll}
           scrollTop={2 * MAX_HEIGHT - 2 * this.state.scroll}
           tableWidth={this.offsetWidth}
           tableHeight={this.offsetHeight - 100}

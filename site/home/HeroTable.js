@@ -20,6 +20,7 @@ var HeroTable = React.createClass({
   render() {
     return (
       <Table
+        scrollLeft={this.props.scrollLeft}
         scrollTop={this.props.scrollTop}
         overflowX="hidden"
         overflowY="hidden"
@@ -34,20 +35,20 @@ var HeroTable = React.createClass({
           dataKey="firstName"
           fixed={true}
           label="First Name"
-          width={100}
+          width={150}
         />
         <Column
           flexGrow={1}
           dataKey="lastName"
           fixed={true}
           label="Last Name"
-          width={100}
+          width={120}
         />
         <Column
           flexGrow={1}
           dataKey="city"
           label="City"
-          width={100}
+          width={200}
         />
         <Column
           label="Street"
@@ -56,8 +57,18 @@ var HeroTable = React.createClass({
         />
         <Column
           label="Zip Code"
-          width={100}
+          width={200}
           dataKey="zipCode"
+        />
+        <Column
+          label="Email"
+          width={200}
+          dataKey="email"
+        />
+        <Column
+          label="DOB"
+          width={200}
+          dataKey="date"
         />
       </Table>
     );
