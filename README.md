@@ -39,7 +39,13 @@ var FixedDataTable = require('fixed-data-table');
 var Table = FixedDataTable.Table;
 var Column = FixedDataTable.Column;
 
-var rows = [...]; // My table data
+// Table data as a list of array.
+var rows = [
+  ['a1', 'b1', 'c1'],
+  ['a2', 'b3', 'c2'],
+  ['a3', 'b3', 'c3'],
+  ..... /// and more
+];
 
 function rowGetter(rowIndex) {
   return rows[rowIndex];
