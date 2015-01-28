@@ -3,6 +3,7 @@
 var React = require('react');
 var Constants = require('../Constants');
 
+var FIXED_THRESHOLD = 680;
 var MAX_HEIGHT = 800;
 var TABLE_OFFSET = 100;
 var HEADER_HEIGHT = 50;
@@ -19,17 +20,15 @@ var Header = React.createClass({
   },
 
   componentDidMount() {
-    this.offsetWidth = this.getDOMNode().offsetWidth;
+    this.offsetWidth = this._getWindowWidth();
     this.offsetHeight = this.getDOMNode().offsetHeight;
     window.addEventListener('scroll', this.handleScroll);
     window.addEventListener('resize', this.handleResize);
 
-    if (window.matchMedia) {
-      this.setState({
-        renderHero: true,
-        fixed: window.matchMedia('(max-device-width: 680px)').matches,
-      });
-    }
+    this.setState({
+      renderHero: true,
+      fixed: this.offsetWidth <= FIXED_THRESHOLD,
+    });
   },
 
   componentWillUnmount() {
@@ -38,8 +37,11 @@ var Header = React.createClass({
   },
 
   handleResize(event) {
-    this.offsetWidth = this.getDOMNode().offsetWidth;
+    this.offsetWidth = this._getWindowWidth();
     this.offsetHeight = this.getDOMNode().offsetHeight;
+    this.setState({
+      fixed: this.offsetWidth <= FIXED_THRESHOLD,
+    });
     this.forceUpdate();
   },
 
@@ -49,8 +51,12 @@ var Header = React.createClass({
     this.setState({ scroll: scrollPos });
   },
 
+  _getWindowWidth() {
+    return Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+  },
+
   _renderHero() {
-    if (this.offsetWidth < 680) {
+    if (this.offsetWidth <= FIXED_THRESHOLD) {
       return;
     }
 
