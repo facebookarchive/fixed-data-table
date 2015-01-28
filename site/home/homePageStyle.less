@@ -102,10 +102,6 @@
     z-index: 1001;
   }
 
-  .logoPic {
-    height: 80px;
-  }
-
   .miniHeader .miniLogo .logoPic {
     width: 169px;
     height: 23px;
@@ -157,6 +153,19 @@
       only screen and ( min-resolution: 2dppx) {
         background-image: url(../images/fdt_logo_transparent_onlight_50px-2x.png);
         background-size: contain;
+    }
+
+    @media only screen and (max-width: 420px) {
+      width: 267px;
+      margin-left: -133px;
+      background-image: url(../images/fdt_logo_transparent_onlight_50px.png);
+      background-size: contain;
+    }
+
+    @media only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 680px),
+      only screen and ( min-resolution: 192dpi),
+      only screen and ( min-resolution: 2dppx) {
+        background-image: url(../images/fdt_logo_transparent_onlight_50px-2x.png);
     }
   }
 

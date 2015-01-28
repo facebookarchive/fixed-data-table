@@ -21,6 +21,7 @@ var HeroTable = React.createClass({
     return (
       <Table
         scrollTop={this.props.scrollTop}
+        overflowX="hidden"
         overflowY="hidden"
         rowHeight={50}
         headerHeight={50}

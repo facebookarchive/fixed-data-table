@@ -56,10 +56,6 @@ var Header = React.createClass({
   },
 
   _renderHero() {
-    if (this.offsetWidth <= FIXED_THRESHOLD) {
-      return;
-    }
-
     var HeroTable = require('./HeroTable');
 
     return (
@@ -103,9 +99,7 @@ var Header = React.createClass({
             </div>
           </div>
           {this.state.renderHero && this._renderHero()}
-          <div className="logo">
-            <div className="logoPic" />
-          </div>
+          <div className="logo" />
         </div>
       </div>
     );
