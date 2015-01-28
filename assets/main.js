@@ -299,7 +299,7 @@
 	"use strict";
 	
 	var DocsHTMLWrapper = __webpack_require__(18);
-	var TableAPIHTML = __webpack_require__(37);
+	var TableAPIHTML = __webpack_require__(36);
 	var React = __webpack_require__(10);
 	
 	var TableAPIPage = React.createClass({displayName: "TableAPIPage",
@@ -322,7 +322,7 @@
 	"use strict";
 	
 	var DocsHTMLWrapper = __webpack_require__(18);
-	var TableAPIHTML = __webpack_require__(36);
+	var TableAPIHTML = __webpack_require__(37);
 	var React = __webpack_require__(10);
 	
 	var ColumnAPIPage = React.createClass({displayName: "ColumnAPIPage",
@@ -423,9 +423,12 @@
 	
 	  _update:function() {
 	    var win = window;
+	
+	    var widthOffset = win.innerWidth < 680 ? 0 : 240;
+	
 	    this.setState({
 	      renderPage: true,
-	      tableWidth: win.innerWidth - 240,
+	      tableWidth: win.innerWidth - widthOffset,
 	      tableHeight: win.innerHeight - 100,
 	    });
 	  }
@@ -470,6 +473,7 @@
 	var React = __webpack_require__(10);
 	var Constants = __webpack_require__(4);
 	
+	var FIXED_THRESHOLD = 680;
 	var MAX_HEIGHT = 800;
 	var TABLE_OFFSET = 100;
 	var HEADER_HEIGHT = 50;
@@ -486,17 +490,15 @@
 	  },
 	
 	  componentDidMount:function() {
-	    this.offsetWidth = this.getDOMNode().offsetWidth;
+	    this.offsetWidth = this._getWindowWidth();
 	    this.offsetHeight = this.getDOMNode().offsetHeight;
 	    window.addEventListener('scroll', this.handleScroll);
 	    window.addEventListener('resize', this.handleResize);
 	
-	    if (window.matchMedia) {
-	      this.setState({
-	        renderHero: true,
-	        fixed: window.matchMedia('(max-device-width: 680px)').matches,
-	      });
-	    }
+	    this.setState({
+	      renderHero: true,
+	      fixed: this.offsetWidth <= FIXED_THRESHOLD,
+	    });
 	  },
 	
 	  componentWillUnmount:function() {
@@ -505,8 +507,11 @@
 	  },
 	
 	  handleResize:function(event) {
-	    this.offsetWidth = this.getDOMNode().offsetWidth;
+	    this.offsetWidth = this._getWindowWidth();
 	    this.offsetHeight = this.getDOMNode().offsetHeight;
+	    this.setState({
+	      fixed: this.offsetWidth <= FIXED_THRESHOLD,
+	    });
 	    this.forceUpdate();
 	  },
 	
@@ -516,16 +521,17 @@
 	    this.setState({ scroll: scrollPos });
 	  },
 	
-	  _renderHero:function() {
-	    if (this.offsetWidth < 680) {
-	      return;
-	    }
+	  _getWindowWidth:function() {
+	    return Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+	  },
 	
+	  _renderHero:function() {
 	    var HeroTable = __webpack_require__(40);
 	
 	    return (
 	      React.createElement("div", {className: "heroContainer", style: {top: TABLE_OFFSET}}, 
 	        React.createElement(HeroTable, {
+	          scrollLeft: 0.8 * this.state.scroll, 
 	          scrollTop: 2 * MAX_HEIGHT - 2 * this.state.scroll, 
 	          tableWidth: this.offsetWidth, 
 	          tableHeight: this.offsetHeight - 100}
@@ -564,9 +570,7 @@
 	            )
 	          ), 
 	          this.state.renderHero && this._renderHero(), 
-	          React.createElement("div", {className: "logo"}, 
-	            React.createElement("div", {className: "logoPic"})
-	          )
+	          React.createElement("div", {className: "logo"})
 	        )
 	      )
 	    );
@@ -821,19 +825,19 @@
 /* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<h1 id=\"fixed-data-tables-for-react\">Fixed Data Tables for React</h1>\n<p>FixedDataTable is a React component for building and presenting data in a flexible, powerful way. It supports standard table features, like headers, columns, rows, header groupings, and both fixed-position and scrolling columns.</p>\n<p>The table was designed to handle thousands rows of data without sacrificing performance. Scrolling smoothly is a first-class goal of FixedDataTable and it&#39;s architected in a way to allow for flexibility and extensibilty.</p>\n<p>Features of FixedDataTable:</p>\n<ul>\n<li>Fixed headers and footer</li>\n<li>Both fixed and scrollable columns</li>\n<li>Handling huge amounts of data</li>\n<li>Variable row heights (with adaptive scroll positions)</li>\n<li>Column resizing</li>\n<li>Performant scrolling</li>\n<li>Customizable styling</li>\n<li>Jumping to a row or column</li>\n</ul>\n<p>Things that are FixedDataTable doesn&#39;t do:</p>\n<ul>\n<li>FixedDataTable does not provide a layout reflow mechanism or calculates content layout information such as width and height of the cell contents. The developer has to provide the layout information to the table instead.</li>\n<li>FixedDataTable does not handle sorting of data. Instead it allows the developer to supply data getters that can be sort-, filter-, or tail-loading-aware.</li>\n<li>FixedDataTable does not fetch the data (see above)</li>\n<li>FixedDataTable does not support touch devices, but eventually will.</li>\n</ul>\n<h2 id=\"getting-started\">Getting started</h2>\n<p>Install <code>fixed-data-table</code> using npm.</p>\n<code class=\"codeBlock\">npm install fixed<span class=\"token operator\" >-</span>data<span class=\"token operator\" >-</span>table</code><p>Then require it into any module.</p>\n<code class=\"codeBlock\"><span class=\"token keyword\" >var</span> <span class=\"token qualifier\" >React</span> <span class=\"token operator\" >=</span> <span class=\"token function\" >require<span class=\"token punctuation\" >(</span></span><span class=\"token string\" >'react'</span><span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\n<span class=\"token keyword\" >var</span> <span class=\"token qualifier\" >Fixed</span><span class=\"token qualifier\" >Data</span><span class=\"token qualifier\" >Table</span> <span class=\"token operator\" >=</span> <span class=\"token function\" >require<span class=\"token punctuation\" >(</span></span><span class=\"token string\" >'fixed-data-table'</span><span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\n\n<span class=\"token keyword\" >var</span> <span class=\"token qualifier\" >Table</span> <span class=\"token operator\" >=</span> <span class=\"token qualifier\" >Fixed</span><span class=\"token qualifier\" >Data</span><span class=\"token qualifier\" >Table</span><span class=\"token punctuation\" >.</span><span class=\"token qualifier\" >Table</span><span class=\"token punctuation\" >;</span>\n<span class=\"token keyword\" >var</span> <span class=\"token qualifier\" >Column</span> <span class=\"token operator\" >=</span> <span class=\"token qualifier\" >Fixed</span><span class=\"token qualifier\" >Data</span><span class=\"token qualifier\" >Table</span><span class=\"token punctuation\" >.</span><span class=\"token qualifier\" >Column</span><span class=\"token punctuation\" >;</span>\n\n<span class=\"token keyword\" >var</span> rows <span class=\"token operator\" >=</span> <span class=\"token punctuation\" >[</span><span class=\"token punctuation\" >.</span><span class=\"token punctuation\" >.</span><span class=\"token punctuation\" >.</span><span class=\"token punctuation\" >]</span><span class=\"token punctuation\" >;</span> <span class=\"token comment\" spellcheck=\"true\">// My table data\n</span>\n<span class=\"token block-keyword\" >function</span> <span class=\"token function\" >rowGetter<span class=\"token punctuation\" >(</span></span>rowIndex<span class=\"token punctuation\" >)</span> <span class=\"token punctuation\" >{</span>\n  <span class=\"token keyword\" >return</span> rows<span class=\"token punctuation\" >[</span>rowIndex<span class=\"token punctuation\" >]</span><span class=\"token punctuation\" >;</span>\n<span class=\"token punctuation\" >}</span>\n\n<span class=\"token qualifier\" >React</span><span class=\"token punctuation\" >.</span><span class=\"token function\" >render<span class=\"token punctuation\" >(</span></span>\n  <span class=\"token operator\" >&lt;</span><span class=\"token qualifier\" >Table</span>\n    rowHeight<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >50</span><span class=\"token punctuation\" >}</span>\n    rowGetter<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span>rowGetter<span class=\"token punctuation\" >}</span>\n    rowsCount<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span>rows<span class=\"token punctuation\" >.</span>length<span class=\"token punctuation\" >}</span>\n    width<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >5000</span><span class=\"token punctuation\" >}</span>\n    height<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >5000</span><span class=\"token punctuation\" >}</span>\n    headerHeight<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >50</span><span class=\"token punctuation\" >}</span><span class=\"token operator\" >></span>\n    <span class=\"token operator\" >&lt;</span><span class=\"token qualifier\" >Column</span>\n      label<span class=\"token operator\" >=</span><span class=\"token string\" >\"Col 1\"</span>\n      width<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >3000</span><span class=\"token punctuation\" >}</span>\n      dataKey<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >0</span><span class=\"token punctuation\" >}</span>\n    <span class=\"token operator\" >/</span><span class=\"token operator\" >></span>\n    <span class=\"token operator\" >&lt;</span><span class=\"token qualifier\" >Column</span>\n      label<span class=\"token operator\" >=</span><span class=\"token string\" >\"Col 2\"</span>\n      width<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >2000</span><span class=\"token punctuation\" >}</span>\n      dataKey<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >1</span><span class=\"token punctuation\" >}</span>\n    <span class=\"token operator\" >/</span><span class=\"token operator\" >></span>\n  <span class=\"token operator\" >&lt;</span><span class=\"token operator\" >/</span><span class=\"token qualifier\" >Table</span><span class=\"token operator\" >></span><span class=\"token punctuation\" >,</span>\n  document<span class=\"token punctuation\" >.</span><span class=\"token function\" >getElementById<span class=\"token punctuation\" >(</span></span><span class=\"token string\" >'example'</span><span class=\"token punctuation\" >)</span>\n<span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span></code><h2 id=\"contributions\">Contributions</h2>\n<p>Use <a href=\"https://github.com/facebook/fixed-data-table-experimental/issues\">Github issues</a> for requests.</p>\n<p>We actively welcome pull requests; learn how to <a href=\"./CONTRIBUTING.md\">contribute</a>.</p>\n<h2 id=\"changelog\">Changelog</h2>\n<p>Changes are tracked as <a href=\"https://github.com/facebook/fixed-data-table-experimental/releases\">Github releases</a>.</p>\n<h2 id=\"license\">License</h2>\n<p><code>FixedDataTable</code> is <a href=\"./LICENSE\">BSD-licensed</a>. We also provide an additional <a href=\"./PATENTS\">patent grant</a>.</p>\n";
+	module.exports = "<h1 id=\"fixed-data-tables-for-react\">Fixed Data Tables for React</h1>\n<p>FixedDataTable is a React component for building and presenting data in a flexible, powerful way. It supports standard table features, like headers, columns, rows, header groupings, and both fixed-position and scrolling columns.</p>\n<p>The table was designed to handle thousands rows of data without sacrificing performance. Scrolling smoothly is a first-class goal of FixedDataTable and it&#39;s architected in a way to allow for flexibility and extensibilty.</p>\n<p>Features of FixedDataTable:</p>\n<ul>\n<li>Fixed headers and footer</li>\n<li>Both fixed and scrollable columns</li>\n<li>Handling huge amounts of data</li>\n<li>Variable row heights (with adaptive scroll positions)</li>\n<li>Column resizing</li>\n<li>Performant scrolling</li>\n<li>Customizable styling</li>\n<li>Jumping to a row or column</li>\n</ul>\n<p>Things that are FixedDataTable doesn&#39;t do:</p>\n<ul>\n<li>FixedDataTable does not provide a layout reflow mechanism or calculates content layout information such as width and height of the cell contents. The developer has to provide the layout information to the table instead.</li>\n<li>FixedDataTable does not handle sorting of data. Instead it allows the developer to supply data getters that can be sort-, filter-, or tail-loading-aware.</li>\n<li>FixedDataTable does not fetch the data (see above)</li>\n<li>FixedDataTable does not support touch devices, but eventually will.</li>\n</ul>\n<h2 id=\"getting-started\">Getting started</h2>\n<p>Install <code>fixed-data-table</code> using npm.</p>\n<code class=\"codeBlock\">npm install fixed<span class=\"token operator\" >-</span>data<span class=\"token operator\" >-</span>table</code><p>Then require it into any module.</p>\n<code class=\"codeBlock\"><span class=\"token keyword\" >var</span> <span class=\"token qualifier\" >React</span> <span class=\"token operator\" >=</span> <span class=\"token function\" >require<span class=\"token punctuation\" >(</span></span><span class=\"token string\" >'react'</span><span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\n<span class=\"token keyword\" >var</span> <span class=\"token qualifier\" >Fixed</span><span class=\"token qualifier\" >Data</span><span class=\"token qualifier\" >Table</span> <span class=\"token operator\" >=</span> <span class=\"token function\" >require<span class=\"token punctuation\" >(</span></span><span class=\"token string\" >'fixed-data-table'</span><span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\n\n<span class=\"token keyword\" >var</span> <span class=\"token qualifier\" >Table</span> <span class=\"token operator\" >=</span> <span class=\"token qualifier\" >Fixed</span><span class=\"token qualifier\" >Data</span><span class=\"token qualifier\" >Table</span><span class=\"token punctuation\" >.</span><span class=\"token qualifier\" >Table</span><span class=\"token punctuation\" >;</span>\n<span class=\"token keyword\" >var</span> <span class=\"token qualifier\" >Column</span> <span class=\"token operator\" >=</span> <span class=\"token qualifier\" >Fixed</span><span class=\"token qualifier\" >Data</span><span class=\"token qualifier\" >Table</span><span class=\"token punctuation\" >.</span><span class=\"token qualifier\" >Column</span><span class=\"token punctuation\" >;</span>\n\n<span class=\"token comment\" spellcheck=\"true\">// Table data as a list of array.\n</span><span class=\"token keyword\" >var</span> rows <span class=\"token operator\" >=</span> <span class=\"token punctuation\" >[</span>\n  <span class=\"token punctuation\" >[</span><span class=\"token string\" >'a1'</span><span class=\"token punctuation\" >,</span> <span class=\"token string\" >'b1'</span><span class=\"token punctuation\" >,</span> <span class=\"token string\" >'c1'</span><span class=\"token punctuation\" >]</span><span class=\"token punctuation\" >,</span>\n  <span class=\"token punctuation\" >[</span><span class=\"token string\" >'a2'</span><span class=\"token punctuation\" >,</span> <span class=\"token string\" >'b3'</span><span class=\"token punctuation\" >,</span> <span class=\"token string\" >'c2'</span><span class=\"token punctuation\" >]</span><span class=\"token punctuation\" >,</span>\n  <span class=\"token punctuation\" >[</span><span class=\"token string\" >'a3'</span><span class=\"token punctuation\" >,</span> <span class=\"token string\" >'b3'</span><span class=\"token punctuation\" >,</span> <span class=\"token string\" >'c3'</span><span class=\"token punctuation\" >]</span><span class=\"token punctuation\" >,</span>\n  <span class=\"token punctuation\" >.</span><span class=\"token punctuation\" >.</span><span class=\"token punctuation\" >.</span><span class=\"token punctuation\" >.</span><span class=\"token punctuation\" >.</span> <span class=\"token comment\" spellcheck=\"true\">/// and more\n</span><span class=\"token punctuation\" >]</span><span class=\"token punctuation\" >;</span>\n\n<span class=\"token block-keyword\" >function</span> <span class=\"token function\" >rowGetter<span class=\"token punctuation\" >(</span></span>rowIndex<span class=\"token punctuation\" >)</span> <span class=\"token punctuation\" >{</span>\n  <span class=\"token keyword\" >return</span> rows<span class=\"token punctuation\" >[</span>rowIndex<span class=\"token punctuation\" >]</span><span class=\"token punctuation\" >;</span>\n<span class=\"token punctuation\" >}</span>\n\n<span class=\"token qualifier\" >React</span><span class=\"token punctuation\" >.</span><span class=\"token function\" >render<span class=\"token punctuation\" >(</span></span>\n  <span class=\"token operator\" >&lt;</span><span class=\"token qualifier\" >Table</span>\n    rowHeight<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >50</span><span class=\"token punctuation\" >}</span>\n    rowGetter<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span>rowGetter<span class=\"token punctuation\" >}</span>\n    rowsCount<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span>rows<span class=\"token punctuation\" >.</span>length<span class=\"token punctuation\" >}</span>\n    width<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >5000</span><span class=\"token punctuation\" >}</span>\n    height<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >5000</span><span class=\"token punctuation\" >}</span>\n    headerHeight<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >50</span><span class=\"token punctuation\" >}</span><span class=\"token operator\" >></span>\n    <span class=\"token operator\" >&lt;</span><span class=\"token qualifier\" >Column</span>\n      label<span class=\"token operator\" >=</span><span class=\"token string\" >\"Col 1\"</span>\n      width<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >3000</span><span class=\"token punctuation\" >}</span>\n      dataKey<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >0</span><span class=\"token punctuation\" >}</span>\n    <span class=\"token operator\" >/</span><span class=\"token operator\" >></span>\n    <span class=\"token operator\" >&lt;</span><span class=\"token qualifier\" >Column</span>\n      label<span class=\"token operator\" >=</span><span class=\"token string\" >\"Col 2\"</span>\n      width<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >2000</span><span class=\"token punctuation\" >}</span>\n      dataKey<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >1</span><span class=\"token punctuation\" >}</span>\n    <span class=\"token operator\" >/</span><span class=\"token operator\" >></span>\n  <span class=\"token operator\" >&lt;</span><span class=\"token operator\" >/</span><span class=\"token qualifier\" >Table</span><span class=\"token operator\" >></span><span class=\"token punctuation\" >,</span>\n  document<span class=\"token punctuation\" >.</span><span class=\"token function\" >getElementById<span class=\"token punctuation\" >(</span></span><span class=\"token string\" >'example'</span><span class=\"token punctuation\" >)</span>\n<span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span></code><h2 id=\"contributions\">Contributions</h2>\n<p>Use <a href=\"https://github.com/facebook/fixed-data-table-experimental/issues\">Github issues</a> for requests.</p>\n<p>We actively welcome pull requests; learn how to <a href=\"./CONTRIBUTING.md\">contribute</a>.</p>\n<h2 id=\"changelog\">Changelog</h2>\n<p>Changes are tracked as <a href=\"https://github.com/facebook/fixed-data-table-experimental/releases\">Github releases</a>.</p>\n<h2 id=\"license\">License</h2>\n<p><code>FixedDataTable</code> is <a href=\"./LICENSE\">BSD-licensed</a>. We also provide an additional <a href=\"./PATENTS\">patent grant</a>.</p>\n";
 
 /***/ },
 /* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<!-- File generated from \"src/FixedDataTableColumn.react.js\" -->\n<h1 id=\"api-column-component-\">API: <code>Column</code> (component)</h1>\n<p>Component that defines the attributes of table column.</p>\n<h2 id=\"props\">Props</h2>\n<h3 id=\"-align-\"><code>align</code></h3>\n<p>The horizontal alignment of the table cell content.</p>\n<p>type: <code>enum(&#39;left&#39;|&#39;center&#39;|&#39;right&#39;)</code></p>\n<h3 id=\"-cellclassname-\"><code>cellClassName</code></h3>\n<p>className for each of this column&#39;s data cells.</p>\n<p>type: <code>string</code></p>\n<h3 id=\"-cellrenderer-\"><code>cellRenderer</code></h3>\n<p>The data cell renderer\n<code>function(\n  any_cellData,\n  string_cellDataKey,\n  object_rowData,\n  number_rowIndex,\n  any_columnData,\n  number_width\n)</code>\nthat returns React-renderable content for table cell.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-celldatagetter-\"><code>cellDataGetter</code></h3>\n<p>The getter <code>function(string_cellDataKey, object_rowData)</code> that returns\nthe cell data for the <code>cellRenderer</code>.\nIf not provided, the cell data will be collected from\n<code>rowData[cellDataKey]</code> instead. The value that <code>cellDataGetter</code> returns\nwill be used to determine whether the cell should re-render.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-datakey-\"><code>dataKey</code></h3>\n<p>The key to retrieve the cell data from the data row. Provided key type\nmust be either <code>string</code> or <code>number</code>. Since we use this\nfor keys, it must be specified for each column.</p>\n<p>type: <code>custom</code></p>\n<h3 id=\"-headerrenderer-\"><code>headerRenderer</code></h3>\n<p>The header cell renderer\n<code>function(\n  any_cellData,\n  string_cellDataKey,\n  object_rowData,\n  any_columnData\n)</code>\nthat returns React-renderable content for table column header.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-footerrenderer-\"><code>footerRenderer</code></h3>\n<p>The footer cell renderer\n<code>function(\n  any_cellData,\n  string_cellDataKey,\n  object_rowData,\n  any_columnData\n)</code>\nthat returns React-renderable content for table column footer.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-columndata-\"><code>columnData</code></h3>\n<p>Bucket for any data to be passed into column renderer functions.</p>\n<p>type: <code>object</code></p>\n<h3 id=\"-label-\"><code>label</code></h3>\n<p>The column&#39;s header label.</p>\n<p>type: <code>string</code></p>\n<h3 id=\"-width-required-\"><code>width</code> (required)</h3>\n<p>The pixel width of the column.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-minwidth-\"><code>minWidth</code></h3>\n<p>If this is a resizable column this is its minimum width.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-maxwidth-\"><code>maxWidth</code></h3>\n<p>If this is a resizable column this is its maximum width.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-flexgrow-\"><code>flexGrow</code></h3>\n<p>The grow factor relative to other columns. Same as the flex-grow API\nfrom <a href=\"http://www.w3.org/TR/css3-flexbox/\">http://www.w3.org/TR/css3-flexbox/</a>. Basically, take any available\nextra width and distribute it proportionally according to all columns&#39;\nflexGrow values. Defaults to zero (no-flexing).</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-isresizable-\"><code>isResizable</code></h3>\n<p>Whether the column can be resized with the\nFixedDataTableColumnResizeHandle. Please note that if a column\nhas a flex grow, once you resize the column this will be set to 0.</p>\n<p>type: <code>bool</code></p>\n";
+	module.exports = "<!-- File generated from \"src/FixedDataTable.react.js\" -->\n<h1 id=\"api-table-component-\">API: <code>Table</code> (component)</h1>\n<p>Data grid component with fixed or scrollable header and columns.</p>\n<p>The layout of the data table is as follow:</p>\n<code class=\"codeBlock\"><span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+</span>\n<span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Fixed</span> <span class=\"token qualifier\" >Column</span> <span class=\"token qualifier\" >Group</span>    <span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Scrollable</span> <span class=\"token qualifier\" >Column</span> <span class=\"token qualifier\" >Group</span>   <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Header</span>                <span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Header</span>                    <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span>                       <span class=\"token operator\" >|</span>                           <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+</span>\n<span class=\"token operator\" >|</span>                       <span class=\"token operator\" >|</span>                           <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Fixed</span> <span class=\"token qualifier\" >Header</span> <span class=\"token qualifier\" >Columns</span>  <span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Scrollable</span> <span class=\"token qualifier\" >Header</span> <span class=\"token qualifier\" >Columns</span> <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span>                       <span class=\"token operator\" >|</span>                           <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+</span>\n<span class=\"token operator\" >|</span>                       <span class=\"token operator\" >|</span>                           <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Fixed</span> <span class=\"token qualifier\" >Body</span> <span class=\"token qualifier\" >Columns</span>    <span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Scrollable</span> <span class=\"token qualifier\" >Body</span> <span class=\"token qualifier\" >Columns</span>   <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span>                       <span class=\"token operator\" >|</span>                           <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+</span>\n<span class=\"token operator\" >|</span>                       <span class=\"token operator\" >|</span>                           <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Fixed</span> <span class=\"token qualifier\" >Footer</span> <span class=\"token qualifier\" >Columns</span>  <span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Scrollable</span> <span class=\"token qualifier\" >Footer</span> <span class=\"token qualifier\" >Columns</span> <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span>                       <span class=\"token operator\" >|</span>                           <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+</span></code><ul>\n<li><p>Fixed Column Group Header: These are the headers for a group\nof columns if included in the table that do not scroll\nvertically or horizontally.</p>\n</li>\n<li><p>Scrollable Column Group Header:  The header for a group of columns\nthat do not move while scrolling vertically, but move horizontally\nwith the horizontal scrolling.</p>\n</li>\n<li><p>Fixed Header Columns: The header columns that do not move while scrolling\nvertically or horizontally.</p>\n</li>\n<li><p>Scrollable Header Columns: The header columns that do not move\nwhile scrolling vertically, but move horizontally with the horizontal\nscrolling.</p>\n</li>\n<li><p>Fixed Body Columns: The body columns that do not move while scrolling\nhorizontally, but move vertically with the vertical scrolling.</p>\n</li>\n<li><p>Scrollable Body Columns: The body columns that move while scrolling\nvertically or horizontally.</p>\n</li>\n</ul>\n<h2 id=\"props\">Props</h2>\n<h3 id=\"-width-required-\"><code>width</code> (required)</h3>\n<p>type: <code>number</code></p>\n<h3 id=\"-height-\"><code>height</code></h3>\n<p>type: <code>number</code></p>\n<h3 id=\"-maxheight-\"><code>maxHeight</code></h3>\n<p>type: <code>number</code></p>\n<h3 id=\"-ownerheight-\"><code>ownerHeight</code></h3>\n<p>Height of table&#39;s owner, This is used to make sure the footer\nand scrollbar of the table are visible when current space for table in\nview is smaller than final height of table. It allows to avoid resizing\nand reflowing table whan it is moving in the view.</p>\n<p>This is used if <code>ownerHeight &lt; height</code>.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-overflowx-\"><code>overflowX</code></h3>\n<p>type: <code>enum(&#39;hidden&#39;|&#39;auto&#39;)</code></p>\n<h3 id=\"-overflowy-\"><code>overflowY</code></h3>\n<p>type: <code>enum(&#39;hidden&#39;|&#39;auto&#39;)</code></p>\n<h3 id=\"-rowscount-required-\"><code>rowsCount</code> (required)</h3>\n<p>Number of rows in the table.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-rowheight-required-\"><code>rowHeight</code> (required)</h3>\n<p>Height of rows unless rowHeightGetter is specified and returns different\nvalue.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-rowheightgetter-\"><code>rowHeightGetter</code></h3>\n<p>If specified, <code>rowHeightGetter(index)</code> is called for each row and the\nreturned value overrides rowHeight for particular row.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-rowgetter-required-\"><code>rowGetter</code> (required)</h3>\n<p>To get rows to display in table, <code>rowGetter(index)</code>\nis called. rowGetter should be smart enough to handle async\nfetching of data and returning temporary objects\nwhile data is being fetched.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-rowclassnamegetter-\"><code>rowClassNameGetter</code></h3>\n<p>To get any additional css classes that should be added to a row,\n<code>rowClassNameGetter(index)</code> is called.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-groupheaderheight-\"><code>groupHeaderHeight</code></h3>\n<p>Height of the column group header.</p>\n<p>type: <code>number</code>\ndefaultValue: <code>0</code></p>\n<h3 id=\"-headerheight-required-\"><code>headerHeight</code> (required)</h3>\n<p>Height of the header.</p>\n<p>type: <code>number</code>\ndefaultValue: <code>0</code></p>\n<h3 id=\"-headerdatagetter-\"><code>headerDataGetter</code></h3>\n<p>Function that is called to get the data for the header row.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-footerheight-\"><code>footerHeight</code></h3>\n<p>Height of the footer.</p>\n<p>type: <code>number</code>\ndefaultValue: <code>0</code></p>\n<h3 id=\"-footerdata-\"><code>footerData</code></h3>\n<p>Data that will be passed to footer cell renderers.</p>\n<p>type: <code>union(object|array)</code></p>\n<h3 id=\"-scrollleft-\"><code>scrollLeft</code></h3>\n<p>Value of horizontal scroll.</p>\n<p>type: <code>number</code>\ndefaultValue: <code>0</code></p>\n<h3 id=\"-scrolltocolumn-\"><code>scrollToColumn</code></h3>\n<p>Index of column to scroll to.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-scrolltop-\"><code>scrollTop</code></h3>\n<p>Value of vertical scroll.</p>\n<p>type: <code>number</code>\ndefaultValue: <code>0</code></p>\n<h3 id=\"-scrolltorow-\"><code>scrollToRow</code></h3>\n<p>Index of row to scroll to.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-onscrollend-\"><code>onScrollEnd</code></h3>\n<p>Callback that is called when scrolling ends or stops with new horizontal\nand vertical scroll values.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-oncontentheightchange-\"><code>onContentHeightChange</code></h3>\n<p>Callback that is called when <code>rowHeightGetter</code> returns a different height\nfor a row than the <code>rowHeight</code> prop. This is necessary because initially\ntable estimates heights of some parts of the content.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-onrowclick-\"><code>onRowClick</code></h3>\n<p>Callback that is called when a row is clicked.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-onrowmousedown-\"><code>onRowMouseDown</code></h3>\n<p>Callback that is called when mouse down event happens above a row.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-onrowmouseenter-\"><code>onRowMouseEnter</code></h3>\n<p>Callback that is called when the mouse eneters a row.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-oncolumnresizeendcallback-\"><code>onColumnResizeEndCallback</code></h3>\n<p>Callback that is called when resizer has been released\nand column needs to be updated.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-iscolumnresizing-\"><code>isColumnResizing</code></h3>\n<p>Whether a column is currently being resized.</p>\n<p>type: <code>bool</code></p>\n";
 
 /***/ },
 /* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<!-- File generated from \"src/FixedDataTable.react.js\" -->\n<h1 id=\"api-table-component-\">API: <code>Table</code> (component)</h1>\n<p>Data grid component with fixed or scrollable header and columns.</p>\n<p>The layout of the data table is as follow:</p>\n<code class=\"codeBlock\"><span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+</span>\n<span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Fixed</span> <span class=\"token qualifier\" >Column</span> <span class=\"token qualifier\" >Group</span>    <span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Scrollable</span> <span class=\"token qualifier\" >Column</span> <span class=\"token qualifier\" >Group</span>   <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Header</span>                <span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Header</span>                    <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span>                       <span class=\"token operator\" >|</span>                           <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+</span>\n<span class=\"token operator\" >|</span>                       <span class=\"token operator\" >|</span>                           <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Fixed</span> <span class=\"token qualifier\" >Header</span> <span class=\"token qualifier\" >Columns</span>  <span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Scrollable</span> <span class=\"token qualifier\" >Header</span> <span class=\"token qualifier\" >Columns</span> <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span>                       <span class=\"token operator\" >|</span>                           <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+</span>\n<span class=\"token operator\" >|</span>                       <span class=\"token operator\" >|</span>                           <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Fixed</span> <span class=\"token qualifier\" >Body</span> <span class=\"token qualifier\" >Columns</span>    <span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Scrollable</span> <span class=\"token qualifier\" >Body</span> <span class=\"token qualifier\" >Columns</span>   <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span>                       <span class=\"token operator\" >|</span>                           <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+</span>\n<span class=\"token operator\" >|</span>                       <span class=\"token operator\" >|</span>                           <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Fixed</span> <span class=\"token qualifier\" >Footer</span> <span class=\"token qualifier\" >Columns</span>  <span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Scrollable</span> <span class=\"token qualifier\" >Footer</span> <span class=\"token qualifier\" >Columns</span> <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span>                       <span class=\"token operator\" >|</span>                           <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+</span></code><ul>\n<li><p>Fixed Column Group Header: These are the headers for a group\nof columns if included in the table that do not scroll\nvertically or horizontally.</p>\n</li>\n<li><p>Scrollable Column Group Header:  The header for a group of columns\nthat do not move while scrolling vertically, but move horizontally\nwith the horizontal scrolling.</p>\n</li>\n<li><p>Fixed Header Columns: The header columns that do not move while scrolling\nvertically or horizontally.</p>\n</li>\n<li><p>Scrollable Header Columns: The header columns that do not move\nwhile scrolling vertically, but move horizontally with the horizontal\nscrolling.</p>\n</li>\n<li><p>Fixed Body Columns: The body columns that do not move while scrolling\nhorizontally, but move vertically with the vertical scrolling.</p>\n</li>\n<li><p>Scrollable Body Columns: The body columns that move while scrolling\nvertically or horizontally.</p>\n</li>\n</ul>\n<h2 id=\"props\">Props</h2>\n<h3 id=\"-width-required-\"><code>width</code> (required)</h3>\n<p>type: <code>number</code></p>\n<h3 id=\"-height-\"><code>height</code></h3>\n<p>type: <code>number</code></p>\n<h3 id=\"-maxheight-\"><code>maxHeight</code></h3>\n<p>type: <code>number</code></p>\n<h3 id=\"-ownerheight-\"><code>ownerHeight</code></h3>\n<p>Height of table&#39;s owner, This is used to make sure the footer\nand scrollbar of the table are visible when current space for table in\nview is smaller than final height of table. It allows to avoid resizing\nand reflowing table whan it is moving in the view.</p>\n<p>This is used if <code>ownerHeight &lt; height</code>.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-overflowx-\"><code>overflowX</code></h3>\n<p>type: <code>enum(&#39;hidden&#39;|&#39;auto&#39;)</code></p>\n<h3 id=\"-overflowy-\"><code>overflowY</code></h3>\n<p>type: <code>enum(&#39;hidden&#39;|&#39;auto&#39;)</code></p>\n<h3 id=\"-rowscount-required-\"><code>rowsCount</code> (required)</h3>\n<p>Number of rows in the table.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-rowheight-required-\"><code>rowHeight</code> (required)</h3>\n<p>Height of rows unless rowHeightGetter is specified and returns different\nvalue.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-rowheightgetter-\"><code>rowHeightGetter</code></h3>\n<p>If specified, <code>rowHeightGetter(index)</code> is called for each row and the\nreturned value overrides rowHeight for particular row.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-rowgetter-required-\"><code>rowGetter</code> (required)</h3>\n<p>To get rows to display in table, <code>rowGetter(index)</code>\nis called. rowGetter should be smart enough to handle async\nfetching of data and returning temporary objects\nwhile data is being fetched.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-rowclassnamegetter-\"><code>rowClassNameGetter</code></h3>\n<p>To get any additional css classes that should be added to a row,\n<code>rowClassNameGetter(index)</code> is called.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-groupheaderheight-\"><code>groupHeaderHeight</code></h3>\n<p>Height of the column group header.</p>\n<p>type: <code>number</code>\ndefaultValue: <code>0</code></p>\n<h3 id=\"-headerheight-required-\"><code>headerHeight</code> (required)</h3>\n<p>Height of the header.</p>\n<p>type: <code>number</code>\ndefaultValue: <code>0</code></p>\n<h3 id=\"-headerdatagetter-\"><code>headerDataGetter</code></h3>\n<p>Function that is called to get the data for the header row.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-footerheight-\"><code>footerHeight</code></h3>\n<p>Height of the footer.</p>\n<p>type: <code>number</code>\ndefaultValue: <code>0</code></p>\n<h3 id=\"-footerdata-\"><code>footerData</code></h3>\n<p>Data that will be passed to footer cell renderers.</p>\n<p>type: <code>union(object|array)</code></p>\n<h3 id=\"-scrollleft-\"><code>scrollLeft</code></h3>\n<p>Value of horizontal scroll.</p>\n<p>type: <code>number</code>\ndefaultValue: <code>0</code></p>\n<h3 id=\"-scrolltocolumn-\"><code>scrollToColumn</code></h3>\n<p>Index of column to scroll to.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-scrolltop-\"><code>scrollTop</code></h3>\n<p>Value of vertical scroll.</p>\n<p>type: <code>number</code>\ndefaultValue: <code>0</code></p>\n<h3 id=\"-scrolltorow-\"><code>scrollToRow</code></h3>\n<p>Index of row to scroll to.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-onscrollend-\"><code>onScrollEnd</code></h3>\n<p>Callback that is called when scrolling ends or stops with new horizontal\nand vertical scroll values.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-oncontentheightchange-\"><code>onContentHeightChange</code></h3>\n<p>Callback that is called when <code>rowHeightGetter</code> returns a different height\nfor a row than the <code>rowHeight</code> prop. This is necessary because initially\ntable estimates heights of some parts of the content.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-onrowclick-\"><code>onRowClick</code></h3>\n<p>Callback that is called when a row is clicked.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-onrowmousedown-\"><code>onRowMouseDown</code></h3>\n<p>Callback that is called when mouse down event happens above a row.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-onrowmouseenter-\"><code>onRowMouseEnter</code></h3>\n<p>Callback that is called when the mouse eneters a row.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-oncolumnresizeendcallback-\"><code>onColumnResizeEndCallback</code></h3>\n<p>Callback that is called when resizer has been released\nand column needs to be updated.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-iscolumnresizing-\"><code>isColumnResizing</code></h3>\n<p>Whether a column is currently being resized.</p>\n<p>type: <code>bool</code></p>\n";
+	module.exports = "<!-- File generated from \"src/FixedDataTableColumn.react.js\" -->\n<h1 id=\"api-column-component-\">API: <code>Column</code> (component)</h1>\n<p>Component that defines the attributes of table column.</p>\n<h2 id=\"props\">Props</h2>\n<h3 id=\"-align-\"><code>align</code></h3>\n<p>The horizontal alignment of the table cell content.</p>\n<p>type: <code>enum(&#39;left&#39;|&#39;center&#39;|&#39;right&#39;)</code></p>\n<h3 id=\"-cellclassname-\"><code>cellClassName</code></h3>\n<p>className for each of this column&#39;s data cells.</p>\n<p>type: <code>string</code></p>\n<h3 id=\"-cellrenderer-\"><code>cellRenderer</code></h3>\n<p>The data cell renderer\n<code>function(\n  any_cellData,\n  string_cellDataKey,\n  object_rowData,\n  number_rowIndex,\n  any_columnData,\n  number_width\n)</code>\nthat returns React-renderable content for table cell.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-celldatagetter-\"><code>cellDataGetter</code></h3>\n<p>The getter <code>function(string_cellDataKey, object_rowData)</code> that returns\nthe cell data for the <code>cellRenderer</code>.\nIf not provided, the cell data will be collected from\n<code>rowData[cellDataKey]</code> instead. The value that <code>cellDataGetter</code> returns\nwill be used to determine whether the cell should re-render.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-datakey-\"><code>dataKey</code></h3>\n<p>The key to retrieve the cell data from the data row. Provided key type\nmust be either <code>string</code> or <code>number</code>. Since we use this\nfor keys, it must be specified for each column.</p>\n<p>type: <code>custom</code></p>\n<h3 id=\"-headerrenderer-\"><code>headerRenderer</code></h3>\n<p>The header cell renderer\n<code>function(\n  any_cellData,\n  string_cellDataKey,\n  object_rowData,\n  any_columnData\n)</code>\nthat returns React-renderable content for table column header.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-footerrenderer-\"><code>footerRenderer</code></h3>\n<p>The footer cell renderer\n<code>function(\n  any_cellData,\n  string_cellDataKey,\n  object_rowData,\n  any_columnData\n)</code>\nthat returns React-renderable content for table column footer.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-columndata-\"><code>columnData</code></h3>\n<p>Bucket for any data to be passed into column renderer functions.</p>\n<p>type: <code>object</code></p>\n<h3 id=\"-label-\"><code>label</code></h3>\n<p>The column&#39;s header label.</p>\n<p>type: <code>string</code></p>\n<h3 id=\"-width-required-\"><code>width</code> (required)</h3>\n<p>The pixel width of the column.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-minwidth-\"><code>minWidth</code></h3>\n<p>If this is a resizable column this is its minimum width.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-maxwidth-\"><code>maxWidth</code></h3>\n<p>If this is a resizable column this is its maximum width.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-flexgrow-\"><code>flexGrow</code></h3>\n<p>The grow factor relative to other columns. Same as the flex-grow API\nfrom <a href=\"http://www.w3.org/TR/css3-flexbox/\">http://www.w3.org/TR/css3-flexbox/</a>. Basically, take any available\nextra width and distribute it proportionally according to all columns&#39;\nflexGrow values. Defaults to zero (no-flexing).</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-isresizable-\"><code>isResizable</code></h3>\n<p>Whether the column can be resized with the\nFixedDataTableColumnResizeHandle. Please note that if a column\nhas a flex grow, once you resize the column this will be set to 0.</p>\n<p>type: <code>bool</code></p>\n";
 
 /***/ },
 /* 38 */
@@ -1057,7 +1061,9 @@
 	  render:function() {
 	    return (
 	      React.createElement(Table, {
+	        scrollLeft: this.props.scrollLeft, 
 	        scrollTop: this.props.scrollTop, 
+	        overflowX: "hidden", 
 	        overflowY: "hidden", 
 	        rowHeight: 50, 
 	        headerHeight: 50, 
@@ -1070,20 +1076,20 @@
 	          dataKey: "firstName", 
 	          fixed: true, 
 	          label: "First Name", 
-	          width: 100}
+	          width: 150}
 	        ), 
 	        React.createElement(Column, {
 	          flexGrow: 1, 
 	          dataKey: "lastName", 
 	          fixed: true, 
 	          label: "Last Name", 
-	          width: 100}
+	          width: 120}
 	        ), 
 	        React.createElement(Column, {
 	          flexGrow: 1, 
 	          dataKey: "city", 
 	          label: "City", 
-	          width: 100}
+	          width: 200}
 	        ), 
 	        React.createElement(Column, {
 	          label: "Street", 
@@ -1092,8 +1098,24 @@
 	        ), 
 	        React.createElement(Column, {
 	          label: "Zip Code", 
-	          width: 100, 
+	          width: 200, 
 	          dataKey: "zipCode"}
+	        ), 
+	        React.createElement(Column, {
+	          label: "Email", 
+	          width: 200, 
+	          dataKey: "email"}
+	        ), 
+	        React.createElement(Column, {
+	          label: "DOB", 
+	          width: 400, 
+	          dataKey: "date"}
+	        ), 
+	        React.createElement(Column, {
+	          flexGrow: 1, 
+	          dataKey: "city", 
+	          label: "City", 
+	          width: 400}
 	        )
 	      )
 	    );
@@ -1101,7 +1123,6 @@
 	});
 	
 	module.exports = HeroTable;
-	
 
 
 /***/ },
@@ -1126,7 +1147,7 @@
 	var React = __webpack_require__(10);
 	var Constants = __webpack_require__(4);
 	
-	__webpack_require__(59);
+	__webpack_require__(60);
 	
 	var GITHUB_URL = 'https://github.com/facebook/fixed-data-table-experimental';
 	
@@ -1354,23 +1375,23 @@
 	
 	/* jslint bitwise: true */
 	
-	var FixedDataTableHelper = __webpack_require__(86);
-	var Locale = __webpack_require__(87);
+	var FixedDataTableHelper = __webpack_require__(87);
+	var Locale = __webpack_require__(88);
 	var React = __webpack_require__(1);
-	var ReactComponentWithPureRenderMixin = __webpack_require__(88);
-	var ReactWheelHandler = __webpack_require__(89);
-	var Scrollbar = __webpack_require__(90);
-	var FixedDataTableBufferedRows = __webpack_require__(91);
-	var FixedDataTableColumnResizeHandle = __webpack_require__(92);
-	var FixedDataTableRow = __webpack_require__(93);
-	var FixedDataTableScrollHelper = __webpack_require__(94);
-	var FixedDataTableWidthHelper = __webpack_require__(95);
+	var ReactComponentWithPureRenderMixin = __webpack_require__(89);
+	var ReactWheelHandler = __webpack_require__(90);
+	var Scrollbar = __webpack_require__(91);
+	var FixedDataTableBufferedRows = __webpack_require__(92);
+	var FixedDataTableColumnResizeHandle = __webpack_require__(93);
+	var FixedDataTableRow = __webpack_require__(94);
+	var FixedDataTableScrollHelper = __webpack_require__(95);
+	var FixedDataTableWidthHelper = __webpack_require__(96);
 	
-	var cloneWithProps = __webpack_require__(96);
-	var cx = __webpack_require__(97);
-	var debounceCore = __webpack_require__(98);
-	var emptyFunction = __webpack_require__(99);
-	var invariant = __webpack_require__(100);
+	var cloneWithProps = __webpack_require__(97);
+	var cx = __webpack_require__(98);
+	var debounceCore = __webpack_require__(99);
+	var emptyFunction = __webpack_require__(100);
+	var invariant = __webpack_require__(86);
 	var shallowEqual = __webpack_require__(101);
 	var translateDOMPositionXY = __webpack_require__(102);
 	
@@ -2361,7 +2382,7 @@
 	 */
 	
 	var React = __webpack_require__(1);
-	var invariant = __webpack_require__(100);
+	var invariant = __webpack_require__(86);
 	
 	var PropTypes = React.PropTypes;
 	
@@ -2587,13 +2608,13 @@
 
 
 /***/ },
-/* 59 */
+/* 59 */,
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 60 */,
 /* 61 */,
 /* 62 */
 /***/ function(module, exports, __webpack_require__) {
@@ -3186,12 +3207,12 @@
 	"use strict";
 	
 	var ReactElement = __webpack_require__(69);
-	var ReactOwner = __webpack_require__(122);
-	var ReactUpdates = __webpack_require__(126);
+	var ReactOwner = __webpack_require__(120);
+	var ReactUpdates = __webpack_require__(121);
 	
 	var assign = __webpack_require__(82);
 	var invariant = __webpack_require__(117);
-	var keyMirror = __webpack_require__(128);
+	var keyMirror = __webpack_require__(122);
 	
 	/**
 	 * Every React component is in one of these life cycles.
@@ -3635,20 +3656,20 @@
 	var ReactCurrentOwner = __webpack_require__(68);
 	var ReactElement = __webpack_require__(69);
 	var ReactElementValidator = __webpack_require__(70);
-	var ReactEmptyComponent = __webpack_require__(120);
-	var ReactErrorUtils = __webpack_require__(121);
+	var ReactEmptyComponent = __webpack_require__(123);
+	var ReactErrorUtils = __webpack_require__(124);
 	var ReactLegacyElement = __webpack_require__(75);
-	var ReactOwner = __webpack_require__(122);
+	var ReactOwner = __webpack_require__(120);
 	var ReactPerf = __webpack_require__(78);
-	var ReactPropTransferer = __webpack_require__(123);
-	var ReactPropTypeLocations = __webpack_require__(124);
-	var ReactPropTypeLocationNames = __webpack_require__(125);
-	var ReactUpdates = __webpack_require__(126);
+	var ReactPropTransferer = __webpack_require__(125);
+	var ReactPropTypeLocations = __webpack_require__(126);
+	var ReactPropTypeLocationNames = __webpack_require__(127);
+	var ReactUpdates = __webpack_require__(121);
 	
 	var assign = __webpack_require__(82);
-	var instantiateReactComponent = __webpack_require__(127);
+	var instantiateReactComponent = __webpack_require__(128);
 	var invariant = __webpack_require__(117);
-	var keyMirror = __webpack_require__(128);
+	var keyMirror = __webpack_require__(122);
 	var keyOf = __webpack_require__(129);
 	var monitorCodeUse = __webpack_require__(130);
 	var mapObject = __webpack_require__(131);
@@ -5432,7 +5453,7 @@
 	"use strict";
 	
 	var ReactElement = __webpack_require__(69);
-	var ReactPropTypeLocations = __webpack_require__(124);
+	var ReactPropTypeLocations = __webpack_require__(126);
 	var ReactCurrentOwner = __webpack_require__(68);
 	
 	var monitorCodeUse = __webpack_require__(130);
@@ -7107,10 +7128,10 @@
 	var ReactInstanceHandles = __webpack_require__(74);
 	var ReactPerf = __webpack_require__(78);
 	
-	var containsNode = __webpack_require__(165);
+	var containsNode = __webpack_require__(163);
 	var deprecated = __webpack_require__(83);
-	var getReactRootElementInContainer = __webpack_require__(166);
-	var instantiateReactComponent = __webpack_require__(127);
+	var getReactRootElementInContainer = __webpack_require__(164);
+	var instantiateReactComponent = __webpack_require__(128);
 	var invariant = __webpack_require__(117);
 	var shouldUpdateReactComponent = __webpack_require__(132);
 	var warning = __webpack_require__(115);
@@ -7801,10 +7822,10 @@
 	"use strict";
 	
 	var ReactComponent = __webpack_require__(65);
-	var ReactMultiChildUpdateTypes = __webpack_require__(163);
+	var ReactMultiChildUpdateTypes = __webpack_require__(165);
 	
-	var flattenChildren = __webpack_require__(164);
-	var instantiateReactComponent = __webpack_require__(127);
+	var flattenChildren = __webpack_require__(166);
+	var instantiateReactComponent = __webpack_require__(128);
 	var shouldUpdateReactComponent = __webpack_require__(132);
 	
 	/**
@@ -8318,10 +8339,10 @@
 	"use strict";
 	
 	var ReactElement = __webpack_require__(69);
-	var ReactPropTypeLocationNames = __webpack_require__(125);
+	var ReactPropTypeLocationNames = __webpack_require__(127);
 	
 	var deprecated = __webpack_require__(83);
-	var emptyFunction = __webpack_require__(167);
+	var emptyFunction = __webpack_require__(169);
 	
 	/**
 	 * Collection of methods that allow declaration and validation of props that are
@@ -8677,11 +8698,11 @@
 	
 	var ReactElement = __webpack_require__(69);
 	var ReactInstanceHandles = __webpack_require__(74);
-	var ReactMarkupChecksum = __webpack_require__(168);
+	var ReactMarkupChecksum = __webpack_require__(167);
 	var ReactServerRenderingTransaction =
-	  __webpack_require__(169);
+	  __webpack_require__(168);
 	
-	var instantiateReactComponent = __webpack_require__(127);
+	var instantiateReactComponent = __webpack_require__(128);
 	var invariant = __webpack_require__(117);
 	
 	/**
@@ -9057,13 +9078,72 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
+	 * @providesModule invariant
+	 */
+	
+	"use strict";
+	
+	/**
+	 * Use invariant() to assert state which your program assumes to be true.
+	 *
+	 * Provide sprintf-style format (only %s is supported) and arguments
+	 * to provide information about what broke and what you were
+	 * expecting.
+	 *
+	 * The invariant message will be stripped in production, but the invariant
+	 * will remain to ensure logic does not differ in production.
+	 */
+	
+	var invariant = function(condition, format, a, b, c, d, e, f) {
+	  if (true) {
+	    if (format === undefined) {
+	      throw new Error('invariant requires an error message argument');
+	    }
+	  }
+	
+	  if (!condition) {
+	    var error;
+	    if (format === undefined) {
+	      error = new Error(
+	        'Minified exception occurred; use the non-minified dev environment ' +
+	        'for the full error message and additional helpful warnings.'
+	      );
+	    } else {
+	      var args = [a, b, c, d, e, f];
+	      var argIndex = 0;
+	      error = new Error(
+	        'Invariant Violation: ' +
+	        format.replace(/%s/g, function() { return args[argIndex++]; })
+	      );
+	    }
+	
+	    error.framesToPop = 1; // we don't care about invariant's own frame
+	    throw error;
+	  }
+	};
+	
+	module.exports = invariant;
+
+
+/***/ },
+/* 87 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
 	 * @providesModule FixedDataTableHelper
 	 * @typechecks
 	 */
 	
 	"use strict";
 	
-	var Locale = __webpack_require__(87);
+	var Locale = __webpack_require__(88);
 	var React = __webpack_require__(1);
 	var FixedDataTableColumnGroup = __webpack_require__(58);
 	var FixedDataTableColumn = __webpack_require__(57);
@@ -9109,7 +9189,7 @@
 
 
 /***/ },
-/* 87 */
+/* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9135,7 +9215,7 @@
 
 
 /***/ },
-/* 88 */
+/* 89 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9153,7 +9233,7 @@
 
 
 /***/ },
-/* 89 */
+/* 90 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9229,7 +9309,7 @@
 
 
 /***/ },
-/* 90 */
+/* 91 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9247,12 +9327,12 @@
 	var DOMMouseMoveTracker = __webpack_require__(104);
 	var Keys = __webpack_require__(105);
 	var React = __webpack_require__(1);
-	var ReactComponentWithPureRenderMixin = __webpack_require__(88);
-	var ReactWheelHandler = __webpack_require__(89);
+	var ReactComponentWithPureRenderMixin = __webpack_require__(89);
+	var ReactWheelHandler = __webpack_require__(90);
 	
 	var cssVar = __webpack_require__(106);
-	var cx = __webpack_require__(97);
-	var emptyFunction = __webpack_require__(99);
+	var cx = __webpack_require__(98);
+	var emptyFunction = __webpack_require__(100);
 	var translateDOMPositionXY = __webpack_require__(102);
 	
 	var PropTypes = React.PropTypes;
@@ -9714,7 +9794,7 @@
 
 
 /***/ },
-/* 91 */
+/* 92 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9731,10 +9811,10 @@
 	
 	var React = __webpack_require__(1);
 	var FixedDataTableRowBuffer = __webpack_require__(107);
-	var FixedDataTableRow = __webpack_require__(93);
+	var FixedDataTableRow = __webpack_require__(94);
 	
-	var cx = __webpack_require__(97);
-	var emptyFunction = __webpack_require__(99);
+	var cx = __webpack_require__(98);
+	var emptyFunction = __webpack_require__(100);
 	var joinClasses = __webpack_require__(108);
 	
 	var PropTypes = React.PropTypes;
@@ -9878,7 +9958,7 @@
 
 
 /***/ },
-/* 92 */
+/* 93 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9898,12 +9978,12 @@
 	 */
 	
 	var DOMMouseMoveTracker = __webpack_require__(104);
-	var Locale = __webpack_require__(87);
+	var Locale = __webpack_require__(88);
 	var React = __webpack_require__(1);
-	var ReactComponentWithPureRenderMixin = __webpack_require__(88);
+	var ReactComponentWithPureRenderMixin = __webpack_require__(89);
 	
 	var clamp = __webpack_require__(109);
-	var cx = __webpack_require__(97);
+	var cx = __webpack_require__(98);
 	
 	var PropTypes = React.PropTypes;
 	
@@ -10050,7 +10130,7 @@
 
 
 /***/ },
-/* 93 */
+/* 94 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10067,12 +10147,12 @@
 	
 	"use strict";
 	
-	var FixedDataTableHelper = __webpack_require__(86);
+	var FixedDataTableHelper = __webpack_require__(87);
 	var React = __webpack_require__(1);
-	var ReactComponentWithPureRenderMixin = __webpack_require__(88);
+	var ReactComponentWithPureRenderMixin = __webpack_require__(89);
 	var FixedDataTableCellGroup = __webpack_require__(110);
 	
-	var cx = __webpack_require__(97);
+	var cx = __webpack_require__(98);
 	var joinClasses = __webpack_require__(108);
 	var translateDOMPositionXY = __webpack_require__(102);
 	
@@ -10297,7 +10377,7 @@
 
 
 /***/ },
-/* 94 */
+/* 95 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10567,7 +10647,7 @@
 
 
 /***/ },
-/* 95 */
+/* 96 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10585,7 +10665,7 @@
 	
 	var React = __webpack_require__(1);
 	
-	var cloneWithProps = __webpack_require__(96);
+	var cloneWithProps = __webpack_require__(97);
 	
 	function getTotalWidth(/*array*/ columns) /*number*/ {
 	  var totalWidth = 0;
@@ -10715,7 +10795,7 @@
 
 
 /***/ },
-/* 96 */
+/* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10733,7 +10813,7 @@
 
 
 /***/ },
-/* 97 */
+/* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10746,6 +10826,18 @@
 	 *
 	 * @providesModule cx
 	 */
+	
+	var slashReplaceRegex = /\//g;
+	var cache = {};
+	
+	function getClassName(className) {
+	  if (cache[className]) {
+	    return cache[className];
+	  }
+	
+	  cache[className] = className.replace(slashReplaceRegex, '_');
+	  return cache[className];
+	}
 	
 	/**
 	 * This function is used to mark string literals representing CSS class names
@@ -10763,8 +10855,6 @@
 	 * @return string       Renderable space-separated CSS className.
 	 */
 	function cx(classNames) {
-	  // TODO(pieterv): Optimise and memorize!!
-	
 	  var classNamesArray;
 	  if (typeof classNames == 'object') {
 	    classNamesArray = Object.keys(classNames).filter(function(className) {
@@ -10774,16 +10864,14 @@
 	    classNamesArray = Array.prototype.slice.call(arguments);
 	  }
 	
-	  return classNamesArray.map(
-	    function(className)  {return className.replace(/\//g, '_');}
-	  ).join(' ');
+	  return classNamesArray.map(getClassName).join(' ');
 	}
 	
 	module.exports = cx;
 
 
 /***/ },
-/* 98 */
+/* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10848,7 +10936,7 @@
 
 
 /***/ },
-/* 99 */
+/* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10883,65 +10971,6 @@
 	emptyFunction.thatReturnsArgument = function(arg) { return arg; };
 	
 	module.exports = emptyFunction;
-
-
-/***/ },
-/* 100 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule invariant
-	 */
-	
-	"use strict";
-	
-	/**
-	 * Use invariant() to assert state which your program assumes to be true.
-	 *
-	 * Provide sprintf-style format (only %s is supported) and arguments
-	 * to provide information about what broke and what you were
-	 * expecting.
-	 *
-	 * The invariant message will be stripped in production, but the invariant
-	 * will remain to ensure logic does not differ in production.
-	 */
-	
-	var invariant = function(condition, format, a, b, c, d, e, f) {
-	  if (true) {
-	    if (format === undefined) {
-	      throw new Error('invariant requires an error message argument');
-	    }
-	  }
-	
-	  if (!condition) {
-	    var error;
-	    if (format === undefined) {
-	      error = new Error(
-	        'Minified exception occurred; use the non-minified dev environment ' +
-	        'for the full error message and additional helpful warnings.'
-	      );
-	    } else {
-	      var args = [a, b, c, d, e, f];
-	      var argIndex = 0;
-	      error = new Error(
-	        'Invariant Violation: ' +
-	        format.replace(/%s/g, function() { return args[argIndex++]; })
-	      );
-	    }
-	
-	    error.framesToPop = 1; // we don't care about invariant's own frame
-	    throw error;
-	  }
-	};
-	
-	module.exports = invariant;
 
 
 /***/ },
@@ -11070,20 +11099,20 @@
 	
 	*/
 	
-	exports.name = __webpack_require__(181);
-	exports.address = __webpack_require__(182);
-	exports.phone = __webpack_require__(183);
-	exports.internet = __webpack_require__(184);
-	exports.company = __webpack_require__(185);
-	exports.image = __webpack_require__(186);
-	exports.lorem = __webpack_require__(187);
-	exports.helpers =  __webpack_require__(188);
-	exports.date = __webpack_require__(189);
-	exports.random = __webpack_require__(190);
-	exports.finance = __webpack_require__(191);
-	exports.hacker = __webpack_require__(192);
+	exports.name = __webpack_require__(176);
+	exports.address = __webpack_require__(177);
+	exports.phone = __webpack_require__(178);
+	exports.internet = __webpack_require__(179);
+	exports.company = __webpack_require__(180);
+	exports.image = __webpack_require__(181);
+	exports.lorem = __webpack_require__(182);
+	exports.helpers =  __webpack_require__(183);
+	exports.date = __webpack_require__(184);
+	exports.random = __webpack_require__(185);
+	exports.finance = __webpack_require__(186);
+	exports.hacker = __webpack_require__(187);
 	
-	var locales = exports.locales = __webpack_require__(193);
+	var locales = exports.locales = __webpack_require__(188);
 	
 	// default locale
 	exports.locale = "en";
@@ -11141,9 +11170,9 @@
 	 * @typechecks
 	 */
 	
-	var EventListener = __webpack_require__(176);
+	var EventListener = __webpack_require__(189);
 	
-	var cancelAnimationFramePolyfill = __webpack_require__(177);
+	var cancelAnimationFramePolyfill = __webpack_require__(190);
 	var requestAnimationFramePolyfill = __webpack_require__(171);
 	
 	
@@ -11372,10 +11401,10 @@
 	 */
 	'use strict';
 	
-	var IntegerBufferSet = __webpack_require__(178);
+	var IntegerBufferSet = __webpack_require__(191);
 	
 	var clamp = __webpack_require__(109);
-	var invariant = __webpack_require__(100);
+	var invariant = __webpack_require__(86);
 	var MIN_BUFFER_ROWS = 5;
 	var MAX_BUFFER_ROWS = 15;
 	
@@ -11618,13 +11647,13 @@
 	
 	"use strict";
 	
-	var FixedDataTableHelper = __webpack_require__(86);
-	var ImmutableObject = __webpack_require__(179);
+	var FixedDataTableHelper = __webpack_require__(87);
+	var ImmutableObject = __webpack_require__(192);
 	var React = __webpack_require__(1);
-	var ReactComponentWithPureRenderMixin = __webpack_require__(88);
-	var FixedDataTableCell = __webpack_require__(180);
+	var ReactComponentWithPureRenderMixin = __webpack_require__(89);
+	var FixedDataTableCell = __webpack_require__(193);
 	
-	var cx = __webpack_require__(97);
+	var cx = __webpack_require__(98);
 	var renderToString = FixedDataTableHelper.renderToString;
 	var translateDOMPositionXY = __webpack_require__(102);
 	
@@ -12375,7 +12404,7 @@
 	
 	"use strict";
 	
-	var emptyFunction = __webpack_require__(167);
+	var emptyFunction = __webpack_require__(169);
 	
 	/**
 	 * Similar to invariant but only logs a warning if the condition is not met.
@@ -12422,7 +12451,7 @@
 	
 	"use strict";
 	
-	var keyMirror = __webpack_require__(128);
+	var keyMirror = __webpack_require__(122);
 	
 	var PropagationPhases = keyMirror({bubbled: null, captured: null});
 	
@@ -12848,121 +12877,6 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * Copyright 2014, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule ReactEmptyComponent
-	 */
-	
-	"use strict";
-	
-	var ReactElement = __webpack_require__(69);
-	
-	var invariant = __webpack_require__(117);
-	
-	var component;
-	// This registry keeps track of the React IDs of the components that rendered to
-	// `null` (in reality a placeholder such as `noscript`)
-	var nullComponentIdsRegistry = {};
-	
-	var ReactEmptyComponentInjection = {
-	  injectEmptyComponent: function(emptyComponent) {
-	    component = ReactElement.createFactory(emptyComponent);
-	  }
-	};
-	
-	/**
-	 * @return {ReactComponent} component The injected empty component.
-	 */
-	function getEmptyComponent() {
-	  ("production" !== (undefined) ? invariant(
-	    component,
-	    'Trying to return null from a render, but no null placeholder component ' +
-	    'was injected.'
-	  ) : invariant(component));
-	  return component();
-	}
-	
-	/**
-	 * Mark the component as having rendered to null.
-	 * @param {string} id Component's `_rootNodeID`.
-	 */
-	function registerNullComponentID(id) {
-	  nullComponentIdsRegistry[id] = true;
-	}
-	
-	/**
-	 * Unmark the component as having rendered to null: it renders to something now.
-	 * @param {string} id Component's `_rootNodeID`.
-	 */
-	function deregisterNullComponentID(id) {
-	  delete nullComponentIdsRegistry[id];
-	}
-	
-	/**
-	 * @param {string} id Component's `_rootNodeID`.
-	 * @return {boolean} True if the component is rendered to null.
-	 */
-	function isNullComponentID(id) {
-	  return nullComponentIdsRegistry[id];
-	}
-	
-	var ReactEmptyComponent = {
-	  deregisterNullComponentID: deregisterNullComponentID,
-	  getEmptyComponent: getEmptyComponent,
-	  injection: ReactEmptyComponentInjection,
-	  isNullComponentID: isNullComponentID,
-	  registerNullComponentID: registerNullComponentID
-	};
-	
-	module.exports = ReactEmptyComponent;
-
-
-/***/ },
-/* 121 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-2014, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule ReactErrorUtils
-	 * @typechecks
-	 */
-	
-	"use strict";
-	
-	var ReactErrorUtils = {
-	  /**
-	   * Creates a guarded version of a function. This is supposed to make debugging
-	   * of event handlers easier. To aid debugging with the browser's debugger,
-	   * this currently simply returns the original function.
-	   *
-	   * @param {function} func Function to be executed
-	   * @param {string} name The name of the guard
-	   * @return {function}
-	   */
-	  guard: function(func, name) {
-	    return func;
-	  }
-	};
-	
-	module.exports = ReactErrorUtils;
-
-
-/***/ },
-/* 122 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
 	 * Copyright 2013-2014, Facebook, Inc.
 	 * All rights reserved.
 	 *
@@ -13117,234 +13031,7 @@
 
 
 /***/ },
-/* 123 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-2014, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule ReactPropTransferer
-	 */
-	
-	"use strict";
-	
-	var assign = __webpack_require__(82);
-	var emptyFunction = __webpack_require__(167);
-	var invariant = __webpack_require__(117);
-	var joinClasses = __webpack_require__(199);
-	var warning = __webpack_require__(115);
-	
-	var didWarn = false;
-	
-	/**
-	 * Creates a transfer strategy that will merge prop values using the supplied
-	 * `mergeStrategy`. If a prop was previously unset, this just sets it.
-	 *
-	 * @param {function} mergeStrategy
-	 * @return {function}
-	 */
-	function createTransferStrategy(mergeStrategy) {
-	  return function(props, key, value) {
-	    if (!props.hasOwnProperty(key)) {
-	      props[key] = value;
-	    } else {
-	      props[key] = mergeStrategy(props[key], value);
-	    }
-	  };
-	}
-	
-	var transferStrategyMerge = createTransferStrategy(function(a, b) {
-	  // `merge` overrides the first object's (`props[key]` above) keys using the
-	  // second object's (`value`) keys. An object's style's existing `propA` would
-	  // get overridden. Flip the order here.
-	  return assign({}, b, a);
-	});
-	
-	/**
-	 * Transfer strategies dictate how props are transferred by `transferPropsTo`.
-	 * NOTE: if you add any more exceptions to this list you should be sure to
-	 * update `cloneWithProps()` accordingly.
-	 */
-	var TransferStrategies = {
-	  /**
-	   * Never transfer `children`.
-	   */
-	  children: emptyFunction,
-	  /**
-	   * Transfer the `className` prop by merging them.
-	   */
-	  className: createTransferStrategy(joinClasses),
-	  /**
-	   * Transfer the `style` prop (which is an object) by merging them.
-	   */
-	  style: transferStrategyMerge
-	};
-	
-	/**
-	 * Mutates the first argument by transferring the properties from the second
-	 * argument.
-	 *
-	 * @param {object} props
-	 * @param {object} newProps
-	 * @return {object}
-	 */
-	function transferInto(props, newProps) {
-	  for (var thisKey in newProps) {
-	    if (!newProps.hasOwnProperty(thisKey)) {
-	      continue;
-	    }
-	
-	    var transferStrategy = TransferStrategies[thisKey];
-	
-	    if (transferStrategy && TransferStrategies.hasOwnProperty(thisKey)) {
-	      transferStrategy(props, thisKey, newProps[thisKey]);
-	    } else if (!props.hasOwnProperty(thisKey)) {
-	      props[thisKey] = newProps[thisKey];
-	    }
-	  }
-	  return props;
-	}
-	
-	/**
-	 * ReactPropTransferer are capable of transferring props to another component
-	 * using a `transferPropsTo` method.
-	 *
-	 * @class ReactPropTransferer
-	 */
-	var ReactPropTransferer = {
-	
-	  TransferStrategies: TransferStrategies,
-	
-	  /**
-	   * Merge two props objects using TransferStrategies.
-	   *
-	   * @param {object} oldProps original props (they take precedence)
-	   * @param {object} newProps new props to merge in
-	   * @return {object} a new object containing both sets of props merged.
-	   */
-	  mergeProps: function(oldProps, newProps) {
-	    return transferInto(assign({}, oldProps), newProps);
-	  },
-	
-	  /**
-	   * @lends {ReactPropTransferer.prototype}
-	   */
-	  Mixin: {
-	
-	    /**
-	     * Transfer props from this component to a target component.
-	     *
-	     * Props that do not have an explicit transfer strategy will be transferred
-	     * only if the target component does not already have the prop set.
-	     *
-	     * This is usually used to pass down props to a returned root component.
-	     *
-	     * @param {ReactElement} element Component receiving the properties.
-	     * @return {ReactElement} The supplied `component`.
-	     * @final
-	     * @protected
-	     */
-	    transferPropsTo: function(element) {
-	      ("production" !== (undefined) ? invariant(
-	        element._owner === this,
-	        '%s: You can\'t call transferPropsTo() on a component that you ' +
-	        'don\'t own, %s. This usually means you are calling ' +
-	        'transferPropsTo() on a component passed in as props or children.',
-	        this.constructor.displayName,
-	        typeof element.type === 'string' ?
-	        element.type :
-	        element.type.displayName
-	      ) : invariant(element._owner === this));
-	
-	      if ("production" !== (undefined)) {
-	        if (!didWarn) {
-	          didWarn = true;
-	          ("production" !== (undefined) ? warning(
-	            false,
-	            'transferPropsTo is deprecated. ' +
-	            'See http://fb.me/react-transferpropsto for more information.'
-	          ) : null);
-	        }
-	      }
-	
-	      // Because elements are immutable we have to merge into the existing
-	      // props object rather than clone it.
-	      transferInto(element.props, this.props);
-	
-	      return element;
-	    }
-	
-	  }
-	};
-	
-	module.exports = ReactPropTransferer;
-
-
-/***/ },
-/* 124 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-2014, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule ReactPropTypeLocations
-	 */
-	
-	"use strict";
-	
-	var keyMirror = __webpack_require__(128);
-	
-	var ReactPropTypeLocations = keyMirror({
-	  prop: null,
-	  context: null,
-	  childContext: null
-	});
-	
-	module.exports = ReactPropTypeLocations;
-
-
-/***/ },
-/* 125 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-2014, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule ReactPropTypeLocationNames
-	 */
-	
-	"use strict";
-	
-	var ReactPropTypeLocationNames = {};
-	
-	if ("production" !== (undefined)) {
-	  ReactPropTypeLocationNames = {
-	    prop: 'prop',
-	    context: 'context',
-	    childContext: 'child context'
-	  };
-	}
-	
-	module.exports = ReactPropTypeLocationNames;
-
-
-/***/ },
-/* 126 */
+/* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -13360,11 +13047,11 @@
 	
 	"use strict";
 	
-	var CallbackQueue = __webpack_require__(200);
+	var CallbackQueue = __webpack_require__(199);
 	var PooledClass = __webpack_require__(118);
 	var ReactCurrentOwner = __webpack_require__(68);
 	var ReactPerf = __webpack_require__(78);
-	var Transaction = __webpack_require__(201);
+	var Transaction = __webpack_require__(200);
 	
 	var assign = __webpack_require__(82);
 	var invariant = __webpack_require__(117);
@@ -13636,7 +13323,406 @@
 
 
 /***/ },
+/* 122 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-2014, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule keyMirror
+	 * @typechecks static-only
+	 */
+	
+	"use strict";
+	
+	var invariant = __webpack_require__(117);
+	
+	/**
+	 * Constructs an enumeration with keys equal to their value.
+	 *
+	 * For example:
+	 *
+	 *   var COLORS = keyMirror({blue: null, red: null});
+	 *   var myColor = COLORS.blue;
+	 *   var isColorValid = !!COLORS[myColor];
+	 *
+	 * The last line could not be performed if the values of the generated enum were
+	 * not equal to their keys.
+	 *
+	 *   Input:  {key1: val1, key2: val2}
+	 *   Output: {key1: key1, key2: key2}
+	 *
+	 * @param {object} obj
+	 * @return {object}
+	 */
+	var keyMirror = function(obj) {
+	  var ret = {};
+	  var key;
+	  ("production" !== (undefined) ? invariant(
+	    obj instanceof Object && !Array.isArray(obj),
+	    'keyMirror(...): Argument must be an object.'
+	  ) : invariant(obj instanceof Object && !Array.isArray(obj)));
+	  for (key in obj) {
+	    if (!obj.hasOwnProperty(key)) {
+	      continue;
+	    }
+	    ret[key] = key;
+	  }
+	  return ret;
+	};
+	
+	module.exports = keyMirror;
+
+
+/***/ },
+/* 123 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2014, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactEmptyComponent
+	 */
+	
+	"use strict";
+	
+	var ReactElement = __webpack_require__(69);
+	
+	var invariant = __webpack_require__(117);
+	
+	var component;
+	// This registry keeps track of the React IDs of the components that rendered to
+	// `null` (in reality a placeholder such as `noscript`)
+	var nullComponentIdsRegistry = {};
+	
+	var ReactEmptyComponentInjection = {
+	  injectEmptyComponent: function(emptyComponent) {
+	    component = ReactElement.createFactory(emptyComponent);
+	  }
+	};
+	
+	/**
+	 * @return {ReactComponent} component The injected empty component.
+	 */
+	function getEmptyComponent() {
+	  ("production" !== (undefined) ? invariant(
+	    component,
+	    'Trying to return null from a render, but no null placeholder component ' +
+	    'was injected.'
+	  ) : invariant(component));
+	  return component();
+	}
+	
+	/**
+	 * Mark the component as having rendered to null.
+	 * @param {string} id Component's `_rootNodeID`.
+	 */
+	function registerNullComponentID(id) {
+	  nullComponentIdsRegistry[id] = true;
+	}
+	
+	/**
+	 * Unmark the component as having rendered to null: it renders to something now.
+	 * @param {string} id Component's `_rootNodeID`.
+	 */
+	function deregisterNullComponentID(id) {
+	  delete nullComponentIdsRegistry[id];
+	}
+	
+	/**
+	 * @param {string} id Component's `_rootNodeID`.
+	 * @return {boolean} True if the component is rendered to null.
+	 */
+	function isNullComponentID(id) {
+	  return nullComponentIdsRegistry[id];
+	}
+	
+	var ReactEmptyComponent = {
+	  deregisterNullComponentID: deregisterNullComponentID,
+	  getEmptyComponent: getEmptyComponent,
+	  injection: ReactEmptyComponentInjection,
+	  isNullComponentID: isNullComponentID,
+	  registerNullComponentID: registerNullComponentID
+	};
+	
+	module.exports = ReactEmptyComponent;
+
+
+/***/ },
+/* 124 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-2014, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactErrorUtils
+	 * @typechecks
+	 */
+	
+	"use strict";
+	
+	var ReactErrorUtils = {
+	  /**
+	   * Creates a guarded version of a function. This is supposed to make debugging
+	   * of event handlers easier. To aid debugging with the browser's debugger,
+	   * this currently simply returns the original function.
+	   *
+	   * @param {function} func Function to be executed
+	   * @param {string} name The name of the guard
+	   * @return {function}
+	   */
+	  guard: function(func, name) {
+	    return func;
+	  }
+	};
+	
+	module.exports = ReactErrorUtils;
+
+
+/***/ },
+/* 125 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-2014, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactPropTransferer
+	 */
+	
+	"use strict";
+	
+	var assign = __webpack_require__(82);
+	var emptyFunction = __webpack_require__(169);
+	var invariant = __webpack_require__(117);
+	var joinClasses = __webpack_require__(201);
+	var warning = __webpack_require__(115);
+	
+	var didWarn = false;
+	
+	/**
+	 * Creates a transfer strategy that will merge prop values using the supplied
+	 * `mergeStrategy`. If a prop was previously unset, this just sets it.
+	 *
+	 * @param {function} mergeStrategy
+	 * @return {function}
+	 */
+	function createTransferStrategy(mergeStrategy) {
+	  return function(props, key, value) {
+	    if (!props.hasOwnProperty(key)) {
+	      props[key] = value;
+	    } else {
+	      props[key] = mergeStrategy(props[key], value);
+	    }
+	  };
+	}
+	
+	var transferStrategyMerge = createTransferStrategy(function(a, b) {
+	  // `merge` overrides the first object's (`props[key]` above) keys using the
+	  // second object's (`value`) keys. An object's style's existing `propA` would
+	  // get overridden. Flip the order here.
+	  return assign({}, b, a);
+	});
+	
+	/**
+	 * Transfer strategies dictate how props are transferred by `transferPropsTo`.
+	 * NOTE: if you add any more exceptions to this list you should be sure to
+	 * update `cloneWithProps()` accordingly.
+	 */
+	var TransferStrategies = {
+	  /**
+	   * Never transfer `children`.
+	   */
+	  children: emptyFunction,
+	  /**
+	   * Transfer the `className` prop by merging them.
+	   */
+	  className: createTransferStrategy(joinClasses),
+	  /**
+	   * Transfer the `style` prop (which is an object) by merging them.
+	   */
+	  style: transferStrategyMerge
+	};
+	
+	/**
+	 * Mutates the first argument by transferring the properties from the second
+	 * argument.
+	 *
+	 * @param {object} props
+	 * @param {object} newProps
+	 * @return {object}
+	 */
+	function transferInto(props, newProps) {
+	  for (var thisKey in newProps) {
+	    if (!newProps.hasOwnProperty(thisKey)) {
+	      continue;
+	    }
+	
+	    var transferStrategy = TransferStrategies[thisKey];
+	
+	    if (transferStrategy && TransferStrategies.hasOwnProperty(thisKey)) {
+	      transferStrategy(props, thisKey, newProps[thisKey]);
+	    } else if (!props.hasOwnProperty(thisKey)) {
+	      props[thisKey] = newProps[thisKey];
+	    }
+	  }
+	  return props;
+	}
+	
+	/**
+	 * ReactPropTransferer are capable of transferring props to another component
+	 * using a `transferPropsTo` method.
+	 *
+	 * @class ReactPropTransferer
+	 */
+	var ReactPropTransferer = {
+	
+	  TransferStrategies: TransferStrategies,
+	
+	  /**
+	   * Merge two props objects using TransferStrategies.
+	   *
+	   * @param {object} oldProps original props (they take precedence)
+	   * @param {object} newProps new props to merge in
+	   * @return {object} a new object containing both sets of props merged.
+	   */
+	  mergeProps: function(oldProps, newProps) {
+	    return transferInto(assign({}, oldProps), newProps);
+	  },
+	
+	  /**
+	   * @lends {ReactPropTransferer.prototype}
+	   */
+	  Mixin: {
+	
+	    /**
+	     * Transfer props from this component to a target component.
+	     *
+	     * Props that do not have an explicit transfer strategy will be transferred
+	     * only if the target component does not already have the prop set.
+	     *
+	     * This is usually used to pass down props to a returned root component.
+	     *
+	     * @param {ReactElement} element Component receiving the properties.
+	     * @return {ReactElement} The supplied `component`.
+	     * @final
+	     * @protected
+	     */
+	    transferPropsTo: function(element) {
+	      ("production" !== (undefined) ? invariant(
+	        element._owner === this,
+	        '%s: You can\'t call transferPropsTo() on a component that you ' +
+	        'don\'t own, %s. This usually means you are calling ' +
+	        'transferPropsTo() on a component passed in as props or children.',
+	        this.constructor.displayName,
+	        typeof element.type === 'string' ?
+	        element.type :
+	        element.type.displayName
+	      ) : invariant(element._owner === this));
+	
+	      if ("production" !== (undefined)) {
+	        if (!didWarn) {
+	          didWarn = true;
+	          ("production" !== (undefined) ? warning(
+	            false,
+	            'transferPropsTo is deprecated. ' +
+	            'See http://fb.me/react-transferpropsto for more information.'
+	          ) : null);
+	        }
+	      }
+	
+	      // Because elements are immutable we have to merge into the existing
+	      // props object rather than clone it.
+	      transferInto(element.props, this.props);
+	
+	      return element;
+	    }
+	
+	  }
+	};
+	
+	module.exports = ReactPropTransferer;
+
+
+/***/ },
+/* 126 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-2014, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactPropTypeLocations
+	 */
+	
+	"use strict";
+	
+	var keyMirror = __webpack_require__(122);
+	
+	var ReactPropTypeLocations = keyMirror({
+	  prop: null,
+	  context: null,
+	  childContext: null
+	});
+	
+	module.exports = ReactPropTypeLocations;
+
+
+/***/ },
 /* 127 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-2014, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactPropTypeLocationNames
+	 */
+	
+	"use strict";
+	
+	var ReactPropTypeLocationNames = {};
+	
+	if ("production" !== (undefined)) {
+	  ReactPropTypeLocationNames = {
+	    prop: 'prop',
+	    context: 'context',
+	    childContext: 'child context'
+	  };
+	}
+	
+	module.exports = ReactPropTypeLocationNames;
+
+
+/***/ },
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -13658,7 +13744,7 @@
 	var ReactElement = __webpack_require__(69);
 	var ReactLegacyElement = __webpack_require__(75);
 	var ReactNativeComponent = __webpack_require__(202);
-	var ReactEmptyComponent = __webpack_require__(120);
+	var ReactEmptyComponent = __webpack_require__(123);
 	
 	/**
 	 * Given an `element` create an instance that will actually be mounted.
@@ -13749,63 +13835,6 @@
 	}
 	
 	module.exports = instantiateReactComponent;
-
-
-/***/ },
-/* 128 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-2014, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule keyMirror
-	 * @typechecks static-only
-	 */
-	
-	"use strict";
-	
-	var invariant = __webpack_require__(117);
-	
-	/**
-	 * Constructs an enumeration with keys equal to their value.
-	 *
-	 * For example:
-	 *
-	 *   var COLORS = keyMirror({blue: null, red: null});
-	 *   var myColor = COLORS.blue;
-	 *   var isColorValid = !!COLORS[myColor];
-	 *
-	 * The last line could not be performed if the values of the generated enum were
-	 * not equal to their keys.
-	 *
-	 *   Input:  {key1: val1, key2: val2}
-	 *   Output: {key1: key1, key2: key2}
-	 *
-	 * @param {object} obj
-	 * @return {object}
-	 */
-	var keyMirror = function(obj) {
-	  var ret = {};
-	  var key;
-	  ("production" !== (undefined) ? invariant(
-	    obj instanceof Object && !Array.isArray(obj),
-	    'keyMirror(...): Argument must be an object.'
-	  ) : invariant(obj instanceof Object && !Array.isArray(obj)));
-	  for (key in obj) {
-	    if (!obj.hasOwnProperty(key)) {
-	      continue;
-	    }
-	    ret[key] = key;
-	  }
-	  return ret;
-	};
-	
-	module.exports = keyMirror;
 
 
 /***/ },
@@ -14137,7 +14166,7 @@
 	
 	"use strict";
 	
-	var ReactEmptyComponent = __webpack_require__(120);
+	var ReactEmptyComponent = __webpack_require__(123);
 	var ReactMount = __webpack_require__(76);
 	
 	var invariant = __webpack_require__(117);
@@ -14840,7 +14869,7 @@
 	var EventPluginHub = __webpack_require__(207);
 	var EventPropagators = __webpack_require__(211);
 	var ExecutionEnvironment = __webpack_require__(85);
-	var ReactUpdates = __webpack_require__(126);
+	var ReactUpdates = __webpack_require__(121);
 	var SyntheticEvent = __webpack_require__(213);
 	
 	var isEventSupported = __webpack_require__(136);
@@ -15901,7 +15930,7 @@
 	
 	var EventConstants = __webpack_require__(116);
 	
-	var emptyFunction = __webpack_require__(167);
+	var emptyFunction = __webpack_require__(169);
 	
 	var topLevelTypes = EventConstants.topLevelTypes;
 	
@@ -15963,12 +15992,12 @@
 	"use strict";
 	
 	var ReactDOMIDOperations = __webpack_require__(219);
-	var ReactMarkupChecksum = __webpack_require__(168);
+	var ReactMarkupChecksum = __webpack_require__(167);
 	var ReactMount = __webpack_require__(76);
 	var ReactPerf = __webpack_require__(78);
 	var ReactReconcileTransaction = __webpack_require__(220);
 	
-	var getReactRootElementInContainer = __webpack_require__(166);
+	var getReactRootElementInContainer = __webpack_require__(164);
 	var invariant = __webpack_require__(117);
 	var setInnerHTML = __webpack_require__(221);
 	
@@ -16084,11 +16113,11 @@
 	
 	"use strict";
 	
-	var ReactUpdates = __webpack_require__(126);
-	var Transaction = __webpack_require__(201);
+	var ReactUpdates = __webpack_require__(121);
+	var Transaction = __webpack_require__(200);
 	
 	var assign = __webpack_require__(82);
-	var emptyFunction = __webpack_require__(167);
+	var emptyFunction = __webpack_require__(169);
 	
 	var RESET_BATCHED_UPDATES = {
 	  initialize: emptyFunction,
@@ -16167,7 +16196,7 @@
 	var ReactElement = __webpack_require__(69);
 	var ReactDOM = __webpack_require__(71);
 	
-	var keyMirror = __webpack_require__(128);
+	var keyMirror = __webpack_require__(122);
 	
 	// Store a reference to the <button> `ReactDOMComponent`. TODO: use string
 	var button = ReactElement.createFactory(ReactDOM.button.type);
@@ -16344,7 +16373,7 @@
 	var ReactElement = __webpack_require__(69);
 	var ReactDOM = __webpack_require__(71);
 	var ReactMount = __webpack_require__(76);
-	var ReactUpdates = __webpack_require__(126);
+	var ReactUpdates = __webpack_require__(121);
 	
 	var assign = __webpack_require__(82);
 	var invariant = __webpack_require__(117);
@@ -16577,7 +16606,7 @@
 	var ReactCompositeComponent = __webpack_require__(66);
 	var ReactElement = __webpack_require__(69);
 	var ReactDOM = __webpack_require__(71);
-	var ReactUpdates = __webpack_require__(126);
+	var ReactUpdates = __webpack_require__(121);
 	
 	var assign = __webpack_require__(82);
 	
@@ -16766,7 +16795,7 @@
 	var ReactCompositeComponent = __webpack_require__(66);
 	var ReactElement = __webpack_require__(69);
 	var ReactDOM = __webpack_require__(71);
-	var ReactUpdates = __webpack_require__(126);
+	var ReactUpdates = __webpack_require__(121);
 	
 	var assign = __webpack_require__(82);
 	var invariant = __webpack_require__(117);
@@ -16908,7 +16937,7 @@
 	var PooledClass = __webpack_require__(118);
 	var ReactInstanceHandles = __webpack_require__(74);
 	var ReactMount = __webpack_require__(76);
-	var ReactUpdates = __webpack_require__(126);
+	var ReactUpdates = __webpack_require__(121);
 	
 	var assign = __webpack_require__(82);
 	var getEventTarget = __webpack_require__(226);
@@ -17094,12 +17123,12 @@
 	var EventPluginHub = __webpack_require__(207);
 	var ReactComponent = __webpack_require__(65);
 	var ReactCompositeComponent = __webpack_require__(66);
-	var ReactEmptyComponent = __webpack_require__(120);
+	var ReactEmptyComponent = __webpack_require__(123);
 	var ReactBrowserEventEmitter = __webpack_require__(135);
 	var ReactNativeComponent = __webpack_require__(202);
 	var ReactPerf = __webpack_require__(78);
 	var ReactRootIndex = __webpack_require__(162);
-	var ReactUpdates = __webpack_require__(126);
+	var ReactUpdates = __webpack_require__(121);
 	
 	var ReactInjection = {
 	  Component: ReactComponent.injection,
@@ -18251,12 +18280,99 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
+	 * @providesModule containsNode
+	 * @typechecks
+	 */
+	
+	var isTextNode = __webpack_require__(240);
+	
+	/*jslint bitwise:true */
+	
+	/**
+	 * Checks if a given DOM node contains or is another DOM node.
+	 *
+	 * @param {?DOMNode} outerNode Outer DOM node.
+	 * @param {?DOMNode} innerNode Inner DOM node.
+	 * @return {boolean} True if `outerNode` contains or is `innerNode`.
+	 */
+	function containsNode(outerNode, innerNode) {
+	  if (!outerNode || !innerNode) {
+	    return false;
+	  } else if (outerNode === innerNode) {
+	    return true;
+	  } else if (isTextNode(outerNode)) {
+	    return false;
+	  } else if (isTextNode(innerNode)) {
+	    return containsNode(outerNode, innerNode.parentNode);
+	  } else if (outerNode.contains) {
+	    return outerNode.contains(innerNode);
+	  } else if (outerNode.compareDocumentPosition) {
+	    return !!(outerNode.compareDocumentPosition(innerNode) & 16);
+	  } else {
+	    return false;
+	  }
+	}
+	
+	module.exports = containsNode;
+
+
+/***/ },
+/* 164 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-2014, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule getReactRootElementInContainer
+	 */
+	
+	"use strict";
+	
+	var DOC_NODE_TYPE = 9;
+	
+	/**
+	 * @param {DOMElement|DOMDocument} container DOM element that may contain
+	 *                                           a React component
+	 * @return {?*} DOM element that may have the reactRoot ID, or null.
+	 */
+	function getReactRootElementInContainer(container) {
+	  if (!container) {
+	    return null;
+	  }
+	
+	  if (container.nodeType === DOC_NODE_TYPE) {
+	    return container.documentElement;
+	  } else {
+	    return container.firstChild;
+	  }
+	}
+	
+	module.exports = getReactRootElementInContainer;
+
+
+/***/ },
+/* 165 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-2014, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
 	 * @providesModule ReactMultiChildUpdateTypes
 	 */
 	
 	"use strict";
 	
-	var keyMirror = __webpack_require__(128);
+	var keyMirror = __webpack_require__(122);
 	
 	/**
 	 * When a component's children are updated, a series of update configuration
@@ -18277,7 +18393,7 @@
 
 
 /***/ },
-/* 164 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18348,132 +18464,7 @@
 
 
 /***/ },
-/* 165 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-2014, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule containsNode
-	 * @typechecks
-	 */
-	
-	var isTextNode = __webpack_require__(240);
-	
-	/*jslint bitwise:true */
-	
-	/**
-	 * Checks if a given DOM node contains or is another DOM node.
-	 *
-	 * @param {?DOMNode} outerNode Outer DOM node.
-	 * @param {?DOMNode} innerNode Inner DOM node.
-	 * @return {boolean} True if `outerNode` contains or is `innerNode`.
-	 */
-	function containsNode(outerNode, innerNode) {
-	  if (!outerNode || !innerNode) {
-	    return false;
-	  } else if (outerNode === innerNode) {
-	    return true;
-	  } else if (isTextNode(outerNode)) {
-	    return false;
-	  } else if (isTextNode(innerNode)) {
-	    return containsNode(outerNode, innerNode.parentNode);
-	  } else if (outerNode.contains) {
-	    return outerNode.contains(innerNode);
-	  } else if (outerNode.compareDocumentPosition) {
-	    return !!(outerNode.compareDocumentPosition(innerNode) & 16);
-	  } else {
-	    return false;
-	  }
-	}
-	
-	module.exports = containsNode;
-
-
-/***/ },
-/* 166 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-2014, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule getReactRootElementInContainer
-	 */
-	
-	"use strict";
-	
-	var DOC_NODE_TYPE = 9;
-	
-	/**
-	 * @param {DOMElement|DOMDocument} container DOM element that may contain
-	 *                                           a React component
-	 * @return {?*} DOM element that may have the reactRoot ID, or null.
-	 */
-	function getReactRootElementInContainer(container) {
-	  if (!container) {
-	    return null;
-	  }
-	
-	  if (container.nodeType === DOC_NODE_TYPE) {
-	    return container.documentElement;
-	  } else {
-	    return container.firstChild;
-	  }
-	}
-	
-	module.exports = getReactRootElementInContainer;
-
-
-/***/ },
 /* 167 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-2014, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule emptyFunction
-	 */
-	
-	function makeEmptyFunction(arg) {
-	  return function() {
-	    return arg;
-	  };
-	}
-	
-	/**
-	 * This function accepts and discards inputs; it has no side effects. This is
-	 * primarily useful idiomatically for overridable function endpoints which
-	 * always need to be callable, since JS lacks a null-call idiom ala Cocoa.
-	 */
-	function emptyFunction() {}
-	
-	emptyFunction.thatReturns = makeEmptyFunction;
-	emptyFunction.thatReturnsFalse = makeEmptyFunction(false);
-	emptyFunction.thatReturnsTrue = makeEmptyFunction(true);
-	emptyFunction.thatReturnsNull = makeEmptyFunction(null);
-	emptyFunction.thatReturnsThis = function() { return this; };
-	emptyFunction.thatReturnsArgument = function(arg) { return arg; };
-	
-	module.exports = emptyFunction;
-
-
-/***/ },
-/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18525,7 +18516,7 @@
 
 
 /***/ },
-/* 169 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -18543,12 +18534,12 @@
 	"use strict";
 	
 	var PooledClass = __webpack_require__(118);
-	var CallbackQueue = __webpack_require__(200);
+	var CallbackQueue = __webpack_require__(199);
 	var ReactPutListenerQueue = __webpack_require__(242);
-	var Transaction = __webpack_require__(201);
+	var Transaction = __webpack_require__(200);
 	
 	var assign = __webpack_require__(82);
-	var emptyFunction = __webpack_require__(167);
+	var emptyFunction = __webpack_require__(169);
 	
 	/**
 	 * Provides a `CallbackQueue` queue for collecting `onDOMReady` callbacks
@@ -18639,6 +18630,44 @@
 	PooledClass.addPoolingTo(ReactServerRenderingTransaction);
 	
 	module.exports = ReactServerRenderingTransaction;
+
+
+/***/ },
+/* 169 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-2014, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule emptyFunction
+	 */
+	
+	function makeEmptyFunction(arg) {
+	  return function() {
+	    return arg;
+	  };
+	}
+	
+	/**
+	 * This function accepts and discards inputs; it has no side effects. This is
+	 * primarily useful idiomatically for overridable function endpoints which
+	 * always need to be callable, since JS lacks a null-call idiom ala Cocoa.
+	 */
+	function emptyFunction() {}
+	
+	emptyFunction.thatReturns = makeEmptyFunction;
+	emptyFunction.thatReturnsFalse = makeEmptyFunction(false);
+	emptyFunction.thatReturnsTrue = makeEmptyFunction(true);
+	emptyFunction.thatReturnsNull = makeEmptyFunction(null);
+	emptyFunction.thatReturnsThis = function() { return this; };
+	emptyFunction.thatReturnsArgument = function(arg) { return arg; };
+	
+	module.exports = emptyFunction;
 
 
 /***/ },
@@ -18841,7 +18870,7 @@
 	 * @providesModule requestAnimationFramePolyfill
 	 */
 	
-	var emptyFunction = __webpack_require__(99);
+	var emptyFunction = __webpack_require__(100);
 	var nativeRequestAnimationFrame = __webpack_require__(196);
 	
 	var lastTime = 0;
@@ -18938,7 +18967,7 @@
 	var ExecutionEnvironment = __webpack_require__(55);
 	
 	var camelize = __webpack_require__(197);
-	var invariant = __webpack_require__(100);
+	var invariant = __webpack_require__(86);
 	
 	var memoized = {};
 	var prefixes = ['Webkit', 'ms', 'Moz', 'O'];
@@ -19053,7 +19082,7 @@
 	"use strict";
 	
 	var ReactElement = __webpack_require__(69);
-	var ReactPropTransferer = __webpack_require__(123);
+	var ReactPropTransferer = __webpack_require__(125);
 	
 	var keyOf = __webpack_require__(129);
 	var warning = __webpack_require__(115);
@@ -19099,6 +19128,994 @@
 /* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var faker = __webpack_require__(103);
+	
+	var _name = {
+	
+	    firstName: function () {
+	      if (typeof faker.definitions.name.male_first_name !== "undefined" && typeof faker.definitions.name.female_first_name !== "undefined") {
+	        // some locale datasets ( like ru ) have first_name split by gender. since the name.first_name field does not exist in these datasets,
+	        // we must randomly pick a name from either gender array so faker.name.firstName will return the correct locale data ( and not fallback )
+	        var rand = faker.random.number(1);
+	        if (rand === 0) {
+	          return faker.random.array_element(faker.locales[faker.locale].name.male_first_name)
+	        } else {
+	          return faker.random.array_element(faker.locales[faker.locale].name.female_first_name)
+	        }
+	      }
+	      return faker.random.array_element(faker.definitions.name.first_name)
+	    },
+	
+	    lastName: function () {
+	      if (typeof faker.definitions.name.male_last_name !== "undefined" && typeof faker.defintions.name.female_last_name !== "undefined") {
+	        // some locale datasets ( like ru ) have last_name split by gender. i have no idea how last names can have genders, but also i do not speak russian
+	        // see above comment of firstName method
+	        var rand = faker.random.number(1);
+	        if (rand === 0) {
+	          return faker.random.array_element(faker.locales[faker.locale].name.male_last_name);
+	        } else {
+	          return faker.random.array_element(faker.locales[faker.locale].name.female_last_name);
+	        }
+	      }
+	      return faker.random.array_element(faker.definitions.name.last_name);
+	    },
+	
+	    findName: function (firstName, lastName) {
+	        var r = faker.random.number(8);
+	        firstName = firstName || faker.name.firstName();
+	        lastName = lastName || faker.name.lastName();
+	        switch (r) {
+	        case 0:
+	            return faker.name.prefix() + " " + firstName + " " + lastName;
+	        case 1:
+	            return firstName + " " + lastName + " " + faker.name.suffix();
+	        }
+	
+	        return firstName + " " + lastName;
+	    },
+	
+	    prefix: function () {
+	        return faker.random.array_element(faker.definitions.name.prefix);
+	    },
+	
+	    suffix: function () {
+	        return faker.random.array_element(faker.definitions.name.suffix);
+	    },
+	
+	};
+	
+	module.exports = _name;
+
+
+/***/ },
+/* 177 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Helpers = __webpack_require__(183);
+	var faker = __webpack_require__(103);
+	
+	var address = {
+	    zipCode: function () {
+	        return Helpers.replaceSymbolWithNumber(faker.random.array_element(["#####", '#####-####']));
+	    },
+	
+	    city: function () {
+	        var result;
+	        switch (faker.random.number(3)) {
+	        case 0:
+	            result = faker.address.cityPrefix() + " " + faker.name.firstName() + faker.address.citySuffix();
+	            break;
+	        case 1:
+	            result = faker.address.cityPrefix() + " " + faker.name.firstName();
+	            break;
+	        case 2:
+	            result = faker.name.firstName() + faker.address.citySuffix();
+	            break;
+	        case 3:
+	            result = faker.name.lastName() + faker.address.citySuffix();
+	            break;
+	        }
+	        return result;
+	    },
+	
+	    cityPrefix: function () {
+	      return faker.random.array_element(faker.definitions.address.city_prefix);
+	    },
+	
+	    citySuffix: function () {
+	      return faker.random.array_element(faker.definitions.address.city_suffix);
+	    },
+	
+	    streetName: function () {
+	        var result;
+	        switch (faker.random.number(1)) {
+	        case 0:
+	            result = faker.name.lastName() + " " + faker.address.streetSuffix();
+	            break;
+	        case 1:
+	            result = faker.name.firstName() + " " + faker.address.streetSuffix();
+	            break;
+	        }
+	        return result;
+	    },
+	
+	    //
+	    // TODO: change all these methods that accept a boolean to instead accept an options hash.
+	    //
+	    streetAddress: function (useFullAddress) {
+	        if (useFullAddress === undefined) { useFullAddress = false; }
+	        var address = "";
+	        switch (faker.random.number(2)) {
+	        case 0:
+	            address = Helpers.replaceSymbolWithNumber("#####") + " " + faker.address.streetName();
+	            break;
+	        case 1:
+	            address = Helpers.replaceSymbolWithNumber("####") +  " " + faker.address.streetName();
+	            break;
+	        case 2:
+	            address = Helpers.replaceSymbolWithNumber("###") + " " + faker.address.streetName();
+	            break;
+	        }
+	        return useFullAddress ? (address + " " + faker.address.secondaryAddress()) : address;
+	    },
+	
+	    streetSuffix: function () {
+	        return faker.random.array_element(faker.definitions.address.street_suffix);
+	    },
+	
+	    secondaryAddress: function () {
+	        return Helpers.replaceSymbolWithNumber(faker.random.array_element(
+	            [
+	                'Apt. ###',
+	                'Suite ###'
+	            ]
+	        ));
+	    },
+	
+	    county: function () {
+	      return faker.random.array_element(faker.definitions.address.county);
+	    },
+	
+	    country: function () {
+	      return faker.random.array_element(faker.definitions.address.country);
+	    },
+	
+	    state: function (useAbbr) {
+	        return faker.random.array_element(faker.definitions.address.state);
+	    },
+	
+	    stateAbbr: function () {
+	        return faker.random.array_element(faker.definitions.address.state_abbr);
+	    },
+	
+	    latitude: function () {
+	        return (faker.random.number(180 * 10000) / 10000.0 - 90.0).toFixed(4);
+	    },
+	
+	    longitude: function () {
+	        return (faker.random.number(360 * 10000) / 10000.0 - 180.0).toFixed(4);
+	    }
+	};
+	
+	module.exports = address;
+
+
+/***/ },
+/* 178 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var faker = __webpack_require__(103);
+	
+	var phone = {
+	    phoneNumber: function (format) {
+	        format = format || faker.phone.phoneFormats();
+	        return faker.helpers.replaceSymbolWithNumber(format);
+	    },
+	
+	    // FIXME: this is strange passing in an array index.
+	    phoneNumberFormat: function (phoneFormatsArrayIndex) {
+	        phoneFormatsArrayIndex = phoneFormatsArrayIndex || 0;
+	        return faker.helpers.replaceSymbolWithNumber(faker.definitions.phone_number.formats[phoneFormatsArrayIndex]);
+	    },
+	
+	    phoneFormats: function () {
+	      return faker.random.array_element(faker.definitions.phone_number.formats);
+	    }
+	
+	};
+	
+	module.exports = phone;
+
+
+/***/ },
+/* 179 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var faker = __webpack_require__(103),
+	    password_generator = __webpack_require__(247),
+	    random_ua = __webpack_require__(248);
+	
+	var internet = {
+	
+	    avatar: function () {
+	        return faker.random.array_element(faker.definitions.internet.avatar_uri);
+	    },
+	
+	    email: function (firstName, lastName, provider) {
+	        provider = provider || faker.random.array_element(faker.definitions.internet.free_email);
+	        return  faker.helpers.slugify(faker.internet.userName(firstName, lastName)) + "@" + provider;
+	    },
+	
+	    userName: function (firstName, lastName) {
+	        var result;
+	        firstName = firstName || faker.name.firstName();
+	        lastName = lastName || faker.name.lastName();
+	        switch (faker.random.number(2)) {
+	        case 0:
+	            result = firstName + faker.random.number(99);
+	            break;
+	        case 1:
+	            result = firstName + faker.random.array_element([".", "_"]) + lastName;
+	            break;
+	        case 2:
+	            result = firstName + faker.random.array_element([".", "_"]) + lastName + faker.random.number(99);
+	            break;
+	        }
+	        result = result.replace(/'/g, "");
+	        result = result.replace(/ /g, "");
+	        return result;
+	    },
+	
+	    domainName: function () {
+	        return faker.internet.domainWord() + "." + faker.internet.domainSuffix();
+	    },
+	
+	    domainSuffix: function () {
+	        return faker.random.array_element(faker.definitions.internet.domain_suffix);
+	    },
+	
+	    domainWord:  function () {
+	        return faker.name.firstName().replace(/([^A-Z0-9._%+-])/ig, '').toLowerCase();
+	    },
+	
+	    ip: function () {
+	        var randNum = function () {
+	            return (faker.random.number(255)).toFixed(0);
+	        };
+	
+	        var result = [];
+	        for (var i = 0; i < 4; i++) {
+	            result[i] = randNum();
+	        }
+	
+	        return result.join(".");
+	    },
+	
+	    userAgent: function () {
+	      return random_ua.generate();
+	    },
+	
+	    color: function (baseRed255, baseGreen255, baseBlue255) {
+	        baseRed255 = baseRed255 || 0;
+	        baseGreen255 = baseGreen255 || 0;
+	        baseBlue255 = baseBlue255 || 0;
+	        // based on awesome response : http://stackoverflow.com/questions/43044/algorithm-to-randomly-generate-an-aesthetically-pleasing-color-palette
+	        var red = Math.floor((faker.random.number(256) + baseRed255) / 2);
+	        var green = Math.floor((faker.random.number(256) + baseRed255) / 2);
+	        var blue = Math.floor((faker.random.number(256) + baseRed255) / 2);
+	        var redStr = red.toString(16);
+	        var greenStr = green.toString(16);
+	        var blueStr = blue.toString(16);
+	        return '#' +
+	          (redStr.length === 1 ? '0' : '') + redStr +
+	          (greenStr.length === 1 ? '0' : '') + greenStr +
+	          (blueStr.length === 1 ? '0': '') + blueStr;
+	
+	    },
+	
+	    password: function (len, memorable, pattern, prefix) {
+	      len = len || 15;
+	      if (typeof memorable === "undefined") {
+	        memorable = false;
+	      }
+	      return password_generator(len, memorable, pattern, prefix);
+	    }
+	};
+	
+	module.exports = internet;
+
+
+/***/ },
+/* 180 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var faker = __webpack_require__(103);
+	
+	var company = {
+	
+	    suffixes: function () {
+	        return ["Inc", "and Sons", "LLC", "Group", "and Daughters"];
+	    },
+	
+	    companyName: function (format) {
+	        switch ((format ? format : faker.random.number(2))) {
+	        case 0:
+	            return faker.name.lastName() + " " + faker.company.companySuffix();
+	        case 1:
+	            return faker.name.lastName() + "-" + faker.name.lastName();
+	        case 2:
+	            return faker.name.lastName() + ", " + faker.name.lastName() + " and " + faker.name.lastName();
+	        }
+	    },
+	
+	    companySuffix: function () {
+	        return faker.random.array_element(faker.company.suffixes());
+	    },
+	
+	    catchPhrase: function () {
+	        return faker.company.catchPhraseAdjective() + " " +
+	            faker.company.catchPhraseDescriptor() + " " +
+	            faker.company.catchPhraseNoun();
+	    },
+	
+	    bs: function () {
+	        return faker.company.bsAdjective() + " " +
+	            faker.company.bsBuzz() + " " +
+	            faker.company.bsNoun();
+	    },
+	
+	    catchPhraseAdjective: function () {
+	        return faker.random.array_element(faker.definitions.company.adjective);
+	    },
+	
+	    catchPhraseDescriptor: function () {
+	        return faker.random.array_element(faker.definitions.company.descriptor);
+	    },
+	
+	    catchPhraseNoun: function () {
+	        return faker.random.array_element(faker.definitions.company.noun);
+	    },
+	
+	    bsAdjective: function () {
+	        return faker.random.array_element(faker.definitions.company.bs_adjective);
+	    },
+	
+	    bsBuzz: function () {
+	        return faker.random.array_element(faker.definitions.company.bs_verb);
+	    },
+	
+	    bsNoun: function () {
+	        return faker.random.array_element(faker.definitions.company.bs_noun);
+	    }
+	
+	};
+	
+	module.exports = company;
+
+
+/***/ },
+/* 181 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var faker = __webpack_require__(103);
+	
+	var image = {
+	  image: function () {
+	    var categories = ["abstract", "animals", "business", "cats", "city", "food", "nightlife", "fashion", "people", "nature", "sports", "technics", "transport"];
+	    return image[faker.random.array_element(categories)]();
+	  },
+	  avatar: function () {
+	    return faker.internet.avatar();
+	  },
+	  imageUrl: function (width, height, category) {
+	      var width = width || 640;
+	      var height = height || 480;
+	
+	      var url ='http://lorempixel.com/' + width + '/' + height;
+	      if (typeof category !== 'undefined') {
+	        url += '/' + category;
+	      }
+	      return url;
+	  },
+	  abstract: function (width, height) {
+	    return faker.image.imageUrl(width, height, 'abstract');
+	  },
+	  animals: function (width, height) {
+	    return faker.image.imageUrl(width, height, 'animals');
+	  },
+	  business: function (width, height) {
+	    return faker.image.imageUrl(width, height, 'business');
+	  },
+	  cats: function (width, height) {
+	    return faker.image.imageUrl(width, height, 'cats');
+	  },
+	  city: function (width, height) {
+	    return faker.image.imageUrl(width, height, 'city');
+	  },
+	  food: function (width, height) {
+	    return faker.image.imageUrl(width, height, 'food');
+	  },
+	  nightlife: function (width, height) {
+	    return faker.image.imageUrl(width, height, 'nightlife');
+	  },
+	  fashion: function (width, height) {
+	    return faker.image.imageUrl(width, height, 'fashion');
+	  },
+	  people: function (width, height) {
+	    return faker.image.imageUrl(width, height, 'people');
+	  },
+	  nature: function (width, height) {
+	    return faker.image.imageUrl(width, height, 'nature');
+	  },
+	  sports: function (width, height) {
+	    return faker.image.imageUrl(width, height, 'sports');
+	  },
+	  technics: function (width, height) {
+	    return faker.image.imageUrl(width, height, 'technics');
+	  },
+	  transport: function (width, height) {
+	    return faker.image.imageUrl(width, height, 'transport');
+	  }
+	};
+	
+	module.exports = image;
+
+
+/***/ },
+/* 182 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var faker = __webpack_require__(103);
+	var Helpers = __webpack_require__(183);
+	
+	var lorem = {
+	    words: function (num) {
+	        if (typeof num == 'undefined') { num = 3; }
+	        return Helpers.shuffle(faker.definitions.lorem.words).slice(0, num);
+	    },
+	
+	    sentence: function (wordCount, range) {
+	        if (typeof wordCount == 'undefined') { wordCount = 3; }
+	        if (typeof range == 'undefined') { range = 7; }
+	
+	        // strange issue with the node_min_test failing for captialize, please fix and add faker.lorem.back
+	        //return  faker.lorem.words(wordCount + Helpers.randomNumber(range)).join(' ').capitalize();
+	
+	        return  faker.lorem.words(wordCount + faker.random.number(range)).join(' ');
+	    },
+	
+	    sentences: function (sentenceCount) {
+	        if (typeof sentenceCount == 'undefined') { sentenceCount = 3; }
+	        var sentences = [];
+	        for (sentenceCount; sentenceCount > 0; sentenceCount--) {
+	            sentences.push(faker.lorem.sentence());
+	        }
+	        return sentences.join("\n");
+	    },
+	
+	    paragraph: function (sentenceCount) {
+	        if (typeof sentenceCount == 'undefined') { sentenceCount = 3; }
+	        return faker.lorem.sentences(sentenceCount + faker.random.number(3));
+	    },
+	
+	    paragraphs: function (paragraphCount) {
+	        if (typeof paragraphCount == 'undefined') { paragraphCount = 3; }
+	        var paragraphs = [];
+	        for (paragraphCount; paragraphCount > 0; paragraphCount--) {
+	            paragraphs.push(faker.lorem.paragraph());
+	        }
+	        return paragraphs.join("\n \r\t");
+	    }
+	};
+	
+	module.exports = lorem;
+
+
+/***/ },
+/* 183 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var faker = __webpack_require__(103);
+	
+	// backword-compatibility
+	exports.randomNumber = function (range) {
+	    return faker.random.number(range);
+	};
+	
+	// backword-compatibility
+	exports.randomize = function (array) {
+	    array = array || ["a", "b", "c"];
+	    return faker.random.array_element(array);
+	};
+	
+	// slugifies string
+	exports.slugify = function (string) {
+	    string = string || "";
+	    return string.replace(/ /g, '-').replace(/[^\w\.\-]+/g, '');
+	};
+	
+	// parses string for a symbol and replace it with a random number from 1-10
+	exports.replaceSymbolWithNumber = function (string, symbol) {
+	    string = string || "";
+	    // default symbol is '#'
+	    if (symbol === undefined) {
+	        symbol = '#';
+	    }
+	
+	    var str = '';
+	    for (var i = 0; i < string.length; i++) {
+	        if (string.charAt(i) == symbol) {
+	            str += faker.random.number(9);
+	        } else {
+	            str += string.charAt(i);
+	        }
+	    }
+	    return str;
+	};
+	
+	// takes an array and returns it randomized
+	exports.shuffle = function (o) {
+	    o = o || ["a", "b", "c"];
+	    for (var j, x, i = o.length; i; j = faker.random.number(i), x = o[--i], o[i] = o[j], o[j] = x);
+	    return o;
+	};
+	
+	exports.mustache = function (str, data) {
+	  for(var p in data) {
+	    var re = new RegExp('{{' + p + '}}', 'g')
+	    str = str.replace(re, data[p]);
+	  }
+	  return str;
+	};
+	
+	exports.createCard = function () {
+	    return {
+	        "name": faker.name.findName(),
+	        "username": faker.internet.userName(),
+	        "email": faker.internet.email(),
+	        "address": {
+	            "streetA": faker.address.streetName(),
+	            "streetB": faker.address.streetAddress(),
+	            "streetC": faker.address.streetAddress(true),
+	            "streetD": faker.address.secondaryAddress(),
+	            "city": faker.address.city(),
+	            "state": faker.address.state(),
+	            "country": faker.address.country(),
+	            "zipcode": faker.address.zipCode(),
+	            "geo": {
+	                "lat": faker.address.latitude(),
+	                "lng": faker.address.longitude()
+	            }
+	        },
+	        "phone": faker.phone.phoneNumber(),
+	        "website": faker.internet.domainName(),
+	        "company": {
+	            "name": faker.company.companyName(),
+	            "catchPhrase": faker.company.catchPhrase(),
+	            "bs": faker.company.bs()
+	        },
+	        "posts": [
+	            {
+	                "words": faker.lorem.words(),
+	                "sentence": faker.lorem.sentence(),
+	                "sentences": faker.lorem.sentences(),
+	                "paragraph": faker.lorem.paragraph()
+	            },
+	            {
+	                "words": faker.lorem.words(),
+	                "sentence": faker.lorem.sentence(),
+	                "sentences": faker.lorem.sentences(),
+	                "paragraph": faker.lorem.paragraph()
+	            },
+	            {
+	                "words": faker.lorem.words(),
+	                "sentence": faker.lorem.sentence(),
+	                "sentences": faker.lorem.sentences(),
+	                "paragraph": faker.lorem.paragraph()
+	            }
+	        ],
+	        "accountHistory": [faker.helpers.createTransaction(), faker.helpers.createTransaction(), faker.helpers.createTransaction()]
+	    };
+	};
+	
+	exports.contextualCard = function () {
+	  var name = faker.name.firstName(),
+	      userName = faker.internet.userName(name);
+	  return {
+	      "name": name,
+	      "username": userName,
+	      "avatar": faker.internet.avatar(),
+	      "email": faker.internet.email(userName),
+	      "dob": faker.date.past(50, new Date("Sat Sep 20 1992 21:35:02 GMT+0200 (CEST)")),
+	      "phone": faker.phone.phoneNumber(),
+	      "address": {
+	          "street": faker.address.streetName(true),
+	          "suite": faker.address.secondaryAddress(),
+	          "city": faker.address.city(),
+	          "zipcode": faker.address.zipCode(),
+	          "geo": {
+	              "lat": faker.address.latitude(),
+	              "lng": faker.address.longitude()
+	          }
+	      },
+	      "website": faker.internet.domainName(),
+	      "company": {
+	          "name": faker.company.companyName(),
+	          "catchPhrase": faker.company.catchPhrase(),
+	          "bs": faker.company.bs()
+	      }
+	  };
+	};
+	
+	
+	exports.userCard = function () {
+	    return {
+	        "name": faker.name.findName(),
+	        "username": faker.internet.userName(),
+	        "email": faker.internet.email(),
+	        "address": {
+	            "street": faker.address.streetName(true),
+	            "suite": faker.address.secondaryAddress(),
+	            "city": faker.address.city(),
+	            "zipcode": faker.address.zipCode(),
+	            "geo": {
+	                "lat": faker.address.latitude(),
+	                "lng": faker.address.longitude()
+	            }
+	        },
+	        "phone": faker.phone.phoneNumber(),
+	        "website": faker.internet.domainName(),
+	        "company": {
+	            "name": faker.company.companyName(),
+	            "catchPhrase": faker.company.catchPhrase(),
+	            "bs": faker.company.bs()
+	        }
+	    };
+	};
+	
+	exports.createTransaction = function(){
+	  return {
+	    "amount" : faker.finance.amount(),
+	    "date" : new Date(2012, 1, 2),  //TODO: add a ranged date method
+	    "business": faker.company.companyName(),
+	    "name": [faker.finance.accountName(), faker.finance.mask()].join(' '),
+	    "type" : exports.randomize(faker.definitions.finance.transaction_type),
+	    "account" : faker.finance.account()
+	  };
+	};
+	
+	/*
+	String.prototype.capitalize = function () { //v1.0
+	    return this.replace(/\w+/g, function (a) {
+	        return a.charAt(0).toUpperCase() + a.substr(1).toLowerCase();
+	    });
+	};
+	*/
+	
+
+
+/***/ },
+/* 184 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var faker = __webpack_require__(103);
+	
+	var date = {
+	
+	    past: function (years, refDate) {
+	        var date = (refDate) ? new Date(Date.parse(refDate)) : new Date();
+	        var range = {
+	          min: 1000,
+	          max: (years || 1) * 365 * 24 * 3600 * 1000
+	        };
+	
+	        var past = date.getTime();
+	        past -= faker.random.number(range); // some time from now to N years ago, in milliseconds
+	        date.setTime(past);
+	
+	        return date;
+	    },
+	
+	    future: function (years, refDate) {
+	        var date = (refDate) ? new Date(Date.parse(refDate)) : new Date();
+	        var range = {
+	          min: 1000,
+	          max: (years || 1) * 365 * 24 * 3600 * 1000
+	        };
+	
+	        var future = date.getTime();
+	        future += faker.random.number(range); // some time from now to N years later, in milliseconds
+	        date.setTime(future);
+	
+	        return date;
+	    },
+	
+	    between: function (from, to) {
+	        var fromMilli = Date.parse(from);
+	        var dateOffset = faker.random.number(Date.parse(to) - fromMilli);
+	
+	        var newDate = new Date(fromMilli + dateOffset);
+	
+	        return newDate;
+	    },
+	
+	    recent: function (days) {
+	        var date = new Date();
+	        var range = {
+	          min: 1000,
+	          max: (days || 1) * 24 * 3600 * 1000
+	        };
+	
+	        var future = date.getTime();
+	        future -= faker.random.number(range); // some time from now to N days ago, in milliseconds
+	        date.setTime(future);
+	
+	        return date;
+	    }
+	};
+	module.exports = date;
+
+
+/***/ },
+/* 185 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var mersenne = __webpack_require__(249);
+	var faker = __webpack_require__(103);
+	
+	var random = {
+	    // returns a single random number based on a max number or range
+	    number: function (options) {
+	
+	        if (typeof options === "number") {
+	          options = {
+	            max: options
+	          };
+	        }
+	
+	        options = options || {};
+	
+	        if (typeof options.min === "undefined") {
+	          options.min = 0;
+	        }
+	
+	        if (typeof options.max === "undefined") {
+	          options.max = 1;
+	        }
+	        if (typeof options.precision === "undefined") {
+	          options.precision = 1;
+	        }
+	
+	        // Make the range inclusive of the max value
+	        var max = options.max;
+	        if (max > 0) {
+	          max += options.precision;
+	        } 
+	          
+	        var randomNumber = options.precision * Math.floor(
+	          mersenne.rand(max / options.precision, options.min / options.precision));
+	
+	        return randomNumber;
+	
+	    },
+	
+	    // takes an array and returns a random element of the array
+	    array_element: function (array) {
+	        array = array || ["a", "b", "c"];
+	        var r = faker.random.number({ max: array.length - 1 });
+	        return array[r];
+	    },
+	
+	    // takes an object and returns the randomly key or value
+	    object_element: function (object, field) {
+	        object = object || {};
+	        var array = Object.keys(object);
+	        var key = faker.random.array_element(array);
+	
+	        return field === "key" ? key : object[key];
+	    },
+	
+	    uuid : function () {
+	        var RFC4122_TEMPLATE = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx';
+	        var replacePlaceholders = function (placeholder) {
+	            var random = Math.random()*16|0;
+	            var value = placeholder == 'x' ? random : (random &0x3 | 0x8);
+	            return value.toString(16);
+	        };
+	        return RFC4122_TEMPLATE.replace(/[xy]/g, replacePlaceholders);
+	    }
+	};
+	
+	module.exports = random;
+
+
+/***/ },
+/* 186 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Helpers = __webpack_require__(183),
+	    faker = __webpack_require__(103);
+	
+	var finance = {
+	
+	    account: function (length) {
+	
+	        length = length || 8;
+	
+	        var template = '';
+	
+	        for (var i = 0; i < length; i++) {
+	            template = template + '#';
+	        }
+	        length = null;
+	        return Helpers.replaceSymbolWithNumber(template);
+	    },
+	
+	    accountName: function () {
+	
+	        return [Helpers.randomize(faker.definitions.finance.account_type), 'Account'].join(' ');
+	    },
+	
+	    mask: function (length, parens, elipsis) {
+	
+	
+	        //set defaults
+	        length = (length == 0 || !length || typeof length == 'undefined') ? 4 : length;
+	        parens = (parens === null) ? true : parens;
+	        elipsis = (elipsis === null) ? true : elipsis;
+	
+	        //create a template for length
+	        var template = '';
+	
+	        for (var i = 0; i < length; i++) {
+	            template = template + '#';
+	        }
+	
+	        //prefix with elipsis
+	        template = (elipsis) ? ['...', template].join('') : template;
+	
+	        template = (parens) ? ['(', template, ')'].join('') : template;
+	
+	        //generate random numbers
+	        template = Helpers.replaceSymbolWithNumber(template);
+	
+	        return template;
+	
+	    },
+	
+	    //min and max take in minimum and maximum amounts, dec is the decimal place you want rounded to, symbol is $, €, £, etc
+	    //NOTE: this returns a string representation of the value, if you want a number use parseFloat and no symbol
+	
+	    amount: function (min, max, dec, symbol) {
+	
+	        min = min || 0;
+	        max = max || 1000;
+	        dec = dec || 2;
+	        symbol = symbol || '';
+	
+	        return symbol + (Math.round((Math.random() * (max - min) + min) * Math.pow(10, dec)) / Math.pow(10, dec)).toFixed(dec);
+	
+	    },
+	
+	    transactionType: function () {
+	        return Helpers.randomize(faker.definitions.finance.transaction_type);
+	    },
+	
+	    currencyCode: function () {
+	        return faker.random.object_element(faker.definitions.finance.currency)['code'];
+	    },
+	
+	    currencyName: function () {
+	        return faker.random.object_element(faker.definitions.finance.currency, 'key');
+	    },
+	
+	    currencySymbol: function () {
+	        var symbol;
+	
+	        while (!symbol) {
+	            symbol = faker.random.object_element(faker.definitions.finance.currency)['symbol'];
+	        }
+	        return symbol;
+	    }
+	};
+	
+	module.exports = finance;
+
+/***/ },
+/* 187 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var faker = __webpack_require__(103);
+	
+	var hacker = {
+	
+	  abbreviation : function () {
+	    return faker.random.array_element(faker.definitions.hacker.abbreviation);
+	  },
+	
+	  adjective : function () {
+	    return faker.random.array_element(faker.definitions.hacker.adjective);
+	  },
+	
+	  noun : function () {
+	    return faker.random.array_element(faker.definitions.hacker.noun);
+	  },
+	
+	  verb : function () {
+	    return faker.random.array_element(faker.definitions.hacker.verb);
+	  },
+	
+	  ingverb : function () {
+	    return faker.random.array_element(faker.definitions.hacker.ingverb);
+	  },
+	
+	  phrase : function () {
+	
+	    var data = {
+	      abbreviation: hacker.abbreviation(),
+	      adjective: hacker.adjective(),
+	      ingverb: hacker.ingverb(),
+	      noun: hacker.noun(),
+	      verb: hacker.verb()
+	    };
+	
+	    var phrase = faker.random.array_element([ "If we {{verb}} the {{noun}}, we can get to the {{abbreviation}} {{noun}} through the {{adjective}} {{abbreviation}} {{noun}}!",
+	      "We need to {{verb}} the {{adjective}} {{abbreviation}} {{noun}}!",
+	      "Try to {{verb}} the {{abbreviation}} {{noun}}, maybe it will {{verb}} the {{adjective}} {{noun}}!",
+	      "You can't {{verb}} the {{noun}} without {{ingverb}} the {{adjective}} {{abbreviation}} {{noun}}!",
+	      "Use the {{adjective}} {{abbreviation}} {{noun}}, then you can {{verb}} the {{adjective}} {{noun}}!",
+	      "The {{abbreviation}} {{noun}} is down, {{verb}} the {{adjective}} {{noun}} so we can {{verb}} the {{abbreviation}} {{noun}}!",
+	      "{{ingverb}} the {{noun}} won't do anything, we need to {{verb}} the {{adjective}} {{abbreviation}} {{noun}}!",
+	      "I'll {{verb}} the {{adjective}} {{abbreviation}} {{noun}}, that should {{noun}} the {{abbreviation}} {{noun}}!"
+	   ]);
+	
+	   return faker.helpers.mustache(phrase, data);
+	
+	  },
+	
+	
+	};
+	
+	module.exports = hacker;
+
+
+/***/ },
+/* 188 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var faker = __webpack_require__(103);
+	exports['de'] = __webpack_require__(250);
+	exports['de_AT'] = __webpack_require__(251);
+	exports['de_CH'] = __webpack_require__(252);
+	exports['en'] = __webpack_require__(253);
+	exports['en_AU'] = __webpack_require__(254);
+	exports['en_BORK'] = __webpack_require__(255);
+	exports['en_CA'] = __webpack_require__(256);
+	exports['en_GB'] = __webpack_require__(257);
+	exports['en_IND'] = __webpack_require__(258);
+	exports['en_US'] = __webpack_require__(259);
+	exports['en_au_ocker'] = __webpack_require__(260);
+	exports['es'] = __webpack_require__(261);
+	exports['fa'] = __webpack_require__(262);
+	exports['fr'] = __webpack_require__(263);
+	exports['it'] = __webpack_require__(264);
+	exports['ja'] = __webpack_require__(265);
+	exports['ko'] = __webpack_require__(266);
+	exports['nb_NO'] = __webpack_require__(267);
+	exports['nep'] = __webpack_require__(268);
+	exports['nl'] = __webpack_require__(269);
+	exports['pl'] = __webpack_require__(270);
+	exports['pt_BR'] = __webpack_require__(271);
+	exports['ru'] = __webpack_require__(272);
+	exports['sk'] = __webpack_require__(273);
+	exports['sv'] = __webpack_require__(274);
+	exports['vi'] = __webpack_require__(275);
+	exports['zh_CN'] = __webpack_require__(276);
+
+/***/ },
+/* 189 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
 	 * All rights reserved.
@@ -19111,7 +20128,7 @@
 	 * @typechecks
 	 */
 	
-	var emptyFunction = __webpack_require__(99);
+	var emptyFunction = __webpack_require__(100);
 	
 	/**
 	 * Upstream version of event listener. Does not take into account specific
@@ -19181,7 +20198,7 @@
 
 
 /***/ },
-/* 177 */
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -19212,7 +20229,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 178 */
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -19230,7 +20247,7 @@
 	
 	var Heap = __webpack_require__(243);
 	
-	var invariant = __webpack_require__(100);
+	var invariant = __webpack_require__(86);
 	
 	// Data structure that allows to store values and assign positions to them
 	// in a way to minimize changing positions of stored values when new ones are
@@ -19399,7 +20416,7 @@
 
 
 /***/ },
-/* 179 */
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -19418,7 +20435,7 @@
 	
 	var ImmutableValue = __webpack_require__(244);
 	
-	var invariant = __webpack_require__(100);
+	var invariant = __webpack_require__(86);
 	var keyOf = __webpack_require__(245);
 	var mergeHelpers = __webpack_require__(246);
 	
@@ -19585,7 +20602,7 @@
 
 
 /***/ },
-/* 180 */
+/* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -19600,11 +20617,11 @@
 	 * @typechecks
 	 */
 	
-	var ImmutableObject = __webpack_require__(179);
+	var ImmutableObject = __webpack_require__(192);
 	var React = __webpack_require__(1);
 	
-	var cloneWithProps = __webpack_require__(96);
-	var cx = __webpack_require__(97);
+	var cloneWithProps = __webpack_require__(97);
+	var cx = __webpack_require__(98);
 	var joinClasses = __webpack_require__(108);
 	
 	var PropTypes = React.PropTypes;
@@ -19804,994 +20821,6 @@
 	
 	module.exports = FixedDataTableCell;
 
-
-/***/ },
-/* 181 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var faker = __webpack_require__(103);
-	
-	var _name = {
-	
-	    firstName: function () {
-	      if (typeof faker.definitions.name.male_first_name !== "undefined" && typeof faker.definitions.name.female_first_name !== "undefined") {
-	        // some locale datasets ( like ru ) have first_name split by gender. since the name.first_name field does not exist in these datasets,
-	        // we must randomly pick a name from either gender array so faker.name.firstName will return the correct locale data ( and not fallback )
-	        var rand = faker.random.number(1);
-	        if (rand === 0) {
-	          return faker.random.array_element(faker.locales[faker.locale].name.male_first_name)
-	        } else {
-	          return faker.random.array_element(faker.locales[faker.locale].name.female_first_name)
-	        }
-	      }
-	      return faker.random.array_element(faker.definitions.name.first_name)
-	    },
-	
-	    lastName: function () {
-	      if (typeof faker.definitions.name.male_last_name !== "undefined" && typeof faker.defintions.name.female_last_name !== "undefined") {
-	        // some locale datasets ( like ru ) have last_name split by gender. i have no idea how last names can have genders, but also i do not speak russian
-	        // see above comment of firstName method
-	        var rand = faker.random.number(1);
-	        if (rand === 0) {
-	          return faker.random.array_element(faker.locales[faker.locale].name.male_last_name);
-	        } else {
-	          return faker.random.array_element(faker.locales[faker.locale].name.female_last_name);
-	        }
-	      }
-	      return faker.random.array_element(faker.definitions.name.last_name);
-	    },
-	
-	    findName: function (firstName, lastName) {
-	        var r = faker.random.number(8);
-	        firstName = firstName || faker.name.firstName();
-	        lastName = lastName || faker.name.lastName();
-	        switch (r) {
-	        case 0:
-	            return faker.name.prefix() + " " + firstName + " " + lastName;
-	        case 1:
-	            return firstName + " " + lastName + " " + faker.name.suffix();
-	        }
-	
-	        return firstName + " " + lastName;
-	    },
-	
-	    prefix: function () {
-	        return faker.random.array_element(faker.definitions.name.prefix);
-	    },
-	
-	    suffix: function () {
-	        return faker.random.array_element(faker.definitions.name.suffix);
-	    },
-	
-	};
-	
-	module.exports = _name;
-
-
-/***/ },
-/* 182 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Helpers = __webpack_require__(188);
-	var faker = __webpack_require__(103);
-	
-	var address = {
-	    zipCode: function () {
-	        return Helpers.replaceSymbolWithNumber(faker.random.array_element(["#####", '#####-####']));
-	    },
-	
-	    city: function () {
-	        var result;
-	        switch (faker.random.number(3)) {
-	        case 0:
-	            result = faker.address.cityPrefix() + " " + faker.name.firstName() + faker.address.citySuffix();
-	            break;
-	        case 1:
-	            result = faker.address.cityPrefix() + " " + faker.name.firstName();
-	            break;
-	        case 2:
-	            result = faker.name.firstName() + faker.address.citySuffix();
-	            break;
-	        case 3:
-	            result = faker.name.lastName() + faker.address.citySuffix();
-	            break;
-	        }
-	        return result;
-	    },
-	
-	    cityPrefix: function () {
-	      return faker.random.array_element(faker.definitions.address.city_prefix);
-	    },
-	
-	    citySuffix: function () {
-	      return faker.random.array_element(faker.definitions.address.city_suffix);
-	    },
-	
-	    streetName: function () {
-	        var result;
-	        switch (faker.random.number(1)) {
-	        case 0:
-	            result = faker.name.lastName() + " " + faker.address.streetSuffix();
-	            break;
-	        case 1:
-	            result = faker.name.firstName() + " " + faker.address.streetSuffix();
-	            break;
-	        }
-	        return result;
-	    },
-	
-	    //
-	    // TODO: change all these methods that accept a boolean to instead accept an options hash.
-	    //
-	    streetAddress: function (useFullAddress) {
-	        if (useFullAddress === undefined) { useFullAddress = false; }
-	        var address = "";
-	        switch (faker.random.number(2)) {
-	        case 0:
-	            address = Helpers.replaceSymbolWithNumber("#####") + " " + faker.address.streetName();
-	            break;
-	        case 1:
-	            address = Helpers.replaceSymbolWithNumber("####") +  " " + faker.address.streetName();
-	            break;
-	        case 2:
-	            address = Helpers.replaceSymbolWithNumber("###") + " " + faker.address.streetName();
-	            break;
-	        }
-	        return useFullAddress ? (address + " " + faker.address.secondaryAddress()) : address;
-	    },
-	
-	    streetSuffix: function () {
-	        return faker.random.array_element(faker.definitions.address.street_suffix);
-	    },
-	
-	    secondaryAddress: function () {
-	        return Helpers.replaceSymbolWithNumber(faker.random.array_element(
-	            [
-	                'Apt. ###',
-	                'Suite ###'
-	            ]
-	        ));
-	    },
-	
-	    county: function () {
-	      return faker.random.array_element(faker.definitions.address.county);
-	    },
-	
-	    country: function () {
-	      return faker.random.array_element(faker.definitions.address.country);
-	    },
-	
-	    state: function (useAbbr) {
-	        return faker.random.array_element(faker.definitions.address.state);
-	    },
-	
-	    stateAbbr: function () {
-	        return faker.random.array_element(faker.definitions.address.state_abbr);
-	    },
-	
-	    latitude: function () {
-	        return (faker.random.number(180 * 10000) / 10000.0 - 90.0).toFixed(4);
-	    },
-	
-	    longitude: function () {
-	        return (faker.random.number(360 * 10000) / 10000.0 - 180.0).toFixed(4);
-	    }
-	};
-	
-	module.exports = address;
-
-
-/***/ },
-/* 183 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var faker = __webpack_require__(103);
-	
-	var phone = {
-	    phoneNumber: function (format) {
-	        format = format || faker.phone.phoneFormats();
-	        return faker.helpers.replaceSymbolWithNumber(format);
-	    },
-	
-	    // FIXME: this is strange passing in an array index.
-	    phoneNumberFormat: function (phoneFormatsArrayIndex) {
-	        phoneFormatsArrayIndex = phoneFormatsArrayIndex || 0;
-	        return faker.helpers.replaceSymbolWithNumber(faker.definitions.phone_number.formats[phoneFormatsArrayIndex]);
-	    },
-	
-	    phoneFormats: function () {
-	      return faker.random.array_element(faker.definitions.phone_number.formats);
-	    }
-	
-	};
-	
-	module.exports = phone;
-
-
-/***/ },
-/* 184 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var faker = __webpack_require__(103),
-	    password_generator = __webpack_require__(247),
-	    random_ua = __webpack_require__(248);
-	
-	var internet = {
-	
-	    avatar: function () {
-	        return faker.random.array_element(faker.definitions.internet.avatar_uri);
-	    },
-	
-	    email: function (firstName, lastName, provider) {
-	        provider = provider || faker.random.array_element(faker.definitions.internet.free_email);
-	        return  faker.helpers.slugify(faker.internet.userName(firstName, lastName)) + "@" + provider;
-	    },
-	
-	    userName: function (firstName, lastName) {
-	        var result;
-	        firstName = firstName || faker.name.firstName();
-	        lastName = lastName || faker.name.lastName();
-	        switch (faker.random.number(2)) {
-	        case 0:
-	            result = firstName + faker.random.number(99);
-	            break;
-	        case 1:
-	            result = firstName + faker.random.array_element([".", "_"]) + lastName;
-	            break;
-	        case 2:
-	            result = firstName + faker.random.array_element([".", "_"]) + lastName + faker.random.number(99);
-	            break;
-	        }
-	        result = result.replace(/'/g, "");
-	        result = result.replace(/ /g, "");
-	        return result;
-	    },
-	
-	    domainName: function () {
-	        return faker.internet.domainWord() + "." + faker.internet.domainSuffix();
-	    },
-	
-	    domainSuffix: function () {
-	        return faker.random.array_element(faker.definitions.internet.domain_suffix);
-	    },
-	
-	    domainWord:  function () {
-	        return faker.name.firstName().replace(/([^A-Z0-9._%+-])/ig, '').toLowerCase();
-	    },
-	
-	    ip: function () {
-	        var randNum = function () {
-	            return (faker.random.number(255)).toFixed(0);
-	        };
-	
-	        var result = [];
-	        for (var i = 0; i < 4; i++) {
-	            result[i] = randNum();
-	        }
-	
-	        return result.join(".");
-	    },
-	
-	    userAgent: function () {
-	      return random_ua.generate();
-	    },
-	
-	    color: function (baseRed255, baseGreen255, baseBlue255) {
-	        baseRed255 = baseRed255 || 0;
-	        baseGreen255 = baseGreen255 || 0;
-	        baseBlue255 = baseBlue255 || 0;
-	        // based on awesome response : http://stackoverflow.com/questions/43044/algorithm-to-randomly-generate-an-aesthetically-pleasing-color-palette
-	        var red = Math.floor((faker.random.number(256) + baseRed255) / 2);
-	        var green = Math.floor((faker.random.number(256) + baseRed255) / 2);
-	        var blue = Math.floor((faker.random.number(256) + baseRed255) / 2);
-	        var redStr = red.toString(16);
-	        var greenStr = green.toString(16);
-	        var blueStr = blue.toString(16);
-	        return '#' +
-	          (redStr.length === 1 ? '0' : '') + redStr +
-	          (greenStr.length === 1 ? '0' : '') + greenStr +
-	          (blueStr.length === 1 ? '0': '') + blueStr;
-	
-	    },
-	
-	    password: function (len, memorable, pattern, prefix) {
-	      len = len || 15;
-	      if (typeof memorable === "undefined") {
-	        memorable = false;
-	      }
-	      return password_generator(len, memorable, pattern, prefix);
-	    }
-	};
-	
-	module.exports = internet;
-
-
-/***/ },
-/* 185 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var faker = __webpack_require__(103);
-	
-	var company = {
-	
-	    suffixes: function () {
-	        return ["Inc", "and Sons", "LLC", "Group", "and Daughters"];
-	    },
-	
-	    companyName: function (format) {
-	        switch ((format ? format : faker.random.number(2))) {
-	        case 0:
-	            return faker.name.lastName() + " " + faker.company.companySuffix();
-	        case 1:
-	            return faker.name.lastName() + "-" + faker.name.lastName();
-	        case 2:
-	            return faker.name.lastName() + ", " + faker.name.lastName() + " and " + faker.name.lastName();
-	        }
-	    },
-	
-	    companySuffix: function () {
-	        return faker.random.array_element(faker.company.suffixes());
-	    },
-	
-	    catchPhrase: function () {
-	        return faker.company.catchPhraseAdjective() + " " +
-	            faker.company.catchPhraseDescriptor() + " " +
-	            faker.company.catchPhraseNoun();
-	    },
-	
-	    bs: function () {
-	        return faker.company.bsAdjective() + " " +
-	            faker.company.bsBuzz() + " " +
-	            faker.company.bsNoun();
-	    },
-	
-	    catchPhraseAdjective: function () {
-	        return faker.random.array_element(faker.definitions.company.adjective);
-	    },
-	
-	    catchPhraseDescriptor: function () {
-	        return faker.random.array_element(faker.definitions.company.descriptor);
-	    },
-	
-	    catchPhraseNoun: function () {
-	        return faker.random.array_element(faker.definitions.company.noun);
-	    },
-	
-	    bsAdjective: function () {
-	        return faker.random.array_element(faker.definitions.company.bs_adjective);
-	    },
-	
-	    bsBuzz: function () {
-	        return faker.random.array_element(faker.definitions.company.bs_verb);
-	    },
-	
-	    bsNoun: function () {
-	        return faker.random.array_element(faker.definitions.company.bs_noun);
-	    }
-	
-	};
-	
-	module.exports = company;
-
-
-/***/ },
-/* 186 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var faker = __webpack_require__(103);
-	
-	var image = {
-	  image: function () {
-	    var categories = ["abstract", "animals", "business", "cats", "city", "food", "nightlife", "fashion", "people", "nature", "sports", "technics", "transport"];
-	    return image[faker.random.array_element(categories)]();
-	  },
-	  avatar: function () {
-	    return faker.internet.avatar();
-	  },
-	  imageUrl: function (width, height, category) {
-	      var width = width || 640;
-	      var height = height || 480;
-	
-	      var url ='http://lorempixel.com/' + width + '/' + height;
-	      if (typeof category !== 'undefined') {
-	        url += '/' + category;
-	      }
-	      return url;
-	  },
-	  abstract: function (width, height) {
-	    return faker.image.imageUrl(width, height, 'abstract');
-	  },
-	  animals: function (width, height) {
-	    return faker.image.imageUrl(width, height, 'animals');
-	  },
-	  business: function (width, height) {
-	    return faker.image.imageUrl(width, height, 'business');
-	  },
-	  cats: function (width, height) {
-	    return faker.image.imageUrl(width, height, 'cats');
-	  },
-	  city: function (width, height) {
-	    return faker.image.imageUrl(width, height, 'city');
-	  },
-	  food: function (width, height) {
-	    return faker.image.imageUrl(width, height, 'food');
-	  },
-	  nightlife: function (width, height) {
-	    return faker.image.imageUrl(width, height, 'nightlife');
-	  },
-	  fashion: function (width, height) {
-	    return faker.image.imageUrl(width, height, 'fashion');
-	  },
-	  people: function (width, height) {
-	    return faker.image.imageUrl(width, height, 'people');
-	  },
-	  nature: function (width, height) {
-	    return faker.image.imageUrl(width, height, 'nature');
-	  },
-	  sports: function (width, height) {
-	    return faker.image.imageUrl(width, height, 'sports');
-	  },
-	  technics: function (width, height) {
-	    return faker.image.imageUrl(width, height, 'technics');
-	  },
-	  transport: function (width, height) {
-	    return faker.image.imageUrl(width, height, 'transport');
-	  }
-	};
-	
-	module.exports = image;
-
-
-/***/ },
-/* 187 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var faker = __webpack_require__(103);
-	var Helpers = __webpack_require__(188);
-	
-	var lorem = {
-	    words: function (num) {
-	        if (typeof num == 'undefined') { num = 3; }
-	        return Helpers.shuffle(faker.definitions.lorem.words).slice(0, num);
-	    },
-	
-	    sentence: function (wordCount, range) {
-	        if (typeof wordCount == 'undefined') { wordCount = 3; }
-	        if (typeof range == 'undefined') { range = 7; }
-	
-	        // strange issue with the node_min_test failing for captialize, please fix and add faker.lorem.back
-	        //return  faker.lorem.words(wordCount + Helpers.randomNumber(range)).join(' ').capitalize();
-	
-	        return  faker.lorem.words(wordCount + faker.random.number(range)).join(' ');
-	    },
-	
-	    sentences: function (sentenceCount) {
-	        if (typeof sentenceCount == 'undefined') { sentenceCount = 3; }
-	        var sentences = [];
-	        for (sentenceCount; sentenceCount > 0; sentenceCount--) {
-	            sentences.push(faker.lorem.sentence());
-	        }
-	        return sentences.join("\n");
-	    },
-	
-	    paragraph: function (sentenceCount) {
-	        if (typeof sentenceCount == 'undefined') { sentenceCount = 3; }
-	        return faker.lorem.sentences(sentenceCount + faker.random.number(3));
-	    },
-	
-	    paragraphs: function (paragraphCount) {
-	        if (typeof paragraphCount == 'undefined') { paragraphCount = 3; }
-	        var paragraphs = [];
-	        for (paragraphCount; paragraphCount > 0; paragraphCount--) {
-	            paragraphs.push(faker.lorem.paragraph());
-	        }
-	        return paragraphs.join("\n \r\t");
-	    }
-	};
-	
-	module.exports = lorem;
-
-
-/***/ },
-/* 188 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var faker = __webpack_require__(103);
-	
-	// backword-compatibility
-	exports.randomNumber = function (range) {
-	    return faker.random.number(range);
-	};
-	
-	// backword-compatibility
-	exports.randomize = function (array) {
-	    array = array || ["a", "b", "c"];
-	    return faker.random.array_element(array);
-	};
-	
-	// slugifies string
-	exports.slugify = function (string) {
-	    string = string || "";
-	    return string.replace(/ /g, '-').replace(/[^\w\.\-]+/g, '');
-	};
-	
-	// parses string for a symbol and replace it with a random number from 1-10
-	exports.replaceSymbolWithNumber = function (string, symbol) {
-	    string = string || "";
-	    // default symbol is '#'
-	    if (symbol === undefined) {
-	        symbol = '#';
-	    }
-	
-	    var str = '';
-	    for (var i = 0; i < string.length; i++) {
-	        if (string.charAt(i) == symbol) {
-	            str += faker.random.number(9);
-	        } else {
-	            str += string.charAt(i);
-	        }
-	    }
-	    return str;
-	};
-	
-	// takes an array and returns it randomized
-	exports.shuffle = function (o) {
-	    o = o || ["a", "b", "c"];
-	    for (var j, x, i = o.length; i; j = faker.random.number(i), x = o[--i], o[i] = o[j], o[j] = x);
-	    return o;
-	};
-	
-	exports.mustache = function (str, data) {
-	  for(var p in data) {
-	    var re = new RegExp('{{' + p + '}}', 'g')
-	    str = str.replace(re, data[p]);
-	  }
-	  return str;
-	};
-	
-	exports.createCard = function () {
-	    return {
-	        "name": faker.name.findName(),
-	        "username": faker.internet.userName(),
-	        "email": faker.internet.email(),
-	        "address": {
-	            "streetA": faker.address.streetName(),
-	            "streetB": faker.address.streetAddress(),
-	            "streetC": faker.address.streetAddress(true),
-	            "streetD": faker.address.secondaryAddress(),
-	            "city": faker.address.city(),
-	            "state": faker.address.state(),
-	            "country": faker.address.country(),
-	            "zipcode": faker.address.zipCode(),
-	            "geo": {
-	                "lat": faker.address.latitude(),
-	                "lng": faker.address.longitude()
-	            }
-	        },
-	        "phone": faker.phone.phoneNumber(),
-	        "website": faker.internet.domainName(),
-	        "company": {
-	            "name": faker.company.companyName(),
-	            "catchPhrase": faker.company.catchPhrase(),
-	            "bs": faker.company.bs()
-	        },
-	        "posts": [
-	            {
-	                "words": faker.lorem.words(),
-	                "sentence": faker.lorem.sentence(),
-	                "sentences": faker.lorem.sentences(),
-	                "paragraph": faker.lorem.paragraph()
-	            },
-	            {
-	                "words": faker.lorem.words(),
-	                "sentence": faker.lorem.sentence(),
-	                "sentences": faker.lorem.sentences(),
-	                "paragraph": faker.lorem.paragraph()
-	            },
-	            {
-	                "words": faker.lorem.words(),
-	                "sentence": faker.lorem.sentence(),
-	                "sentences": faker.lorem.sentences(),
-	                "paragraph": faker.lorem.paragraph()
-	            }
-	        ],
-	        "accountHistory": [faker.helpers.createTransaction(), faker.helpers.createTransaction(), faker.helpers.createTransaction()]
-	    };
-	};
-	
-	exports.contextualCard = function () {
-	  var name = faker.name.firstName(),
-	      userName = faker.internet.userName(name);
-	  return {
-	      "name": name,
-	      "username": userName,
-	      "avatar": faker.internet.avatar(),
-	      "email": faker.internet.email(userName),
-	      "dob": faker.date.past(50, new Date("Sat Sep 20 1992 21:35:02 GMT+0200 (CEST)")),
-	      "phone": faker.phone.phoneNumber(),
-	      "address": {
-	          "street": faker.address.streetName(true),
-	          "suite": faker.address.secondaryAddress(),
-	          "city": faker.address.city(),
-	          "zipcode": faker.address.zipCode(),
-	          "geo": {
-	              "lat": faker.address.latitude(),
-	              "lng": faker.address.longitude()
-	          }
-	      },
-	      "website": faker.internet.domainName(),
-	      "company": {
-	          "name": faker.company.companyName(),
-	          "catchPhrase": faker.company.catchPhrase(),
-	          "bs": faker.company.bs()
-	      }
-	  };
-	};
-	
-	
-	exports.userCard = function () {
-	    return {
-	        "name": faker.name.findName(),
-	        "username": faker.internet.userName(),
-	        "email": faker.internet.email(),
-	        "address": {
-	            "street": faker.address.streetName(true),
-	            "suite": faker.address.secondaryAddress(),
-	            "city": faker.address.city(),
-	            "zipcode": faker.address.zipCode(),
-	            "geo": {
-	                "lat": faker.address.latitude(),
-	                "lng": faker.address.longitude()
-	            }
-	        },
-	        "phone": faker.phone.phoneNumber(),
-	        "website": faker.internet.domainName(),
-	        "company": {
-	            "name": faker.company.companyName(),
-	            "catchPhrase": faker.company.catchPhrase(),
-	            "bs": faker.company.bs()
-	        }
-	    };
-	};
-	
-	exports.createTransaction = function(){
-	  return {
-	    "amount" : faker.finance.amount(),
-	    "date" : new Date(2012, 1, 2),  //TODO: add a ranged date method
-	    "business": faker.company.companyName(),
-	    "name": [faker.finance.accountName(), faker.finance.mask()].join(' '),
-	    "type" : exports.randomize(faker.definitions.finance.transaction_type),
-	    "account" : faker.finance.account()
-	  };
-	};
-	
-	/*
-	String.prototype.capitalize = function () { //v1.0
-	    return this.replace(/\w+/g, function (a) {
-	        return a.charAt(0).toUpperCase() + a.substr(1).toLowerCase();
-	    });
-	};
-	*/
-	
-
-
-/***/ },
-/* 189 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var faker = __webpack_require__(103);
-	
-	var date = {
-	
-	    past: function (years, refDate) {
-	        var date = (refDate) ? new Date(Date.parse(refDate)) : new Date();
-	        var range = {
-	          min: 1000,
-	          max: (years || 1) * 365 * 24 * 3600 * 1000
-	        };
-	
-	        var past = date.getTime();
-	        past -= faker.random.number(range); // some time from now to N years ago, in milliseconds
-	        date.setTime(past);
-	
-	        return date;
-	    },
-	
-	    future: function (years, refDate) {
-	        var date = (refDate) ? new Date(Date.parse(refDate)) : new Date();
-	        var range = {
-	          min: 1000,
-	          max: (years || 1) * 365 * 24 * 3600 * 1000
-	        };
-	
-	        var future = date.getTime();
-	        future += faker.random.number(range); // some time from now to N years later, in milliseconds
-	        date.setTime(future);
-	
-	        return date;
-	    },
-	
-	    between: function (from, to) {
-	        var fromMilli = Date.parse(from);
-	        var dateOffset = faker.random.number(Date.parse(to) - fromMilli);
-	
-	        var newDate = new Date(fromMilli + dateOffset);
-	
-	        return newDate;
-	    },
-	
-	    recent: function (days) {
-	        var date = new Date();
-	        var range = {
-	          min: 1000,
-	          max: (days || 1) * 24 * 3600 * 1000
-	        };
-	
-	        var future = date.getTime();
-	        future -= faker.random.number(range); // some time from now to N days ago, in milliseconds
-	        date.setTime(future);
-	
-	        return date;
-	    }
-	};
-	module.exports = date;
-
-
-/***/ },
-/* 190 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var mersenne = __webpack_require__(249);
-	var faker = __webpack_require__(103);
-	
-	var random = {
-	    // returns a single random number based on a max number or range
-	    number: function (options) {
-	
-	        if (typeof options === "number") {
-	          options = {
-	            max: options
-	          };
-	        }
-	
-	        options = options || {};
-	
-	        if (typeof options.min === "undefined") {
-	          options.min = 0;
-	        }
-	
-	        if (typeof options.max === "undefined") {
-	          options.max = 1;
-	        }
-	        if (typeof options.precision === "undefined") {
-	          options.precision = 1;
-	        }
-	
-	        // Make the range inclusive of the max value
-	        var max = options.max;
-	        if (max > 0) {
-	          max += options.precision;
-	        } 
-	          
-	        var randomNumber = options.precision * Math.floor(
-	          mersenne.rand(max / options.precision, options.min / options.precision));
-	
-	        return randomNumber;
-	
-	    },
-	
-	    // takes an array and returns a random element of the array
-	    array_element: function (array) {
-	        array = array || ["a", "b", "c"];
-	        var r = faker.random.number({ max: array.length - 1 });
-	        return array[r];
-	    },
-	
-	    // takes an object and returns the randomly key or value
-	    object_element: function (object, field) {
-	        object = object || {};
-	        var array = Object.keys(object);
-	        var key = faker.random.array_element(array);
-	
-	        return field === "key" ? key : object[key];
-	    },
-	
-	    uuid : function () {
-	        var RFC4122_TEMPLATE = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx';
-	        var replacePlaceholders = function (placeholder) {
-	            var random = Math.random()*16|0;
-	            var value = placeholder == 'x' ? random : (random &0x3 | 0x8);
-	            return value.toString(16);
-	        };
-	        return RFC4122_TEMPLATE.replace(/[xy]/g, replacePlaceholders);
-	    }
-	};
-	
-	module.exports = random;
-
-
-/***/ },
-/* 191 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Helpers = __webpack_require__(188),
-	    faker = __webpack_require__(103);
-	
-	var finance = {
-	
-	    account: function (length) {
-	
-	        length = length || 8;
-	
-	        var template = '';
-	
-	        for (var i = 0; i < length; i++) {
-	            template = template + '#';
-	        }
-	        length = null;
-	        return Helpers.replaceSymbolWithNumber(template);
-	    },
-	
-	    accountName: function () {
-	
-	        return [Helpers.randomize(faker.definitions.finance.account_type), 'Account'].join(' ');
-	    },
-	
-	    mask: function (length, parens, elipsis) {
-	
-	
-	        //set defaults
-	        length = (length == 0 || !length || typeof length == 'undefined') ? 4 : length;
-	        parens = (parens === null) ? true : parens;
-	        elipsis = (elipsis === null) ? true : elipsis;
-	
-	        //create a template for length
-	        var template = '';
-	
-	        for (var i = 0; i < length; i++) {
-	            template = template + '#';
-	        }
-	
-	        //prefix with elipsis
-	        template = (elipsis) ? ['...', template].join('') : template;
-	
-	        template = (parens) ? ['(', template, ')'].join('') : template;
-	
-	        //generate random numbers
-	        template = Helpers.replaceSymbolWithNumber(template);
-	
-	        return template;
-	
-	    },
-	
-	    //min and max take in minimum and maximum amounts, dec is the decimal place you want rounded to, symbol is $, €, £, etc
-	    //NOTE: this returns a string representation of the value, if you want a number use parseFloat and no symbol
-	
-	    amount: function (min, max, dec, symbol) {
-	
-	        min = min || 0;
-	        max = max || 1000;
-	        dec = dec || 2;
-	        symbol = symbol || '';
-	
-	        return symbol + (Math.round((Math.random() * (max - min) + min) * Math.pow(10, dec)) / Math.pow(10, dec)).toFixed(dec);
-	
-	    },
-	
-	    transactionType: function () {
-	        return Helpers.randomize(faker.definitions.finance.transaction_type);
-	    },
-	
-	    currencyCode: function () {
-	        return faker.random.object_element(faker.definitions.finance.currency)['code'];
-	    },
-	
-	    currencyName: function () {
-	        return faker.random.object_element(faker.definitions.finance.currency, 'key');
-	    },
-	
-	    currencySymbol: function () {
-	        var symbol;
-	
-	        while (!symbol) {
-	            symbol = faker.random.object_element(faker.definitions.finance.currency)['symbol'];
-	        }
-	        return symbol;
-	    }
-	};
-	
-	module.exports = finance;
-
-/***/ },
-/* 192 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var faker = __webpack_require__(103);
-	
-	var hacker = {
-	
-	  abbreviation : function () {
-	    return faker.random.array_element(faker.definitions.hacker.abbreviation);
-	  },
-	
-	  adjective : function () {
-	    return faker.random.array_element(faker.definitions.hacker.adjective);
-	  },
-	
-	  noun : function () {
-	    return faker.random.array_element(faker.definitions.hacker.noun);
-	  },
-	
-	  verb : function () {
-	    return faker.random.array_element(faker.definitions.hacker.verb);
-	  },
-	
-	  ingverb : function () {
-	    return faker.random.array_element(faker.definitions.hacker.ingverb);
-	  },
-	
-	  phrase : function () {
-	
-	    var data = {
-	      abbreviation: hacker.abbreviation(),
-	      adjective: hacker.adjective(),
-	      ingverb: hacker.ingverb(),
-	      noun: hacker.noun(),
-	      verb: hacker.verb()
-	    };
-	
-	    var phrase = faker.random.array_element([ "If we {{verb}} the {{noun}}, we can get to the {{abbreviation}} {{noun}} through the {{adjective}} {{abbreviation}} {{noun}}!",
-	      "We need to {{verb}} the {{adjective}} {{abbreviation}} {{noun}}!",
-	      "Try to {{verb}} the {{abbreviation}} {{noun}}, maybe it will {{verb}} the {{adjective}} {{noun}}!",
-	      "You can't {{verb}} the {{noun}} without {{ingverb}} the {{adjective}} {{abbreviation}} {{noun}}!",
-	      "Use the {{adjective}} {{abbreviation}} {{noun}}, then you can {{verb}} the {{adjective}} {{noun}}!",
-	      "The {{abbreviation}} {{noun}} is down, {{verb}} the {{adjective}} {{noun}} so we can {{verb}} the {{abbreviation}} {{noun}}!",
-	      "{{ingverb}} the {{noun}} won't do anything, we need to {{verb}} the {{adjective}} {{abbreviation}} {{noun}}!",
-	      "I'll {{verb}} the {{adjective}} {{abbreviation}} {{noun}}, that should {{noun}} the {{abbreviation}} {{noun}}!"
-	   ]);
-	
-	   return faker.helpers.mustache(phrase, data);
-	
-	  },
-	
-	
-	};
-	
-	module.exports = hacker;
-
-
-/***/ },
-/* 193 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var faker = __webpack_require__(103);
-	exports['de'] = __webpack_require__(250);
-	exports['de_AT'] = __webpack_require__(251);
-	exports['de_CH'] = __webpack_require__(252);
-	exports['en'] = __webpack_require__(253);
-	exports['en_AU'] = __webpack_require__(254);
-	exports['en_BORK'] = __webpack_require__(255);
-	exports['en_CA'] = __webpack_require__(256);
-	exports['en_GB'] = __webpack_require__(257);
-	exports['en_IND'] = __webpack_require__(258);
-	exports['en_US'] = __webpack_require__(259);
-	exports['en_au_ocker'] = __webpack_require__(260);
-	exports['es'] = __webpack_require__(261);
-	exports['fa'] = __webpack_require__(262);
-	exports['fr'] = __webpack_require__(263);
-	exports['it'] = __webpack_require__(264);
-	exports['ja'] = __webpack_require__(265);
-	exports['ko'] = __webpack_require__(266);
-	exports['nb_NO'] = __webpack_require__(267);
-	exports['nep'] = __webpack_require__(268);
-	exports['nl'] = __webpack_require__(269);
-	exports['pl'] = __webpack_require__(270);
-	exports['pt_BR'] = __webpack_require__(271);
-	exports['ru'] = __webpack_require__(272);
-	exports['sk'] = __webpack_require__(273);
-	exports['sv'] = __webpack_require__(274);
-	exports['vi'] = __webpack_require__(275);
-	exports['zh_CN'] = __webpack_require__(276);
 
 /***/ },
 /* 194 */
@@ -21255,51 +21284,6 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 * @providesModule joinClasses
-	 * @typechecks static-only
-	 */
-	
-	"use strict";
-	
-	/**
-	 * Combines multiple className strings into one.
-	 * http://jsperf.com/joinclasses-args-vs-array
-	 *
-	 * @param {...?string} classes
-	 * @return {string}
-	 */
-	function joinClasses(className/*, ... */) {
-	  if (!className) {
-	    className = '';
-	  }
-	  var nextClass;
-	  var argLength = arguments.length;
-	  if (argLength > 1) {
-	    for (var ii = 1; ii < argLength; ii++) {
-	      nextClass = arguments[ii];
-	      if (nextClass) {
-	        className = (className ? className + ' ' : '') + nextClass;
-	      }
-	    }
-	  }
-	  return className;
-	}
-	
-	module.exports = joinClasses;
-
-
-/***/ },
-/* 200 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-2014, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
 	 * @providesModule CallbackQueue
 	 */
 	
@@ -21391,7 +21375,7 @@
 
 
 /***/ },
-/* 201 */
+/* 200 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -21631,6 +21615,51 @@
 	};
 	
 	module.exports = Transaction;
+
+
+/***/ },
+/* 201 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-2014, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule joinClasses
+	 * @typechecks static-only
+	 */
+	
+	"use strict";
+	
+	/**
+	 * Combines multiple className strings into one.
+	 * http://jsperf.com/joinclasses-args-vs-array
+	 *
+	 * @param {...?string} classes
+	 * @return {string}
+	 */
+	function joinClasses(className/*, ... */) {
+	  if (!className) {
+	    className = '';
+	  }
+	  var nextClass;
+	  var argLength = arguments.length;
+	  if (argLength > 1) {
+	    for (var ii = 1; ii < argLength; ii++) {
+	      nextClass = arguments[ii];
+	      if (nextClass) {
+	        className = (className ? className + ' ' : '') + nextClass;
+	      }
+	    }
+	  }
+	  return className;
+	}
+	
+	module.exports = joinClasses;
 
 
 /***/ },
@@ -22850,7 +22879,7 @@
 	var PooledClass = __webpack_require__(118);
 	
 	var assign = __webpack_require__(82);
-	var emptyFunction = __webpack_require__(167);
+	var emptyFunction = __webpack_require__(169);
 	var getEventTarget = __webpack_require__(226);
 	
 	/**
@@ -23058,7 +23087,7 @@
 	
 	var ReactDOMSelection = __webpack_require__(281);
 	
-	var containsNode = __webpack_require__(165);
+	var containsNode = __webpack_require__(163);
 	var focusNode = __webpack_require__(282);
 	var getActiveElement = __webpack_require__(228);
 	
@@ -23563,12 +23592,12 @@
 	
 	"use strict";
 	
-	var CallbackQueue = __webpack_require__(200);
+	var CallbackQueue = __webpack_require__(199);
 	var PooledClass = __webpack_require__(118);
 	var ReactBrowserEventEmitter = __webpack_require__(135);
 	var ReactInputSelection = __webpack_require__(215);
 	var ReactPutListenerQueue = __webpack_require__(242);
-	var Transaction = __webpack_require__(201);
+	var Transaction = __webpack_require__(200);
 	
 	var assign = __webpack_require__(82);
 	
@@ -24071,7 +24100,7 @@
 	 * @typechecks
 	 */
 	
-	var emptyFunction = __webpack_require__(167);
+	var emptyFunction = __webpack_require__(169);
 	
 	/**
 	 * Upstream version of event listener. Does not take into account specific
@@ -25312,7 +25341,7 @@
 	
 	"use strict";
 	
-	var invariant = __webpack_require__(100);
+	var invariant = __webpack_require__(86);
 	var isNode = __webpack_require__(288);
 	var keyOf = __webpack_require__(245);
 	
@@ -25486,7 +25515,7 @@
 	
 	"use strict";
 	
-	var invariant = __webpack_require__(100);
+	var invariant = __webpack_require__(86);
 	var keyMirror = __webpack_require__(289);
 	
 	/**
@@ -67980,7 +68009,7 @@
 	"use strict";
 	
 	var Danger = __webpack_require__(291);
-	var ReactMultiChildUpdateTypes = __webpack_require__(163);
+	var ReactMultiChildUpdateTypes = __webpack_require__(165);
 	
 	var getTextContentAccessor = __webpack_require__(217);
 	var invariant = __webpack_require__(117);
@@ -68361,7 +68390,7 @@
 	
 	'use strict';
 	
-	var invariant = __webpack_require__(100);
+	var invariant = __webpack_require__(86);
 	
 	/**
 	 * Constructs an enumeration with keys equal to their value.
@@ -68502,7 +68531,7 @@
 	var ExecutionEnvironment = __webpack_require__(85);
 	
 	var createNodesFromMarkup = __webpack_require__(293);
-	var emptyFunction = __webpack_require__(167);
+	var emptyFunction = __webpack_require__(169);
 	var getMarkupWrap = __webpack_require__(294);
 	var invariant = __webpack_require__(117);
 	

@@ -202,9 +202,6 @@ blockquote > :last-child {
   width: 100%;
   z-index: 1001;
 }
-.homePage .logoPic {
-  height: 80px;
-}
 .homePage .miniHeader .miniLogo .logoPic {
   width: 169px;
   height: 23px;
@@ -221,10 +218,11 @@ blockquote > :last-child {
   bottom: 0;
   left: 50%;
   position: fixed;
-  top: 300px;
+  top: 35vh;
   text-align: center;
   z-index: 1000;
   width: 587px;
+  margin-top: -40px;
   margin-left: -283px;
   background: url(./images/fdt_logo_transparent_onlight_80px.png) no-repeat scroll;
 }
@@ -251,6 +249,19 @@ blockquote > :last-child {
   .homePage .logo {
     background-image: url(./images/fdt_logo_transparent_onlight_50px-2x.png);
     background-size: contain;
+  }
+}
+@media only screen and (max-width: 420px) {
+  .homePage .logo {
+    width: 267px;
+    margin-left: -133px;
+    background-image: url(./images/fdt_logo_transparent_onlight_50px.png);
+    background-size: contain;
+  }
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 680px), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+  .homePage .logo {
+    background-image: url(./images/fdt_logo_transparent_onlight_50px-2x.png);
   }
 }
 .homePage .buttons {
@@ -289,7 +300,8 @@ blockquote > :last-child {
     max-width: 540px;
   }
   .homePage .logo {
-    top: 110px;
+    top: 105px;
+    margin-top: 0;
   }
   .homePage .logoPic {
     height: 50px;
@@ -854,17 +866,28 @@ blockquote > :last-child {
   width: 220px;
   z-index: 0;
 }
-@media only screen and (max-width: 680px) {
-  .docsPage .sideBar {
-    display: none;
-  }
-}
 .docsPage .sideBar .scrollContent {
   box-sizing: border-box;
   height: 100%;
   overflow: auto;
   padding: 66px 0 100px;
   width: 240px;
+}
+@media only screen and (max-width: 680px) {
+  .docsPage .sideBar {
+    position: relative;
+    width: 100%;
+  }
+  .docsPage .sideBar .scrollContent {
+    padding: 0;
+    width: 100%;
+  }
+  .docsPage .pageBody {
+    padding: 0;
+  }
+  .docsPage .contents {
+    padding: 0;
+  }
 }
 .docsPage .sideBar h2 {
   font-size: 1em;
@@ -1218,17 +1241,28 @@ blockquote > :last-child {
   width: 220px;
   z-index: 0;
 }
-@media only screen and (max-width: 680px) {
-  .examplesPage .sideBar {
-    display: none;
-  }
-}
 .examplesPage .sideBar .scrollContent {
   box-sizing: border-box;
   height: 100%;
   overflow: auto;
   padding: 66px 0 100px;
   width: 160px;
+}
+@media only screen and (max-width: 680px) {
+  .examplesPage .sideBar {
+    position: relative;
+    width: 100%;
+  }
+  .examplesPage .sideBar .scrollContent {
+    padding: 0;
+    width: 100%;
+  }
+  .examplesPage .pageBody {
+    padding: 0;
+  }
+  .examplesPage .contents {
+    padding: 0;
+  }
 }
 .examplesPage .sideBar h2 {
   font-size: 1em;
