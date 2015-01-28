@@ -1,0 +1,141 @@
+<!doctype html><html data-reactid=".9daf4k4t1c" data-react-checksum="1786764064"><head data-reactid=".9daf4k4t1c.0"><meta charset="utf-8" data-reactid=".9daf4k4t1c.0.0"><title data-reactid=".9daf4k4t1c.0.1">FixedDataTable</title><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" data-reactid=".9daf4k4t1c.0.2"><link rel="stylesheet" href="//code.cdn.mozilla.net/fonts/fira.css" data-reactid=".9daf4k4t1c.0.3"><link rel="stylesheet" type="text/css" href="assets/main.css" data-reactid=".9daf4k4t1c.0.4"><link rel="shortcut icon" type="image/png" href="images/favicon.png" data-reactid=".9daf4k4t1c.0.5"><base target="_blank" data-reactid=".9daf4k4t1c.0.6"></head><body data-reactid=".9daf4k4t1c.1"><div class="docsPage" data-reactid=".9daf4k4t1c.1.0"><div class="header" data-reactid=".9daf4k4t1c.1.0.0"><div class="miniHeader" data-reactid=".9daf4k4t1c.1.0.0.0"><div class="miniHeaderContents" data-reactid=".9daf4k4t1c.1.0.0.0.0"><a href="./" target="_self" class="miniLogo" data-reactid=".9daf4k4t1c.1.0.0.0.0.0"></a><a class="homeLink" href="./" target="_self" data-reactid=".9daf4k4t1c.1.0.0.0.0.1">Home</a><a href="api-table.html" target="_self" data-reactid=".9daf4k4t1c.1.0.0.0.0.2">Documentation</a><a href="example-object-data.html" target="_self" data-reactid=".9daf4k4t1c.1.0.0.0.0.3">Examples</a><a href="https://github.com/facebook/fixed-data-table-experimental" data-reactid=".9daf4k4t1c.1.0.0.0.0.4">Github</a></div></div></div><div class="pageBody" id="body" data-reactid=".9daf4k4t1c.1.0.1"><div class="contents" data-reactid=".9daf4k4t1c.1.0.1.0"><div class="sideBar" data-reactid=".9daf4k4t1c.1.0.1.0.0"><div class="scrollContent" data-reactid=".9daf4k4t1c.1.0.1.0.0.0"><h4 class="groupTitle" data-reactid=".9daf4k4t1c.1.0.1.0.0.0.0">API</h4><h2 data-reactid=".9daf4k4t1c.1.0.1.0.0.0.1:$Table"><a href="api-table.html" target="_self" data-reactid=".9daf4k4t1c.1.0.1.0.0.0.1:$Table.0">Table</a></h2><h2 data-reactid=".9daf4k4t1c.1.0.1.0.0.0.1:$Column"><a href="api-column.html" target="_self" data-reactid=".9daf4k4t1c.1.0.1.0.0.0.1:$Column.0">Column</a></h2><h2 data-reactid=".9daf4k4t1c.1.0.1.0.0.0.1:$ColumnGroup"><a href="api-columngroup.html" target="_self" data-reactid=".9daf4k4t1c.1.0.1.0.0.0.1:$ColumnGroup.0">ColumnGroup</a></h2></div></div><div class="docContents" data-reactid=".9daf4k4t1c.1.0.1.0.1"><!-- File generated from "src/FixedDataTable.react.js" -->
+<h1 id="api-table-component-">API: <code>Table</code> (component)</h1>
+<p>Data grid component with fixed or scrollable header and columns.</p>
+<p>The layout of the data table is as follow:</p>
+<code class="codeBlock"><span class="token operator" >+-</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >+</span>
+<span class="token operator" >|</span> <span class="token qualifier" >Fixed</span> <span class="token qualifier" >Column</span> <span class="token qualifier" >Group</span>    <span class="token operator" >|</span> <span class="token qualifier" >Scrollable</span> <span class="token qualifier" >Column</span> <span class="token qualifier" >Group</span>   <span class="token operator" >|</span>
+<span class="token operator" >|</span> <span class="token qualifier" >Header</span>                <span class="token operator" >|</span> <span class="token qualifier" >Header</span>                    <span class="token operator" >|</span>
+<span class="token operator" >|</span>                       <span class="token operator" >|</span>                           <span class="token operator" >|</span>
+<span class="token operator" >+-</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >+</span>
+<span class="token operator" >|</span>                       <span class="token operator" >|</span>                           <span class="token operator" >|</span>
+<span class="token operator" >|</span> <span class="token qualifier" >Fixed</span> <span class="token qualifier" >Header</span> <span class="token qualifier" >Columns</span>  <span class="token operator" >|</span> <span class="token qualifier" >Scrollable</span> <span class="token qualifier" >Header</span> <span class="token qualifier" >Columns</span> <span class="token operator" >|</span>
+<span class="token operator" >|</span>                       <span class="token operator" >|</span>                           <span class="token operator" >|</span>
+<span class="token operator" >+-</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >+-</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >+</span>
+<span class="token operator" >|</span>                       <span class="token operator" >|</span>                           <span class="token operator" >|</span>
+<span class="token operator" >|</span> <span class="token qualifier" >Fixed</span> <span class="token qualifier" >Body</span> <span class="token qualifier" >Columns</span>    <span class="token operator" >|</span> <span class="token qualifier" >Scrollable</span> <span class="token qualifier" >Body</span> <span class="token qualifier" >Columns</span>   <span class="token operator" >|</span>
+<span class="token operator" >|</span>                       <span class="token operator" >|</span>                           <span class="token operator" >|</span>
+<span class="token operator" >+-</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >+-</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >+</span>
+<span class="token operator" >|</span>                       <span class="token operator" >|</span>                           <span class="token operator" >|</span>
+<span class="token operator" >|</span> <span class="token qualifier" >Fixed</span> <span class="token qualifier" >Footer</span> <span class="token qualifier" >Columns</span>  <span class="token operator" >|</span> <span class="token qualifier" >Scrollable</span> <span class="token qualifier" >Footer</span> <span class="token qualifier" >Columns</span> <span class="token operator" >|</span>
+<span class="token operator" >|</span>                       <span class="token operator" >|</span>                           <span class="token operator" >|</span>
+<span class="token operator" >+-</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >+-</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >--</span><span class="token operator" >+</span></code><ul>
+<li><p>Fixed Column Group Header: These are the headers for a group
+of columns if included in the table that do not scroll
+vertically or horizontally.</p>
+</li>
+<li><p>Scrollable Column Group Header:  The header for a group of columns
+that do not move while scrolling vertically, but move horizontally
+with the horizontal scrolling.</p>
+</li>
+<li><p>Fixed Header Columns: The header columns that do not move while scrolling
+vertically or horizontally.</p>
+</li>
+<li><p>Scrollable Header Columns: The header columns that do not move
+while scrolling vertically, but move horizontally with the horizontal
+scrolling.</p>
+</li>
+<li><p>Fixed Body Columns: The body columns that do not move while scrolling
+horizontally, but move vertically with the vertical scrolling.</p>
+</li>
+<li><p>Scrollable Body Columns: The body columns that move while scrolling
+vertically or horizontally.</p>
+</li>
+</ul>
+<h2 id="props">Props</h2>
+<h3 id="-width-required-"><code>width</code> (required)</h3>
+<p>type: <code>number</code></p>
+<h3 id="-height-"><code>height</code></h3>
+<p>type: <code>number</code></p>
+<h3 id="-maxheight-"><code>maxHeight</code></h3>
+<p>type: <code>number</code></p>
+<h3 id="-ownerheight-"><code>ownerHeight</code></h3>
+<p>Height of table&#39;s owner, This is used to make sure the footer
+and scrollbar of the table are visible when current space for table in
+view is smaller than final height of table. It allows to avoid resizing
+and reflowing table whan it is moving in the view.</p>
+<p>This is used if <code>ownerHeight &lt; height</code>.</p>
+<p>type: <code>number</code></p>
+<h3 id="-overflowx-"><code>overflowX</code></h3>
+<p>type: <code>enum(&#39;hidden&#39;|&#39;auto&#39;)</code></p>
+<h3 id="-overflowy-"><code>overflowY</code></h3>
+<p>type: <code>enum(&#39;hidden&#39;|&#39;auto&#39;)</code></p>
+<h3 id="-rowscount-required-"><code>rowsCount</code> (required)</h3>
+<p>Number of rows in the table.</p>
+<p>type: <code>number</code></p>
+<h3 id="-rowheight-required-"><code>rowHeight</code> (required)</h3>
+<p>Height of rows unless rowHeightGetter is specified and returns different
+value.</p>
+<p>type: <code>number</code></p>
+<h3 id="-rowheightgetter-"><code>rowHeightGetter</code></h3>
+<p>If specified, <code>rowHeightGetter(index)</code> is called for each row and the
+returned value overrides rowHeight for particular row.</p>
+<p>type: <code>func</code></p>
+<h3 id="-rowgetter-required-"><code>rowGetter</code> (required)</h3>
+<p>To get rows to display in table, <code>rowGetter(index)</code>
+is called. rowGetter should be smart enough to handle async
+fetching of data and returning temporary objects
+while data is being fetched.</p>
+<p>type: <code>func</code></p>
+<h3 id="-rowclassnamegetter-"><code>rowClassNameGetter</code></h3>
+<p>To get any additional css classes that should be added to a row,
+<code>rowClassNameGetter(index)</code> is called.</p>
+<p>type: <code>func</code></p>
+<h3 id="-groupheaderheight-"><code>groupHeaderHeight</code></h3>
+<p>Height of the column group header.</p>
+<p>type: <code>number</code>
+defaultValue: <code>0</code></p>
+<h3 id="-headerheight-required-"><code>headerHeight</code> (required)</h3>
+<p>Height of the header.</p>
+<p>type: <code>number</code>
+defaultValue: <code>0</code></p>
+<h3 id="-headerdatagetter-"><code>headerDataGetter</code></h3>
+<p>Function that is called to get the data for the header row.</p>
+<p>type: <code>func</code></p>
+<h3 id="-footerheight-"><code>footerHeight</code></h3>
+<p>Height of the footer.</p>
+<p>type: <code>number</code>
+defaultValue: <code>0</code></p>
+<h3 id="-footerdata-"><code>footerData</code></h3>
+<p>Data that will be passed to footer cell renderers.</p>
+<p>type: <code>union(object|array)</code></p>
+<h3 id="-scrollleft-"><code>scrollLeft</code></h3>
+<p>Value of horizontal scroll.</p>
+<p>type: <code>number</code>
+defaultValue: <code>0</code></p>
+<h3 id="-scrolltocolumn-"><code>scrollToColumn</code></h3>
+<p>Index of column to scroll to.</p>
+<p>type: <code>number</code></p>
+<h3 id="-scrolltop-"><code>scrollTop</code></h3>
+<p>Value of vertical scroll.</p>
+<p>type: <code>number</code>
+defaultValue: <code>0</code></p>
+<h3 id="-scrolltorow-"><code>scrollToRow</code></h3>
+<p>Index of row to scroll to.</p>
+<p>type: <code>number</code></p>
+<h3 id="-onscrollend-"><code>onScrollEnd</code></h3>
+<p>Callback that is called when scrolling ends or stops with new horizontal
+and vertical scroll values.</p>
+<p>type: <code>func</code></p>
+<h3 id="-oncontentheightchange-"><code>onContentHeightChange</code></h3>
+<p>Callback that is called when <code>rowHeightGetter</code> returns a different height
+for a row than the <code>rowHeight</code> prop. This is necessary because initially
+table estimates heights of some parts of the content.</p>
+<p>type: <code>func</code></p>
+<h3 id="-onrowclick-"><code>onRowClick</code></h3>
+<p>Callback that is called when a row is clicked.</p>
+<p>type: <code>func</code></p>
+<h3 id="-onrowmousedown-"><code>onRowMouseDown</code></h3>
+<p>Callback that is called when mouse down event happens above a row.</p>
+<p>type: <code>func</code></p>
+<h3 id="-onrowmouseenter-"><code>onRowMouseEnter</code></h3>
+<p>Callback that is called when the mouse eneters a row.</p>
+<p>type: <code>func</code></p>
+<h3 id="-oncolumnresizeendcallback-"><code>onColumnResizeEndCallback</code></h3>
+<p>Callback that is called when resizer has been released
+and column needs to be updated.</p>
+<p>type: <code>func</code></p>
+<h3 id="-iscolumnresizing-"><code>isColumnResizing</code></h3>
+<p>Whether a column is currently being resized.</p>
+<p>type: <code>bool</code></p>
+</div></div></div></div><script data-reactid=".9daf4k4t1c.1.1">window.INITIAL_PROPS = {"location":"api-table.html","devMode":false};
+</script><script src="assets/main.js" data-reactid=".9daf4k4t1c.1.2"></script></body></html>

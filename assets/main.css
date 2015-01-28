@@ -1,0 +1,1347 @@
+html,
+body {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  color: #626466;
+  font-family: 'Fira Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.625;
+}
+@media only screen and (max-width: 680px) {
+  body {
+    font-size: 14px;
+  }
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #212325;
+}
+a {
+  color: #4183c4;
+  text-decoration: none;
+}
+pre,
+code {
+  font-family: 'Fira Mono', Menlo, monospace;
+  background: #F9F8F7;
+  color: #484A4C;
+  font-size: 0.9375em;
+  letter-spacing: -0.015em;
+}
+code {
+  margin: -0.05rem -0.15em;
+  padding: 0.05rem 0.35em;
+}
+blockquote {
+  margin: 1rem 0;
+  padding: 0 1rem;
+  color: #727476;
+  border-left: solid 3px #DCDAD9;
+}
+blockquote > :first-child {
+  margin-top: 0;
+}
+blockquote > :last-child {
+  margin-bottom: 0;
+}
+.codeBlock {
+  -webkit-overflow-scrolling: touch;
+  background: #FCFBFA;
+  border-left: solid 3px #ECEAE9;
+  box-sizing: border-box;
+  display: block;
+  font-size: 0.875em;
+  margin: 0.5rem 0;
+  overflow-y: scroll;
+  padding: 0.5rem 8px 0.5rem 12px;
+  white-space: pre;
+}
+.t.blockParams {
+  padding-left: 2ch;
+}
+.token.punctuation,
+.token.ignore,
+.t.interfaceDef,
+.t.member,
+.t.callSig {
+  color: #808890;
+}
+.token.function,
+.token.class-name,
+.token.qualifier,
+.t.fnQualifier,
+.t.fnName {
+  color: #32308E;
+}
+.token.primitive,
+.t.primitive {
+  color: #922;
+}
+.token.number,
+.t.typeParam {
+  color: #905;
+}
+.t.typeQualifier,
+.t.typeName {
+  color: #013679;
+}
+.t.param {
+  color: #945277;
+}
+.t.memberName {
+  color: teal;
+}
+.token.block-keyword,
+.token.keyword,
+.t.keyword {
+  color: #A51;
+}
+.token.string,
+.token.regex {
+  color: #df5050;
+}
+.token.operator {
+  color: #a67f59;
+}
+.token.comment {
+  color: #998;
+  font-style: italic;
+}
+.homePage .header {
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.homePage .pageBody {
+  background-color: #fff;
+  padding: 0 36px;
+  position: relative;
+  z-index: 1;
+}
+.homePage .contents {
+  margin: 0 auto;
+  max-width: 740px;
+  padding: 64px 0;
+}
+.homePage .contents h2 {
+  margin: 4rem 0 1rem;
+}
+.homePage .contents h3 {
+  margin: 2rem 0 1rem;
+}
+.homePage .miniHeader {
+  background: #435052;
+  position: fixed;
+  width: 100%;
+  z-index: 2;
+}
+.homePage .miniHeaderContents {
+  margin: 0 auto;
+  max-width: 880px;
+  padding: 12px 36px;
+  text-align: right;
+}
+@media only screen and (max-width: 680px) {
+  .homePage .miniHeaderContents {
+    text-align: left;
+  }
+}
+.homePage .miniLogo {
+  float: left;
+  left: -140px;
+  top: 12px;
+}
+@media only screen and (max-width: 680px) {
+  .homePage .miniLogo {
+    display: none;
+  }
+}
+.homePage .miniLogo {
+  margin: 0;
+  line-height: 28px;
+  color: #000;
+}
+.homePage .miniHeaderContents a {
+  color: #fff;
+  margin-right: 1em;
+  text-decoration: none;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.15);
+}
+.homePage .cover .miniHeaderContents a {
+  color: #435052;
+  text-shadow: 0 1px rgba(255, 255, 255, 0.15);
+}
+.homePage .miniHeaderContents a:last-child {
+  margin-right: 0;
+}
+.homePage .cover {
+  background-color: #bdbdbd;
+  border-bottom: 1px solid #ddd;
+  height: 70vh;
+  max-height: 800px;
+  min-height: 260px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+.homePage .filler {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1001;
+}
+.homePage .logoPic {
+  height: 80px;
+}
+.homePage .miniHeader .miniLogo .logoPic {
+  width: 169px;
+  height: 23px;
+  margin-top: 1px;
+  background: url(./images/fdt_logo_transparent_ondark_23px.png) no-repeat scroll;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+  .homePage .miniHeader .miniLogo .logoPic {
+    background-image: url(./images/fdt_logo_transparent_ondark_23px-2x.png);
+    background-size: contain;
+  }
+}
+.homePage .logo {
+  bottom: 0;
+  left: 50%;
+  position: fixed;
+  top: 300px;
+  text-align: center;
+  z-index: 1000;
+  width: 587px;
+  margin-left: -283px;
+  background: url(./images/fdt_logo_transparent_onlight_80px.png) no-repeat scroll;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+  .homePage .logo {
+    background-image: url(./images/fdt_logo_transparent_onlight_80px-2x.png);
+    background-size: contain;
+  }
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+  .homePage .logo {
+    background-image: url(./images/fdt_logo_transparent_onlight_80px-2x.png);
+    background-size: contain;
+  }
+}
+@media only screen and (max-width: 680px) {
+  .homePage .logo {
+    width: 367px;
+    margin-left: -187px;
+    background-image: url(./images/fdt_logo_transparent_onlight_50px.png);
+  }
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 680px), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+  .homePage .logo {
+    background-image: url(./images/fdt_logo_transparent_onlight_50px-2x.png);
+    background-size: contain;
+  }
+}
+.homePage .buttons {
+  -webkit-align-items: center;
+  -webkit-flex: 10;
+  align-items: center;
+  display: -webkit-flex;
+  display: flex;
+  flex: 10;
+}
+.homePage .heroContainer {
+  position: absolute;
+}
+.homePage .heroContainer:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 1000;
+}
+@media only screen and (max-width: 680px) {
+  .homePage .cover {
+    max-height: 260px;
+  }
+  .homePage .miniHeader {
+    display: none;
+  }
+  .homePage .miniHeaderContents {
+    padding: 12px;
+    text-align: center;
+  }
+  .homePage .synopsis {
+    max-width: 540px;
+  }
+  .homePage .logo {
+    top: 110px;
+  }
+  .homePage .logoPic {
+    height: 50px;
+  }
+  .homePage .contents {
+    padding-top: 24px;
+  }
+  .homePage .pageBody {
+    padding: 0 12px;
+  }
+}
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule Scrollbar
+ */
+
+.public_Scrollbar_main {
+  box-sizing: border-box;
+  outline: none;
+  overflow: hidden;
+  position: absolute;
+  -webkit-transition-duration: 250ms;
+          transition-duration: 250ms;
+  -webkit-transition-timing-function: ease;
+          transition-timing-function: ease;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.public_Scrollbar_mainVertical {
+  bottom: 0;
+  right: 0;
+  top: 0;
+  -webkit-transition-property: background-color width;
+          transition-property: background-color width;
+  width: 15px;
+}
+
+/* Touching the scroll-track directly makes the scroll-track bolder */
+.public_Scrollbar_mainVertical.Scrollbar_mainActive,
+.public_Scrollbar_mainVertical:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 17px;
+}
+
+.public_Scrollbar_mainHorizontal {
+  bottom: 0;
+  height: 15px;
+  left: 0;
+  -webkit-transition-property: background-color height;
+          transition-property: background-color height;
+}
+
+/* Touching the scroll-track directly makes the scroll-track bolder */
+.public_Scrollbar_mainHorizontal.Scrollbar_mainActive,
+.public_Scrollbar_mainHorizontal:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  height: 17px;
+}
+
+.Scrollbar_mainOpaque,
+.Scrollbar_mainOpaque.Scrollbar_mainActive,
+.Scrollbar_mainOpaque:hover {
+  background-color: #fff;
+}
+
+.Scrollbar_face {
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: 1;
+}
+
+/**
+ * This selector renders the "nub" of the scrollface. The nub must
+ * be rendered as pseudo-element so that it won't receive any UI events then
+ * we can get the correct `event.offsetX` and `event.offsetY` from the
+ * scrollface element while dragging it.
+ */
+.Scrollbar_face:after {
+  background-color: #c2c2c2;
+  border-radius: 6px;
+  content: '';
+  display: block;
+  position: absolute;
+  -webkit-transition: background-color 250ms ease;
+          transition: background-color 250ms ease;
+}
+
+.public_Scrollbar_main:hover .Scrollbar_face:after,
+.Scrollbar_mainActive .Scrollbar_face:after,
+.Scrollbar_faceActive:after {
+  background-color: #7d7d7d;
+}
+
+.Scrollbar_faceHorizontal {
+  bottom: 0;
+  left: 0;
+  top: 0;
+}
+
+.Scrollbar_faceHorizontal:after {
+  bottom: 4px;
+  left: 0;
+  top: 4px;
+  width: 100%;
+}
+
+.Scrollbar_faceVertical {
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.Scrollbar_faceVertical:after {
+  height: 100%;
+  left: 4px;
+  right: 4px;
+  top: 0;
+}
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule fixedDataTable
+ */
+
+.public_fixedDataTable_main {
+  border: solid 1px #d3d3d3;
+  overflow: hidden;
+  position: relative;
+}
+
+.public_fixedDataTable_header,
+.fixedDataTable_hasBottomBorder {
+  border-bottom: solid 1px #d3d3d3;
+}
+
+.public_fixedDataTable_header .public_fixedDataTableCell_main {
+  font-weight: bold;
+}
+
+.public_fixedDataTable_header,
+.public_fixedDataTable_header .public_fixedDataTableCell_main {
+  background-color: #f6f7f8;
+  background-image: -webkit-linear-gradient(#fff, #efefef);
+  background-image: linear-gradient(#fff, #efefef);
+}
+
+.public_fixedDataTable_footer .public_fixedDataTableCell_main {
+  background-color: #f6f7f8;
+  border-top: solid 1px #d3d3d3;
+}
+
+.fixedDataTable_shadow {
+  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAF0lEQVR4AWPUkNeSBhHCjJoK2twgFisAFagCCp3pJlAAAAAASUVORK5CYII=) repeat-x;
+  height: 4px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  z-index: 1;
+}
+
+.fixedDataTable_rowsContainer {
+  overflow: hidden;
+  position: relative;
+}
+
+.fixedDataTable_horizontalScrollbar {
+  bottom: 0;
+  position: absolute;
+}
+
+.fixedDataTable_horizontalScrollbar .public_Scrollbar_mainHorizontal {
+  background: #fff;
+}
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule fixedDataTableCell
+ */
+
+.public_fixedDataTableCell_main {
+  background-color: #fff;
+  border: solid 1px #d3d3d3;
+  border-width: 0 1px 0 0;
+  box-sizing: border-box;
+  display: block;
+  overflow: hidden;
+  position: relative;
+  white-space: normal;
+}
+
+.public_fixedDataTableCell_lastChild {
+  border-width: 0 1px 1px 0;
+}
+
+.public_fixedDataTableCell_highlighted {
+  background-color: #f4f4f4;
+}
+
+.public_fixedDataTableCell_alignRight {
+  text-align: right;
+}
+
+.public_fixedDataTableCell_alignCenter {
+  text-align: center;
+}
+
+.public_fixedDataTableCell_wrap1 {
+  display: table;
+  overflow: hidden;
+}
+
+.public_fixedDataTableCell_wrap2 {
+  display: table-row;
+}
+
+.public_fixedDataTableCell_wrap3 {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.public_fixedDataTableCell_cellContent {
+  padding: 8px;
+}
+
+.fixedDataTableCell_columnResizerContainer {
+  position: absolute;
+  right: 0px;
+  width: 6px;
+  z-index: 1;
+}
+
+.fixedDataTableCell_columnResizerContainer:hover {
+  cursor: ew-resize;
+}
+
+.fixedDataTableCell_columnResizerContainer:hover .fixedDataTableCell_columnResizerKnob {
+  visibility: visible;
+}
+
+.fixedDataTableCell_columnResizerKnob {
+  background-color: #0284ff;
+  position: absolute;
+  right: 0px;
+  visibility: hidden;
+  width: 4px;
+}
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule fixedDataTableCellGroup
+ */
+
+.fixedDataTableCellGroup_cellGroup {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+}
+
+.fixedDataTableCellGroup_cellGroup > .public_fixedDataTableCell_main {
+  display: inline-block;
+  vertical-align: top;
+  white-space: normal;
+}
+
+.fixedDataTableCellGroup_cellGroupWrapper {
+  position: absolute;
+  top: 0;
+}
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule fixedDataTableColumnResizerLine
+ */
+
+.fixedDataTableColumnResizerLine_mouseArea {
+  cursor: ew-resize;
+  position: absolute;
+  right: -5px;
+  width: 12px;
+}
+
+.fixedDataTableColumnResizerLine_main {
+  border-right: 1px solid #0284ff;
+  box-sizing: border-box;
+  position: absolute;
+  z-index: 10;
+}
+
+.fixedDataTableColumnResizerLine_hiddenElem {
+  display: none !important;
+}
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule fixedDataTableRow
+ */
+
+.public_fixedDataTableRow_main {
+  background-color: #fff;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+}
+
+.fixedDataTableRow_body {
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+.public_fixedDataTableRow_highlighted,
+.public_fixedDataTableRow_highlighted .public_fixedDataTableCell_main {
+  background-color: #f6f7f8;
+}
+
+.fixedDataTableRow_fixedColumnsDivider {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  border-left: solid 1px #d3d3d3;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 0;
+}
+
+.fixedDataTableRow_columnsShadow {
+  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAABCAYAAAD5PA/NAAAAFklEQVQIHWPSkNeSBmJhTQVtbiDNCgASagIIuJX8OgAAAABJRU5ErkJggg==) repeat-y;
+  width: 4px;
+}
+
+.fixedDataTableRow_rowWrapper {
+  position: absolute;
+  top: 0;
+}
+.docsPage html,
+.docsPage body {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  color: #626466;
+  font-family: 'Fira Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.625;
+}
+@media only screen and (max-width: 680px) {
+  .docsPage body {
+    font-size: 14px;
+  }
+}
+.docsPage h1,
+.docsPage h2,
+.docsPage h3,
+.docsPage h4,
+.docsPage h5,
+.docsPage h6 {
+  color: #212325;
+}
+.docsPage a {
+  color: #4183c4;
+  text-decoration: none;
+}
+.docsPage pre,
+.docsPage code {
+  font-family: 'Fira Mono', Menlo, monospace;
+  background: #F9F8F7;
+  color: #484A4C;
+  font-size: 0.9375em;
+  letter-spacing: -0.015em;
+}
+.docsPage code {
+  margin: -0.05rem -0.15em;
+  padding: 0.05rem 0.35em;
+}
+.docsPage blockquote {
+  margin: 1rem 0;
+  padding: 0 1rem;
+  color: #727476;
+  border-left: solid 3px #DCDAD9;
+}
+.docsPage blockquote > :first-child {
+  margin-top: 0;
+}
+.docsPage blockquote > :last-child {
+  margin-bottom: 0;
+}
+.docsPage .codeBlock {
+  -webkit-overflow-scrolling: touch;
+  background: #FCFBFA;
+  border-left: solid 3px #ECEAE9;
+  box-sizing: border-box;
+  display: block;
+  font-size: 0.875em;
+  margin: 0.5rem 0;
+  overflow-y: scroll;
+  padding: 0.5rem 8px 0.5rem 12px;
+  white-space: pre;
+}
+.docsPage .t.blockParams {
+  padding-left: 2ch;
+}
+.docsPage .token.punctuation,
+.docsPage .token.ignore,
+.docsPage .t.interfaceDef,
+.docsPage .t.member,
+.docsPage .t.callSig {
+  color: #808890;
+}
+.docsPage .token.function,
+.docsPage .token.class-name,
+.docsPage .token.qualifier,
+.docsPage .t.fnQualifier,
+.docsPage .t.fnName {
+  color: #32308E;
+}
+.docsPage .token.primitive,
+.docsPage .t.primitive {
+  color: #922;
+}
+.docsPage .token.number,
+.docsPage .t.typeParam {
+  color: #905;
+}
+.docsPage .t.typeQualifier,
+.docsPage .t.typeName {
+  color: #013679;
+}
+.docsPage .t.param {
+  color: #945277;
+}
+.docsPage .t.memberName {
+  color: teal;
+}
+.docsPage .token.block-keyword,
+.docsPage .token.keyword,
+.docsPage .t.keyword {
+  color: #A51;
+}
+.docsPage .token.string,
+.docsPage .token.regex {
+  color: #df5050;
+}
+.docsPage .token.operator {
+  color: #a67f59;
+}
+.docsPage .token.comment {
+  color: #998;
+  font-style: italic;
+}
+.docsPage .pageBody {
+  padding: 0 36px;
+  position: relative;
+}
+.docsPage .contents {
+  margin: 0 auto;
+  max-width: 880px;
+  padding: 64px 0;
+}
+.docsPage .disclaimer {
+  margin: 60px 20px 0 260px;
+  border: solid 1px #eecccc;
+  background: #fefafa;
+  padding: 1em;
+  text-align: center;
+  font-size: 0.8em;
+}
+@media only screen and (max-width: 680px) {
+  .docsPage .disclaimer {
+    margin: 60px 0 0;
+  }
+}
+@media only screen and (max-width: 680px) {
+  .docsPage .miniHeader {
+    position: relative;
+  }
+}
+.docsPage .miniHeaderContents {
+  margin: 0 auto;
+  max-width: 880px;
+  padding: 12px 36px;
+  position: relative;
+  text-align: right;
+}
+@media only screen and (max-width: 680px) {
+  .docsPage .miniHeaderContents {
+    text-align: left;
+  }
+}
+.docsPage .miniLogo {
+  float: left;
+  left: -140px;
+  top: 12px;
+  margin-top: -4px;
+}
+.docsPage .miniLogo > .svg {
+  height: 24px;
+}
+.docsPage .miniHeaderContents a {
+  color: #fff;
+  margin-right: 1em;
+  text-decoration: none;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.15);
+}
+.docsPage .miniHeaderContents a:last-child {
+  margin-right: 0;
+}
+.docsPage .sideBar {
+  cursor: default;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  font-size: 0.825em;
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 220px;
+  z-index: 0;
+}
+@media only screen and (max-width: 680px) {
+  .docsPage .sideBar {
+    display: none;
+  }
+}
+.docsPage .sideBar .scrollContent {
+  box-sizing: border-box;
+  height: 100%;
+  overflow: auto;
+  padding: 66px 0 100px;
+  width: 240px;
+}
+.docsPage .sideBar h2 {
+  font-size: 1em;
+  margin: 1em 0;
+  position: relative;
+}
+.docsPage .sideBar h2 a {
+  font-weight: normal;
+}
+.docsPage .sideBar .members {
+  margin: 0 0 2.5em 1em;
+}
+.docsPage .sideBar .groupTitle {
+  color: #626466;
+  font-size: 1em;
+  margin: 1em 0 0;
+}
+.docsPage .docContents {
+  margin-left: 240px;
+}
+@media only screen and (max-width: 680px) {
+  .docsPage .docContents {
+    margin-left: 0;
+  }
+}
+.docsPage .t a {
+  -webkit-transition: background-color 0.15s;
+  -moz-transition: background-color 0.15s;
+  -ms-transition: background-color 0.15s;
+  -o-transition: background-color 0.15s;
+  background-color: rgba(0, 0, 0, 0.01);
+  border-radius: 4px;
+  box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.08);
+  margin: -2px -4px;
+  padding: 2px 4px;
+}
+.docsPage .t a:hover {
+  background-color: rgba(112, 170, 220, 0.2);
+}
+.docsPage .typeHeader {
+  color: #555;
+  font-size: 1.5em;
+  font-weight: normal;
+  margin: 1rem 0;
+  font-weight: bold;
+}
+.docsPage .interfaceMember {
+  margin: 1.3rem 0;
+}
+.docsPage .infoHeader {
+  color: #555;
+  font-size: 10px;
+  letter-spacing: 0.25ch;
+  line-height: 16px;
+  margin: 1rem 0 0.125rem;
+  text-transform: uppercase;
+}
+.docsPage .synopsis {
+  margin: -0.5em 0 1em;
+}
+.docsPage .discussion p:first-child {
+  margin-top: 0.5em;
+}
+.docsPage .memberSignature {
+  border-left-color: #9CDAE9;
+  background: #F8F9FA;
+}
+.docsPage .t.over {
+  border-bottom: solid 2px rgba(0, 0, 0, 0.05);
+  padding-bottom: 3px;
+}
+.docsPage .memberLabel {
+  cursor: default;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  font-size: 1em;
+  margin: 0;
+}
+@media only screen and (max-width: 680px) {
+  .docsPage .memberLabel {
+    cursor: pointer;
+  }
+}
+.docsPage .detail {
+  box-sizing: border-box;
+  margin-bottom: 2.6rem;
+  overflow: hidden;
+}
+.docsPage .groupTitle {
+  color: #9A9C9E;
+  font-size: 1.5em;
+  font-weight: 300;
+  margin: 3rem 0 2rem;
+}
+@media only screen and (max-width: 680px) {
+  .docsPage .groupTitle {
+    margin: 2em 0 1em;
+  }
+}
+.docsPage .doc {
+  margin: 2em 0 3em;
+}
+.docsPage p:last-child {
+  margin-bottom: 0;
+}
+.miniHeader {
+  background: #435052;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+}
+.miniHeader .miniLogo {
+  width: 169px;
+  height: 23px;
+  margin-top: 1px;
+  background: url(./images/fdt_logo_transparent_ondark_23px.png) no-repeat scroll;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+  .miniHeader .miniLogo {
+    background-image: url(./images/fdt_logo_transparent_ondark_23px-2x.png);
+    background-size: contain;
+  }
+}
+.miniHeader .lines:after {
+  position: absolute;
+  content: '';
+  border-left: 3px solid #450500;
+  height: 12px;
+  display: block;
+  left: 4px;
+  top: -7px;
+}
+.miniHeader .lines:before {
+  position: absolute;
+  content: '';
+  display: block;
+  width: 19px;
+  height: 0;
+  border-top: 2px solid #ff0;
+  top: -7px;
+}
+.miniHeader .lines {
+  display: inline-block;
+  position: relative;
+  width: 19px;
+  top: -1px;
+  height: 3px;
+  margin-right: 6px;
+  border-bottom: 2px solid #fff;
+  border-top: 2px solid #fff;
+}
+.miniHeader .homeLink {
+  display: none;
+}
+@media only screen and (max-width: 680px) {
+  .miniHeader .homeLink {
+    display: inline;
+  }
+  .miniHeader .miniLogo {
+    display: none;
+  }
+}
+.examplesPage html,
+.examplesPage body {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  color: #626466;
+  font-family: 'Fira Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.625;
+}
+@media only screen and (max-width: 680px) {
+  .examplesPage body {
+    font-size: 14px;
+  }
+}
+.examplesPage h1,
+.examplesPage h2,
+.examplesPage h3,
+.examplesPage h4,
+.examplesPage h5,
+.examplesPage h6 {
+  color: #212325;
+}
+.examplesPage a {
+  color: #4183c4;
+  text-decoration: none;
+}
+.examplesPage pre,
+.examplesPage code {
+  font-family: 'Fira Mono', Menlo, monospace;
+  background: #F9F8F7;
+  color: #484A4C;
+  font-size: 0.9375em;
+  letter-spacing: -0.015em;
+}
+.examplesPage code {
+  margin: -0.05rem -0.15em;
+  padding: 0.05rem 0.35em;
+}
+.examplesPage blockquote {
+  margin: 1rem 0;
+  padding: 0 1rem;
+  color: #727476;
+  border-left: solid 3px #DCDAD9;
+}
+.examplesPage blockquote > :first-child {
+  margin-top: 0;
+}
+.examplesPage blockquote > :last-child {
+  margin-bottom: 0;
+}
+.examplesPage .codeBlock {
+  -webkit-overflow-scrolling: touch;
+  background: #FCFBFA;
+  border-left: solid 3px #ECEAE9;
+  box-sizing: border-box;
+  display: block;
+  font-size: 0.875em;
+  margin: 0.5rem 0;
+  overflow-y: scroll;
+  padding: 0.5rem 8px 0.5rem 12px;
+  white-space: pre;
+}
+.examplesPage .t.blockParams {
+  padding-left: 2ch;
+}
+.examplesPage .token.punctuation,
+.examplesPage .token.ignore,
+.examplesPage .t.interfaceDef,
+.examplesPage .t.member,
+.examplesPage .t.callSig {
+  color: #808890;
+}
+.examplesPage .token.function,
+.examplesPage .token.class-name,
+.examplesPage .token.qualifier,
+.examplesPage .t.fnQualifier,
+.examplesPage .t.fnName {
+  color: #32308E;
+}
+.examplesPage .token.primitive,
+.examplesPage .t.primitive {
+  color: #922;
+}
+.examplesPage .token.number,
+.examplesPage .t.typeParam {
+  color: #905;
+}
+.examplesPage .t.typeQualifier,
+.examplesPage .t.typeName {
+  color: #013679;
+}
+.examplesPage .t.param {
+  color: #945277;
+}
+.examplesPage .t.memberName {
+  color: teal;
+}
+.examplesPage .token.block-keyword,
+.examplesPage .token.keyword,
+.examplesPage .t.keyword {
+  color: #A51;
+}
+.examplesPage .token.string,
+.examplesPage .token.regex {
+  color: #df5050;
+}
+.examplesPage .token.operator {
+  color: #a67f59;
+}
+.examplesPage .token.comment {
+  color: #998;
+  font-style: italic;
+}
+.examplesPage .pageBody {
+  padding: 0 36px;
+  position: relative;
+}
+.examplesPage .contents {
+  margin: 0 auto;
+  padding: 64px 0;
+}
+.examplesPage .disclaimer {
+  margin: 60px 20px 0 260px;
+  border: solid 1px #eecccc;
+  background: #fefafa;
+  padding: 1em;
+  text-align: center;
+  font-size: 0.8em;
+}
+@media only screen and (max-width: 680px) {
+  .examplesPage .disclaimer {
+    margin: 60px 0 0;
+  }
+}
+@media only screen and (max-width: 680px) {
+  .examplesPage .miniHeader {
+    position: relative;
+  }
+}
+.examplesPage .miniHeaderContents {
+  margin: 0 auto;
+  padding: 12px 36px;
+  position: relative;
+  text-align: right;
+}
+@media only screen and (max-width: 680px) {
+  .examplesPage .miniHeaderContents {
+    text-align: left;
+  }
+}
+.examplesPage .miniLogo {
+  float: left;
+  left: -140px;
+  top: 12px;
+}
+.examplesPage .miniLogo > .svg {
+  height: 24px;
+}
+.examplesPage .miniHeaderContents a {
+  color: #fff;
+  margin-right: 1em;
+  text-decoration: none;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.15);
+}
+.examplesPage .miniHeaderContents a:last-child {
+  margin-right: 0;
+}
+.examplesPage .sideBar {
+  cursor: default;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  font-size: 0.825em;
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 220px;
+  z-index: 0;
+}
+@media only screen and (max-width: 680px) {
+  .examplesPage .sideBar {
+    display: none;
+  }
+}
+.examplesPage .sideBar .scrollContent {
+  box-sizing: border-box;
+  height: 100%;
+  overflow: auto;
+  padding: 66px 0 100px;
+  width: 160px;
+}
+.examplesPage .sideBar h2 {
+  font-size: 1em;
+  margin: 1em 0;
+  position: relative;
+}
+.examplesPage .sideBar h2 a {
+  font-weight: normal;
+}
+.examplesPage .sideBar .members {
+  margin: 0 0 2.5em 1em;
+}
+.examplesPage .sideBar .groupTitle {
+  color: #626466;
+  font-size: 1em;
+  margin: 1em 0 0;
+}
+.examplesPage .exampleContents {
+  font-family: Helvetica, Arial, 'lucida grande', tahoma, verdana, arial, sans-serif;
+  font-size: 12px;
+  margin-left: 160px;
+}
+@media only screen and (max-width: 680px) {
+  .examplesPage .exampleContents {
+    margin-left: 0;
+  }
+}
+.examplesPage .t a {
+  -webkit-transition: background-color 0.15s;
+  -moz-transition: background-color 0.15s;
+  -ms-transition: background-color 0.15s;
+  -o-transition: background-color 0.15s;
+  background-color: rgba(0, 0, 0, 0.01);
+  border-radius: 4px;
+  box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.08);
+  margin: -2px -4px;
+  padding: 2px 4px;
+}
+.examplesPage .t a:hover {
+  background-color: rgba(112, 170, 220, 0.2);
+}
+.examplesPage .typeHeader {
+  color: #555;
+  font-size: 1.5em;
+  font-weight: normal;
+  margin: 1rem 0;
+  font-weight: bold;
+}
+.examplesPage .interfaceMember {
+  margin: 1.3rem 0;
+}
+.examplesPage .infoHeader {
+  color: #555;
+  font-size: 10px;
+  letter-spacing: 0.25ch;
+  line-height: 16px;
+  margin: 1rem 0 0.125rem;
+  text-transform: uppercase;
+}
+.examplesPage .synopsis {
+  margin: -0.5em 0 1em;
+}
+.examplesPage .discussion p:first-child {
+  margin-top: 0.5em;
+}
+.examplesPage .memberSignature {
+  border-left-color: #9CDAE9;
+  background: #F8F9FA;
+}
+.examplesPage .t.over {
+  border-bottom: solid 2px rgba(0, 0, 0, 0.05);
+  padding-bottom: 3px;
+}
+.examplesPage .memberLabel {
+  cursor: default;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  font-size: 1em;
+  margin: 0;
+}
+@media only screen and (max-width: 680px) {
+  .examplesPage .memberLabel {
+    cursor: pointer;
+  }
+}
+.examplesPage .detail {
+  box-sizing: border-box;
+  margin-bottom: 2.6rem;
+  overflow: hidden;
+}
+.examplesPage .groupTitle {
+  color: #9A9C9E;
+  font-size: 1.5em;
+  font-weight: 300;
+  margin: 3rem 0 2rem;
+}
+@media only screen and (max-width: 680px) {
+  .examplesPage .groupTitle {
+    margin: 2em 0 1em;
+  }
+}
+.examplesPage .doc {
+  margin: 2em 0 3em;
+}
+.examplesPage p:last-child {
+  margin-bottom: 0;
+}
+.exampleImage {
+  margin: -8px;
+}
+
+/*# sourceMappingURL=main.css.map*/

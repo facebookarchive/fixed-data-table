@@ -1,0 +1,82 @@
+<!doctype html><html data-reactid=".tj5rmpmtj4" data-react-checksum="507374919"><head data-reactid=".tj5rmpmtj4.0"><meta charset="utf-8" data-reactid=".tj5rmpmtj4.0.0"><title data-reactid=".tj5rmpmtj4.0.1">FixedDataTable</title><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" data-reactid=".tj5rmpmtj4.0.2"><link rel="stylesheet" href="//code.cdn.mozilla.net/fonts/fira.css" data-reactid=".tj5rmpmtj4.0.3"><link rel="stylesheet" type="text/css" href="assets/main.css" data-reactid=".tj5rmpmtj4.0.4"><link rel="shortcut icon" type="image/png" href="images/favicon.png" data-reactid=".tj5rmpmtj4.0.5"><base target="_blank" data-reactid=".tj5rmpmtj4.0.6"></head><body data-reactid=".tj5rmpmtj4.1"><div class="docsPage" data-reactid=".tj5rmpmtj4.1.0"><div class="header" data-reactid=".tj5rmpmtj4.1.0.0"><div class="miniHeader" data-reactid=".tj5rmpmtj4.1.0.0.0"><div class="miniHeaderContents" data-reactid=".tj5rmpmtj4.1.0.0.0.0"><a href="./" target="_self" class="miniLogo" data-reactid=".tj5rmpmtj4.1.0.0.0.0.0"></a><a class="homeLink" href="./" target="_self" data-reactid=".tj5rmpmtj4.1.0.0.0.0.1">Home</a><a href="api-table.html" target="_self" data-reactid=".tj5rmpmtj4.1.0.0.0.0.2">Documentation</a><a href="example-object-data.html" target="_self" data-reactid=".tj5rmpmtj4.1.0.0.0.0.3">Examples</a><a href="https://github.com/facebook/fixed-data-table-experimental" data-reactid=".tj5rmpmtj4.1.0.0.0.0.4">Github</a></div></div></div><div class="pageBody" id="body" data-reactid=".tj5rmpmtj4.1.0.1"><div class="contents" data-reactid=".tj5rmpmtj4.1.0.1.0"><div class="sideBar" data-reactid=".tj5rmpmtj4.1.0.1.0.0"><div class="scrollContent" data-reactid=".tj5rmpmtj4.1.0.1.0.0.0"><h4 class="groupTitle" data-reactid=".tj5rmpmtj4.1.0.1.0.0.0.0">API</h4><h2 data-reactid=".tj5rmpmtj4.1.0.1.0.0.0.1:$Table"><a href="api-table.html" target="_self" data-reactid=".tj5rmpmtj4.1.0.1.0.0.0.1:$Table.0">Table</a></h2><h2 data-reactid=".tj5rmpmtj4.1.0.1.0.0.0.1:$Column"><a href="api-column.html" target="_self" data-reactid=".tj5rmpmtj4.1.0.1.0.0.0.1:$Column.0">Column</a></h2><h2 data-reactid=".tj5rmpmtj4.1.0.1.0.0.0.1:$ColumnGroup"><a href="api-columngroup.html" target="_self" data-reactid=".tj5rmpmtj4.1.0.1.0.0.0.1:$ColumnGroup.0">ColumnGroup</a></h2></div></div><div class="docContents" data-reactid=".tj5rmpmtj4.1.0.1.0.1"><!-- File generated from "src/FixedDataTableColumn.react.js" -->
+<h1 id="api-column-component-">API: <code>Column</code> (component)</h1>
+<p>Component that defines the attributes of table column.</p>
+<h2 id="props">Props</h2>
+<h3 id="-align-"><code>align</code></h3>
+<p>The horizontal alignment of the table cell content.</p>
+<p>type: <code>enum(&#39;left&#39;|&#39;center&#39;|&#39;right&#39;)</code></p>
+<h3 id="-cellclassname-"><code>cellClassName</code></h3>
+<p>className for each of this column&#39;s data cells.</p>
+<p>type: <code>string</code></p>
+<h3 id="-cellrenderer-"><code>cellRenderer</code></h3>
+<p>The data cell renderer
+<code>function(
+  any_cellData,
+  string_cellDataKey,
+  object_rowData,
+  number_rowIndex,
+  any_columnData,
+  number_width
+)</code>
+that returns React-renderable content for table cell.</p>
+<p>type: <code>func</code></p>
+<h3 id="-celldatagetter-"><code>cellDataGetter</code></h3>
+<p>The getter <code>function(string_cellDataKey, object_rowData)</code> that returns
+the cell data for the <code>cellRenderer</code>.
+If not provided, the cell data will be collected from
+<code>rowData[cellDataKey]</code> instead. The value that <code>cellDataGetter</code> returns
+will be used to determine whether the cell should re-render.</p>
+<p>type: <code>func</code></p>
+<h3 id="-datakey-"><code>dataKey</code></h3>
+<p>The key to retrieve the cell data from the data row. Provided key type
+must be either <code>string</code> or <code>number</code>. Since we use this
+for keys, it must be specified for each column.</p>
+<p>type: <code>custom</code></p>
+<h3 id="-headerrenderer-"><code>headerRenderer</code></h3>
+<p>The header cell renderer
+<code>function(
+  any_cellData,
+  string_cellDataKey,
+  object_rowData,
+  any_columnData
+)</code>
+that returns React-renderable content for table column header.</p>
+<p>type: <code>func</code></p>
+<h3 id="-footerrenderer-"><code>footerRenderer</code></h3>
+<p>The footer cell renderer
+<code>function(
+  any_cellData,
+  string_cellDataKey,
+  object_rowData,
+  any_columnData
+)</code>
+that returns React-renderable content for table column footer.</p>
+<p>type: <code>func</code></p>
+<h3 id="-columndata-"><code>columnData</code></h3>
+<p>Bucket for any data to be passed into column renderer functions.</p>
+<p>type: <code>object</code></p>
+<h3 id="-label-"><code>label</code></h3>
+<p>The column&#39;s header label.</p>
+<p>type: <code>string</code></p>
+<h3 id="-width-required-"><code>width</code> (required)</h3>
+<p>The pixel width of the column.</p>
+<p>type: <code>number</code></p>
+<h3 id="-minwidth-"><code>minWidth</code></h3>
+<p>If this is a resizable column this is its minimum width.</p>
+<p>type: <code>number</code></p>
+<h3 id="-maxwidth-"><code>maxWidth</code></h3>
+<p>If this is a resizable column this is its maximum width.</p>
+<p>type: <code>number</code></p>
+<h3 id="-flexgrow-"><code>flexGrow</code></h3>
+<p>The grow factor relative to other columns. Same as the flex-grow API
+from <a href="http://www.w3.org/TR/css3-flexbox/">http://www.w3.org/TR/css3-flexbox/</a>. Basically, take any available
+extra width and distribute it proportionally according to all columns&#39;
+flexGrow values. Defaults to zero (no-flexing).</p>
+<p>type: <code>number</code></p>
+<h3 id="-isresizable-"><code>isResizable</code></h3>
+<p>Whether the column can be resized with the
+FixedDataTableColumnResizeHandle. Please note that if a column
+has a flex grow, once you resize the column this will be set to 0.</p>
+<p>type: <code>bool</code></p>
+</div></div></div></div><script data-reactid=".tj5rmpmtj4.1.1">window.INITIAL_PROPS = {"location":"api-column.html","devMode":false};
+</script><script src="assets/main.js" data-reactid=".tj5rmpmtj4.1.2"></script></body></html>

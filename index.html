@@ -1,0 +1,65 @@
+<!doctype html><html data-reactid=".3ltn21y9z4" data-react-checksum="1849143824"><head data-reactid=".3ltn21y9z4.0"><meta charset="utf-8" data-reactid=".3ltn21y9z4.0.0"><title data-reactid=".3ltn21y9z4.0.1">FixedDataTable</title><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" data-reactid=".3ltn21y9z4.0.2"><link rel="stylesheet" href="//code.cdn.mozilla.net/fonts/fira.css" data-reactid=".3ltn21y9z4.0.3"><link rel="stylesheet" type="text/css" href="assets/main.css" data-reactid=".3ltn21y9z4.0.4"><link rel="shortcut icon" type="image/png" href="images/favicon.png" data-reactid=".3ltn21y9z4.0.5"><base target="_blank" data-reactid=".3ltn21y9z4.0.6"></head><body data-reactid=".3ltn21y9z4.1"><div class="homePage" data-reactid=".3ltn21y9z4.1.0"><div class="header" data-reactid=".3ltn21y9z4.1.0.0"><div class="miniHeader" style="clip:rect(NaNpx, 5000px, 50px, 0);" data-reactid=".3ltn21y9z4.1.0.0.0"><div class="miniHeaderContents" data-reactid=".3ltn21y9z4.1.0.0.0.0"><a href="./" target="_self" class="miniLogo" data-reactid=".3ltn21y9z4.1.0.0.0.0.0"></a><a href="api-table.html" target="_self" data-reactid=".3ltn21y9z4.1.0.0.0.0.1">Documentation</a><a href="example-object-data.html" target="_self" data-reactid=".3ltn21y9z4.1.0.0.0.0.2">Examples</a><a href="https://github.com/facebook/fixed-data-table-experimental" data-reactid=".3ltn21y9z4.1.0.0.0.0.3">Github</a></div></div><div class="cover" data-reactid=".3ltn21y9z4.1.0.0.1"><div class="filler" data-reactid=".3ltn21y9z4.1.0.0.1.0"><div class="miniHeaderContents" data-reactid=".3ltn21y9z4.1.0.0.1.0.0"><a href="api-table.html" target="_self" data-reactid=".3ltn21y9z4.1.0.0.1.0.0.0">Documentation</a><a href="example-object-data.html" target="_self" data-reactid=".3ltn21y9z4.1.0.0.1.0.0.1">Examples</a><a href="https://github.com/facebook/fixed-data-table-experimental" data-reactid=".3ltn21y9z4.1.0.0.1.0.0.2">Github</a></div></div><div class="logo" data-reactid=".3ltn21y9z4.1.0.0.1.2"><div class="logoPic" data-reactid=".3ltn21y9z4.1.0.0.1.2.0"></div></div></div></div><div class="pageBody" id="body" data-reactid=".3ltn21y9z4.1.0.1"><div class="contents" data-reactid=".3ltn21y9z4.1.0.1.0"><div data-reactid=".3ltn21y9z4.1.0.1.0.0"><h1 id="fixed-data-tables-for-react">Fixed Data Tables for React</h1>
+<p>FixedDataTable is a React component for building and presenting data in a flexible, powerful way. It supports standard table features, like headers, columns, rows, header groupings, and both fixed-position and scrolling columns.</p>
+<p>The table was designed to handle thousands rows of data without sacrificing performance. Scrolling smoothly is a first-class goal of FixedDataTable and it&#39;s architected in a way to allow for flexibility and extensibilty.</p>
+<p>Features of FixedDataTable:</p>
+<ul>
+<li>Fixed headers and footer</li>
+<li>Both fixed and scrollable columns</li>
+<li>Handling huge amounts of data</li>
+<li>Variable row heights (with adaptive scroll positions)</li>
+<li>Column resizing</li>
+<li>Performant scrolling</li>
+<li>Customizable styling</li>
+<li>Jumping to a row or column</li>
+</ul>
+<p>Things that are FixedDataTable doesn&#39;t do:</p>
+<ul>
+<li>FixedDataTable does not provide a layout reflow mechanism or calculates content layout information such as width and height of the cell contents. The developer has to provide the layout information to the table instead.</li>
+<li>FixedDataTable does not handle sorting of data. Instead it allows the developer to supply data getters that can be sort-, filter-, or tail-loading-aware.</li>
+<li>FixedDataTable does not fetch the data (see above)</li>
+<li>FixedDataTable does not support touch devices, but eventually will.</li>
+</ul>
+<h2 id="getting-started">Getting started</h2>
+<p>Install <code>fixed-data-table</code> using npm.</p>
+<code class="codeBlock">npm install fixed<span class="token operator" >-</span>data<span class="token operator" >-</span>table</code><p>Then require it into any module.</p>
+<code class="codeBlock"><span class="token keyword" >var</span> <span class="token qualifier" >React</span> <span class="token operator" >=</span> <span class="token function" >require<span class="token punctuation" >(</span></span><span class="token string" >'react'</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+<span class="token keyword" >var</span> <span class="token qualifier" >Fixed</span><span class="token qualifier" >Data</span><span class="token qualifier" >Table</span> <span class="token operator" >=</span> <span class="token function" >require<span class="token punctuation" >(</span></span><span class="token string" >'fixed-data-table'</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+
+<span class="token keyword" >var</span> <span class="token qualifier" >Table</span> <span class="token operator" >=</span> <span class="token qualifier" >Fixed</span><span class="token qualifier" >Data</span><span class="token qualifier" >Table</span><span class="token punctuation" >.</span><span class="token qualifier" >Table</span><span class="token punctuation" >;</span>
+<span class="token keyword" >var</span> <span class="token qualifier" >Column</span> <span class="token operator" >=</span> <span class="token qualifier" >Fixed</span><span class="token qualifier" >Data</span><span class="token qualifier" >Table</span><span class="token punctuation" >.</span><span class="token qualifier" >Column</span><span class="token punctuation" >;</span>
+
+<span class="token keyword" >var</span> rows <span class="token operator" >=</span> <span class="token punctuation" >[</span><span class="token punctuation" >.</span><span class="token punctuation" >.</span><span class="token punctuation" >.</span><span class="token punctuation" >]</span><span class="token punctuation" >;</span> <span class="token comment" spellcheck="true">// My table data
+</span>
+<span class="token block-keyword" >function</span> <span class="token function" >rowGetter<span class="token punctuation" >(</span></span>rowIndex<span class="token punctuation" >)</span> <span class="token punctuation" >{</span>
+  <span class="token keyword" >return</span> rows<span class="token punctuation" >[</span>rowIndex<span class="token punctuation" >]</span><span class="token punctuation" >;</span>
+<span class="token punctuation" >}</span>
+
+<span class="token qualifier" >React</span><span class="token punctuation" >.</span><span class="token function" >render<span class="token punctuation" >(</span></span>
+  <span class="token operator" >&lt;</span><span class="token qualifier" >Table</span>
+    rowHeight<span class="token operator" >=</span><span class="token punctuation" >{</span><span class="token number" >50</span><span class="token punctuation" >}</span>
+    rowGetter<span class="token operator" >=</span><span class="token punctuation" >{</span>rowGetter<span class="token punctuation" >}</span>
+    rowsCount<span class="token operator" >=</span><span class="token punctuation" >{</span>rows<span class="token punctuation" >.</span>length<span class="token punctuation" >}</span>
+    width<span class="token operator" >=</span><span class="token punctuation" >{</span><span class="token number" >5000</span><span class="token punctuation" >}</span>
+    height<span class="token operator" >=</span><span class="token punctuation" >{</span><span class="token number" >5000</span><span class="token punctuation" >}</span>
+    headerHeight<span class="token operator" >=</span><span class="token punctuation" >{</span><span class="token number" >50</span><span class="token punctuation" >}</span><span class="token operator" >></span>
+    <span class="token operator" >&lt;</span><span class="token qualifier" >Column</span>
+      label<span class="token operator" >=</span><span class="token string" >"Col 1"</span>
+      width<span class="token operator" >=</span><span class="token punctuation" >{</span><span class="token number" >3000</span><span class="token punctuation" >}</span>
+      dataKey<span class="token operator" >=</span><span class="token punctuation" >{</span><span class="token number" >0</span><span class="token punctuation" >}</span>
+    <span class="token operator" >/</span><span class="token operator" >></span>
+    <span class="token operator" >&lt;</span><span class="token qualifier" >Column</span>
+      label<span class="token operator" >=</span><span class="token string" >"Col 2"</span>
+      width<span class="token operator" >=</span><span class="token punctuation" >{</span><span class="token number" >2000</span><span class="token punctuation" >}</span>
+      dataKey<span class="token operator" >=</span><span class="token punctuation" >{</span><span class="token number" >1</span><span class="token punctuation" >}</span>
+    <span class="token operator" >/</span><span class="token operator" >></span>
+  <span class="token operator" >&lt;</span><span class="token operator" >/</span><span class="token qualifier" >Table</span><span class="token operator" >></span><span class="token punctuation" >,</span>
+  document<span class="token punctuation" >.</span><span class="token function" >getElementById<span class="token punctuation" >(</span></span><span class="token string" >'example'</span><span class="token punctuation" >)</span>
+<span class="token punctuation" >)</span><span class="token punctuation" >;</span></code><h2 id="contributions">Contributions</h2>
+<p>Use <a href="https://github.com/facebook/fixed-data-table-experimental/issues">Github issues</a> for requests.</p>
+<p>We actively welcome pull requests; learn how to <a href="./CONTRIBUTING.md">contribute</a>.</p>
+<h2 id="changelog">Changelog</h2>
+<p>Changes are tracked as <a href="https://github.com/facebook/fixed-data-table-experimental/releases">Github releases</a>.</p>
+<h2 id="license">License</h2>
+<p><code>FixedDataTable</code> is <a href="./LICENSE">BSD-licensed</a>. We also provide an additional <a href="./PATENTS">patent grant</a>.</p>
+</div></div></div></div><script data-reactid=".3ltn21y9z4.1.1">window.INITIAL_PROPS = {"location":"index.html","devMode":false};
+</script><script src="assets/main.js" data-reactid=".3ltn21y9z4.1.2"></script></body></html>
