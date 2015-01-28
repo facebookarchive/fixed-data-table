@@ -104,7 +104,7 @@ var FixedDataTable =
 	  Table: FixedDataTable,
 	};
 
-	FixedDataTableRoot.version = '0.1.0-alpha.1';
+	FixedDataTableRoot.version = '0.1.0';
 
 	module.exports = FixedDataTableRoot;
 
@@ -170,25 +170,25 @@ var FixedDataTable =
 
 	/* jslint bitwise: true */
 
-	var FixedDataTableHelper = __webpack_require__(19);
-	var Locale = __webpack_require__(20);
-	var React = __webpack_require__(21);
-	var ReactComponentWithPureRenderMixin = __webpack_require__(22);
-	var ReactWheelHandler = __webpack_require__(23);
-	var Scrollbar = __webpack_require__(24);
-	var FixedDataTableBufferedRows = __webpack_require__(25);
-	var FixedDataTableColumnResizeHandle = __webpack_require__(26);
-	var FixedDataTableRow = __webpack_require__(27);
-	var FixedDataTableScrollHelper = __webpack_require__(28);
-	var FixedDataTableWidthHelper = __webpack_require__(29);
+	var FixedDataTableHelper = __webpack_require__(18);
+	var Locale = __webpack_require__(19);
+	var React = __webpack_require__(20);
+	var ReactComponentWithPureRenderMixin = __webpack_require__(21);
+	var ReactWheelHandler = __webpack_require__(22);
+	var Scrollbar = __webpack_require__(23);
+	var FixedDataTableBufferedRows = __webpack_require__(24);
+	var FixedDataTableColumnResizeHandle = __webpack_require__(25);
+	var FixedDataTableRow = __webpack_require__(26);
+	var FixedDataTableScrollHelper = __webpack_require__(27);
+	var FixedDataTableWidthHelper = __webpack_require__(28);
 
-	var cloneWithProps = __webpack_require__(30);
-	var cx = __webpack_require__(31);
-	var debounceCore = __webpack_require__(32);
-	var emptyFunction = __webpack_require__(33);
-	var invariant = __webpack_require__(34);
-	var shallowEqual = __webpack_require__(35);
-	var translateDOMPositionXY = __webpack_require__(36);
+	var cloneWithProps = __webpack_require__(29);
+	var cx = __webpack_require__(30);
+	var debounceCore = __webpack_require__(31);
+	var emptyFunction = __webpack_require__(32);
+	var invariant = __webpack_require__(33);
+	var shallowEqual = __webpack_require__(34);
+	var translateDOMPositionXY = __webpack_require__(35);
 
 	var PropTypes = React.PropTypes;
 	var ReactChildren = React.Children;
@@ -1176,8 +1176,8 @@ var FixedDataTable =
 	 * @typechecks
 	 */
 
-	var React = __webpack_require__(21);
-	var invariant = __webpack_require__(34);
+	var React = __webpack_require__(20);
+	var invariant = __webpack_require__(33);
 
 	var PropTypes = React.PropTypes;
 
@@ -1347,7 +1347,7 @@ var FixedDataTable =
 	 * @typechecks
 	 */
 
-	var React = __webpack_require__(21);
+	var React = __webpack_require__(20);
 
 	var PropTypes = React.PropTypes;
 
@@ -1403,8 +1403,7 @@ var FixedDataTable =
 
 
 /***/ },
-/* 18 */,
-/* 19 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1421,8 +1420,8 @@ var FixedDataTable =
 
 	"use strict";
 
-	var Locale = __webpack_require__(20);
-	var React = __webpack_require__(21);
+	var Locale = __webpack_require__(19);
+	var React = __webpack_require__(20);
 	var FixedDataTableColumnGroup = __webpack_require__(17);
 	var FixedDataTableColumn = __webpack_require__(16);
 
@@ -1467,7 +1466,7 @@ var FixedDataTable =
 
 
 /***/ },
-/* 20 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1493,7 +1492,7 @@ var FixedDataTable =
 
 
 /***/ },
-/* 21 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1511,7 +1510,7 @@ var FixedDataTable =
 
 
 /***/ },
-/* 22 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1529,7 +1528,7 @@ var FixedDataTable =
 
 
 /***/ },
-/* 23 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1605,7 +1604,7 @@ var FixedDataTable =
 
 
 /***/ },
-/* 24 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1622,14 +1621,14 @@ var FixedDataTable =
 
 	var DOMMouseMoveTracker = __webpack_require__(38);
 	var Keys = __webpack_require__(39);
-	var React = __webpack_require__(21);
-	var ReactComponentWithPureRenderMixin = __webpack_require__(22);
-	var ReactWheelHandler = __webpack_require__(23);
+	var React = __webpack_require__(20);
+	var ReactComponentWithPureRenderMixin = __webpack_require__(21);
+	var ReactWheelHandler = __webpack_require__(22);
 
 	var cssVar = __webpack_require__(40);
-	var cx = __webpack_require__(31);
-	var emptyFunction = __webpack_require__(33);
-	var translateDOMPositionXY = __webpack_require__(36);
+	var cx = __webpack_require__(30);
+	var emptyFunction = __webpack_require__(32);
+	var translateDOMPositionXY = __webpack_require__(35);
 
 	var PropTypes = React.PropTypes;
 
@@ -2090,7 +2089,7 @@ var FixedDataTable =
 
 
 /***/ },
-/* 25 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2105,12 +2104,12 @@ var FixedDataTable =
 	 * @typechecks
 	 */
 
-	var React = __webpack_require__(21);
+	var React = __webpack_require__(20);
 	var FixedDataTableRowBuffer = __webpack_require__(41);
-	var FixedDataTableRow = __webpack_require__(27);
+	var FixedDataTableRow = __webpack_require__(26);
 
-	var cx = __webpack_require__(31);
-	var emptyFunction = __webpack_require__(33);
+	var cx = __webpack_require__(30);
+	var emptyFunction = __webpack_require__(32);
 	var joinClasses = __webpack_require__(42);
 
 	var PropTypes = React.PropTypes;
@@ -2254,7 +2253,7 @@ var FixedDataTable =
 
 
 /***/ },
-/* 26 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2274,12 +2273,12 @@ var FixedDataTable =
 	 */
 
 	var DOMMouseMoveTracker = __webpack_require__(38);
-	var Locale = __webpack_require__(20);
-	var React = __webpack_require__(21);
-	var ReactComponentWithPureRenderMixin = __webpack_require__(22);
+	var Locale = __webpack_require__(19);
+	var React = __webpack_require__(20);
+	var ReactComponentWithPureRenderMixin = __webpack_require__(21);
 
-	var clamp = __webpack_require__(43);
-	var cx = __webpack_require__(31);
+	var clamp = __webpack_require__(45);
+	var cx = __webpack_require__(30);
 
 	var PropTypes = React.PropTypes;
 
@@ -2426,7 +2425,7 @@ var FixedDataTable =
 
 
 /***/ },
-/* 27 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2443,14 +2442,14 @@ var FixedDataTable =
 
 	"use strict";
 
-	var FixedDataTableHelper = __webpack_require__(19);
-	var React = __webpack_require__(21);
-	var ReactComponentWithPureRenderMixin = __webpack_require__(22);
-	var FixedDataTableCellGroup = __webpack_require__(44);
+	var FixedDataTableHelper = __webpack_require__(18);
+	var React = __webpack_require__(20);
+	var ReactComponentWithPureRenderMixin = __webpack_require__(21);
+	var FixedDataTableCellGroup = __webpack_require__(43);
 
-	var cx = __webpack_require__(31);
+	var cx = __webpack_require__(30);
 	var joinClasses = __webpack_require__(42);
-	var translateDOMPositionXY = __webpack_require__(36);
+	var translateDOMPositionXY = __webpack_require__(35);
 
 	var DIR_SIGN = FixedDataTableHelper.DIR_SIGN;
 	var PropTypes = React.PropTypes;
@@ -2673,7 +2672,7 @@ var FixedDataTable =
 
 
 /***/ },
-/* 28 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2689,8 +2688,8 @@ var FixedDataTable =
 	 */
 	'use strict';
 
-	var PrefixIntervalTree = __webpack_require__(45);
-	var clamp = __webpack_require__(43);
+	var PrefixIntervalTree = __webpack_require__(44);
+	var clamp = __webpack_require__(45);
 
 	var BUFFER_ROWS = 5;
 
@@ -2943,7 +2942,7 @@ var FixedDataTable =
 
 
 /***/ },
-/* 29 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2959,9 +2958,9 @@ var FixedDataTable =
 	 */
 	'use strict';
 
-	var React = __webpack_require__(21);
+	var React = __webpack_require__(20);
 
-	var cloneWithProps = __webpack_require__(30);
+	var cloneWithProps = __webpack_require__(29);
 
 	function getTotalWidth(/*array*/ columns) /*number*/ {
 	  var totalWidth = 0;
@@ -3091,7 +3090,7 @@ var FixedDataTable =
 
 
 /***/ },
-/* 30 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3109,7 +3108,7 @@ var FixedDataTable =
 
 
 /***/ },
-/* 31 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3167,7 +3166,7 @@ var FixedDataTable =
 
 
 /***/ },
-/* 32 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3232,7 +3231,7 @@ var FixedDataTable =
 
 
 /***/ },
-/* 33 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3270,7 +3269,7 @@ var FixedDataTable =
 
 
 /***/ },
-/* 34 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3329,7 +3328,7 @@ var FixedDataTable =
 
 
 /***/ },
-/* 35 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3377,7 +3376,7 @@ var FixedDataTable =
 
 
 /***/ },
-/* 36 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -3432,6 +3431,7 @@ var FixedDataTable =
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
+/* 36 */,
 /* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -3686,8 +3686,8 @@ var FixedDataTable =
 
 	var IntegerBufferSet = __webpack_require__(52);
 
-	var clamp = __webpack_require__(43);
-	var invariant = __webpack_require__(34);
+	var clamp = __webpack_require__(45);
+	var invariant = __webpack_require__(33);
 	var MIN_BUFFER_ROWS = 5;
 	var MAX_BUFFER_ROWS = 15;
 
@@ -3889,56 +3889,21 @@ var FixedDataTable =
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 * @providesModule clamp
-	 * @typechecks
-	 */
-
-	 /**
-	  * @param {number} min
-	  * @param {number} value
-	  * @param {number} max
-	  * @return {number}
-	  */
-	function clamp(min, value, max) {
-	  if (value < min) {
-	    return min;
-	  }
-	  if (value > max) {
-	    return max;
-	  }
-	  return value;
-	}
-
-	module.exports = clamp;
-
-
-/***/ },
-/* 44 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
 	 * @providesModule FixedDataTableCellGroup.react
 	 * @typechecks
 	 */
 
 	"use strict";
 
-	var FixedDataTableHelper = __webpack_require__(19);
+	var FixedDataTableHelper = __webpack_require__(18);
 	var ImmutableObject = __webpack_require__(53);
-	var React = __webpack_require__(21);
-	var ReactComponentWithPureRenderMixin = __webpack_require__(22);
+	var React = __webpack_require__(20);
+	var ReactComponentWithPureRenderMixin = __webpack_require__(21);
 	var FixedDataTableCell = __webpack_require__(54);
 
-	var cx = __webpack_require__(31);
+	var cx = __webpack_require__(30);
 	var renderToString = FixedDataTableHelper.renderToString;
-	var translateDOMPositionXY = __webpack_require__(36);
+	var translateDOMPositionXY = __webpack_require__(35);
 
 	var PropTypes = React.PropTypes;
 
@@ -4125,7 +4090,7 @@ var FixedDataTable =
 
 
 /***/ },
-/* 45 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -4285,6 +4250,41 @@ var FixedDataTable =
 	module.exports = PrefixIntervalTree;
 	
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 45 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule clamp
+	 * @typechecks
+	 */
+
+	 /**
+	  * @param {number} min
+	  * @param {number} value
+	  * @param {number} max
+	  * @return {number}
+	  */
+	function clamp(min, value, max) {
+	  if (value < min) {
+	    return min;
+	  }
+	  if (value > max) {
+	    return max;
+	  }
+	  return value;
+	}
+
+	module.exports = clamp;
+
 
 /***/ },
 /* 46 */
@@ -4486,7 +4486,7 @@ var FixedDataTable =
 	 * @providesModule requestAnimationFramePolyfill
 	 */
 
-	var emptyFunction = __webpack_require__(33);
+	var emptyFunction = __webpack_require__(32);
 	var nativeRequestAnimationFrame = __webpack_require__(57);
 
 	var lastTime = 0;
@@ -4583,7 +4583,7 @@ var FixedDataTable =
 	var ExecutionEnvironment = __webpack_require__(58);
 
 	var camelize = __webpack_require__(59);
-	var invariant = __webpack_require__(34);
+	var invariant = __webpack_require__(33);
 
 	var memoized = {};
 	var prefixes = ['Webkit', 'ms', 'Moz', 'O'];
@@ -4642,7 +4642,7 @@ var FixedDataTable =
 	 * @typechecks
 	 */
 
-	var emptyFunction = __webpack_require__(33);
+	var emptyFunction = __webpack_require__(32);
 
 	/**
 	 * Upstream version of event listener. Does not take into account specific
@@ -4761,7 +4761,7 @@ var FixedDataTable =
 
 	var Heap = __webpack_require__(62);
 
-	var invariant = __webpack_require__(34);
+	var invariant = __webpack_require__(33);
 
 	// Data structure that allows to store values and assign positions to them
 	// in a way to minimize changing positions of stored values when new ones are
@@ -4949,7 +4949,7 @@ var FixedDataTable =
 
 	var ImmutableValue = __webpack_require__(63);
 
-	var invariant = __webpack_require__(34);
+	var invariant = __webpack_require__(33);
 	var keyOf = __webpack_require__(64);
 	var mergeHelpers = __webpack_require__(65);
 
@@ -5132,10 +5132,10 @@ var FixedDataTable =
 	 */
 
 	var ImmutableObject = __webpack_require__(53);
-	var React = __webpack_require__(21);
+	var React = __webpack_require__(20);
 
-	var cloneWithProps = __webpack_require__(30);
-	var cx = __webpack_require__(31);
+	var cloneWithProps = __webpack_require__(29);
+	var cx = __webpack_require__(30);
 	var joinClasses = __webpack_require__(42);
 
 	var PropTypes = React.PropTypes;
@@ -6101,7 +6101,7 @@ var FixedDataTable =
 
 	"use strict";
 
-	var invariant = __webpack_require__(34);
+	var invariant = __webpack_require__(33);
 	var isNode = __webpack_require__(66);
 	var keyOf = __webpack_require__(64);
 
@@ -6275,7 +6275,7 @@ var FixedDataTable =
 
 	"use strict";
 
-	var invariant = __webpack_require__(34);
+	var invariant = __webpack_require__(33);
 	var keyMirror = __webpack_require__(67);
 
 	/**
@@ -6452,7 +6452,7 @@ var FixedDataTable =
 
 	'use strict';
 
-	var invariant = __webpack_require__(34);
+	var invariant = __webpack_require__(33);
 
 	/**
 	 * Constructs an enumeration with keys equal to their value.
@@ -6556,8 +6556,8 @@ var FixedDataTable =
 
 	"use strict";
 
-	var ReactContext = __webpack_require__(78);
-	var ReactCurrentOwner = __webpack_require__(79);
+	var ReactContext = __webpack_require__(74);
+	var ReactCurrentOwner = __webpack_require__(75);
 
 	var warning = __webpack_require__(72);
 
@@ -6805,10 +6805,10 @@ var FixedDataTable =
 
 	"use strict";
 
-	var assign = __webpack_require__(74);
-	var emptyFunction = __webpack_require__(75);
-	var invariant = __webpack_require__(76);
-	var joinClasses = __webpack_require__(77);
+	var assign = __webpack_require__(76);
+	var emptyFunction = __webpack_require__(77);
+	var invariant = __webpack_require__(78);
+	var joinClasses = __webpack_require__(79);
 	var warning = __webpack_require__(72);
 
 	var didWarn = false;
@@ -7015,7 +7015,7 @@ var FixedDataTable =
 
 	"use strict";
 
-	var emptyFunction = __webpack_require__(75);
+	var emptyFunction = __webpack_require__(77);
 
 	/**
 	 * Similar to invariant but only logs a warning if the condition is not met.
@@ -7143,6 +7143,110 @@ var FixedDataTable =
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
+	 * Copyright 2013-2014, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactContext
+	 */
+
+	"use strict";
+
+	var assign = __webpack_require__(76);
+
+	/**
+	 * Keeps track of the current context.
+	 *
+	 * The context is automatically passed down the component ownership hierarchy
+	 * and is accessible via `this.context` on ReactCompositeComponents.
+	 */
+	var ReactContext = {
+
+	  /**
+	   * @internal
+	   * @type {object}
+	   */
+	  current: {},
+
+	  /**
+	   * Temporarily extends the current context while executing scopedCallback.
+	   *
+	   * A typical use case might look like
+	   *
+	   *  render: function() {
+	   *    var children = ReactContext.withContext({foo: 'foo'}, () => (
+	   *
+	   *    ));
+	   *    return <div>{children}</div>;
+	   *  }
+	   *
+	   * @param {object} newContext New context to merge into the existing context
+	   * @param {function} scopedCallback Callback to run with the new context
+	   * @return {ReactComponent|array<ReactComponent>}
+	   */
+	  withContext: function(newContext, scopedCallback) {
+	    var result;
+	    var previousContext = ReactContext.current;
+	    ReactContext.current = assign({}, previousContext, newContext);
+	    try {
+	      result = scopedCallback();
+	    } finally {
+	      ReactContext.current = previousContext;
+	    }
+	    return result;
+	  }
+
+	};
+
+	module.exports = ReactContext;
+
+
+/***/ },
+/* 75 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-2014, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactCurrentOwner
+	 */
+
+	"use strict";
+
+	/**
+	 * Keeps track of the current owner.
+	 *
+	 * The current owner is the component who should own any components that are
+	 * currently being constructed.
+	 *
+	 * The depth indicate how many composite components are above this render level.
+	 */
+	var ReactCurrentOwner = {
+
+	  /**
+	   * @internal
+	   * @type {ReactComponent}
+	   */
+	  current: null
+
+	};
+
+	module.exports = ReactCurrentOwner;
+
+
+/***/ },
+/* 76 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
 	 * Copyright 2014, Facebook, Inc.
 	 * All rights reserved.
 	 *
@@ -7190,7 +7294,7 @@ var FixedDataTable =
 
 
 /***/ },
-/* 75 */
+/* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -7228,7 +7332,7 @@ var FixedDataTable =
 
 
 /***/ },
-/* 76 */
+/* 78 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -7288,7 +7392,7 @@ var FixedDataTable =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(73)))
 
 /***/ },
-/* 77 */
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -7330,110 +7434,6 @@ var FixedDataTable =
 	}
 
 	module.exports = joinClasses;
-
-
-/***/ },
-/* 78 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-2014, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule ReactContext
-	 */
-
-	"use strict";
-
-	var assign = __webpack_require__(74);
-
-	/**
-	 * Keeps track of the current context.
-	 *
-	 * The context is automatically passed down the component ownership hierarchy
-	 * and is accessible via `this.context` on ReactCompositeComponents.
-	 */
-	var ReactContext = {
-
-	  /**
-	   * @internal
-	   * @type {object}
-	   */
-	  current: {},
-
-	  /**
-	   * Temporarily extends the current context while executing scopedCallback.
-	   *
-	   * A typical use case might look like
-	   *
-	   *  render: function() {
-	   *    var children = ReactContext.withContext({foo: 'foo'}, () => (
-	   *
-	   *    ));
-	   *    return <div>{children}</div>;
-	   *  }
-	   *
-	   * @param {object} newContext New context to merge into the existing context
-	   * @param {function} scopedCallback Callback to run with the new context
-	   * @return {ReactComponent|array<ReactComponent>}
-	   */
-	  withContext: function(newContext, scopedCallback) {
-	    var result;
-	    var previousContext = ReactContext.current;
-	    ReactContext.current = assign({}, previousContext, newContext);
-	    try {
-	      result = scopedCallback();
-	    } finally {
-	      ReactContext.current = previousContext;
-	    }
-	    return result;
-	  }
-
-	};
-
-	module.exports = ReactContext;
-
-
-/***/ },
-/* 79 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-2014, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule ReactCurrentOwner
-	 */
-
-	"use strict";
-
-	/**
-	 * Keeps track of the current owner.
-	 *
-	 * The current owner is the component who should own any components that are
-	 * currently being constructed.
-	 *
-	 * The depth indicate how many composite components are above this render level.
-	 */
-	var ReactCurrentOwner = {
-
-	  /**
-	   * @internal
-	   * @type {ReactComponent}
-	   */
-	  current: null
-
-	};
-
-	module.exports = ReactCurrentOwner;
 
 
 /***/ }
