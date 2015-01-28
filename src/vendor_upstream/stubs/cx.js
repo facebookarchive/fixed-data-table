@@ -9,6 +9,18 @@
  * @providesModule cx
  */
 
+var slashReplaceRegex = /\//g;
+var cache = {};
+
+function getClassName(className) {
+  if (cache[className]) {
+    return cache[className];
+  }
+
+  cache[className] = className.replace(slashReplaceRegex, '_');
+  return cache[className];
+}
+
 /**
  * This function is used to mark string literals representing CSS class names
  * so that they can be transformed statically. This allows for modularization
@@ -25,8 +37,6 @@
  * @return string       Renderable space-separated CSS className.
  */
 function cx(classNames) {
-  // TODO(pieterv): Optimise and memorize!!
-
   var classNamesArray;
   if (typeof classNames == 'object') {
     classNamesArray = Object.keys(classNames).filter(function(className) {
@@ -36,9 +46,7 @@ function cx(classNames) {
     classNamesArray = Array.prototype.slice.call(arguments);
   }
 
-  return classNamesArray.map(
-    (className) => className.replace(/\//g, '_')
-  ).join(' ');
+  return classNamesArray.map(getClassName).join(' ');
 }
 
 module.exports = cx;
