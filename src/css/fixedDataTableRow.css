@@ -1,0 +1,48 @@
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule fixedDataTableRow
+ */
+
+.public/fixedDataTableRow/main {
+  background-color: #fff;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+}
+
+.fixedDataTableRow/body {
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+.public/fixedDataTableRow/highlighted,
+.public/fixedDataTableRow/highlighted .public/fixedDataTableCell/main {
+  background-color: #f6f7f8;
+}
+
+.fixedDataTableRow/fixedColumnsDivider {
+  backface-visibility: hidden;
+  border-left: solid 1px #d3d3d3;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 0;
+}
+
+.fixedDataTableRow/columnsShadow {
+  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAABCAYAAAD5PA/NAAAAFklEQVQIHWPSkNeSBmJhTQVtbiDNCgASagIIuJX8OgAAAABJRU5ErkJggg==) repeat-y;
+  width: 4px;
+}
+
+.fixedDataTableRow/rowWrapper {
+  position: absolute;
+  top: 0;
+}

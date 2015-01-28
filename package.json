@@ -1,0 +1,59 @@
+{
+  "name": "fixed-data-table",
+  "version": "0.1.0",
+  "description": "A React table component designed to allow presenting thousands of rows of data.",
+  "main": "main.js",
+  "peerDependencies": {
+    "react": "0.12.x"
+  },
+  "devDependencies": {
+    "autoprefixer": "^5.0.0",
+    "bundle-loader": "^0.5.2",
+    "css-loader": "^0.9.1",
+    "esprima-fb": "^10001.1.0-dev-harmony-fb",
+    "extract-text-webpack-plugin": "^0.3.8",
+    "faker": "^2.1.2",
+    "file-loader": "^0.8.1",
+    "glob": "^4.3.5",
+    "html-loader": "^0.2.3",
+    "jsx-loader": "^0.12.2",
+    "less": "^2.2.0",
+    "less-loader": "^2.0.0",
+    "marked": "^0.3.2",
+    "node-jsx": "^0.12.4",
+    "postcss": "^4.0.2",
+    "postcss-custom-properties": "^3.0.0",
+    "react": "^0.12.2",
+    "style-loader": "^0.8.3",
+    "url-loader": "^0.5.5",
+    "webpack": "^1.4.15",
+    "webpack-dev-server": "^1.7.0"
+  },
+  "scripts": {
+    "site-dev-server": "build_helpers/buildAPIDocs.sh && build_helpers/buildSiteIndexPages.sh --devMode && webpack-dev-server --config site/webpack.config.js --no-info --content-base __site__",
+    "site-build": "build_helpers/buildAPIDocs.sh && build_helpers/buildSiteIndexPages.sh && webpack --config site/webpack.config.js",
+    "build-dist": "NODE_ENV=production webpack && NODE_ENV=production COMPRESS=1 webpack",
+    "build-npm": "build_helpers/buildNPMInternals.sh",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/facebook/fixed-data-table.git"
+  },
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/facebook/fixed-data-table/issues"
+  },
+  "homepage": "http://facebook.github.io/fixed-data-table",
+  "tags": [
+    "react",
+    "table"
+  ],
+  "keywords": [
+    "react",
+    "react-component",
+    "table",
+    "data-table",
+    "fixed-table"
+  ]
+}

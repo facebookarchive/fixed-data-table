@@ -1,0 +1,78 @@
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule fixedDataTableCell
+ */
+
+.public/fixedDataTableCell/main {
+  background-color: #fff;
+  border: solid 1px #d3d3d3;
+  border-width: 0 1px 0 0;
+  box-sizing: border-box;
+  display: block;
+  overflow: hidden;
+  position: relative;
+  white-space: normal;
+}
+
+.public/fixedDataTableCell/lastChild {
+  border-width: 0 1px 1px 0;
+}
+
+.public/fixedDataTableCell/highlighted {
+  background-color: #f4f4f4;
+}
+
+.public/fixedDataTableCell/alignRight {
+  text-align: right;
+}
+
+.public/fixedDataTableCell/alignCenter {
+  text-align: center;
+}
+
+.public/fixedDataTableCell/wrap1 {
+  display: table;
+  overflow: hidden;
+}
+
+.public/fixedDataTableCell/wrap2 {
+  display: table-row;
+}
+
+.public/fixedDataTableCell/wrap3 {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.public/fixedDataTableCell/cellContent {
+  padding: 8px;
+}
+
+.fixedDataTableCell/columnResizerContainer {
+  position: absolute;
+  right: 0px;
+  width: 6px;
+  z-index: 1;
+}
+
+.fixedDataTableCell/columnResizerContainer:hover {
+  cursor: ew-resize;
+}
+
+.fixedDataTableCell/columnResizerContainer:hover .fixedDataTableCell/columnResizerKnob {
+  visibility: visible;
+}
+
+.fixedDataTableCell/columnResizerKnob {
+  background-color: #0284ff;
+  position: absolute;
+  right: 0px;
+  visibility: hidden;
+  width: 4px;
+}

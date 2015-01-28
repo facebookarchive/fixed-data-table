@@ -1,0 +1,221 @@
+.homePage {
+  .header {
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .pageBody {
+    background-color: #fff;
+    padding: 0 36px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .contents {
+    margin: 0 auto;
+    max-width: 740px;
+    padding: 64px 0;
+  }
+
+  .contents h2 {
+    margin: 4rem 0 1rem;
+  }
+
+  .contents h3 {
+    margin: 2rem 0 1rem;
+  }
+
+  .miniHeader {
+    background: #435052;
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+  }
+
+  .miniHeaderContents {
+    margin: 0 auto;
+    max-width: 880px;
+    padding: 12px 36px;
+    text-align: right;
+  }
+
+  @media only screen and (max-width: 680px) {
+    .miniHeaderContents {
+      text-align: left;
+    }
+  }
+
+  .miniLogo {
+    float: left;
+    left: -140px;
+    top: 12px;
+  }
+
+  @media only screen and (max-width: 680px) {
+    .miniLogo {
+      display: none;
+    }
+  }
+
+  .miniLogo {
+    margin: 0;
+    line-height: 28px;
+    color: #000;
+  }
+
+  .miniHeaderContents a {
+    color: #fff;
+    margin-right: 1em;
+    text-decoration: none;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.15);
+  }
+
+  .cover .miniHeaderContents a {
+    color: #435052;
+    text-shadow: 0 1px rgba(255, 255, 255, 0.15);
+  }
+
+  .miniHeaderContents a:last-child {
+    margin-right: 0;
+  }
+
+  .cover {
+    background-color: #bdbdbd;
+    border-bottom: 1px solid #ddd;
+    height: 70vh;
+    max-height: 800px;
+    min-height: 260px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+  }
+
+  .filler {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1001;
+  }
+
+  .logoPic {
+    height: 80px;
+  }
+
+  .miniHeader .miniLogo .logoPic {
+    width: 169px;
+    height: 23px;
+    margin-top: 1px;
+    background: url(../images/fdt_logo_transparent_ondark_23px.png) no-repeat scroll;
+
+    @media only screen and (-webkit-min-device-pixel-ratio: 2),
+      only screen and ( min-resolution: 192dpi),
+      only screen and ( min-resolution: 2dppx) {
+        background-image: url(../images/fdt_logo_transparent_ondark_23px-2x.png);
+        background-size: contain;
+    }
+  }
+
+  .logo {
+    bottom: 0;
+    left: 50%;
+    position: fixed;
+    top: 300px;
+    text-align: center;
+    z-index: 1000;
+    width: 587px;
+    margin-left: -283px;
+    background: url(../images/fdt_logo_transparent_onlight_80px.png) no-repeat scroll;
+
+    @media only screen and (-webkit-min-device-pixel-ratio: 2),
+      only screen and ( min-resolution: 192dpi),
+      only screen and ( min-resolution: 2dppx) {
+        background-image: url(../images/fdt_logo_transparent_onlight_80px-2x.png);
+        background-size: contain;
+    }
+
+    @media only screen and (-webkit-min-device-pixel-ratio: 2),
+      only screen and ( min-resolution: 192dpi),
+      only screen and ( min-resolution: 2dppx) {
+        background-image: url(../images/fdt_logo_transparent_onlight_80px-2x.png);
+        background-size: contain;
+    }
+
+    @media only screen and (max-width: 680px) {
+      width: 367px;
+      margin-left: -187px;
+      background-image: url(../images/fdt_logo_transparent_onlight_50px.png);
+    }
+
+    @media only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 680px),
+      only screen and ( min-resolution: 192dpi),
+      only screen and ( min-resolution: 2dppx) {
+        background-image: url(../images/fdt_logo_transparent_onlight_50px-2x.png);
+        background-size: contain;
+    }
+  }
+
+  .buttons {
+    -webkit-align-items: center;
+    -webkit-flex: 10;
+    align-items: center;
+    display: -webkit-flex;
+    display: flex;
+    flex: 10;
+  }
+
+  .heroContainer {
+    position: absolute;
+  }
+
+  .heroContainer:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.7);
+    z-index: 1000;
+  }
+
+  @media only screen and (max-width: 680px) {
+
+    .cover {
+      max-height: 260px;
+    }
+
+    .miniHeader {
+      display: none;
+    }
+
+    .miniHeaderContents {
+      padding: 12px;
+      text-align: center;
+    }
+
+    .synopsis {
+      max-width: 540px;
+    }
+
+    .logo {
+      top: 110px;
+    }
+
+    .logoPic {
+      height: 50px;
+    }
+
+    .contents {
+      padding-top: 24px;
+    }
+
+    .pageBody {
+      padding: 0 12px;
+    }
+  }
+}

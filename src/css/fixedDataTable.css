@@ -1,0 +1,59 @@
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule fixedDataTable
+ */
+
+.public/fixedDataTable/main {
+  border: solid 1px #d3d3d3;
+  overflow: hidden;
+  position: relative;
+}
+
+.public/fixedDataTable/header,
+.fixedDataTable/hasBottomBorder {
+  border-bottom: solid 1px #d3d3d3;
+}
+
+.public/fixedDataTable/header .public/fixedDataTableCell/main {
+  font-weight: bold;
+}
+
+.public/fixedDataTable/header,
+.public/fixedDataTable/header .public/fixedDataTableCell/main {
+  background-color: #f6f7f8;
+  background-image: linear-gradient(#fff, #efefef);
+}
+
+.public/fixedDataTable/footer .public/fixedDataTableCell/main {
+  background-color: #f6f7f8;
+  border-top: solid 1px #d3d3d3;
+}
+
+.fixedDataTable/shadow {
+  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAF0lEQVR4AWPUkNeSBhHCjJoK2twgFisAFagCCp3pJlAAAAAASUVORK5CYII=) repeat-x;
+  height: 4px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  z-index: 1;
+}
+
+.fixedDataTable/rowsContainer {
+  overflow: hidden;
+  position: relative;
+}
+
+.fixedDataTable/horizontalScrollbar {
+  bottom: 0;
+  position: absolute;
+}
+
+.fixedDataTable/horizontalScrollbar .public/Scrollbar/mainHorizontal {
+  background: #fff;
+}

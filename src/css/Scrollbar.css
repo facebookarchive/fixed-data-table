@@ -1,0 +1,109 @@
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule Scrollbar
+ */
+
+.public/Scrollbar/main {
+  box-sizing: border-box;
+  outline: none;
+  overflow: hidden;
+  position: absolute;
+  transition-duration: 250ms;
+  transition-timing-function: ease;
+  user-select: none;
+}
+
+.public/Scrollbar/mainVertical {
+  bottom: 0;
+  right: 0;
+  top: 0;
+  transition-property: background-color width;
+  width: var(scrollbar-size);
+}
+
+/* Touching the scroll-track directly makes the scroll-track bolder */
+.public/Scrollbar/mainVertical.Scrollbar/mainActive,
+.public/Scrollbar/mainVertical:hover {
+  background-color: var(scrollbar-track-color);
+  width: var(scrollbar-size-large);
+}
+
+.public/Scrollbar/mainHorizontal {
+  bottom: 0;
+  height: var(scrollbar-size);
+  left: 0;
+  transition-property: background-color height;
+}
+
+/* Touching the scroll-track directly makes the scroll-track bolder */
+.public/Scrollbar/mainHorizontal.Scrollbar/mainActive,
+.public/Scrollbar/mainHorizontal:hover {
+  background-color: var(scrollbar-track-color);
+  height: var(scrollbar-size-large);
+}
+
+.Scrollbar/mainOpaque,
+.Scrollbar/mainOpaque.Scrollbar/mainActive,
+.Scrollbar/mainOpaque:hover {
+  background-color: #fff;
+}
+
+.Scrollbar/face {
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: 1;
+}
+
+/**
+ * This selector renders the "nub" of the scrollface. The nub must
+ * be rendered as pseudo-element so that it won't receive any UI events then
+ * we can get the correct `event.offsetX` and `event.offsetY` from the
+ * scrollface element while dragging it.
+ */
+.Scrollbar/face:after {
+  background-color: var(scrollbar-face-color);
+  border-radius: var(scrollbar-face-radius);
+  content: '';
+  display: block;
+  position: absolute;
+  transition: background-color 250ms ease;
+}
+
+.public/Scrollbar/main:hover .Scrollbar/face:after,
+.Scrollbar/mainActive .Scrollbar/face:after,
+.Scrollbar/faceActive:after {
+  background-color: var(scrollbar-face-active-color);
+}
+
+.Scrollbar/faceHorizontal {
+  bottom: 0;
+  left: 0;
+  top: 0;
+}
+
+.Scrollbar/faceHorizontal:after {
+  bottom: var(scrollbar-face-margin);
+  left: 0;
+  top: var(scrollbar-face-margin);
+  width: 100%;
+}
+
+.Scrollbar/faceVertical {
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.Scrollbar/faceVertical:after {
+  height: 100%;
+  left: var(scrollbar-face-margin);
+  right: var(scrollbar-face-margin);
+  top: 0;
+}

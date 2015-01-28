@@ -1,0 +1,66 @@
+.miniHeader {
+  background: #435052;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+
+  .miniLogo {
+    width: 169px;
+    height: 23px;
+    margin-top: 1px;
+    background: url(./images/fdt_logo_transparent_ondark_23px.png) no-repeat scroll;
+
+    @media only screen and (-webkit-min-device-pixel-ratio: 2),
+      only screen and ( min-resolution: 192dpi),
+      only screen and ( min-resolution: 2dppx) {
+        background-image: url(./images/fdt_logo_transparent_ondark_23px-2x.png);
+        background-size: contain;
+    }
+  }
+
+  .lines:after {
+    position: absolute;
+    content: '';
+    border-left: 3px solid #450500;
+    height: 12px;
+    display: block;
+    left: 4px;
+    top: -7px;
+  }
+
+  .lines:before {
+    position: absolute;
+    content: '';
+    display: block;
+    width: 19px;
+    height: 0;
+    border-top: 2px solid #ff0;
+    top: -7px;
+  }
+
+  .lines {
+    display: inline-block;
+    position: relative;
+    width: 19px;
+    top: -1px;
+    height: 3px;
+    margin-right: 6px;
+    border-bottom: 2px solid #fff;
+    border-top: 2px solid #fff;
+  }
+
+  .homeLink {
+    display: none;
+  }
+
+  @media only screen and (max-width: 680px) {
+    .homeLink {
+      display: inline;
+    }
+
+    .miniLogo {
+      display: none;
+    }
+  }
+
+}
