@@ -56,9 +56,12 @@ var ExamplesPage = React.createClass({
 
   _update() {
     var win = window;
+
+    var widthOffset = win.innerWidth < 680 ? 0 : 240;
+
     this.setState({
       renderPage: true,
-      tableWidth: win.innerWidth - 240,
+      tableWidth: win.innerWidth - widthOffset,
       tableHeight: win.innerHeight - 100,
     });
   }

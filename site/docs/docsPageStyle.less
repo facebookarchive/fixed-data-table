@@ -80,18 +80,30 @@
     z-index: 0;
   }
 
-  @media only screen and (max-width: 680px) {
-    .sideBar {
-      display: none;
-    }
-  }
-
   .sideBar .scrollContent {
     box-sizing: border-box;
     height: 100%;
     overflow: auto;
     padding: 66px 0 100px;
     width: 240px;
+  }
+
+  @media only screen and (max-width: 680px) {
+    .sideBar {
+      position: relative;
+      width: 100%;
+    }
+    .sideBar .scrollContent {
+      padding: 0;
+      width: 100%;
+    }
+
+    .pageBody {
+      padding: 0;
+    }
+    .contents {
+      padding: 0;
+    }
   }
 
   .sideBar h2 {
