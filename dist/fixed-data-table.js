@@ -1507,7 +1507,6 @@ var FixedDataTable =
 	 * @providesModule React
 	 */
 
-	// TODO
 	module.exports = __webpack_require__(37);
 
 
@@ -1526,7 +1525,6 @@ var FixedDataTable =
 	 * @providesModule ReactComponentWithPureRenderMixin
 	 */
 
-	// TODO
 	module.exports = __webpack_require__(60);
 
 
@@ -3107,7 +3105,6 @@ var FixedDataTable =
 	 * @providesModule cloneWithProps
 	 */
 
-	// TODO
 	module.exports = __webpack_require__(61);
 
 
@@ -3126,6 +3123,18 @@ var FixedDataTable =
 	 * @providesModule cx
 	 */
 
+	var slashReplaceRegex = /\//g;
+	var cache = {};
+
+	function getClassName(className) {
+	  if (cache[className]) {
+	    return cache[className];
+	  }
+
+	  cache[className] = className.replace(slashReplaceRegex, '_');
+	  return cache[className];
+	}
+
 	/**
 	 * This function is used to mark string literals representing CSS class names
 	 * so that they can be transformed statically. This allows for modularization
@@ -3142,8 +3151,6 @@ var FixedDataTable =
 	 * @return string       Renderable space-separated CSS className.
 	 */
 	function cx(classNames) {
-	  // TODO(pieterv): Optimise and memorize!!
-
 	  var classNamesArray;
 	  if (typeof classNames == 'object') {
 	    classNamesArray = Object.keys(classNames).filter(function(className) {
@@ -3153,9 +3160,7 @@ var FixedDataTable =
 	    classNamesArray = Array.prototype.slice.call(arguments);
 	  }
 
-	  return classNamesArray.map(
-	    function(className)  {return className.replace(/\//g, '_');}
-	  ).join(' ');
+	  return classNamesArray.map(getClassName).join(' ');
 	}
 
 	module.exports = cx;
@@ -6551,8 +6556,8 @@ var FixedDataTable =
 
 	"use strict";
 
-	var ReactContext = __webpack_require__(74);
-	var ReactCurrentOwner = __webpack_require__(75);
+	var ReactContext = __webpack_require__(78);
+	var ReactCurrentOwner = __webpack_require__(79);
 
 	var warning = __webpack_require__(72);
 
@@ -6800,10 +6805,10 @@ var FixedDataTable =
 
 	"use strict";
 
-	var assign = __webpack_require__(76);
-	var emptyFunction = __webpack_require__(77);
-	var invariant = __webpack_require__(78);
-	var joinClasses = __webpack_require__(79);
+	var assign = __webpack_require__(74);
+	var emptyFunction = __webpack_require__(75);
+	var invariant = __webpack_require__(76);
+	var joinClasses = __webpack_require__(77);
 	var warning = __webpack_require__(72);
 
 	var didWarn = false;
@@ -7010,7 +7015,7 @@ var FixedDataTable =
 
 	"use strict";
 
-	var emptyFunction = __webpack_require__(77);
+	var emptyFunction = __webpack_require__(75);
 
 	/**
 	 * Similar to invariant but only logs a warning if the condition is not met.
@@ -7138,110 +7143,6 @@ var FixedDataTable =
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * Copyright 2013-2014, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule ReactContext
-	 */
-
-	"use strict";
-
-	var assign = __webpack_require__(76);
-
-	/**
-	 * Keeps track of the current context.
-	 *
-	 * The context is automatically passed down the component ownership hierarchy
-	 * and is accessible via `this.context` on ReactCompositeComponents.
-	 */
-	var ReactContext = {
-
-	  /**
-	   * @internal
-	   * @type {object}
-	   */
-	  current: {},
-
-	  /**
-	   * Temporarily extends the current context while executing scopedCallback.
-	   *
-	   * A typical use case might look like
-	   *
-	   *  render: function() {
-	   *    var children = ReactContext.withContext({foo: 'foo'}, () => (
-	   *
-	   *    ));
-	   *    return <div>{children}</div>;
-	   *  }
-	   *
-	   * @param {object} newContext New context to merge into the existing context
-	   * @param {function} scopedCallback Callback to run with the new context
-	   * @return {ReactComponent|array<ReactComponent>}
-	   */
-	  withContext: function(newContext, scopedCallback) {
-	    var result;
-	    var previousContext = ReactContext.current;
-	    ReactContext.current = assign({}, previousContext, newContext);
-	    try {
-	      result = scopedCallback();
-	    } finally {
-	      ReactContext.current = previousContext;
-	    }
-	    return result;
-	  }
-
-	};
-
-	module.exports = ReactContext;
-
-
-/***/ },
-/* 75 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-2014, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule ReactCurrentOwner
-	 */
-
-	"use strict";
-
-	/**
-	 * Keeps track of the current owner.
-	 *
-	 * The current owner is the component who should own any components that are
-	 * currently being constructed.
-	 *
-	 * The depth indicate how many composite components are above this render level.
-	 */
-	var ReactCurrentOwner = {
-
-	  /**
-	   * @internal
-	   * @type {ReactComponent}
-	   */
-	  current: null
-
-	};
-
-	module.exports = ReactCurrentOwner;
-
-
-/***/ },
-/* 76 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
 	 * Copyright 2014, Facebook, Inc.
 	 * All rights reserved.
 	 *
@@ -7289,7 +7190,7 @@ var FixedDataTable =
 
 
 /***/ },
-/* 77 */
+/* 75 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -7327,7 +7228,7 @@ var FixedDataTable =
 
 
 /***/ },
-/* 78 */
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -7387,7 +7288,7 @@ var FixedDataTable =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(73)))
 
 /***/ },
-/* 79 */
+/* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -7429,6 +7330,110 @@ var FixedDataTable =
 	}
 
 	module.exports = joinClasses;
+
+
+/***/ },
+/* 78 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-2014, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactContext
+	 */
+
+	"use strict";
+
+	var assign = __webpack_require__(74);
+
+	/**
+	 * Keeps track of the current context.
+	 *
+	 * The context is automatically passed down the component ownership hierarchy
+	 * and is accessible via `this.context` on ReactCompositeComponents.
+	 */
+	var ReactContext = {
+
+	  /**
+	   * @internal
+	   * @type {object}
+	   */
+	  current: {},
+
+	  /**
+	   * Temporarily extends the current context while executing scopedCallback.
+	   *
+	   * A typical use case might look like
+	   *
+	   *  render: function() {
+	   *    var children = ReactContext.withContext({foo: 'foo'}, () => (
+	   *
+	   *    ));
+	   *    return <div>{children}</div>;
+	   *  }
+	   *
+	   * @param {object} newContext New context to merge into the existing context
+	   * @param {function} scopedCallback Callback to run with the new context
+	   * @return {ReactComponent|array<ReactComponent>}
+	   */
+	  withContext: function(newContext, scopedCallback) {
+	    var result;
+	    var previousContext = ReactContext.current;
+	    ReactContext.current = assign({}, previousContext, newContext);
+	    try {
+	      result = scopedCallback();
+	    } finally {
+	      ReactContext.current = previousContext;
+	    }
+	    return result;
+	  }
+
+	};
+
+	module.exports = ReactContext;
+
+
+/***/ },
+/* 79 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-2014, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactCurrentOwner
+	 */
+
+	"use strict";
+
+	/**
+	 * Keeps track of the current owner.
+	 *
+	 * The current owner is the component who should own any components that are
+	 * currently being constructed.
+	 *
+	 * The depth indicate how many composite components are above this render level.
+	 */
+	var ReactCurrentOwner = {
+
+	  /**
+	   * @internal
+	   * @type {ReactComponent}
+	   */
+	  current: null
+
+	};
+
+	module.exports = ReactCurrentOwner;
 
 
 /***/ }
