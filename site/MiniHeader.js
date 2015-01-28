@@ -5,7 +5,7 @@ var Constants = require('./Constants');
 
 require('./miniHeader.less');
 
-var GITHUB_URL = 'https://github.com/facebook/fixed-data-table-experimental';
+var GITHUB_URL = 'https://github.com/facebook/fixed-data-table';
 
 var MiniHeader = React.createClass({
   render() {

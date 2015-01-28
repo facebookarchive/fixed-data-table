@@ -8,7 +8,7 @@ var MAX_HEIGHT = 800;
 var TABLE_OFFSET = 100;
 var HEADER_HEIGHT = 50;
 var EMPTY_OBJECT = {};
-var GITHUB_URL = 'https://github.com/facebook/fixed-data-table-experimental';
+var GITHUB_URL = 'https://github.com/facebook/fixed-data-table';
 
 var Header = React.createClass({
   getInitialState() {
