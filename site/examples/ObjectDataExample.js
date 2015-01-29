@@ -8,7 +8,15 @@ var Table = FixedDataTable.Table;
 var Column = FixedDataTable.Column;
 
 function renderImage(/*string*/ cellData) {
-  return <img src={cellData} width={50} height={50} className="exampleImage" />;
+  return (
+    <img 
+      src={cellData} 
+      key={cellData} 
+      width={50} 
+      height={50} 
+      className="exampleImage" 
+    />
+  );
 }
 
 function renderLink(/*string*/ cellData) {
