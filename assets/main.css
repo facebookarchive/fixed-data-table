@@ -146,6 +146,9 @@ blockquote > :last-child {
   width: 100%;
   z-index: 2;
 }
+.homePage .notLoaded {
+  visibility: hidden;
+}
 .homePage .miniHeaderContents {
   margin: 0 auto;
   max-width: 880px;
