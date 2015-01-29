@@ -48,7 +48,7 @@ var Header = React.createClass({
   handleScroll(event) {
     var scrollPos = window.scrollY;
     scrollPos = scrollPos < this.offsetHeight ? scrollPos : this.offsetHeight;
-    this.setState({ scroll: scrollPos });
+    this.setState({ scroll: Math.max(scrollPos, 0) });
   },
 
   _getWindowWidth() {
