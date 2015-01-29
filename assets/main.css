@@ -1378,7 +1378,11 @@ blockquote > :last-child {
   margin-bottom: 0;
 }
 .exampleImage {
-  margin: -8px;
+  background: #efefef;
+  background-size: 100%;
+  display: inline-block;
+  height: 50px;
+  width: 50px;
 }
 
 /*# sourceMappingURL=main.css.map*/
