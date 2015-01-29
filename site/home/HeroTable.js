@@ -76,6 +76,21 @@ var HeroTable = React.createClass({
           label="City"
           width={400}
         />
+        <Column
+          dataKey="bs"
+          label="BS!"
+          width={300}
+        />
+        <Column
+          dataKey="catchPhrase"
+          label="Catch Phrase"
+          width={400}
+        />
+        <Column
+          dataKey="companyName"
+          label="Company Name"
+          width={700}
+        />
       </Table>
     );
   }
