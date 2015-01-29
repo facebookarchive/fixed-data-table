@@ -1,5 +1,6 @@
 "use strict";
 
+var ExampleImage = require('./ExampleImage');
 var FakeObjectDataListStore = require('./FakeObjectDataListStore');
 var FixedDataTable = require('fixed-data-table');
 var React = require('react');
@@ -8,15 +9,7 @@ var Table = FixedDataTable.Table;
 var Column = FixedDataTable.Column;
 
 function renderImage(/*string*/ cellData) {
-  return (
-    <img 
-      src={cellData} 
-      key={cellData} 
-      width={50} 
-      height={50} 
-      className="exampleImage" 
-    />
-  );
+  return <ExampleImage src={cellData} />;
 }
 
 function renderLink(/*string*/ cellData) {
@@ -38,7 +31,6 @@ var ObjectDataExample = React.createClass({
         width={this.props.tableWidth}
         height={this.props.tableHeight}>
         <Column
-          cellClassName="exampleTableCell"
           cellRenderer={renderImage}
           dataKey="avartar"
           fixed={true}
