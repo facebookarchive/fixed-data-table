@@ -79,10 +79,15 @@ var Header = React.createClass({
       clip: 'rect(' + topClip + 'px, 5000px, ' + HEADER_HEIGHT + 'px, 0)',
     };
 
+    var miniHeaderClasses = 'miniHeader';
+    if (!this.state.renderHero) {
+      miniHeaderClasses += ' notLoaded';
+    }
+
     return (
       <div className="header">
         <div
-          className="miniHeader"
+          className={miniHeaderClasses}
           style={this.state.fixed ? EMPTY_OBJECT : clipStyles}>
           <div className="miniHeaderContents">
             <a href="./" target="_self" className="miniLogo" />
