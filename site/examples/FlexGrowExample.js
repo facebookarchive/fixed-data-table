@@ -8,10 +8,12 @@ var Column = FixedDataTable.Column;
 var PropTypes = React.PropTypes;
 var Table = FixedDataTable.Table;
 
-var n = 0;
-function colorizeText(/*string*/ str) {
+function colorizeText(/*string*/ str, key, data, index) {
+  var n = 0;
+  var val;
   return str.split('').map((letter) => {
-    var color = 'hsl(' + n++ * 240 / 255 + ', 100%, 50%)';
+    val = index * 70 + n++;
+    var color = 'hsl(' + val + ', 100%, 50%)';
     return <span style={{color}}>{letter}</span>;
   });
 }
