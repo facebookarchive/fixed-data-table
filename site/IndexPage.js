@@ -56,7 +56,7 @@ var IndexPage = React.createClass({
           <title>FixedDataTable</title>
           <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
           <link rel="stylesheet" href="//code.cdn.mozilla.net/fonts/fira.css" />
-          <link rel="stylesheet" type="text/css" href="assets/main.css" />
+          <link rel="stylesheet" type="text/css" href="main.css" />
           <link rel="shortcut icon" type="image/png" href="images/favicon.png" />
           <base target="_blank" />
         </head>
@@ -66,7 +66,7 @@ var IndexPage = React.createClass({
           <script dangerouslySetInnerHTML={browserInitScriptObj} />
           <script src="https://cdn.rawgit.com/zynga/scroller/master/src/Animate.js"></script>
           <script src="https://cdn.rawgit.com/zynga/scroller/master/src/Scroller.js"></script>
-          <script src="assets/main.js"></script>
+          <script src="main.js"></script>
         </body>
       </html>
     );

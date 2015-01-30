@@ -11,10 +11,10 @@ module.exports = {
   entry: path.join(__dirname, 'client.js'),
 
   output: {
-    path: '__site__/assets',
+    path: '__site__/',
     filename: '[name].js',
     chunkFilename: '[id].chunk.js',
-    publicPath: './'
+    publicPath: ''
   },
 
   module: {
