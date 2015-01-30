@@ -4,8 +4,9 @@ var FakeObjectDataListStore = require('./FakeObjectDataListStore');
 var FixedDataTable = require('fixed-data-table');
 var React = require('react');
 
-var Table = FixedDataTable.Table;
 var Column = FixedDataTable.Column;
+var PropTypes = React.PropTypes;
+var Table = FixedDataTable.Table;
 
 var n = 0;
 function colorizeText(/*string*/ str) {
@@ -20,7 +21,24 @@ function renderDate(/*object*/ cellData) {
 }
 
 var FlexGrowExample = React.createClass({
+  propTypes: {
+    onContentDimensionsChange: PropTypes.func,
+    left: PropTypes.number,
+    top: PropTypes.number,
+  },
+
+  _onContentHeightChange(contentHeight) {
+    this.props.onContentDimensionsChange &&
+      this.props.onContentDimensionsChange(
+        contentHeight,
+        Math.max(600, this.props.tableWidth)
+      );
+  },
+
   render() {
+    var controlledScrolling =
+      this.props.left !== undefined || this.props.top !== undefined;
+
     return (
       <Table
         rowHeight={50}
@@ -28,7 +46,12 @@ var FlexGrowExample = React.createClass({
         rowGetter={FakeObjectDataListStore.getObjectAt}
         rowsCount={FakeObjectDataListStore.getSize()}
         width={this.props.tableWidth}
-        height={this.props.tableHeight}>
+        height={this.props.tableHeight}
+        onContentHeightChange={this._onContentHeightChange}
+        scrollTop={this.props.top}
+        scrollLeft={this.props.left}
+        overflowX={controlledScrolling ? "hidden" : "auto"}
+        overflowY={controlledScrolling ? "hidden" : "auto"}>
         <Column
           dataKey="firstName"
           fixed={true}
