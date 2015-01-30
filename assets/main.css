@@ -1201,9 +1201,15 @@ blockquote > :last-child {
 .examplesPage .arrowBullet {
   visibility: hidden;
   width: 6px;
-  height: 10px;
+  height: 9px;
   background: url(./images/arrowBullet.png) no-repeat scroll;
   margin-left: 9px;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+  .examplesPage .arrowBullet {
+    background-image: url(./images/arrowBullet-2x.png);
+    background-size: contain;
+  }
 }
 .examplesPage .disclaimer {
   margin: 60px 20px 0 260px;
