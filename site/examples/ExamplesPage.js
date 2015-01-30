@@ -1,6 +1,19 @@
+/**
+ * This file provided by Facebook is for non-commercial testing and evaluation
+ * purposes only. Facebook reserves all rights not expressly granted.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * FACEBOOK BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 "use strict";
 
 var ExamplesWrapper = require('./ExamplesWrapper');
+var TouchExampleWrapper = require('./TouchExampleWrapper');
 var React = require('react');
 var Constants = require('../Constants');
 
@@ -33,13 +46,25 @@ var ExamplesPage = React.createClass({
     switch (this.props.example) {
       case PageLocations.OBJECT_DATA_EXAMPLE:
         var ObjectDataExample = require('./ObjectDataExample');
-        return <ObjectDataExample {...this.state} />;
+        return (
+          <TouchExampleWrapper {...this.state}>
+            <ObjectDataExample />
+          </TouchExampleWrapper>
+        );
       case PageLocations.RESIZE_EXAMPLE:
         var ResizeExample = require('./ResizeExample');
-        return <ResizeExample {...this.state} />;
+        return (
+          <TouchExampleWrapper {...this.state}>
+            <ResizeExample />
+          </TouchExampleWrapper>
+        );
       case PageLocations.FLEXGROW_EXAMPLE:
         var FlexGrowExample = require('./FlexGrowExample');
-        return <FlexGrowExample {...this.state} />;
+        return (
+          <TouchExampleWrapper {...this.state}>
+            <FlexGrowExample />
+          </TouchExampleWrapper>
+        );
     }
   },
 

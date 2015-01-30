@@ -1,3 +1,15 @@
+/**
+ * This file provided by Facebook is for non-commercial testing and evaluation
+ * purposes only. Facebook reserves all rights not expressly granted.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * FACEBOOK BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 "use strict";
 
 var ExampleImage = require('./ExampleImage');
@@ -5,6 +17,7 @@ var FakeObjectDataListStore = require('./FakeObjectDataListStore');
 var FixedDataTable = require('fixed-data-table');
 var React = require('react');
 
+var PropTypes = React.PropTypes;
 var Table = FixedDataTable.Table;
 var Column = FixedDataTable.Column;
 
@@ -21,7 +34,22 @@ function renderDate(/*object*/ cellData) {
 }
 
 var ObjectDataExample = React.createClass({
+
+  propTypes: {
+    onContentDimensionsChange: PropTypes.func,
+    left: PropTypes.number,
+    top: PropTypes.number,
+  },
+
+  _onContentHeightChange(contentHeight) {
+    this.props.onContentDimensionsChange &&
+      this.props.onContentDimensionsChange(contentHeight, 1150);
+  },
+
   render() {
+    var controlledScrolling =
+      this.props.left !== undefined || this.props.top !== undefined;
+
     return (
       <Table
         rowHeight={50}
@@ -29,7 +57,12 @@ var ObjectDataExample = React.createClass({
         rowGetter={FakeObjectDataListStore.getObjectAt}
         rowsCount={FakeObjectDataListStore.getSize()}
         width={this.props.tableWidth}
-        height={this.props.tableHeight}>
+        height={this.props.tableHeight}
+        onContentHeightChange={this._onContentHeightChange}
+        scrollTop={this.props.top}
+        scrollLeft={this.props.left}
+        overflowX={controlledScrolling ? "hidden" : "auto"}
+        overflowY={controlledScrolling ? "hidden" : "auto"}>
         <Column
           cellRenderer={renderImage}
           dataKey="avartar"
@@ -78,7 +111,7 @@ var ObjectDataExample = React.createClass({
         />
       </Table>
     );
-  }
+  },
 });
 
 module.exports = ObjectDataExample;
