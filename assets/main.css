@@ -1182,6 +1182,18 @@ blockquote > :last-child {
   margin: 0 auto;
   padding: 64px 0 0;
 }
+.examplesPage .sidebarItemText,
+.examplesPage .arrowBullet {
+  display: inline-block;
+  vertical-align: middle;
+}
+.examplesPage .arrowBullet {
+  visibility: hidden;
+  width: 6px;
+  height: 10px;
+  background: url(./images/arrowBullet.png) no-repeat scroll;
+  margin-left: 9px;
+}
 .examplesPage .disclaimer {
   margin: 60px 20px 0 260px;
   border: solid 1px #eecccc;
@@ -1274,6 +1286,12 @@ blockquote > :last-child {
 }
 .examplesPage .sideBar h2 a {
   font-weight: normal;
+}
+.examplesPage .sideBar .curSideItem {
+  font-weight: bold;
+}
+.examplesPage .sideBar .curSideItem .arrowBullet {
+  visibility: visible;
 }
 .examplesPage .sideBar .members {
   margin: 0 0 2.5em 1em;
