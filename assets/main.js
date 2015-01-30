@@ -272,12 +272,12 @@
 
 	"use strict";
 	
-	__webpack_require__(14);
+	__webpack_require__(15);
 	
-	var Header = __webpack_require__(16);
+	var Header = __webpack_require__(17);
 	var React = __webpack_require__(10);
-	var ReadMeHTML = __webpack_require__(38);
-	var StaticHTMLBlock = __webpack_require__(17);
+	var ReadMeHTML = __webpack_require__(40);
+	var StaticHTMLBlock = __webpack_require__(18);
 	
 	var HomePage = React.createClass({displayName: "HomePage",
 	  render:function() {
@@ -304,8 +304,8 @@
 
 	"use strict";
 	
-	var DocsHTMLWrapper = __webpack_require__(18);
-	var TableAPIHTML = __webpack_require__(39);
+	var DocsHTMLWrapper = __webpack_require__(14);
+	var TableAPIHTML = __webpack_require__(38);
 	var React = __webpack_require__(10);
 	
 	var TableAPIPage = React.createClass({displayName: "TableAPIPage",
@@ -327,8 +327,8 @@
 
 	"use strict";
 	
-	var DocsHTMLWrapper = __webpack_require__(18);
-	var TableAPIHTML = __webpack_require__(40);
+	var DocsHTMLWrapper = __webpack_require__(14);
+	var TableAPIHTML = __webpack_require__(39);
 	var React = __webpack_require__(10);
 	
 	var ColumnAPIPage = React.createClass({displayName: "ColumnAPIPage",
@@ -350,7 +350,7 @@
 
 	"use strict";
 	
-	var DocsHTMLWrapper = __webpack_require__(18);
+	var DocsHTMLWrapper = __webpack_require__(14);
 	var TableAPIHTML = __webpack_require__(41);
 	var React = __webpack_require__(10);
 	
@@ -498,11 +498,51 @@
 /* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+	
+	__webpack_require__(43);
+	
+	var MiniHeader = __webpack_require__(45);
+	var SideBar = __webpack_require__(46);
+	var React = __webpack_require__(10);
+	var StaticHTMLBlock = __webpack_require__(18);
+	var Constants = __webpack_require__(4);
+	
+	var DocsHTMLWrapper = React.createClass({displayName: "DocsHTMLWrapper",
+	  render:function() {
+	    return (
+	      React.createElement("div", {className: "docsPage"}, 
+	        React.createElement(MiniHeader, null), 
+	
+	        React.createElement("div", {className: "pageBody", id: "body"}, 
+	          React.createElement("div", {className: "contents"}, 
+	            React.createElement(SideBar, {
+	              title: "API", 
+	              pages: Constants.APIPages}
+	            ), 
+	            React.createElement(StaticHTMLBlock, {
+	              className: "docContents", 
+	              html: this.props.html}
+	            )
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = DocsHTMLWrapper;
+
+
+/***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 15 */,
-/* 16 */
+/* 16 */,
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -563,7 +603,7 @@
 	  },
 	
 	  _renderHero:function() {
-	    var HeroTable = __webpack_require__(49);
+	    var HeroTable = __webpack_require__(53);
 	
 	    return (
 	      React.createElement("div", {className: "heroContainer", style: {top: TABLE_OFFSET}}, 
@@ -624,7 +664,7 @@
 
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -655,46 +695,6 @@
 
 
 /***/ },
-/* 18 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	__webpack_require__(50);
-	
-	var MiniHeader = __webpack_require__(52);
-	var SideBar = __webpack_require__(53);
-	var React = __webpack_require__(10);
-	var StaticHTMLBlock = __webpack_require__(17);
-	var Constants = __webpack_require__(4);
-	
-	var DocsHTMLWrapper = React.createClass({displayName: "DocsHTMLWrapper",
-	  render:function() {
-	    return (
-	      React.createElement("div", {className: "docsPage"}, 
-	        React.createElement(MiniHeader, null), 
-	
-	        React.createElement("div", {className: "pageBody", id: "body"}, 
-	          React.createElement("div", {className: "contents"}, 
-	            React.createElement(SideBar, {
-	              title: "API", 
-	              pages: Constants.APIPages}
-	            ), 
-	            React.createElement(StaticHTMLBlock, {
-	              className: "docContents", 
-	              html: this.props.html}
-	            )
-	          )
-	        )
-	      )
-	    );
-	  }
-	});
-	
-	module.exports = DocsHTMLWrapper;
-
-
-/***/ },
 /* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -714,8 +714,8 @@
 	
 	__webpack_require__(54);
 	
-	var MiniHeader = __webpack_require__(52);
-	var SideBar = __webpack_require__(53);
+	var MiniHeader = __webpack_require__(45);
+	var SideBar = __webpack_require__(46);
 	var React = __webpack_require__(10);
 	var Constants = __webpack_require__(4);
 	
@@ -1191,19 +1191,19 @@
 /* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<h1 id=\"fixed-data-tables-for-react\">Fixed Data Tables for React</h1>\n<p>FixedDataTable is a React component for building and presenting data in a flexible, powerful way. It supports standard table features, like headers, columns, rows, header groupings, and both fixed-position and scrolling columns.</p>\n<p>The table was designed to handle thousands rows of data without sacrificing performance. Scrolling smoothly is a first-class goal of FixedDataTable and it&#39;s architected in a way to allow for flexibility and extensibility.</p>\n<p>Features of FixedDataTable:</p>\n<ul>\n<li>Fixed headers and footer</li>\n<li>Both fixed and scrollable columns</li>\n<li>Handling huge amounts of data</li>\n<li>Variable row heights (with adaptive scroll positions)</li>\n<li>Column resizing</li>\n<li>Performant scrolling</li>\n<li>Customizable styling</li>\n<li>Jumping to a row or column</li>\n<li>Controlled scroll API allows touch support</li>\n</ul>\n<p>Things the FixedDataTable doesn&#39;t do:</p>\n<ul>\n<li>FixedDataTable does not provide a layout reflow mechanism or calculate content layout information such as width and height of the cell contents. The developer has to provide the layout information to the table instead.</li>\n<li>FixedDataTable does not handle sorting of data. Instead it allows the developer to supply data getters that can be sort-, filter-, or tail-loading-aware.</li>\n<li>FixedDataTable does not fetch the data (see above)</li>\n</ul>\n<h2 id=\"getting-started\">Getting started</h2>\n<p>Install <code>fixed-data-table</code> using npm.</p>\n<code class=\"codeBlock\">npm install fixed<span class=\"token operator\" >-</span>data<span class=\"token operator\" >-</span>table</code><p>Then require it into any module.</p>\n<code class=\"codeBlock\"><span class=\"token keyword\" >var</span> <span class=\"token qualifier\" >React</span> <span class=\"token operator\" >=</span> <span class=\"token function\" >require<span class=\"token punctuation\" >(</span></span><span class=\"token string\" >'react'</span><span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\n<span class=\"token keyword\" >var</span> <span class=\"token qualifier\" >Fixed</span><span class=\"token qualifier\" >Data</span><span class=\"token qualifier\" >Table</span> <span class=\"token operator\" >=</span> <span class=\"token function\" >require<span class=\"token punctuation\" >(</span></span><span class=\"token string\" >'fixed-data-table'</span><span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\n\n<span class=\"token keyword\" >var</span> <span class=\"token qualifier\" >Table</span> <span class=\"token operator\" >=</span> <span class=\"token qualifier\" >Fixed</span><span class=\"token qualifier\" >Data</span><span class=\"token qualifier\" >Table</span><span class=\"token punctuation\" >.</span><span class=\"token qualifier\" >Table</span><span class=\"token punctuation\" >;</span>\n<span class=\"token keyword\" >var</span> <span class=\"token qualifier\" >Column</span> <span class=\"token operator\" >=</span> <span class=\"token qualifier\" >Fixed</span><span class=\"token qualifier\" >Data</span><span class=\"token qualifier\" >Table</span><span class=\"token punctuation\" >.</span><span class=\"token qualifier\" >Column</span><span class=\"token punctuation\" >;</span>\n\n<span class=\"token comment\" spellcheck=\"true\">// Table data as a list of array.\n</span><span class=\"token keyword\" >var</span> rows <span class=\"token operator\" >=</span> <span class=\"token punctuation\" >[</span>\n  <span class=\"token punctuation\" >[</span><span class=\"token string\" >'a1'</span><span class=\"token punctuation\" >,</span> <span class=\"token string\" >'b1'</span><span class=\"token punctuation\" >,</span> <span class=\"token string\" >'c1'</span><span class=\"token punctuation\" >]</span><span class=\"token punctuation\" >,</span>\n  <span class=\"token punctuation\" >[</span><span class=\"token string\" >'a2'</span><span class=\"token punctuation\" >,</span> <span class=\"token string\" >'b3'</span><span class=\"token punctuation\" >,</span> <span class=\"token string\" >'c2'</span><span class=\"token punctuation\" >]</span><span class=\"token punctuation\" >,</span>\n  <span class=\"token punctuation\" >[</span><span class=\"token string\" >'a3'</span><span class=\"token punctuation\" >,</span> <span class=\"token string\" >'b3'</span><span class=\"token punctuation\" >,</span> <span class=\"token string\" >'c3'</span><span class=\"token punctuation\" >]</span><span class=\"token punctuation\" >,</span>\n  <span class=\"token punctuation\" >.</span><span class=\"token punctuation\" >.</span><span class=\"token punctuation\" >.</span><span class=\"token punctuation\" >.</span><span class=\"token punctuation\" >.</span> <span class=\"token comment\" spellcheck=\"true\">/// and more\n</span><span class=\"token punctuation\" >]</span><span class=\"token punctuation\" >;</span>\n\n<span class=\"token block-keyword\" >function</span> <span class=\"token function\" >rowGetter<span class=\"token punctuation\" >(</span></span>rowIndex<span class=\"token punctuation\" >)</span> <span class=\"token punctuation\" >{</span>\n  <span class=\"token keyword\" >return</span> rows<span class=\"token punctuation\" >[</span>rowIndex<span class=\"token punctuation\" >]</span><span class=\"token punctuation\" >;</span>\n<span class=\"token punctuation\" >}</span>\n\n<span class=\"token qualifier\" >React</span><span class=\"token punctuation\" >.</span><span class=\"token function\" >render<span class=\"token punctuation\" >(</span></span>\n  <span class=\"token operator\" >&lt;</span><span class=\"token qualifier\" >Table</span>\n    rowHeight<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >50</span><span class=\"token punctuation\" >}</span>\n    rowGetter<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span>rowGetter<span class=\"token punctuation\" >}</span>\n    rowsCount<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span>rows<span class=\"token punctuation\" >.</span>length<span class=\"token punctuation\" >}</span>\n    width<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >5000</span><span class=\"token punctuation\" >}</span>\n    height<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >5000</span><span class=\"token punctuation\" >}</span>\n    headerHeight<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >50</span><span class=\"token punctuation\" >}</span><span class=\"token operator\" >></span>\n    <span class=\"token operator\" >&lt;</span><span class=\"token qualifier\" >Column</span>\n      label<span class=\"token operator\" >=</span><span class=\"token string\" >\"Col 1\"</span>\n      width<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >3000</span><span class=\"token punctuation\" >}</span>\n      dataKey<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >0</span><span class=\"token punctuation\" >}</span>\n    <span class=\"token operator\" >/</span><span class=\"token operator\" >></span>\n    <span class=\"token operator\" >&lt;</span><span class=\"token qualifier\" >Column</span>\n      label<span class=\"token operator\" >=</span><span class=\"token string\" >\"Col 2\"</span>\n      width<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >2000</span><span class=\"token punctuation\" >}</span>\n      dataKey<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >1</span><span class=\"token punctuation\" >}</span>\n    <span class=\"token operator\" >/</span><span class=\"token operator\" >></span>\n  <span class=\"token operator\" >&lt;</span><span class=\"token operator\" >/</span><span class=\"token qualifier\" >Table</span><span class=\"token operator\" >></span><span class=\"token punctuation\" >,</span>\n  document<span class=\"token punctuation\" >.</span><span class=\"token function\" >getElementById<span class=\"token punctuation\" >(</span></span><span class=\"token string\" >'example'</span><span class=\"token punctuation\" >)</span>\n<span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span></code><h2 id=\"contributions\">Contributions</h2>\n<p>Use <a href=\"https://github.com/facebook/fixed-data-table/issues\">Github issues</a> for requests.</p>\n<p>We actively welcome pull requests; learn how to <a href=\"./CONTRIBUTING.md\">contribute</a>.</p>\n<h2 id=\"changelog\">Changelog</h2>\n<p>Changes are tracked as <a href=\"https://github.com/facebook/fixed-data-table/releases\">Github releases</a>.</p>\n<h2 id=\"license\">License</h2>\n<p><code>FixedDataTable</code> is <a href=\"./LICENSE\">BSD-licensed</a>. We also provide an additional <a href=\"./PATENTS\">patent grant</a>.</p>\n";
+	module.exports = "<!-- File generated from \"src/FixedDataTable.react.js\" -->\n<h1 id=\"api-table-component-\">API: <code>Table</code> (component)</h1>\n<p>Data grid component with fixed or scrollable header and columns.</p>\n<p>The layout of the data table is as follow:</p>\n<code class=\"codeBlock\"><span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+</span>\n<span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Fixed</span> <span class=\"token qualifier\" >Column</span> <span class=\"token qualifier\" >Group</span>    <span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Scrollable</span> <span class=\"token qualifier\" >Column</span> <span class=\"token qualifier\" >Group</span>   <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Header</span>                <span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Header</span>                    <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span>                       <span class=\"token operator\" >|</span>                           <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+</span>\n<span class=\"token operator\" >|</span>                       <span class=\"token operator\" >|</span>                           <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Fixed</span> <span class=\"token qualifier\" >Header</span> <span class=\"token qualifier\" >Columns</span>  <span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Scrollable</span> <span class=\"token qualifier\" >Header</span> <span class=\"token qualifier\" >Columns</span> <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span>                       <span class=\"token operator\" >|</span>                           <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+</span>\n<span class=\"token operator\" >|</span>                       <span class=\"token operator\" >|</span>                           <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Fixed</span> <span class=\"token qualifier\" >Body</span> <span class=\"token qualifier\" >Columns</span>    <span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Scrollable</span> <span class=\"token qualifier\" >Body</span> <span class=\"token qualifier\" >Columns</span>   <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span>                       <span class=\"token operator\" >|</span>                           <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+</span>\n<span class=\"token operator\" >|</span>                       <span class=\"token operator\" >|</span>                           <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Fixed</span> <span class=\"token qualifier\" >Footer</span> <span class=\"token qualifier\" >Columns</span>  <span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Scrollable</span> <span class=\"token qualifier\" >Footer</span> <span class=\"token qualifier\" >Columns</span> <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span>                       <span class=\"token operator\" >|</span>                           <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+</span></code><ul>\n<li><p>Fixed Column Group Header: These are the headers for a group\nof columns if included in the table that do not scroll\nvertically or horizontally.</p>\n</li>\n<li><p>Scrollable Column Group Header:  The header for a group of columns\nthat do not move while scrolling vertically, but move horizontally\nwith the horizontal scrolling.</p>\n</li>\n<li><p>Fixed Header Columns: The header columns that do not move while scrolling\nvertically or horizontally.</p>\n</li>\n<li><p>Scrollable Header Columns: The header columns that do not move\nwhile scrolling vertically, but move horizontally with the horizontal\nscrolling.</p>\n</li>\n<li><p>Fixed Body Columns: The body columns that do not move while scrolling\nhorizontally, but move vertically with the vertical scrolling.</p>\n</li>\n<li><p>Scrollable Body Columns: The body columns that move while scrolling\nvertically or horizontally.</p>\n</li>\n</ul>\n<h2 id=\"props\">Props</h2>\n<h3 id=\"-width-required-\"><code>width</code> (required)</h3>\n<p>type: <code>number</code></p>\n<h3 id=\"-height-\"><code>height</code></h3>\n<p>type: <code>number</code></p>\n<h3 id=\"-maxheight-\"><code>maxHeight</code></h3>\n<p>type: <code>number</code></p>\n<h3 id=\"-ownerheight-\"><code>ownerHeight</code></h3>\n<p>Height of table&#39;s owner, This is used to make sure the footer\nand scrollbar of the table are visible when current space for table in\nview is smaller than final height of table. It allows to avoid resizing\nand reflowing table whan it is moving in the view.</p>\n<p>This is used if <code>ownerHeight &lt; height</code>.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-overflowx-\"><code>overflowX</code></h3>\n<p>type: <code>enum(&#39;hidden&#39;|&#39;auto&#39;)</code></p>\n<h3 id=\"-overflowy-\"><code>overflowY</code></h3>\n<p>type: <code>enum(&#39;hidden&#39;|&#39;auto&#39;)</code></p>\n<h3 id=\"-rowscount-required-\"><code>rowsCount</code> (required)</h3>\n<p>Number of rows in the table.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-rowheight-required-\"><code>rowHeight</code> (required)</h3>\n<p>Height of rows unless rowHeightGetter is specified and returns different\nvalue.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-rowheightgetter-\"><code>rowHeightGetter</code></h3>\n<p>If specified, <code>rowHeightGetter(index)</code> is called for each row and the\nreturned value overrides rowHeight for particular row.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-rowgetter-required-\"><code>rowGetter</code> (required)</h3>\n<p>To get rows to display in table, <code>rowGetter(index)</code>\nis called. rowGetter should be smart enough to handle async\nfetching of data and returning temporary objects\nwhile data is being fetched.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-rowclassnamegetter-\"><code>rowClassNameGetter</code></h3>\n<p>To get any additional css classes that should be added to a row,\n<code>rowClassNameGetter(index)</code> is called.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-groupheaderheight-\"><code>groupHeaderHeight</code></h3>\n<p>Height of the column group header.</p>\n<p>type: <code>number</code>\ndefaultValue: <code>0</code></p>\n<h3 id=\"-headerheight-required-\"><code>headerHeight</code> (required)</h3>\n<p>Height of the header.</p>\n<p>type: <code>number</code>\ndefaultValue: <code>0</code></p>\n<h3 id=\"-headerdatagetter-\"><code>headerDataGetter</code></h3>\n<p>Function that is called to get the data for the header row.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-footerheight-\"><code>footerHeight</code></h3>\n<p>Height of the footer.</p>\n<p>type: <code>number</code>\ndefaultValue: <code>0</code></p>\n<h3 id=\"-footerdata-\"><code>footerData</code></h3>\n<p>Data that will be passed to footer cell renderers.</p>\n<p>type: <code>union(object|array)</code></p>\n<h3 id=\"-scrollleft-\"><code>scrollLeft</code></h3>\n<p>Value of horizontal scroll.</p>\n<p>type: <code>number</code>\ndefaultValue: <code>0</code></p>\n<h3 id=\"-scrolltocolumn-\"><code>scrollToColumn</code></h3>\n<p>Index of column to scroll to.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-scrolltop-\"><code>scrollTop</code></h3>\n<p>Value of vertical scroll.</p>\n<p>type: <code>number</code>\ndefaultValue: <code>0</code></p>\n<h3 id=\"-scrolltorow-\"><code>scrollToRow</code></h3>\n<p>Index of row to scroll to.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-onscrollend-\"><code>onScrollEnd</code></h3>\n<p>Callback that is called when scrolling ends or stops with new horizontal\nand vertical scroll values.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-oncontentheightchange-\"><code>onContentHeightChange</code></h3>\n<p>Callback that is called when <code>rowHeightGetter</code> returns a different height\nfor a row than the <code>rowHeight</code> prop. This is necessary because initially\ntable estimates heights of some parts of the content.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-onrowclick-\"><code>onRowClick</code></h3>\n<p>Callback that is called when a row is clicked.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-onrowmousedown-\"><code>onRowMouseDown</code></h3>\n<p>Callback that is called when mouse down event happens above a row.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-onrowmouseenter-\"><code>onRowMouseEnter</code></h3>\n<p>Callback that is called when the mouse eneters a row.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-oncolumnresizeendcallback-\"><code>onColumnResizeEndCallback</code></h3>\n<p>Callback that is called when resizer has been released\nand column needs to be updated.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-iscolumnresizing-\"><code>isColumnResizing</code></h3>\n<p>Whether a column is currently being resized.</p>\n<p>type: <code>bool</code></p>\n";
 
 /***/ },
 /* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<!-- File generated from \"src/FixedDataTable.react.js\" -->\n<h1 id=\"api-table-component-\">API: <code>Table</code> (component)</h1>\n<p>Data grid component with fixed or scrollable header and columns.</p>\n<p>The layout of the data table is as follow:</p>\n<code class=\"codeBlock\"><span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+</span>\n<span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Fixed</span> <span class=\"token qualifier\" >Column</span> <span class=\"token qualifier\" >Group</span>    <span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Scrollable</span> <span class=\"token qualifier\" >Column</span> <span class=\"token qualifier\" >Group</span>   <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Header</span>                <span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Header</span>                    <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span>                       <span class=\"token operator\" >|</span>                           <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+</span>\n<span class=\"token operator\" >|</span>                       <span class=\"token operator\" >|</span>                           <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Fixed</span> <span class=\"token qualifier\" >Header</span> <span class=\"token qualifier\" >Columns</span>  <span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Scrollable</span> <span class=\"token qualifier\" >Header</span> <span class=\"token qualifier\" >Columns</span> <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span>                       <span class=\"token operator\" >|</span>                           <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+</span>\n<span class=\"token operator\" >|</span>                       <span class=\"token operator\" >|</span>                           <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Fixed</span> <span class=\"token qualifier\" >Body</span> <span class=\"token qualifier\" >Columns</span>    <span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Scrollable</span> <span class=\"token qualifier\" >Body</span> <span class=\"token qualifier\" >Columns</span>   <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span>                       <span class=\"token operator\" >|</span>                           <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+</span>\n<span class=\"token operator\" >|</span>                       <span class=\"token operator\" >|</span>                           <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Fixed</span> <span class=\"token qualifier\" >Footer</span> <span class=\"token qualifier\" >Columns</span>  <span class=\"token operator\" >|</span> <span class=\"token qualifier\" >Scrollable</span> <span class=\"token qualifier\" >Footer</span> <span class=\"token qualifier\" >Columns</span> <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >|</span>                       <span class=\"token operator\" >|</span>                           <span class=\"token operator\" >|</span>\n<span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+-</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >--</span><span class=\"token operator\" >+</span></code><ul>\n<li><p>Fixed Column Group Header: These are the headers for a group\nof columns if included in the table that do not scroll\nvertically or horizontally.</p>\n</li>\n<li><p>Scrollable Column Group Header:  The header for a group of columns\nthat do not move while scrolling vertically, but move horizontally\nwith the horizontal scrolling.</p>\n</li>\n<li><p>Fixed Header Columns: The header columns that do not move while scrolling\nvertically or horizontally.</p>\n</li>\n<li><p>Scrollable Header Columns: The header columns that do not move\nwhile scrolling vertically, but move horizontally with the horizontal\nscrolling.</p>\n</li>\n<li><p>Fixed Body Columns: The body columns that do not move while scrolling\nhorizontally, but move vertically with the vertical scrolling.</p>\n</li>\n<li><p>Scrollable Body Columns: The body columns that move while scrolling\nvertically or horizontally.</p>\n</li>\n</ul>\n<h2 id=\"props\">Props</h2>\n<h3 id=\"-width-required-\"><code>width</code> (required)</h3>\n<p>type: <code>number</code></p>\n<h3 id=\"-height-\"><code>height</code></h3>\n<p>type: <code>number</code></p>\n<h3 id=\"-maxheight-\"><code>maxHeight</code></h3>\n<p>type: <code>number</code></p>\n<h3 id=\"-ownerheight-\"><code>ownerHeight</code></h3>\n<p>Height of table&#39;s owner, This is used to make sure the footer\nand scrollbar of the table are visible when current space for table in\nview is smaller than final height of table. It allows to avoid resizing\nand reflowing table whan it is moving in the view.</p>\n<p>This is used if <code>ownerHeight &lt; height</code>.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-overflowx-\"><code>overflowX</code></h3>\n<p>type: <code>enum(&#39;hidden&#39;|&#39;auto&#39;)</code></p>\n<h3 id=\"-overflowy-\"><code>overflowY</code></h3>\n<p>type: <code>enum(&#39;hidden&#39;|&#39;auto&#39;)</code></p>\n<h3 id=\"-rowscount-required-\"><code>rowsCount</code> (required)</h3>\n<p>Number of rows in the table.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-rowheight-required-\"><code>rowHeight</code> (required)</h3>\n<p>Height of rows unless rowHeightGetter is specified and returns different\nvalue.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-rowheightgetter-\"><code>rowHeightGetter</code></h3>\n<p>If specified, <code>rowHeightGetter(index)</code> is called for each row and the\nreturned value overrides rowHeight for particular row.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-rowgetter-required-\"><code>rowGetter</code> (required)</h3>\n<p>To get rows to display in table, <code>rowGetter(index)</code>\nis called. rowGetter should be smart enough to handle async\nfetching of data and returning temporary objects\nwhile data is being fetched.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-rowclassnamegetter-\"><code>rowClassNameGetter</code></h3>\n<p>To get any additional css classes that should be added to a row,\n<code>rowClassNameGetter(index)</code> is called.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-groupheaderheight-\"><code>groupHeaderHeight</code></h3>\n<p>Height of the column group header.</p>\n<p>type: <code>number</code>\ndefaultValue: <code>0</code></p>\n<h3 id=\"-headerheight-required-\"><code>headerHeight</code> (required)</h3>\n<p>Height of the header.</p>\n<p>type: <code>number</code>\ndefaultValue: <code>0</code></p>\n<h3 id=\"-headerdatagetter-\"><code>headerDataGetter</code></h3>\n<p>Function that is called to get the data for the header row.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-footerheight-\"><code>footerHeight</code></h3>\n<p>Height of the footer.</p>\n<p>type: <code>number</code>\ndefaultValue: <code>0</code></p>\n<h3 id=\"-footerdata-\"><code>footerData</code></h3>\n<p>Data that will be passed to footer cell renderers.</p>\n<p>type: <code>union(object|array)</code></p>\n<h3 id=\"-scrollleft-\"><code>scrollLeft</code></h3>\n<p>Value of horizontal scroll.</p>\n<p>type: <code>number</code>\ndefaultValue: <code>0</code></p>\n<h3 id=\"-scrolltocolumn-\"><code>scrollToColumn</code></h3>\n<p>Index of column to scroll to.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-scrolltop-\"><code>scrollTop</code></h3>\n<p>Value of vertical scroll.</p>\n<p>type: <code>number</code>\ndefaultValue: <code>0</code></p>\n<h3 id=\"-scrolltorow-\"><code>scrollToRow</code></h3>\n<p>Index of row to scroll to.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-onscrollend-\"><code>onScrollEnd</code></h3>\n<p>Callback that is called when scrolling ends or stops with new horizontal\nand vertical scroll values.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-oncontentheightchange-\"><code>onContentHeightChange</code></h3>\n<p>Callback that is called when <code>rowHeightGetter</code> returns a different height\nfor a row than the <code>rowHeight</code> prop. This is necessary because initially\ntable estimates heights of some parts of the content.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-onrowclick-\"><code>onRowClick</code></h3>\n<p>Callback that is called when a row is clicked.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-onrowmousedown-\"><code>onRowMouseDown</code></h3>\n<p>Callback that is called when mouse down event happens above a row.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-onrowmouseenter-\"><code>onRowMouseEnter</code></h3>\n<p>Callback that is called when the mouse eneters a row.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-oncolumnresizeendcallback-\"><code>onColumnResizeEndCallback</code></h3>\n<p>Callback that is called when resizer has been released\nand column needs to be updated.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-iscolumnresizing-\"><code>isColumnResizing</code></h3>\n<p>Whether a column is currently being resized.</p>\n<p>type: <code>bool</code></p>\n";
+	module.exports = "<!-- File generated from \"src/FixedDataTableColumn.react.js\" -->\n<h1 id=\"api-column-component-\">API: <code>Column</code> (component)</h1>\n<p>Component that defines the attributes of table column.</p>\n<h2 id=\"props\">Props</h2>\n<h3 id=\"-align-\"><code>align</code></h3>\n<p>The horizontal alignment of the table cell content.</p>\n<p>type: <code>enum(&#39;left&#39;|&#39;center&#39;|&#39;right&#39;)</code></p>\n<h3 id=\"-cellclassname-\"><code>cellClassName</code></h3>\n<p>className for each of this column&#39;s data cells.</p>\n<p>type: <code>string</code></p>\n<h3 id=\"-cellrenderer-\"><code>cellRenderer</code></h3>\n<p>The data cell renderer\n<code>function(\n  any_cellData,\n  string_cellDataKey,\n  object_rowData,\n  number_rowIndex,\n  any_columnData,\n  number_width\n)</code>\nthat returns React-renderable content for table cell.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-celldatagetter-\"><code>cellDataGetter</code></h3>\n<p>The getter <code>function(string_cellDataKey, object_rowData)</code> that returns\nthe cell data for the <code>cellRenderer</code>.\nIf not provided, the cell data will be collected from\n<code>rowData[cellDataKey]</code> instead. The value that <code>cellDataGetter</code> returns\nwill be used to determine whether the cell should re-render.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-datakey-\"><code>dataKey</code></h3>\n<p>The key to retrieve the cell data from the data row. Provided key type\nmust be either <code>string</code> or <code>number</code>. Since we use this\nfor keys, it must be specified for each column.</p>\n<p>type: <code>custom</code></p>\n<h3 id=\"-headerrenderer-\"><code>headerRenderer</code></h3>\n<p>The header cell renderer\n<code>function(\n  any_cellData,\n  string_cellDataKey,\n  object_rowData,\n  any_columnData\n)</code>\nthat returns React-renderable content for table column header.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-footerrenderer-\"><code>footerRenderer</code></h3>\n<p>The footer cell renderer\n<code>function(\n  any_cellData,\n  string_cellDataKey,\n  object_rowData,\n  any_columnData\n)</code>\nthat returns React-renderable content for table column footer.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-columndata-\"><code>columnData</code></h3>\n<p>Bucket for any data to be passed into column renderer functions.</p>\n<p>type: <code>object</code></p>\n<h3 id=\"-label-\"><code>label</code></h3>\n<p>The column&#39;s header label.</p>\n<p>type: <code>string</code></p>\n<h3 id=\"-width-required-\"><code>width</code> (required)</h3>\n<p>The pixel width of the column.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-minwidth-\"><code>minWidth</code></h3>\n<p>If this is a resizable column this is its minimum width.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-maxwidth-\"><code>maxWidth</code></h3>\n<p>If this is a resizable column this is its maximum width.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-flexgrow-\"><code>flexGrow</code></h3>\n<p>The grow factor relative to other columns. Same as the flex-grow API\nfrom <a href=\"http://www.w3.org/TR/css3-flexbox/\">http://www.w3.org/TR/css3-flexbox/</a>. Basically, take any available\nextra width and distribute it proportionally according to all columns&#39;\nflexGrow values. Defaults to zero (no-flexing).</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-isresizable-\"><code>isResizable</code></h3>\n<p>Whether the column can be resized with the\nFixedDataTableColumnResizeHandle. Please note that if a column\nhas a flex grow, once you resize the column this will be set to 0.</p>\n<p>type: <code>bool</code></p>\n";
 
 /***/ },
 /* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<!-- File generated from \"src/FixedDataTableColumn.react.js\" -->\n<h1 id=\"api-column-component-\">API: <code>Column</code> (component)</h1>\n<p>Component that defines the attributes of table column.</p>\n<h2 id=\"props\">Props</h2>\n<h3 id=\"-align-\"><code>align</code></h3>\n<p>The horizontal alignment of the table cell content.</p>\n<p>type: <code>enum(&#39;left&#39;|&#39;center&#39;|&#39;right&#39;)</code></p>\n<h3 id=\"-cellclassname-\"><code>cellClassName</code></h3>\n<p>className for each of this column&#39;s data cells.</p>\n<p>type: <code>string</code></p>\n<h3 id=\"-cellrenderer-\"><code>cellRenderer</code></h3>\n<p>The data cell renderer\n<code>function(\n  any_cellData,\n  string_cellDataKey,\n  object_rowData,\n  number_rowIndex,\n  any_columnData,\n  number_width\n)</code>\nthat returns React-renderable content for table cell.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-celldatagetter-\"><code>cellDataGetter</code></h3>\n<p>The getter <code>function(string_cellDataKey, object_rowData)</code> that returns\nthe cell data for the <code>cellRenderer</code>.\nIf not provided, the cell data will be collected from\n<code>rowData[cellDataKey]</code> instead. The value that <code>cellDataGetter</code> returns\nwill be used to determine whether the cell should re-render.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-datakey-\"><code>dataKey</code></h3>\n<p>The key to retrieve the cell data from the data row. Provided key type\nmust be either <code>string</code> or <code>number</code>. Since we use this\nfor keys, it must be specified for each column.</p>\n<p>type: <code>custom</code></p>\n<h3 id=\"-headerrenderer-\"><code>headerRenderer</code></h3>\n<p>The header cell renderer\n<code>function(\n  any_cellData,\n  string_cellDataKey,\n  object_rowData,\n  any_columnData\n)</code>\nthat returns React-renderable content for table column header.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-footerrenderer-\"><code>footerRenderer</code></h3>\n<p>The footer cell renderer\n<code>function(\n  any_cellData,\n  string_cellDataKey,\n  object_rowData,\n  any_columnData\n)</code>\nthat returns React-renderable content for table column footer.</p>\n<p>type: <code>func</code></p>\n<h3 id=\"-columndata-\"><code>columnData</code></h3>\n<p>Bucket for any data to be passed into column renderer functions.</p>\n<p>type: <code>object</code></p>\n<h3 id=\"-label-\"><code>label</code></h3>\n<p>The column&#39;s header label.</p>\n<p>type: <code>string</code></p>\n<h3 id=\"-width-required-\"><code>width</code> (required)</h3>\n<p>The pixel width of the column.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-minwidth-\"><code>minWidth</code></h3>\n<p>If this is a resizable column this is its minimum width.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-maxwidth-\"><code>maxWidth</code></h3>\n<p>If this is a resizable column this is its maximum width.</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-flexgrow-\"><code>flexGrow</code></h3>\n<p>The grow factor relative to other columns. Same as the flex-grow API\nfrom <a href=\"http://www.w3.org/TR/css3-flexbox/\">http://www.w3.org/TR/css3-flexbox/</a>. Basically, take any available\nextra width and distribute it proportionally according to all columns&#39;\nflexGrow values. Defaults to zero (no-flexing).</p>\n<p>type: <code>number</code></p>\n<h3 id=\"-isresizable-\"><code>isResizable</code></h3>\n<p>Whether the column can be resized with the\nFixedDataTableColumnResizeHandle. Please note that if a column\nhas a flex grow, once you resize the column this will be set to 0.</p>\n<p>type: <code>bool</code></p>\n";
+	module.exports = "<h1 id=\"fixed-data-tables-for-react\">Fixed Data Tables for React</h1>\n<p>FixedDataTable is a React component for building and presenting data in a flexible, powerful way. It supports standard table features, like headers, columns, rows, header groupings, and both fixed-position and scrolling columns.</p>\n<p>The table was designed to handle thousands rows of data without sacrificing performance. Scrolling smoothly is a first-class goal of FixedDataTable and it&#39;s architected in a way to allow for flexibility and extensibility.</p>\n<p>Features of FixedDataTable:</p>\n<ul>\n<li>Fixed headers and footer</li>\n<li>Both fixed and scrollable columns</li>\n<li>Handling huge amounts of data</li>\n<li>Variable row heights (with adaptive scroll positions)</li>\n<li>Column resizing</li>\n<li>Performant scrolling</li>\n<li>Customizable styling</li>\n<li>Jumping to a row or column</li>\n<li>Controlled scroll API allows touch support</li>\n</ul>\n<p>Things the FixedDataTable doesn&#39;t do:</p>\n<ul>\n<li>FixedDataTable does not provide a layout reflow mechanism or calculate content layout information such as width and height of the cell contents. The developer has to provide the layout information to the table instead.</li>\n<li>FixedDataTable does not handle sorting of data. Instead it allows the developer to supply data getters that can be sort-, filter-, or tail-loading-aware.</li>\n<li>FixedDataTable does not fetch the data (see above)</li>\n</ul>\n<h2 id=\"getting-started\">Getting started</h2>\n<p>Install <code>fixed-data-table</code> using npm.</p>\n<code class=\"codeBlock\">npm install fixed<span class=\"token operator\" >-</span>data<span class=\"token operator\" >-</span>table</code><p>Add the default stylesheet <code>dist/fixed-data-table.css</code>, then require it into any module.</p>\n<code class=\"codeBlock\"><span class=\"token keyword\" >var</span> <span class=\"token qualifier\" >React</span> <span class=\"token operator\" >=</span> <span class=\"token function\" >require<span class=\"token punctuation\" >(</span></span><span class=\"token string\" >'react'</span><span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\n<span class=\"token keyword\" >var</span> <span class=\"token qualifier\" >Fixed</span><span class=\"token qualifier\" >Data</span><span class=\"token qualifier\" >Table</span> <span class=\"token operator\" >=</span> <span class=\"token function\" >require<span class=\"token punctuation\" >(</span></span><span class=\"token string\" >'fixed-data-table'</span><span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\n\n<span class=\"token keyword\" >var</span> <span class=\"token qualifier\" >Table</span> <span class=\"token operator\" >=</span> <span class=\"token qualifier\" >Fixed</span><span class=\"token qualifier\" >Data</span><span class=\"token qualifier\" >Table</span><span class=\"token punctuation\" >.</span><span class=\"token qualifier\" >Table</span><span class=\"token punctuation\" >;</span>\n<span class=\"token keyword\" >var</span> <span class=\"token qualifier\" >Column</span> <span class=\"token operator\" >=</span> <span class=\"token qualifier\" >Fixed</span><span class=\"token qualifier\" >Data</span><span class=\"token qualifier\" >Table</span><span class=\"token punctuation\" >.</span><span class=\"token qualifier\" >Column</span><span class=\"token punctuation\" >;</span>\n\n<span class=\"token comment\" spellcheck=\"true\">// Table data as a list of array.\n</span><span class=\"token keyword\" >var</span> rows <span class=\"token operator\" >=</span> <span class=\"token punctuation\" >[</span>\n  <span class=\"token punctuation\" >[</span><span class=\"token string\" >'a1'</span><span class=\"token punctuation\" >,</span> <span class=\"token string\" >'b1'</span><span class=\"token punctuation\" >,</span> <span class=\"token string\" >'c1'</span><span class=\"token punctuation\" >]</span><span class=\"token punctuation\" >,</span>\n  <span class=\"token punctuation\" >[</span><span class=\"token string\" >'a2'</span><span class=\"token punctuation\" >,</span> <span class=\"token string\" >'b3'</span><span class=\"token punctuation\" >,</span> <span class=\"token string\" >'c2'</span><span class=\"token punctuation\" >]</span><span class=\"token punctuation\" >,</span>\n  <span class=\"token punctuation\" >[</span><span class=\"token string\" >'a3'</span><span class=\"token punctuation\" >,</span> <span class=\"token string\" >'b3'</span><span class=\"token punctuation\" >,</span> <span class=\"token string\" >'c3'</span><span class=\"token punctuation\" >]</span><span class=\"token punctuation\" >,</span>\n  <span class=\"token punctuation\" >.</span><span class=\"token punctuation\" >.</span><span class=\"token punctuation\" >.</span><span class=\"token punctuation\" >.</span><span class=\"token punctuation\" >.</span> <span class=\"token comment\" spellcheck=\"true\">/// and more\n</span><span class=\"token punctuation\" >]</span><span class=\"token punctuation\" >;</span>\n\n<span class=\"token block-keyword\" >function</span> <span class=\"token function\" >rowGetter<span class=\"token punctuation\" >(</span></span>rowIndex<span class=\"token punctuation\" >)</span> <span class=\"token punctuation\" >{</span>\n  <span class=\"token keyword\" >return</span> rows<span class=\"token punctuation\" >[</span>rowIndex<span class=\"token punctuation\" >]</span><span class=\"token punctuation\" >;</span>\n<span class=\"token punctuation\" >}</span>\n\n<span class=\"token qualifier\" >React</span><span class=\"token punctuation\" >.</span><span class=\"token function\" >render<span class=\"token punctuation\" >(</span></span>\n  <span class=\"token operator\" >&lt;</span><span class=\"token qualifier\" >Table</span>\n    rowHeight<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >50</span><span class=\"token punctuation\" >}</span>\n    rowGetter<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span>rowGetter<span class=\"token punctuation\" >}</span>\n    rowsCount<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span>rows<span class=\"token punctuation\" >.</span>length<span class=\"token punctuation\" >}</span>\n    width<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >5000</span><span class=\"token punctuation\" >}</span>\n    height<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >5000</span><span class=\"token punctuation\" >}</span>\n    headerHeight<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >50</span><span class=\"token punctuation\" >}</span><span class=\"token operator\" >></span>\n    <span class=\"token operator\" >&lt;</span><span class=\"token qualifier\" >Column</span>\n      label<span class=\"token operator\" >=</span><span class=\"token string\" >\"Col 1\"</span>\n      width<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >3000</span><span class=\"token punctuation\" >}</span>\n      dataKey<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >0</span><span class=\"token punctuation\" >}</span>\n    <span class=\"token operator\" >/</span><span class=\"token operator\" >></span>\n    <span class=\"token operator\" >&lt;</span><span class=\"token qualifier\" >Column</span>\n      label<span class=\"token operator\" >=</span><span class=\"token string\" >\"Col 2\"</span>\n      width<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >2000</span><span class=\"token punctuation\" >}</span>\n      dataKey<span class=\"token operator\" >=</span><span class=\"token punctuation\" >{</span><span class=\"token number\" >1</span><span class=\"token punctuation\" >}</span>\n    <span class=\"token operator\" >/</span><span class=\"token operator\" >></span>\n  <span class=\"token operator\" >&lt;</span><span class=\"token operator\" >/</span><span class=\"token qualifier\" >Table</span><span class=\"token operator\" >></span><span class=\"token punctuation\" >,</span>\n  document<span class=\"token punctuation\" >.</span><span class=\"token function\" >getElementById<span class=\"token punctuation\" >(</span></span><span class=\"token string\" >'example'</span><span class=\"token punctuation\" >)</span>\n<span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span></code><h2 id=\"contributions\">Contributions</h2>\n<p>Use <a href=\"https://github.com/facebook/fixed-data-table/issues\">Github issues</a> for requests.</p>\n<p>We actively welcome pull requests; learn how to <a href=\"./CONTRIBUTING.md\">contribute</a>.</p>\n<h2 id=\"changelog\">Changelog</h2>\n<p>Changes are tracked as <a href=\"https://github.com/facebook/fixed-data-table/releases\">Github releases</a>.</p>\n<h2 id=\"license\">License</h2>\n<p><code>FixedDataTable</code> is <a href=\"./LICENSE\">BSD-licensed</a>. We also provide an additional <a href=\"./PATENTS\">patent grant</a>.</p>\n";
 
 /***/ },
 /* 41 */
@@ -1402,13 +1402,104 @@
 
 
 /***/ },
-/* 43 */,
+/* 43 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
 /* 44 */,
-/* 45 */,
-/* 46 */,
+/* 45 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(10);
+	var Constants = __webpack_require__(4);
+	
+	__webpack_require__(67);
+	
+	var GITHUB_URL = 'https://github.com/facebook/fixed-data-table';
+	
+	var MiniHeader = React.createClass({displayName: "MiniHeader",
+	  render:function() {
+	    return (
+	      React.createElement("div", {className: "header"}, 
+	        React.createElement("div", {className: "miniHeader"}, 
+	          React.createElement("div", {className: "miniHeaderContents"}, 
+	            React.createElement("a", {href: "./", target: "_self", className: "miniLogo"}), 
+	            React.createElement("a", {className: "homeLink", href: "./", target: "_self"}, 
+	              "Home"
+	            ), 
+	            React.createElement("a", {href: Constants.DOCS_INDEX, target: "_self"}, "Documentation"), 
+	            React.createElement("a", {href: Constants.EXAMPLES_INDEX, target: "_self"}, "Examples"), 
+	            React.createElement("a", {href: GITHUB_URL}, "Github")
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = MiniHeader;
+
+
+/***/ },
+/* 46 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(10);
+	var Constants = __webpack_require__(4);
+	
+	var SideBar = React.createClass({displayName: "SideBar",
+	  render:function() {
+	    return (
+	      React.createElement("div", {className: "sideBar"}, 
+	        React.createElement("div", {className: "scrollContent"}, 
+	          React.createElement("h4", {className: "groupTitle"}, this.props.title), 
+	          Object.keys(this.props.pages).map(
+	              function(link)  {return this.renderLink(
+	                this.props.pages[link],
+	                Constants.PageLocations[link],
+	                this.props.example
+	              );}.bind(this)
+	            )
+	        )
+	      )
+	    );
+	  },
+	
+	  renderLink:function(linkName, linkUrl, curUrl) {
+	    var arrow = React.createElement("span", {className: "arrowBullet"});
+	    var linkClass = 'sideItem';
+	    if (curUrl === linkUrl) {
+	      linkClass += ' curSideItem';
+	    }
+	
+	    return (
+	      React.createElement("h2", {key: linkName}, 
+	        React.createElement("a", {href: linkUrl, target: "_self", className: linkClass}, 
+	          React.createElement("span", {className: "sidebarItemText"}, linkName), 
+	          arrow
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = SideBar;
+
+
+/***/ },
 /* 47 */,
 /* 48 */,
-/* 49 */
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1510,97 +1601,6 @@
 	});
 	
 	module.exports = HeroTable;
-
-
-/***/ },
-/* 50 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 51 */,
-/* 52 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	var React = __webpack_require__(10);
-	var Constants = __webpack_require__(4);
-	
-	__webpack_require__(67);
-	
-	var GITHUB_URL = 'https://github.com/facebook/fixed-data-table';
-	
-	var MiniHeader = React.createClass({displayName: "MiniHeader",
-	  render:function() {
-	    return (
-	      React.createElement("div", {className: "header"}, 
-	        React.createElement("div", {className: "miniHeader"}, 
-	          React.createElement("div", {className: "miniHeaderContents"}, 
-	            React.createElement("a", {href: "./", target: "_self", className: "miniLogo"}), 
-	            React.createElement("a", {className: "homeLink", href: "./", target: "_self"}, 
-	              "Home"
-	            ), 
-	            React.createElement("a", {href: Constants.DOCS_INDEX, target: "_self"}, "Documentation"), 
-	            React.createElement("a", {href: Constants.EXAMPLES_INDEX, target: "_self"}, "Examples"), 
-	            React.createElement("a", {href: GITHUB_URL}, "Github")
-	          )
-	        )
-	      )
-	    );
-	  }
-	});
-	
-	module.exports = MiniHeader;
-
-
-/***/ },
-/* 53 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	var React = __webpack_require__(10);
-	var Constants = __webpack_require__(4);
-	
-	var SideBar = React.createClass({displayName: "SideBar",
-	  render:function() {
-	    return (
-	      React.createElement("div", {className: "sideBar"}, 
-	        React.createElement("div", {className: "scrollContent"}, 
-	          React.createElement("h4", {className: "groupTitle"}, this.props.title), 
-	          Object.keys(this.props.pages).map(
-	              function(link)  {return this.renderLink(
-	                this.props.pages[link],
-	                Constants.PageLocations[link],
-	                this.props.example
-	              );}.bind(this)
-	            )
-	        )
-	      )
-	    );
-	  },
-	
-	  renderLink:function(linkName, linkUrl, curUrl) {
-	    var arrow = React.createElement("span", {className: "arrowBullet"});
-	    var linkClass = 'sideItem';
-	    if (curUrl === linkUrl) {
-	      linkClass += ' curSideItem';
-	    }
-	
-	    return (
-	      React.createElement("h2", {key: linkName}, 
-	        React.createElement("a", {href: linkUrl, target: "_self", className: linkClass}, 
-	          React.createElement("span", {className: "sidebarItemText"}, linkName), 
-	          arrow
-	        )
-	      )
-	    );
-	  }
-	});
-	
-	module.exports = SideBar;
 
 
 /***/ },
@@ -2006,23 +2006,23 @@
 	
 	/* jslint bitwise: true */
 	
-	var FixedDataTableHelper = __webpack_require__(98);
-	var Locale = __webpack_require__(99);
+	var FixedDataTableHelper = __webpack_require__(99);
+	var Locale = __webpack_require__(100);
 	var React = __webpack_require__(1);
-	var ReactComponentWithPureRenderMixin = __webpack_require__(100);
-	var ReactWheelHandler = __webpack_require__(101);
-	var Scrollbar = __webpack_require__(102);
-	var FixedDataTableBufferedRows = __webpack_require__(103);
-	var FixedDataTableColumnResizeHandle = __webpack_require__(104);
-	var FixedDataTableRow = __webpack_require__(105);
-	var FixedDataTableScrollHelper = __webpack_require__(106);
-	var FixedDataTableWidthHelper = __webpack_require__(107);
+	var ReactComponentWithPureRenderMixin = __webpack_require__(101);
+	var ReactWheelHandler = __webpack_require__(102);
+	var Scrollbar = __webpack_require__(103);
+	var FixedDataTableBufferedRows = __webpack_require__(104);
+	var FixedDataTableColumnResizeHandle = __webpack_require__(105);
+	var FixedDataTableRow = __webpack_require__(106);
+	var FixedDataTableScrollHelper = __webpack_require__(107);
+	var FixedDataTableWidthHelper = __webpack_require__(108);
 	
-	var cloneWithProps = __webpack_require__(108);
-	var cx = __webpack_require__(109);
-	var debounceCore = __webpack_require__(110);
-	var emptyFunction = __webpack_require__(111);
-	var invariant = __webpack_require__(112);
+	var cloneWithProps = __webpack_require__(109);
+	var cx = __webpack_require__(110);
+	var debounceCore = __webpack_require__(111);
+	var emptyFunction = __webpack_require__(112);
+	var invariant = __webpack_require__(98);
 	var shallowEqual = __webpack_require__(113);
 	var translateDOMPositionXY = __webpack_require__(114);
 	
@@ -3013,7 +3013,7 @@
 	 */
 	
 	var React = __webpack_require__(1);
-	var invariant = __webpack_require__(112);
+	var invariant = __webpack_require__(98);
 	
 	var PropTypes = React.PropTypes;
 	
@@ -9967,13 +9967,72 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
+	 * @providesModule invariant
+	 */
+	
+	"use strict";
+	
+	/**
+	 * Use invariant() to assert state which your program assumes to be true.
+	 *
+	 * Provide sprintf-style format (only %s is supported) and arguments
+	 * to provide information about what broke and what you were
+	 * expecting.
+	 *
+	 * The invariant message will be stripped in production, but the invariant
+	 * will remain to ensure logic does not differ in production.
+	 */
+	
+	var invariant = function(condition, format, a, b, c, d, e, f) {
+	  if (true) {
+	    if (format === undefined) {
+	      throw new Error('invariant requires an error message argument');
+	    }
+	  }
+	
+	  if (!condition) {
+	    var error;
+	    if (format === undefined) {
+	      error = new Error(
+	        'Minified exception occurred; use the non-minified dev environment ' +
+	        'for the full error message and additional helpful warnings.'
+	      );
+	    } else {
+	      var args = [a, b, c, d, e, f];
+	      var argIndex = 0;
+	      error = new Error(
+	        'Invariant Violation: ' +
+	        format.replace(/%s/g, function() { return args[argIndex++]; })
+	      );
+	    }
+	
+	    error.framesToPop = 1; // we don't care about invariant's own frame
+	    throw error;
+	  }
+	};
+	
+	module.exports = invariant;
+
+
+/***/ },
+/* 99 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
 	 * @providesModule FixedDataTableHelper
 	 * @typechecks
 	 */
 	
 	"use strict";
 	
-	var Locale = __webpack_require__(99);
+	var Locale = __webpack_require__(100);
 	var React = __webpack_require__(1);
 	var FixedDataTableColumnGroup = __webpack_require__(65);
 	var FixedDataTableColumn = __webpack_require__(64);
@@ -10019,7 +10078,7 @@
 
 
 /***/ },
-/* 99 */
+/* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10045,7 +10104,7 @@
 
 
 /***/ },
-/* 100 */
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10063,7 +10122,7 @@
 
 
 /***/ },
-/* 101 */
+/* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10139,7 +10198,7 @@
 
 
 /***/ },
-/* 102 */
+/* 103 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10157,12 +10216,12 @@
 	var DOMMouseMoveTracker = __webpack_require__(116);
 	var Keys = __webpack_require__(117);
 	var React = __webpack_require__(1);
-	var ReactComponentWithPureRenderMixin = __webpack_require__(100);
-	var ReactWheelHandler = __webpack_require__(101);
+	var ReactComponentWithPureRenderMixin = __webpack_require__(101);
+	var ReactWheelHandler = __webpack_require__(102);
 	
 	var cssVar = __webpack_require__(118);
-	var cx = __webpack_require__(109);
-	var emptyFunction = __webpack_require__(111);
+	var cx = __webpack_require__(110);
+	var emptyFunction = __webpack_require__(112);
 	var translateDOMPositionXY = __webpack_require__(114);
 	
 	var PropTypes = React.PropTypes;
@@ -10624,7 +10683,7 @@
 
 
 /***/ },
-/* 103 */
+/* 104 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10641,10 +10700,10 @@
 	
 	var React = __webpack_require__(1);
 	var FixedDataTableRowBuffer = __webpack_require__(119);
-	var FixedDataTableRow = __webpack_require__(105);
+	var FixedDataTableRow = __webpack_require__(106);
 	
-	var cx = __webpack_require__(109);
-	var emptyFunction = __webpack_require__(111);
+	var cx = __webpack_require__(110);
+	var emptyFunction = __webpack_require__(112);
 	var joinClasses = __webpack_require__(120);
 	
 	var PropTypes = React.PropTypes;
@@ -10788,7 +10847,7 @@
 
 
 /***/ },
-/* 104 */
+/* 105 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10808,12 +10867,12 @@
 	 */
 	
 	var DOMMouseMoveTracker = __webpack_require__(116);
-	var Locale = __webpack_require__(99);
+	var Locale = __webpack_require__(100);
 	var React = __webpack_require__(1);
-	var ReactComponentWithPureRenderMixin = __webpack_require__(100);
+	var ReactComponentWithPureRenderMixin = __webpack_require__(101);
 	
 	var clamp = __webpack_require__(121);
-	var cx = __webpack_require__(109);
+	var cx = __webpack_require__(110);
 	
 	var PropTypes = React.PropTypes;
 	
@@ -10960,7 +11019,7 @@
 
 
 /***/ },
-/* 105 */
+/* 106 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10977,12 +11036,12 @@
 	
 	"use strict";
 	
-	var FixedDataTableHelper = __webpack_require__(98);
+	var FixedDataTableHelper = __webpack_require__(99);
 	var React = __webpack_require__(1);
-	var ReactComponentWithPureRenderMixin = __webpack_require__(100);
+	var ReactComponentWithPureRenderMixin = __webpack_require__(101);
 	var FixedDataTableCellGroup = __webpack_require__(122);
 	
-	var cx = __webpack_require__(109);
+	var cx = __webpack_require__(110);
 	var joinClasses = __webpack_require__(120);
 	var translateDOMPositionXY = __webpack_require__(114);
 	
@@ -11207,7 +11266,7 @@
 
 
 /***/ },
-/* 106 */
+/* 107 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -11477,7 +11536,7 @@
 
 
 /***/ },
-/* 107 */
+/* 108 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -11495,7 +11554,7 @@
 	
 	var React = __webpack_require__(1);
 	
-	var cloneWithProps = __webpack_require__(108);
+	var cloneWithProps = __webpack_require__(109);
 	
 	function getTotalWidth(/*array*/ columns) /*number*/ {
 	  var totalWidth = 0;
@@ -11625,7 +11684,7 @@
 
 
 /***/ },
-/* 108 */
+/* 109 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -11643,7 +11702,7 @@
 
 
 /***/ },
-/* 109 */
+/* 110 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -11701,7 +11760,7 @@
 
 
 /***/ },
-/* 110 */
+/* 111 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -11766,7 +11825,7 @@
 
 
 /***/ },
-/* 111 */
+/* 112 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -11801,65 +11860,6 @@
 	emptyFunction.thatReturnsArgument = function(arg) { return arg; };
 	
 	module.exports = emptyFunction;
-
-
-/***/ },
-/* 112 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule invariant
-	 */
-	
-	"use strict";
-	
-	/**
-	 * Use invariant() to assert state which your program assumes to be true.
-	 *
-	 * Provide sprintf-style format (only %s is supported) and arguments
-	 * to provide information about what broke and what you were
-	 * expecting.
-	 *
-	 * The invariant message will be stripped in production, but the invariant
-	 * will remain to ensure logic does not differ in production.
-	 */
-	
-	var invariant = function(condition, format, a, b, c, d, e, f) {
-	  if (true) {
-	    if (format === undefined) {
-	      throw new Error('invariant requires an error message argument');
-	    }
-	  }
-	
-	  if (!condition) {
-	    var error;
-	    if (format === undefined) {
-	      error = new Error(
-	        'Minified exception occurred; use the non-minified dev environment ' +
-	        'for the full error message and additional helpful warnings.'
-	      );
-	    } else {
-	      var args = [a, b, c, d, e, f];
-	      var argIndex = 0;
-	      error = new Error(
-	        'Invariant Violation: ' +
-	        format.replace(/%s/g, function() { return args[argIndex++]; })
-	      );
-	    }
-	
-	    error.framesToPop = 1; // we don't care about invariant's own frame
-	    throw error;
-	  }
-	};
-	
-	module.exports = invariant;
 
 
 /***/ },
@@ -12293,7 +12293,7 @@
 	var IntegerBufferSet = __webpack_require__(200);
 	
 	var clamp = __webpack_require__(121);
-	var invariant = __webpack_require__(112);
+	var invariant = __webpack_require__(98);
 	var MIN_BUFFER_ROWS = 5;
 	var MAX_BUFFER_ROWS = 15;
 	
@@ -12536,13 +12536,13 @@
 	
 	"use strict";
 	
-	var FixedDataTableHelper = __webpack_require__(98);
+	var FixedDataTableHelper = __webpack_require__(99);
 	var ImmutableObject = __webpack_require__(201);
 	var React = __webpack_require__(1);
-	var ReactComponentWithPureRenderMixin = __webpack_require__(100);
+	var ReactComponentWithPureRenderMixin = __webpack_require__(101);
 	var FixedDataTableCell = __webpack_require__(202);
 	
-	var cx = __webpack_require__(109);
+	var cx = __webpack_require__(110);
 	var renderToString = FixedDataTableHelper.renderToString;
 	var translateDOMPositionXY = __webpack_require__(114);
 	
@@ -19548,7 +19548,7 @@
 	 * @providesModule requestAnimationFramePolyfill
 	 */
 	
-	var emptyFunction = __webpack_require__(111);
+	var emptyFunction = __webpack_require__(112);
 	var nativeRequestAnimationFrame = __webpack_require__(205);
 	
 	var lastTime = 0;
@@ -19645,7 +19645,7 @@
 	var ExecutionEnvironment = __webpack_require__(62);
 	
 	var camelize = __webpack_require__(206);
-	var invariant = __webpack_require__(112);
+	var invariant = __webpack_require__(98);
 	
 	var memoized = {};
 	var prefixes = ['Webkit', 'ms', 'Moz', 'O'];
@@ -20745,7 +20745,7 @@
 	 * @typechecks
 	 */
 	
-	var emptyFunction = __webpack_require__(111);
+	var emptyFunction = __webpack_require__(112);
 	
 	/**
 	 * Upstream version of event listener. Does not take into account specific
@@ -20864,7 +20864,7 @@
 	
 	var Heap = __webpack_require__(251);
 	
-	var invariant = __webpack_require__(112);
+	var invariant = __webpack_require__(98);
 	
 	// Data structure that allows to store values and assign positions to them
 	// in a way to minimize changing positions of stored values when new ones are
@@ -21052,7 +21052,7 @@
 	
 	var ImmutableValue = __webpack_require__(252);
 	
-	var invariant = __webpack_require__(112);
+	var invariant = __webpack_require__(98);
 	var keyOf = __webpack_require__(253);
 	var mergeHelpers = __webpack_require__(254);
 	
@@ -21237,8 +21237,8 @@
 	var ImmutableObject = __webpack_require__(201);
 	var React = __webpack_require__(1);
 	
-	var cloneWithProps = __webpack_require__(108);
-	var cx = __webpack_require__(109);
+	var cloneWithProps = __webpack_require__(109);
+	var cx = __webpack_require__(110);
 	var joinClasses = __webpack_require__(120);
 	
 	var PropTypes = React.PropTypes;
@@ -25913,7 +25913,7 @@
 	
 	"use strict";
 	
-	var invariant = __webpack_require__(112);
+	var invariant = __webpack_require__(98);
 	var isNode = __webpack_require__(296);
 	var keyOf = __webpack_require__(253);
 	
@@ -26087,7 +26087,7 @@
 	
 	"use strict";
 	
-	var invariant = __webpack_require__(112);
+	var invariant = __webpack_require__(98);
 	var keyMirror = __webpack_require__(297);
 	
 	/**
@@ -68962,7 +68962,7 @@
 	
 	'use strict';
 	
-	var invariant = __webpack_require__(112);
+	var invariant = __webpack_require__(98);
 	
 	/**
 	 * Constructs an enumeration with keys equal to their value.
