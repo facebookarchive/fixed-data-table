@@ -30,7 +30,7 @@ Install `fixed-data-table` using npm.
 npm install fixed-data-table
 ```
 
-Then require it into any module.
+Add the default stylesheet `dist/fixed-data-table.css`, then require it into any module.
 
 ```javascript
 var React = require('react');
