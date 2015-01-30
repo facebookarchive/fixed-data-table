@@ -3,7 +3,7 @@ Fixed Data Tables for React
 
 FixedDataTable is a React component for building and presenting data in a flexible, powerful way. It supports standard table features, like headers, columns, rows, header groupings, and both fixed-position and scrolling columns.
 
-The table was designed to handle thousands rows of data without sacrificing performance. Scrolling smoothly is a first-class goal of FixedDataTable and it's architected in a way to allow for flexibility and extensibilty.
+The table was designed to handle thousands rows of data without sacrificing performance. Scrolling smoothly is a first-class goal of FixedDataTable and it's architected in a way to allow for flexibility and extensibility.
 
 Features of FixedDataTable:
 * Fixed headers and footer
@@ -16,8 +16,8 @@ Features of FixedDataTable:
 * Jumping to a row or column
 * Controlled scroll API allows touch support
 
-Things that are FixedDataTable doesn't do:
-* FixedDataTable does not provide a layout reflow mechanism or calculates content layout information such as width and height of the cell contents. The developer has to provide the layout information to the table instead.
+Things the FixedDataTable doesn't do:
+* FixedDataTable does not provide a layout reflow mechanism or calculate content layout information such as width and height of the cell contents. The developer has to provide the layout information to the table instead.
 * FixedDataTable does not handle sorting of data. Instead it allows the developer to supply data getters that can be sort-, filter-, or tail-loading-aware.
 * FixedDataTable does not fetch the data (see above)
 
