@@ -7,6 +7,7 @@ exports.PageLocations = {
   COLUMNGROUP_API: 'api-columngroup.html',
   OBJECT_DATA_EXAMPLE: 'example-object-data.html',
   FLEXGROW_EXAMPLE: 'example-flexgrow.html',
+  RESIZE_EXAMPLE: 'example-resize.html',
 };
 
 exports.APIPages = {
@@ -20,6 +21,7 @@ exports.DOCS_INDEX = exports.PageLocations.TABLE_API;
 exports.ExamplePages = {
   OBJECT_DATA_EXAMPLE: 'With JSON Data',
   FLEXGROW_EXAMPLE: 'Fluid column widths',
+  RESIZE_EXAMPLE: 'Resizable columns',
 };
 
 exports.EXAMPLES_INDEX = exports.PageLocations.OBJECT_DATA_EXAMPLE;

@@ -9,17 +9,12 @@ var PropTypes = React.PropTypes;
 var Table = FixedDataTable.Table;
 
 function colorizeText(/*string*/ str, key, data, index) {
-  var n = 0;
-  var val;
+  var val, n = 0;
   return str.split('').map((letter) => {
     val = index * 70 + n++;
     var color = 'hsl(' + val + ', 100%, 50%)';
     return <span style={{color}}>{letter}</span>;
   });
-}
-
-function renderDate(/*object*/ cellData) {
-  return <span>{cellData.toLocaleString()}</span>;
 }
 
 var FlexGrowExample = React.createClass({
@@ -84,4 +79,3 @@ var FlexGrowExample = React.createClass({
 });
 
 module.exports = FlexGrowExample;
-
