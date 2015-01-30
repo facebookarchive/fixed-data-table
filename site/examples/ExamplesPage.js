@@ -15,7 +15,7 @@ var ExamplesPage = React.createClass({
 
   render() {
     return (
-      <ExamplesWrapper>
+      <ExamplesWrapper {...this.props} >
         {this.state.renderPage && this._renderPage()}
       </ExamplesWrapper>
     );
@@ -34,6 +34,12 @@ var ExamplesPage = React.createClass({
       case PageLocations.OBJECT_DATA_EXAMPLE:
         var ObjectDataExample = require('./ObjectDataExample');
         return <ObjectDataExample {...this.state} />;
+      case PageLocations.RESIZE_EXAMPLE:
+        var ResizeExample = require('./ResizeExample');
+        return <ResizeExample {...this.state} />;
+      case PageLocations.FLEXGROW_EXAMPLE:
+        var FlexGrowExample = require('./FlexGrowExample');
+        return <FlexGrowExample {...this.state} />;
     }
   },
 

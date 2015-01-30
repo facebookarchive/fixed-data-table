@@ -18,6 +18,8 @@ function createFakeRowObjectData(/*number*/ index) {
     bs: faker.company.bs(),
     catchPhrase: faker.company.catchPhrase(),
     companyName: faker.company.companyName(),
+    words: faker.lorem.words(),
+    sentence: faker.lorem.sentence(),
   };
 }
 

@@ -14,6 +14,20 @@
     padding: 64px 0 0;
   }
 
+  .sidebarItemText,
+  .arrowBullet {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .arrowBullet {
+    visibility: hidden;
+    width: 6px;
+    height: 10px;
+    background: url(../images/arrowBullet.png) no-repeat scroll;
+    margin-left: 9px;
+  }
+
   .disclaimer {
     margin: 60px 20px 0 260px;
     border: solid 1px #eecccc;
@@ -115,6 +129,14 @@
 
   .sideBar h2 a {
     font-weight: normal;
+  }
+
+  .sideBar .curSideItem {
+    font-weight: bold;
+  }
+
+  .sideBar .curSideItem .arrowBullet {
+    visibility: visible;
   }
 
   .sideBar .members {
