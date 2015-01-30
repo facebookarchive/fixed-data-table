@@ -14,12 +14,12 @@ Features of FixedDataTable:
 * Performant scrolling
 * Customizable styling
 * Jumping to a row or column
+* Controled scroll API allows touch support
 
 Things that are FixedDataTable doesn't do:
 * FixedDataTable does not provide a layout reflow mechanism or calculates content layout information such as width and height of the cell contents. The developer has to provide the layout information to the table instead.
 * FixedDataTable does not handle sorting of data. Instead it allows the developer to supply data getters that can be sort-, filter-, or tail-loading-aware.
 * FixedDataTable does not fetch the data (see above)
-* FixedDataTable does not support touch devices, but eventually will.
 
 Getting started
 ---------------
