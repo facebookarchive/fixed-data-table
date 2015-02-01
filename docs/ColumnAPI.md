@@ -108,14 +108,14 @@ type: `number`
 
 ### `minWidth`
 
-If this is a resizable column this is its minimum width.
+If this is a resizable column this is its minimum pixel width.
 
 type: `number`
 
 
 ### `maxWidth`
 
-If this is a resizable column this is its maximum width.
+If this is a resizable column this is its maximum pixel width.
 
 type: `number`
 

@@ -127,12 +127,12 @@ var FixedDataTableColumn = React.createClass({
     width: PropTypes.number.isRequired,
 
     /**
-     * If this is a resizable column this is its minimum width.
+     * If this is a resizable column this is its minimum pixel width.
      */
     minWidth: PropTypes.number,
 
     /**
-     * If this is a resizable column this is its maximum width.
+     * If this is a resizable column this is its maximum pixel width.
      */
     maxWidth: PropTypes.number,
 

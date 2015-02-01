@@ -95,12 +95,31 @@ var COLUMN_SETTING_NAMES = [
 var FixedDataTable = React.createClass({
 
   propTypes: {
+    
+    /**
+     * Pixel width of table. If all rows do not fit,
+     * a horizontal scrollbar will appear. 
+     */
     width: PropTypes.number.isRequired,
+
+    /**
+     * Pixel height of table. If all rows do not fit,
+     * a vertical scrollbar will appear.
+     *
+     * Either `height` or `maxHeight` must be specified.
+     */
     height: PropTypes.number,
+
+    /**
+     * Maximum pixel height of table. If all rows do not fit,
+     * a vertical scrollbar will appear.
+
+     * Either `height` or `maxHeight` must be specified.
+     */
     maxHeight: PropTypes.number,
 
     /**
-     * Height of table's owner, This is used to make sure the footer
+     * Pixel height of table's owner, This is used to make sure the footer
      * and scrollbar of the table are visible when current space for table in
      * view is smaller than final height of table. It allows to avoid resizing
      * and reflowing table whan it is moving in the view.
@@ -118,7 +137,7 @@ var FixedDataTable = React.createClass({
     rowsCount: PropTypes.number.isRequired,
 
     /**
-     * Height of rows unless rowHeightGetter is specified and returns different
+     * Pixel height of rows unless rowHeightGetter is specified and returns different
      * value.
      */
     rowHeight: PropTypes.number.isRequired,
@@ -144,12 +163,12 @@ var FixedDataTable = React.createClass({
     rowClassNameGetter: PropTypes.func,
 
     /**
-     * Height of the column group header.
+     * Pixel height of the column group header.
      */
     groupHeaderHeight: PropTypes.number,
 
     /**
-     * Height of the header.
+     * Pixel height of header.
      */
     headerHeight: PropTypes.number.isRequired,
 
@@ -159,7 +178,7 @@ var FixedDataTable = React.createClass({
     headerDataGetter: PropTypes.func,
 
     /**
-     * Height of the footer.
+     * Pixel height of footer.
      */
     footerHeight: PropTypes.number,
 
