@@ -52,22 +52,35 @@ Props
 
 ### `width` (required)
 
+Pixel width of table. If all rows do not fit,
+a horizontal scrollbar will appear.
+
 type: `number`
 
 
 ### `height`
+
+Pixel height of table. If all rows do not fit,
+a vertical scrollbar will appear.
+
+Either `height` or `maxHeight` must be specified.
 
 type: `number`
 
 
 ### `maxHeight`
 
+Maximum pixel height of table. If all rows do not fit,
+a vertical scrollbar will appear.
+
+Either `height` or `maxHeight` must be specified.
+
 type: `number`
 
 
 ### `ownerHeight`
 
-Height of table's owner, This is used to make sure the footer
+Pixel height of table's owner, This is used to make sure the footer
 and scrollbar of the table are visible when current space for table in
 view is smaller than final height of table. It allows to avoid resizing
 and reflowing table whan it is moving in the view.
@@ -96,7 +109,7 @@ type: `number`
 
 ### `rowHeight` (required)
 
-Height of rows unless rowHeightGetter is specified and returns different
+Pixel height of rows unless rowHeightGetter is specified and returns different
 value.
 
 type: `number`
@@ -130,7 +143,7 @@ type: `func`
 
 ### `groupHeaderHeight`
 
-Height of the column group header.
+Pixel height of the column group header.
 
 type: `number`
 defaultValue: `0`
@@ -138,7 +151,7 @@ defaultValue: `0`
 
 ### `headerHeight` (required)
 
-Height of the header.
+Pixel height of header.
 
 type: `number`
 defaultValue: `0`
@@ -153,7 +166,7 @@ type: `func`
 
 ### `footerHeight`
 
-Height of the footer.
+Pixel height of footer.
 
 type: `number`
 defaultValue: `0`
