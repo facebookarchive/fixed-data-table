@@ -31,8 +31,8 @@
     "webpack-dev-server": "^1.7.0"
   },
   "scripts": {
-    "site-dev-server": "build_helpers/buildAPIDocs.sh && build_helpers/buildSiteIndexPages.sh --devMode && webpack-dev-server --config site/webpack.config.js --no-info --content-base __site__",
-    "site-build": "build_helpers/buildAPIDocs.sh && build_helpers/buildSiteIndexPages.sh && webpack --config site/webpack.config.js",
+    "site-dev-server": "build_helpers/buildAPIDocs.sh && build_helpers/buildSiteIndexPages.sh && webpack-dev-server --config site/webpack.config.js --no-info --content-base __site__",
+    "site-build": "rm -rf ./__site__ && build_helpers/buildAPIDocs.sh && NODE_ENV=production webpack --config site/webpack.config.js && NODE_ENV=production build_helpers/buildSiteIndexPages.sh",
     "build-dist": "NODE_ENV=production webpack && NODE_ENV=production COMPRESS=1 webpack",
     "build-npm": "build_helpers/buildNPMInternals.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
