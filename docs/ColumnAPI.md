@@ -48,13 +48,13 @@ will be used to determine whether the cell should re-render.
 type: `func`
 
 
-### `dataKey`
+### `dataKey` (required)
 
 The key to retrieve the cell data from the data row. Provided key type
 must be either `string` or `number`. Since we use this
 for keys, it must be specified for each column.
 
-type: `custom`
+type: `union(string|number)`
 
 
 ### `headerRenderer`

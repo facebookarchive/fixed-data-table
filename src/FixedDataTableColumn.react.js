@@ -11,32 +11,8 @@
  */
 
 var React = require('React');
-var invariant = require('invariant');
 
 var PropTypes = React.PropTypes;
-
-/**
- * Verify that the component property `dataKey` has the right type.
- */
-function checkDataKeyPropTypes(
-  /*object*/ props,
-  /*string*/ propName,
-  /*string*/ componentName
-) {
-  var propValue = props[propName];
-  invariant(
-    propValue !== undefined,
-    'Datakey must be specified for each column'
-  );
-
-  var propValueType = typeof propValue;
-
-  invariant(
-    propValueType === 'string' || propValueType === 'number',
-    'Provided property dataKey to be type of string or number, not %s',
-    propValueType
-  );
-}
 
 /**
  * Component that defines the attributes of table column.
@@ -85,7 +61,10 @@ var FixedDataTableColumn = React.createClass({
      * must be either `string` or `number`. Since we use this
      * for keys, it must be specified for each column.
      */
-    dataKey: checkDataKeyPropTypes,
+    dataKey: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]).isRequired,
 
     /**
      * The header cell renderer
