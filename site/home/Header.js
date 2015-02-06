@@ -9,6 +9,8 @@ var TABLE_OFFSET = 100;
 var HEADER_HEIGHT = 50;
 var EMPTY_OBJECT = {};
 var GITHUB_URL = 'https://github.com/facebook/fixed-data-table';
+var DOCS_DEFAULT_LOCATION = Constants.DOCS_DEFAULT.location;
+var EXAMPLES_DEFAULT_LOCATION = Constants.EXAMPLES_DEFAULT.location;
 
 var Header = React.createClass({
   getInitialState() {
@@ -91,16 +93,16 @@ var Header = React.createClass({
           style={this.state.fixed ? EMPTY_OBJECT : clipStyles}>
           <div className="miniHeaderContents">
             <a href="./" target="_self" className="miniLogo" />
-            <a href={Constants.DOCS_INDEX} target="_self">Documentation</a>
-            <a href={Constants.EXAMPLES_INDEX} target="_self">Examples</a>
+            <a href={DOCS_DEFAULT_LOCATION} target="_self">Documentation</a>
+            <a href={EXAMPLES_DEFAULT_LOCATION} target="_self">Examples</a>
             <a href={GITHUB_URL}>Github</a>
           </div>
         </div>
         <div className="cover">
           <div className="filler">
             <div className="miniHeaderContents">
-              <a href={Constants.DOCS_INDEX} target="_self">Documentation</a>
-              <a href={Constants.EXAMPLES_INDEX} target="_self">Examples</a>
+              <a href={DOCS_DEFAULT_LOCATION} target="_self">Documentation</a>
+              <a href={EXAMPLES_DEFAULT_LOCATION} target="_self">Examples</a>
               <a href={GITHUB_URL}>Github</a>
             </div>
           </div>

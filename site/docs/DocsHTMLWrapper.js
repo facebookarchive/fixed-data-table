@@ -19,6 +19,7 @@ var DocsHTMLWrapper = React.createClass({
             <SideBar
               title="API"
               pages={Constants.APIPages}
+              example={this.props.example}
             />
             <StaticHTMLBlock
               className="docContents"

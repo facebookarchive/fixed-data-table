@@ -12,12 +12,13 @@
 
 "use strict";
 
+var ExampleHeader = require('./ExampleHeader');
 var ExamplesWrapper = require('./ExamplesWrapper');
 var TouchExampleWrapper = require('./TouchExampleWrapper');
 var React = require('react');
 var Constants = require('../Constants');
 
-var PageLocations = Constants.PageLocations;
+var ExamplePages = Constants.ExamplePages;
 
 var ExamplesPage = React.createClass({
   getInitialState() {
@@ -28,7 +29,8 @@ var ExamplesPage = React.createClass({
 
   render() {
     return (
-      <ExamplesWrapper {...this.props} >
+      <ExamplesWrapper {...this.props}>
+        <ExampleHeader {...this.props} />
         {this.state.renderPage && this._renderPage()}
       </ExamplesWrapper>
     );
@@ -44,21 +46,21 @@ var ExamplesPage = React.createClass({
     require('fixed-data-table/css/fixedDataTableRow.css');
 
     switch (this.props.example) {
-      case PageLocations.OBJECT_DATA_EXAMPLE:
+      case ExamplePages.OBJECT_DATA_EXAMPLE:
         var ObjectDataExample = require('./ObjectDataExample');
         return (
           <TouchExampleWrapper {...this.state}>
             <ObjectDataExample />
           </TouchExampleWrapper>
         );
-      case PageLocations.RESIZE_EXAMPLE:
+      case ExamplePages.RESIZE_EXAMPLE:
         var ResizeExample = require('./ResizeExample');
         return (
           <TouchExampleWrapper {...this.state}>
             <ResizeExample />
           </TouchExampleWrapper>
         );
-      case PageLocations.FLEXGROW_EXAMPLE:
+      case ExamplePages.FLEXGROW_EXAMPLE:
         var FlexGrowExample = require('./FlexGrowExample');
         return (
           <TouchExampleWrapper {...this.state}>
@@ -93,7 +95,7 @@ var ExamplesPage = React.createClass({
     this.setState({
       renderPage: true,
       tableWidth: win.innerWidth - widthOffset,
-      tableHeight: win.innerHeight - 100,
+      tableHeight: win.innerHeight - 200,
     });
   }
 });
