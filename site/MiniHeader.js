@@ -6,6 +6,8 @@ var Constants = require('./Constants');
 require('./miniHeader.less');
 
 var GITHUB_URL = 'https://github.com/facebook/fixed-data-table';
+var DOCS_DEFAULT_LOCATION = Constants.DOCS_DEFAULT.location;
+var EXAMPLES_DEFAULT_LOCATION = Constants.EXAMPLES_DEFAULT.location;
 
 var MiniHeader = React.createClass({
   render() {
@@ -17,8 +19,8 @@ var MiniHeader = React.createClass({
             <a className="homeLink" href="./" target="_self">
               Home
             </a>
-            <a href={Constants.DOCS_INDEX} target="_self">Documentation</a>
-            <a href={Constants.EXAMPLES_INDEX} target="_self">Examples</a>
+            <a href={DOCS_DEFAULT_LOCATION} target="_self">Documentation</a>
+            <a href={EXAMPLES_DEFAULT_LOCATION} target="_self">Examples</a>
             <a href={GITHUB_URL}>Github</a>
           </div>
         </div>

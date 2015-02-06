@@ -10,10 +10,9 @@ var SideBar = React.createClass({
         <div className="scrollContent">
           <h4 className="groupTitle">{this.props.title}</h4>
           {Object.keys(this.props.pages).map(
-              link => this.renderLink(
-                this.props.pages[link],
-                Constants.PageLocations[link],
-                this.props.example
+              page => this.renderLink(
+                this.props.pages[page].title,
+                this.props.pages[page].location
               )
             )}
         </div>
@@ -21,10 +20,10 @@ var SideBar = React.createClass({
     );
   },
 
-  renderLink(linkName, linkUrl, curUrl) {
+  renderLink(linkName, linkUrl) {
     var arrow = <span className="arrowBullet" />;
     var linkClass = 'sideItem';
-    if (curUrl === linkUrl) {
+    if (this.props.example.location === linkUrl) {
       linkClass += ' curSideItem';
     }
 

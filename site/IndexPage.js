@@ -15,14 +15,20 @@ var React = require('react');
 
 require('./images/favicon.png');
 
-var PageLocations = Constants.PageLocations;
+var APIPages = Constants.APIPages;
+var ExamplePages = Constants.ExamplePages;
+var OtherPages = Constants.OtherPages;
+var Pages = Constants.Pages;
+
+function getPageLocations(pagesObj) {
+  return Object.keys(pagesObj).map(key => pagesObj[key].location);
+}
 
 var IndexPage = React.createClass({
   statics: {
     getPageLocations() {
-      return Object.keys(PageLocations).map(
-        key => PageLocations[key]
-      );
+      var locations = [APIPages, ExamplePages, OtherPages].map(getPageLocations);
+      return Array.prototype.concat.apply([], locations); // flatten
     },
 
     getDoctype() {
@@ -74,21 +80,21 @@ var IndexPage = React.createClass({
 
   _renderPage() {
     switch (this.props.location) {
-      case PageLocations.HOME:
+      case OtherPages.HOME.location:
         return <HomePage />;
-      case PageLocations.TABLE_API:
+      case APIPages.TABLE_API.location:
         return <TableAPIPage />;
-      case PageLocations.COLUMN_API:
+      case APIPages.COLUMN_API.location:
         return <ColumnAPIPage />;
-      case PageLocations.COLUMNGROUP_API:
+      case APIPages.COLUMNGROUP_API.location:
         return <ColumnGroupAPIPage />;
     }
 
-    var isExample = Object.keys(Constants.ExamplePages).some(
-      page => PageLocations[page] === this.props.location
-    );
-    if (isExample) {
-      return <ExamplesPage example={this.props.location} />;
+    for (var key in ExamplePages) {
+      if (ExamplePages.hasOwnProperty(key) &&
+        ExamplePages[key].location === this.props.location) {
+        return <ExamplesPage example={ExamplePages[key]} />;
+      }
     }
 
     throw new Error(
