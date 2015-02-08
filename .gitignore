@@ -4,6 +4,7 @@ node_modules
 static
 .grunt
 build/
+dist/
 .module-cache
 *.log*
 chrome-user-data

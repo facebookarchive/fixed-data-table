@@ -1,0 +1,8 @@
+script: bash build_helpers/buildDistFromTravis.sh
+env:
+  global:
+  - GH_REF: github.com/kimagure/fixed-data-table
+  - secure: {{encrypted key goes here}}
+language: node_js
+node_js:
+  - "0.10"
