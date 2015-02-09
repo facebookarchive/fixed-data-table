@@ -1,7 +1,10 @@
 "use strict";
 
-var React = require('React');
+var React = require('react');
 var IndexPage = require('./IndexPage');
+
+// Polyfill ES6 `Object.assign`.
+Object.assign = Object.assign || require('object-assign');
 
 React.render(
   <IndexPage
