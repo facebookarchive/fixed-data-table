@@ -1,12 +1,9 @@
 .DS_STORE
 node_modules
 *~
-static
-.grunt
-build/
-.module-cache
 *.log*
 chrome-user-data
 __build__
 __site__
+__site_prerender__
 internal

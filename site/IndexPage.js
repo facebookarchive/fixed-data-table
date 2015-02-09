@@ -20,17 +20,8 @@ var ExamplePages = Constants.ExamplePages;
 var OtherPages = Constants.OtherPages;
 var Pages = Constants.Pages;
 
-function getPageLocations(pagesObj) {
-  return Object.keys(pagesObj).map(key => pagesObj[key].location);
-}
-
 var IndexPage = React.createClass({
   statics: {
-    getPageLocations() {
-      var locations = [APIPages, ExamplePages, OtherPages].map(getPageLocations);
-      return Array.prototype.concat.apply([], locations); // flatten
-    },
-
     getDoctype() {
       return '<!doctype html>';
     },

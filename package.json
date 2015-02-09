@@ -21,6 +21,8 @@
     "less-loader": "^2.0.0",
     "marked": "^0.3.2",
     "node-jsx": "^0.12.4",
+    "null-loader": "^0.1.0",
+    "object-assign": "^2.0.0",
     "postcss": "^4.0.2",
     "postcss-custom-properties": "^3.0.0",
     "react": "^0.12.2",
@@ -31,10 +33,10 @@
     "webpack-dev-server": "^1.7.0"
   },
   "scripts": {
-    "site-dev-server": "build_helpers/buildAPIDocs.sh && build_helpers/buildSiteIndexPages.sh && webpack-dev-server --config site/webpack.config.js --no-info --content-base __site__",
-    "site-build": "rm -rf ./__site__ && build_helpers/buildAPIDocs.sh && NODE_ENV=production webpack --config site/webpack.config.js && NODE_ENV=production build_helpers/buildSiteIndexPages.sh",
+    "site-dev-server": "./build_helpers/startSiteDevServer.sh",
+    "site-build": "./build_helpers/buildStaticSite.sh",
     "build-dist": "NODE_ENV=production webpack && NODE_ENV=production COMPRESS=1 webpack",
-    "build-npm": "build_helpers/buildNPMInternals.sh",
+    "build-npm": "./build_helpers/buildNPMInternals.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
