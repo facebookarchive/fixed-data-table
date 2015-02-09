@@ -2,14 +2,11 @@
 // -*- mode: js -*-
 "use strict";
 
-require('node-jsx').install({harmony: true});
-require('./nodeMarkdown').install();
-require('./nodeLessStub').install();
-
 var fs = require('fs');
 var path = require('path');
 var glob = require('glob');
-var IndexPage = require('../site/IndexPage');
+var Constants = require('../site/Constants');
+var renderPath = require('../__site_prerender__/renderPath');
 
 var sitePath = path.join(__dirname, '../__site__');
 if (!fs.existsSync(sitePath)) {
@@ -39,13 +36,29 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-IndexPage.getPageLocations().forEach(function(fileName) {
-  fs.writeFileSync(
-    path.join(sitePath, fileName),
-    IndexPage.renderToString({
-      location: fileName,
-      devMode: process.env.NODE_ENV !== 'production',
-      files: files
+var locations = [
+  Constants.APIPages,
+  Constants.ExamplePages,
+  Constants.OtherPages
+].reduce(function(paths, pages) {
+  return paths.concat(
+    Object.keys(pages).map(function(key) {
+      return pages[key].location;
     })
   );
+}, []);
+
+locations.forEach(function(fileName) {
+  var props = {
+    location: fileName,
+    devMode: process.env.NODE_ENV !== 'production',
+    files: files
+  };
+
+  renderPath(fileName, props, function(content) {
+    fs.writeFileSync(
+      path.join(sitePath, fileName),
+      content
+    );
+  });
 });
