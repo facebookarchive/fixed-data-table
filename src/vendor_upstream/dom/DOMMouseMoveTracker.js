@@ -10,6 +10,8 @@
  * @typechecks
  */
 
+"use strict";
+
 var EventListener = require('EventListener');
 
 var cancelAnimationFramePolyfill = require('cancelAnimationFramePolyfill');
