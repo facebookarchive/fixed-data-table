@@ -67,6 +67,13 @@ var ExamplesPage = React.createClass({
             <FlexGrowExample />
           </TouchExampleWrapper>
         );
+      case ExamplePages.COLUMN_GROUPS_EXAMPLE:
+        var ColumnGroupsExample = require('./ColumnGroupsExample');
+        return (
+          <TouchExampleWrapper {...this.state}>
+            <ColumnGroupsExample />
+          </TouchExampleWrapper>
+        );
     }
   },
 

@@ -36,6 +36,11 @@ exports.ExamplePages = {
     title: 'Resizable columns',
     description: 'Table with drag and drop column resizing and a dummy "store" for persistence. The Last Name column demonstrates the ability to contrain to both a min- and max-width.',
   },
+  COLUMN_GROUPS_EXAMPLE: {
+    location: 'example-column-groups.html',
+    title: 'Column Groups',
+    description: 'Table with column groupings.',
+  },
 };
 
 exports.DOCS_DEFAULT = exports.APIPages.TABLE_API;

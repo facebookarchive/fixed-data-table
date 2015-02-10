@@ -43,7 +43,7 @@ var ResizeExample = React.createClass({
 
     return (
       <Table
-        rowHeight={50}
+        rowHeight={30}
         headerHeight={50}
         rowGetter={FakeObjectDataListStore.getObjectAt}
         rowsCount={FakeObjectDataListStore.getSize()}
