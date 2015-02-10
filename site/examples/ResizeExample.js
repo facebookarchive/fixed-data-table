@@ -10,7 +10,7 @@ var Table = FixedDataTable.Table;
 
 var columnWidths = {
   firstName: 240,
-  lastName: 200,
+  lastName: 150,
   sentence: 140,
   companyName: 60,
 };
@@ -64,10 +64,12 @@ var ResizeExample = React.createClass({
           isResizable={true}
         />
         <Column
-          label="Last Name"
+          label="Last Name (min/max constrained)"
           dataKey="lastName"
           width={columnWidths['lastName']}
           isResizable={true}
+          minWidth={70}
+          maxWidth={170}
         />
         <Column
           label="Company"
