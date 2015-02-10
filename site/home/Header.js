@@ -2,6 +2,9 @@
 
 var React = require('react');
 var Constants = require('../Constants');
+var Router = require('react-router');
+
+var Link = Router.Link;
 
 var FIXED_THRESHOLD = 680;
 var MAX_HEIGHT = 800;
@@ -92,8 +95,8 @@ var Header = React.createClass({
           className={miniHeaderClasses}
           style={this.state.fixed ? EMPTY_OBJECT : clipStyles}>
           <div className="miniHeaderContents">
-            <a href="./" target="_self" className="miniLogo" />
-            <a href={DOCS_DEFAULT_LOCATION} target="_self">Documentation</a>
+            <Link to="home" className="miniLogo" />
+            <Link to="docs">Documentation</Link>
             <a href={EXAMPLES_DEFAULT_LOCATION} target="_self">Examples</a>
             <a href={GITHUB_URL}>Github</a>
           </div>
@@ -101,7 +104,7 @@ var Header = React.createClass({
         <div className="cover">
           <div className="filler">
             <div className="miniHeaderContents">
-              <a href={DOCS_DEFAULT_LOCATION} target="_self">Documentation</a>
+              <Link to="docs">Documentation</Link>
               <a href={EXAMPLES_DEFAULT_LOCATION} target="_self">Examples</a>
               <a href={GITHUB_URL}>Github</a>
             </div>

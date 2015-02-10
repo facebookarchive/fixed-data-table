@@ -9,12 +9,12 @@ var SideBar = React.createClass({
       <div className="sideBar">
         <div className="scrollContent">
           <h4 className="groupTitle">{this.props.title}</h4>
-          {Object.keys(this.props.pages).map(
+          {/*Object.keys(this.props.pages).map(
               page => this.renderLink(
                 this.props.pages[page].title,
                 this.props.pages[page].location
               )
-            )}
+            )*/}
         </div>
       </div>
     );

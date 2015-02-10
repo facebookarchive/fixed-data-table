@@ -5,11 +5,11 @@ var resolvers = require('../build_helpers/resolvers');
 var isDev = process.env.NODE_ENV !== 'production';
 
 module.exports = {
-  entry: path.join(__dirname, 'renderPath.js'),
+  entry: path.join(__dirname, 'prerender.js'),
 
   output: {
     path: '__site_prerender__/',
-    filename: 'renderPath.js',
+    filename: 'prerender.js',
     libraryTarget: 'commonjs2',
   },
 

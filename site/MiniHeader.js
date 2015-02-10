@@ -2,11 +2,13 @@
 
 var React = require('react');
 var Constants = require('./Constants');
+var Router = require('react-router');
+
+var Link = Router.Link;
 
 require('./miniHeader.less');
 
 var GITHUB_URL = 'https://github.com/facebook/fixed-data-table';
-var DOCS_DEFAULT_LOCATION = Constants.DOCS_DEFAULT.location;
 var EXAMPLES_DEFAULT_LOCATION = Constants.EXAMPLES_DEFAULT.location;
 
 var MiniHeader = React.createClass({
@@ -15,11 +17,9 @@ var MiniHeader = React.createClass({
       <div className="header">
         <div className="miniHeader">
           <div className="miniHeaderContents">
-            <a href="./" target="_self" className="miniLogo" />
-            <a className="homeLink" href="./" target="_self">
-              Home
-            </a>
-            <a href={DOCS_DEFAULT_LOCATION} target="_self">Documentation</a>
+            <Link to="home" className="miniLogo" />
+            <Link to="home" className="homeLink">Home</Link>
+            <Link to="docs">Documentation</Link>
             <a href={EXAMPLES_DEFAULT_LOCATION} target="_self">Examples</a>
             <a href={GITHUB_URL}>Github</a>
           </div>
