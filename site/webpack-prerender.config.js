@@ -26,7 +26,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        loader: 'jsx-loader?harmony'
+        loader: 'jsx-loader?harmony&stripTypes'
       },
       {
         test: /\.css$/,
