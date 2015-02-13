@@ -95,10 +95,10 @@ var COLUMN_SETTING_NAMES = [
 var FixedDataTable = React.createClass({
 
   propTypes: {
-    
+
     /**
      * Pixel width of table. If all rows do not fit,
-     * a horizontal scrollbar will appear. 
+     * a horizontal scrollbar will appear.
      */
     width: PropTypes.number.isRequired,
 
@@ -651,6 +651,9 @@ var FixedDataTable = React.createClass({
     var children = [];
 
     ReactChildren.forEach(props.children, (child, index) => {
+      if(child == null) {
+        return;
+      }
       invariant(
         child.type.__TableColumnGroup__ ||
         child.type.__TableColumn__,
