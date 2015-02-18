@@ -80,7 +80,7 @@ Contributions
 
 Use [Github issues](https://github.com/facebook/fixed-data-table/issues) for requests.
 
-We actively welcome pull requests; learn how to [contribute](./CONTRIBUTING.md).
+We actively welcome pull requests; learn how to [contribute](https://github.com/facebook/fixed-data-table/blob/master/CONTRIBUTING.md).
 
 
 Changelog
@@ -92,4 +92,4 @@ Changes are tracked as [Github releases](https://github.com/facebook/fixed-data-
 License
 -------
 
-`FixedDataTable` is [BSD-licensed](./LICENSE). We also provide an additional [patent grant](./PATENTS).
+`FixedDataTable` is [BSD-licensed](https://github.com/facebook/fixed-data-table/blob/master/LICENSE). We also provide an additional [patent grant](https://github.com/facebook/fixed-data-table/blob/master/PATENTS).
