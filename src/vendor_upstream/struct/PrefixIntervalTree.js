@@ -9,6 +9,7 @@
  * @providesModule PrefixIntervalTree
  * @typechecks
  */
+
 "use strict";
 
 /**

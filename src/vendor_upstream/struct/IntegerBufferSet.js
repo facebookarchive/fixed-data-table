@@ -9,7 +9,8 @@
  * @providesModule IntegerBufferSet
  * @typechecks
  */
-'use strict';
+
+"use strict";
 
 var Heap = require('Heap');
 
