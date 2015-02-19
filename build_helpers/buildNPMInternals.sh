@@ -31,7 +31,7 @@ function processFile(fileName) {
   var contents = fs.readFileSync(fileName, {encoding: 'utf8'});
   var providesModule = providesModuleRegex.exec(contents);
   if (providesModule) {
-    contents = reactTools.transform(contents, {harmony: true});
+    contents = reactTools.transform(contents, {harmony: true, stripTypes: true});
     contents = contents.replace(moduleRequireRegex, replaceRequirePath);
     contents = contents.replace(findDEVRegex, 'process.env.NODE_ENV !== \'production\'');
     fs.writeFileSync(
