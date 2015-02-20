@@ -71,8 +71,9 @@ var FixedDataTableColumn = React.createClass({
      * `function(
      *   any_cellData,
      *   string_cellDataKey,
+     *   any_columnData,
      *   object_rowData,
-     *   any_columnData
+     *   number_width
      *)`
      * that returns React-renderable content for table column header.
      */
