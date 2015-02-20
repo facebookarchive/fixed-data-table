@@ -34,10 +34,16 @@ var FixedDataTableColumnGroup = React.createClass({
     fixed: PropTypes.bool.isRequired,
 
     /**
-     * The function that takes a label and column group data as params and
-     * returns React-renderable content for table header. If this is not set
-     * the label will be the only thing rendered in the column group header
-     * cell.
+     * If not specified, props.label will be rendered into group header.
+     * The group header cell renderer
+     * `function(
+     *   any_label,
+     *   string_cellDataKey,
+     *   any_columnGroupData,
+     *   object_rowData(array of labels of all coludmnGroups),
+     *   number_width
+     *)`
+     * that returns React-renderable content for table column group header.
      */
     groupHeaderRenderer: PropTypes.func,
 
