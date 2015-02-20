@@ -149,7 +149,8 @@ var FixedDataTableCell = React.createClass({
         props.cellData,
         props.cellDataKey,
         props.columnData,
-        props.rowData
+        props.rowData,
+        props.width
       );
     } else {
       content = props.cellRenderer(

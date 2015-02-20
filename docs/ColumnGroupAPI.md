@@ -21,16 +21,6 @@ Whether the column group is fixed.
 type: `bool`
 
 
-### `groupHeaderRenderer`
-
-The function that takes a label and column group data as params and
-returns React-renderable content for table header. If this is not set
-the label will be the only thing rendered in the column group header
-cell.
-
-type: `func`
-
-
 ### `columnGroupData`
 
 Bucket for any data to be passed into column group renderer functions.
@@ -40,7 +30,25 @@ type: `object`
 
 ### `label`
 
-The column's header label.
+The column group's header label.
 
 type: `string`
+
+
+### `groupHeaderRenderer`
+
+The cell renderer that returns React-renderable content for a table
+column group header. If it's not specified, the label from props will
+be rendered as header content.
+```
+function(
+  label: ?string,
+  cellDataKey: string,
+  columnGroupData: any,
+  rowData: array<?object>, // array of labels of all coludmnGroups
+  width: number
+): ?$jsx
+```
+
+type: `func`
 

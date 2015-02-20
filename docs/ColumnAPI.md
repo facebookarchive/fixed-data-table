@@ -23,16 +23,17 @@ type: `string`
 
 ### `cellRenderer`
 
-The data cell renderer
-`function(
-  any_cellData,
-  string_cellDataKey,
-  object_rowData,
-  number_rowIndex,
-  any_columnData,
-  number_width
-)`
-that returns React-renderable content for table cell.
+The cell renderer that returns React-renderable content for table cell.
+```
+function(
+  cellData: any,
+  cellDataKey: string,
+  rowData: object,
+  rowIndex: number,
+  columnData: any,
+  width: number
+): ?$jsx
+```
 
 type: `func`
 
@@ -59,28 +60,34 @@ type: `union(string|number)`
 
 ### `headerRenderer`
 
-The header cell renderer
-`function(
-  any_cellData,
-  string_cellDataKey,
-  object_rowData,
-  any_columnData
-)`
-that returns React-renderable content for table column header.
+The cell renderer that returns React-renderable content for table column
+header.
+```
+function(
+  label: ?string,
+  cellDataKey: string,
+  columnData: any,
+  rowData: array<?object>,
+  width: number
+): ?$jsx
+```
 
 type: `func`
 
 
 ### `footerRenderer`
 
-The footer cell renderer
-`function(
-  any_cellData,
-  string_cellDataKey,
-  object_rowData,
-  any_columnData
-)`
-that returns React-renderable content for table column footer.
+The cell renderer that returns React-renderable content for table column
+footer.
+```
+function(
+  label: ?string,
+  cellDataKey: string,
+  columnData: any,
+  rowData: array<?object>,
+  width: number
+): ?$jsx
+```
 
 type: `func`
 

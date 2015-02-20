@@ -234,7 +234,7 @@ var FixedDataTable = React.createClass({
     onRowMouseDown: PropTypes.func,
 
     /**
-     * Callback that is called when the mouse eneters a row.
+     * Callback that is called when the mouse enters a row.
      */
     onRowMouseEnter: PropTypes.func,
 
@@ -842,6 +842,8 @@ var FixedDataTable = React.createClass({
         {
           dataKey: i,
           children: undefined,
+          columnData: columnGroups[i].props.columnGroupData,
+          isHeaderCell: true,
         }
       );
     }

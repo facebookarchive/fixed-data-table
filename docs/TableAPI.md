@@ -242,7 +242,7 @@ type: `func`
 
 ### `onRowMouseEnter`
 
-Callback that is called when the mouse eneters a row.
+Callback that is called when the mouse enters a row.
 
 type: `func`
 
