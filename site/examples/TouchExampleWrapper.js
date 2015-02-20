@@ -21,7 +21,7 @@ var PropTypes = React.PropTypes;
 var cloneWithProps = require('react/lib/cloneWithProps');
 
 function isTouchDevice() {
-  return 'ontouchstart' in window // works on most browsers
+  return 'ontouchstart' in document.documentElement // works on most browsers
       || 'onmsgesturechange' in window; // works on ie10
 };
 
