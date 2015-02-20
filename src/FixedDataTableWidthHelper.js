@@ -41,8 +41,8 @@ function distributeFlexWidth(
       width: getTotalWidth(columns),
     };
   }
-  var columnsFlexGrow = getTotalFlexGrow(columns);
-  var flexGrowUnit = flexWidth / columnsFlexGrow;
+  var remainingFlexGrow = getTotalFlexGrow(columns);
+  var remainingFlexWidth = flexWidth;
   var newColumns = [];
   var totalWidth = 0;
   for (var i = 0; i < columns.length; ++i) {
@@ -52,9 +52,14 @@ function distributeFlexWidth(
       newColumns.push(column);
       continue;
     }
-    var newColumnWidth =
-      Math.floor(column.props.width + column.props.flexGrow * flexGrowUnit);
+    var columnFlexWidth = Math.floor(
+      column.props.flexGrow / remainingFlexGrow * remainingFlexWidth
+    );
+    var newColumnWidth = Math.floor(column.props.width + columnFlexWidth);
     totalWidth += newColumnWidth;
+
+    remainingFlexGrow -= column.props.flexGrow;
+    remainingFlexWidth -= columnFlexWidth;
 
     newColumns.push(cloneWithProps(
       column,
@@ -81,9 +86,8 @@ function adjustColumnGroupWidths(
     );
   }
   var columnsWidth = getTotalWidth(allColumns);
-  var totalFlexGrow = getTotalFlexGrow(allColumns);
-  var totalFlexWidth = Math.max(expectedWidth - columnsWidth, 0);
-  var flexGrowUnit = totalFlexWidth / totalFlexGrow;
+  var remainingFlexGrow = getTotalFlexGrow(allColumns);
+  var remainingFlexWidth = Math.max(expectedWidth - columnsWidth, 0);
 
   var newAllColumns = [];
   var newColumnGroups = [];
@@ -98,11 +102,17 @@ function adjustColumnGroupWidths(
     );
 
     var columnGroupFlexGrow = getTotalFlexGrow(currentColumns);
-    var columnGroupFlexWidth = Math.floor(columnGroupFlexGrow * flexGrowUnit);
+    var columnGroupFlexWidth = Math.floor(
+      columnGroupFlexGrow / remainingFlexGrow * remainingFlexWidth
+    );
+
     var newColumnSettings = distributeFlexWidth(
       currentColumns,
       columnGroupFlexWidth
     );
+
+    remainingFlexGrow -= columnGroupFlexGrow;
+    remainingFlexWidth -= columnGroupFlexWidth;
 
     for (var j = 0; j < newColumnSettings.columns.length; ++j) {
       newAllColumns.push(newColumnSettings.columns[j]);
