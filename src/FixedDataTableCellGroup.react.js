@@ -57,20 +57,22 @@ var FixedDataTableCellGroupImpl = React.createClass({
   render() /*object*/ {
     var props = this.props;
     var columns = props.columns;
-    var cells = {};
+    var cells = [];
     var width = 0;
 
     for (var i = 0, j = columns.length; i < j; i++) {
       var columnProps = columns[i].props;
       width += columnProps.width;
       var key = 'cell_' + i;
-      cells[key] = this._renderCell(
-        props.data,
-        props.rowIndex,
-        props.rowHeight,
-        columnProps,
-        width,
-        key
+      cells.push(
+        this._renderCell(
+          props.data,
+          props.rowIndex,
+          props.rowHeight,
+          columnProps,
+          width,
+          key
+        )
       );
     }
 
