@@ -103,7 +103,7 @@ var FixedDataTableCellGroupImpl = React.createClass({
     var cellData;
 
     if (isHeaderCell || isFooterCell) {
-      cellData = columnProps.label;
+      cellData = rowData[cellDataKey];
     } else {
       var cellDataGetter = columnProps.cellDataGetter;
       cellData = cellDataGetter ?
