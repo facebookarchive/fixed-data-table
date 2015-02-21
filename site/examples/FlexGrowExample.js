@@ -13,7 +13,7 @@ function colorizeText(/*string*/ str, key, data, index) {
   return str.split('').map((letter) => {
     val = index * 70 + n++;
     var color = 'hsl(' + val + ', 100%, 50%)';
-    return <span style={{color}}>{letter}</span>;
+    return <span style={{color}} key={n}>{letter}</span>;
   });
 }
 
