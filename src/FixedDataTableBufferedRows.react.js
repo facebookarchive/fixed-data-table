@@ -60,6 +60,9 @@ var FixedDataTableBufferedRows = React.createClass({
 
   componentWillMount() {
     this._staticRowArray = [];
+  },
+
+  componentDidMount() {
     this._bufferUpdateTimer = setTimeout(this._updateBuffer, 500);
   },
 

@@ -100,7 +100,7 @@ var FixedDataTableColumnResizeHandle = React.createClass({
     }
   },
 
-  componentWillMount() {
+  componentDidMount() {
     this._mouseMoveTracker = new DOMMouseMoveTracker(
       this._onMove,
       this._onColumnResizeEnd,
