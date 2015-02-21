@@ -2,4 +2,7 @@ build_helpers
 site
 src
 __site__
+__site_prerender__
+.editorconfig
 webpack.config.js
+CONTRIBUTING.md

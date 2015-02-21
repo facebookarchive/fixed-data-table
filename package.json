@@ -1,6 +1,6 @@
 {
   "name": "fixed-data-table",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A React table component designed to allow presenting thousands of rows of data.",
   "main": "main.js",
   "peerDependencies": {
