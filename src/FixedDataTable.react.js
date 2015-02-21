@@ -113,7 +113,7 @@ var FixedDataTable = React.createClass({
     /**
      * Maximum pixel height of table. If all rows do not fit,
      * a vertical scrollbar will appear.
-
+     *
      * Either `height` or `maxHeight` must be specified.
      */
     maxHeight: PropTypes.number,
@@ -137,8 +137,8 @@ var FixedDataTable = React.createClass({
     rowsCount: PropTypes.number.isRequired,
 
     /**
-     * Pixel height of rows unless rowHeightGetter is specified and returns different
-     * value.
+     * Pixel height of rows unless rowHeightGetter is specified and returns
+     * different value.
      */
     rowHeight: PropTypes.number.isRequired,
 

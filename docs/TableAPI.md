@@ -109,8 +109,8 @@ type: `number`
 
 ### `rowHeight` (required)
 
-Pixel height of rows unless rowHeightGetter is specified and returns different
-value.
+Pixel height of rows unless rowHeightGetter is specified and returns
+different value.
 
 type: `number`
 
