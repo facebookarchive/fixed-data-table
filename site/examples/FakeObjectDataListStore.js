@@ -35,7 +35,10 @@ function createFakeRowObjectData(/*number*/ index) {
 }
 
 function getObjectAt(/*number*/ index) /*?object*/ {
-  if (_cache[index] === undefined && index >= 0 && index <= SIZE) {
+  if (index < 0 || index > SIZE){
+    return undefined;
+  }
+  if (_cache[index] === undefined) {
     _cache[index] = createFakeRowObjectData(index);
   }
   return _cache[index];
