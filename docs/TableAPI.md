@@ -1,6 +1,6 @@
 <!-- File generated from "src/FixedDataTable.react.js" -->
-API: `Table` (component)
-========================
+`Table` (component)
+===================
 
 Data grid component with fixed or scrollable header and columns.
 
