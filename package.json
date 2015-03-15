@@ -37,7 +37,8 @@
     "site-build": "./build_helpers/buildStaticSite.sh",
     "build-dist": "NODE_ENV=production webpack && NODE_ENV=production COMPRESS=1 webpack",
     "build-npm": "./build_helpers/buildNPMInternals.sh",
-    "site-publish": "./build_helpers/publishStaticSite.sh",
+    "publish-site": "./build_helpers/publishStaticSite.sh",
+    "publish-package": "./build_helpers/publishPackage.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
