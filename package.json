@@ -4,7 +4,7 @@
   "description": "A React table component designed to allow presenting thousands of rows of data.",
   "main": "main.js",
   "peerDependencies": {
-    "react": "0.12.x"
+    "react": ">=0.12.0 <0.14.0"
   },
   "devDependencies": {
     "autoprefixer": "^5.0.0",
