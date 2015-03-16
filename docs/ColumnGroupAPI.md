@@ -1,6 +1,6 @@
 <!-- File generated from "src/FixedDataTableColumnGroup.react.js" -->
-API: `ColumnGroup` (component)
-==============================
+`ColumnGroup` (component)
+=========================
 
 Component that defines the attributes of a table column group.
 

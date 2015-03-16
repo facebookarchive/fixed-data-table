@@ -2,13 +2,10 @@
 // -*- mode: js -*-
 "use strict";
 
-/**
- *  Extractor for React documentation in JavaScript.
- */
-var ReactDocumentationParser = require('./react_documentation/ReactDocumentationParser');
+var fs = require('fs');
 var generateMarkdown = require('./react_documentation/generateMarkdown');
 var path = require('path');
-var fs = require('fs');
+var ReactDocGen = require('react-docgen');
 
 var PROJECT_ROOT = path.join(__dirname, '../');
 var FILES_TO_READ = [
@@ -29,26 +26,9 @@ var FILES_TO_READ = [
   }
 ];
 
-ReactDocumentationParser.addHandler(
-  require('./react_documentation/propTypeHandler'),
-  'propTypes'
-);
-ReactDocumentationParser.addHandler(
-  require('./react_documentation/propDocBlockHandler'),
-  'propTypes'
-);
-ReactDocumentationParser.addHandler(
-  require('./react_documentation/defaultValueHandler'),
-  'getDefaultProps'
-);
-
-ReactDocumentationParser.addHandler(
-  require('./react_documentation/componentDocblockHandler')
-);
-
 FILES_TO_READ.forEach(function(file) {
   var fileSource = fs.readFileSync(file.path);
-  var fileDocsData = ReactDocumentationParser.parseSource(fileSource);
+  var fileDocsData = ReactDocGen.parse(fileSource);
   var markdownFilePath = path.join(__dirname, '../docs', file.markdownFileName);
 
   var headerComment = '<!-- File generated from "' +

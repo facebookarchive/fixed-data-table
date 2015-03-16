@@ -6,7 +6,6 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  */
-/*jslint node:true*/
 "use strict";
 
 function stringOfLength(string, length) {
@@ -18,7 +17,7 @@ function stringOfLength(string, length) {
 }
 
 function generateTitle(name) {
-  var title = 'API: `' + name + '` (component)';
+  var title = '`' + name + '` (component)';
   return title + '\n' + stringOfLength('=', title.length) + '\n';
 }
 
@@ -50,11 +49,8 @@ function generateProp(propName, prop) {
     '### `' + propName + '`' + (prop.required ? ' (required)' : '') + '\n' +
     '\n' +
     (prop.description ? prop.description + '\n\n' : '') +
-    generatePropType(prop.type) +
+    (prop.type ? generatePropType(prop.type) : '') +
     (prop.defaultValue ? generatePropDefaultValue(prop.defaultValue) : '') +
-    // '```\n' +
-    // JSON.stringify(prop, null, '\t') + '\n' +
-    // '```\n'
     '\n'
   );
 }

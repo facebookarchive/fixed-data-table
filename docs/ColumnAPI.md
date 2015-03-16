@@ -1,6 +1,6 @@
 <!-- File generated from "src/FixedDataTableColumn.react.js" -->
-API: `Column` (component)
-=========================
+`Column` (component)
+====================
 
 Component that defines the attributes of table column.
 
