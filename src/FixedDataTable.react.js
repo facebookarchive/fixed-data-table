@@ -32,11 +32,12 @@ var invariant = require('invariant');
 var shallowEqual = require('shallowEqual');
 var translateDOMPositionXY = require('translateDOMPositionXY');
 
-var PropTypes = React.PropTypes;
+var {PropTypes} = React;
 var ReactChildren = React.Children;
 
 var renderToString = FixedDataTableHelper.renderToString;
 var EMPTY_OBJECT = {};
+var BORDER_HEIGHT = 1;
 var COLUMN_SETTING_NAMES = [
   'bodyFixedColumns',
   'bodyScrollableColumns',
@@ -44,12 +45,14 @@ var COLUMN_SETTING_NAMES = [
   'headScrollableColumns',
   'footFixedColumns',
   'footScrollableColumns',
+  'groupHeaderFixedColumns',
+  'groupHeaderScrollableColumns',
 ];
 
 /**
  * Data grid component with fixed or scrollable header and columns.
  *
- * The layout of the data table is as follow:
+ * The layout of the data table is as follows:
  *
  * ```
  * +---------------------------------------------------+
@@ -75,7 +78,7 @@ var COLUMN_SETTING_NAMES = [
  *   of columns if included in the table that do not scroll
  *   vertically or horizontally.
  *
- * - Scrollable Column Group Header:  The header for a group of columns
+ * - Scrollable Column Group Header: The header for a group of columns
  *   that do not move while scrolling vertically, but move horizontally
  *   with the horizontal scrolling.
  *
@@ -97,7 +100,7 @@ var FixedDataTable = React.createClass({
   propTypes: {
 
     /**
-     * Pixel width of table. If all rows do not fit,
+     * Pixel width of table. If all columns do not fit,
      * a horizontal scrollbar will appear.
      */
     width: PropTypes.number.isRequired,
@@ -119,12 +122,17 @@ var FixedDataTable = React.createClass({
     maxHeight: PropTypes.number,
 
     /**
-     * Pixel height of table's owner, This is used to make sure the footer
-     * and scrollbar of the table are visible when current space for table in
-     * view is smaller than final height of table. It allows to avoid resizing
-     * and reflowing table whan it is moving in the view.
+     * Pixel height of table's owner, this is used in a managed scrolling
+     * situation when you want to slide the table up from below the fold
+     * without having to constantly update the height on every scroll tick.
+     * Instead, vary this property on scroll. By using `ownerHeight`, we
+     * over-render the table while making sure the footer and horizontal
+     * scrollbar of the table are visible when the current space for the table
+     * in view is smaller than the final, over-flowing height of table. It
+     * allows us to avoid resizing and reflowing table when it is moving in the
+     * view.
      *
-     * This is used if `ownerHeight < height`.
+     * This is used if `ownerHeight < height` (or `maxHeight`).
      */
     ownerHeight: PropTypes.number,
 
@@ -137,27 +145,27 @@ var FixedDataTable = React.createClass({
     rowsCount: PropTypes.number.isRequired,
 
     /**
-     * Pixel height of rows unless rowHeightGetter is specified and returns
+     * Pixel height of rows unless `rowHeightGetter` is specified and returns
      * different value.
      */
     rowHeight: PropTypes.number.isRequired,
 
     /**
      * If specified, `rowHeightGetter(index)` is called for each row and the
-     * returned value overrides rowHeight for particular row.
+     * returned value overrides `rowHeight` for particular row.
      */
     rowHeightGetter: PropTypes.func,
 
     /**
      * To get rows to display in table, `rowGetter(index)`
-     * is called. rowGetter should be smart enough to handle async
-     * fetching of data and returning temporary objects
+     * is called. `rowGetter` should be smart enough to handle async
+     * fetching of data and return temporary objects
      * while data is being fetched.
      */
     rowGetter: PropTypes.func.isRequired,
 
     /**
-     * To get any additional css classes that should be added to a row,
+     * To get any additional CSS classes that should be added to a row,
      * `rowClassNameGetter(index)` is called.
      */
     rowClassNameGetter: PropTypes.func,
@@ -229,14 +237,19 @@ var FixedDataTable = React.createClass({
     onRowClick: PropTypes.func,
 
     /**
-     * Callback that is called when mouse down event happens above a row.
+     * Callback that is called when a mouse-down event happens on a row.
      */
     onRowMouseDown: PropTypes.func,
 
     /**
-     * Callback that is called when the mouse enters a row.
+     * Callback that is called when a mouse-enter event happens on a row.
      */
     onRowMouseEnter: PropTypes.func,
+
+    /**
+     * Callback that is called when a mouse-leave event happens on a row.
+     */
+    onRowMouseLeave: PropTypes.func,
 
     /**
      * Callback that is called when resizer has been released
@@ -301,11 +314,14 @@ var FixedDataTable = React.createClass({
     var reservedHeight = this.state.reservedHeight;
     var requiredHeight = scrollContentHeight + reservedHeight;
     var contentHeight;
-    if (this.state.height > requiredHeight && this.props.ownerHeight) {
+    var useMaxHeight = this.props.height === undefined;
+    if (useMaxHeight && this.props.maxHeight > requiredHeight) {
+      contentHeight = requiredHeight;
+    } else if (this.state.height > requiredHeight && this.props.ownerHeight) {
       contentHeight = Math.max(requiredHeight, this.props.ownerHeight);
     } else {
       var maxScrollY = scrollContentHeight - this.state.bodyHeight;
-      contentHeight = this.props.height + maxScrollY;
+      contentHeight = this.state.height + maxScrollY;
     }
     if (contentHeight !== this._contentHeight &&
         this.props.onContentHeightChange) {
@@ -378,11 +394,11 @@ var FixedDataTable = React.createClass({
     var headerOffsetTop = state.useGroupHeader ? state.groupHeaderHeight : 0;
     var bodyOffsetTop = headerOffsetTop + state.headerHeight;
     var bottomSectionOffset = 0;
-    var footOffsetTop = bodyOffsetTop + state.bodyHeight;
+    var footOffsetTop = bodyOffsetTop + state.bodyHeight + BORDER_HEIGHT;
     var rowsContainerHeight = footOffsetTop + state.footerHeight;
 
-    if (props.ownerHeight !== undefined  && props.ownerHeight < props.height) {
-      bottomSectionOffset = props.ownerHeight - props.height;
+    if (props.ownerHeight !== undefined && props.ownerHeight < state.height) {
+      bottomSectionOffset = props.ownerHeight - state.height - BORDER_HEIGHT;
       footOffsetTop = Math.min(
         footOffsetTop,
         scrollbarYHeight + bottomSectionOffset - state.footerHeight
@@ -465,12 +481,21 @@ var FixedDataTable = React.createClass({
         onColumnResize={this._onColumnResize}
       />;
 
-    var shadow;
+    var topShadow;
+    var bottomShadow;
     if (state.scrollY) {
-      shadow =
+      topShadow =
         <div
-          className={cx('fixedDataTable/shadow')}
+          className={cx('fixedDataTable/topShadow')}
           style={{top: bodyOffsetTop}}
+        />;
+    }
+
+    if (state.ownerHeight < state.height || state.scrollY < maxScrollY) {
+      bottomShadow =
+        <div
+          className={cx('fixedDataTable/bottomShadow')}
+          style={{top: footOffsetTop}}
         />;
     }
 
@@ -487,7 +512,8 @@ var FixedDataTable = React.createClass({
           {header}
           {rows}
           {footer}
-          {shadow}
+          {topShadow}
+          {bottomShadow}
         </div>
         {verticalScrollbar}
         {horizontalScrollbar}
@@ -509,6 +535,7 @@ var FixedDataTable = React.createClass({
         onRowClick={state.onRowClick}
         onRowMouseDown={state.onRowMouseDown}
         onRowMouseEnter={state.onRowMouseEnter}
+        onRowMouseLeave={state.onRowMouseLeave}
         rowClassNameGetter={state.rowClassNameGetter}
         rowsCount={state.rowsCount}
         rowGetter={state.rowGetter}
@@ -517,6 +544,7 @@ var FixedDataTable = React.createClass({
         scrollableColumns={state.bodyScrollableColumns}
         showLastRowBorder={!state.footerHeight}
         width={state.width}
+        rowPositionGetter={this._scrollHelper.getRowPosition}
       />
     );
   },
@@ -734,7 +762,7 @@ var FixedDataTable = React.createClass({
     var useMaxHeight = props.height === undefined;
     var height = useMaxHeight ? props.maxHeight : props.height;
     var totalHeightReserved = props.footerHeight + props.headerHeight +
-      props.groupHeaderHeight;
+      props.groupHeaderHeight + 2 * BORDER_HEIGHT;
     var bodyHeight = height - totalHeightReserved;
     var scrollContentHeight = this._scrollHelper.getContentHeight();
     var totalHeightNeeded = scrollContentHeight + totalHeightReserved;
@@ -799,10 +827,18 @@ var FixedDataTable = React.createClass({
     // new `headData` or `groupHeaderData`
     // if they haven't changed.
     if (oldState) {
-      if (shallowEqual(oldState.headData, newState.headData)) {
+      if (
+        oldState.headData &&
+        newState.headData &&
+        shallowEqual(oldState.headData, newState.headData)
+      ) {
         newState.headData = oldState.headData;
       }
-      if (shallowEqual(oldState.groupHeaderData, newState.groupHeaderData)) {
+      if (
+        oldState.groupHeaderData &&
+        newState.groupHeaderData &&
+        shallowEqual(oldState.groupHeaderData, newState.groupHeaderData)
+      ) {
         newState.groupHeaderData = oldState.groupHeaderData;
       }
     }
@@ -815,6 +851,9 @@ var FixedDataTable = React.createClass({
     /*object*/ oldState
   ) /*object*/ {
     COLUMN_SETTING_NAMES.forEach(settingName => {
+      if (!columnInfo[settingName] || !oldState[settingName]) {
+        return;
+      }
       if (columnInfo[settingName].length === oldState[settingName].length) {
         var canReuse = true;
         for (var index = 0; index < columnInfo[settingName].length; ++index) {
