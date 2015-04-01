@@ -45,6 +45,8 @@ var COLUMN_SETTING_NAMES = [
   'headScrollableColumns',
   'footFixedColumns',
   'footScrollableColumns',
+  'groupHeaderFixedColumns',
+  'groupHeaderScrollableColumns',
 ];
 
 /**
@@ -824,10 +826,18 @@ var FixedDataTable = React.createClass({
     // new `headData` or `groupHeaderData`
     // if they haven't changed.
     if (oldState) {
-      if (shallowEqual(oldState.headData, newState.headData)) {
+      if (
+        oldState.headData &&
+        newState.headData &&
+        shallowEqual(oldState.headData, newState.headData)
+      ) {
         newState.headData = oldState.headData;
       }
-      if (shallowEqual(oldState.groupHeaderData, newState.groupHeaderData)) {
+      if (
+        oldState.groupHeaderData &&
+        newState.groupHeaderData &&
+        shallowEqual(oldState.groupHeaderData, newState.groupHeaderData)
+      ) {
         newState.groupHeaderData = oldState.groupHeaderData;
       }
     }
@@ -840,6 +850,9 @@ var FixedDataTable = React.createClass({
     /*object*/ oldState
   ) /*object*/ {
     COLUMN_SETTING_NAMES.forEach(settingName => {
+      if (!columnInfo[settingName] || !oldState[settingName]) {
+        return;
+      }
       if (columnInfo[settingName].length === oldState[settingName].length) {
         var canReuse = true;
         for (var index = 0; index < columnInfo[settingName].length; ++index) {
