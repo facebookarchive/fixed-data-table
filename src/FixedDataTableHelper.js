@@ -41,9 +41,9 @@ function renderToString(value) /*string*/ {
  */
 function forEachColumn(children, callback) {
   React.Children.forEach(children, (child) => {
-    if (child.type === FixedDataTableColumnGroup.type) {
+    if (child.type === FixedDataTableColumnGroup) {
       forEachColumn(child.props.children, callback);
-    } else if (child.type === FixedDataTableColumn.type) {
+    } else if (child.type === FixedDataTableColumn) {
       callback(child);
     }
   });
@@ -66,7 +66,7 @@ function mapColumns(children, callback) {
     // The child is either a column group or a column. If it is a column group
     // we need to iterate over its columns and then potentially generate a
     // new column group
-    if (originalChild.type === FixedDataTableColumnGroup.type) {
+    if (originalChild.type === FixedDataTableColumnGroup) {
       var haveColumnsChanged = false;
       var newColumns = [];
 
@@ -83,7 +83,7 @@ function mapColumns(children, callback) {
       if (haveColumnsChanged) {
         newChild = cloneWithProps(originalChild, {children: newColumns});
       }
-    } else if (originalChild.type === FixedDataTableColumn.type) {
+    } else if (originalChild.type === FixedDataTableColumn) {
       newChild = callback(originalChild);
     }
 
