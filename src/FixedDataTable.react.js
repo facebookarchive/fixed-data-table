@@ -239,11 +239,6 @@ var FixedDataTable = React.createClass({
     onRowMouseEnter: PropTypes.func,
 
     /**
-     * Callback that is called when the mouse leaves a row.
-     */
-    onRowMouseLeave: PropTypes.func,
-
-    /**
      * Callback that is called when resizer has been released
      * and column needs to be updated.
      */
@@ -524,7 +519,6 @@ var FixedDataTable = React.createClass({
         onRowClick={state.onRowClick}
         onRowMouseDown={state.onRowMouseDown}
         onRowMouseEnter={state.onRowMouseEnter}
-        onRowMouseLeave={state.onRowMouseLeave}
         rowClassNameGetter={state.rowClassNameGetter}
         rowsCount={state.rowsCount}
         rowGetter={state.rowGetter}
