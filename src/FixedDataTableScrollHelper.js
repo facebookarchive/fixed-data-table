@@ -43,6 +43,7 @@ class FixedDataTableScrollHelper {
     this.scrollToRow = this.scrollToRow.bind(this);
     this.setRowHeightGetter = this.setRowHeightGetter.bind(this);
     this.getContentHeight = this.getContentHeight.bind(this);
+    this.getRowPosition = this.getRowPosition.bind(this);
 
     this._updateHeightsInViewport(0, 0);
   }
@@ -94,6 +95,12 @@ class FixedDataTableScrollHelper {
       return change;
     }
     return 0;
+  }
+
+  getRowPosition(/*number*/ rowIndex) /*number*/ {
+    return (
+      this._rowOffsets.get(rowIndex).value - this._rowHeightGetter(rowIndex)
+    );
   }
 
   scrollBy(/*number*/ delta) /*object*/ {
