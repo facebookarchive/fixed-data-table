@@ -37,6 +37,7 @@ var ReactChildren = React.Children;
 
 var renderToString = FixedDataTableHelper.renderToString;
 var EMPTY_OBJECT = {};
+var BORDER_HEIGHT = 1;
 var COLUMN_SETTING_NAMES = [
   'bodyFixedColumns',
   'bodyScrollableColumns',
@@ -119,12 +120,17 @@ var FixedDataTable = React.createClass({
     maxHeight: PropTypes.number,
 
     /**
-     * Pixel height of table's owner, This is used to make sure the footer
-     * and scrollbar of the table are visible when current space for table in
-     * view is smaller than final height of table. It allows to avoid resizing
-     * and reflowing table whan it is moving in the view.
+     * Pixel height of table's owner. This is used in a managed scrolling
+     * situation when you want to slide the table up from below the fold
+     * without having to constantly update the height on every scroll tick.
+     * Instead, vary this property on scroll. By using `ownerHeight`, we
+     * over-render the table while making sure the footer and horizontal
+     * scrollbar of the table are visible when the current space for the table
+     * in view is smaller than the final, over-flowing height of table. It
+     * allows us to avoid resizing and reflowing table whan it is moving in the
+     * view.
      *
-     * This is used if `ownerHeight < height`.
+     * This is used if `ownerHeight < height` (or `maxHeight`).
      */
     ownerHeight: PropTypes.number,
 
@@ -306,11 +312,14 @@ var FixedDataTable = React.createClass({
     var reservedHeight = this.state.reservedHeight;
     var requiredHeight = scrollContentHeight + reservedHeight;
     var contentHeight;
-    if (this.state.height > requiredHeight && this.props.ownerHeight) {
+    var useMaxHeight = this.props.height === undefined;
+    if (useMaxHeight && this.props.maxHeight > requiredHeight) {
+      contentHeight = requiredHeight;
+    } else if (this.state.height > requiredHeight && this.props.ownerHeight) {
       contentHeight = Math.max(requiredHeight, this.props.ownerHeight);
     } else {
       var maxScrollY = scrollContentHeight - this.state.bodyHeight;
-      contentHeight = this.props.height + maxScrollY;
+      contentHeight = this.state.height + maxScrollY;
     }
     if (contentHeight !== this._contentHeight &&
         this.props.onContentHeightChange) {
@@ -383,11 +392,11 @@ var FixedDataTable = React.createClass({
     var headerOffsetTop = state.useGroupHeader ? state.groupHeaderHeight : 0;
     var bodyOffsetTop = headerOffsetTop + state.headerHeight;
     var bottomSectionOffset = 0;
-    var footOffsetTop = bodyOffsetTop + state.bodyHeight;
+    var footOffsetTop = bodyOffsetTop + state.bodyHeight + BORDER_HEIGHT;
     var rowsContainerHeight = footOffsetTop + state.footerHeight;
 
-    if (props.ownerHeight !== undefined  && props.ownerHeight < props.height) {
-      bottomSectionOffset = props.ownerHeight - props.height;
+    if (props.ownerHeight !== undefined && props.ownerHeight < state.height) {
+      bottomSectionOffset = props.ownerHeight - state.height - BORDER_HEIGHT;
       footOffsetTop = Math.min(
         footOffsetTop,
         scrollbarYHeight + bottomSectionOffset - state.footerHeight
@@ -750,7 +759,7 @@ var FixedDataTable = React.createClass({
     var useMaxHeight = props.height === undefined;
     var height = useMaxHeight ? props.maxHeight : props.height;
     var totalHeightReserved = props.footerHeight + props.headerHeight +
-      props.groupHeaderHeight;
+      props.groupHeaderHeight + 2 * BORDER_HEIGHT;
     var bodyHeight = height - totalHeightReserved;
     var scrollContentHeight = this._scrollHelper.getContentHeight();
     var totalHeightNeeded = scrollContentHeight + totalHeightReserved;
