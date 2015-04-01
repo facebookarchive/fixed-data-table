@@ -18,7 +18,7 @@ var cx = require('cx');
 var emptyFunction = require('emptyFunction');
 var joinClasses = require('joinClasses');
 
-var PropTypes = React.PropTypes;
+var {PropTypes} = React;
 
 var FixedDataTableBufferedRows = React.createClass({
 

@@ -21,7 +21,7 @@ var cx = require('cx');
 var emptyFunction = require('emptyFunction');
 var translateDOMPositionXY = require('translateDOMPositionXY');
 
-var PropTypes = React.PropTypes;
+var {PropTypes} = React;
 
 var UNSCROLLABLE_STATE = {
   position: 0,
