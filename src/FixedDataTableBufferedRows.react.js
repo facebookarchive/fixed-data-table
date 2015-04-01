@@ -17,6 +17,7 @@ var FixedDataTableRow = require('FixedDataTableRow.react');
 var cx = require('cx');
 var emptyFunction = require('emptyFunction');
 var joinClasses = require('joinClasses');
+var translateDOMPositionXY = require('translateDOMPositionXY');
 
 var {PropTypes} = React;
 
@@ -37,6 +38,7 @@ var FixedDataTableBufferedRows = React.createClass({
     rowsCount: PropTypes.number.isRequired,
     rowGetter: PropTypes.func.isRequired,
     rowHeightGetter: PropTypes.func,
+    rowPositionGetter: PropTypes.func.isRequired,
     scrollLeft: PropTypes.number.isRequired,
     scrollableColumns: PropTypes.array.isRequired,
     showLastRowBorder: PropTypes.bool,
@@ -64,7 +66,7 @@ var FixedDataTableBufferedRows = React.createClass({
   },
 
   componentDidMount() {
-    this._bufferUpdateTimer = setTimeout(this._updateBuffer, 500);
+    this._bufferUpdateTimer = setTimeout(this._updateBuffer, 1000);
   },
 
   componentWillReceiveProps(/*object*/ nextProps) {
@@ -111,18 +113,17 @@ var FixedDataTableBufferedRows = React.createClass({
 
   render() /*object*/ {
     var props = this.props;
-    var offsetTop = props.offsetTop;
     var rowClassNameGetter = props.rowClassNameGetter || emptyFunction;
     var rowGetter = props.rowGetter;
+    var rowPositionGetter = props.rowPositionGetter;
 
     var rowsToRender = this.state.rowsToRender;
     this._staticRowArray.length = rowsToRender.length;
 
     for (var i = 0; i < rowsToRender.length; ++i) {
-      var rowInfo = rowsToRender[i];
-      var rowIndex = rowInfo.rowIndex;
-      var rowOffsetTop = rowInfo.offsetTop;
+      var rowIndex = rowsToRender[i];
       var currentRowHeight = this._getRowHeight(rowIndex);
+      var rowOffsetTop = rowPositionGetter(rowIndex);
 
       var hasBottomBorder =
         rowIndex === props.rowsCount - 1 && props.showLastRowBorder;
@@ -135,7 +136,7 @@ var FixedDataTableBufferedRows = React.createClass({
           width={props.width}
           height={currentRowHeight}
           scrollLeft={Math.round(props.scrollLeft)}
-          offsetTop={Math.round(offsetTop + rowOffsetTop)}
+          offsetTop={Math.round(rowOffsetTop)}
           fixedColumns={props.fixedColumns}
           scrollableColumns={props.scrollableColumns}
           onClick={props.onRowClick}
@@ -150,7 +151,19 @@ var FixedDataTableBufferedRows = React.createClass({
         />;
     }
 
-    return <div>{this._staticRowArray}</div>;
+    var firstRowPosition = props.rowPositionGetter(props.firstRowIndex);
+
+    var style = {
+      position: 'absolute',
+    };
+
+    translateDOMPositionXY(
+      style,
+      0,
+      props.firstRowOffset - firstRowPosition + props.offsetTop
+    );
+
+    return <div style={style}>{this._staticRowArray}</div>;
   },
 
   _getRowHeight(/*number*/ index) /*number*/ {

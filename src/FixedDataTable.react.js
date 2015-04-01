@@ -544,6 +544,7 @@ var FixedDataTable = React.createClass({
         scrollableColumns={state.bodyScrollableColumns}
         showLastRowBorder={!state.footerHeight}
         width={state.width}
+        rowPositionGetter={this._scrollHelper.getRowPosition}
       />
     );
   },
