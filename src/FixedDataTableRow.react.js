@@ -144,6 +144,7 @@ var FixedDataTableRowImpl = React.createClass({
         onClick={this.props.onClick ? this._onClick : null}
         onMouseDown={this.props.onMouseDown ? this._onMouseDown : null}
         onMouseEnter={this.props.onMouseEnter ? this._onMouseEnter : null}
+        onMouseLeave={this.props.onMouseLeave ? this._onMouseLeave : null}
         style={style}>
         <div className={cx('fixedDataTableRow/body')}>
           {fixedColumns}
@@ -186,6 +187,10 @@ var FixedDataTableRowImpl = React.createClass({
 
   _onMouseEnter(/*object*/ event) {
     this.props.onMouseEnter(event, this.props.index, this.props.data);
+  },
+
+  _onMouseLeave(/*object*/ event) {
+    this.props.onMouseLeave(event, this.props.index, this.props.data);
   },
 });
 
