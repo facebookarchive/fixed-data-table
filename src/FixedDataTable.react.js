@@ -32,7 +32,7 @@ var invariant = require('invariant');
 var shallowEqual = require('shallowEqual');
 var translateDOMPositionXY = require('translateDOMPositionXY');
 
-var PropTypes = React.PropTypes;
+var {PropTypes} = React;
 var ReactChildren = React.Children;
 
 var renderToString = FixedDataTableHelper.renderToString;

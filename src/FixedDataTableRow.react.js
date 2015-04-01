@@ -22,7 +22,7 @@ var joinClasses = require('joinClasses');
 var translateDOMPositionXY = require('translateDOMPositionXY');
 
 var DIR_SIGN = FixedDataTableHelper.DIR_SIGN;
-var PropTypes = React.PropTypes;
+var {PropTypes} = React;
 
 /**
  * Component that renders the row for <FixedDataTable />.

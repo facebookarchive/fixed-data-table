@@ -22,7 +22,7 @@ var cx = require('cx');
 var renderToString = FixedDataTableHelper.renderToString;
 var translateDOMPositionXY = require('translateDOMPositionXY');
 
-var PropTypes = React.PropTypes;
+var {PropTypes} = React;
 
 var EMPTY_OBJECT = new ImmutableObject({});
 

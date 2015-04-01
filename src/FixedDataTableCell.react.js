@@ -17,7 +17,7 @@ var cloneWithProps = require('cloneWithProps');
 var cx = require('cx');
 var joinClasses = require('joinClasses');
 
-var PropTypes = React.PropTypes;
+var {PropTypes} = React;
 
 var DEFAULT_PROPS = new ImmutableObject({
   align: 'left',
