@@ -470,12 +470,21 @@ var FixedDataTable = React.createClass({
         onColumnResize={this._onColumnResize}
       />;
 
-    var shadow;
+    var topShadow;
+    var bottomShadow;
     if (state.scrollY) {
-      shadow =
+      topShadow =
         <div
-          className={cx('fixedDataTable/shadow')}
+          className={cx('fixedDataTable/topShadow')}
           style={{top: bodyOffsetTop}}
+        />;
+    }
+
+    if (state.ownerHeight < state.height || state.scrollY < maxScrollY) {
+      bottomShadow =
+        <div
+          className={cx('fixedDataTable/bottomShadow')}
+          style={{top: footOffsetTop}}
         />;
     }
 
@@ -492,7 +501,8 @@ var FixedDataTable = React.createClass({
           {header}
           {rows}
           {footer}
-          {shadow}
+          {topShadow}
+          {bottomShadow}
         </div>
         {verticalScrollbar}
         {horizontalScrollbar}
