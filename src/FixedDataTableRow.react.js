@@ -9,8 +9,7 @@
  * @providesModule FixedDataTableRow.react
  * @typechecks
  */
-
-"use strict";
+'use strict';
 
 var FixedDataTableHelper = require('FixedDataTableHelper');
 var React = require('React');

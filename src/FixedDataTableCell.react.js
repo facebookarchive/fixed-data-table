@@ -165,7 +165,10 @@ var FixedDataTableCell = React.createClass({
 
     var contentClass = cx('public/fixedDataTableCell/cellContent');
     if (React.isValidElement(content)) {
-      content = cloneWithProps(content, {key: content.key, className: contentClass});
+      content = cloneWithProps(content, {
+        key: content.key,
+        className: contentClass,
+      });
     } else {
       content = <div className={contentClass}>{content}</div>;
     }

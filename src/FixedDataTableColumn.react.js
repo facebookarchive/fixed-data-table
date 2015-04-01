@@ -68,6 +68,11 @@ var FixedDataTableColumn = React.createClass({
     ]).isRequired,
 
     /**
+     * Whether the column is fixed.
+     */
+    fixed: PropTypes.bool,
+
+    /**
      * The cell renderer that returns React-renderable content for table column
      * header.
      * ```

@@ -31,7 +31,7 @@ var FixedDataTableColumnGroup = React.createClass({
     /**
      * Whether the column group is fixed.
      */
-    fixed: PropTypes.bool.isRequired,
+    fixed: PropTypes.bool,
 
     /**
      * Bucket for any data to be passed into column group renderer functions.
