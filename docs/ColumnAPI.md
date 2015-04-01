@@ -57,6 +57,12 @@ for keys, it must be specified for each column.
 
 type: `union(string|number)`
 
+### `fixed`
+
+Whether the column is fixed.
+
+type: `bool`
+
 
 ### `headerRenderer`
 

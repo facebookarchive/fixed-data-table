@@ -80,12 +80,17 @@ type: `number`
 
 ### `ownerHeight`
 
-Pixel height of table's owner, This is used to make sure the footer
-and scrollbar of the table are visible when current space for table in
-view is smaller than final height of table. It allows to avoid resizing
-and reflowing table whan it is moving in the view.
+Pixel height of table's owner. This is used in a managed scrolling
+situation when you want to slide the table up from below the fold
+without having to constantly update the height on every scroll tick.
+Instead, vary this property on scroll. By using `ownerHeight`, we
+over-render the table while making sure the footer and horizontal
+scrollbar of the table are visible when the current space for the table
+in view is smaller than the final, over-flowing height of table. It
+allows us to avoid resizing and reflowing table whan it is moving in the
+view.
 
-This is used if `ownerHeight < height`.
+This is used if `ownerHeight < height` (or `maxHeight`).
 
 type: `number`
 
@@ -243,6 +248,13 @@ type: `func`
 ### `onRowMouseEnter`
 
 Callback that is called when the mouse enters a row.
+
+type: `func`
+
+
+### `onRowMouseLeave`
+
+Callback that is called when the mouse leaves a row.
 
 type: `func`
 
