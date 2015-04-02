@@ -394,8 +394,7 @@ var FixedDataTable = React.createClass({
     var headerOffsetTop = state.useGroupHeader ? state.groupHeaderHeight : 0;
     var bodyOffsetTop = headerOffsetTop + state.headerHeight;
     var bottomSectionOffset = 0;
-    var footOffsetTop = bodyOffsetTop + state.bodyHeight + BORDER_HEIGHT;
-    var rowsContainerHeight = footOffsetTop + state.footerHeight;
+    var footOffsetTop = state.height - state.footerHeight;
 
     if (props.ownerHeight !== undefined && props.ownerHeight < state.height) {
       bottomSectionOffset = props.ownerHeight - state.height - BORDER_HEIGHT;
@@ -506,7 +505,7 @@ var FixedDataTable = React.createClass({
         style={{height: state.height, width: state.width}}>
         <div
           className={cx('fixedDataTable/rowsContainer')}
-          style={{height: rowsContainerHeight, width: state.width}}>
+          style={{height: state.height, width: state.width}}>
           {dragKnob}
           {groupHeader}
           {header}
