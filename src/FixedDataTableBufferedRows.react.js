@@ -43,6 +43,7 @@ var FixedDataTableBufferedRows = React.createClass({
     scrollableColumns: PropTypes.array.isRequired,
     showLastRowBorder: PropTypes.bool,
     width: PropTypes.number.isRequired,
+    rowSettings: PropTypes.object
   },
 
   getInitialState() /*object*/ {
@@ -129,7 +130,7 @@ var FixedDataTableBufferedRows = React.createClass({
         rowIndex === props.rowsCount - 1 && props.showLastRowBorder;
 
       this._staticRowArray[i] =
-        <FixedDataTableRow
+        <FixedDataTableRow {...props.rowSettings}
           key={i}
           index={rowIndex}
           data={rowGetter(rowIndex)}
