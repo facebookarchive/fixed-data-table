@@ -111,6 +111,12 @@ The column's header label.
 
 type: `string`
 
+### `fixed`
+
+Controls if the column is fixed (false by default) when scrolling in the X axis.
+
+type: `bool`
+
 
 ### `width` (required)
 
