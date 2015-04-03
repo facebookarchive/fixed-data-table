@@ -117,10 +117,13 @@ var FixedDataTableRowDelegate = React.createClass({
     onMouseUp: PropTypes.func,
 
     /**
-     * If specified, attribute `draggable={bool}` will be added to
+     * If specified, attribute `draggable={bool|function}` will be added to
      * nodes of rows.
+     *
+     * If provided function, row index and row data will be passed in as
+     * parameters, and supposed to return a bool.
      */
-    draggable: PropTypes.bool,
+    draggable: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
 
   },
 

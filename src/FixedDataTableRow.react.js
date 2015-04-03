@@ -139,7 +139,9 @@ var FixedDataTableRowImpl = React.createClass({
 
     var optionalProps = {};
     if ('draggable' in this.props) {
-      optionalProps.draggable = this.props.draggable;
+      optionalProps.draggable = typeof this.props.draggable === 'function' ?
+        !!this.props.draggable(this.props.index, this.props.data) :
+        this.props.draggable;
     }
 
     return (
