@@ -4,7 +4,7 @@
 
 Data grid component with fixed or scrollable header and columns.
 
-The layout of the data table is as follow:
+The layout of the data table is as follows:
 
 ```
 +---------------------------------------------------+
@@ -30,7 +30,7 @@ The layout of the data table is as follow:
   of columns if included in the table that do not scroll
   vertically or horizontally.
 
-- Scrollable Column Group Header:  The header for a group of columns
+- Scrollable Column Group Header: The header for a group of columns
   that do not move while scrolling vertically, but move horizontally
   with the horizontal scrolling.
 
@@ -80,14 +80,14 @@ type: `number`
 
 ### `ownerHeight`
 
-Pixel height of table's owner. This is used in a managed scrolling
+Pixel height of table's owner, this is used in a managed scrolling
 situation when you want to slide the table up from below the fold
 without having to constantly update the height on every scroll tick.
 Instead, vary this property on scroll. By using `ownerHeight`, we
 over-render the table while making sure the footer and horizontal
 scrollbar of the table are visible when the current space for the table
 in view is smaller than the final, over-flowing height of table. It
-allows us to avoid resizing and reflowing table whan it is moving in the
+allows us to avoid resizing and reflowing table when it is moving in the
 view.
 
 This is used if `ownerHeight < height` (or `maxHeight`).
@@ -114,7 +114,7 @@ type: `number`
 
 ### `rowHeight` (required)
 
-Pixel height of rows unless rowHeightGetter is specified and returns
+Pixel height of rows unless `rowHeightGetter` is specified and returns
 different value.
 
 type: `number`
@@ -123,7 +123,7 @@ type: `number`
 ### `rowHeightGetter`
 
 If specified, `rowHeightGetter(index)` is called for each row and the
-returned value overrides rowHeight for particular row.
+returned value overrides `rowHeight` for particular row.
 
 type: `func`
 
@@ -131,8 +131,8 @@ type: `func`
 ### `rowGetter` (required)
 
 To get rows to display in table, `rowGetter(index)`
-is called. rowGetter should be smart enough to handle async
-fetching of data and returning temporary objects
+is called. `rowGetter` should be smart enough to handle async
+fetching of data and return temporary objects
 while data is being fetched.
 
 type: `func`
@@ -140,7 +140,7 @@ type: `func`
 
 ### `rowClassNameGetter`
 
-To get any additional css classes that should be added to a row,
+To get any additional CSS classes that should be added to a row,
 `rowClassNameGetter(index)` is called.
 
 type: `func`
@@ -240,21 +240,21 @@ type: `func`
 
 ### `onRowMouseDown`
 
-Callback that is called when mouse down event happens above a row.
+Callback that is called when a mouse-down event happens on a row.
 
 type: `func`
 
 
 ### `onRowMouseEnter`
 
-Callback that is called when the mouse enters a row.
+Callback that is called when a mouse-enter event happens on a row.
 
 type: `func`
 
 
 ### `onRowMouseLeave`
 
-Callback that is called when the mouse leaves a row.
+Callback that is called when a mouse-leave event happens on a row.
 
 type: `func`
 
