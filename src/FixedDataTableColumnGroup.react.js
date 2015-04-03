@@ -29,7 +29,7 @@ var FixedDataTableColumnGroup = React.createClass({
     align: PropTypes.oneOf(['left', 'center', 'right']),
 
     /**
-     * Whether the column group is fixed.
+     * Controls if the column group is fixed when scrolling in the X axis.
      */
     fixed: PropTypes.bool,
 
@@ -58,6 +58,12 @@ var FixedDataTableColumnGroup = React.createClass({
      * ```
      */
     groupHeaderRenderer: PropTypes.func,
+  },
+
+  getDefaultProps() /*object*/ {
+    return {
+      fixed: false,
+    };
   },
 
   render() {

@@ -57,11 +57,13 @@ for keys, it must be specified for each column.
 
 type: `union(string|number)`
 
+
 ### `fixed`
 
-Whether the column is fixed.
+Controls if the column is fixed when scrolling in the X axis.
 
 type: `bool`
+defaultValue: `false`
 
 
 ### `headerRenderer`

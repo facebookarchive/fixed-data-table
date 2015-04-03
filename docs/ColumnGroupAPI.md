@@ -14,11 +14,12 @@ The horizontal alignment of the table cell content.
 type: `enum('left'|'center'|'right')`
 
 
-### `fixed` (required)
+### `fixed`
 
-Whether the column group is fixed.
+Controls if the column group is fixed when scrolling in the X axis.
 
 type: `bool`
+defaultValue: `false`
 
 
 ### `columnGroupData`

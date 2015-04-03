@@ -68,7 +68,7 @@ var FixedDataTableColumn = React.createClass({
     ]).isRequired,
 
     /**
-     * Whether the column is fixed.
+     * Controls if the column is fixed when scrolling in the X axis.
      */
     fixed: PropTypes.bool,
 
@@ -141,6 +141,12 @@ var FixedDataTableColumn = React.createClass({
      * has a flex grow, once you resize the column this will be set to 0.
      */
     isResizable: PropTypes.bool,
+  },
+
+  getDefaultProps() /*object*/ {
+    return {
+      fixed: false,
+    };
   },
 
   render() {
