@@ -26,7 +26,7 @@
     "postcss": "^4.0.2",
     "postcss-custom-properties": "^3.0.0",
     "react": "^0.12.2",
-    "react-docgen": "^1.1.0",
+    "react-docgen": "^1.2.0",
     "react-tools": "^0.12.2",
     "style-loader": "^0.8.3",
     "url-loader": "^0.5.5",
