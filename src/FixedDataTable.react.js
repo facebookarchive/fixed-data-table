@@ -100,7 +100,7 @@ var FixedDataTable = React.createClass({
   propTypes: {
 
     /**
-     * Pixel width of table. If all rows do not fit,
+     * Pixel width of table. If all columns do not fit,
      * a horizontal scrollbar will appear.
      */
     width: PropTypes.number.isRequired,
