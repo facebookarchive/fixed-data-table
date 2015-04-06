@@ -26,7 +26,8 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        loader: 'jsx-loader?harmony&stripTypes'
+        exclude: /node_modules/,
+        loader: 'babel-loader'
       },
       {
         test: /\.css$/,
