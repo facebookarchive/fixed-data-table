@@ -74,13 +74,18 @@ module.exports = {
 
   output: {
     library: 'FixedDataTable',
-    libraryTarget: 'var',
+    libraryTarget: 'umd',
     path: 'dist',
     filename: '[name].js',
   },
 
   externals: {
-    react: 'React'
+    react: {
+      root: 'React',
+      commonjs: 'react',
+      commonjs2: 'react',
+      amd: 'react',
+    },
   },
 
   node: {
