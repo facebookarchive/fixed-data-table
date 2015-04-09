@@ -141,11 +141,17 @@ var FixedDataTableColumn = React.createClass({
      * has a flex grow, once you resize the column this will be set to 0.
      */
     isResizable: PropTypes.bool,
+
+    /**
+     * Hide the column
+     */
+    hidden: PropTypes.bool,
   },
 
   getDefaultProps() /*object*/ {
     return {
       fixed: false,
+      hidden: false,
     };
   },
 
