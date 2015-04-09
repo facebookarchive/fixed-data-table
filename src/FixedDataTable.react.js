@@ -679,7 +679,7 @@ var FixedDataTable = React.createClass({
     var children = [];
 
     ReactChildren.forEach(props.children, (child, index) => {
-      if (child == null) {
+      if (child == null || child.props.hidden) {
         return;
       }
       invariant(
