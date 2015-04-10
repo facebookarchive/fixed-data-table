@@ -229,6 +229,11 @@ var FixedDataTable = React.createClass({
     onRowClick: PropTypes.func,
 
     /**
+     * Callback that is called when contextual menu is requested above a row.
+     */
+    onRowContextMenu: PropTypes.func,
+
+    /**
      * Callback that is called when mouse down event happens above a row.
      */
     onRowMouseDown: PropTypes.func,
@@ -507,6 +512,7 @@ var FixedDataTable = React.createClass({
         height={state.bodyHeight}
         offsetTop={offsetTop}
         onRowClick={state.onRowClick}
+        onRowContextMenu={state.onRowContextMenu}
         onRowMouseDown={state.onRowMouseDown}
         onRowMouseEnter={state.onRowMouseEnter}
         rowClassNameGetter={state.rowClassNameGetter}

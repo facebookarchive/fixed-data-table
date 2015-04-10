@@ -79,6 +79,11 @@ var FixedDataTableRowImpl = React.createClass({
     onClick: PropTypes.func,
 
     /**
+     * Fire when contextual menu is requested above a row.
+     */
+    onContextMenu: PropTypes.func,
+
+    /**
      * Callback for when resizer knob (in FixedDataTableCell) is clicked
      * to initialize resizing. Please note this is only on the cells
      * in the header.
@@ -142,6 +147,7 @@ var FixedDataTableRowImpl = React.createClass({
       <div
         className={joinClasses(className, this.props.className)}
         onClick={this.props.onClick ? this._onClick : null}
+        onContextMenu={this.props.onContextMenu ? this._onContextMenu : null}
         onMouseDown={this.props.onMouseDown ? this._onMouseDown : null}
         onMouseEnter={this.props.onMouseEnter ? this._onMouseEnter : null}
         style={style}>
