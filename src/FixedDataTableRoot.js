@@ -11,18 +11,6 @@
 
 "use strict";
 
-if (__DEV__) {
-  var ExecutionEnvironment = require('ExecutionEnvironment');
-  if (ExecutionEnvironment.canUseDOM && window.top === window.self) {
-
-    if (!Object.assign) {
-      console.error(
-        'FixedDataTable expected an ES6 compatible `Object.assign` polyfill.'
-      );
-    }
-  }
-}
-
 var FixedDataTable = require('FixedDataTable.react');
 var FixedDataTableColumn = require('FixedDataTableColumn.react');
 var FixedDataTableColumnGroup = require('FixedDataTableColumnGroup.react');
