@@ -186,6 +186,10 @@ var FixedDataTableRowImpl = React.createClass({
     this.props.onClick(event, this.props.index, this.props.data);
   },
 
+  _onContextMenu(/*object*/ event) {
+    this.props.onContextMenu(event, this.props.index, this.props.data);
+  },
+
   _onMouseDown(/*object*/ event) {
     this.props.onMouseDown(event, this.props.index, this.props.data);
   },
