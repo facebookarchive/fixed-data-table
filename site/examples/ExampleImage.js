@@ -71,6 +71,7 @@ var ExampleImage = React.createClass({
   },
 
   _onLoad(/*string*/ src) {
+    ReadyPool[src] = true;
     if (this.isMounted() && src === this.props.src) {
       this.setState({
         src: src,

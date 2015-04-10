@@ -59,9 +59,8 @@ class FixedDataTableRowBuffer {
     while (bufferRowIndex < this._viewportRowsBegin) {
       this._addRowToBuffer(
         bufferRowIndex,
-        this._viewportHeight,
         this._viewportRowsBegin,
-        this._viewportRowsEnd -1
+        this._viewportRowsEnd - 1
       );
       bufferRowIndex++;
       remainingBufferRows--;
@@ -70,9 +69,8 @@ class FixedDataTableRowBuffer {
     while (bufferRowIndex < this._rowsCount && remainingBufferRows > 0) {
       this._addRowToBuffer(
         bufferRowIndex,
-        this._viewportHeight,
         this._viewportRowsBegin,
-        this._viewportRowsEnd -1
+        this._viewportRowsEnd - 1
       );
       bufferRowIndex++;
       remainingBufferRows--;
@@ -84,10 +82,6 @@ class FixedDataTableRowBuffer {
     /*number*/ firstRowIndex,
     /*number*/ firstRowOffset
   ) /*array*/ {
-    // Update offsets of all rows to move them outside of viewport. Later we
-    // will bring rows that we should show to their right offsets.
-    this._hideAllRows();
-
     var top = firstRowOffset;
     var totalHeight = top;
     var rowIndex = firstRowIndex;
@@ -99,7 +93,6 @@ class FixedDataTableRowBuffer {
         (totalHeight < this._viewportHeight && rowIndex < this._rowsCount)) {
       this._addRowToBuffer(
         rowIndex,
-        totalHeight,
         firstRowIndex,
         endIndex - 1
       );
@@ -115,7 +108,6 @@ class FixedDataTableRowBuffer {
 
   _addRowToBuffer(
     /*number*/ rowIndex,
-    /*number*/ offsetTop,
     /*number*/ firstViewportRowIndex,
     /*number*/ lastViewportRowIndex
   ) {
@@ -135,24 +127,12 @@ class FixedDataTableRowBuffer {
         // We can't reuse any of existing positions for this row. We have to
         // create new position
         rowPosition = this._bufferSet.getNewPositionForValue(rowIndex);
-        this._rows[rowPosition] = {
-          rowIndex,
-          offsetTop,
-        };
+        this._rows[rowPosition] = rowIndex;
       } else {
         // This row already is in the table with rowPosition position or it
         // can replace row that is in that position
-        this._rows[rowPosition].rowIndex = rowIndex;
-        this._rows[rowPosition].offsetTop = offsetTop;
+        this._rows[rowPosition] = rowIndex;
       }
-  }
-
-  _hideAllRows() {
-    var i = this._rows.length - 1;
-    while (i > -1) {
-      this._rows[i].offsetTop = this._viewportHeight;
-      i--;
-    }
   }
 }
 

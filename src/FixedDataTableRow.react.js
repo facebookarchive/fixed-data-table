@@ -9,8 +9,7 @@
  * @providesModule FixedDataTableRow.react
  * @typechecks
  */
-
-"use strict";
+'use strict';
 
 var FixedDataTableHelper = require('FixedDataTableHelper');
 var React = require('React');
@@ -22,7 +21,7 @@ var joinClasses = require('joinClasses');
 var translateDOMPositionXY = require('translateDOMPositionXY');
 
 var DIR_SIGN = FixedDataTableHelper.DIR_SIGN;
-var PropTypes = React.PropTypes;
+var {PropTypes} = React;
 
 /**
  * Component that renders the row for <FixedDataTable />.
@@ -150,6 +149,7 @@ var FixedDataTableRowImpl = React.createClass({
         onContextMenu={this.props.onContextMenu ? this._onContextMenu : null}
         onMouseDown={this.props.onMouseDown ? this._onMouseDown : null}
         onMouseEnter={this.props.onMouseEnter ? this._onMouseEnter : null}
+        onMouseLeave={this.props.onMouseLeave ? this._onMouseLeave : null}
         style={style}>
         <div className={cx('fixedDataTableRow/body')}>
           {fixedColumns}
@@ -192,6 +192,10 @@ var FixedDataTableRowImpl = React.createClass({
 
   _onMouseEnter(/*object*/ event) {
     this.props.onMouseEnter(event, this.props.index, this.props.data);
+  },
+
+  _onMouseLeave(/*object*/ event) {
+    this.props.onMouseLeave(event, this.props.index, this.props.data);
   },
 });
 

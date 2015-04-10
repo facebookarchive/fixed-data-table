@@ -12,7 +12,7 @@
 
 var React = require('React');
 
-var PropTypes = React.PropTypes;
+var {PropTypes} = React;
 
 /**
  * Component that defines the attributes of a table column group.
@@ -29,9 +29,9 @@ var FixedDataTableColumnGroup = React.createClass({
     align: PropTypes.oneOf(['left', 'center', 'right']),
 
     /**
-     * Whether the column group is fixed.
+     * Controls if the column group is fixed when scrolling in the X axis.
      */
-    fixed: PropTypes.bool.isRequired,
+    fixed: PropTypes.bool,
 
     /**
      * Bucket for any data to be passed into column group renderer functions.
@@ -58,6 +58,12 @@ var FixedDataTableColumnGroup = React.createClass({
      * ```
      */
     groupHeaderRenderer: PropTypes.func,
+  },
+
+  getDefaultProps() /*object*/ {
+    return {
+      fixed: false,
+    };
   },
 
   render() {

@@ -12,7 +12,7 @@
 
 var React = require('React');
 
-var PropTypes = React.PropTypes;
+var {PropTypes} = React;
 
 /**
  * Component that defines the attributes of table column.
@@ -66,6 +66,11 @@ var FixedDataTableColumn = React.createClass({
       PropTypes.string,
       PropTypes.number,
     ]).isRequired,
+
+    /**
+     * Controls if the column is fixed when scrolling in the X axis.
+     */
+    fixed: PropTypes.bool,
 
     /**
      * The cell renderer that returns React-renderable content for table column
@@ -136,6 +141,12 @@ var FixedDataTableColumn = React.createClass({
      * has a flex grow, once you resize the column this will be set to 0.
      */
     isResizable: PropTypes.bool,
+  },
+
+  getDefaultProps() /*object*/ {
+    return {
+      fixed: false,
+    };
   },
 
   render() {
