@@ -4,5 +4,6 @@ src
 __site__
 __site_prerender__
 .editorconfig
+.babelrc
 webpack.config.js
 CONTRIBUTING.md
