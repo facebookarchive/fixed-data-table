@@ -232,6 +232,16 @@ var FixedDataTable = React.createClass({
     onContentHeightChange: PropTypes.func,
 
     /**
+     * Callback that is called when keystroke is up. Table must be focused.
+     */
+    onKeyUp: PropTypes.func,
+
+    /**
+     * Callback that is called when keystroke is down. Table must be focused.
+     */
+    onKeyDown: PropTypes.func,
+
+    /**
      * Callback that is called when a row is clicked.
      */
     onRowClick: PropTypes.func,
@@ -508,6 +518,9 @@ var FixedDataTable = React.createClass({
       <div
         className={cx('public/fixedDataTable/main')}
         onWheel={this._wheelHandler.onWheel}
+        onKeyUp={state.onKeyUp && state.onKeyUp}
+        onKeyDown={state.onKeyDown && state.onKeyDown}
+        tabIndex={-1}
         style={{height: state.height, width: state.width}}>
         <div
           className={cx('fixedDataTable/rowsContainer')}
