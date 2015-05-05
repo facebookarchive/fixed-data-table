@@ -28,7 +28,7 @@ class PrefixIntervalTree {
     this._leafCount = leafCount;
     this._internalLeafCount = internalLeafCount;
     var nodeCount = 2 * internalLeafCount;
-    var Int32Array = global.Int32Array || Array;
+    var Int32Array = global.Int32Array || this._initArray;
     this._value = new Int32Array(nodeCount);
     this._initTables(initialLeafValue || 0);
 
@@ -44,6 +44,10 @@ class PrefixIntervalTree {
       internalLeafCount *= 2;
     }
     return internalLeafCount;
+  }
+
+  _initArray(/*number*/ size) /*object*/ {
+    return Array.apply(null, new Array(size)).map(Number.prototype.valueOf, 0);
   }
 
   _initTables(/*number*/ initialLeafValue) {
