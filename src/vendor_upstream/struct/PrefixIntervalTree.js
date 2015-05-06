@@ -46,8 +46,13 @@ class PrefixIntervalTree {
     return internalLeafCount;
   }
 
-  _initArray(/*number*/ size) /*object*/ {
-    return Array.apply(null, new Array(size)).map(Number.prototype.valueOf, 0);
+  _initArray(/*number*/ size) /*array*/ {
+    var arr = [];
+    while (size > 0) {
+      size--;
+      arr[size] = 0;
+    }
+    return arr;
   }
 
   _initTables(/*number*/ initialLeafValue) {
