@@ -137,14 +137,36 @@ var FixedDataTableRowImpl = React.createClass({
         rowIndex={this.props.index}
       />;
 
+    var optionalProps = {};
+    if ('draggable' in this.props) {
+      optionalProps.draggable = typeof this.props.draggable === 'function' ?
+        !!this.props.draggable(this.props.index, this.props.data) :
+        this.props.draggable;
+    }
+
     return (
       <div
         className={joinClasses(className, this.props.className)}
         onClick={this.props.onClick ? this._onClick : null}
+        onContextMenu={this.props.onContextMenu ? this._onContextMenu : null}
+        onDoubleClick={this.props.onDoubleClick ? this._onDoubleClick : null}
+        onDrag={this.props.onDrag ? this._onDrag : null}
+        onDragEnd={this.props.onDragEnd ? this._onDragEnd : null}
+        onDragEnter={this.props.onDragEnter ? this._onDragEnter : null}
+        onDragExit={this.props.onDragExit ? this._onDragExit : null}
+        onDragLeave={this.props.onDragLeave ? this._onDragLeave : null}
+        onDragOver={this.props.onDragOver ? this._onDragOver : null}
+        onDragStart={this.props.onDragStart ? this._onDragStart : null}
+        onDrop={this.props.onDrop ? this._onDrop : null}
         onMouseDown={this.props.onMouseDown ? this._onMouseDown : null}
         onMouseEnter={this.props.onMouseEnter ? this._onMouseEnter : null}
         onMouseLeave={this.props.onMouseLeave ? this._onMouseLeave : null}
-        style={style}>
+        onMouseMove={this.props.onMouseMove ? this._onMouseMove : null}
+        onMouseOut={this.props.onMouseOut ? this._onMouseOut : null}
+        onMouseOver={this.props.onMouseOver ? this._onMouseOver : null}
+        onMouseUp={this.props.onMouseUp ? this._onMouseUp : null}
+        style={style}
+        {...optionalProps}>
         <div className={cx('fixedDataTableRow/body')}>
           {fixedColumns}
           {scrollableColumns}
@@ -180,6 +202,46 @@ var FixedDataTableRowImpl = React.createClass({
     this.props.onClick(event, this.props.index, this.props.data);
   },
 
+  _onContextMenu(/*object*/ event) {
+    this.props.onContextMenu(event, this.props.index, this.props.data);
+  },
+
+  _onDoubleClick(/*object*/ event) {
+    this.props.onDoubleClick(event, this.props.index, this.props.data);
+  },
+
+  _onDrag(/*object*/ event) {
+    this.props.onDrag(event, this.props.index, this.props.data);
+  },
+
+  _onDragEnd(/*object*/ event) {
+    this.props.onDragEnd(event, this.props.index, this.props.data);
+  },
+
+  _onDragEnter(/*object*/ event) {
+    this.props.onDragEnter(event, this.props.index, this.props.data);
+  },
+
+  _onDragExit(/*object*/ event) {
+    this.props.onDragExit(event, this.props.index, this.props.data);
+  },
+
+  _onDragLeave(/*object*/ event) {
+    this.props.onDragLeave(event, this.props.index, this.props.data);
+  },
+
+  _onDragOver(/*object*/ event) {
+    this.props.onDragOver(event, this.props.index, this.props.data);
+  },
+
+  _onDragStart(/*object*/ event) {
+    this.props.onDragStart(event, this.props.index, this.props.data);
+  },
+
+  _onDrop(/*object*/ event) {
+    this.props.onDrop(event, this.props.index, this.props.data);
+  },
+
   _onMouseDown(/*object*/ event) {
     this.props.onMouseDown(event, this.props.index, this.props.data);
   },
@@ -191,6 +253,23 @@ var FixedDataTableRowImpl = React.createClass({
   _onMouseLeave(/*object*/ event) {
     this.props.onMouseLeave(event, this.props.index, this.props.data);
   },
+
+  _onMouseMove(/*object*/ event) {
+    this.props.onMouseMove(event, this.props.index, this.props.data);
+  },
+
+  _onMouseOut(/*object*/ event) {
+    this.props.onMouseOut(event, this.props.index, this.props.data);
+  },
+
+  _onMouseOver(/*object*/ event) {
+    this.props.onMouseOver(event, this.props.index, this.props.data);
+  },
+
+  _onMouseUp(/*object*/ event) {
+    this.props.onMouseUp(event, this.props.index, this.props.data);
+  },
+
 });
 
 var FixedDataTableRow = React.createClass({

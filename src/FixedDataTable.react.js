@@ -545,6 +545,7 @@ var FixedDataTable = React.createClass({
         showLastRowBorder={!state.footerHeight}
         width={state.width}
         rowPositionGetter={this._scrollHelper.getRowPosition}
+        rowSettings={state.rowSettings}
       />
     );
   },
@@ -677,6 +678,7 @@ var FixedDataTable = React.createClass({
     }
 
     var children = [];
+    var rowDelegate = null;
 
     ReactChildren.forEach(props.children, (child, index) => {
       if (child == null) {
@@ -684,12 +686,23 @@ var FixedDataTable = React.createClass({
       }
       invariant(
         child.type.__TableColumnGroup__ ||
-        child.type.__TableColumn__,
+        child.type.__TableColumn__ ||
+        child.type.__TableRowDelegate__,
         'child type should be <FixedDataTableColumn /> or ' +
-        '<FixedDataTableColumnGroup />'
+        '<FixedDataTableColumnGroup /> or' +
+        '<FixedDataTableRowDelegate />'
       );
+      if (child.type.__TableRowDelegate__) {
+        rowDelegate = child;
+      } else {
       children.push(child);
+      }
     });
+
+    var rowSettings = {};
+    if (rowDelegate) {
+      rowSettings = rowDelegate.props;
+    }
 
     var useGroupHeader = false;
     if (children.length && children[0].type.__TableColumnGroup__) {
@@ -803,6 +816,8 @@ var FixedDataTable = React.createClass({
 
       ...columnInfo,
       ...props,
+
+      rowSettings,
 
       columnResizingData,
       firstRowIndex,

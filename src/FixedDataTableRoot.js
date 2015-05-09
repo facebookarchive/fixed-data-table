@@ -14,8 +14,10 @@
 var FixedDataTable = require('FixedDataTable.react');
 var FixedDataTableColumn = require('FixedDataTableColumn.react');
 var FixedDataTableColumnGroup = require('FixedDataTableColumnGroup.react');
+var FixedDataTableRowDelegate = require('FixedDataTableRowDelegate.react');
 
 var FixedDataTableRoot = {
+  Row: FixedDataTableRowDelegate,
   Column: FixedDataTableColumn,
   ColumnGroup: FixedDataTableColumnGroup,
   Table: FixedDataTable,
