@@ -1,4 +1,4 @@
-library fixed_data_table
+library fixed_data_table;
 
 import 'dart:js';
 import 'package:react/react_client.dart' as reactClient;
