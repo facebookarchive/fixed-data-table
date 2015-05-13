@@ -4,7 +4,7 @@ import 'dart:js';
 import 'package:react/react_client.dart' as reactClient;
 import 'dart:async';
 
-var _FixedDataTable = context['fixed-data-table'];
+var _FixedDataTable = context['FixedDataTableRoot'];
 
 var FixedDataTable = _getFixedDataTable('Table');
 var FixedDataTableColumn = _getFixedDataTable('Column');
