@@ -4,7 +4,7 @@ import 'dart:js';
 import 'package:react/react_client.dart' as reactClient;
 import 'dart:async';
 
-var _FixedDataTable = context['WebSkinReact'];
+var _FixedDataTable = context['FixedDataTable'];
 
 var FixedDataTable = _getFixedDataTable('Table');
 var FixedDataTableColumn = _getFixedDataTable('Column');
@@ -12,10 +12,10 @@ var FixedDataTableColumn = _getFixedDataTable('Column');
 _getFixedDataTable(String name) {
   print(_FixedDataTable);
 	print('_FixedDataTable: ${context}');
-  print(context['object']);
+  print(context['WebSkinReact']);
 	JsFunction method = _FixedDataTable[name];
 	return (Map args, [children]) {
-		_convertBoundValues(args);
+		_convertBoundedValues(args);
 		_convertEventHandlers(args);
 		if (args.containsKey('style')) {
 			args['style'] = new JsObject.jsify(args['style']);
