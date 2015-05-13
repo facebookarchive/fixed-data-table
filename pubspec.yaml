@@ -1,5 +1,5 @@
 name: fixed_data_table
-version: 0.1.17
+version: 0.1.18
 description: A react component for tables
 dependencies:
         browser: any
