@@ -10,7 +10,8 @@ var FixedDataTable = _getFixedDataTable('Table');
 var FixedDataTableColumn = _getFixedDataTable('Column');
 
 _getFixedDataTable(String name) {
-	print('_FixedDataTable: ${context}');
+	print('_FixedDataTable: ${context['object']}');
+	print(context['Window']);
 	JsFunction method = _FixedDataTable[name];
 	return (Map args, [children]) {
 		_convertBoundValues(args);
