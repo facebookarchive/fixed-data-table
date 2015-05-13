@@ -6,10 +6,11 @@ import 'dart:async';
 
 var _FixedDataTable = context['FixedDataTable'];
 
-var FixedDataTable = _getFixedDataTable();
+var FixedDataTable = _getFixedDataTable('Table');
+var FixedDataTableColumn = _getFixedDataTable('Column');
 
-_getFixedDataTable() {
-	JsFunction method = _FixedDataTable;
+_getFixedDataTable(String name) {
+	JsFunction method = _FixedDataTable[name];
 	return (Map args, [children]) {
 		_convertBoundValues(args);
 		_convertEventHandlers(args);
