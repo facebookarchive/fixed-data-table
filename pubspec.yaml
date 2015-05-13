@@ -1,4 +1,5 @@
 name: fixed_data_table
+version:0.1.2
 description: fixed_data_table
 dependencies:
         browser: any
