@@ -1,5 +1,5 @@
-name: fixed-data-table
-description: fixed-data-table
+name: fixed_data_table
+description: fixed_data_table
 dependencies:
         browser: any
         react: ">=0.5.0 <0.6.0"
