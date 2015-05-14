@@ -197,8 +197,7 @@ var FixedDataTableCell = React.createClass({
           <div className={cx('public/fixedDataTableCell/wrap2')}>
             <div className={cx('public/fixedDataTableCell/wrap3')}>
               {content}
-              <div id={content}>
-              </div>
+              <h1> Hello World</h1>
             </div>
           </div>
         </>
