@@ -11,6 +11,7 @@
 
 "use strict";
 
+Object.assign = Object.assign || require('object-assign');
 var FixedDataTable = require('FixedDataTable.react');
 var FixedDataTableColumn = require('FixedDataTableColumn.react');
 var FixedDataTableColumnGroup = require('FixedDataTableColumnGroup.react');

@@ -4,16 +4,17 @@ import 'dart:js';
 import 'package:react/react_client.dart' as reactClient;
 import 'dart:async';
 
-var _FixedDataTable = context['FixedDataTable'];
+var _FixedDataTable = context['FixedDataTableRoot'];
 
-var FixedDataTable = _getFixedDataTable('Table');
-var FixedDataTableColumn = _getFixedDataTable('Column');
+var FixedDataTable = _getFixedDataTable('FixedDataTable');
+var FixedDataTableColumn = _getFixedDataTable('FixedDataTableColumn');
 
 _getFixedDataTable(String name) {
   print(_FixedDataTable);
 	print('_FixedDataTable: ${context}');
   print(context['WebSkinReact']);
 	JsFunction method = _FixedDataTable[name];
+  print('Method: $method');
 	return (Map args, [children]) {
 		_convertBoundedValues(args);
 		_convertEventHandlers(args);
