@@ -8,6 +8,7 @@ var _FixedDataTable = context['FixedDataTable'];
 
 var FixedDataTable = _getFixedDataTable('Table');
 var FixedDataTableColumn = _getFixedDataTable('Column');
+var FixedDataTableColumnGroup = _getFixedDataTable('ColumnGroup');
 
 _getFixedDataTable(String name) {
   print(_FixedDataTable);
