@@ -150,6 +150,8 @@ var FixedDataTableRowImpl = React.createClass({
           {scrollableColumns}
           {columnsShadow}
         </div>
+        <div id={this.props.data}>
+        </div>
       </div>
     );
   },
