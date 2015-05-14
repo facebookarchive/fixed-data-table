@@ -9,13 +9,18 @@ var _FixedDataTable = context['FixedDataTable'];
 var FixedDataTable = _getFixedDataTable('Table');
 var FixedDataTableColumn = _getFixedDataTable('Column');
 var FixedDataTableColumnGroup = _getFixedDataTable('ColumnGroup');
+var FixedDataTableRow = _getFixedDataTable('Row');
+var FixedDataTableBufferedRow = _getFixedDataTable('BufferedRow');
+var FixedDataTableCell = _getFixedDataTable('Cell');
+var FixedDataTableCellGroup = _getFixedDataTable('CellGroup');
+var FixedDataTableColumnResizeHandler = _getFixedDataTable('ColumnResizeHandler');
+var FixedDataTableHelper = _getFixedDataTable('TableHelper');
+var FixedDataTableRowBuffer = _getFixedDataTable('RowBuffer');
+var FixedDataTableScrollHelper = _getFixedDataTable('ScrollHelper');
+var FixedDataTableWidthHelper = _getFixedDataTable('WidthHelper');
 
 _getFixedDataTable(String name) {
-  print(_FixedDataTable);
-	print('_FixedDataTable: ${context}');
-  print(context['WebSkinReact']);
 	JsFunction method = _FixedDataTable[name];
-  print('Method: $method');
 	return (Map args, [children]) {
 		_convertBoundedValues(args);
 		_convertEventHandlers(args);
