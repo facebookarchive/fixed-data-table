@@ -41,7 +41,13 @@ _convertReactReturnFunctions(Map args) {
     print('we have the call render function!!! ${args['cellRenderer']}');
     var cellRenderer = args['cellRenderer'];
 
-    args['cellRenderer'] = (data) {
+    args['cellRenderer'] = (arg1, data, arg3, arg4, arg5, arg6) {
+      print('Arg1: $arg1');
+      print('Arg2: $data');
+      print('Arg3: $arg3');
+      print('Arg4: $arg4');
+      print('Arg5: $arg5');
+      print('Arg6: $arg6');
       return cellRenderer(data);
     };
 
