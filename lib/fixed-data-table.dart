@@ -58,7 +58,7 @@ _convertReactReturnFunctions(Map args) {
     }*/
     var cellRenderer = args['cellRenderer2'];
     args['cellRenderer'] = (data) {
-      JsFunction method = cellRenderer(data);
+      JsFunction method = cellRenderer;
 
       return (Map childArgs, [children]) {
         _convertBoundedValues(childArgs);
