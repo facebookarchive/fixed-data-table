@@ -137,6 +137,8 @@ var FixedDataTableRowImpl = React.createClass({
         rowIndex={this.props.index}
       />;
 
+    console.log(this.props.data);
+
     return (
       <div
         className={joinClasses(className, this.props.className)}
