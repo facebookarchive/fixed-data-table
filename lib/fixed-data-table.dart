@@ -83,7 +83,7 @@ _convertReactReturnFunctions(Map args) {
     };*/
 
 
-    print('we have the call render function!!! ${args['cellRenderer']()}');
+    //print('we have the call render function!!! ${args['cellRenderer']()}');
   }
 }
 
