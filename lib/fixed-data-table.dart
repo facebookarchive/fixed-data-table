@@ -22,7 +22,6 @@ var FixedDataTableWidthHelper = _getFixedDataTable('WidthHelper');
 _getFixedDataTable(String name) {
 	JsFunction method = _FixedDataTable[name];
 	return (Map args, [children]) {
-    print('$name : $args');
     _convertReactReturnFunctions(args);
 		_convertBoundedValues(args);
 		_convertEventHandlers(args);
@@ -38,52 +37,11 @@ _getFixedDataTable(String name) {
 
 _convertReactReturnFunctions(Map args) {
   if (args['cellRenderer'] != null) {
-    print('we have the call render function!!! ${args['cellRenderer']}');
     var cellRenderer = args['cellRenderer'];
 
-    args['cellRenderer'] = (arg1, data, arg3, arg4, arg5, arg6) {
-      return cellRenderer(arg3[data]);
+    args['cellRenderer'] = (arg1, param, obj, arg4, arg5, arg6) {
+      return cellRenderer(obj[param]);
     };
-
-      /*(data) {
-      return cellRenderer;
-    };*/
-
-    /*func(data) {
-      JsFunction method = args['cellRenderer2'](data);
-
-      return (Map childArgs, [children]) {
-        _convertBoundedValues(childArgs);
-        _convertEventHandlers(childArgs);
-
-        if (childArgs.containsKey('style')) {
-          childArgs['style'] = new JsObject.jsify(childArgs['style']);
-        }
-        if (children is Iterable) {
-          children = new JsArray.from(children);
-        }
-        return method.apply([reactClient.newJsMap(childArgs), children]);
-      };
-    }
-    args['cellRenderer'] = (data) {
-      JsFunction method = cellRenderer;
-
-      return (Map childArgs, [children]) {
-        _convertBoundedValues(childArgs);
-        _convertEventHandlers(childArgs);
-
-        if (childArgs.containsKey('style')) {
-          childArgs['style'] = new JsObject.jsify(childArgs['style']);
-        }
-        if (children is Iterable) {
-          children = new JsArray.from(children);
-        }
-        return method.apply([reactClient.newJsMap(childArgs), children]);
-      };
-    };*/
-
-
-    //print('we have the call render function!!! ${args['cellRenderer']()}');
   }
 }
 
