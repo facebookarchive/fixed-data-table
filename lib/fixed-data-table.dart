@@ -41,25 +41,9 @@ _convertReactReturnFunctions(Map args) {
     print('we have the call render function!!! ${args['cellRenderer']}');
     var cellRenderer = args['cellRenderer'];
 
-     func() {
-      print('Inside of func');
-      JsFunction method = cellRenderer;
-      /*return (Map childArgs, [children]) {
-        _convertBoundedValues(childArgs);
-        _convertEventHandlers(childArgs);
-
-        if (childArgs.containsKey('style')) {
-          childArgs['style'] = new JsObject.jsify(childArgs['style']);
-        }
-        if (children is Iterable) {
-          children = new JsArray.from(children);
-        }
-        return method.apply([reactClient.newJsMap(childArgs), children]);
-      };*/
-       return method;
-    }
-
-    args['cellRenderer'] = func;
+    args['cellRenderer'] = new JsFunction.withThis((jsThis) => (data) {
+      return cellRenderer(data);
+    });
 
       /*(data) {
       return cellRenderer;
