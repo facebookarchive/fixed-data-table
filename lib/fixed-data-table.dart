@@ -41,11 +41,13 @@ _convertReactReturnFunctions(Map args) {
     print('we have the call render function!!! ${args['cellRenderer2']}');
     var cellRenderer = args['cellRenderer2'];
 
-    JsFunction func(data) {
+    /*JsFunction func(data) {
       return cellRenderer;
-    }
+    }*/
 
-    args['cellRenderer'] = func;
+    args['cellRenderer'] = (data) {
+      return cellRenderer;
+    };
 
     /*func(data) {
       JsFunction method = args['cellRenderer2'](data);
@@ -81,7 +83,7 @@ _convertReactReturnFunctions(Map args) {
     };*/
 
 
-    print('we have the call render function!!! ${args['cellRenderer']}');
+    print('we have the call render function!!! ${args['cellRenderer']()}');
   }
 }
 
