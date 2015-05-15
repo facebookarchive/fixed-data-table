@@ -60,5 +60,8 @@
     "table",
     "data-table",
     "fixed-table"
-  ]
+  ],
+  "dependencies": {
+    "object-assign": "^2.0.0"
+  }
 }
