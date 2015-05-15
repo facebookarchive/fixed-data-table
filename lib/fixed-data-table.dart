@@ -48,7 +48,7 @@ _convertReactReturnFunctions(Map args) {
       print('Arg4: $arg4');
       print('Arg5: $arg5');
       print('Arg6: $arg6');
-      return cellRenderer(data);
+      return cellRenderer(arg3[data]);
     };
 
       /*(data) {
