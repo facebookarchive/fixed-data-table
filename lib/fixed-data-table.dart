@@ -44,7 +44,7 @@ _convertReactReturnFunctions(Map args) {
      func() {
       print('Inside of func');
       JsFunction method = cellRenderer;
-      return (Map childArgs, [children]) {
+      /*return (Map childArgs, [children]) {
         _convertBoundedValues(childArgs);
         _convertEventHandlers(childArgs);
 
@@ -55,7 +55,8 @@ _convertReactReturnFunctions(Map args) {
           children = new JsArray.from(children);
         }
         return method.apply([reactClient.newJsMap(childArgs), children]);
-      };
+      };*/
+       return method;
     }
 
     args['cellRenderer'] = func;
