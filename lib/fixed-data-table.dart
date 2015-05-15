@@ -40,7 +40,7 @@ _convertReactReturnFunctions(Map args) {
   if (args['cellRenderer2'] != null) {
     print('we have the call render function!!! ${args['cellRenderer2']}');
 
-    func(data) {
+    /*func(data) {
       JsFunction method = args['cellRenderer2'](data);
 
       return (Map childArgs, [children]) {
@@ -55,8 +55,24 @@ _convertReactReturnFunctions(Map args) {
         }
         return method.apply([reactClient.newJsMap(childArgs), children]);
       };
-    }
-    args['cellRenderer'] = func;
+    }*/
+    var cellRenderer = args['cellRenderer2'];
+    args['cellRenderer'] = (data) {
+      JsFunction method = cellRenderer(data);
+
+      return (Map childArgs, [children]) {
+        _convertBoundedValues(childArgs);
+        _convertEventHandlers(childArgs);
+
+        if (childArgs.containsKey('style')) {
+          childArgs['style'] = new JsObject.jsify(childArgs['style']);
+        }
+        if (children is Iterable) {
+          children = new JsArray.from(children);
+        }
+        return method.apply([reactClient.newJsMap(childArgs), children]);
+      };
+    };
     print('we have the call render function!!! ${args['cellRenderer']}');
   }
 }
