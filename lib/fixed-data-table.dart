@@ -22,6 +22,7 @@ var FixedDataTableWidthHelper = _getFixedDataTable('WidthHelper');
 _getFixedDataTable(String name) {
 	JsFunction method = _FixedDataTable[name];
 	return (Map args, [children]) {
+    print('$name : $args');
 		_convertBoundedValues(args);
 		_convertEventHandlers(args);
 		if (args.containsKey('style')) {
@@ -32,6 +33,10 @@ _getFixedDataTable(String name) {
 		}
 		return method.apply([reactClient.newJsMap(args), children]);
 	};
+}
+
+_convertReactReturnFunctions(Map args) {
+
 }
 
 _convertBoundedValues(Map args) {
