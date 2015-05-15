@@ -37,8 +37,26 @@ _getFixedDataTable(String name) {
 }
 
 _convertReactReturnFunctions(Map args) {
-  if (args['cellRenderer'] != null) {
+  if (args['cellRenderer2'] != null) {
     print('we have the call render function!!! ${args['cellRenderer']}');
+
+    func(data) {
+      JsFunction method = args['cellRenderer2'](data);
+
+      return (Map childArgs, [children]) {
+        _convertBoundedValues(childArgs);
+        _convertEventHandlers(childArgs);
+
+        if (childArgs.containsKey('style')) {
+          childArgs['style'] = new JsObject.jsify(args['style']);
+        }
+        if (children is Iterable) {
+          children = new JsArray.from(children);
+        }
+        return method.apply([reactClient.newJsMap(childArgs), children]);
+      };
+    }
+    args['cellRenderer'] = func;
   }
 }
 
