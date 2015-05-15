@@ -25,6 +25,7 @@ _getFixedDataTable(String name) {
     print('$name : $args');
 		_convertBoundedValues(args);
 		_convertEventHandlers(args);
+    _convertReactReturnFunctions(args);
 		if (args.containsKey('style')) {
 			args['style'] = new JsObject.jsify(args['style']);
 		}
@@ -36,7 +37,9 @@ _getFixedDataTable(String name) {
 }
 
 _convertReactReturnFunctions(Map args) {
-
+  if (args['cellRenderer'] != null) {
+    print('we have the call render function!!! ${args['cellRenderer']}');
+  }
 }
 
 _convertBoundedValues(Map args) {
