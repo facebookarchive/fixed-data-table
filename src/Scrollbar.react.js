@@ -137,7 +137,7 @@ var Scrollbar = React.createClass({
       translateDOMPositionXY(faceStyle, position, 0);
     } else {
       mainStyle = {
-        top:verticalTop + 'px',
+        top: verticalTop,
         height: size,
       };
       faceStyle = {
