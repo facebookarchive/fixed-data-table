@@ -10,7 +10,7 @@
  * @typechecks
  */
 
-"use strict";
+'use strict';
 
 var Locale = require('Locale');
 var React = require('React');

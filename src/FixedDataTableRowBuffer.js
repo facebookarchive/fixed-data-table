@@ -9,6 +9,7 @@
  * @providesModule FixedDataTableRowBuffer
  * @typechecks
  */
+
 'use strict';
 
 var IntegerBufferSet = require('IntegerBufferSet');

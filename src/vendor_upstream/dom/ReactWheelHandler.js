@@ -13,7 +13,7 @@
  * @typechecks
  */
 
-"use strict";
+'use strict';
 
 var normalizeWheel = require('normalizeWheel');
 var requestAnimationFramePolyfill = require('requestAnimationFramePolyfill');

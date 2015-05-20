@@ -9,7 +9,7 @@
  * @providesModule FixedDataTableRoot
  */
 
-"use strict";
+'use strict';
 
 var FixedDataTable = require('FixedDataTable.react');
 var FixedDataTableColumn = require('FixedDataTableColumn.react');
