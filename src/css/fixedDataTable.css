@@ -11,6 +11,7 @@
 
 .public/fixedDataTable/main {
   border: solid 1px #d3d3d3;
+  box-sizing: border-box;
   overflow: hidden;
   position: relative;
 }
@@ -18,6 +19,10 @@
 .public/fixedDataTable/header,
 .fixedDataTable/hasBottomBorder {
   border-bottom: solid 1px #d3d3d3;
+}
+
+.public/fixedDataTableRow/main.fixedDataTable/hasBottomBorder {
+  box-sizing: content-box;
 }
 
 .public/fixedDataTable/header .public/fixedDataTableCell/main {

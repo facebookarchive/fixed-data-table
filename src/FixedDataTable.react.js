@@ -395,16 +395,18 @@ var FixedDataTable = React.createClass({
     var showScrollbarX = state.maxScrollX > 0 && state.overflowX !== 'hidden';
     var showScrollbarY = maxScrollY > 0 && state.overflowY !== 'hidden';
     var scrollbarXHeight = showScrollbarX ? Scrollbar.SIZE : 0;
-    var scrollbarYHeight = state.height - scrollbarXHeight;
+    var scrollbarYHeight = state.height - scrollbarXHeight - 2 * BORDER_HEIGHT;
 
     var headerOffsetTop = state.useGroupHeader ? state.groupHeaderHeight : 0;
     var bodyOffsetTop = headerOffsetTop + state.headerHeight;
     var bottomSectionOffset = 0;
-    var footOffsetTop = bodyOffsetTop + state.bodyHeight + BORDER_HEIGHT;
+    var footOffsetTop = props.maxHeight != null
+      ? bodyOffsetTop + state.bodyHeight
+      : scrollbarYHeight - props.footerHeight;
     var rowsContainerHeight = footOffsetTop + state.footerHeight;
 
     if (props.ownerHeight !== undefined && props.ownerHeight < state.height) {
-      bottomSectionOffset = props.ownerHeight - state.height - BORDER_HEIGHT;
+      bottomSectionOffset = props.ownerHeight - state.height;
       footOffsetTop = Math.min(
         footOffsetTop,
         scrollbarYHeight + bottomSectionOffset - state.footerHeight
@@ -501,7 +503,12 @@ var FixedDataTable = React.createClass({
         />;
     }
 
-    if (state.ownerHeight < state.height || state.scrollY < maxScrollY) {
+    if (
+      (state.ownerHeight != null &&
+        state.ownerHeight < state.height &&
+        state.scrollContentHeight + state.reservedHeight > state.ownerHeight) ||
+      state.scrollY < maxScrollY
+    ) {
       bottomShadow =
         <div
           className={cx('fixedDataTable/bottomShadow')}
@@ -552,7 +559,7 @@ var FixedDataTable = React.createClass({
         rowHeightGetter={state.rowHeightGetter}
         scrollLeft={state.scrollX}
         scrollableColumns={state.bodyScrollableColumns}
-        showLastRowBorder={!state.footerHeight}
+        showLastRowBorder={true}
         width={state.width}
         rowPositionGetter={this._scrollHelper.getRowPosition}
       />
@@ -1049,6 +1056,7 @@ var HorizontalScrollbar = React.createClass({
     var innerContainerStyle = {
       height: Scrollbar.SIZE,
       position: 'absolute',
+      overflow: 'hidden',
       width: this.props.size,
     };
     translateDOMPositionXY(
