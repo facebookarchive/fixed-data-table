@@ -191,12 +191,18 @@ var FixedDataTable = React.createClass({
     footerHeight: PropTypes.number,
 
     /**
+     * DEPRECATED - use footerDataGetter instead.
      * Data that will be passed to footer cell renderers.
      */
     footerData: PropTypes.oneOfType([
       PropTypes.object,
       PropTypes.array,
     ]),
+
+    /**
+     * Function that is called to get the data for the footer row.
+     */
+    footerDataGetter: PropTypes.func,
 
     /**
      * Value of horizontal scroll.
@@ -447,11 +453,15 @@ var FixedDataTable = React.createClass({
 
     var footer = null;
     if (state.footerHeight) {
+      var footerData = props.footerDataGetter
+        ? props.footerDataGetter()
+        : props.footerData;
+
       footer =
         <FixedDataTableRow
           key="footer"
           className={cx('public/fixedDataTable/footer')}
-          data={state.footerData}
+          data={footerData}
           fixedColumns={state.footFixedColumns}
           height={state.footerHeight}
           index={-1}
