@@ -631,6 +631,25 @@ var FixedDataTable = React.createClass({
       'You must set either a height or a maxHeight'
     );
 
+    var children = [];
+    ReactChildren.forEach(props.children, (child, index) => {
+      if (child == null) {
+        return;
+      }
+      invariant(
+        child.type.__TableColumnGroup__ ||
+        child.type.__TableColumn__,
+        'child type should be <FixedDataTableColumn /> or ' +
+        '<FixedDataTableColumnGroup />'
+      );
+      children.push(child);
+    });
+
+    var useGroupHeader = false;
+    if (children.length && children[0].type.__TableColumnGroup__) {
+      useGroupHeader = true;
+    }
+
     var firstRowIndex = (oldState && oldState.firstRowIndex) || 0;
     var firstRowOffset = (oldState && oldState.firstRowOffset) || 0;
     var scrollX, scrollY;
@@ -657,13 +676,15 @@ var FixedDataTable = React.createClass({
       delete this._rowToScrollTo;
     }
 
+    var groupHeaderHeight = useGroupHeader ? props.groupHeaderHeight : 0;
+
     if (oldState && props.rowsCount !== oldState.rowsCount) {
       // Number of rows changed, try to scroll to the row from before the
       // change
       var viewportHeight = props.height -
         props.headerHeight -
         props.footerHeight -
-        props.groupHeaderHeight;
+        groupHeaderHeight;
       this._scrollHelper = new FixedDataTableScrollHelper(
         props.rowsCount,
         props.rowHeight,
@@ -684,26 +705,6 @@ var FixedDataTable = React.createClass({
       columnResizingData = oldState && oldState.columnResizingData;
     } else {
       columnResizingData = EMPTY_OBJECT;
-    }
-
-    var children = [];
-
-    ReactChildren.forEach(props.children, (child, index) => {
-      if (child == null) {
-        return;
-      }
-      invariant(
-        child.type.__TableColumnGroup__ ||
-        child.type.__TableColumn__,
-        'child type should be <FixedDataTableColumn /> or ' +
-        '<FixedDataTableColumnGroup />'
-      );
-      children.push(child);
-    });
-
-    var useGroupHeader = false;
-    if (children.length && children[0].type.__TableColumnGroup__) {
-      useGroupHeader = true;
     }
 
     var columns;
@@ -772,7 +773,7 @@ var FixedDataTable = React.createClass({
     var useMaxHeight = props.height === undefined;
     var height = useMaxHeight ? props.maxHeight : props.height;
     var totalHeightReserved = props.footerHeight + props.headerHeight +
-      props.groupHeaderHeight + 2 * BORDER_HEIGHT;
+      groupHeaderHeight + 2 * BORDER_HEIGHT;
     var bodyHeight = height - totalHeightReserved;
     var scrollContentHeight = this._scrollHelper.getContentHeight();
     var totalHeightNeeded = scrollContentHeight + totalHeightReserved;
@@ -828,6 +829,7 @@ var FixedDataTable = React.createClass({
       // columnInfo and props
       bodyHeight,
       height,
+      groupHeaderHeight,
       useGroupHeader,
     };
 
