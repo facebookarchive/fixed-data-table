@@ -10,7 +10,7 @@
  * @typechecks
  */
 
-"use strict";
+'use strict';
 
 var Locale = require('Locale');
 var React = require('React');
@@ -81,7 +81,10 @@ function mapColumns(children, callback) {
       // If the column groups columns have changed clone the group and supply
       // new children
       if (haveColumnsChanged) {
-        newChild = cloneWithProps(originalChild, {children: newColumns});
+        newChild = cloneWithProps(originalChild, {
+          key: originalChild.key,
+          children: newColumns,
+        });
       }
     } else if (originalChild.type === FixedDataTableColumn) {
       newChild = callback(originalChild);

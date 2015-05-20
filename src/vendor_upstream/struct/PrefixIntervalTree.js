@@ -10,7 +10,7 @@
  * @typechecks
  */
 
-"use strict";
+'use strict';
 
 /**
  * An interval tree that allows to set a number at index and given the value

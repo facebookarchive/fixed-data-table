@@ -191,12 +191,18 @@ var FixedDataTable = React.createClass({
     footerHeight: PropTypes.number,
 
     /**
+     * DEPRECATED - use footerDataGetter instead.
      * Data that will be passed to footer cell renderers.
      */
     footerData: PropTypes.oneOfType([
       PropTypes.object,
       PropTypes.array,
     ]),
+
+    /**
+     * Function that is called to get the data for the footer row.
+     */
+    footerDataGetter: PropTypes.func,
 
     /**
      * Value of horizontal scroll.
@@ -304,8 +310,40 @@ var FixedDataTable = React.createClass({
     }
     this._wheelHandler = new ReactWheelHandler(
       this._onWheel,
-      this.props.overflowX !== 'hidden', // Should handle horizontal scroll
-      this.props.overflowY !== 'hidden' // Should handle vertical scroll
+      this._shouldHandleWheelX,
+      this._shouldHandleWheelY
+    );
+  },
+
+  _shouldHandleWheelX(/*number*/ delta) /*boolean*/ {
+    if (this.props.overflowX === 'hidden') {
+      return false;
+    }
+
+    delta = Math.round(delta);
+    if (delta === 0) {
+      return false;
+    }
+
+    return(
+      (delta < 0 && this.state.scrollX > 0) ||
+      (delta >= 0 && this.state.scrollX < this.state.maxScrollX)
+    );
+  },
+
+  _shouldHandleWheelY(/*number*/ delta) /*boolean*/ {
+    if (this.props.overflowY === 'hidden'|| delta === 0) {
+      return false;
+    }
+
+    delta = Math.round(delta);
+    if (delta === 0) {
+      return false;
+    }
+
+    return(
+      (delta < 0 && this.state.scrollY > 0) ||
+      (delta >= 0 && this.state.scrollY < this.state.maxScrollY)
     );
   },
 
@@ -320,8 +358,7 @@ var FixedDataTable = React.createClass({
     } else if (this.state.height > requiredHeight && this.props.ownerHeight) {
       contentHeight = Math.max(requiredHeight, this.props.ownerHeight);
     } else {
-      var maxScrollY = scrollContentHeight - this.state.bodyHeight;
-      contentHeight = this.state.height + maxScrollY;
+      contentHeight = this.state.height + this.state.maxScrollY;
     }
     if (contentHeight !== this._contentHeight &&
         this.props.onContentHeightChange) {
@@ -385,20 +422,22 @@ var FixedDataTable = React.createClass({
       );
     }
 
-    var maxScrollY = this.state.scrollContentHeight - this.state.bodyHeight;
+    var maxScrollY = this.state.maxScrollY;
     var showScrollbarX = state.maxScrollX > 0 && state.overflowX !== 'hidden';
     var showScrollbarY = maxScrollY > 0 && state.overflowY !== 'hidden';
     var scrollbarXHeight = showScrollbarX ? Scrollbar.SIZE : 0;
-    var scrollbarYHeight = state.height - scrollbarXHeight;
+    var scrollbarYHeight = state.height - scrollbarXHeight - 2 * BORDER_HEIGHT;
 
     var headerOffsetTop = state.useGroupHeader ? state.groupHeaderHeight : 0;
     var bodyOffsetTop = headerOffsetTop + state.headerHeight;
     var bottomSectionOffset = 0;
-    var footOffsetTop = bodyOffsetTop + state.bodyHeight + BORDER_HEIGHT;
+    var footOffsetTop = props.maxHeight != null
+      ? bodyOffsetTop + state.bodyHeight
+      : scrollbarYHeight - props.footerHeight;
     var rowsContainerHeight = footOffsetTop + state.footerHeight;
 
     if (props.ownerHeight !== undefined && props.ownerHeight < state.height) {
-      bottomSectionOffset = props.ownerHeight - state.height - BORDER_HEIGHT;
+      bottomSectionOffset = props.ownerHeight - state.height;
       footOffsetTop = Math.min(
         footOffsetTop,
         scrollbarYHeight + bottomSectionOffset - state.footerHeight
@@ -447,11 +486,15 @@ var FixedDataTable = React.createClass({
 
     var footer = null;
     if (state.footerHeight) {
+      var footerData = props.footerDataGetter
+        ? props.footerDataGetter()
+        : props.footerData;
+
       footer =
         <FixedDataTableRow
           key="footer"
           className={cx('public/fixedDataTable/footer')}
-          data={state.footerData}
+          data={footerData}
           fixedColumns={state.footFixedColumns}
           height={state.footerHeight}
           index={-1}
@@ -491,7 +534,12 @@ var FixedDataTable = React.createClass({
         />;
     }
 
-    if (state.ownerHeight < state.height || state.scrollY < maxScrollY) {
+    if (
+      (state.ownerHeight != null &&
+        state.ownerHeight < state.height &&
+        state.scrollContentHeight + state.reservedHeight > state.ownerHeight) ||
+      state.scrollY < maxScrollY
+    ) {
       bottomShadow =
         <div
           className={cx('fixedDataTable/bottomShadow')}
@@ -542,7 +590,7 @@ var FixedDataTable = React.createClass({
         rowHeightGetter={state.rowHeightGetter}
         scrollLeft={state.scrollX}
         scrollableColumns={state.bodyScrollableColumns}
-        showLastRowBorder={!state.footerHeight}
+        showLastRowBorder={true}
         width={state.width}
         rowPositionGetter={this._scrollHelper.getRowPosition}
       />
@@ -621,6 +669,25 @@ var FixedDataTable = React.createClass({
       'You must set either a height or a maxHeight'
     );
 
+    var children = [];
+    ReactChildren.forEach(props.children, (child, index) => {
+      if (child == null) {
+        return;
+      }
+      invariant(
+        child.type.__TableColumnGroup__ ||
+        child.type.__TableColumn__,
+        'child type should be <FixedDataTableColumn /> or ' +
+        '<FixedDataTableColumnGroup />'
+      );
+      children.push(child);
+    });
+
+    var useGroupHeader = false;
+    if (children.length && children[0].type.__TableColumnGroup__) {
+      useGroupHeader = true;
+    }
+
     var firstRowIndex = (oldState && oldState.firstRowIndex) || 0;
     var firstRowOffset = (oldState && oldState.firstRowOffset) || 0;
     var scrollX, scrollY;
@@ -647,13 +714,15 @@ var FixedDataTable = React.createClass({
       delete this._rowToScrollTo;
     }
 
+    var groupHeaderHeight = useGroupHeader ? props.groupHeaderHeight : 0;
+
     if (oldState && props.rowsCount !== oldState.rowsCount) {
       // Number of rows changed, try to scroll to the row from before the
       // change
       var viewportHeight = props.height -
         props.headerHeight -
         props.footerHeight -
-        props.groupHeaderHeight;
+        groupHeaderHeight;
       this._scrollHelper = new FixedDataTableScrollHelper(
         props.rowsCount,
         props.rowHeight,
@@ -674,26 +743,6 @@ var FixedDataTable = React.createClass({
       columnResizingData = oldState && oldState.columnResizingData;
     } else {
       columnResizingData = EMPTY_OBJECT;
-    }
-
-    var children = [];
-
-    ReactChildren.forEach(props.children, (child, index) => {
-      if (child == null) {
-        return;
-      }
-      invariant(
-        child.type.__TableColumnGroup__ ||
-        child.type.__TableColumn__,
-        'child type should be <FixedDataTableColumn /> or ' +
-        '<FixedDataTableColumnGroup />'
-      );
-      children.push(child);
-    });
-
-    var useGroupHeader = false;
-    if (children.length && children[0].type.__TableColumnGroup__) {
-      useGroupHeader = true;
     }
 
     var columns;
@@ -762,7 +811,7 @@ var FixedDataTable = React.createClass({
     var useMaxHeight = props.height === undefined;
     var height = useMaxHeight ? props.maxHeight : props.height;
     var totalHeightReserved = props.footerHeight + props.headerHeight +
-      props.groupHeaderHeight + 2 * BORDER_HEIGHT;
+      groupHeaderHeight + 2 * BORDER_HEIGHT;
     var bodyHeight = height - totalHeightReserved;
     var scrollContentHeight = this._scrollHelper.getContentHeight();
     var totalHeightNeeded = scrollContentHeight + totalHeightReserved;
@@ -809,6 +858,7 @@ var FixedDataTable = React.createClass({
       firstRowOffset,
       horizontalScrollbarVisible,
       maxScrollX,
+      maxScrollY,
       reservedHeight: totalHeightReserved,
       scrollContentHeight,
       scrollX,
@@ -818,6 +868,7 @@ var FixedDataTable = React.createClass({
       // columnInfo and props
       bodyHeight,
       height,
+      groupHeaderHeight,
       useGroupHeader,
     };
 
@@ -968,11 +1019,16 @@ var FixedDataTable = React.createClass({
       if (Math.abs(deltaY) > Math.abs(deltaX) &&
           this.props.overflowY !== 'hidden') {
         var scrollState = this._scrollHelper.scrollBy(Math.round(deltaY));
+        var maxScrollY = Math.max(
+          0,
+          scrollState.contentHeight - this.state.bodyHeight
+        );
         this.setState({
           firstRowIndex: scrollState.index,
           firstRowOffset: scrollState.offset,
           scrollY: scrollState.position,
           scrollContentHeight: scrollState.contentHeight,
+          maxScrollY: maxScrollY,
         });
       } else if (deltaX && this.props.overflowX !== 'hidden') {
         x += deltaX;
@@ -1037,6 +1093,7 @@ var HorizontalScrollbar = React.createClass({
     var innerContainerStyle = {
       height: Scrollbar.SIZE,
       position: 'absolute',
+      overflow: 'hidden',
       width: this.props.size,
     };
     translateDOMPositionXY(
