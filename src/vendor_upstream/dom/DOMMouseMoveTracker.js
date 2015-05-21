@@ -17,7 +17,7 @@
  * @typechecks
  */
 
-"use strict";
+'use strict';
 
 var EventListener = require('EventListener');
 

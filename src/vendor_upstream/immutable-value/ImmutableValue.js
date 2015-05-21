@@ -10,7 +10,7 @@
  * @typechecks
  */
 
-"use strict";
+'use strict';
 
 var invariant = require('invariant');
 var isNode = require('isNode');

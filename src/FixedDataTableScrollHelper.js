@@ -9,6 +9,7 @@
  * @providesModule FixedDataTableScrollHelper
  * @typechecks
  */
+
 'use strict';
 
 var PrefixIntervalTree = require('PrefixIntervalTree');

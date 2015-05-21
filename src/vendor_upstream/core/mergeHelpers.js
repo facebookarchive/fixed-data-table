@@ -11,7 +11,7 @@
  * requiresPolyfills: Array.isArray
  */
 
-"use strict";
+'use strict';
 
 var invariant = require('invariant');
 var keyMirror = require('keyMirror');

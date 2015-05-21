@@ -149,7 +149,7 @@ var Scrollbar = React.createClass({
     mainStyle.zIndex = this.props.zIndex;
 
     if (this.props.trackColor === 'gray') {
-      mainStyle.backgroundColor = cssVar('ads-cf-bg-color-gray');
+      mainStyle.backgroundColor = cssVar('fbui-desktop-background-light');
     }
 
     return (
@@ -177,8 +177,8 @@ var Scrollbar = React.createClass({
 
     this._wheelHandler = new ReactWheelHandler(
       onWheel,
-      isHorizontal, // Should hanlde horizontal scroll
-      !isHorizontal // Should handle vertical scroll
+      this._shouldHandleX, // Should hanlde horizontal scroll
+      this._shouldHandleY // Should handle vertical scroll
     );
   },
 
@@ -208,18 +208,42 @@ var Scrollbar = React.createClass({
     this._onWheel(delta);
   },
 
+  _shouldHandleX(/*number*/ delta) /*boolean*/ {
+    return this.props.orientation === 'horizontal' ?
+      this._shouldHandleChange(delta) :
+      false;
+  },
+
+  _shouldHandleY(/*number*/ delta) /*boolean*/ {
+    return this.props.orientation !== 'horizontal' ?
+      this._shouldHandleChange(delta) :
+      false;
+  },
+
+  _shouldHandleChange(/*number*/ delta) /*boolean*/ {
+    var nextState = this._calculateState(
+      this.state.position + delta,
+      this.props.size,
+      this.props.contentSize,
+      this.props.orientation
+    );
+    return nextState.position !== this.state.position;
+  },
+
   _calculateState(
-    /*?number*/ position,
+    /*number*/ position,
     /*number*/ size,
     /*number*/ contentSize,
     /*string*/ orientation
-    ) /*object*/ {
-
+  ) /*object*/ {
     if (size < 1 || contentSize <= size) {
       return UNSCROLLABLE_STATE;
     }
 
-    position = position || 0;
+    var stateKey = `${position}_${size}_${contentSize}_${orientation}`;
+    if (this._stateKey === stateKey) {
+      return this._stateForKey;
+    }
 
     // There are two types of positions here.
     // 1) Phisical position: changed by mouse / keyboard
@@ -254,7 +278,7 @@ var Scrollbar = React.createClass({
 
     // This function should only return flat values that can be compared quiclky
     // by `ReactComponentWithPureRenderMixin`.
-    return {
+    var state = {
       faceSize,
       isDragging,
       isHorizontal,
@@ -262,6 +286,11 @@ var Scrollbar = React.createClass({
       scale,
       scrollable,
     };
+
+    // cache the state for later use.
+    this._stateKey = stateKey;
+    this._stateForKey = state;
+    return state;
   },
 
   _onWheelY(/*number*/ deltaX, /*number*/ deltaY) {
