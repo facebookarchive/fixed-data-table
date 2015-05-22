@@ -239,12 +239,17 @@ class FixedDataTableScrollHelper {
    * brings that row to top of viewport with that offset
    */
   scrollToRow(/*number*/ rowIndex, /*number*/ offset) /*object*/ {
-    rowIndex = clamp(0, rowIndex, this._rowCount - 1);
-    offset = clamp(-this._storedHeights[rowIndex], offset, 0);
-    var firstRow = this._rowOffsets.get(rowIndex);
-    return this.scrollTo(
-      firstRow.value - this._storedHeights[rowIndex] - offset
-    );
+    if (this._rowCount === 0) {
+      return this.scrollTo(0);
+    }
+    else {
+      rowIndex = clamp(0, rowIndex, this._rowCount - 1);
+      offset = clamp(-this._storedHeights[rowIndex], offset, 0);
+      var firstRow = this._rowOffsets.get(rowIndex);
+      return this.scrollTo(
+        firstRow.value - this._storedHeights[rowIndex] - offset
+      );
+    }
   }
 
   /**
