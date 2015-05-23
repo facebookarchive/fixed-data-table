@@ -443,7 +443,7 @@ var FixedDataTable = React.createClass({
         footOffsetTop,
         bodyOffsetTop + scrollbarYHeight + bottomSectionOffset - state.footerHeight
       );
-      scrollbarYHeight = footOffsetTop - bodyOffsetTop;
+      scrollbarYHeight = Math.max(0, footOffsetTop - bodyOffsetTop);
     }
 
     var verticalScrollbar;
