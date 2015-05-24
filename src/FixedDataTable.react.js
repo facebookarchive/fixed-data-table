@@ -225,6 +225,12 @@ var FixedDataTable = React.createClass({
     scrollToRow: PropTypes.number,
 
     /**
+     * Callback that is called when scrolling starts with current horizontal
+     * and vertical scroll values.
+     */
+    onScrollStart: PropTypes.func,
+
+    /**
      * Callback that is called when scrolling ends or stops with new horizontal
      * and vertical scroll values.
      */
@@ -1015,6 +1021,9 @@ var FixedDataTable = React.createClass({
 
   _onWheel(/*number*/ deltaX, /*number*/ deltaY) {
     if (this.isMounted()) {
+      if (!this.state.isScrolling) {
+        this._didScrollStart();
+      }
       var x = this.state.scrollX;
       if (Math.abs(deltaY) > Math.abs(deltaX) &&
           this.props.overflowY !== 'hidden') {
@@ -1046,6 +1055,9 @@ var FixedDataTable = React.createClass({
 
   _onHorizontalScroll(/*number*/ scrollPos) {
     if (this.isMounted() && scrollPos !== this.state.scrollX) {
+      if (!this.state.isScrolling) {
+        this._didScrollStart();
+      }
       this.setState({
         scrollX: scrollPos,
       });
@@ -1055,6 +1067,9 @@ var FixedDataTable = React.createClass({
 
   _onVerticalScroll(/*number*/ scrollPos) {
     if (this.isMounted() && scrollPos !== this.state.scrollY) {
+      if (!this.state.isScrolling) {
+        this._didScrollStart();
+      }
       var scrollState = this._scrollHelper.scrollTo(Math.round(scrollPos));
       this.setState({
         firstRowIndex: scrollState.index,
@@ -1066,8 +1081,18 @@ var FixedDataTable = React.createClass({
     }
   },
 
+  _didScrollStart() {
+    if (this.isMounted() && !this.state.isScrolling) {
+      this.setState({isScrolling:true});
+      if (this.props.onScrollStart) {
+        this.props.onScrollStart(this.state.scrollX, this.state.scrollY);
+      }
+    }
+  },
+
   _didScrollStop() {
-    if (this.isMounted()) {
+    if (this.isMounted() && this.state.isScrolling) {
+      this.setState({isScrolling:false});
       if (this.props.onScrollEnd) {
         this.props.onScrollEnd(this.state.scrollX, this.state.scrollY);
       }
