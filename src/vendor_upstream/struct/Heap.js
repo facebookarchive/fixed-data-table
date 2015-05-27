@@ -11,7 +11,7 @@
  * @preventMunge
  */
 
-"use strict";
+'use strict';
 
 /*
  * @param {*} a

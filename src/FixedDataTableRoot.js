@@ -9,7 +9,7 @@
  * @providesModule FixedDataTableRoot
  */
 
-"use strict";
+'use strict';
 
 var FixedDataTable = require('FixedDataTable.react');
 var FixedDataTableColumn = require('FixedDataTableColumn.react');
@@ -21,6 +21,6 @@ var FixedDataTableRoot = {
   Table: FixedDataTable,
 };
 
-FixedDataTableRoot.version = '0.1.2';
+FixedDataTableRoot.version = '0.2.0';
 
 module.exports = FixedDataTableRoot;
