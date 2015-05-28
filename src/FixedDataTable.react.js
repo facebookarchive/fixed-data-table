@@ -931,6 +931,7 @@ var FixedDataTable = React.createClass({
         columnGroups[i],
         {
           dataKey: i,
+          cellRenderer: columnGroups[i].props.headerRenderer || renderToString,
           children: undefined,
           columnData: columnGroups[i].props.columnGroupData,
           isHeaderCell: true,
