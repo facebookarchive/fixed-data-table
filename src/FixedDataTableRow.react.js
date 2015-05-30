@@ -79,6 +79,11 @@ var FixedDataTableRowImpl = React.createClass({
     onClick: PropTypes.func,
 
     /**
+     * Fire when a row is double clicked.
+     */
+    onDoubleClick: PropTypes.func,
+
+    /**
      * Callback for when resizer knob (in FixedDataTableCell) is clicked
      * to initialize resizing. Please note this is only on the cells
      * in the header.
@@ -142,6 +147,7 @@ var FixedDataTableRowImpl = React.createClass({
       <div
         className={joinClasses(className, this.props.className)}
         onClick={this.props.onClick ? this._onClick : null}
+        onDoubleClick={this.props.onDoubleClick ? this._onDoubleClick : null}
         onMouseDown={this.props.onMouseDown ? this._onMouseDown : null}
         onMouseEnter={this.props.onMouseEnter ? this._onMouseEnter : null}
         onMouseLeave={this.props.onMouseLeave ? this._onMouseLeave : null}
@@ -179,6 +185,10 @@ var FixedDataTableRowImpl = React.createClass({
 
   _onClick(/*object*/ event) {
     this.props.onClick(event, this.props.index, this.props.data);
+  },
+
+  _onDoubleClick(/*object*/ event) {
+    this.props.onDoubleClick(event, this.props.index, this.props.data);
   },
 
   _onMouseDown(/*object*/ event) {
