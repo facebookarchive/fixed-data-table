@@ -16,8 +16,8 @@ var IntegerBufferSet = require('IntegerBufferSet');
 
 var clamp = require('clamp');
 var invariant = require('invariant');
-var MIN_BUFFER_ROWS = 5;
-var MAX_BUFFER_ROWS = 15;
+var MIN_BUFFER_ROWS = 3;
+var MAX_BUFFER_ROWS = 6;
 
 // FixedDataTableRowBuffer is a helper class that executes row buffering
 // logic for FixedDataTable. It figures out which rows should be rendered
