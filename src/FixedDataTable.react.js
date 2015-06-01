@@ -38,16 +38,6 @@ var ReactChildren = React.Children;
 var renderToString = FixedDataTableHelper.renderToString;
 var EMPTY_OBJECT = {};
 var BORDER_HEIGHT = 1;
-var COLUMN_SETTING_NAMES = [
-  'bodyFixedColumns',
-  'bodyScrollableColumns',
-  'headFixedColumns',
-  'headScrollableColumns',
-  'footFixedColumns',
-  'footScrollableColumns',
-  'groupHeaderFixedColumns',
-  'groupHeaderScrollableColumns',
-];
 
 /**
  * Data grid component with fixed or scrollable header and columns.
@@ -630,36 +620,84 @@ var FixedDataTable = React.createClass({
     });
   },
 
+  _areColumnSettingsIdentical(
+    oldColumns: Array,
+    newColumns: Array
+  ): boolean {
+    if (oldColumns.length !== newColumns.length) {
+      return false;
+    }
+    for (var index = 0; index < oldColumns.length; ++index) {
+      if (!shallowEqual(
+          oldColumns[index].props,
+          newColumns[index].props
+      )) {
+        return false;
+      }
+    }
+    return true;
+  },
+
   _populateColumnsAndColumnData(
-    /*array*/ columns,
-    /*?array*/ columnGroups
-  ) /*object*/ {
+    columns: Array,
+    columnGroups: ?Array,
+    oldState: ?Object
+  ): Object {
+    var canReuseColumnSettings = false;
+    var canReuseColumnGroupSettings = false;
+
+    if (oldState && oldState.columns) {
+      canReuseColumnSettings =
+        this._areColumnSettingsIdentical(columns, oldState.columns);
+    }
+    if (oldState && oldState.columnGroups && columnGroups) {
+      canReuseColumnGroupSettings =
+        this._areColumnSettingsIdentical(columnGroups, oldState.columnGroups);
+    }
+
     var columnInfo = {};
-    var bodyColumnTypes = this._splitColumnTypes(columns);
-    columnInfo.bodyFixedColumns = bodyColumnTypes.fixed;
-    columnInfo.bodyScrollableColumns = bodyColumnTypes.scrollable;
+    if (canReuseColumnSettings) {
+      columnInfo.bodyFixedColumns = oldState.bodyFixedColumns;
+      columnInfo.bodyScrollableColumns = oldState.bodyScrollableColumns;
+      columnInfo.headFixedColumns = oldState.headFixedColumns;
+      columnInfo.headScrollableColumns = oldState.headScrollableColumns;
+      columnInfo.footFixedColumns = oldState.footFixedColumns;
+      columnInfo.footScrollableColumns = oldState.footScrollableColumns;
+    } else {
+      var bodyColumnTypes = this._splitColumnTypes(columns);
+      columnInfo.bodyFixedColumns = bodyColumnTypes.fixed;
+      columnInfo.bodyScrollableColumns = bodyColumnTypes.scrollable;
+
+      var headColumnTypes = this._splitColumnTypes(
+        this._createHeadColumns(columns)
+      );
+      columnInfo.headFixedColumns = headColumnTypes.fixed;
+      columnInfo.headScrollableColumns = headColumnTypes.scrollable;
+
+      var footColumnTypes = this._splitColumnTypes(
+        this._createFootColumns(columns)
+      );
+      columnInfo.footFixedColumns = footColumnTypes.fixed;
+      columnInfo.footScrollableColumns = footColumnTypes.scrollable;
+    }
+
+    if (canReuseColumnGroupSettings) {
+      columnInfo.groupHeaderFixedColumns = oldState.groupHeaderFixedColumns;
+      columnInfo.groupHeaderScrollableColumns =
+        oldState.groupHeaderScrollableColumns;
+    } else {
+      if (columnGroups) {
+        columnInfo.groupHeaderData = this._getGroupHeaderData(columnGroups);
+        columnGroups = this._createGroupHeaderColumns(columnGroups);
+        var groupHeaderColumnTypes = this._splitColumnTypes(columnGroups);
+        columnInfo.groupHeaderFixedColumns = groupHeaderColumnTypes.fixed;
+        columnInfo.groupHeaderScrollableColumns =
+          groupHeaderColumnTypes.scrollable;
+      }
+    }
 
     columnInfo.headData = this._getHeadData(columns);
-    var headColumnTypes = this._splitColumnTypes(
-      this._createHeadColumns(columns)
-    );
-    columnInfo.headFixedColumns = headColumnTypes.fixed;
-    columnInfo.headScrollableColumns = headColumnTypes.scrollable;
 
-    var footColumnTypes = this._splitColumnTypes(
-      this._createFootColumns(columns)
-    );
-    columnInfo.footFixedColumns = footColumnTypes.fixed;
-    columnInfo.footScrollableColumns = footColumnTypes.scrollable;
-
-    if (columnGroups) {
-      columnInfo.groupHeaderData = this._getGroupHeaderData(columnGroups);
-      columnGroups = this._createGroupHeaderColumns(columnGroups);
-      var groupHeaderColumnTypes = this._splitColumnTypes(columnGroups);
-      columnInfo.groupHeaderFixedColumns = groupHeaderColumnTypes.fixed;
-      columnInfo.groupHeaderScrollableColumns =
-        groupHeaderColumnTypes.scrollable;
-    }
     return columnInfo;
   },
 
@@ -765,12 +803,9 @@ var FixedDataTable = React.createClass({
 
     var columnInfo = this._populateColumnsAndColumnData(
       columns,
-      columnGroups
+      columnGroups,
+      oldState
     );
-
-    if (oldState) {
-      columnInfo = this._tryReusingColumnSettings(columnInfo, oldState);
-    }
 
     if (this._columnToScrollTo !== undefined) {
       // If selected column is a fixed column, don't scroll
@@ -853,6 +888,8 @@ var FixedDataTable = React.createClass({
       ...columnInfo,
       ...props,
 
+      columns,
+      columnGroups,
       columnResizingData,
       firstRowIndex,
       firstRowOffset,
@@ -895,33 +932,6 @@ var FixedDataTable = React.createClass({
     }
 
     return newState;
-  },
-
-  _tryReusingColumnSettings(
-    /*object*/ columnInfo,
-    /*object*/ oldState
-  ) /*object*/ {
-    COLUMN_SETTING_NAMES.forEach(settingName => {
-      if (!columnInfo[settingName] || !oldState[settingName]) {
-        return;
-      }
-      if (columnInfo[settingName].length === oldState[settingName].length) {
-        var canReuse = true;
-        for (var index = 0; index < columnInfo[settingName].length; ++index) {
-          if (!shallowEqual(
-              columnInfo[settingName][index].props,
-              oldState[settingName][index].props
-          )) {
-            canReuse = false;
-            break;
-          }
-        }
-        if (canReuse) {
-          columnInfo[settingName] = oldState[settingName];
-        }
-      }
-    });
-    return columnInfo;
   },
 
   _createGroupHeaderColumns(/*array*/ columnGroups) /*array*/  {
