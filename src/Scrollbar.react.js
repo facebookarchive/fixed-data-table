@@ -298,7 +298,7 @@ var Scrollbar = React.createClass({
     this._onWheel(deltaX);
   },
 
-  _onWheel(/*number*/ delta){
+  _onWheel(/*number*/ delta) {
     var props = this.props;
 
     // The mouse may move faster then the animation frame does.
@@ -316,7 +316,7 @@ var Scrollbar = React.createClass({
   _onMouseDown(/*object*/ event) {
     var nextState;
 
-    if (event.target !== this.refs.face.getDOMNode()) {
+    if (event.target !== React.findDOMNode(this.refs.face)) {
       // Both `offsetX` and `layerX` are non-standard DOM property but they are
       // magically available for browsers somehow.
       var nativeEvent = event.nativeEvent;
@@ -343,7 +343,7 @@ var Scrollbar = React.createClass({
 
     this._mouseMoveTracker.captureMouseMoves(event);
     // Focus the node so it may receive keyboard event.
-    this.getDOMNode().focus();
+    React.findDOMNode(this).focus();
   },
 
   _onMouseMove(/*number*/ deltaX, /*number*/ deltaY) {
@@ -465,7 +465,7 @@ var Scrollbar = React.createClass({
     if (this.isMounted()) {
       try {
         this._onBlur();
-        this.getDOMNode().blur();
+        React.findDOMNode(this).blur();
       } catch (oops) {
         // pass
       }
