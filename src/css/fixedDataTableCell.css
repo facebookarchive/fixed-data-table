@@ -16,7 +16,7 @@
   box-sizing: border-box;
   display: block;
   overflow: hidden;
-  position: relative;
+  position: absolute;
   white-space: normal;
 }
 
@@ -38,7 +38,6 @@
 
 .public/fixedDataTableCell/wrap1 {
   display: table;
-  overflow: hidden;
 }
 
 .public/fixedDataTableCell/wrap2 {
