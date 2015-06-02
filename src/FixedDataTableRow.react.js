@@ -116,11 +116,13 @@ var FixedDataTableRowImpl = React.createClass({
       );
     }
 
+    var fixedColumnsWidth = this._getColumnsWidth(this.props.fixedColumns);
     var fixedColumns =
       <FixedDataTableCellGroup
         key="fixed_cells"
         height={this.props.height}
         left={0}
+        width={fixedColumnsWidth}
         zIndex={2}
         columns={this.props.fixedColumns}
         data={this.props.data}
@@ -128,13 +130,14 @@ var FixedDataTableRowImpl = React.createClass({
         rowHeight={this.props.height}
         rowIndex={this.props.index}
       />;
-    var fixedColumnsWidth = this._getColumnsWidth(this.props.fixedColumns);
     var columnsShadow = this._renderColumnsShadow(fixedColumnsWidth);
     var scrollableColumns =
       <FixedDataTableCellGroup
         key="scrollable_cells"
         height={this.props.height}
-        left={(fixedColumnsWidth - this.props.scrollLeft) * DIR_SIGN}
+        left={this.props.scrollLeft * DIR_SIGN}
+        offsetLeft={fixedColumnsWidth * DIR_SIGN}
+        width={this.props.width - fixedColumnsWidth}
         zIndex={0}
         columns={this.props.scrollableColumns}
         data={this.props.data}

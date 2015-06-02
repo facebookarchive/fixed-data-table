@@ -12,7 +12,7 @@
 
 var ImmutableObject = require('ImmutableObject');
 var React = require('React');
-
+var ReactComponentWithPureRenderMixin = require('ReactComponentWithPureRenderMixin');
 var cloneWithProps = require('cloneWithProps');
 var cx = require('cx');
 var joinClasses = require('joinClasses');
@@ -27,6 +27,7 @@ var DEFAULT_PROPS = new ImmutableObject({
 });
 
 var FixedDataTableCell = React.createClass({
+  mixins: [ReactComponentWithPureRenderMixin],
 
   propTypes: {
     align: PropTypes.oneOf(['left', 'center', 'right']),
@@ -80,7 +81,7 @@ var FixedDataTableCell = React.createClass({
      * to initialize resizing. Please note this is only on the cells
      * in the header.
      * @param number combinedWidth
-     * @param number leftOffset
+     * @param number left
      * @param number width
      * @param number minWidth
      * @param number maxWidth
@@ -90,34 +91,9 @@ var FixedDataTableCell = React.createClass({
     onColumnResize: PropTypes.func,
 
     /**
-     * Width of the all the cells preceding this cell that
-     * are in its column group.
-     */
-    widthOffset: PropTypes.number,
-
-    /**
      * The left offset in pixels of the cell.
      */
     left: PropTypes.number,
-  },
-
-  shouldComponentUpdate(/*object*/ nextProps) /*boolean*/ {
-    var props = this.props;
-    var key;
-    for (key in props) {
-      if (props[key] !== nextProps[key] &&
-          key !== 'left') {
-        return true;
-      }
-    }
-    for (key in nextProps) {
-      if (props[key] !== nextProps[key] &&
-          key !== 'left') {
-        return true;
-      }
-    }
-
-    return false;
   },
 
   getDefaultProps() /*object*/ {
@@ -128,8 +104,9 @@ var FixedDataTableCell = React.createClass({
     var props = this.props;
 
     var style = {
+      height: props.height,
+      left: props.left,
       width: props.width,
-      height: props.height
     };
 
     var className = joinClasses(
@@ -190,10 +167,18 @@ var FixedDataTableCell = React.createClass({
         </div>
       );
     }
+
+    var innerStyle = {
+      height: props.height,
+      width: props.width,
+    };
+
     return (
       <div className={className} style={style}>
         {columnResizerComponent}
-        <div className={cx('public/fixedDataTableCell/wrap1')} style={style}>
+        <div
+          className={cx('public/fixedDataTableCell/wrap1')}
+          style={innerStyle}>
           <div className={cx('public/fixedDataTableCell/wrap2')}>
             <div className={cx('public/fixedDataTableCell/wrap3')}>
               {content}
@@ -206,7 +191,7 @@ var FixedDataTableCell = React.createClass({
 
   _onColumnResizerMouseDown(/*object*/ event) {
     this.props.onColumnResize(
-      this.props.widthOffset,
+      this.props.left,
       this.props.width,
       this.props.minWidth,
       this.props.maxWidth,

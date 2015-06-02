@@ -45,11 +45,15 @@ var FixedDataTableCellGroupImpl = React.createClass({
       PropTypes.array
     ]),
 
+    left: PropTypes.number,
+
     onColumnResize: PropTypes.func,
 
     rowHeight: PropTypes.number.isRequired,
 
     rowIndex: PropTypes.number.isRequired,
+
+    width: PropTypes.number.isRequired,
 
     zIndex: PropTypes.number.isRequired,
   },
@@ -57,30 +61,36 @@ var FixedDataTableCellGroupImpl = React.createClass({
   render() /*object*/ {
     var props = this.props;
     var columns = props.columns;
-    var cells = [];
-    var width = 0;
+    var cells = new Array(columns.length);
 
+    var currentPosition = 0;
     for (var i = 0, j = columns.length; i < j; i++) {
       var columnProps = columns[i].props;
-      width += columnProps.width;
-      var key = 'cell_' + i;
-      cells.push(
-        this._renderCell(
+      if (!columnProps.allowCellsRecycling || (
+            currentPosition - props.left <= props.width &&
+            currentPosition - props.left + columnProps.width >= 0)) {
+        var key = 'cell_' + i;
+        cells[i] = this._renderCell(
           props.data,
           props.rowIndex,
           props.rowHeight,
           columnProps,
-          width,
+          currentPosition,
           key
-        )
-      );
+        );
+      }
+      currentPosition += columnProps.width;
     }
 
+    var contentWidth = this._getColumnsWidth(columns);
+
     var style = {
-      width: width,
       height: props.height,
-      zIndex: props.zIndex
+      position: 'absolute',
+      width: contentWidth,
+      zIndex: props.zIndex,
     };
+    translateDOMPositionXY(style, -1 * props.left, 0);
 
     return (
       <div className={cx('fixedDataTableCellGroup/cellGroup')} style={style}>
@@ -94,7 +104,7 @@ var FixedDataTableCellGroupImpl = React.createClass({
     /*number*/ rowIndex,
     /*number*/ height,
     /*object*/ columnProps,
-    /*?number*/ widthOffset,
+    /*number*/ left,
     /*string*/ key
   ) /*object*/ {
     var cellRenderer = columnProps.cellRenderer || renderToString;
@@ -135,9 +145,17 @@ var FixedDataTableCellGroupImpl = React.createClass({
         rowData={rowData}
         rowIndex={rowIndex}
         width={columnProps.width}
-        widthOffset={widthOffset}
+        left={left}
       />
     );
+  },
+
+  _getColumnsWidth(columns: array): number {
+    var width = 0;
+    for (var i = 0; i < columns.length; ++i) {
+      width += columns[i].props.width;
+    }
+    return width;
   },
 });
 
@@ -150,7 +168,7 @@ var FixedDataTableCellGroup = React.createClass({
      */
     height: PropTypes.number.isRequired,
 
-    left: PropTypes.number,
+    offsetLeft: PropTypes.number,
 
     /**
      * Z-index on which the row will be displayed. Used e.g. for keeping
@@ -160,14 +178,14 @@ var FixedDataTableCellGroup = React.createClass({
   },
 
   render() /*object*/ {
-    var {left, ...props} = this.props;
+    var {offsetLeft, ...props} = this.props;
 
     var style = {
       height: props.height,
     };
 
-    if (left) {
-      translateDOMPositionXY(style, left, 0);
+    if (offsetLeft) {
+      translateDOMPositionXY(style, offsetLeft, 0);
     }
 
     var onColumnResize = props.onColumnResize ? this._onColumnResize : null;
@@ -185,7 +203,7 @@ var FixedDataTableCellGroup = React.createClass({
   },
 
   _onColumnResize(
-    /*number*/ widthOffset,
+    /*number*/ left,
     /*number*/ width,
     /*?number*/ minWidth,
     /*?number*/ maxWidth,
@@ -193,8 +211,8 @@ var FixedDataTableCellGroup = React.createClass({
     /*object*/ event
   ) {
     this.props.onColumnResize && this.props.onColumnResize(
-      widthOffset,
-      this.props.left,
+      this.props.offsetLeft,
+      left - this.props.left + width,
       width,
       minWidth,
       maxWidth,

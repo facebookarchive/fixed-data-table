@@ -99,6 +99,7 @@ class FixedDataTableScrollHelper {
   }
 
   getRowPosition(/*number*/ rowIndex) /*number*/ {
+    this._updateRowHeight(rowIndex);
     return (
       this._rowOffsets.get(rowIndex).value - this._rowHeightGetter(rowIndex)
     );
