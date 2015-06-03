@@ -1,5 +1,5 @@
 /**
- * FixedDataTable v0.2.0 
+ * FixedDataTable v0.3.0 
  *
  * Copyright (c) 2015, Facebook, Inc.
  * All rights reserved.
@@ -218,7 +218,7 @@
   box-sizing: border-box;
   display: block;
   overflow: hidden;
-  position: relative;
+  position: absolute;
   white-space: normal;
 }
 
@@ -240,7 +240,6 @@
 
 .public_fixedDataTableCell_wrap1 {
   display: table;
-  overflow: hidden;
 }
 
 .public_fixedDataTableCell_wrap2 {
