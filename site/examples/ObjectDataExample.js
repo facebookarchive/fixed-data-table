@@ -12,8 +12,11 @@
 
 "use strict";
 
+var ROWS = 1000000;
+
 var ExampleImage = require('./ExampleImage');
 var FakeObjectDataListStore = require('./FakeObjectDataListStore');
+
 var FixedDataTable = require('fixed-data-table');
 var React = require('react');
 
@@ -46,6 +49,16 @@ var ObjectDataExample = React.createClass({
       this.props.onContentDimensionsChange(contentHeight, 1150);
   },
 
+  getInitialState() {
+    return {
+      dataList: new FakeObjectDataListStore(ROWS)
+    }
+  },
+
+  _rowGetter(index){
+    return this.state.dataList.getObjectAt(index);
+  },
+
   render() {
     var controlledScrolling =
       this.props.left !== undefined || this.props.top !== undefined;
@@ -54,8 +67,8 @@ var ObjectDataExample = React.createClass({
       <Table
         rowHeight={50}
         headerHeight={50}
-        rowGetter={FakeObjectDataListStore.getObjectAt}
-        rowsCount={FakeObjectDataListStore.getSize()}
+        rowGetter={this._rowGetter}
+        rowsCount={this.state.dataList.getSize()}
         width={this.props.tableWidth}
         height={this.props.tableHeight}
         onContentHeightChange={this._onContentHeightChange}

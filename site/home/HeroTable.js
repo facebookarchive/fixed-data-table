@@ -17,6 +17,17 @@ require('fixed-data-table/css/fixedDataTableColumnResizerLine.css');
 require('fixed-data-table/css/fixedDataTableRow.css');
 
 var HeroTable = React.createClass({
+
+  getInitialState() {
+    return {
+      dataList: new FakeObjectDataListStore()
+    }
+  },
+
+  _rowGetter(index) {
+    return this.state.dataList.getObjectAt(index);
+  },
+
   render() {
     return (
       <Table
@@ -26,8 +37,8 @@ var HeroTable = React.createClass({
         overflowY="hidden"
         rowHeight={50}
         headerHeight={50}
-        rowGetter={FakeObjectDataListStore.getObjectAt}
-        rowsCount={FakeObjectDataListStore.getSize()}
+        rowGetter={this._rowGetter}
+        rowsCount={this.state.dataList.getSize()}
         width={this.props.tableWidth}
         height={this.props.tableHeight}>
         <Column
