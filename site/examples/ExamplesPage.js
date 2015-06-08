@@ -74,6 +74,20 @@ var ExamplesPage = React.createClass({
             <ColumnGroupsExample />
           </TouchExampleWrapper>
         );
+      case ExamplePages.FILTER_EXAMPLE:
+        var FilterExample = require('./FilterExample');
+        return (
+          <TouchExampleWrapper {...this.state}>
+            <FilterExample />
+          </TouchExampleWrapper>
+        );
+      case ExamplePages.SORT_EXAMPLE:
+        var SortExample = require('./SortExample');
+        return (
+          <TouchExampleWrapper {...this.state}>
+            <SortExample />
+          </TouchExampleWrapper>
+        );
     }
   },
 

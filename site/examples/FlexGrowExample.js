@@ -1,5 +1,7 @@
 "use strict";
 
+var ROWS = 1000000;
+
 var FakeObjectDataListStore = require('./FakeObjectDataListStore');
 var FixedDataTable = require('fixed-data-table');
 var React = require('react');
@@ -24,6 +26,16 @@ var FlexGrowExample = React.createClass({
     top: PropTypes.number,
   },
 
+  getInitialState() {
+    return {
+      dataList: new FakeObjectDataListStore(ROWS)
+    };
+  },
+
+  _rowGetter(index) {
+    return this.state.dataList.getObjectAt(index);
+  },
+
   _onContentHeightChange(contentHeight) {
     this.props.onContentDimensionsChange &&
       this.props.onContentDimensionsChange(
@@ -40,8 +52,8 @@ var FlexGrowExample = React.createClass({
       <Table
         rowHeight={50}
         headerHeight={50}
-        rowGetter={FakeObjectDataListStore.getObjectAt}
-        rowsCount={FakeObjectDataListStore.getSize()}
+        rowGetter={this._rowGetter}
+        rowsCount={this.state.dataList.getSize()}
         width={this.props.tableWidth}
         height={this.props.tableHeight}
         onContentHeightChange={this._onContentHeightChange}
