@@ -5,7 +5,6 @@ var Constants = require('../Constants');
 
 var FIXED_THRESHOLD = 680;
 var MAX_HEIGHT = 800;
-var TABLE_OFFSET = 100;
 var HEADER_HEIGHT = 50;
 var EMPTY_OBJECT = {};
 var GITHUB_URL = 'https://github.com/facebook/fixed-data-table';
@@ -61,12 +60,12 @@ var Header = React.createClass({
     var HeroTable = require('./HeroTable');
 
     return (
-      <div className="heroContainer" style={{top: TABLE_OFFSET}}>
+      <div className="heroContainer">
         <HeroTable
           scrollLeft={0.5 * this.state.scroll}
           scrollTop={2 * MAX_HEIGHT - 2 * this.state.scroll}
           tableWidth={this.offsetWidth}
-          tableHeight={this.offsetHeight - 100}
+          tableHeight={this.offsetHeight}
         />
       </div>
     );
@@ -93,21 +92,27 @@ var Header = React.createClass({
           style={this.state.fixed ? EMPTY_OBJECT : clipStyles}>
           <div className="miniHeaderContents">
             <a href="./" target="_self" className="miniLogo" />
-            <a href={DOCS_DEFAULT_LOCATION} target="_self">Documentation</a>
+            <a href={DOCS_DEFAULT_LOCATION} target="_self">Docs</a>
             <a href={EXAMPLES_DEFAULT_LOCATION} target="_self">Examples</a>
             <a href={GITHUB_URL}>Github</a>
           </div>
         </div>
         <div className="cover">
-          <div className="filler">
-            <div className="miniHeaderContents">
-              <a href={DOCS_DEFAULT_LOCATION} target="_self">Documentation</a>
+          {this.state.renderHero && this._renderHero()}
+          <div className="logo">
+            <div className="title">
+              FixedDataTable
+            </div>
+            <div className="subtitle">
+              A fast and flexible lazily rendered table for React.js
+            </div>
+            <a href={GITHUB_URL} className="button">View on GitHub</a>
+            <div className="links">
+              <a href={DOCS_DEFAULT_LOCATION} target="_self">Docs</a>
+              &bull;
               <a href={EXAMPLES_DEFAULT_LOCATION} target="_self">Examples</a>
-              <a href={GITHUB_URL}>Github</a>
             </div>
           </div>
-          {this.state.renderHero && this._renderHero()}
-          <div className="logo" />
         </div>
       </div>
     );

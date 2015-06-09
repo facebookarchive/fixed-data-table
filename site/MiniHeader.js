@@ -19,7 +19,7 @@ var MiniHeader = React.createClass({
             <a className="homeLink" href="./" target="_self">
               Home
             </a>
-            <a href={DOCS_DEFAULT_LOCATION} target="_self">Documentation</a>
+            <a href={DOCS_DEFAULT_LOCATION} target="_self">Docs</a>
             <a href={EXAMPLES_DEFAULT_LOCATION} target="_self">Examples</a>
             <a href={GITHUB_URL}>Github</a>
           </div>
