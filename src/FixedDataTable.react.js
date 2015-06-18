@@ -421,23 +421,24 @@ var FixedDataTable = React.createClass({
     var showScrollbarX = state.maxScrollX > 0 && state.overflowX !== 'hidden';
     var showScrollbarY = maxScrollY > 0 && state.overflowY !== 'hidden';
     var scrollbarXHeight = showScrollbarX ? Scrollbar.SIZE : 0;
-    var scrollbarYHeight = state.height - scrollbarXHeight - 2 * BORDER_HEIGHT;
+    var scrollbarYHeight = state.height - scrollbarXHeight - (2 * BORDER_HEIGHT) - state.footerHeight;
 
     var headerOffsetTop = state.useGroupHeader ? state.groupHeaderHeight : 0;
     var bodyOffsetTop = headerOffsetTop + state.headerHeight;
+    scrollbarYHeight -= bodyOffsetTop;
     var bottomSectionOffset = 0;
     var footOffsetTop = props.maxHeight != null
       ? bodyOffsetTop + state.bodyHeight
-      : scrollbarYHeight - props.footerHeight;
+      : bodyOffsetTop + scrollbarYHeight;
     var rowsContainerHeight = footOffsetTop + state.footerHeight;
 
     if (props.ownerHeight !== undefined && props.ownerHeight < state.height) {
       bottomSectionOffset = props.ownerHeight - state.height;
       footOffsetTop = Math.min(
         footOffsetTop,
-        scrollbarYHeight + bottomSectionOffset - state.footerHeight
+        bodyOffsetTop + scrollbarYHeight + bottomSectionOffset - state.footerHeight
       );
-      scrollbarYHeight = props.ownerHeight - scrollbarXHeight;
+      scrollbarYHeight = Math.max(0, footOffsetTop - bodyOffsetTop);
     }
 
     var verticalScrollbar;
@@ -447,6 +448,7 @@ var FixedDataTable = React.createClass({
           size={scrollbarYHeight}
           contentSize={scrollbarYHeight + maxScrollY}
           onScroll={this._onVerticalScroll}
+          verticalTop={bodyOffsetTop}
           position={state.scrollY}
         />;
     }
