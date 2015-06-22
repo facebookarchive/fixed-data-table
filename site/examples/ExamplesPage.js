@@ -45,6 +45,8 @@ var ExamplesPage = React.createClass({
     require('fixed-data-table/css/fixedDataTableColumnResizerLine.css');
     require('fixed-data-table/css/fixedDataTableRow.css');
 
+    require('fixed-data-table/theme/fixedDataTableThemeDefault.css');
+
     switch (this.props.example) {
       case ExamplePages.OBJECT_DATA_EXAMPLE:
         var ObjectDataExample = require('./ObjectDataExample');

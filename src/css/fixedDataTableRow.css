@@ -22,7 +22,7 @@
   top: 0;
 }
 
-.fixedDataTableRow/fixedColumnsDivider {
+.public/fixedDataTableRow/fixedColumnsDivider {
   backface-visibility: hidden;
   border-left: solid 1px transparent;
   left: 0;
@@ -31,7 +31,7 @@
   width: 0;
 }
 
-.fixedDataTableRow/columnsShadow {
+.public/fixedDataTableRow/columnsShadow {
   width: 4px;
 }
 

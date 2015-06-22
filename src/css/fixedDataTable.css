@@ -17,30 +17,16 @@
 }
 
 .public/fixedDataTable/header,
-.fixedDataTable/hasBottomBorder {
-  border-bottom: solid 1px #d3d3d3;
-}
-
-.public/fixedDataTableRow/main.fixedDataTable/hasBottomBorder {
-  box-sizing: content-box;
-}
-
-.public/fixedDataTable/header .public/fixedDataTableCell/main {
-  font-weight: bold;
-}
-
-.public/fixedDataTable/header,
-.public/fixedDataTable/header .public/fixedDataTableCell/main {
-  background-color: #f6f7f8;
-  background-image: linear-gradient(#fff, #efefef);
+.public/fixedDataTable/hasBottomBorder {
+  border-bottom: solid 1px transparent;
 }
 
 .public/fixedDataTable/footer .public/fixedDataTableCell/main {
   border-top: solid 1px transparent;
 }
 
-.fixedDataTable/topShadow,
-.fixedDataTable/bottomShadow {
+.public/fixedDataTable/topShadow,
+.public/fixedDataTable/bottomShadow {
   height: 4px;
   left: 0;
   position: absolute;
@@ -57,7 +43,7 @@
   position: relative;
 }
 
-.fixedDataTable/horizontalScrollbar {
+.public/fixedDataTable/horizontalScrollbar {
   bottom: 0;
   position: absolute;
 }

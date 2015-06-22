@@ -55,11 +55,11 @@
   cursor: ew-resize;
 }
 
-.fixedDataTableCell/columnResizerContainer:hover .fixedDataTableCell/columnResizerKnob {
+.fixedDataTableCell/columnResizerContainer:hover .public/fixedDataTableCell/columnResizerKnob {
   visibility: visible;
 }
 
-.fixedDataTableCell/columnResizerKnob {
+.public/fixedDataTableCell/columnResizerKnob {
   position: absolute;
   right: 0px;
   visibility: hidden;

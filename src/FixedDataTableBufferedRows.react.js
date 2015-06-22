@@ -148,7 +148,7 @@ var FixedDataTableBufferedRows = React.createClass({
           className={joinClasses(
             rowClassNameGetter(rowIndex),
             cx('public/fixedDataTable/bodyRow'),
-            hasBottomBorder ? cx('fixedDataTable/hasBottomBorder') : null
+            hasBottomBorder ? cx('public/fixedDataTable/hasBottomBorder') : null
           )}
         />;
     }

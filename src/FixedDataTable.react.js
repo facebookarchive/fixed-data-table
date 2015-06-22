@@ -524,7 +524,7 @@ var FixedDataTable = React.createClass({
     if (state.scrollY) {
       topShadow =
         <div
-          className={cx('fixedDataTable/topShadow')}
+          className={cx('public/fixedDataTable/topShadow')}
           style={{top: bodyOffsetTop}}
         />;
     }
@@ -537,7 +537,7 @@ var FixedDataTable = React.createClass({
     ) {
       bottomShadow =
         <div
-          className={cx('fixedDataTable/bottomShadow')}
+          className={cx('public/fixedDataTable/bottomShadow')}
           style={{top: footOffsetTop}}
         />;
     }

@@ -8,6 +8,4 @@ __site__
 __site_prerender__
 internal
 docs
-# Temp hack.
-dist/fixed-data-table-theme.js
-dist/fixed-data-table-theme.min.js
+dist

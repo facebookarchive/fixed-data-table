@@ -46,7 +46,7 @@
   height: var(scrollbar-size-large);
 }
 
-.Scrollbar/face {
+.public/Scrollbar/face {
   left: 0;
   overflow: hidden;
   position: absolute;
@@ -59,7 +59,7 @@
  * we can get the correct `event.offsetX` and `event.offsetY` from the
  * scrollface element while dragging it.
  */
-.Scrollbar/face:after {
+.public/Scrollbar/face:after {
   border-radius: var(scrollbar-face-radius);
   content: '';
   display: block;
@@ -67,26 +67,26 @@
   transition: background-color 250ms ease;
 }
 
-.Scrollbar/faceHorizontal {
+.public/Scrollbar/faceHorizontal {
   bottom: 0;
   left: 0;
   top: 0;
 }
 
-.Scrollbar/faceHorizontal:after {
+.public/Scrollbar/faceHorizontal:after {
   bottom: var(scrollbar-face-margin);
   left: 0;
   top: var(scrollbar-face-margin);
   width: 100%;
 }
 
-.Scrollbar/faceVertical {
+.public/Scrollbar/faceVertical {
   left: 0;
   right: 0;
   top: 0;
 }
 
-.Scrollbar/faceVertical:after {
+.public/Scrollbar/faceVertical:after {
   height: 100%;
   left: var(scrollbar-face-margin);
   right: var(scrollbar-face-margin);

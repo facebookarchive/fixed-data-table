@@ -16,6 +16,8 @@ require('fixed-data-table/css/fixedDataTableCellGroup.css');
 require('fixed-data-table/css/fixedDataTableColumnResizerLine.css');
 require('fixed-data-table/css/fixedDataTableRow.css');
 
+require('fixed-data-table/theme/fixedDataTableThemeDefault.css');
+
 var HeroTable = React.createClass({
 
   getInitialState() {
