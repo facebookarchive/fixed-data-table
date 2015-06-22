@@ -48,6 +48,7 @@ var Scrollbar = React.createClass({
     size: PropTypes.number.isRequired,
     trackColor: PropTypes.oneOf(['gray']),
     zIndex: PropTypes.number,
+    verticalTop: PropTypes.number
   },
 
   getInitialState() /*object*/ {
@@ -107,6 +108,7 @@ var Scrollbar = React.createClass({
     var isActive = this.state.focused || this.state.isDragging;
     var faceSize = this.state.faceSize;
     var isOpaque = this.props.isOpaque;
+    var verticalTop = this.props.verticalTop || 0;
 
     var mainClassName = cx({
       'public/Scrollbar/main': true,
@@ -135,6 +137,7 @@ var Scrollbar = React.createClass({
       translateDOMPositionXY(faceStyle, position, 0);
     } else {
       mainStyle = {
+        top: verticalTop,
         height: size,
       };
       faceStyle = {
@@ -250,7 +253,7 @@ var Scrollbar = React.createClass({
 
     var isHorizontal = orientation === 'horizontal';
     var scale = size / contentSize;
-    var faceSize = Math.round(size * scale);
+    var faceSize = size * scale;
 
     if (faceSize < FACE_SIZE_MIN) {
       scale = (size - FACE_SIZE_MIN) / (contentSize - FACE_SIZE_MIN);
@@ -269,9 +272,6 @@ var Scrollbar = React.createClass({
     var isDragging = this._mouseMoveTracker ?
       this._mouseMoveTracker.isDragging() :
       false;
-
-    position = Math.round(position);
-    faceSize = Math.round(faceSize);
 
     // This function should only return flat values that can be compared quiclky
     // by `ReactComponentWithPureRenderMixin`.
