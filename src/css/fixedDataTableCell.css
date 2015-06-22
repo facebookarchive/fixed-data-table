@@ -10,8 +10,7 @@
  */
 
 .public/fixedDataTableCell/main {
-  background-color: #fff;
-  border: solid 1px #d3d3d3;
+  border: solid 1px transparent;
   border-width: 0 1px 0 0;
   box-sizing: border-box;
   display: block;
@@ -22,10 +21,6 @@
 
 .public/fixedDataTableCell/lastChild {
   border-width: 0 1px 1px 0;
-}
-
-.public/fixedDataTableCell/highlighted {
-  background-color: #f4f4f4;
 }
 
 .public/fixedDataTableCell/alignRight {
@@ -49,10 +44,6 @@
   vertical-align: middle;
 }
 
-.public/fixedDataTableCell/cellContent {
-  padding: 8px;
-}
-
 .fixedDataTableCell/columnResizerContainer {
   position: absolute;
   right: 0px;
@@ -69,7 +60,6 @@
 }
 
 .fixedDataTableCell/columnResizerKnob {
-  background-color: #0284ff;
   position: absolute;
   right: 0px;
   visibility: hidden;

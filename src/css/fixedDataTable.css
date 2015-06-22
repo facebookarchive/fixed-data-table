@@ -36,8 +36,7 @@
 }
 
 .public/fixedDataTable/footer .public/fixedDataTableCell/main {
-  background-color: #f6f7f8;
-  border-top: solid 1px #d3d3d3;
+  border-top: solid 1px transparent;
 }
 
 .fixedDataTable/topShadow,
@@ -49,12 +48,7 @@
   z-index: 1;
 }
 
-.fixedDataTable/topShadow {
-  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAF0lEQVR4AWPUkNeSBhHCjJoK2twgFisAFagCCp3pJlAAAAAASUVORK5CYII=) repeat-x;
-}
-
 .fixedDataTable/bottomShadow {
-  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAHElEQVQI12MwNjZmZdAT1+Nm0JDWEGZQk1GTBgAWkwIeAEp52AAAAABJRU5ErkJggg==) repeat-x;
   margin-top: -4px;
 }
 
@@ -66,8 +60,4 @@
 .fixedDataTable/horizontalScrollbar {
   bottom: 0;
   position: absolute;
-}
-
-.fixedDataTable/horizontalScrollbar .public/Scrollbar/mainHorizontal {
-  background: #fff;
 }
