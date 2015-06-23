@@ -175,8 +175,8 @@ var FixedDataTableRowImpl = React.createClass({
   _renderColumnsShadow(/*number*/ left) /*?object*/ {
     if (left > 0) {
       var className = cx({
-        'fixedDataTableRow/fixedColumnsDivider': true,
-        'fixedDataTableRow/columnsShadow': this.props.scrollLeft > 0,
+        'public/fixedDataTableRow/fixedColumnsDivider': true,
+        'public/fixedDataTableRow/columnsShadow': this.props.scrollLeft > 0,
       });
       var style = {
         left: left,

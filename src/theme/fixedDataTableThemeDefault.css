@@ -1,0 +1,125 @@
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ */
+
+/**
+ * Table.
+ */
+.public/fixedDataTable/main {
+  border-color: #d3d3d3;
+}
+
+.public/fixedDataTable/header,
+.public/fixedDataTable/hasBottomBorder {
+  border-color: #d3d3d3;
+}
+
+.public/fixedDataTable/header .public/fixedDataTableCell/main {
+  font-weight: bold;
+}
+
+.public/fixedDataTable/header,
+.public/fixedDataTable/header .public/fixedDataTableCell/main {
+  background-color: #f6f7f8;
+  background-image: linear-gradient(#fff, #efefef);
+}
+
+.public/fixedDataTable/footer .public/fixedDataTableCell/main {
+  background-color: #f6f7f8;
+  border-color: #d3d3d3;
+}
+
+.public/fixedDataTable/topShadow {
+  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAF0lEQVR4AWPUkNeSBhHCjJoK2twgFisAFagCCp3pJlAAAAAASUVORK5CYII=) repeat-x;
+}
+
+.public/fixedDataTable/bottomShadow {
+  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAHElEQVQI12MwNjZmZdAT1+Nm0JDWEGZQk1GTBgAWkwIeAEp52AAAAABJRU5ErkJggg==) repeat-x;
+}
+
+.public/fixedDataTable/horizontalScrollbar .public/Scrollbar/mainHorizontal {
+  background-color: #fff;
+}
+
+/**
+ * Table cell.
+ */
+.public/fixedDataTableCell/main {
+  background-color: #fff;
+  border-color: #d3d3d3
+}
+
+.public/fixedDataTableCell/highlighted {
+  background-color: #f4f4f4;
+}
+
+.public/fixedDataTableCell/cellContent {
+  padding: 0 10px;
+}
+
+.public/fixedDataTableCell/columnResizerKnob {
+  background-color: #0284ff;
+}
+
+/**
+ * Column resizer line.
+ */
+.public/fixedDataTableColumnResizerLine/main {
+  border-color: #0284ff;
+}
+
+/**
+ * Table row.
+ */
+.public/fixedDataTableRow/main {
+  background-color: #fff;
+}
+
+.public/fixedDataTableRow/highlighted,
+.public/fixedDataTableRow/highlighted .public/fixedDataTableCell/main {
+  background-color: #f6f7f8;
+}
+
+.public/fixedDataTableRow/fixedColumnsDivider {
+  border-color: #d3d3d3;
+}
+
+.public/fixedDataTableRow/columnsShadow {
+  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAABCAYAAAD5PA/NAAAAFklEQVQIHWPSkNeSBmJhTQVtbiDNCgASagIIuJX8OgAAAABJRU5ErkJggg==) repeat-y;
+}
+
+/**
+ * Scrollbars.
+ */
+/* Touching the scroll-track directly makes the scroll-track bolder */
+.public/Scrollbar/mainVertical.Scrollbar/mainActive,
+.public/Scrollbar/mainVertical:hover {
+  background-color: var(scrollbar-track-color);
+}
+
+.public/Scrollbar/mainHorizontal.Scrollbar/mainActive,
+.public/Scrollbar/mainHorizontal:hover {
+  background-color: var(scrollbar-track-color);
+}
+
+.public/Scrollbar/mainOpaque,
+.public/Scrollbar/mainOpaque.Scrollbar/mainActive,
+.public/Scrollbar/mainOpaque:hover {
+  background-color: #fff;
+}
+
+.public/Scrollbar/face:after {
+  background-color: var(scrollbar-face-color);
+}
+
+.public/Scrollbar/main:hover .Scrollbar/face:after,
+.public/Scrollbar/mainActive .Scrollbar/face:after,
+.public/Scrollbar/faceActive:after {
+  background-color: var(scrollbar-face-active-color);
+}

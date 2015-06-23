@@ -16,8 +16,8 @@
   width: 12px;
 }
 
-.fixedDataTableColumnResizerLine/main {
-  border-right: 1px solid #0284ff;
+.public/fixedDataTableColumnResizerLine/main {
+  border-right: 1px solid transparent;
   box-sizing: border-box;
   position: absolute;
   z-index: 10;

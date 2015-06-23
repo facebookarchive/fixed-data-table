@@ -10,7 +10,6 @@
  */
 
 .public/fixedDataTableRow/main {
-  background-color: #fff;
   box-sizing: border-box;
   overflow: hidden;
   position: absolute;
@@ -23,22 +22,16 @@
   top: 0;
 }
 
-.public/fixedDataTableRow/highlighted,
-.public/fixedDataTableRow/highlighted .public/fixedDataTableCell/main {
-  background-color: #f6f7f8;
-}
-
-.fixedDataTableRow/fixedColumnsDivider {
+.public/fixedDataTableRow/fixedColumnsDivider {
   backface-visibility: hidden;
-  border-left: solid 1px #d3d3d3;
+  border-left: solid 1px transparent;
   left: 0;
   position: absolute;
   top: 0;
   width: 0;
 }
 
-.fixedDataTableRow/columnsShadow {
-  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAABCAYAAAD5PA/NAAAAFklEQVQIHWPSkNeSBmJhTQVtbiDNCgASagIIuJX8OgAAAABJRU5ErkJggg==) repeat-y;
+.public/fixedDataTableRow/columnsShadow {
   width: 4px;
 }
 

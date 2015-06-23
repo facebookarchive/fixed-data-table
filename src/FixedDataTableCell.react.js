@@ -161,7 +161,7 @@ var FixedDataTableCell = React.createClass({
           style={columnResizerStyle}
           onMouseDown={this._onColumnResizerMouseDown}>
           <div
-            className={cx('fixedDataTableCell/columnResizerKnob')}
+            className={cx('public/fixedDataTableCell/columnResizerKnob')}
             style={columnResizerStyle}
           />
         </div>

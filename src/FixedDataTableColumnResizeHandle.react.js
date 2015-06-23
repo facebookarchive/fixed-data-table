@@ -126,7 +126,7 @@ var FixedDataTableColumnResizeHandle = React.createClass({
     return (
       <div
         className={cx({
-          'fixedDataTableColumnResizerLine/main': true,
+          'public/fixedDataTableColumnResizerLine/main': true,
           'fixedDataTableColumnResizerLine/hiddenElem': !this.props.visible
         })}
         style={style}>
