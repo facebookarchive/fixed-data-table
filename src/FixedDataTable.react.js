@@ -282,7 +282,7 @@ var FixedDataTable = React.createClass({
 
   getInitialState() /*object*/ {
     var props = this.props;
-    var viewportHeight = props.height -
+    var viewportHeight = ~~props.height -
       props.headerHeight -
       props.footerHeight -
       props.groupHeaderHeight;
@@ -771,7 +771,7 @@ var FixedDataTable = React.createClass({
     if (oldState && props.rowsCount !== oldState.rowsCount) {
       // Number of rows changed, try to scroll to the row from before the
       // change
-      var viewportHeight = props.height -
+      var viewportHeight = ~~props.height -
         props.headerHeight -
         props.footerHeight -
         groupHeaderHeight;
@@ -858,7 +858,7 @@ var FixedDataTable = React.createClass({
     }
 
     var useMaxHeight = props.height === undefined;
-    var height = useMaxHeight ? props.maxHeight : props.height;
+    var height = useMaxHeight ? props.maxHeight : ~~props.height;
     var totalHeightReserved = props.footerHeight + props.headerHeight +
       groupHeaderHeight + 2 * BORDER_HEIGHT;
     var bodyHeight = height - totalHeightReserved;
