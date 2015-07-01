@@ -32,6 +32,22 @@ var FixedDataTableColumn = React.createClass({
      * className for each of this column's data cells.
      */
     cellClassName: PropTypes.string,
+    
+    /**
+     * To get any additional CSS classes that should be added to a cell,
+     * `cellClassNameGetter(rowIndex)` is called.
+     */
+    cellClassNameGetter: PropTypes.func,
+    
+    /**
+     * Fire when a cell is clicked.
+     */
+    onCellClick: PropTypes.func,
+
+    /**
+     * Fire when a cell is double clicked.
+     */
+    onCellDoubleClick: PropTypes.func,
 
     /**
      * The cell renderer that returns React-renderable content for table cell.

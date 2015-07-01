@@ -55,7 +55,7 @@ var FixedDataTableCellGroupImpl = React.createClass({
 
     width: PropTypes.number.isRequired,
 
-    zIndex: PropTypes.number.isRequired,
+    zIndex: PropTypes.number.isRequired
   },
 
   render() /*object*/ {
@@ -134,6 +134,7 @@ var FixedDataTableCellGroupImpl = React.createClass({
         cellDataKey={cellDataKey}
         cellRenderer={cellRenderer}
         className={columnProps.cellClassName}
+        cellClassNameGetter={columnProps.cellClassNameGetter}
         columnData={columnData}
         height={height}
         isFooterCell={isFooterCell}
@@ -146,6 +147,8 @@ var FixedDataTableCellGroupImpl = React.createClass({
         rowIndex={rowIndex}
         width={columnProps.width}
         left={left}
+        onClick={columnProps.onCellClick}
+        onDoubleClick={columnProps.onCellDoubleClick}
       />
     );
   },
