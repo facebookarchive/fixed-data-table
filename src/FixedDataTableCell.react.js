@@ -39,6 +39,7 @@ var FixedDataTableCell = React.createClass({
     minWidth: PropTypes.number,
     maxWidth: PropTypes.number,
     height: PropTypes.number.isRequired,
+    cellClassNameGetter: PropTypes.func,
 
     /**
      * The cell data that will be passed to `cellRenderer` to render.
@@ -75,6 +76,16 @@ var FixedDataTableCell = React.createClass({
      * The row index that will be passed to `cellRenderer` to render.
      */
     rowIndex: PropTypes.number.isRequired,
+    
+    /**
+     * Fire when a cell is clicked.
+     */
+    onClick: PropTypes.func,
+
+    /**
+     * Fire when a cell is double clicked.
+     */
+    onDoubleClick: PropTypes.func,
 
     /**
      * Callback for when resizer knob (in FixedDataTableCell) is clicked
@@ -99,6 +110,14 @@ var FixedDataTableCell = React.createClass({
   getDefaultProps() /*object*/ {
     return DEFAULT_PROPS;
   },
+  
+  _onClick(/*object*/ event) {
+    this.props.onClick(event, this.props.cellDataKey, this.props.cellData, this.props.rowIndex, this.props.rowData);
+  },
+
+  _onDoubleClick(/*object*/ event) {
+    this.props.onDoubleClick(event, this.props.cellDataKey, this.props.cellData, this.props.rowIndex, this.props.rowData);
+  },
 
   render() /*object*/ {
     var props = this.props;
@@ -109,6 +128,7 @@ var FixedDataTableCell = React.createClass({
       width: props.width,
     };
 
+    var cellClassNameGetter = props.cellClassNameGetter || emptyFunction;
     var className = joinClasses(
       cx({
         'public/fixedDataTableCell/main': true,
@@ -117,7 +137,8 @@ var FixedDataTableCell = React.createClass({
         'public/fixedDataTableCell/alignRight': props.align === 'right',
         'public/fixedDataTableCell/alignCenter': props.align === 'center'
       }),
-      props.className
+      props.className,
+      cellClassNameGetter(props.rowIndex)
     );
 
     var content;
@@ -174,7 +195,11 @@ var FixedDataTableCell = React.createClass({
     };
 
     return (
-      <div className={className} style={style}>
+      <div 
+        className={className}
+        style={style} 
+        onClick={this.props.onClick ? this._onClick : null} 
+        onDoubleClick={this.props.onDoubleClick ? this._onDoubleClick : null}>
         {columnResizerComponent}
         <div
           className={cx('public/fixedDataTableCell/wrap1')}

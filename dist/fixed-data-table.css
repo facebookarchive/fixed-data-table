@@ -17,123 +17,6 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @providesModule Scrollbar
- */
-
-.public_Scrollbar_main {
-  box-sizing: border-box;
-  outline: none;
-  overflow: hidden;
-  position: absolute;
-  -webkit-transition-duration: 250ms;
-          transition-duration: 250ms;
-  -webkit-transition-timing-function: ease;
-          transition-timing-function: ease;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-}
-
-.public_Scrollbar_mainVertical {
-  bottom: 0;
-  right: 0;
-  top: 0;
-  -webkit-transition-property: background-color width;
-          transition-property: background-color width;
-  width: 15px;
-}
-
-/* Touching the scroll-track directly makes the scroll-track bolder */
-.public_Scrollbar_mainVertical.Scrollbar_mainActive,
-.public_Scrollbar_mainVertical:hover {
-  background-color: rgba(255, 255, 255, 0.8);
-  width: 17px;
-}
-
-.public_Scrollbar_mainHorizontal {
-  bottom: 0;
-  height: 15px;
-  left: 0;
-  -webkit-transition-property: background-color height;
-          transition-property: background-color height;
-}
-
-/* Touching the scroll-track directly makes the scroll-track bolder */
-.public_Scrollbar_mainHorizontal.Scrollbar_mainActive,
-.public_Scrollbar_mainHorizontal:hover {
-  background-color: rgba(255, 255, 255, 0.8);
-  height: 17px;
-}
-
-.Scrollbar_mainOpaque,
-.Scrollbar_mainOpaque.Scrollbar_mainActive,
-.Scrollbar_mainOpaque:hover {
-  background-color: #fff;
-}
-
-.Scrollbar_face {
-  left: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: 1;
-}
-
-/**
- * This selector renders the "nub" of the scrollface. The nub must
- * be rendered as pseudo-element so that it won't receive any UI events then
- * we can get the correct `event.offsetX` and `event.offsetY` from the
- * scrollface element while dragging it.
- */
-.Scrollbar_face:after {
-  background-color: #c2c2c2;
-  border-radius: 6px;
-  content: '';
-  display: block;
-  position: absolute;
-  -webkit-transition: background-color 250ms ease;
-          transition: background-color 250ms ease;
-}
-
-.public_Scrollbar_main:hover .Scrollbar_face:after,
-.Scrollbar_mainActive .Scrollbar_face:after,
-.Scrollbar_faceActive:after {
-  background-color: #7d7d7d;
-}
-
-.Scrollbar_faceHorizontal {
-  bottom: 0;
-  left: 0;
-  top: 0;
-}
-
-.Scrollbar_faceHorizontal:after {
-  bottom: 4px;
-  left: 0;
-  top: 4px;
-  width: 100%;
-}
-
-.Scrollbar_faceVertical {
-  left: 0;
-  right: 0;
-  top: 0;
-}
-
-.Scrollbar_faceVertical:after {
-  height: 100%;
-  left: 4px;
-  right: 4px;
-  top: 0;
-}
-/**
- * Copyright (c) 2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
  * @providesModule fixedDataTable
  */
 
@@ -145,45 +28,24 @@
 }
 
 .public_fixedDataTable_header,
-.fixedDataTable_hasBottomBorder {
-  border-bottom: solid 1px #d3d3d3;
-}
-
-.public_fixedDataTableRow_main.fixedDataTable_hasBottomBorder {
-  box-sizing: content-box;
-}
-
-.public_fixedDataTable_header .public_fixedDataTableCell_main {
-  font-weight: bold;
-}
-
-.public_fixedDataTable_header,
-.public_fixedDataTable_header .public_fixedDataTableCell_main {
-  background-color: #f6f7f8;
-  background-image: -webkit-linear-gradient(#fff, #efefef);
-  background-image: linear-gradient(#fff, #efefef);
+.public_fixedDataTable_hasBottomBorder {
+  border-bottom: solid 1px transparent;
 }
 
 .public_fixedDataTable_footer .public_fixedDataTableCell_main {
-  background-color: #f6f7f8;
-  border-top: solid 1px #d3d3d3;
+  border-top: solid 1px transparent;
 }
 
-.fixedDataTable_topShadow,
-.fixedDataTable_bottomShadow {
+.public_fixedDataTable_topShadow,
+.public_fixedDataTable_bottomShadow {
   height: 4px;
   left: 0;
   position: absolute;
   right: 0;
-  z-index: 1;
-}
-
-.fixedDataTable_topShadow {
-  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAF0lEQVR4AWPUkNeSBhHCjJoK2twgFisAFagCCp3pJlAAAAAASUVORK5CYII=) repeat-x;
+  z-index: 100;
 }
 
 .fixedDataTable_bottomShadow {
-  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAHElEQVQI12MwNjZmZdAT1+Nm0JDWEGZQk1GTBgAWkwIeAEp52AAAAABJRU5ErkJggg==) repeat-x;
   margin-top: -4px;
 }
 
@@ -192,13 +54,9 @@
   position: relative;
 }
 
-.fixedDataTable_horizontalScrollbar {
+.public_fixedDataTable_horizontalScrollbar {
   bottom: 0;
   position: absolute;
-}
-
-.fixedDataTable_horizontalScrollbar .public_Scrollbar_mainHorizontal {
-  background: #fff;
 }
 /**
  * Copyright (c) 2015, Facebook, Inc.
@@ -212,8 +70,7 @@
  */
 
 .public_fixedDataTableCell_main {
-  background-color: #fff;
-  border: solid 1px #d3d3d3;
+  border: solid 1px transparent;
   border-width: 0 1px 0 0;
   box-sizing: border-box;
   display: block;
@@ -224,10 +81,6 @@
 
 .public_fixedDataTableCell_lastChild {
   border-width: 0 1px 1px 0;
-}
-
-.public_fixedDataTableCell_highlighted {
-  background-color: #f4f4f4;
 }
 
 .public_fixedDataTableCell_alignRight {
@@ -251,10 +104,6 @@
   vertical-align: middle;
 }
 
-.public_fixedDataTableCell_cellContent {
-  padding: 8px;
-}
-
 .fixedDataTableCell_columnResizerContainer {
   position: absolute;
   right: 0px;
@@ -266,12 +115,11 @@
   cursor: ew-resize;
 }
 
-.fixedDataTableCell_columnResizerContainer:hover .fixedDataTableCell_columnResizerKnob {
+.fixedDataTableCell_columnResizerContainer:hover .public_fixedDataTableCell_columnResizerKnob {
   visibility: visible;
 }
 
-.fixedDataTableCell_columnResizerKnob {
-  background-color: #0284ff;
+.public_fixedDataTableCell_columnResizerKnob {
   position: absolute;
   right: 0px;
   visibility: hidden;
@@ -326,8 +174,8 @@
   width: 12px;
 }
 
-.fixedDataTableColumnResizerLine_main {
-  border-right: 1px solid #0284ff;
+.public_fixedDataTableColumnResizerLine_main {
+  border-right: 1px solid transparent;
   box-sizing: border-box;
   position: absolute;
   z-index: 10;
@@ -348,7 +196,6 @@
  */
 
 .public_fixedDataTableRow_main {
-  background-color: #fff;
   box-sizing: border-box;
   overflow: hidden;
   position: absolute;
@@ -361,27 +208,249 @@
   top: 0;
 }
 
-.public_fixedDataTableRow_highlighted,
-.public_fixedDataTableRow_highlighted .public_fixedDataTableCell_main {
-  background-color: #f6f7f8;
-}
-
-.fixedDataTableRow_fixedColumnsDivider {
+.public_fixedDataTableRow_fixedColumnsDivider {
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
-  border-left: solid 1px #d3d3d3;
+  border-left: solid 1px transparent;
   left: 0;
   position: absolute;
   top: 0;
   width: 0;
 }
 
-.fixedDataTableRow_columnsShadow {
-  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAABCAYAAAD5PA/NAAAAFklEQVQIHWPSkNeSBmJhTQVtbiDNCgASagIIuJX8OgAAAABJRU5ErkJggg==) repeat-y;
+.public_fixedDataTableRow_columnsShadow {
   width: 4px;
 }
 
 .fixedDataTableRow_rowWrapper {
   position: absolute;
   top: 0;
+}
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule Scrollbar
+ */
+
+.public_Scrollbar_main {
+  box-sizing: border-box;
+  outline: none;
+  overflow: hidden;
+  position: absolute;
+  -webkit-transition-duration: 250ms;
+          transition-duration: 250ms;
+  -webkit-transition-timing-function: ease;
+          transition-timing-function: ease;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.public_Scrollbar_mainVertical {
+  bottom: 0;
+  right: 0;
+  top: 0;
+  -webkit-transition-property: background-color width;
+          transition-property: background-color width;
+  width: 15px;
+}
+
+/* Touching the scroll-track directly makes the scroll-track bolder */
+.public_Scrollbar_mainVertical.Scrollbar_mainActive,
+.public_Scrollbar_mainVertical:hover {
+  width: 17px;
+}
+
+.public_Scrollbar_mainHorizontal {
+  bottom: 0;
+  height: 15px;
+  left: 0;
+  -webkit-transition-property: background-color height;
+          transition-property: background-color height;
+}
+
+/* Touching the scroll-track directly makes the scroll-track bolder */
+.public_Scrollbar_mainHorizontal.Scrollbar_mainActive,
+.public_Scrollbar_mainHorizontal:hover {
+  height: 17px;
+}
+
+.public_Scrollbar_face {
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: 1;
+}
+
+/**
+ * This selector renders the "nub" of the scrollface. The nub must
+ * be rendered as pseudo-element so that it won't receive any UI events then
+ * we can get the correct `event.offsetX` and `event.offsetY` from the
+ * scrollface element while dragging it.
+ */
+.public_Scrollbar_face:after {
+  border-radius: 6px;
+  content: '';
+  display: block;
+  position: absolute;
+  -webkit-transition: background-color 250ms ease;
+          transition: background-color 250ms ease;
+}
+
+.public_Scrollbar_faceHorizontal {
+  bottom: 0;
+  left: 0;
+  top: 0;
+}
+
+.public_Scrollbar_faceHorizontal:after {
+  bottom: 4px;
+  left: 0;
+  top: 4px;
+  width: 100%;
+}
+
+.public_Scrollbar_faceVertical {
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.public_Scrollbar_faceVertical:after {
+  height: 100%;
+  left: 4px;
+  right: 4px;
+  top: 0;
+}
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ */
+
+/**
+ * Table.
+ */
+.public_fixedDataTable_main {
+  border-color: #d3d3d3;
+}
+
+.public_fixedDataTable_header,
+.public_fixedDataTable_hasBottomBorder {
+  border-color: #d3d3d3;
+}
+
+.public_fixedDataTable_header .public_fixedDataTableCell_main {
+  font-weight: bold;
+}
+
+.public_fixedDataTable_header,
+.public_fixedDataTable_header .public_fixedDataTableCell_main {
+  background-color: #f6f7f8;
+  background-image: -webkit-linear-gradient(#fff, #efefef);
+  background-image: linear-gradient(#fff, #efefef);
+}
+
+.public_fixedDataTable_footer .public_fixedDataTableCell_main {
+  background-color: #f6f7f8;
+  border-color: #d3d3d3;
+}
+
+.public_fixedDataTable_topShadow {
+  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAF0lEQVR4AWPUkNeSBhHCjJoK2twgFisAFagCCp3pJlAAAAAASUVORK5CYII=) repeat-x;
+}
+
+.public_fixedDataTable_bottomShadow {
+  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAHElEQVQI12MwNjZmZdAT1+Nm0JDWEGZQk1GTBgAWkwIeAEp52AAAAABJRU5ErkJggg==) repeat-x;
+}
+
+.public_fixedDataTable_horizontalScrollbar .public_Scrollbar_mainHorizontal {
+  background-color: #fff;
+}
+
+/**
+ * Table cell.
+ */
+.public_fixedDataTableCell_main {
+  background-color: #fff;
+  border-color: #d3d3d3
+}
+
+.public_fixedDataTableCell_highlighted {
+  background-color: #f4f4f4;
+}
+
+.public_fixedDataTableCell_cellContent {
+  padding: 0 10px;
+}
+
+.public_fixedDataTableCell_columnResizerKnob {
+  background-color: #0284ff;
+}
+
+/**
+ * Column resizer line.
+ */
+.public_fixedDataTableColumnResizerLine_main {
+  border-color: #0284ff;
+}
+
+/**
+ * Table row.
+ */
+.public_fixedDataTableRow_main {
+  background-color: #fff;
+}
+
+.public_fixedDataTableRow_highlighted,
+.public_fixedDataTableRow_highlighted .public_fixedDataTableCell_main {
+  background-color: #f6f7f8;
+}
+
+.public_fixedDataTableRow_fixedColumnsDivider {
+  border-color: #d3d3d3;
+}
+
+.public_fixedDataTableRow_columnsShadow {
+  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAABCAYAAAD5PA/NAAAAFklEQVQIHWPSkNeSBmJhTQVtbiDNCgASagIIuJX8OgAAAABJRU5ErkJggg==) repeat-y;
+}
+
+/**
+ * Scrollbars.
+ */
+/* Touching the scroll-track directly makes the scroll-track bolder */
+.public_Scrollbar_mainVertical.Scrollbar_mainActive,
+.public_Scrollbar_mainVertical:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.public_Scrollbar_mainHorizontal.Scrollbar_mainActive,
+.public_Scrollbar_mainHorizontal:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.public_Scrollbar_mainOpaque,
+.public_Scrollbar_mainOpaque.Scrollbar_mainActive,
+.public_Scrollbar_mainOpaque:hover {
+  background-color: #fff;
+}
+
+.public_Scrollbar_face:after {
+  background-color: #c2c2c2;
+}
+
+.public_Scrollbar_main:hover .Scrollbar_face:after,
+.public_Scrollbar_mainActive .Scrollbar_face:after,
+.public_Scrollbar_faceActive:after {
+  background-color: #7d7d7d;
 }
