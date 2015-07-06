@@ -13,7 +13,6 @@
 /* jslint bitwise: true */
 
 var FixedDataTableHelper = require('FixedDataTableHelper');
-var Locale = require('Locale');
 var React = require('React');
 var ReactComponentWithPureRenderMixin = require('ReactComponentWithPureRenderMixin');
 var ReactWheelHandler = require('ReactWheelHandler');
@@ -627,10 +626,8 @@ var FixedDataTable = React.createClass({
     /*?number*/ cellMinWidth,
     /*?number*/ cellMaxWidth,
     /*number|string*/ columnKey,
-    /*object*/ event) {
-    if (Locale.isRTL()) {
-      leftOffset = -leftOffset;
-    }
+    /*object*/ event
+  ) {
     this.setState({
       isColumnResizing: true,
       columnResizingData: {
