@@ -100,7 +100,7 @@ var FixedDataTableCellGroupImpl = React.createClass({
   },
 
   _renderCell(
-    /*object|array*/ rowData,
+    /*?object|array*/ rowData,
     /*number*/ rowIndex,
     /*number*/ height,
     /*object*/ columnProps,

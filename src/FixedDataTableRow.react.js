@@ -103,11 +103,15 @@ var FixedDataTableRowImpl = React.createClass({
     };
 
     var className = cx({
+      'fixedDataTableRowLayout/main': true,
       'public/fixedDataTableRow/main': true,
-      'public/fixedDataTableRow/highlighted': (this.props.index % 2 === 1)
+      'public/fixedDataTableRow/highlighted': (this.props.index % 2 === 1),
+      'public/fixedDataTableRow/odd': (this.props.index % 2 === 1),
+      'public/fixedDataTableRow/even': (this.props.index % 2 === 0),
     });
 
-    if (!this.props.data) {
+    var isHeaderOrFooterRow = this.props.index === -1;
+    if (!this.props.data && !isHeaderOrFooterRow) {
       return (
         <div
           className={joinClasses(className, this.props.className)}
