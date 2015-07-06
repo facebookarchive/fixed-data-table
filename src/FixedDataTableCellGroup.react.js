@@ -24,6 +24,7 @@ var translateDOMPositionXY = require('translateDOMPositionXY');
 
 var {PropTypes} = React;
 
+var DIR_SIGN = FixedDataTableHelper.DIR_SIGN;
 var EMPTY_OBJECT = new ImmutableObject({});
 
 var FixedDataTableCellGroupImpl = React.createClass({
@@ -76,7 +77,7 @@ var FixedDataTableCellGroupImpl = React.createClass({
           props.rowHeight,
           columnProps,
           currentPosition,
-          key
+          key,
         );
       }
       currentPosition += columnProps.width;
@@ -90,7 +91,7 @@ var FixedDataTableCellGroupImpl = React.createClass({
       width: contentWidth,
       zIndex: props.zIndex,
     };
-    translateDOMPositionXY(style, -1 * props.left, 0);
+    translateDOMPositionXY(style, -1 * DIR_SIGN * props.left, 0);
 
     return (
       <div className={cx('fixedDataTableCellGroup/cellGroup')} style={style}>
@@ -196,8 +197,10 @@ var FixedDataTableCellGroup = React.createClass({
       height: props.height,
     };
 
-    if (offsetLeft) {
-      translateDOMPositionXY(style, offsetLeft, 0);
+    if (DIR_SIGN === 1) {
+      style.left = offsetLeft;
+    } else {
+      style.right = offsetLeft;
     }
 
     var onColumnResize = props.onColumnResize ? this._onColumnResize : null;

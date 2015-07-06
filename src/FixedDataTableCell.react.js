@@ -10,12 +10,15 @@
  * @typechecks
  */
 
+var FixedDataTableHelper = require('FixedDataTableHelper');
 var ImmutableObject = require('ImmutableObject');
 var React = require('React');
 var ReactComponentWithPureRenderMixin = require('ReactComponentWithPureRenderMixin');
 var cloneWithProps = require('cloneWithProps');
 var cx = require('cx');
 var joinClasses = require('joinClasses');
+
+var DIR_SIGN = FixedDataTableHelper.DIR_SIGN;
 
 var {PropTypes} = React;
 
@@ -105,9 +108,13 @@ var FixedDataTableCell = React.createClass({
 
     var style = {
       height: props.height,
-      left: props.left,
       width: props.width,
     };
+    if (DIR_SIGN === 1) {
+      style.left = props.left;
+    } else {
+      style.right = props.left;
+    }
 
     var className = joinClasses(
       cx({
