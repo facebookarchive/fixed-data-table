@@ -172,6 +172,8 @@ var FixedDataTable = React.createClass({
 
     /**
      * Function that is called to get the data for the header row.
+     * If the function returns null, the header will be set to the
+     * Column's label property.
      */
     headerDataGetter: PropTypes.func,
 
@@ -261,6 +263,15 @@ var FixedDataTable = React.createClass({
     /**
      * Callback that is called when resizer has been released
      * and column needs to be updated.
+     *
+     * Required if the isResizable property is true on any column.
+     *
+     * ```
+     * function(
+     *   newColumnWidth: number,
+     *   dataKey: string,
+     * )
+     * ```
      */
     onColumnResizeEndCallback: PropTypes.func,
 

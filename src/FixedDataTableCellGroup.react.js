@@ -115,7 +115,11 @@ var FixedDataTableCellGroupImpl = React.createClass({
     var cellData;
 
     if (isHeaderCell || isFooterCell) {
-      cellData = rowData[cellDataKey];
+      if (rowData == null || rowData[cellDataKey] == null) {
+        cellData = columnProps.label;
+      } else {
+        cellData = rowData[cellDataKey];
+      }
     } else {
       var cellDataGetter = columnProps.cellDataGetter;
       cellData = cellDataGetter ?

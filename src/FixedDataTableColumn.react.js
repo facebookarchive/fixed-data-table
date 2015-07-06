@@ -149,6 +149,10 @@ var FixedDataTableColumn = React.createClass({
      * Whether the column can be resized with the
      * FixedDataTableColumnResizeHandle. Please note that if a column
      * has a flex grow, once you resize the column this will be set to 0.
+     *
+     * This property only provides the UI for the column resizing. If this
+     * is set to true, you will need ot se the onColumnResizeEndCallback table
+     * property and render your columns appropriately.
      */
     isResizable: PropTypes.bool,
 
