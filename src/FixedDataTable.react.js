@@ -28,6 +28,7 @@ var cx = require('cx');
 var debounceCore = require('debounceCore');
 var emptyFunction = require('emptyFunction');
 var invariant = require('invariant');
+var joinClasses = require('joinClasses');
 var shallowEqual = require('shallowEqual');
 var translateDOMPositionXY = require('translateDOMPositionXY');
 
@@ -420,7 +421,10 @@ var FixedDataTable = React.createClass({
       groupHeader = (
         <FixedDataTableRow
           key="group_header"
-          className={cx('public/fixedDataTable/header')}
+          className={joinClasses(
+            cx('fixedDataTableLayout/header'),
+            cx('public/fixedDataTable/header'),
+          )}
           data={state.groupHeaderData}
           width={state.width}
           height={state.groupHeaderHeight}
@@ -509,7 +513,10 @@ var FixedDataTable = React.createClass({
       footer =
         <FixedDataTableRow
           key="footer"
-          className={cx('public/fixedDataTable/footer')}
+          className={joinClasses(
+            cx('fixedDataTableLayout/footer'),
+            cx('public/fixedDataTable/footer'),
+          )}
           data={footerData}
           fixedColumns={state.footFixedColumns}
           height={state.footerHeight}
@@ -527,7 +534,10 @@ var FixedDataTable = React.createClass({
     var header =
       <FixedDataTableRow
         key="header"
-        className={cx('public/fixedDataTable/header')}
+        className={joinClasses(
+          cx('fixedDataTableLayout/header'),
+          cx('public/fixedDataTable/header'),
+        )}
         data={state.headData}
         width={state.width}
         height={state.headerHeight}
@@ -545,7 +555,10 @@ var FixedDataTable = React.createClass({
     if (state.scrollY) {
       topShadow =
         <div
-          className={cx('public/fixedDataTable/topShadow')}
+          className={joinClasses(
+            cx('fixedDataTableLayout/topShadow'),
+            cx('public/fixedDataTable/topShadow'),
+          )}
           style={{top: bodyOffsetTop}}
         />;
     }
@@ -558,18 +571,24 @@ var FixedDataTable = React.createClass({
     ) {
       bottomShadow =
         <div
-          className={cx('public/fixedDataTable/bottomShadow')}
+          className={joinClasses(
+            cx('fixedDataTableLayout/bottomShadow'),
+            cx('public/fixedDataTable/bottomShadow'),
+          )}
           style={{top: footOffsetTop}}
         />;
     }
 
     return (
       <div
-        className={cx('public/fixedDataTable/main')}
+        className={joinClasses(
+          cx('fixedDataTableLayout/main'),
+          cx('public/fixedDataTable/main'),
+        )}
         onWheel={this._wheelHandler.onWheel}
         style={{height: state.height, width: state.width}}>
         <div
-          className={cx('fixedDataTable/rowsContainer')}
+          className={cx('fixedDataTableLayout/rowsContainer')}
           style={{height: rowsContainerHeight, width: state.width}}>
           {dragKnob}
           {groupHeader}
@@ -1161,7 +1180,10 @@ var HorizontalScrollbar = React.createClass({
 
     return (
       <div
-        className={cx('fixedDataTable/horizontalScrollbar')}
+        className={joinClasses(
+          cx('fixedDataTableLayout/horizontalScrollbar'),
+          cx('public/fixedDataTable/horizontalScrollbar'),
+        )}
         style={outerContainerStyle}>
         <div style={innerContainerStyle}>
           <Scrollbar

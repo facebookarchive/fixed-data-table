@@ -1,0 +1,50 @@
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule fixedDataTable
+ *
+ */
+
+/**
+ * Table.
+ */
+.public/fixedDataTable/main {
+  border-color: #d3d3d3;
+}
+
+.public/fixedDataTable/header,
+.public/fixedDataTable/hasBottomBorder {
+  border-color: #d3d3d3;
+}
+
+.public/fixedDataTable/header .public/fixedDataTableCell/main {
+  font-weight: bold;
+}
+
+.public/fixedDataTable/header,
+.public/fixedDataTable/header .public/fixedDataTableCell/main {
+  background-color: var(fbui-desktop-background-light);
+  background-image: linear-gradient(#fff, #efefef);
+}
+
+.public/fixedDataTable/footer .public/fixedDataTableCell/main {
+  background-color: var(fbui-desktop-background-light);
+  border-color: #d3d3d3;
+}
+
+.public/fixedDataTable/topShadow {
+  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAF0lEQVR4AWPUkNeSBhHCjJoK2twgFisAFagCCp3pJlAAAAAASUVORK5CYII=) repeat-x;
+}
+
+.public/fixedDataTable/bottomShadow {
+  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAHElEQVQI12MwNjZmZdAT1+Nm0JDWEGZQk1GTBgAWkwIeAEp52AAAAABJRU5ErkJggg==) repeat-x;
+}
+
+.public/fixedDataTable/horizontalScrollbar .public/Scrollbar/mainHorizontal {
+  background-color: var(fbui-white);
+}

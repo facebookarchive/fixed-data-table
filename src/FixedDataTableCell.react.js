@@ -118,13 +118,15 @@ var FixedDataTableCell = React.createClass({
 
     var className = joinClasses(
       cx({
-        'public/fixedDataTableCell/main': true,
-        'public/fixedDataTableCell/highlighted': props.highlighted,
-        'public/fixedDataTableCell/lastChild': props.lastChild,
+        'fixedDataTableCellLayout/main': true,
+        'fixedDataTableCellLayout/lastChild': props.lastChild,
+        'fixedDataTableCellLayout/alignRight': props.align === 'right',
+        'fixedDataTableCellLayout/alignCenter': props.align === 'center',
         'public/fixedDataTableCell/alignRight': props.align === 'right',
-        'public/fixedDataTableCell/alignCenter': props.align === 'center'
+        'public/fixedDataTableCell/highlighted': props.highlighted,
+        'public/fixedDataTableCell/main': true,
       }),
-      props.className
+      props.className,
     );
 
     var content;
@@ -164,11 +166,14 @@ var FixedDataTableCell = React.createClass({
       };
       columnResizerComponent = (
         <div
-          className={cx('fixedDataTableCell/columnResizerContainer')}
+          className={cx('fixedDataTableCellLayout/columnResizerContainer')}
           style={columnResizerStyle}
           onMouseDown={this._onColumnResizerMouseDown}>
           <div
-            className={cx('public/fixedDataTableCell/columnResizerKnob')}
+            className={joinClasses(
+              cx('fixedDataTableCellLayout/columnResizerKnob'),
+              cx('public/fixedDataTableCell/columnResizerKnob'),
+            )}
             style={columnResizerStyle}
           />
         </div>
@@ -184,10 +189,21 @@ var FixedDataTableCell = React.createClass({
       <div className={className} style={style}>
         {columnResizerComponent}
         <div
-          className={cx('public/fixedDataTableCell/wrap1')}
+          className={joinClasses(
+            cx('fixedDataTableCellLayout/wrap1'),
+            cx('public/fixedDataTableCell/wrap1'),
+          )}
           style={innerStyle}>
-          <div className={cx('public/fixedDataTableCell/wrap2')}>
-            <div className={cx('public/fixedDataTableCell/wrap3')}>
+          <div
+            className={joinClasses(
+              cx('fixedDataTableCellLayout/wrap2'),
+              cx('public/fixedDataTableCell/wrap2'),
+            )}>
+            <div
+              className={joinClasses(
+                cx('fixedDataTableCellLayout/wrap3'),
+                cx('public/fixedDataTableCell/wrap3'),
+              )}>
               {content}
             </div>
           </div>

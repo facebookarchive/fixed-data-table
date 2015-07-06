@@ -126,12 +126,13 @@ var FixedDataTableColumnResizeHandle = React.createClass({
     return (
       <div
         className={cx({
+          'fixedDataTableColumnResizerLineLayout/main': true,
+          'fixedDataTableColumnResizerLineLayout/hiddenElem': !this.props.visible,
           'public/fixedDataTableColumnResizerLine/main': true,
-          'fixedDataTableColumnResizerLine/hiddenElem': !this.props.visible
         })}
         style={style}>
         <div
-          className={cx('fixedDataTableColumnResizerLine/mouseArea')}
+          className={cx('fixedDataTableColumnResizerLineLayout/mouseArea')}
           style={{height: this.props.height}}
         />
       </div>

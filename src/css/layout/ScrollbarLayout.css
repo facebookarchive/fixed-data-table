@@ -1,0 +1,93 @@
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule ScrollbarLayout
+ */
+
+.ScrollbarLayout/main {
+  box-sizing: border-box;
+  outline: none;
+  overflow: hidden;
+  position: absolute;
+  transition-duration: 250ms;
+  transition-timing-function: ease;
+  user-select: none;
+}
+
+.ScrollbarLayout/mainVertical {
+  bottom: 0;
+  right: 0;
+  top: 0;
+  transition-property: background-color width;
+  width: var(scrollbar-size);
+}
+
+.ScrollbarLayout/mainVertical.public/Scrollbar/mainActive,
+.ScrollbarLayout/mainVertical:hover {
+  width: var(scrollbar-size-large);
+}
+
+.ScrollbarLayout/mainHorizontal {
+  bottom: 0;
+  height: var(scrollbar-size);
+  left: 0;
+  transition-property: background-color height;
+}
+
+/* Touching the scroll-track directly makes the scroll-track bolder */
+.ScrollbarLayout/mainHorizontal.public/Scrollbar/mainActive,
+.ScrollbarLayout/mainHorizontal:hover {
+  height: var(scrollbar-size-large);
+}
+
+.ScrollbarLayout/face {
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: 1;
+}
+
+/**
+ * This selector renders the "nub" of the scrollface. The nub must
+ * be rendered as pseudo-element so that it won't receive any UI events then
+ * we can get the correct `event.offsetX` and `event.offsetY` from the
+ * scrollface element while dragging it.
+ */
+.ScrollbarLayout/face:after {
+  border-radius: var(scrollbar-face-radius);
+  content: '';
+  display: block;
+  position: absolute;
+  transition: background-color 250ms ease;
+}
+
+.ScrollbarLayout/faceHorizontal {
+  bottom: 0;
+  left: 0;
+  top: 0;
+}
+
+.ScrollbarLayout/faceHorizontal:after {
+  bottom: var(scrollbar-face-margin);
+  left: 0;
+  top: var(scrollbar-face-margin);
+  width: 100%;
+}
+
+.ScrollbarLayout/faceVertical {
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.ScrollbarLayout/faceVertical:after {
+  height: 100%;
+  left: var(scrollbar-face-margin);
+  right: var(scrollbar-face-margin);
+  top: 0;
+}

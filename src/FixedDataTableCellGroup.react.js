@@ -94,7 +94,9 @@ var FixedDataTableCellGroupImpl = React.createClass({
     translateDOMPositionXY(style, -1 * DIR_SIGN * props.left, 0);
 
     return (
-      <div className={cx('fixedDataTableCellGroup/cellGroup')} style={style}>
+      <div
+        className={cx('fixedDataTableCellGroupLayout/cellGroup')}
+        style={style}>
         {cells}
       </div>
     );
@@ -208,7 +210,7 @@ var FixedDataTableCellGroup = React.createClass({
     return (
       <div
         style={style}
-        className={cx('fixedDataTableCellGroup/cellGroupWrapper')}>
+        className={cx('fixedDataTableCellGroupLayout/cellGroupWrapper')}>
         <FixedDataTableCellGroupImpl
           {...props}
           onColumnResize={onColumnResize}
