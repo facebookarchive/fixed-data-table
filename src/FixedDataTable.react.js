@@ -873,7 +873,7 @@ var FixedDataTable = React.createClass({
     }
 
     var useMaxHeight = props.height === undefined;
-    var height = useMaxHeight ? props.maxHeight : props.height;
+    var height = Math.round(useMaxHeight ? props.maxHeight : props.height);
     var totalHeightReserved = props.footerHeight + props.headerHeight +
       groupHeaderHeight + 2 * BORDER_HEIGHT;
     var bodyHeight = height - totalHeightReserved;
