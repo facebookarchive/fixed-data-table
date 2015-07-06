@@ -1012,19 +1012,19 @@ var FixedDataTable = React.createClass({
     return footColumns;
   },
 
-  _getHeadData(/*array*/ columns) /*object*/ {
+  _getHeadData(/*array*/ columns) /*?object*/ {
+    if (!this.props.headerDataGetter) {
+      return null;
+    }
+
     var headData = {};
     for (var i = 0; i < columns.length; ++i) {
       var columnProps = columns[i].props;
-      if (this.props.headerDataGetter) {
-        headData[columnProps.dataKey] =
-          this.props.headerDataGetter(columnProps.dataKey);
-      } else {
-        headData[columnProps.dataKey] = columnProps.label || '';
-      }
+      headData[columnProps.dataKey] =
+        this.props.headerDataGetter(columnProps.dataKey);
     }
     return headData;
-  },
+   },
 
   _getGroupHeaderData(/*array*/ columnGroups) /*array*/ {
     var groupHeaderData = [];
