@@ -439,7 +439,8 @@ var FixedDataTable = React.createClass({
     var showScrollbarX = state.maxScrollX > 0 && state.overflowX !== 'hidden';
     var showScrollbarY = maxScrollY > 0 && state.overflowY !== 'hidden';
     var scrollbarXHeight = showScrollbarX ? Scrollbar.SIZE : 0;
-    var scrollbarYHeight = state.height - scrollbarXHeight - (2 * BORDER_HEIGHT) - state.footerHeight;
+    var scrollbarYHeight = state.height - scrollbarXHeight -
+        (2 * BORDER_HEIGHT) - state.footerHeight;
 
     var headerOffsetTop = state.useGroupHeader ? state.groupHeaderHeight : 0;
     var bodyOffsetTop = headerOffsetTop + state.headerHeight;
@@ -452,10 +453,12 @@ var FixedDataTable = React.createClass({
 
     if (props.ownerHeight !== undefined && props.ownerHeight < state.height) {
       bottomSectionOffset = props.ownerHeight - state.height;
+
       footOffsetTop = Math.min(
         footOffsetTop,
-        bodyOffsetTop + scrollbarYHeight + bottomSectionOffset - state.footerHeight
+        props.ownerHeight - state.footerHeight - scrollbarXHeight
       );
+
       scrollbarYHeight = Math.max(0, footOffsetTop - bodyOffsetTop);
     }
 
@@ -473,8 +476,7 @@ var FixedDataTable = React.createClass({
 
     var horizontalScrollbar;
     if (showScrollbarX) {
-      var scrollbarYWidth = showScrollbarY ? Scrollbar.SIZE : 0;
-      var scrollbarXWidth = state.width - scrollbarYWidth;
+      var scrollbarXWidth = state.width;
       horizontalScrollbar =
         <HorizontalScrollbar
           contentSize={scrollbarXWidth + state.maxScrollX}
