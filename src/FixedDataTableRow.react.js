@@ -12,7 +12,6 @@
 
 'use strict';
 
-var FixedDataTableHelper = require('FixedDataTableHelper');
 var React = require('React');
 var ReactComponentWithPureRenderMixin = require('ReactComponentWithPureRenderMixin');
 var FixedDataTableCellGroup = require('FixedDataTableCellGroup.react');
@@ -21,7 +20,6 @@ var cx = require('cx');
 var joinClasses = require('joinClasses');
 var translateDOMPositionXY = require('translateDOMPositionXY');
 
-var DIR_SIGN = FixedDataTableHelper.DIR_SIGN;
 var {PropTypes} = React;
 
 /**
@@ -139,8 +137,8 @@ var FixedDataTableRowImpl = React.createClass({
       <FixedDataTableCellGroup
         key="scrollable_cells"
         height={this.props.height}
-        left={this.props.scrollLeft * DIR_SIGN}
-        offsetLeft={fixedColumnsWidth * DIR_SIGN}
+        left={this.props.scrollLeft}
+        offsetLeft={fixedColumnsWidth}
         width={this.props.width - fixedColumnsWidth}
         zIndex={0}
         columns={this.props.scrollableColumns}
