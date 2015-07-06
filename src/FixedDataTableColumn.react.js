@@ -29,6 +29,16 @@ var FixedDataTableColumn = React.createClass({
     align: PropTypes.oneOf(['left', 'center', 'right']),
 
     /**
+     * className for this column's header cell.
+     */
+    headerClassName: PropTypes.string,
+
+    /**
+     * className for this column's footer cell.
+     */
+    footerClassName: PropTypes.string,
+
+    /**
      * className for each of this column's data cells.
      */
     cellClassName: PropTypes.string,
