@@ -1,0 +1,37 @@
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule fixedDataTableColumnResizerLineLayout
+ */
+
+.fixedDataTableColumnResizerLineLayout/mouseArea {
+  cursor: ew-resize;
+  position: absolute;
+  right: -5px;
+  width: 12px;
+}
+
+.fixedDataTableColumnResizerLineLayout/main {
+  border-right-style: solid;
+  border-right-width: 1px;
+  box-sizing: border-box;
+  position: absolute;
+  z-index: 10;
+}
+
+body[dir="rtl"] .fixedDataTableColumnResizerLineLayout/main {
+  /* the resizer line is in the wrong position in RTL with no easy fix.
+   * Disabling is more useful than displaying it.
+   * #167 (github) should look into this and come up with a permanent fix.
+   */
+  display: none !important;
+}
+
+.fixedDataTableColumnResizerLineLayout/hiddenElem {
+  display: none !important;
+}

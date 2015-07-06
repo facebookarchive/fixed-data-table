@@ -111,18 +111,20 @@ var Scrollbar = React.createClass({
     var verticalTop = this.props.verticalTop || 0;
 
     var mainClassName = cx({
+      'ScrollbarLayout/main': true,
+      'ScrollbarLayout/mainVertical': isVertical,
+      'ScrollbarLayout/mainHorizontal': isHorizontal,
       'public/Scrollbar/main': true,
-      'public/Scrollbar/mainHorizontal': isHorizontal,
-      'public/Scrollbar/mainVertical': isVertical,
-      'public/Scrollbar/mainActive': isActive,
       'public/Scrollbar/mainOpaque': isOpaque,
+      'public/Scrollbar/mainActive': isActive,
     });
 
     var faceClassName = cx({
-      'public/Scrollbar/face': true,
-      'public/Scrollbar/faceHorizontal': isHorizontal,
-      'public/Scrollbar/faceVertical': isVertical,
+      'ScrollbarLayout/face': true,
+      'ScrollbarLayout/faceHorizontal': isHorizontal,
+      'ScrollbarLayout/faceVertical': isVertical,
       'public/Scrollbar/faceActive': isActive,
+      'public/Scrollbar/face': true,
     });
 
     var position = this.state.position * this.state.scale + FACE_MARGIN;

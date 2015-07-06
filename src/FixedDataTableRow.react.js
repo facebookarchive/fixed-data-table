@@ -157,7 +157,7 @@ var FixedDataTableRowImpl = React.createClass({
         onMouseEnter={this.props.onMouseEnter ? this._onMouseEnter : null}
         onMouseLeave={this.props.onMouseLeave ? this._onMouseLeave : null}
         style={style}>
-        <div className={cx('fixedDataTableRow/body')}>
+        <div className={cx('fixedDataTableRowLayout/body')}>
           {fixedColumns}
           {scrollableColumns}
           {columnsShadow}
@@ -177,6 +177,8 @@ var FixedDataTableRowImpl = React.createClass({
   _renderColumnsShadow(/*number*/ left) /*?object*/ {
     if (left > 0) {
       var className = cx({
+        'fixedDataTableRowLayout/fixedColumnsDivider': true,
+        'fixedDataTableRowLayout/columnsShadow': this.props.scrollLeft > 0,
         'public/fixedDataTableRow/fixedColumnsDivider': true,
         'public/fixedDataTableRow/columnsShadow': this.props.scrollLeft > 0,
       });
@@ -246,7 +248,7 @@ var FixedDataTableRow = React.createClass({
     return (
       <div
         style={style}
-        className={cx('fixedDataTableRow/rowWrapper')}>
+        className={cx('fixedDataTableRowLayout/rowWrapper')}>
         <FixedDataTableRowImpl
           {...this.props}
           offsetTop={undefined}

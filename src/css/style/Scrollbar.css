@@ -1,0 +1,42 @@
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule Scrollbar
+ *
+ */
+
+/**
+ * Scrollbars.
+ */
+
+/* Touching the scroll-track directly makes the scroll-track bolder */
+.public/Scrollbar/main.public/Scrollbar/mainActive,
+.public/Scrollbar/main:hover {
+  background-color: var(scrollbar-track-color);
+}
+
+.public/Scrollbar/main.public/Scrollbar/mainActive,
+.public/Scrollbar/main:hover {
+  background-color: var(scrollbar-track-color);
+}
+
+.public/Scrollbar/mainOpaque,
+.public/Scrollbar/mainOpaque.public/Scrollbar/mainActive,
+.public/Scrollbar/mainOpaque:hover {
+  background-color: var(fbui-white);
+}
+
+.public/Scrollbar/face:after {
+  background-color: var(scrollbar-face-color);
+}
+
+.public/Scrollbar/main:hover .public/Scrollbar/face:after,
+.public/Scrollbar/mainActive .public/Scrollbar/face:after,
+.public/Scrollbar/faceActive:after {
+  background-color: var(scrollbar-face-active-color);
+}
