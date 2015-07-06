@@ -192,6 +192,12 @@ var FixedDataTableCellGroup = React.createClass({
     zIndex: PropTypes.number.isRequired,
   },
 
+  getDefaultProps() /*object*/ {
+    return {
+      offsetLeft: 0,
+    };
+  },
+
   render() /*object*/ {
     var {offsetLeft, ...props} = this.props;
 
