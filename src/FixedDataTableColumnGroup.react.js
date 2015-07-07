@@ -52,7 +52,7 @@ var FixedDataTableColumnGroup = React.createClass({
      *   label: ?string,
      *   cellDataKey: string,
      *   columnGroupData: any,
-     *   rowData: array<?object>, // array of labels of all coludmnGroups
+     *   rowData: array<?object>, // array of labels of all columnGroups
      *   width: number
      * ): ?$jsx
      * ```
