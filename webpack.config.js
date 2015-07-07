@@ -28,11 +28,11 @@ var plugins = [
 
 var entry = {};
 var baseEntryPoints = glob.sync(
-  path.join(__dirname, './src/css/*.css')
+  path.join(__dirname, './src/css/layout/*.css')
 );
 
-var themeEntryPoints = glob.sync(
-  path.join(__dirname, './src/theme/default.css')
+var styleEntryPoints = glob.sync(
+  path.join(__dirname, './src/css/style/*.css')
 );
 
 var mainEntryPoints = glob.sync(
@@ -50,11 +50,11 @@ if (process.env.COMPRESS) {
     })
   );
   entry['fixed-data-table-base.min'] = baseEntryPoints;
-  entry['fixed-data-table-theme.min'] = themeEntryPoints;
+  entry['fixed-data-table-style.min'] = styleEntryPoints;
   entry['fixed-data-table.min'] = mainEntryPoints;
 } else {
   entry['fixed-data-table-base'] = baseEntryPoints;
-  entry['fixed-data-table-theme'] = themeEntryPoints;
+  entry['fixed-data-table-style'] = styleEntryPoints;
   entry['fixed-data-table'] = mainEntryPoints;
 }
 
