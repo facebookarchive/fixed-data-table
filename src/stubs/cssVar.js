@@ -20,6 +20,8 @@ var CSS_VARS = {
   'scrollbar-size': '15px',
   'scrollbar-size-large': '17px',
   'scrollbar-track-color': 'rgba(255, 255, 255, 0.8)',
+  'fbui-white': '#fff',
+  'fbui-desktop-background-light': '#f6f7f8',
 };
 
 /**

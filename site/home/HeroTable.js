@@ -9,14 +9,19 @@ var Table = FixedDataTable.Table;
 var Column = FixedDataTable.Column;
 
 // Require common FixedDataTable CSS.
-require('fixed-data-table/css/Scrollbar.css');
-require('fixed-data-table/css/fixedDataTable.css');
-require('fixed-data-table/css/fixedDataTableCell.css');
-require('fixed-data-table/css/fixedDataTableCellGroup.css');
-require('fixed-data-table/css/fixedDataTableColumnResizerLine.css');
-require('fixed-data-table/css/fixedDataTableRow.css');
+require('fixed-data-table/css/layout/ScrollbarLayout.css');
+require('fixed-data-table/css/layout/fixedDataTableLayout.css');
+require('fixed-data-table/css/layout/fixedDataTableCellLayout.css');
+require('fixed-data-table/css/layout/fixedDataTableCellGroupLayout.css');
+require('fixed-data-table/css/layout/fixedDataTableColumnResizerLineLayout.css');
+require('fixed-data-table/css/layout/fixedDataTableRowLayout.css');
 
-require('fixed-data-table/theme/fixedDataTableThemeDefault.css');
+require('fixed-data-table/css/style/fixedDataTable.css');
+require('fixed-data-table/css/style/fixedDataTableCell.css');
+require('fixed-data-table/css/style/fixedDataTableColumnResizerLine.css');
+require('fixed-data-table/css/style/fixedDataTableRow.css');
+require('fixed-data-table/css/style/Scrollbar.css');
+
 
 var HeroTable = React.createClass({
 
