@@ -22,6 +22,14 @@ npm run build-dist
 npm run build-npm
 
 git add -A
+git add -f dist/fixed-data-table-base.css
+git add -f dist/fixed-data-table-style.css
+git add -f dist/fixed-data-table.css
+git add -f dist/fixed-data-table.js
+git add -f dist/fixed-data-table-base.min.css
+git add -f dist/fixed-data-table-style.min.css
+git add -f dist/fixed-data-table.min.css
+git add -f dist/fixed-data-table.min.js
 
 read -p "Are you ready to publish? [Y/n] " -r
 echo
