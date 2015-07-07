@@ -16,6 +16,12 @@ var PrefixIntervalTree = require('PrefixIntervalTree');
 var clamp = require('clamp');
 
 var BUFFER_ROWS = 5;
+var NO_ROWS_SCROLL_RESULT = {
+  index: 0,
+  offset: 0,
+  position: 0,
+  contentHeight: 0,
+};
 
 class FixedDataTableScrollHelper {
   constructor(
@@ -24,7 +30,7 @@ class FixedDataTableScrollHelper {
     /*number*/ viewportHeight,
     /*?function*/ rowHeightGetter
   ) {
-    this._rowOffsets = new PrefixIntervalTree(rowCount, defaultRowHeight);
+    this._rowOffsets = PrefixIntervalTree.uniform(rowCount, defaultRowHeight);
     this._storedHeights = new Array(rowCount);
     for (var i = 0; i < rowCount; ++i) {
       this._storedHeights[i] = defaultRowHeight;
@@ -100,16 +106,17 @@ class FixedDataTableScrollHelper {
 
   getRowPosition(/*number*/ rowIndex) /*number*/ {
     this._updateRowHeight(rowIndex);
-    return (
-      this._rowOffsets.get(rowIndex).value - this._rowHeightGetter(rowIndex)
-    );
+    return this._rowOffsets.sumUntil(rowIndex);
   }
 
   scrollBy(/*number*/ delta) /*object*/ {
-    var firstRow = this._rowOffsets.upperBound(this._position);
-    var firstRowPosition =
-      firstRow.value - this._storedHeights[firstRow.index];
-    var rowIndex = firstRow.index;
+    if (this._rowCount === 0) {
+      return NO_ROWS_SCROLL_RESULT;
+    }
+    var firstRow = this._rowOffsets.greatestLowerBound(this._position);
+    firstRow = clamp(0, firstRow, Math.max(this._rowCount - 1, 0));
+    var firstRowPosition = this._rowOffsets.sumUntil(firstRow);
+    var rowIndex = firstRow;
     var position = this._position;
 
     var rowHeightChange = this._updateRowHeight(rowIndex);
@@ -159,10 +166,9 @@ class FixedDataTableScrollHelper {
     var maxPosition = this._contentHeight - this._viewportHeight;
     position = clamp(0, position, maxPosition);
     this._position = position;
-    var firstVisibleRow = this._rowOffsets.upperBound(position);
-    var firstRowIndex = firstVisibleRow.index;
-    firstRowPosition =
-      firstVisibleRow.value - this._rowHeightGetter(firstRowIndex);
+    var firstRowIndex = this._rowOffsets.greatestLowerBound(position);
+    firstRowIndex = clamp(0, firstRowIndex, Math.max(this._rowCount - 1, 0));
+    firstRowPosition = this._rowOffsets.sumUntil(firstRowIndex);
     var firstRowOffset = firstRowPosition - position;
 
     this._updateHeightsInViewport(firstRowIndex, firstRowOffset);
@@ -190,7 +196,7 @@ class FixedDataTableScrollHelper {
         top += this._storedHeights[currentRowIndex];
       }
     }
-    var position = this._rowOffsets.get(rowIndex).value - this._viewportHeight;
+    var position = this._rowOffsets.sumTo(rowIndex) - this._viewportHeight;
     if (position < 0) {
       position = 0;
     }
@@ -198,6 +204,9 @@ class FixedDataTableScrollHelper {
   }
 
   scrollTo(/*number*/ position) /*object*/ {
+    if (this._rowCount === 0) {
+      return NO_ROWS_SCROLL_RESULT;
+    }
     if (position <= 0) {
       // If position less than or equal to 0 first row should be fully visible
       // on top
@@ -218,10 +227,9 @@ class FixedDataTableScrollHelper {
     }
     this._position = position;
 
-    var firstVisibleRow = this._rowOffsets.upperBound(position);
-    var firstRowIndex = Math.max(firstVisibleRow.index, 0);
-    var firstRowPosition =
-      firstVisibleRow.value - this._rowHeightGetter(firstRowIndex);
+    var firstRowIndex = this._rowOffsets.greatestLowerBound(position);
+    firstRowIndex = clamp(0, firstRowIndex, Math.max(this._rowCount - 1, 0));
+    var firstRowPosition = this._rowOffsets.sumUntil(firstRowIndex);
     var firstRowOffset = firstRowPosition - position;
 
     this._updateHeightsInViewport(firstRowIndex, firstRowOffset);
@@ -240,12 +248,10 @@ class FixedDataTableScrollHelper {
    * brings that row to top of viewport with that offset
    */
   scrollToRow(/*number*/ rowIndex, /*number*/ offset) /*object*/ {
-    rowIndex = clamp(0, rowIndex, this._rowCount - 1);
+    rowIndex = clamp(0, rowIndex, Math.max(this._rowCount - 1, 0));
     offset = clamp(-this._storedHeights[rowIndex], offset, 0);
-    var firstRow = this._rowOffsets.get(rowIndex);
-    return this.scrollTo(
-      firstRow.value - this._storedHeights[rowIndex] - offset
-    );
+    var firstRow = this._rowOffsets.sumUntil(rowIndex);
+    return this.scrollTo(firstRow - offset);
   }
 
   /**
@@ -257,12 +263,12 @@ class FixedDataTableScrollHelper {
    * bottom of viewport.
    */
   scrollRowIntoView(/*number*/ rowIndex) /*object*/ {
-    rowIndex = clamp(0, rowIndex, this._rowCount - 1);
-    var rowEnd = this._rowOffsets.get(rowIndex).value;
-    var rowBegin = rowEnd - this._storedHeights[rowIndex];
+    rowIndex = clamp(0, rowIndex, Math.max(this._rowCount - 1, 0));
+    var rowBegin = this._rowOffsets.sumUntil(rowIndex);
+    var rowEnd = rowBegin + this._storedHeights[rowIndex];
     if (rowBegin < this._position) {
       return this.scrollTo(rowBegin);
-    } else if (rowEnd > this._position + this._viewportHeight) {
+    } else if (this._position + this._viewportHeight < rowEnd) {
       var position = this._getRowAtEndPosition(rowIndex);
       return this.scrollTo(position);
     }
