@@ -6,12 +6,12 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @providesModule fixedDataTableCell
+ * @providesModule fixedDataTableCellLayout
  */
 
-.public/fixedDataTableCell/main {
-  background-color: #fff;
-  border: solid 1px #d3d3d3;
+.fixedDataTableCellLayout/main {
+  border-right-style: solid;
+  border-right-width: 1px;
   border-width: 0 1px 0 0;
   box-sizing: border-box;
   display: block;
@@ -20,56 +20,47 @@
   white-space: normal;
 }
 
-.public/fixedDataTableCell/lastChild {
+.fixedDataTableCellLayout/lastChild {
   border-width: 0 1px 1px 0;
 }
 
-.public/fixedDataTableCell/highlighted {
-  background-color: #f4f4f4;
-}
-
-.public/fixedDataTableCell/alignRight {
+.fixedDataTableCellLayout/alignRight {
   text-align: right;
 }
 
-.public/fixedDataTableCell/alignCenter {
+.fixedDataTableCellLayout/alignCenter {
   text-align: center;
 }
 
-.public/fixedDataTableCell/wrap1 {
+.fixedDataTableCellLayout/wrap1 {
   display: table;
 }
 
-.public/fixedDataTableCell/wrap2 {
+.fixedDataTableCellLayout/wrap2 {
   display: table-row;
 }
 
-.public/fixedDataTableCell/wrap3 {
+.fixedDataTableCellLayout/wrap3 {
   display: table-cell;
   vertical-align: middle;
 }
 
-.public/fixedDataTableCell/cellContent {
-  padding: 8px;
-}
-
-.fixedDataTableCell/columnResizerContainer {
+.fixedDataTableCellLayout/columnResizerContainer {
   position: absolute;
   right: 0px;
   width: 6px;
   z-index: 1;
 }
 
-.fixedDataTableCell/columnResizerContainer:hover {
+.fixedDataTableCellLayout/columnResizerContainer:hover {
   cursor: ew-resize;
 }
 
-.fixedDataTableCell/columnResizerContainer:hover .fixedDataTableCell/columnResizerKnob {
+.fixedDataTableCellLayout/columnResizerContainer:hover .fixedDataTableCellLayout/columnResizerKnob {
   visibility: visible;
 }
 
-.fixedDataTableCell/columnResizerKnob {
-  background-color: #0284ff;
+.fixedDataTableCellLayout/columnResizerKnob {
   position: absolute;
   right: 0px;
   visibility: hidden;

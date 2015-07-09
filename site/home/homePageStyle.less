@@ -1,3 +1,5 @@
+@import '../variables.less';
+
 .homePage {
   .header {
     -khtml-user-select: none;
@@ -122,64 +124,48 @@
 
   .logo {
     bottom: 0;
-    left: 50%;
+    left: 0; 
+    right: 0;
     position: fixed;
-    top: 35vh;
+    top: 25vh;
     text-align: center;
     z-index: 1000;
-    width: 587px;
-    margin-top: -40px;
-    margin-left: -283px;
-    background: url(../images/fdt_logo_transparent_onlight_80px.png) no-repeat scroll;
-
-    @media only screen and (-webkit-min-device-pixel-ratio: 2),
-      only screen and ( min-resolution: 192dpi),
-      only screen and ( min-resolution: 2dppx) {
-        background-image: url(../images/fdt_logo_transparent_onlight_80px-2x.png);
-        background-size: contain;
-    }
-
-    @media only screen and (-webkit-min-device-pixel-ratio: 2),
-      only screen and ( min-resolution: 192dpi),
-      only screen and ( min-resolution: 2dppx) {
-        background-image: url(../images/fdt_logo_transparent_onlight_80px-2x.png);
-        background-size: contain;
-    }
 
     @media only screen and (max-width: 680px) {
-      width: 367px;
-      margin-left: -187px;
-      background-image: url(../images/fdt_logo_transparent_onlight_50px.png);
+      top: 70px;
     }
 
-    @media only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 680px),
-      only screen and ( min-resolution: 192dpi),
-      only screen and ( min-resolution: 2dppx) {
-        background-image: url(../images/fdt_logo_transparent_onlight_50px-2x.png);
-        background-size: contain;
+    .title {
+      font-size: 2.9em;
+      font-weight: 800;
     }
 
-    @media only screen and (max-width: 420px) {
-      width: 267px;
-      margin-left: -133px;
-      background-image: url(../images/fdt_logo_transparent_onlight_50px.png);
-      background-size: contain;
+    .subtitle {
+      font-size: 1.2em;
+      margin-bottom: 18px;
     }
 
-    @media only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 680px),
-      only screen and ( min-resolution: 192dpi),
-      only screen and ( min-resolution: 2dppx) {
-        background-image: url(../images/fdt_logo_transparent_onlight_50px-2x.png);
-    }
-  }
+    .button {
+      background: none;
+      border: 2px solid @link-color;
+      border-radius: 4px;
+      padding: 8px 16px;
+      transition-duration: .3s;
+      text-transform: uppercase;
+      font-weight: 600;
 
-  .buttons {
-    -webkit-align-items: center;
-    -webkit-flex: 10;
-    align-items: center;
-    display: -webkit-flex;
-    display: flex;
-    flex: 10;
+      &:hover {
+        background: @link-color;
+        color: white;
+      }
+    }
+
+    .links {
+      margin-top: 16px;
+      a {
+        margin: 4px;
+      }
+    }
   }
 
   .heroContainer {
@@ -193,7 +179,7 @@
     right: 0;
     top: 0;
     bottom: 0;
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.8);
     z-index: 1000;
   }
 
@@ -204,7 +190,6 @@
     }
 
     .miniHeader {
-      display: none;
     }
 
     .miniHeaderContents {
@@ -214,19 +199,6 @@
 
     .synopsis {
       max-width: 540px;
-    }
-
-    .logo {
-      top: 105px;
-      margin-top: 0;
-    }
-
-    .logoPic {
-      height: 50px;
-    }
-
-    .contents {
-      padding-top: 24px;
     }
 
     .pageBody {

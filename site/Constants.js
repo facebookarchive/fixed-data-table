@@ -8,6 +8,8 @@ exports.Pages = {
   OBJECT_DATA_EXAMPLE: 'OBJECT_DATA_EXAMPLE',
   FLEXGROW_EXAMPLE: 'FLEXGROW_EXAMPLE',
   RESIZE_EXAMPLE: 'RESIZE_EXAMPLE',
+  FILTER_EXAMPLE: 'FILTER_EXAMPLE',
+  SORT_EXAMPLE: 'SORT_EXAMPLE',
 }
 
 exports.OtherPages = {
@@ -40,6 +42,16 @@ exports.ExamplePages = {
     location: 'example-column-groups.html',
     title: 'Column Groups',
     description: 'Table with column groupings.',
+  },
+  FILTER_EXAMPLE: {
+    location: 'example-filter.html',
+    title: 'Client-side Filter',
+    description: 'A table example that is filterable by column. In this example, by first name.',
+  },
+  SORT_EXAMPLE: {
+    location: 'example-sort.html',
+    title: 'Client-side Sort',
+    description: 'A table example that is sortable by column.'
   },
 };
 

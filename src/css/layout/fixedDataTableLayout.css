@@ -1,0 +1,52 @@
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule fixedDataTableLayout
+ */
+
+.fixedDataTableLayout/main {
+  border-style: solid;
+  border-width: 1px;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+}
+
+.fixedDataTableLayout/header,
+.fixedDataTableLayout/hasBottomBorder {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
+
+.fixedDataTableLayout/footer .public/fixedDataTableCell/main {
+  border-top-style: solid;
+  border-top-width: 1px;
+}
+
+.fixedDataTableLayout/topShadow,
+.fixedDataTableLayout/bottomShadow {
+  height: 4px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  z-index: 1;
+}
+
+.fixedDataTableLayout/bottomShadow {
+  margin-top: -4px;
+}
+
+.fixedDataTableLayout/rowsContainer {
+  overflow: hidden;
+  position: relative;
+}
+
+.fixedDataTableLayout/horizontalScrollbar {
+  bottom: 0;
+  position: absolute;
+}

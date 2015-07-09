@@ -24,6 +24,7 @@ var translateDOMPositionXY = require('translateDOMPositionXY');
 
 var {PropTypes} = React;
 
+var DIR_SIGN = FixedDataTableHelper.DIR_SIGN;
 var EMPTY_OBJECT = new ImmutableObject({});
 
 var FixedDataTableCellGroupImpl = React.createClass({
@@ -76,7 +77,7 @@ var FixedDataTableCellGroupImpl = React.createClass({
           props.rowHeight,
           columnProps,
           currentPosition,
-          key
+          key,
         );
       }
       currentPosition += columnProps.width;
@@ -90,17 +91,19 @@ var FixedDataTableCellGroupImpl = React.createClass({
       width: contentWidth,
       zIndex: props.zIndex,
     };
-    translateDOMPositionXY(style, -1 * props.left, 0);
+    translateDOMPositionXY(style, -1 * DIR_SIGN * props.left, 0);
 
     return (
-      <div className={cx('fixedDataTableCellGroup/cellGroup')} style={style}>
+      <div
+        className={cx('fixedDataTableCellGroupLayout/cellGroup')}
+        style={style}>
         {cells}
       </div>
     );
   },
 
   _renderCell(
-    /*object|array*/ rowData,
+    /*?object|array*/ rowData,
     /*number*/ rowIndex,
     /*number*/ height,
     /*object*/ columnProps,
@@ -115,7 +118,11 @@ var FixedDataTableCellGroupImpl = React.createClass({
     var cellData;
 
     if (isHeaderCell || isFooterCell) {
-      cellData = rowData[cellDataKey];
+      if (rowData == null || rowData[cellDataKey] == null) {
+        cellData = columnProps.label;
+      } else {
+        cellData = rowData[cellDataKey];
+      }
     } else {
       var cellDataGetter = columnProps.cellDataGetter;
       cellData = cellDataGetter ?
@@ -127,13 +134,21 @@ var FixedDataTableCellGroupImpl = React.createClass({
       this.props.onColumnResize;
     var onColumnResize = cellIsResizable ? this.props.onColumnResize : null;
 
+    var className;
+    if (isHeaderCell || isFooterCell) {
+      className = isHeaderCell ?
+        columnProps.headerClassName : columnProps.footerClassName;
+    } else {
+      className = columnProps.cellClassName;
+    }
+
     return (
       <FixedDataTableCell
         align={columnProps.align}
         cellData={cellData}
         cellDataKey={cellDataKey}
         cellRenderer={cellRenderer}
-        className={columnProps.cellClassName}
+        className={className}
         columnData={columnData}
         height={height}
         isFooterCell={isFooterCell}
@@ -177,6 +192,12 @@ var FixedDataTableCellGroup = React.createClass({
     zIndex: PropTypes.number.isRequired,
   },
 
+  getDefaultProps() /*object*/ {
+    return {
+      offsetLeft: 0,
+    };
+  },
+
   render() /*object*/ {
     var {offsetLeft, ...props} = this.props;
 
@@ -184,8 +205,10 @@ var FixedDataTableCellGroup = React.createClass({
       height: props.height,
     };
 
-    if (offsetLeft) {
-      translateDOMPositionXY(style, offsetLeft, 0);
+    if (DIR_SIGN === 1) {
+      style.left = offsetLeft;
+    } else {
+      style.right = offsetLeft;
     }
 
     var onColumnResize = props.onColumnResize ? this._onColumnResize : null;
@@ -193,7 +216,7 @@ var FixedDataTableCellGroup = React.createClass({
     return (
       <div
         style={style}
-        className={cx('fixedDataTableCellGroup/cellGroupWrapper')}>
+        className={cx('fixedDataTableCellGroupLayout/cellGroupWrapper')}>
         <FixedDataTableCellGroupImpl
           {...props}
           onColumnResize={onColumnResize}

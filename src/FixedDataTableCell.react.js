@@ -10,12 +10,15 @@
  * @typechecks
  */
 
+var FixedDataTableHelper = require('FixedDataTableHelper');
 var ImmutableObject = require('ImmutableObject');
 var React = require('React');
 var ReactComponentWithPureRenderMixin = require('ReactComponentWithPureRenderMixin');
 var cloneWithProps = require('cloneWithProps');
 var cx = require('cx');
 var joinClasses = require('joinClasses');
+
+var DIR_SIGN = FixedDataTableHelper.DIR_SIGN;
 
 var {PropTypes} = React;
 
@@ -105,19 +108,25 @@ var FixedDataTableCell = React.createClass({
 
     var style = {
       height: props.height,
-      left: props.left,
       width: props.width,
     };
+    if (DIR_SIGN === 1) {
+      style.left = props.left;
+    } else {
+      style.right = props.left;
+    }
 
     var className = joinClasses(
       cx({
-        'public/fixedDataTableCell/main': true,
-        'public/fixedDataTableCell/highlighted': props.highlighted,
-        'public/fixedDataTableCell/lastChild': props.lastChild,
+        'fixedDataTableCellLayout/main': true,
+        'fixedDataTableCellLayout/lastChild': props.lastChild,
+        'fixedDataTableCellLayout/alignRight': props.align === 'right',
+        'fixedDataTableCellLayout/alignCenter': props.align === 'center',
         'public/fixedDataTableCell/alignRight': props.align === 'right',
-        'public/fixedDataTableCell/alignCenter': props.align === 'center'
+        'public/fixedDataTableCell/highlighted': props.highlighted,
+        'public/fixedDataTableCell/main': true,
       }),
-      props.className
+      props.className,
     );
 
     var content;
@@ -157,11 +166,14 @@ var FixedDataTableCell = React.createClass({
       };
       columnResizerComponent = (
         <div
-          className={cx('fixedDataTableCell/columnResizerContainer')}
+          className={cx('fixedDataTableCellLayout/columnResizerContainer')}
           style={columnResizerStyle}
           onMouseDown={this._onColumnResizerMouseDown}>
           <div
-            className={cx('fixedDataTableCell/columnResizerKnob')}
+            className={joinClasses(
+              cx('fixedDataTableCellLayout/columnResizerKnob'),
+              cx('public/fixedDataTableCell/columnResizerKnob'),
+            )}
             style={columnResizerStyle}
           />
         </div>
@@ -177,10 +189,21 @@ var FixedDataTableCell = React.createClass({
       <div className={className} style={style}>
         {columnResizerComponent}
         <div
-          className={cx('public/fixedDataTableCell/wrap1')}
+          className={joinClasses(
+            cx('fixedDataTableCellLayout/wrap1'),
+            cx('public/fixedDataTableCell/wrap1'),
+          )}
           style={innerStyle}>
-          <div className={cx('public/fixedDataTableCell/wrap2')}>
-            <div className={cx('public/fixedDataTableCell/wrap3')}>
+          <div
+            className={joinClasses(
+              cx('fixedDataTableCellLayout/wrap2'),
+              cx('public/fixedDataTableCell/wrap2'),
+            )}>
+            <div
+              className={joinClasses(
+                cx('fixedDataTableCellLayout/wrap3'),
+                cx('public/fixedDataTableCell/wrap3'),
+              )}>
               {content}
             </div>
           </div>

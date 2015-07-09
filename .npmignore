@@ -7,3 +7,5 @@ __site_prerender__
 .babelrc
 webpack.config.js
 CONTRIBUTING.md
+dist/fixed-data-table-base.*js
+dist/fixed-data-table-style.*js

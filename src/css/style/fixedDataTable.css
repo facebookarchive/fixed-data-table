@@ -7,22 +7,19 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  *
  * @providesModule fixedDataTable
+ *
  */
 
+/**
+ * Table.
+ */
 .public/fixedDataTable/main {
-  border: solid 1px #d3d3d3;
-  box-sizing: border-box;
-  overflow: hidden;
-  position: relative;
+  border-color: #d3d3d3;
 }
 
 .public/fixedDataTable/header,
-.fixedDataTable/hasBottomBorder {
-  border-bottom: solid 1px #d3d3d3;
-}
-
-.public/fixedDataTableRow/main.fixedDataTable/hasBottomBorder {
-  box-sizing: content-box;
+.public/fixedDataTable/hasBottomBorder {
+  border-color: #d3d3d3;
 }
 
 .public/fixedDataTable/header .public/fixedDataTableCell/main {
@@ -31,43 +28,23 @@
 
 .public/fixedDataTable/header,
 .public/fixedDataTable/header .public/fixedDataTableCell/main {
-  background-color: #f6f7f8;
+  background-color: var(fbui-desktop-background-light);
   background-image: linear-gradient(#fff, #efefef);
 }
 
 .public/fixedDataTable/footer .public/fixedDataTableCell/main {
-  background-color: #f6f7f8;
-  border-top: solid 1px #d3d3d3;
+  background-color: var(fbui-desktop-background-light);
+  border-color: #d3d3d3;
 }
 
-.fixedDataTable/topShadow,
-.fixedDataTable/bottomShadow {
-  height: 4px;
-  left: 0;
-  position: absolute;
-  right: 0;
-  z-index: 1;
-}
-
-.fixedDataTable/topShadow {
+.public/fixedDataTable/topShadow {
   background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAF0lEQVR4AWPUkNeSBhHCjJoK2twgFisAFagCCp3pJlAAAAAASUVORK5CYII=) repeat-x;
 }
 
-.fixedDataTable/bottomShadow {
+.public/fixedDataTable/bottomShadow {
   background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAHElEQVQI12MwNjZmZdAT1+Nm0JDWEGZQk1GTBgAWkwIeAEp52AAAAABJRU5ErkJggg==) repeat-x;
-  margin-top: -4px;
 }
 
-.fixedDataTable/rowsContainer {
-  overflow: hidden;
-  position: relative;
-}
-
-.fixedDataTable/horizontalScrollbar {
-  bottom: 0;
-  position: absolute;
-}
-
-.fixedDataTable/horizontalScrollbar .public/Scrollbar/mainHorizontal {
-  background: #fff;
+.public/fixedDataTable/horizontalScrollbar .public/Scrollbar/mainHorizontal {
+  background-color: var(fbui-white);
 }

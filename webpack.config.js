@@ -27,10 +27,18 @@ var plugins = [
 ];
 
 var entry = {};
-var entryPoints = glob.sync(
+var baseEntryPoints = glob.sync(
+  path.join(__dirname, './src/css/layout/*.css')
+);
+
+var styleEntryPoints = glob.sync(
+  path.join(__dirname, './src/css/style/*.css')
+);
+
+var mainEntryPoints = glob.sync(
   path.join(__dirname, './src/**/*.css')
 );
-entryPoints.push('./src/FixedDataTableRoot.js');
+mainEntryPoints.push('./src/FixedDataTableRoot.js');
 
 if (process.env.COMPRESS) {
   plugins.push(
@@ -41,9 +49,13 @@ if (process.env.COMPRESS) {
       output: {comments: false}
     })
   );
-  entry['fixed-data-table.min'] = entryPoints;
+  entry['fixed-data-table-base.min'] = baseEntryPoints;
+  entry['fixed-data-table-style.min'] = styleEntryPoints;
+  entry['fixed-data-table.min'] = mainEntryPoints;
 } else {
-  entry['fixed-data-table'] = entryPoints;
+  entry['fixed-data-table-base'] = baseEntryPoints;
+  entry['fixed-data-table-style'] = styleEntryPoints;
+  entry['fixed-data-table'] = mainEntryPoints;
 }
 
 plugins.push(

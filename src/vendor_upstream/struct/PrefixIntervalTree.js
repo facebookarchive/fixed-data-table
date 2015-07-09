@@ -7,158 +7,240 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  *
  * @providesModule PrefixIntervalTree
+ * @flow
  * @typechecks
  */
 
 'use strict';
 
+var invariant = require('invariant');
+
+var parent = node => Math.floor(node / 2);
+
+var Int32Array = global.Int32Array ||
+  function(size: number): Array<number> {
+    var xs = [];
+    for (var i = size - 1; i >= 0; --i) {
+      xs[i] = 0;
+    }
+    return xs;
+  };
+
 /**
- * An interval tree that allows to set a number at index and given the value
- * find the largest index for which prefix sum is greater than or equal to value
- * (lower bound) or greater than value (upper bound)
- * Complexity:
- *   construct: O(n)
- *   query: O(log(n))
- *   memory: O(log(n)),
- * where n is leafCount from the constructor
+ * Computes the next power of 2 after or equal to x.
+ */
+function ceilLog2(x: number): number {
+  var y = 1;
+  while (y < x) {
+    y *= 2;
+  }
+  return y;
+}
+
+/**
+ * A prefix interval tree stores an numeric array and the partial sums of that
+ * array. It is optimized for updating the values of the array without
+ * recomputing all of the partial sums.
+ *
+ *   - O(ln n) update
+ *   - O(1) lookup
+ *   - O(ln n) compute a partial sum
+ *   - O(n) space
+ *
+ * Note that the sequence of partial sums is one longer than the array, so that
+ * the first partial sum is always 0, and the last partial sum is the sum of the
+ * entire array.
  */
 class PrefixIntervalTree {
-  constructor(/*number*/ leafCount, /*?number*/ initialLeafValue) {
-    var internalLeafCount = this.getInternalLeafCount(leafCount);
-    this._leafCount = leafCount;
-    this._internalLeafCount = internalLeafCount;
-    var nodeCount = 2 * internalLeafCount;
-    var Int32Array = global.Int32Array || this._initArray;
-    this._value = new Int32Array(nodeCount);
-    this._initTables(initialLeafValue || 0);
+  /**
+   * Number of elements in the array
+   */
+  _size: number;
 
-    this.get = this.get.bind(this);
-    this.set = this.set.bind(this);
-    this.lowerBound = this.lowerBound.bind(this);
-    this.upperBound = this.upperBound.bind(this);
-  }
+  /**
+   * Half the size of the heap. It is also the number of non-leaf nodes, and the
+   * index of the first element in the heap. Always a power of 2.
+   */
+  _half: number;
 
-  getInternalLeafCount(/*number*/ leafCount) /*number*/ {
-    var internalLeafCount = 1;
-    while (internalLeafCount < leafCount) {
-      internalLeafCount *= 2;
-    }
-    return internalLeafCount;
-  }
+  /**
+   * Binary heap
+   */
+  _heap: Array<number>;
 
-  _initArray(/*number*/ size) /*array*/ {
-    var arr = [];
-    while (size > 0) {
-      size--;
-      arr[size] = 0;
-    }
-    return arr;
-  }
+  constructor(xs: Array<number>) {
+    this._size = xs.length;
+    this._half = ceilLog2(this._size);
+    this._heap = new Int32Array(2 * this._half);
 
-  _initTables(/*number*/ initialLeafValue) {
-    var firstLeaf = this._internalLeafCount;
-    var lastLeaf = this._internalLeafCount + this._leafCount - 1;
     var i;
-    for (i = firstLeaf; i <= lastLeaf; ++i) {
-      this._value[i] = initialLeafValue;
+    for (i = 0; i < this._size; ++i) {
+      this._heap[this._half + i] = xs[i];
     }
-    var lastInternalNode = this._internalLeafCount - 1;
-    for (i = lastInternalNode; i > 0; --i) {
-      this._value[i] =  this._value[2 * i] + this._value[2 * i + 1];
+
+    for (i = this._half - 1; i > 0; --i) {
+      this._heap[i] =  this._heap[2 * i] + this._heap[2 * i + 1];
     }
   }
 
-  set(/*number*/ position, /*number*/ value) {
-    var nodeIndex = position + this._internalLeafCount;
-    this._value[nodeIndex] = value;
-    nodeIndex = Math.floor(nodeIndex / 2);
-    while (nodeIndex !== 0) {
-      this._value[nodeIndex] =
-        this._value[2 * nodeIndex] + this._value[2 * nodeIndex + 1];
-      nodeIndex = Math.floor(nodeIndex / 2);
+  static uniform(size: number, initialValue: number): PrefixIntervalTree {
+    var xs = [];
+    for (var i = size - 1; i >= 0; --i) {
+      xs[i] = initialValue;
     }
+
+    return new PrefixIntervalTree(xs);
+  }
+
+  static empty(size: number): PrefixIntervalTree {
+    return PrefixIntervalTree.uniform(size, 0);
+  }
+
+  set(index: number, value: number): void {
+    invariant(
+      0 <= index && index < this._size,
+      'Index out of range %s',
+      index,
+    );
+
+    var node = this._half + index;
+    this._heap[node] = value;
+
+    node = parent(node);
+    for (; node !== 0; node = parent(node)) {
+      this._heap[node] =
+        this._heap[2 * node] + this._heap[2 * node + 1];
+    }
+  }
+
+  get(index: number): number {
+    invariant(
+      0 <= index && index < this._size,
+      'Index out of range %s',
+      index,
+    );
+
+    var node = this._half + index;
+    return this._heap[node];
+  }
+
+  getSize(): number {
+    return this._size;
   }
 
   /**
-   * Returns an object {index, value} for given position (including value at
-   * specified position), or the same for last position if provided position
-   * is out of range
+   * Returns the sum get(0) + get(1) + ... + get(end - 1).
    */
-  get(/*number*/ position) /*object*/ {
-    position = Math.min(position, this._leafCount);
-    var nodeIndex = position + this._internalLeafCount;
-    var result = this._value[nodeIndex];
-    while (nodeIndex > 1) {
-      if (nodeIndex % 2 === 1) {
-        result = this._value[nodeIndex - 1] + result;
+  sumUntil(end: number): number {
+    invariant(
+      0 <= end && end < this._size + 1,
+      'Index out of range %s',
+      end,
+    );
+
+    if (end === 0) {
+      return 0;
+    }
+
+    var node = this._half + end - 1;
+    var sum = this._heap[node];
+    for (; node !== 1; node = parent(node)) {
+      if (node % 2 === 1) {
+        sum += this._heap[node - 1];
       }
-      nodeIndex = Math.floor(nodeIndex / 2);
     }
-    return {index: position, value: result};
+
+    return sum;
   }
 
   /**
-   * Returns an object {index, value} where index is index of leaf that was
-   * found by upper bound algorithm. Upper bound finds first element for which
-   * value is greater than argument
+   * Returns the sum get(0) + get(1) + ... + get(inclusiveEnd).
    */
-  upperBound(/*number*/ value) /*object*/ {
-    var result = this._upperBoundImpl(1, 0, this._internalLeafCount - 1, value);
-    if (result.index > this._leafCount - 1) {
-      result.index = this._leafCount - 1;
-    }
-    return result;
+  sumTo(inclusiveEnd: number): number {
+    invariant(
+      0 <= inclusiveEnd && inclusiveEnd < this._size,
+      'Index out of range %s',
+      inclusiveEnd,
+    );
+    return this.sumUntil(inclusiveEnd + 1);
   }
 
   /**
-   * Returns result in the same format as upperBound, but finds first element
-   * for which value is greater than or equal to argument
+   * Returns the sum get(begin) + get(begin + 1) + ... + get(end - 1).
    */
-  lowerBound(/*number*/ value) /*object*/ {
-    var result = this.upperBound(value);
-    if (result.value > value && result.index > 0) {
-      var previousValue =
-        result.value - this._value[this._internalLeafCount + result.index];
-      if (previousValue === value) {
-        result.value = previousValue;
-        result.index--;
+  sum(begin: number, end: number): number {
+    invariant(begin <= end, 'Begin must precede end');
+    return this.sumUntil(end) - this.sumUntil(begin);
+  }
+
+  /**
+   * Returns the smallest i such that 0 <= i <= size and sumUntil(i) <= t, or
+   * -1 if no such i exists.
+   */
+  greatestLowerBound(t: number): number {
+    if (t < 0) {
+      return -1;
+    }
+
+    var node = 1;
+    if (this._heap[node] <= t) {
+      return this._size;
+    }
+
+    while (node < this._half) {
+      var leftSum = this._heap[2 * node];
+      if (t < leftSum) {
+        node = 2 * node;
+      } else {
+        node = 2 * node + 1;
+        t -= leftSum;
       }
     }
-    return result;
+
+    return node - this._half;
   }
 
-  _upperBoundImpl(
-    /*number*/ nodeIndex,
-    /*number*/ nodeIntervalBegin,
-    /*number*/ nodeIntervalEnd,
-    /*number*/ value
-  ) /*object*/ {
-    if (nodeIntervalBegin === nodeIntervalEnd) {
-      return {
-        index: nodeIndex - this._internalLeafCount,
-        value: this._value[nodeIndex],
-      };
+  /**
+   * Returns the smallest i such that 0 <= i <= size and sumUntil(i) < t, or
+   * -1 if no such i exists.
+   */
+  greatestStrictLowerBound(t: number): number {
+    if (t <= 0) {
+      return -1;
     }
 
-    var nodeIntervalMidpoint =
-      Math.floor((nodeIntervalBegin + nodeIntervalEnd + 1) / 2);
-    if (value < this._value[nodeIndex * 2]) {
-      return this._upperBoundImpl(
-        2 * nodeIndex,
-        nodeIntervalBegin,
-        nodeIntervalMidpoint - 1,
-        value
-      );
-    } else {
-      var result = this._upperBoundImpl(
-        2 * nodeIndex + 1,
-        nodeIntervalMidpoint,
-        nodeIntervalEnd,
-        value - this._value[2 * nodeIndex]
-      );
-      result.value += this._value[2 * nodeIndex];
-      return result;
+    var node = 1;
+    if (this._heap[node] < t) {
+      return this._size;
     }
+
+    while (node < this._half) {
+      var leftSum = this._heap[2 * node];
+      if (t <= leftSum) {
+        node = 2 * node;
+      } else {
+        node = 2 * node + 1;
+        t -= leftSum;
+      }
+    }
+
+    return node - this._half;
+  }
+
+  /**
+   * Returns the smallest i such that 0 <= i <= size and t <= sumUntil(i), or
+   * size + 1 if no such i exists.
+   */
+  leastUpperBound(t: number): number {
+    return this.greatestStrictLowerBound(t) + 1;
+  }
+
+  /**
+   * Returns the smallest i such that 0 <= i <= size and t < sumUntil(i), or
+   * size + 1 if no such i exists.
+   */
+  leastStrictUpperBound(t: number): number {
+    return this.greatestLowerBound(t) + 1;
   }
 }
 

@@ -6,10 +6,10 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @providesModule fixedDataTableCellGroup
+ * @providesModule fixedDataTableCellGroupLayout
  */
 
-.fixedDataTableCellGroup/cellGroup {
+.fixedDataTableCellGroupLayout/cellGroup {
   backface-visibility: hidden;
   left: 0;
   overflow: hidden;
@@ -18,13 +18,13 @@
   white-space: nowrap;
 }
 
-.fixedDataTableCellGroup/cellGroup > .public/fixedDataTableCell/main {
+.fixedDataTableCellGroupLayout/cellGroup > .public/fixedDataTableCell/main {
   display: inline-block;
   vertical-align: top;
   white-space: normal;
 }
 
-.fixedDataTableCellGroup/cellGroupWrapper {
+.fixedDataTableCellGroupLayout/cellGroupWrapper {
   position: absolute;
   top: 0;
 }

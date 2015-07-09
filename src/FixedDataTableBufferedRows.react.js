@@ -150,7 +150,10 @@ var FixedDataTableBufferedRows = React.createClass({
           className={joinClasses(
             rowClassNameGetter(rowIndex),
             cx('public/fixedDataTable/bodyRow'),
-            hasBottomBorder ? cx('fixedDataTable/hasBottomBorder') : null
+            cx({
+              'fixedDataTableLayout/hasBottomBorder': hasBottomBorder,
+              'public/fixedDataTable/hasBottomBorder': hasBottomBorder,
+            })
           )}
         />;
     }
