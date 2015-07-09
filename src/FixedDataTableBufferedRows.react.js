@@ -151,7 +151,7 @@ var FixedDataTableBufferedRows = React.createClass({
             cx({
               'fixedDataTableLayout/hasBottomBorder': hasBottomBorder,
               'public/fixedDataTable/hasBottomBorder': hasBottomBorder,
-            }),
+            })
           )}
         />;
     }
