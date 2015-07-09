@@ -94,6 +94,13 @@ var ExamplesPage = React.createClass({
             <SortExample />
           </TouchExampleWrapper>
         );
+      case ExamplePages.PLAYGROUND:
+        var Playground = require('./Playground');
+        return (
+          <TouchExampleWrapper {...this.state}>
+            <Playground />
+          </TouchExampleWrapper>
+        );
     }
   },
 
