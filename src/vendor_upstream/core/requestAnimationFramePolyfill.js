@@ -28,6 +28,9 @@ var requestAnimationFrame =
       callback(Date.now());
     }, timeDelay);
   };
+  
+// Webpack Hot Loader IE bug fix  
+requestAnimationFrame = requestAnimationFrame.bind(window);  
 
 // Works around a rare bug in Safari 6 where the first request is never invoked.
 requestAnimationFrame(emptyFunction);
