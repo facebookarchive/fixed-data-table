@@ -107,22 +107,26 @@ class DOMMouseMoveTracker {
    * Calls onMove passed into constructor and updates internal state.
    */
   _onMouseMove(/*object*/ event) {
-    var x = event.clientX;
-    var y = event.clientY;
+    if (event.buttons === 0) {
+      this._onMoveEnd();
+    } else {
+      var x = event.clientX;
+      var y = event.clientY;
 
-    this._deltaX += (x - this._x);
-    this._deltaY += (y - this._y);
+      this._deltaX += (x - this._x);
+      this._deltaY += (y - this._y);
 
-    if (this._animationFrameID === null) {
-      // The mouse may move faster then the animation frame does.
-      // Use `requestAnimationFramePolyfill` to avoid over-updating.
-      this._animationFrameID =
-        requestAnimationFramePolyfill(this._didMouseMove);
+      if (this._animationFrameID === null) {
+        // The mouse may move faster then the animation frame does.
+        // Use `requestAnimationFramePolyfill` to avoid over-updating.
+        this._animationFrameID =
+          requestAnimationFramePolyfill(this._didMouseMove);
+      }
+
+      this._x = x;
+      this._y = y;
+      event.preventDefault();
     }
-
-    this._x = x;
-    this._y = y;
-    event.preventDefault();
   }
 
   _didMouseMove() {
