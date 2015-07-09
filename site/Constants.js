@@ -53,6 +53,11 @@ exports.ExamplePages = {
     title: 'Client-side Sort',
     description: 'A table example that is sortable by column.'
   },
+  PLAYGROUND: {
+    location: 'playground.html',
+    title: 'playground',
+    description: 'A playground'
+  }
 };
 
 exports.DOCS_DEFAULT = exports.APIPages.TABLE_API;
