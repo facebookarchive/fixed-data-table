@@ -146,14 +146,6 @@ var FixedDataTable = React.createClass({
     rowHeightGetter: PropTypes.func,
 
     /**
-     * To get rows to display in table, `rowGetter(index)`
-     * is called. `rowGetter` should be smart enough to handle async
-     * fetching of data and return temporary objects
-     * while data is being fetched.
-     */
-    rowGetter: PropTypes.func.isRequired,
-
-    /**
      * To get any additional CSS classes that should be added to a row,
      * `rowClassNameGetter(index)` is called.
      */

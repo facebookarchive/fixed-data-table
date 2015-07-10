@@ -36,12 +36,17 @@ function renderDate(/*object*/ cellData) {
   return <span>{cellData.toLocaleString()}</span>;
 }
 
+var dataList = new FakeObjectDataListStore(ROWS);
+
 var ImageCell = React.createClass({
   propTypes: {
     dataKey: PropTypes.string
   },
   _getData() {
-    return this.props.dataList.getObjectAt(this.props.rowIndex)[this.props.dataKey];
+    if (this.props.rowIndex > 0){
+      return dataList.getObjectAt(this.props.rowIndex)[this.props.dataKey];
+    }
+    return '';
   },
   render() {
     return (
@@ -65,10 +70,17 @@ var TextCell = React.createClass({
   propTypes: {
     dataKey: PropTypes.string,
   },
+  _getData() {
+    if (this.props.rowIndex > 0){
+      return dataList.getObjectAt(this.props.rowIndex)[this.props.dataKey];
+    }
+  },
   render() {
-    <div>
-      {this.props.dataList.getObjectAt(this.props.index)[this.props.dataKey]}
-    </div>
+    return (
+      <div>
+        {this._getData()}
+      </div>
+    )
   }
 })
 
@@ -85,16 +97,6 @@ var ObjectDataExample = React.createClass({
       this.props.onContentDimensionsChange(contentHeight, 1150);
   },
 
-  getInitialState() {
-    return {
-      dataList: new FakeObjectDataListStore(ROWS)
-    }
-  },
-
-  _rowGetter(index){
-    return this.state.dataList.getObjectAt(index);
-  },
-
   render() {
     var controlledScrolling =
       this.props.left !== undefined || this.props.top !== undefined;
@@ -103,8 +105,8 @@ var ObjectDataExample = React.createClass({
       <Table
         rowHeight={50}
         headerHeight={50}
-        rowsCount={this.state.dataList.getSize()}
-        width={100}
+        rowsCount={dataList.getSize()}
+        width={250}
         height={this.props.tableHeight}
         onContentHeightChange={this._onContentHeightChange}
         scrollTop={this.props.top}
@@ -116,20 +118,26 @@ var ObjectDataExample = React.createClass({
             <MyHeaderCell label="Image" />
           }
           cell={
-            <ImageCell dataKey="avartar" dataList={this.state.dataList} />
+            <ImageCell dataKey="avartar" />
           }
           fixed={true}
           width={50}
         />
         <Column
           headerCell={
-            <MyHeaderCell label="Firstname" />
+            <MyHeaderCell label="First Name" />
           }
           cell={
-            <TextCell dataKey="firstName" dataList={this.state.dataList} />
+            <TextCell dataKey="firstName" />
           }
           fixed={false}
-          width={50}
+          width={100}
+        />
+        <Column
+          headerCell={<MyHeaderCell label="First Name" />}
+          cell={<TextCell dataKey="lastName" />}
+          fixed={false}
+          width={100}
         />
       </Table>
     );
