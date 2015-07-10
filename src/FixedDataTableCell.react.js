@@ -59,7 +59,7 @@ var FixedDataTableCell = React.createClass({
     /**
      * The function to render the `cellData`.
      */
-    cellRenderer: PropTypes.func.isRequired,
+    // cellRenderer: PropTypes.func.isRequired,
 
     /**
      * The column data that will be passed to `cellRenderer` to render.
@@ -129,33 +129,12 @@ var FixedDataTableCell = React.createClass({
       props.className,
     );
 
-    var content;
-    if (props.isHeaderCell || props.isFooterCell) {
-      content = props.cellRenderer(
-        props.cellData,
-        props.cellDataKey,
-        props.columnData,
-        props.rowData,
-        props.width
-      );
-    } else {
-      content = props.cellRenderer(
-        props.cellData,
-        props.cellDataKey,
-        props.rowData,
-        props.rowIndex,
-        props.columnData,
-        props.width
-      );
-    }
+    var content = React.cloneElement(props.cell, {
+      rowIndex: props.rowIndex
+    })
 
     var contentClass = cx('public/fixedDataTableCell/cellContent');
-    if (React.isValidElement(content)) {
-      content = cloneWithProps(content, {
-        key: content.key,
-        className: contentClass,
-      });
-    } else {
+    if (!React.isValidElement(content)) {
       content = <div className={contentClass}>{content}</div>;
     }
 
