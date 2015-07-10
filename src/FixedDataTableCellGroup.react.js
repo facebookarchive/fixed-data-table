@@ -37,15 +37,6 @@ var FixedDataTableCellGroupImpl = React.createClass({
      */
     columns: PropTypes.array.isRequired,
 
-    /**
-     * The row data to render. The data format can be a simple Map object
-     * or an Array of data.
-     */
-    data: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.array
-    ]),
-
     left: PropTypes.number,
 
     onColumnResize: PropTypes.func,
@@ -72,7 +63,6 @@ var FixedDataTableCellGroupImpl = React.createClass({
             currentPosition - props.left + columnProps.width >= 0)) {
         var key = 'cell_' + i;
         cells[i] = this._renderCell(
-          props.data,
           props.rowIndex,
           props.rowHeight,
           columnProps,
@@ -103,7 +93,6 @@ var FixedDataTableCellGroupImpl = React.createClass({
   },
 
   _renderCell(
-    /*?object|array*/ rowData,
     /*number*/ rowIndex,
     /*number*/ height,
     /*object*/ columnProps,
@@ -114,20 +103,6 @@ var FixedDataTableCellGroupImpl = React.createClass({
     var cellDataKey = columnProps.dataKey;
     var isFooterCell = columnProps.isFooterCell;
     var isHeaderCell = columnProps.isHeaderCell;
-    var cellData;
-
-    if (isHeaderCell || isFooterCell) {
-      if (rowData == null || rowData[cellDataKey] == null) {
-        cellData = columnProps.label;
-      } else {
-        cellData = rowData[cellDataKey];
-      }
-    } else {
-      var cellDataGetter = columnProps.cellDataGetter;
-      cellData = cellDataGetter ?
-        cellDataGetter(cellDataKey, rowData) :
-        rowData[cellDataKey];
-    }
 
     var cellIsResizable = columnProps.isResizable &&
       this.props.onColumnResize;
@@ -144,11 +119,7 @@ var FixedDataTableCellGroupImpl = React.createClass({
     return (
       <FixedDataTableCell
         align={columnProps.align}
-        cellData={cellData}
-        cellDataKey={cellDataKey}
-        cell={columnProps.cell}
         className={className}
-        columnData={columnData}
         height={height}
         isFooterCell={isFooterCell}
         isHeaderCell={isHeaderCell}
@@ -159,6 +130,7 @@ var FixedDataTableCellGroupImpl = React.createClass({
         rowIndex={rowIndex}
         width={columnProps.width}
         left={left}
+        cell={columnProps.cell}
       />
     );
   },

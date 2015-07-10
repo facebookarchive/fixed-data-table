@@ -999,11 +999,8 @@ var FixedDataTable = React.createClass({
       headColumns.push(React.cloneElement(
         columns[i],
         {
-          cellRenderer: columnProps.headerRenderer || renderToString,
-          columnData: columnProps.columnData,
-          dataKey: columnProps.dataKey,
+          headerCell: columnProps.header,
           isHeaderCell: true,
-          label: columnProps.label,
         }
       ));
     }

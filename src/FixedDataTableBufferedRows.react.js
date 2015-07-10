@@ -129,7 +129,6 @@ var FixedDataTableBufferedRows = React.createClass({
 
       this._staticRowArray[i] =
         <FixedDataTableRow
-          data={{}}
           key={i}
           index={rowIndex}
           width={props.width}
