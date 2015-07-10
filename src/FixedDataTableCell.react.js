@@ -14,7 +14,6 @@ var FixedDataTableHelper = require('FixedDataTableHelper');
 var ImmutableObject = require('ImmutableObject');
 var React = require('React');
 var ReactComponentWithPureRenderMixin = require('ReactComponentWithPureRenderMixin');
-var cloneWithProps = require('cloneWithProps');
 var cx = require('cx');
 var joinClasses = require('joinClasses');
 
@@ -42,29 +41,6 @@ var FixedDataTableCell = React.createClass({
     minWidth: PropTypes.number,
     maxWidth: PropTypes.number,
     height: PropTypes.number.isRequired,
-
-    /**
-     * The cell data that will be passed to `cellRenderer` to render.
-     */
-    cellData: PropTypes.any,
-
-    /**
-     * The key to retrieve the cell data from the `rowData`.
-     */
-    cellDataKey: PropTypes.oneOfType([
-      PropTypes.string.isRequired,
-      PropTypes.number.isRequired,
-    ]),
-
-    /**
-     * The function to render the `cellData`.
-     */
-    // cellRenderer: PropTypes.func.isRequired,
-
-    /**
-     * The column data that will be passed to `cellRenderer` to render.
-     */
-    columnData: PropTypes.any,
 
     /**
      * The row data that will be passed to `cellRenderer` to render.
@@ -134,9 +110,6 @@ var FixedDataTableCell = React.createClass({
     })
 
     var contentClass = cx('public/fixedDataTableCell/cellContent');
-    if (!React.isValidElement(content)) {
-      content = <div className={contentClass}>{content}</div>;
-    }
 
     var columnResizerComponent;
     if (props.onColumnResize) {
@@ -197,7 +170,6 @@ var FixedDataTableCell = React.createClass({
       this.props.width,
       this.props.minWidth,
       this.props.maxWidth,
-      this.props.cellDataKey,
       event
     );
   },

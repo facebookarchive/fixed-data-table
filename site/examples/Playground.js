@@ -43,7 +43,7 @@ var ImageCell = React.createClass({
     dataKey: PropTypes.string
   },
   _getData() {
-    if (this.props.rowIndex > 0){
+    if (this.props.rowIndex >= 0){
       return dataList.getObjectAt(this.props.rowIndex)[this.props.dataKey];
     }
     return '';
@@ -71,13 +71,14 @@ var TextCell = React.createClass({
     dataKey: PropTypes.string,
   },
   _getData() {
-    if (this.props.rowIndex > 0){
+    if (this.props.rowIndex >= 0){
       return dataList.getObjectAt(this.props.rowIndex)[this.props.dataKey];
     }
   },
   render() {
     return (
-      <div>
+      <div
+        className="public_fixedDataTableCell_cellContent">
         {this._getData()}
       </div>
     )
@@ -106,7 +107,7 @@ var ObjectDataExample = React.createClass({
         rowHeight={50}
         headerHeight={50}
         rowsCount={dataList.getSize()}
-        width={250}
+        width={this.props.tableWidth}
         height={this.props.tableHeight}
         onContentHeightChange={this._onContentHeightChange}
         scrollTop={this.props.top}
@@ -114,7 +115,7 @@ var ObjectDataExample = React.createClass({
         overflowX={controlledScrolling ? "hidden" : "auto"}
         overflowY={controlledScrolling ? "hidden" : "auto"}>
         <Column
-          headerCell={
+          header={
             <MyHeaderCell label="Image" />
           }
           cell={
@@ -124,20 +125,30 @@ var ObjectDataExample = React.createClass({
           width={50}
         />
         <Column
-          headerCell={
+          header={
             <MyHeaderCell label="First Name" />
           }
           cell={
             <TextCell dataKey="firstName" />
           }
-          fixed={false}
           width={100}
         />
         <Column
-          headerCell={<MyHeaderCell label="First Name" />}
+          header={<MyHeaderCell label="First Name" />}
           cell={<TextCell dataKey="lastName" />}
-          fixed={false}
           width={100}
+        />
+        <Column
+          width={100}
+          cell={<TextCell dataKey="city" />}
+        />
+        <Column
+          width={100}
+          cell={<TextCell dataKey="street" />}
+        />
+        <Column
+          width={200}
+          cell={<TextCell dataKey="zipCode" />}
         />
       </Table>
     );

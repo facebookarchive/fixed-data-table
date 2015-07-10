@@ -29,114 +29,17 @@ var FixedDataTableColumn = React.createClass({
     align: PropTypes.oneOf(['left', 'center', 'right']),
 
     /**
-     * DEPRECATED
-     * className for this column's header cell.
-     */
-    // headerClassName: PropTypes.string,
-
-    /**
-     * DEPRECATED
-     * className for this column's footer cell.
-     */
-    // footerClassName: PropTypes.string,
-
-    /**
-     * DEPRECATED
-     * className for each of this column's data cells.
-     */
-    // cellClassName: PropTypes.string,
-
-    /**
-     * DEPRECATED
-     * The cell renderer that returns React-renderable content for table cell.
-     * ```
-     * function(
-     *   cellData: any,
-     *   cellDataKey: string,
-     *   rowData: object,
-     *   rowIndex: number,
-     *   columnData: any,
-     *   width: number
-     * ): ?$jsx
-     * ```
-     */
-    // cellRenderer: PropTypes.func,
-
-    /**
-     * DEPRECATED
-     * The getter `function(string_cellDataKey, object_rowData)` that returns
-     * the cell data for the `cellRenderer`.
-     * If not provided, the cell data will be collected from
-     * `rowData[cellDataKey]` instead. The value that `cellDataGetter` returns
-     * will be used to determine whether the cell should re-render.
-     */
-    // cellDataGetter: PropTypes.func,
-
-    /**
-     * DEPRECATED
-     * The key to retrieve the cell data from the data row. Provided key type
-     * must be either `string` or `number`. Since we use this
-     * for keys, it must be specified for each column.
-     */
-    // dataKey: PropTypes.oneOfType([
-      // PropTypes.string,
-      // PropTypes.number,
-    // ]).isRequired,
-
-    /**
      * Controls if the column is fixed when scrolling in the X axis.
      */
     fixed: PropTypes.bool,
 
     /**
-     * DEPRECATED
-     * The cell renderer that returns React-renderable content for table column
-     * header.
-     * ```
-     * function(
-     *   label: ?string,
-     *   cellDataKey: string,
-     *   columnData: any,
-     *   rowData: array<?object>,
-     *   width: number
-     * ): ?$jsx
-     * ```
-     */
-    // headerRenderer: PropTypes.func,
-
-    /**
-     * DEPRECATED
-     * The cell renderer that returns React-renderable content for table column
-     * footer.
-     * ```
-     * function(
-     *   label: ?string,
-     *   cellDataKey: string,
-     *   columnData: any,
-     *   rowData: array<?object>,
-     *   width: number
-     * ): ?$jsx
-     * ```
-     */
-    // footerRenderer: PropTypes.func,
-
-    /**
-     * DEPRECATED
-     * Bucket for any data to be passed into column renderer functions.
-     */
-    // columnData: PropTypes.object,
-
-    /**
-     * DEPRECATED
-     * The column's header label.
-     */
-    // label: PropTypes.string,
-
-    /**
      * Header Cell
-     * @type {[type]}
+     * TODO: node or string.
+     * If its a node, use the node. Otherwise, just render a basic string.
+     * (renderToString)
      */
-    headerCell: PropTypes.node,
+    header: PropTypes.node,
 
     /**
      * Define the cell node
@@ -147,7 +50,7 @@ var FixedDataTableColumn = React.createClass({
      * Footer Cell
      * @type {[type]}
      */
-    footerCell: PropTypes.node,
+    footer: PropTypes.node,
 
     /**
      * The pixel width of the column.
