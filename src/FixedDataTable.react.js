@@ -162,30 +162,9 @@ var FixedDataTable = React.createClass({
     headerHeight: PropTypes.number.isRequired,
 
     /**
-     * Function that is called to get the data for the header row.
-     * If the function returns null, the header will be set to the
-     * Column's label property.
-     */
-    headerDataGetter: PropTypes.func,
-
-    /**
      * Pixel height of footer.
      */
     footerHeight: PropTypes.number,
-
-    /**
-     * DEPRECATED - use footerDataGetter instead.
-     * Data that will be passed to footer cell renderers.
-     */
-    footerData: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.array,
-    ]),
-
-    /**
-     * Function that is called to get the data for the footer row.
-     */
-    footerDataGetter: PropTypes.func,
 
     /**
      * Value of horizontal scroll.
@@ -497,10 +476,6 @@ var FixedDataTable = React.createClass({
 
     var footer = null;
     if (state.footerHeight) {
-      var footerData = props.footerDataGetter
-        ? props.footerDataGetter()
-        : props.footerData;
-
       footer =
         <FixedDataTableRow
           key="footer"
@@ -508,15 +483,14 @@ var FixedDataTable = React.createClass({
             cx('fixedDataTableLayout/footer'),
             cx('public/fixedDataTable/footer'),
           )}
-          data={footerData}
-          fixedColumns={state.footFixedColumns}
+          width={state.width}
           height={state.footerHeight}
           index={-1}
           zIndex={1}
           offsetTop={footOffsetTop}
+          fixedColumns={state.footFixedColumns}
           scrollableColumns={state.footScrollableColumns}
           scrollLeft={state.scrollX}
-          width={state.width}
         />;
     }
 
@@ -529,7 +503,6 @@ var FixedDataTable = React.createClass({
           cx('fixedDataTableLayout/header'),
           cx('public/fixedDataTable/header'),
         )}
-        data={state.headData}
         width={state.width}
         height={state.headerHeight}
         index={-1}
@@ -730,8 +703,6 @@ var FixedDataTable = React.createClass({
           groupHeaderColumnTypes.scrollable;
       }
     }
-
-    columnInfo.headData = this._getHeadData(columns);
 
     return columnInfo;
   },
@@ -999,7 +970,7 @@ var FixedDataTable = React.createClass({
       headColumns.push(React.cloneElement(
         columns[i],
         {
-          headerCell: columnProps.header,
+          header: columnProps.header,
           isHeaderCell: true,
         }
       ));
@@ -1014,9 +985,7 @@ var FixedDataTable = React.createClass({
       footColumns.push(React.cloneElement(
         columns[i],
         {
-          cellRenderer: columnProps.footerRenderer || renderToString,
-          columnData: columnProps.columnData,
-          dataKey: columnProps.dataKey,
+          footer: columnProps.footer,
           isFooterCell: true,
         }
       ));

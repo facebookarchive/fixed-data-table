@@ -38,6 +38,15 @@ function renderDate(/*object*/ cellData) {
 
 var dataList = new FakeObjectDataListStore(ROWS);
 
+var BasicCell = React.createClass({
+  render() {
+    return (
+      <div className="public_fixedDataTableCell_cellContent">
+        {this.props.children}
+      </div>
+    )
+  }
+})
 var ImageCell = React.createClass({
   propTypes: {
     dataKey: PropTypes.string
@@ -61,7 +70,9 @@ var MyHeaderCell = React.createClass({
   },
   render() {
     return (
-      <div>{this.props.label}</div>
+      <BasicCell>
+        {this.props.label}
+      </BasicCell>
     )
   }
 })
@@ -77,10 +88,9 @@ var TextCell = React.createClass({
   },
   render() {
     return (
-      <div
-        className="public_fixedDataTableCell_cellContent">
+      <BasicCell>
         {this._getData()}
-      </div>
+      </BasicCell>
     )
   }
 })
@@ -116,7 +126,7 @@ var ObjectDataExample = React.createClass({
         overflowY={controlledScrolling ? "hidden" : "auto"}>
         <Column
           header={
-            <MyHeaderCell label="Image" />
+            <MyHeaderCell label="" />
           }
           cell={
             <ImageCell dataKey="avartar" />
@@ -140,14 +150,17 @@ var ObjectDataExample = React.createClass({
         />
         <Column
           width={100}
+          header={<MyHeaderCell label="City" />}
           cell={<TextCell dataKey="city" />}
         />
         <Column
           width={100}
+          header={<MyHeaderCell label="Street" />}
           cell={<TextCell dataKey="street" />}
         />
         <Column
           width={200}
+          header={<MyHeaderCell label="Zip Code" />}
           cell={<TextCell dataKey="zipCode" />}
         />
       </Table>
