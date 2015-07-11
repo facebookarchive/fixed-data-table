@@ -43,14 +43,6 @@ var FixedDataTableCell = React.createClass({
     height: PropTypes.number.isRequired,
 
     /**
-     * The row data that will be passed to `cellRenderer` to render.
-     */
-    rowData: PropTypes.oneOfType([
-      PropTypes.object.isRequired,
-      PropTypes.array.isRequired,
-    ]),
-
-    /**
      * The row index that will be passed to `cellRenderer` to render.
      */
     rowIndex: PropTypes.number.isRequired,
