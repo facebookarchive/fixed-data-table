@@ -39,18 +39,27 @@ var FixedDataTableColumn = React.createClass({
      * If its a node, use the node. Otherwise, just render a basic string.
      * (renderToString)
      */
-    header: PropTypes.node,
+    header: PropTypes.oneOfType([
+        PropTypes.node,
+        PropTypes.string
+    ]),
 
     /**
      * Define the cell node
      */
-    cell: PropTypes.node,
+    cell: PropTypes.oneOfType([
+        PropTypes.node,
+        PropTypes.string
+    ]),
 
     /**
      * Footer Cell
      * @type {[type]}
      */
-    footer: PropTypes.node,
+    footer: PropTypes.oneOfType([
+        PropTypes.node,
+        PropTypes.string
+    ]),
 
     /**
      * The pixel width of the column.

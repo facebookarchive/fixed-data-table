@@ -12,7 +12,7 @@
 
 "use strict";
 
-var ROWS = 1000000;
+var ROWS = 10000;
 
 var ExampleImage = require('./ExampleImage');
 var FakeObjectDataListStore = require('./FakeObjectDataListStore');
@@ -23,6 +23,7 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 var Table = FixedDataTable.Table;
 var Column = FixedDataTable.Column;
+var Cell = FixedDataTable.Cell;
 
 function renderImage(/*string*/ cellData) {
   return <ExampleImage src={cellData} />;
@@ -47,6 +48,7 @@ var BasicCell = React.createClass({
     )
   }
 })
+
 var ImageCell = React.createClass({
   propTypes: {
     dataKey: PropTypes.string
@@ -70,9 +72,9 @@ var MyHeaderCell = React.createClass({
   },
   render() {
     return (
-      <BasicCell>
+      <Cell style={{background: 'blue', color: 'white'}}>
         {this.props.label}
-      </BasicCell>
+      </Cell>
     )
   }
 })
@@ -82,15 +84,13 @@ var TextCell = React.createClass({
     dataKey: PropTypes.string,
   },
   _getData() {
-    if (this.props.rowIndex >= 0){
-      return dataList.getObjectAt(this.props.rowIndex)[this.props.dataKey];
-    }
+    return dataList.getObjectAt(this.props.rowIndex)[this.props.dataKey];
   },
   render() {
     return (
-      <BasicCell>
+      <Cell>
         {this._getData()}
-      </BasicCell>
+      </Cell>
     )
   }
 })
@@ -125,9 +125,6 @@ var ObjectDataExample = React.createClass({
         overflowX={controlledScrolling ? "hidden" : "auto"}
         overflowY={controlledScrolling ? "hidden" : "auto"}>
         <Column
-          header={
-            <MyHeaderCell label="" />
-          }
           cell={
             <ImageCell dataKey="avartar" />
           }
@@ -135,16 +132,14 @@ var ObjectDataExample = React.createClass({
           width={50}
         />
         <Column
-          header={
-            <MyHeaderCell label="First Name" />
-          }
+          header="First Name"
           cell={
             <TextCell dataKey="firstName" />
           }
           width={100}
         />
         <Column
-          header={<MyHeaderCell label="First Name" />}
+          header="Last Name"
           cell={<TextCell dataKey="lastName" />}
           width={100}
         />
@@ -162,6 +157,7 @@ var ObjectDataExample = React.createClass({
           width={200}
           header={<MyHeaderCell label="Zip Code" />}
           cell={<TextCell dataKey="zipCode" />}
+          footer="FOOTER"
         />
       </Table>
     );
