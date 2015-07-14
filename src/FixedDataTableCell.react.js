@@ -143,11 +143,6 @@ var FixedDataTableCell = React.createClass({
         cellHeight: props.height,
         cellWidth: props.width,
       })
-      content =  (
-        <div style={innerStyle}>
-          {content}
-        </div>
-      )
     } else {
       content = (
         <FixedDataTableCellWrapper
@@ -156,7 +151,6 @@ var FixedDataTableCell = React.createClass({
           {props.cell}
         </FixedDataTableCellWrapper>
       )
-
     }
 
     return (
