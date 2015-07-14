@@ -12,10 +12,12 @@
 'use strict';
 
 var FixedDataTable = require('FixedDataTable.react');
+var FixedDataTableCellWrapper = require('FixedDataTableCellWrapper.react');
 var FixedDataTableColumn = require('FixedDataTableColumn.react');
 var FixedDataTableColumnGroup = require('FixedDataTableColumnGroup.react');
 
 var FixedDataTableRoot = {
+  Cell: FixedDataTableCellWrapper,
   Column: FixedDataTableColumn,
   ColumnGroup: FixedDataTableColumnGroup,
   Table: FixedDataTable,

@@ -10,6 +10,7 @@
  * @typechecks
  */
 
+var FixedDataTableCellWrapper = require('FixedDataTableCellWrapper.react');
 var FixedDataTableHelper = require('FixedDataTableHelper');
 var ImmutableObject = require('ImmutableObject');
 var React = require('React');
@@ -24,8 +25,6 @@ var {PropTypes} = React;
 var DEFAULT_PROPS = new ImmutableObject({
   align: 'left',
   highlighted: false,
-  isFooterCell: false,
-  isHeaderCell: false,
 });
 
 var FixedDataTableCell = React.createClass({
@@ -35,12 +34,15 @@ var FixedDataTableCell = React.createClass({
     align: PropTypes.oneOf(['left', 'center', 'right']),
     className: PropTypes.string,
     highlighted: PropTypes.bool,
-    isFooterCell: PropTypes.bool,
-    isHeaderCell: PropTypes.bool,
     width: PropTypes.number.isRequired,
     minWidth: PropTypes.number,
     maxWidth: PropTypes.number,
     height: PropTypes.number.isRequired,
+
+    cell: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.node
+    ]),
 
     /**
      * The row index that will be passed to `cellRenderer` to render.
@@ -99,7 +101,7 @@ var FixedDataTableCell = React.createClass({
 
     var content;
     var contentClass = cx('public/fixedDataTableCell/cellContent');
-    if (React.isValidElement(content)) {
+    if (React.isValidElement(props.cell)) {
       content = React.cloneElement(content, {
         className: joinClasses(content.props.className, contentClass),
         rowIndex: props.rowIndex,
@@ -134,29 +136,33 @@ var FixedDataTableCell = React.createClass({
       width: props.width,
     };
 
+    var content;
+    if (React.isValidElement(props.cell)){
+      content = React.cloneElement(props.cell, {
+        rowIndex: props.rowIndex,
+        cellHeight: props.height,
+        cellWidth: props.width,
+      })
+      content =  (
+        <div style={innerStyle}>
+          {content}
+        </div>
+      )
+    } else {
+      content = (
+        <FixedDataTableCellWrapper
+          cellHeight={props.height}
+          cellWidth={props.width}>
+          {props.cell}
+        </FixedDataTableCellWrapper>
+      )
+
+    }
+
     return (
       <div className={className} style={style}>
         {columnResizerComponent}
-        <div
-          className={joinClasses(
-            cx('fixedDataTableCellLayout/wrap1'),
-            cx('public/fixedDataTableCell/wrap1'),
-          )}
-          style={innerStyle}>
-          <div
-            className={joinClasses(
-              cx('fixedDataTableCellLayout/wrap2'),
-              cx('public/fixedDataTableCell/wrap2'),
-            )}>
-            <div
-              className={joinClasses(
-                cx('fixedDataTableCellLayout/wrap3'),
-                cx('public/fixedDataTableCell/wrap3'),
-              )}>
-              {content}
-            </div>
-          </div>
-        </div>
+        {content}
       </div>
     );
   },
