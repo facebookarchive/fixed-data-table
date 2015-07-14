@@ -72,7 +72,9 @@ var MyHeaderCell = React.createClass({
   },
   render() {
     return (
-      <Cell style={{background: 'blue', color: 'white'}}>
+      <Cell
+      {...this.props}
+      style={{background: 'blue', color: 'white'}}>
         {this.props.label}
       </Cell>
     )
@@ -88,7 +90,8 @@ var TextCell = React.createClass({
   },
   render() {
     return (
-      <Cell>
+      <Cell
+        {...this.props}>
         {this._getData()}
       </Cell>
     )
@@ -116,6 +119,7 @@ var ObjectDataExample = React.createClass({
       <Table
         rowHeight={50}
         headerHeight={50}
+        footerHeight={50}
         rowsCount={dataList.getSize()}
         width={this.props.tableWidth}
         height={this.props.tableHeight}
@@ -125,17 +129,13 @@ var ObjectDataExample = React.createClass({
         overflowX={controlledScrolling ? "hidden" : "auto"}
         overflowY={controlledScrolling ? "hidden" : "auto"}>
         <Column
-          cell={
-            <ImageCell dataKey="avartar" />
-          }
+          cell={<ImageCell dataKey="avartar" />}
           fixed={true}
           width={50}
         />
         <Column
           header="First Name"
-          cell={
-            <TextCell dataKey="firstName" />
-          }
+          cell={<TextCell dataKey="firstName" />}
           width={100}
         />
         <Column
