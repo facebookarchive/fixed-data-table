@@ -76,7 +76,6 @@ var ResizeExample = React.createClass({
   },
 
   _onColumnResizeEndCallback(newColumnWidth, dataKey) {
-    debugger
     columnWidths[dataKey] = newColumnWidth;
     isColumnResizing = false;
     this.forceUpdate(); // don't do this, use a store and put into this.state!
@@ -101,35 +100,35 @@ var ResizeExample = React.createClass({
         isColumnResizing={isColumnResizing}
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}>
         <Column
+          columnKey='firstName'
           header="First Name"
           cell={<TextCell data={this.state.dataList} dataKey='firstName' />}
           fixed={true}
           width={columnWidths['firstName']}
           isResizable={true}
-          key='firstName'
         />
         <Column
+          columnKey='lastName'
           header="Last Name (min/max constrained)"
           cell={<TextCell data={this.state.dataList} dataKey='lastName' />}
           width={columnWidths['lastName']}
           isResizable={true}
           minWidth={70}
           maxWidth={170}
-          key='lastName'
         />
         <Column
+          columnKey='companyName'
           header="Company"
           cell={<TextCell data={this.state.dataList} dataKey='companyName' />}
           width={columnWidths['companyName']}
           isResizable={true}
-          key='companyName'
         />
         <Column
+          columnKey='sentence'
           header="Sentence"
           cell={<TextCell data={this.state.dataList} dataKey='sentence' />}
           width={columnWidths['sentence']}
           isResizable={true}
-          key='sentence'
         />
       </Table>
     );

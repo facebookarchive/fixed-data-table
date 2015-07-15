@@ -966,7 +966,6 @@ var FixedDataTable = React.createClass({
       headColumns.push(React.cloneElement(
         columns[i],
         {
-          header: columnProps.header,
           isHeaderCell: true,
         }
       ));
@@ -981,7 +980,6 @@ var FixedDataTable = React.createClass({
       footColumns.push(React.cloneElement(
         columns[i],
         {
-          footer: columnProps.footer,
           isFooterCell: true,
         }
       ));
