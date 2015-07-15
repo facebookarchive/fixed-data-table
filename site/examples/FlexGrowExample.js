@@ -6,6 +6,7 @@ var FakeObjectDataListStore = require('./FakeObjectDataListStore');
 var FixedDataTable = require('fixed-data-table');
 var React = require('react');
 
+var Cell = FixedDataTable.Cell;
 var Column = FixedDataTable.Column;
 var PropTypes = React.PropTypes;
 var Table = FixedDataTable.Table;
@@ -19,6 +20,60 @@ function colorizeText(/*string*/ str, key, data, index) {
   });
 }
 
+var ImageCell = React.createClass({
+  propTypes: {
+    data: PropTypes.any,
+    dataKey: PropTypes.string,
+    rowIndex: PropTypes.number,
+  },
+  _getData() {
+    return this.props.data.getObjectAt(this.props.rowIndex)[this.props.dataKey];
+  },
+  render() {
+    return (
+      <ExampleImage src={this._getData()} />
+    )
+  }
+})
+
+var TextCell = React.createClass({
+  propTypes: {
+    dataKey: PropTypes.string,
+    data: PropTypes.any,
+    rowIndex: PropTypes.number,
+  },
+  _getData() {
+    return this.props.data.getObjectAt(this.props.rowIndex)[this.props.dataKey];
+  },
+  render() {
+    return (
+      <Cell
+        {...this.props}>
+        {this._getData()}
+      </Cell>
+    )
+  }
+})
+
+var ColoredTextCell = React.createClass({
+  PropTypes: {
+    dataKey: PropTypes.string,
+    data: PropTypes.any,
+    rowIndex: PropTypes.number,
+  },
+  _getData() {
+    return this.props.data.getObjectAt(this.props.rowIndex)[this.props.dataKey];
+  },
+  render() {
+    return (
+      <Cell
+        {...this.props}>
+        {colorizeText(this._getData(), this.props.dataKey, null, this.props.rowIndex)}
+      </Cell>
+    )
+  }
+})
+
 var FlexGrowExample = React.createClass({
   propTypes: {
     onContentDimensionsChange: PropTypes.func,
@@ -30,10 +85,6 @@ var FlexGrowExample = React.createClass({
     return {
       dataList: new FakeObjectDataListStore(ROWS)
     };
-  },
-
-  _rowGetter(index) {
-    return this.state.dataList.getObjectAt(index);
   },
 
   _onContentHeightChange(contentHeight) {
@@ -62,27 +113,27 @@ var FlexGrowExample = React.createClass({
         overflowX={controlledScrolling ? "hidden" : "auto"}
         overflowY={controlledScrolling ? "hidden" : "auto"}>
         <Column
-          dataKey="firstName"
+          header="First Name"
+          cell={<ColoredTextCell data={this.state.dataList} dataKey="firstName" />}
           fixed={true}
-          label="First Name"
           width={100}
         />
         <Column
-          label="Sentence! (flexGrow greediness=2)"
-          cellRenderer={colorizeText}
+          header="Sentence! (flexGrow greediness=2)"
+          cell={<ColoredTextCell data={this.state.dataList} dataKey="sentence" />}
           dataKey="sentence"
           flexGrow={2}
           width={200}
         />
         <Column
           flexGrow={1}
-          label="Company (flexGrow greediness=1)"
+          header="Company (flexGrow greediness=1)"
           width={200}
-          dataKey="companyName"
+          cell={<TextCell data={this.state.dataList} dataKey="companyName" />}
         />
         <Column
-          dataKey="lastName"
-          label="Last Name"
+          header="Last Name"
+          cell={<TextCell data={this.state.dataList} dataKey="lastName" />}
           width={100}
         />
       </Table>
