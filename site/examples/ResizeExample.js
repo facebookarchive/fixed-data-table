@@ -6,6 +6,7 @@ var FakeObjectDataListStore = require('./FakeObjectDataListStore');
 var FixedDataTable = require('fixed-data-table');
 var React = require('react');
 
+var Cell = FixedDataTable.Cell;
 var Column = FixedDataTable.Column;
 var PropTypes = React.PropTypes;
 var Table = FixedDataTable.Table;
@@ -17,6 +18,41 @@ var columnWidths = {
   companyName: 60,
 };
 var isColumnResizing;
+
+var ImageCell = React.createClass({
+  propTypes: {
+    data: PropTypes.any,
+    dataKey: PropTypes.string,
+    rowIndex: PropTypes.number,
+  },
+  _getData() {
+    return this.props.data.getObjectAt(this.props.rowIndex)[this.props.dataKey];
+  },
+  render() {
+    return (
+      <ExampleImage src={this._getData()} />
+    )
+  }
+})
+
+var TextCell = React.createClass({
+  propTypes: {
+    dataKey: PropTypes.string,
+    data: PropTypes.any,
+    rowIndex: PropTypes.number,
+  },
+  _getData() {
+    return this.props.data.getObjectAt(this.props.rowIndex)[this.props.dataKey];
+  },
+  render() {
+    return (
+      <Cell
+        {...this.props}>
+        {this._getData()}
+      </Cell>
+    )
+  }
+})
 
 var ResizeExample = React.createClass({
   propTypes: {
@@ -31,10 +67,6 @@ var ResizeExample = React.createClass({
     }
   },
 
-  _rowGetter(index) {
-    return this.state.dataList.getObjectAt(index);
-  },
-
   _onContentHeightChange(contentHeight) {
     this.props.onContentDimensionsChange &&
       this.props.onContentDimensionsChange(
@@ -44,6 +76,7 @@ var ResizeExample = React.createClass({
   },
 
   _onColumnResizeEndCallback(newColumnWidth, dataKey) {
+    debugger
     columnWidths[dataKey] = newColumnWidth;
     isColumnResizing = false;
     this.forceUpdate(); // don't do this, use a store and put into this.state!
@@ -57,7 +90,6 @@ var ResizeExample = React.createClass({
       <Table
         rowHeight={30}
         headerHeight={50}
-        rowGetter={this._rowGetter}
         rowsCount={this.state.dataList.getSize()}
         width={this.props.tableWidth}
         height={this.props.tableHeight}
@@ -69,31 +101,35 @@ var ResizeExample = React.createClass({
         isColumnResizing={isColumnResizing}
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}>
         <Column
-          dataKey="firstName"
+          header="First Name"
+          cell={<TextCell data={this.state.dataList} dataKey='firstName' />}
           fixed={true}
-          label="First Name"
           width={columnWidths['firstName']}
           isResizable={true}
+          key='firstName'
         />
         <Column
-          label="Last Name (min/max constrained)"
-          dataKey="lastName"
+          header="Last Name (min/max constrained)"
+          cell={<TextCell data={this.state.dataList} dataKey='lastName' />}
           width={columnWidths['lastName']}
           isResizable={true}
           minWidth={70}
           maxWidth={170}
+          key='lastName'
         />
         <Column
-          label="Company"
-          dataKey="companyName"
+          header="Company"
+          cell={<TextCell data={this.state.dataList} dataKey='companyName' />}
           width={columnWidths['companyName']}
           isResizable={true}
+          key='companyName'
         />
         <Column
-          label="Sentence"
-          dataKey="sentence"
+          header="Sentence"
+          cell={<TextCell data={this.state.dataList} dataKey='sentence' />}
           width={columnWidths['sentence']}
           isResizable={true}
+          key='sentence'
         />
       </Table>
     );
