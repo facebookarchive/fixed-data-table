@@ -44,6 +44,11 @@ var FixedDataTableCell = React.createClass({
       PropTypes.node
     ]),
 
+    columnKey: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ]),
+
     /**
      * The row index that will be passed to `cellRenderer` to render.
      */
@@ -167,6 +172,7 @@ var FixedDataTableCell = React.createClass({
       this.props.width,
       this.props.minWidth,
       this.props.maxWidth,
+      this.props.columnKey,
       event
     );
   },

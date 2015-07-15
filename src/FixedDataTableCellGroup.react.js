@@ -133,6 +133,7 @@ var FixedDataTableCellGroupImpl = React.createClass({
         minWidth={columnProps.minWidth}
         onColumnResize={onColumnResize}
         rowIndex={rowIndex}
+        columnKey={columnProps.columnKey}
         width={columnProps.width}
         left={left}
         cell={cell}
@@ -205,6 +206,7 @@ var FixedDataTableCellGroup = React.createClass({
     /*number*/ width,
     /*?number*/ minWidth,
     /*?number*/ maxWidth,
+    /*string|number*/ columnKey,
     /*object*/ event
   ) {
     this.props.onColumnResize && this.props.onColumnResize(
@@ -213,6 +215,7 @@ var FixedDataTableCellGroup = React.createClass({
       width,
       minWidth,
       maxWidth,
+      columnKey,
       event
     );
   },

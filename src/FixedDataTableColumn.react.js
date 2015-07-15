@@ -61,6 +61,11 @@ var FixedDataTableColumn = React.createClass({
         PropTypes.string
     ]),
 
+    columnKey: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]),
+
     /**
      * The pixel width of the column.
      */
