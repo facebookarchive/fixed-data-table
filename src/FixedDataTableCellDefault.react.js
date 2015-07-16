@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @providesModule FixedDataTableCellWrapper.react
+ * @providesModule FixedDataTableCellDefault.react
  * @typechecks
  */
 
@@ -16,8 +16,15 @@ var ReactComponentWithPureRenderMixin = require('ReactComponentWithPureRenderMix
 var cx = require('cx');
 var joinClasses = require('joinClasses');
 
-var FixedDataTableCellWrapper = React.createClass({
+var {PropTypes} = React;
+
+var FixedDataTableCellDefault = React.createClass({
   mixins: [ReactComponentWithPureRenderMixin],
+
+  propTypes: {
+    cellHeight: PropTypes.number.isRequired,
+    cellWidth: PropTypes.number.isRequired
+  },
 
   render() {
 
@@ -30,9 +37,11 @@ var FixedDataTableCellWrapper = React.createClass({
 
     return (
       <div
+          {...this.props}
           className={joinClasses(
             cx('fixedDataTableCellLayout/wrap1'),
             cx('public/fixedDataTableCell/wrap1'),
+            this.props.className
           )}
           style={innerStyle}>
           <div
@@ -56,4 +65,4 @@ var FixedDataTableCellWrapper = React.createClass({
   }
 })
 
-module.exports = FixedDataTableCellWrapper;
+module.exports = FixedDataTableCellDefault;
