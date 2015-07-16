@@ -10,7 +10,7 @@
  * @typechecks
  */
 
-var FixedDataTableCellWrapper = require('FixedDataTableCellWrapper.react');
+var FixedDataTableCellDefault = require('FixedDataTableCellDefault.react');
 var FixedDataTableHelper = require('FixedDataTableHelper');
 var ImmutableObject = require('ImmutableObject');
 var React = require('React');
@@ -141,11 +141,11 @@ var FixedDataTableCell = React.createClass({
       })
     } else {
       content = (
-        <FixedDataTableCellWrapper
+        <FixedDataTableCellDefault
           cellHeight={props.height}
           cellWidth={props.width}>
           {props.cell}
-        </FixedDataTableCellWrapper>
+        </FixedDataTableCellDefault>
       )
     }
 
