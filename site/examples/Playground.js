@@ -98,6 +98,66 @@ var TextCell = React.createClass({
   }
 })
 
+var EditableCell = React.createClass({
+  propTypes: {
+    dataKey: PropTypes.string,
+    rowIndex: PropTypes.number
+  },
+  getInitialState() {
+    return {
+      editing: false
+    }
+  },
+  _getData() {
+    return dataList.getObjectAt(this.props.rowIndex)[this.props.dataKey];
+  },
+
+  _edit() {
+    if (this.state.editing){
+      return;
+    }
+
+    this.setState({
+      editing: true
+    })
+  },
+
+  _save(e) {
+
+    if (e.keyCode !== 13) {
+      return;
+    }
+
+    // Bad
+    dataList._cache[this.props.rowIndex][this.props.dataKey] = event.target.value;
+
+    this.setState({
+      editing: false
+    });
+  },
+  render() {
+
+    var content = '';
+    if (this.state.editing){
+      content = (
+        <input type="text" defaultValue={this._getData()}
+          onKeyDown={this._save}/>
+      )
+    } else {
+      content = this._getData();
+    }
+
+    var cell =
+      <Cell
+        {...this.props}
+        onClick={this._edit}>
+        {content}
+      </Cell>
+
+      return cell;
+  }
+})
+
 var ObjectDataExample = React.createClass({
 
   propTypes: {
@@ -135,8 +195,8 @@ var ObjectDataExample = React.createClass({
         />
         <Column
           header="First Name"
-          cell={<TextCell dataKey="firstName" />}
-          width={100}
+          cell={<EditableCell dataKey="firstName" />}
+          width={200}
         />
         <Column
           header="Last Name"
