@@ -136,23 +136,22 @@ var FixedDataTableCell = React.createClass({
       );
     }
 
-    var innerStyle = {
-      height: props.height,
-      width: props.width,
+    var cellProps = {
+      columnKey: props.columnKey,
+      cellHeight: props.height,
+      cellWidth: props.width,
     };
+    if (props.rowIndex > 0){
+      cellProps.rowIndex = props.rowIndex;
+    }
 
     var content;
     if (React.isValidElement(props.cell)){
-      content = React.cloneElement(props.cell, {
-        rowIndex: props.rowIndex,
-        cellHeight: props.height,
-        cellWidth: props.width,
-      })
+      content = React.cloneElement(props.cell, cellProps)
     } else {
       content = (
         <FixedDataTableCellDefault
-          cellHeight={props.height}
-          cellWidth={props.width}>
+          {...cellProps}>
           {props.cell}
         </FixedDataTableCellDefault>
       )

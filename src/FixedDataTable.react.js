@@ -239,7 +239,7 @@ var FixedDataTable = React.createClass({
      * ```
      * function(
      *   newColumnWidth: number,
-     *   dataKey: string,
+     *   columnKey: string,
      * )
      * ```
      */
