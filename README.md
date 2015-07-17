@@ -3,7 +3,7 @@ Fixed Data Tables for React
 
 FixedDataTable is a React component for building and presenting data in a flexible, powerful way. It supports standard table features, like headers, columns, rows, header groupings, and both fixed-position and scrolling columns.
 
-The table was designed to handle thousands rows of data without sacrificing performance. Scrolling smoothly is a first-class goal of FixedDataTable and it's architected in a way to allow for flexibility and extensibility.
+The table was designed to handle thousands of rows of data without sacrificing performance. Scrolling smoothly is a first-class goal of FixedDataTable and it's architected in a way to allow for flexibility and extensibility.
 
 Features of FixedDataTable:
 * Fixed headers and footer
@@ -16,7 +16,7 @@ Features of FixedDataTable:
 * Jumping to a row or column
 * Controlled scroll API allows touch support
 
-Things the FixedDataTable doesn't do:
+Things the FixedDataTable **doesn't** do:
 * FixedDataTable does not provide a layout reflow mechanism or calculate content layout information such as width and height of the cell contents. The developer has to provide the layout information to the table instead.
 * FixedDataTable does not handle sorting of data. Instead it allows the developer to supply data getters that can be sort-, filter-, or tail-loading-aware.
 * FixedDataTable does not fetch the data (see above)
@@ -29,8 +29,9 @@ Install `fixed-data-table` using npm.
 ```shell
 npm install fixed-data-table
 ```
-
 Add the default stylesheet `dist/fixed-data-table.css`, then require it into any module.
+
+### Basic Example
 
 ```javascript
 var React = require('react');
@@ -39,6 +40,7 @@ var FixedDataTable = require('fixed-data-table');
 
 var Table = FixedDataTable.Table;
 var Column = FixedDataTable.Column;
+var Cell = FixedDataTable.Cell; // A default cell
 
 // Table data as a list of array.
 var rows = [
@@ -48,33 +50,48 @@ var rows = [
   // .... and more
 ];
 
-function rowGetter(rowIndex) {
-  return rows[rowIndex];
-}
+// Create your cell class
+var BasicCell = React.createClass({
+  // Choose how this cell gets data, with whatever function you want!
+  // You can assume your cell will receive the rowIndex prop.
+  _getData: function() {
+    return rows[this.props.rowIndex][this.props.dataKey]
+  },
+  render: function() {
+    // Spread the props (cellWidth and cellHeight) if you want a
+    // basic table cell with vertical alignment and padding.
+    // Otherwise, you can return any valid React element!
+    return (
+      <Cell
+        {...this.props}>
+        {this._getData()}
+      </Cell>
+    )
+  }
+});
 
+// Render your table
 ReactDOM.render(
   <Table
     rowHeight={50}
-    rowGetter={rowGetter}
     rowsCount={rows.length}
     width={5000}
     height={5000}
     headerHeight={50}>
     <Column
-      label="Col 1"
+      header="Col 1" // Header text. You can also pass in a React element here!
+      cell={<BasicCell dataKey={1} />} // Add whatever props your cell needs!
       width={3000}
-      dataKey={0}
     />
     <Column
-      label="Col 2"
+      header="Col 2"
       width={2000}
-      dataKey={1}
+      cell={<BasicCell dataKey={2} />}
     />
   </Table>,
   document.getElementById('example')
 );
 ```
-
 
 Contributions
 ------------

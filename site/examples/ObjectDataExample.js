@@ -23,18 +23,55 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 var Table = FixedDataTable.Table;
 var Column = FixedDataTable.Column;
+var Cell = FixedDataTable.Cell;
 
-function renderImage(/*string*/ cellData) {
-  return <ExampleImage src={cellData} />;
+function _getData(el){
+  return el.props.data.getObjectAt(el.props.rowIndex)[el.props.dataKey];
 }
 
-function renderLink(/*string*/ cellData) {
-  return <a href="#">{cellData}</a>;
-}
+var DateCell = React.createClass({
+  render() {
+    return (
+      <Cell
+        {...this.props}>
+        {_getData(this).toLocaleString()}
+      </Cell>
+    )
+  }
+})
 
-function renderDate(/*object*/ cellData) {
-  return <span>{cellData.toLocaleString()}</span>;
-}
+var ImageCell = React.createClass({
+  render() {
+    return (
+      <ExampleImage src={_getData(this)} />
+    )
+  }
+})
+
+var LinkCell = React.createClass({
+  render() {
+    return (
+      <Cell
+        {...this.props}>
+        <a href="#">{_getData(this)}</a>
+      </Cell>
+    )
+  }
+})
+
+var TextCell = React.createClass({
+  _getData() {
+    return this.props.data.getObjectAt(this.props.rowIndex)[this.props.dataKey];
+  },
+  render() {
+    return (
+      <Cell
+        {...this.props}>
+        {this._getData()}
+      </Cell>
+    )
+  }
+})
 
 var ObjectDataExample = React.createClass({
 
@@ -55,10 +92,6 @@ var ObjectDataExample = React.createClass({
     }
   },
 
-  _rowGetter(index){
-    return this.state.dataList.getObjectAt(index);
-  },
-
   render() {
     var controlledScrolling =
       this.props.left !== undefined || this.props.top !== undefined;
@@ -67,7 +100,6 @@ var ObjectDataExample = React.createClass({
       <Table
         rowHeight={50}
         headerHeight={50}
-        rowGetter={this._rowGetter}
         rowsCount={this.state.dataList.getSize()}
         width={this.props.tableWidth}
         height={this.props.tableHeight}
@@ -77,50 +109,46 @@ var ObjectDataExample = React.createClass({
         overflowX={controlledScrolling ? "hidden" : "auto"}
         overflowY={controlledScrolling ? "hidden" : "auto"}>
         <Column
-          cellRenderer={renderImage}
-          dataKey="avartar"
+          cell={<ImageCell data={this.state.dataList} dataKey="avartar" />}
           fixed={true}
-          label=""
           width={50}
         />
         <Column
-          dataKey="firstName"
+          header="First Name"
+          cell={<TextCell data={this.state.dataList} dataKey="firstName" />}
           fixed={true}
-          label="First Name"
           width={100}
         />
         <Column
-          dataKey="lastName"
+          header="Last Name"
+          cell={<TextCell data={this.state.dataList} dataKey="lastName" />}
           fixed={true}
-          label="Last Name"
           width={100}
         />
         <Column
-          dataKey="city"
-          label="City"
+          header="City"
+          cell={<TextCell data={this.state.dataList} dataKey="city" />}
           width={100}
         />
         <Column
-          label="Street"
+          header="Street"
+          cell={<TextCell data={this.state.dataList} dataKey="street" />}
           width={200}
-          dataKey="street"
         />
         <Column
-          label="Zip Code"
+          header="Zip Code"
+          cell={<TextCell data={this.state.dataList} dataKey="zipCode" />}
           width={200}
-          dataKey="zipCode"
         />
         <Column
-          cellRenderer={renderLink}
-          label="Email"
+          header="Email"
+          cell={<LinkCell data={this.state.dataList} dataKey="email" />}
           width={200}
-          dataKey="email"
         />
         <Column
-          cellRenderer={renderDate}
-          label="DOB"
+          header="DOB"
+          cell={<DateCell data={this.state.dataList} dataKey="date" />}
           width={200}
-          dataKey="date"
         />
       </Table>
     );
