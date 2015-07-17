@@ -34,36 +34,80 @@ var FixedDataTableColumn = React.createClass({
     fixed: PropTypes.bool,
 
     /**
-     * Header Cell
-     * TODO: node or string.
-     * If its a node, use the node. Otherwise, just render a basic string.
-     * (renderToString)
+     * The header cell for this column.
+     * This can either be a string or a React element. Passing in a string
+     * will render a default header cell with that string. By default, the React
+     * element passed in can expect to receive the following props:
+     *
+     * ```
+     * props: {
+     *   columnKey: string // (of the column, if given)
+     *   cellHeight: number // (supplied from the Table or rowHeightGetter)
+     *   cellWidth: number // (supplied from the Column)
+     * }
+     * ```
+     *
+     * Because you are passing in your own React element, you can feel free to
+     * pass in whatever props you may want or need.
      */
     header: PropTypes.oneOfType([
-        PropTypes.node,
-        PropTypes.string
+      PropTypes.element,
+      PropTypes.string
     ]),
 
     /**
-     * Define the cell node
+     * This is the body cell that will be cloned for this column.
+     * This can either be a string or a React element. Passing in a string
+     * will render a default cell with that string. By default, the React
+     * element passed in can expect to receive the following props:
+     *
+     * ```
+     * props: {
+     *   rowIndex; number // (the row index of the cell)
+     *   columnKey: string // (of the column, if given)
+     *   cellHeight: number // (supplied from the Table or rowHeightGetter)
+     *   cellWidth: number // (supplied from the Column)
+     * }
+     * ```
+     *
+     * Because you are passing in your own React element, you can feel free to
+     * pass in whatever props you may want or need.
      */
     cell: PropTypes.oneOfType([
-        PropTypes.node,
-        PropTypes.string
+      PropTypes.element,
+      PropTypes.string
     ]),
 
     /**
-     * Footer Cell
-     * @type {[type]}
+     * This is the footer cell for this column.
+     * This can either be a string or a React element. Passing in a string
+     * will render a default footer cell with that string. By default, the React
+     * element passed in can expect to receive the following props:
+     *
+     * ```
+     * props: {
+     *   columnKey: string // (of the column, if given)
+     *   cellHeight: number // (supplied from the Table or rowHeightGetter)
+     *   cellWidth: number // (supplied from the Column)
+     * }
+     * ```
+     *
+     * Because you are passing in your own React element, you can feel free to
+     * pass in whatever props you may want or need.
      */
     footer: PropTypes.oneOfType([
-        PropTypes.node,
-        PropTypes.string
+      PropTypes.element,
+      PropTypes.string
     ]),
 
+    /**
+     * This is used to uniquely identify the column, and is not required unless
+     * you a resizing columns. This will be the key given in the
+     * `onColumnResizeEndCallback` on the Table.
+     */
     columnKey: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
+      PropTypes.string,
+      PropTypes.number
     ]),
 
     /**

@@ -54,10 +54,7 @@ var ImageCell = React.createClass({
     dataKey: PropTypes.string
   },
   _getData() {
-    if (this.props.rowIndex >= 0){
-      return dataList.getObjectAt(this.props.rowIndex)[this.props.dataKey];
-    }
-    return '';
+    return dataList.getObjectAt(this.props.rowIndex)[this.props.dataKey];
   },
   render() {
     return (
@@ -100,7 +97,6 @@ var TextCell = React.createClass({
 
 var EditableCell = React.createClass({
   propTypes: {
-    dataKey: PropTypes.string,
     rowIndex: PropTypes.number
   },
   getInitialState() {
@@ -109,7 +105,7 @@ var EditableCell = React.createClass({
     }
   },
   _getData() {
-    return dataList.getObjectAt(this.props.rowIndex)[this.props.dataKey];
+    return dataList.getObjectAt(this.props.rowIndex)[this.props.columnKey];
   },
 
   _edit() {
@@ -129,7 +125,7 @@ var EditableCell = React.createClass({
     }
 
     // Bad
-    dataList._cache[this.props.rowIndex][this.props.dataKey] = event.target.value;
+    dataList._cache[this.props.rowIndex][this.props.columnKey] = event.target.value;
 
     this.setState({
       editing: false
@@ -195,7 +191,8 @@ var ObjectDataExample = React.createClass({
         />
         <Column
           header="First Name"
-          cell={<EditableCell dataKey="firstName" />}
+          columnKey="firstName"
+          cell={<EditableCell />}
           width={200}
         />
         <Column
