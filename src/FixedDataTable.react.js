@@ -395,7 +395,6 @@ var FixedDataTable = React.createClass({
             cx('fixedDataTableLayout/header'),
             cx('public/fixedDataTable/header'),
           )}
-          data={state.groupHeaderData}
           width={state.width}
           height={state.groupHeaderHeight}
           index={0}
@@ -931,9 +930,6 @@ var FixedDataTable = React.createClass({
         {
           dataKey: i,
           children: undefined,
-          columnData: columnGroups[i].props.columnGroupData,
-          cellRenderer: columnGroups[i].props.groupHeaderRenderer ||
-            renderToString,
           isHeaderCell: true,
         }
       );

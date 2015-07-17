@@ -34,30 +34,25 @@ var FixedDataTableColumnGroup = React.createClass({
     fixed: PropTypes.bool,
 
     /**
-     * Bucket for any data to be passed into column group renderer functions.
-     */
-    columnGroupData: PropTypes.object,
-
-    /**
-     * The column group's header label.
-     */
-    label: PropTypes.string,
-
-    /**
-     * The cell renderer that returns React-renderable content for a table
-     * column group header. If it's not specified, the label from props will
-     * be rendered as header content.
+     * This is the header cell for this column group.
+     * This can either be a string or a React element. Passing in a string
+     * will render a default footer cell with that string. By default, the React
+     * element passed in can expect to receive the following props:
+     *
      * ```
-     * function(
-     *   label: ?string,
-     *   cellDataKey: string,
-     *   columnGroupData: any,
-     *   rowData: array<?object>, // array of labels of all columnGroups
-     *   width: number
-     * ): ?$jsx
+     * props: {
+     *   cellHeight: number // (supplied from the groupHeaderHeight)
+     *   cellWidth: number // (supplied from the Column)
+     * }
      * ```
+     *
+     * Because you are passing in your own React element, you can feel free to
+     * pass in whatever props you may want or need.
      */
-    groupHeaderRenderer: PropTypes.func,
+    header: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.node
+    ]),
   },
 
   getDefaultProps() /*object*/ {
