@@ -16,9 +16,11 @@ var ImageCell = React.createClass({
     dataKey: PropTypes.string,
     rowIndex: PropTypes.number,
   },
+
   _getData() {
     return this.props.data[this.props.rowIndex][this.props.dataKey];
   },
+
   render() {
     return (
       <ExampleImage src={this._getData()} />
@@ -32,9 +34,11 @@ var TextCell = React.createClass({
     data: PropTypes.any,
     rowIndex: PropTypes.number,
   },
+
   _getData() {
     return this.props.data[this.props.rowIndex][this.props.dataKey];
   },
+
   render() {
     return (
       <Cell
@@ -94,7 +98,7 @@ var FilterExample = React.createClass({
             width={50}
           />
           <Column
-            label='First Name'
+            header='First Name'
             cell={<TextCell data={this.state.filteredRows} dataKey='firstName' />}
             fixed={true}
             width={100}
@@ -111,7 +115,7 @@ var FilterExample = React.createClass({
             width={100}
           />
           <Column
-            label='Street'
+            header='Street'
             cell={<TextCell data={this.state.filteredRows} dataKey='street' />}
             width={200}
           />

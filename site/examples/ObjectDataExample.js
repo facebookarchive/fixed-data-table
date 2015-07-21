@@ -63,6 +63,7 @@ var TextCell = React.createClass({
   _getData() {
     return this.props.data.getObjectAt(this.props.rowIndex)[this.props.dataKey];
   },
+
   render() {
     return (
       <Cell

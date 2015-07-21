@@ -694,7 +694,6 @@ var FixedDataTable = React.createClass({
         oldState.groupHeaderScrollableColumns;
     } else {
       if (columnGroups) {
-        // columnInfo.groupHeaderData = this._getGroupHeaderData(columnGroups);
         columnGroups = this._createGroupHeaderColumns(columnGroups);
         var groupHeaderColumnTypes = this._splitColumnTypes(columnGroups);
         columnInfo.groupHeaderFixedColumns = groupHeaderColumnTypes.fixed;
@@ -959,14 +958,6 @@ var FixedDataTable = React.createClass({
       ));
     }
     return footColumns;
-  },
-
-  _getGroupHeaderData(/*array*/ columnGroups) /*array*/ {
-    var groupHeaderData = [];
-    for (var i = 0; i < columnGroups.length; ++i) {
-      groupHeaderData[i] = columnGroups[i].props.label || '';
-    }
-    return groupHeaderData;
   },
 
   _splitColumnTypes(/*array*/ columns) /*object*/ {
