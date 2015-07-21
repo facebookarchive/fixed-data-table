@@ -28,13 +28,19 @@ class FixedDataTableScrollHelper {
     /*number*/ rowCount,
     /*number*/ defaultRowHeight,
     /*number*/ viewportHeight,
-    /*?function*/ rowHeightGetter
+    /*?function*/ rowHeightGetter,
+    /*?function*/ rowExpansionHeightGetter
   ) {
     this._rowOffsets = PrefixIntervalTree.uniform(rowCount, defaultRowHeight);
     this._storedHeights = new Array(rowCount);
     for (var i = 0; i < rowCount; ++i) {
       this._storedHeights[i] = defaultRowHeight;
     }
+    this._storedExpansionHeights = new Array(rowCount);
+    for(var i = 0; i < rowCount; ++i) {
+      this._storedExpansionHeights[i] = 0;
+    }
+
     this._rowCount = rowCount;
     this._position = 0;
     this._contentHeight = rowCount * defaultRowHeight;
@@ -42,6 +48,11 @@ class FixedDataTableScrollHelper {
     this._rowHeightGetter = rowHeightGetter ?
       rowHeightGetter :
       () => defaultRowHeight;
+
+    this._rowExpansionHeightGetter = rowExpansionHeightGetter ?
+      rowExpansionHeightGetter :
+      () => 0;
+
     this._viewportHeight = viewportHeight;
     this.scrollRowIntoView = this.scrollRowIntoView.bind(this);
     this.setViewportHeight = this.setViewportHeight.bind(this);
@@ -49,6 +60,9 @@ class FixedDataTableScrollHelper {
     this.scrollTo = this.scrollTo.bind(this);
     this.scrollToRow = this.scrollToRow.bind(this);
     this.setRowHeightGetter = this.setRowHeightGetter.bind(this);
+
+    this.setRowExpansionHeightGetter = this.setRowExpansionHeightGetter.bind(this);
+
     this.getContentHeight = this.getContentHeight.bind(this);
     this.getRowPosition = this.getRowPosition.bind(this);
 
@@ -57,6 +71,9 @@ class FixedDataTableScrollHelper {
 
   setRowHeightGetter(/*function*/ rowHeightGetter) {
     this._rowHeightGetter = rowHeightGetter;
+  }
+  setRowExpansionHeightGetter(/*function*/ rowExpansionHeightGetter) {
+    this._rowExpansionHeightGetter = rowExpansionHeightGetter;
   }
 
   setViewportHeight(/*number*/ viewportHeight) {
@@ -75,7 +92,7 @@ class FixedDataTableScrollHelper {
     var index = firstRowIndex;
     while (top <= this._viewportHeight && index < this._rowCount) {
       this._updateRowHeight(index);
-      top += this._storedHeights[index];
+      top += this._storedHeights[index] + this._storedExpansionHeights[index];
       index++;
     }
   }
@@ -94,10 +111,15 @@ class FixedDataTableScrollHelper {
       return 0;
     }
     var newHeight = this._rowHeightGetter(rowIndex);
-    if (newHeight !== this._storedHeights[rowIndex]) {
-      var change = newHeight - this._storedHeights[rowIndex];
-      this._rowOffsets.set(rowIndex, newHeight);
+    var newExpansionHeight = this._rowExpansionHeightGetter(rowIndex);
+
+    if (newHeight !== this._storedHeights[rowIndex]
+       || newExpansionHeight !== this._storedExpansionHeights[rowIndex]) {
+      var change = newHeight - this._storedHeights[rowIndex] +
+        newExpansionHeight - this._storedExpansionHeights[rowIndex];
+      this._rowOffsets.set(rowIndex, newHeight + newExpansionHeight);
       this._storedHeights[rowIndex] = newHeight;
+      this._storedExpansionHeights[rowIndex] = newExpansionHeight;
       this._contentHeight += change;
       return change;
     }

@@ -211,6 +211,60 @@ var FixedDataTableRowImpl = React.createClass({
   },
 });
 
+var FixedDataTableRowExpansion = React.createClass({
+  mixins: [ReactComponentWithPureRenderMixin],
+
+  propTypes: {
+    /**
+     * Height of the row.
+     */
+    height: PropTypes.number.isRequired,
+
+    /**
+     * Height of the expansion content
+     */
+    expansionHeight: PropTypes.number,
+
+    /**
+     * Renderer for the expansion content
+     */
+    expansionRenderer: PropTypes.func,
+
+    /**
+     * The row index.
+     */
+    index: PropTypes.number.isRequired,
+
+    /**
+     * Width of the row.
+     */
+    width: PropTypes.number.isRequired,
+
+  },
+  render() {
+    var style = {
+      width: this.props.width,
+      height: this.props.expansionHeight,
+      top: this.props.height
+    };
+    var className = cx({
+      'fixedDataTableRowLayout/expansion': true,
+      'public/fixedDataTableRow/expansion': true,
+    });
+    var content = this.props.expansionRenderer(this.props.index,
+                                               this.props.data);
+
+    return (
+      <div
+        style={style}
+        className={joinClasses(className, this.props.className)}
+        >
+        {content}
+      </div>
+    );
+  }
+})
+
 var FixedDataTableRow = React.createClass({
   mixins: [ReactComponentWithPureRenderMixin],
 
@@ -220,6 +274,7 @@ var FixedDataTableRow = React.createClass({
      */
     height: PropTypes.number.isRequired,
 
+    expansionHeight: PropTypes.number,
     /**
      * Z-index on which the row will be displayed. Used e.g. for keeping
      * header and footer in front of other rows.
@@ -236,14 +291,25 @@ var FixedDataTableRow = React.createClass({
      */
     width: PropTypes.number.isRequired,
   },
+  defaultProps: {
+    expansionHeight: 0
+  },
 
   render() /*object*/ {
     var style = {
       width: this.props.width,
-      height: this.props.height,
+      height: this.props.height + this.props.expansionHeight,
       zIndex: (this.props.zIndex ? this.props.zIndex : 0),
     };
     translateDOMPositionXY(style, 0, this.props.offsetTop);
+    var expansion;
+    if(this.props.expansionHeight > 0 && this.props.expansionRenderer) {
+      expansion = (
+        <FixedDataTableRowExpansion
+          {...this.props}
+        />
+      );
+    }
 
     return (
       <div
@@ -254,6 +320,7 @@ var FixedDataTableRow = React.createClass({
           offsetTop={undefined}
           zIndex={undefined}
         />
+        {expansion}
       </div>
     );
   },
