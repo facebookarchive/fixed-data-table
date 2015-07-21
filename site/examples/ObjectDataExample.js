@@ -36,6 +36,7 @@ function renderDate(/*object*/ cellData) {
   return <span>{cellData.toLocaleString()}</span>;
 }
 
+
 var ObjectDataExample = React.createClass({
 
   propTypes: {
@@ -51,12 +52,34 @@ var ObjectDataExample = React.createClass({
 
   getInitialState() {
     return {
-      dataList: new FakeObjectDataListStore(ROWS)
+      dataList: new FakeObjectDataListStore(ROWS),
+      expansions: {}
     }
   },
 
   _rowGetter(index){
     return this.state.dataList.getObjectAt(index);
+  },
+  _rowExpansionHeightGetter(index) {
+    return this.state.expansions[index] ? 200 : 0;
+  },
+  _rowExpansionRenderer(index, data, width) {
+    var style = {
+      width: width,
+      height: 200,
+      backgroundImage: 'url(' + data.avartar + ')'
+    };
+    return (
+      <div style={style}>
+      </div>
+    );
+  },
+  _handleRowClick(e, index) {
+    var expansions = this.state.expansions;
+    expansions[index] = !expansions[index];
+    this.setState({
+      expansions: expansions
+    });
   },
 
   render() {
@@ -72,6 +95,9 @@ var ObjectDataExample = React.createClass({
         width={this.props.tableWidth}
         height={this.props.tableHeight}
         onContentHeightChange={this._onContentHeightChange}
+        rowExpansionHeightGetter={this._rowExpansionHeightGetter}
+        onRowClick={this._handleRowClick}
+        rowExpansionRenderer={this._rowExpansionRenderer}
         scrollTop={this.props.top}
         scrollLeft={this.props.left}
         overflowX={controlledScrolling ? "hidden" : "auto"}
