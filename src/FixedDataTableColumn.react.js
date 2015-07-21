@@ -83,6 +83,12 @@ var FixedDataTableColumn = React.createClass({
     fixed: PropTypes.bool,
 
     /**
+     * Controls if the column group is fixed at the left or the right of the
+     * table.
+     */
+    fixedPosition: PropTypes.oneOf(['left', 'right']),
+
+    /**
      * The cell renderer that returns React-renderable content for table column
      * header.
      * ```
@@ -174,6 +180,7 @@ var FixedDataTableColumn = React.createClass({
     return {
       allowCellsRecycling: false,
       fixed: false,
+      fixedPosition: 'left',
     };
   },
 

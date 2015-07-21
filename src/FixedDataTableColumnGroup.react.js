@@ -34,6 +34,12 @@ var FixedDataTableColumnGroup = React.createClass({
     fixed: PropTypes.bool,
 
     /**
+     * Controls if the column group is fixed at the left or the right of the
+     * table.
+     */
+    fixedPosition: PropTypes.oneOf(['left', 'right']),
+
+    /**
      * Bucket for any data to be passed into column group renderer functions.
      */
     columnGroupData: PropTypes.object,
@@ -63,6 +69,7 @@ var FixedDataTableColumnGroup = React.createClass({
   getDefaultProps() /*object*/ {
     return {
       fixed: false,
+      fixedPosition: 'left',
     };
   },
 

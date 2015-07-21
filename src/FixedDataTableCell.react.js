@@ -97,6 +97,10 @@ var FixedDataTableCell = React.createClass({
      * The left offset in pixels of the cell.
      */
     left: PropTypes.number,
+    /**
+     * Controls whether or not to render left border
+     */
+    borderLeft: PropTypes.bool,
   },
 
   getDefaultProps() /*object*/ {
@@ -120,6 +124,7 @@ var FixedDataTableCell = React.createClass({
       cx({
         'fixedDataTableCellLayout/main': true,
         'fixedDataTableCellLayout/lastChild': props.lastChild,
+        'fixedDataTableCellLayout/borderLeft': props.borderLeft,
         'fixedDataTableCellLayout/alignRight': props.align === 'right',
         'fixedDataTableCellLayout/alignCenter': props.align === 'center',
         'public/fixedDataTableCell/alignRight': props.align === 'right',

@@ -25,6 +25,14 @@
   border-color: #d3d3d3;
 }
 
+.public/fixedDataTableRow/rightFixedColumnsDivider {
+  border-color: #d3d3d3;
+}
+
 .public/fixedDataTableRow/columnsShadow {
   background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAABCAYAAAD5PA/NAAAAFklEQVQIHWPSkNeSBmJhTQVtbiDNCgASagIIuJX8OgAAAABJRU5ErkJggg==) repeat-y;
+}
+
+.public/fixedDataTableRow/rightColumnsShadow {
+  background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAABCAYAAAD5PA/NAAAAGklEQVQIW2M0NjZm/f3kN9svll8c/xj/cQAAPN0HhWmsXhYAAAAASUVORK5CYII=) repeat-y;
 }
