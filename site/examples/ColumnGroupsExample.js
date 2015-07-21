@@ -17,9 +17,11 @@ var TextCell = React.createClass({
     data: PropTypes.any,
     rowIndex: PropTypes.number,
   },
+
   _getData() {
     return this.props.data.getObjectAt(this.props.rowIndex)[this.props.columnKey];
   },
+
   render() {
     return (
       <Cell

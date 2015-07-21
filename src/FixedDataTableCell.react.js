@@ -41,12 +41,12 @@ var FixedDataTableCell = React.createClass({
 
     cell: PropTypes.oneOfType([
       PropTypes.string,
-      PropTypes.node
+      PropTypes.element,
     ]),
 
     columnKey: PropTypes.oneOfType([
       PropTypes.string,
-      PropTypes.number
+      PropTypes.number,
     ]),
 
     /**
@@ -141,7 +141,8 @@ var FixedDataTableCell = React.createClass({
       cellHeight: props.height,
       cellWidth: props.width,
     };
-    if (props.rowIndex > 0){
+
+    if (props.rowIndex > -1){
       cellProps.rowIndex = props.rowIndex;
     }
 
