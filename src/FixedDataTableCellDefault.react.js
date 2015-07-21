@@ -31,6 +31,7 @@ var FixedDataTableCellDefault = React.createClass({
     var innerStyle = {
       height: this.props.cellHeight,
       width: this.props.cellWidth,
+      ...this.props.style,
     };
 
     var contentClass = cx('public/fixedDataTableCell/cellContent');
