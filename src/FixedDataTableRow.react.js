@@ -251,8 +251,11 @@ var FixedDataTableRowExpansion = React.createClass({
       'fixedDataTableRowLayout/expansion': true,
       'public/fixedDataTableRow/expansion': true,
     });
-    var content = this.props.expansionRenderer(this.props.index,
-                                               this.props.data);
+    var content = this.props.expansionRenderer(
+      this.props.index,
+      this.props.data,
+      this.props.width
+    );
 
     return (
       <div

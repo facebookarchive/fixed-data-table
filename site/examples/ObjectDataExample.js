@@ -60,6 +60,27 @@ var ObjectDataExample = React.createClass({
   _rowGetter(index){
     return this.state.dataList.getObjectAt(index);
   },
+  _rowExpansionHeightGetter(index) {
+    return this.state.expansions[index] ? 200 : 0;
+  },
+  _rowExpansionRenderer(index, data, width) {
+    var style = {
+      width: width,
+      height: 200,
+      backgroundImage: 'url(' + data.avartar + ')'
+    };
+    return (
+      <div style={style}>
+      </div>
+    );
+  },
+  _handleRowClick(e, index) {
+    var expansions = this.state.expansions;
+    expansions[index] = !expansions[index];
+    this.setState({
+      expansions: expansions
+    });
+  },
 
   render() {
     var controlledScrolling =
@@ -74,23 +95,9 @@ var ObjectDataExample = React.createClass({
         width={this.props.tableWidth}
         height={this.props.tableHeight}
         onContentHeightChange={this._onContentHeightChange}
-        rowExpansionHeightGetter={(idx) => {
-          if(this.state.expansions[idx]) {
-            return 200;
-          }
-          return 0;
-        }}
-        onRowClick={(e, idx) => {
-          var expansions = this.state.expansions;
-          expansions[idx] = !expansions[idx];
-          this.setState({
-            expansions: expansions
-          });
-        }}
-        rowExpansionRenderer={(...args) => {
-          console.log(...args);
-          return null;
-        }}
+        rowExpansionHeightGetter={this._rowExpansionHeightGetter}
+        onRowClick={this._handleRowClick}
+        rowExpansionRenderer={this._rowExpansionRenderer}
         scrollTop={this.props.top}
         scrollLeft={this.props.left}
         overflowX={controlledScrolling ? "hidden" : "auto"}
