@@ -51,13 +51,13 @@ var rows = [
 ];
 
 // Create your cell class
-var BasicCell = React.createClass({
+class BasicCell extends React.Component {
   // Choose how this cell gets data, with whatever function you want!
   // You can assume your cell will receive the rowIndex prop.
-  _getData: function() {
+  _getData() {
     return rows[this.props.rowIndex][this.props.dataKey]
   },
-  render: function() {
+  render() {
     // Spread the props (cellWidth and cellHeight) if you want a
     // basic table cell with vertical alignment and padding.
     // Otherwise, you can return any valid React element!
@@ -68,7 +68,7 @@ var BasicCell = React.createClass({
       </Cell>
     )
   }
-});
+};
 
 // Render your table
 ReactDOM.render(
