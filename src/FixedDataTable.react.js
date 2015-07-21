@@ -279,6 +279,11 @@ var FixedDataTable = React.createClass({
      * Whether a column is currently being resized.
      */
     isColumnResizing: PropTypes.bool,
+
+
+    rowExpansionRenderer: PropTypes.func,
+
+    rowExpansionHeightGetter: PropTypes.func
   },
 
   getDefaultProps() /*object*/ {
@@ -302,7 +307,8 @@ var FixedDataTable = React.createClass({
       props.rowsCount,
       props.rowHeight,
       viewportHeight,
-      props.rowHeightGetter
+      props.rowHeightGetter,
+      props.rowExpansionHeightGetter
     );
     if (props.scrollTop) {
       this._scrollHelper.scrollTo(props.scrollTop);
@@ -624,6 +630,8 @@ var FixedDataTable = React.createClass({
         rowsCount={state.rowsCount}
         rowGetter={state.rowGetter}
         rowHeightGetter={state.rowHeightGetter}
+        rowExpansionHeightGetter={state.rowExpansionHeightGetter}
+        rowExpansionRenderer={state.rowExpansionRenderer}
         scrollLeft={state.scrollX}
         scrollableColumns={state.bodyScrollableColumns}
         showLastRowBorder={true}
@@ -810,7 +818,8 @@ var FixedDataTable = React.createClass({
         props.rowsCount,
         props.rowHeight,
         viewportHeight,
-        props.rowHeightGetter
+        props.rowHeightGetter,
+        props.rowExpansionHeightGetter
       );
       var scrollState =
         this._scrollHelper.scrollToRow(firstRowIndex, firstRowOffset);
