@@ -307,10 +307,6 @@ var FixedDataTable = React.createClass({
 
     this._didScrollStop = debounceCore(this._didScrollStop, 160, this);
 
-    return this._calculateState(this.props);
-  },
-
-  componentWillMount() {
     var scrollToRow = this.props.scrollToRow;
     if (scrollToRow !== undefined && scrollToRow !== null) {
       this._rowToScrollTo = scrollToRow;
@@ -319,6 +315,11 @@ var FixedDataTable = React.createClass({
     if (scrollToColumn !== undefined && scrollToColumn !== null) {
       this._columnToScrollTo = scrollToColumn;
     }
+
+    return this._calculateState(this.props);
+  },
+
+  componentWillMount() {
     this._wheelHandler = new ReactWheelHandler(
       this._onWheel,
       this._shouldHandleWheelX,
