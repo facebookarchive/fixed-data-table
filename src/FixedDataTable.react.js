@@ -697,7 +697,7 @@ var FixedDataTable = React.createClass({
     } else {
       if (columnGroups) {
         var groupHeaderColumnTypes = this._splitColumnTypes(
-          this._selectColumnElement(HEADER, columnGroups);
+          this._selectColumnElement(HEADER, columnGroups)
         );
         columnInfo.groupHeaderFixedColumns = groupHeaderColumnTypes.fixed;
         columnInfo.groupHeaderScrollableColumns =
