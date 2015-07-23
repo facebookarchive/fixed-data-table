@@ -304,9 +304,7 @@ var FixedDataTable = React.createClass({
       viewportHeight,
       props.rowHeightGetter
     );
-    if (props.scrollTop) {
-      this._scrollHelper.scrollTo(props.scrollTop);
-    }
+
     this._didScrollStop = debounceCore(this._didScrollStop, 160, this);
 
     return this._calculateState(this.props);
