@@ -34,9 +34,11 @@ var translateDOMPositionXY = require('translateDOMPositionXY');
 var {PropTypes} = React;
 var ReactChildren = React.Children;
 
-var renderToString = FixedDataTableHelper.renderToString;
 var EMPTY_OBJECT = {};
 var BORDER_HEIGHT = 1;
+var HEADER = 'header';
+var FOOTER = 'footer';
+var CELL = 'cell';
 
 /**
  * Data grid component with fixed or scrollable header and columns.
@@ -676,13 +678,13 @@ var FixedDataTable = React.createClass({
       columnInfo.bodyScrollableColumns = bodyColumnTypes.scrollable;
 
       var headColumnTypes = this._splitColumnTypes(
-        this._createHeadColumns(columns)
+        this._selectColumnElement(HEADER, columns)
       );
       columnInfo.headFixedColumns = headColumnTypes.fixed;
       columnInfo.headScrollableColumns = headColumnTypes.scrollable;
 
       var footColumnTypes = this._splitColumnTypes(
-        this._createFootColumns(columns)
+        this._selectColumnElement(FOOTER, columns)
       );
       columnInfo.footFixedColumns = footColumnTypes.fixed;
       columnInfo.footScrollableColumns = footColumnTypes.scrollable;
@@ -694,8 +696,9 @@ var FixedDataTable = React.createClass({
         oldState.groupHeaderScrollableColumns;
     } else {
       if (columnGroups) {
-        columnGroups = this._createGroupHeaderColumns(columnGroups);
-        var groupHeaderColumnTypes = this._splitColumnTypes(columnGroups);
+        var groupHeaderColumnTypes = this._splitColumnTypes(
+          this._selectColumnElement(HEADER, columnGroups);
+        );
         columnInfo.groupHeaderFixedColumns = groupHeaderColumnTypes.fixed;
         columnInfo.groupHeaderScrollableColumns =
           groupHeaderColumnTypes.scrollable;
@@ -921,47 +924,18 @@ var FixedDataTable = React.createClass({
     return newState;
   },
 
-  _createGroupHeaderColumns(/*array*/ columnGroups) /*array*/  {
-    var newColumnGroups = [];
-    for (var i = 0; i < columnGroups.length; ++i) {
-      newColumnGroups[i] = React.cloneElement(
-        columnGroups[i],
-        {
-          dataKey: i,
-          children: undefined,
-          isHeaderCell: true,
-        }
-      );
-    }
-    return newColumnGroups;
-  },
-
-  _createHeadColumns(/*array*/ columns) /*array*/ {
-    var headColumns = [];
+  _selectColumnElement(/*string*/ type, /*array*/ columns) /*array*/ {
+    var newColumns = [];
     for (var i = 0; i < columns.length; ++i) {
-      var columnProps = columns[i].props;
-      headColumns.push(React.cloneElement(
-        columns[i],
+      var column = columns[i];
+      newColumns.push(React.cloneElement(
+        column,
         {
-          isHeaderCell: true,
+          cell: type ?  column.props[type] : column.props['cell']
         }
       ));
     }
-    return headColumns;
-  },
-
-  _createFootColumns(/*array*/ columns) /*array*/ {
-    var footColumns = [];
-    for (var i = 0; i < columns.length; ++i) {
-      var columnProps = columns[i].props;
-      footColumns.push(React.cloneElement(
-        columns[i],
-        {
-          isFooterCell: true,
-        }
-      ));
-    }
-    return footColumns;
+    return newColumns;
   },
 
   _splitColumnTypes(/*array*/ columns) /*object*/ {

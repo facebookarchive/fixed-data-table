@@ -99,29 +99,12 @@ var FixedDataTableCellGroupImpl = React.createClass({
     /*number*/ left,
     /*string*/ key
   ) /*object*/ {
-    var isFooterCell = columnProps.isFooterCell;
-    var isHeaderCell = columnProps.isHeaderCell;
 
     var cellIsResizable = columnProps.isResizable &&
       this.props.onColumnResize;
     var onColumnResize = cellIsResizable ? this.props.onColumnResize : null;
 
-    var className;
-    if (isHeaderCell || isFooterCell) {
-      className = isHeaderCell ?
-        columnProps.headerClassName : columnProps.footerClassName;
-    } else {
-      className = columnProps.cellClassName;
-    }
-
-    var cell = columnProps.cell;
-
-    if (isHeaderCell){
-      cell = columnProps.header;
-    }
-    if (isFooterCell){
-      cell = columnProps.footer;
-    }
+    var className = columnProps.cellClassName;
 
     return (
       <FixedDataTableCell
@@ -136,7 +119,7 @@ var FixedDataTableCellGroupImpl = React.createClass({
         columnKey={columnProps.columnKey}
         width={columnProps.width}
         left={left}
-        cell={cell}
+        cell={columnProps.cell}
       />
     );
   },

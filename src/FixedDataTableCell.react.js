@@ -142,7 +142,7 @@ var FixedDataTableCell = React.createClass({
       cellWidth: props.width,
     };
 
-    if (props.rowIndex > -1){
+    if (props.rowIndex >= 0){
       cellProps.rowIndex = props.rowIndex;
     }
 
