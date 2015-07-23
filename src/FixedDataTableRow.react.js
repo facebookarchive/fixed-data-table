@@ -13,7 +13,6 @@
 'use strict';
 
 var React = require('React');
-var ReactComponentWithPureRenderMixin = require('ReactComponentWithPureRenderMixin');
 var FixedDataTableCellGroup = require('FixedDataTableCellGroup.react');
 
 var cx = require('cx');
@@ -27,8 +26,7 @@ var {PropTypes} = React;
  * This component should not be used directly by developer. Instead,
  * only <FixedDataTable /> should use the component internally.
  */
-var FixedDataTableRowImpl = React.createClass({
-  mixins: [ReactComponentWithPureRenderMixin],
+var FixedDataTableRow = React.createClass({
 
   propTypes: {
     /**
@@ -40,6 +38,17 @@ var FixedDataTableRowImpl = React.createClass({
      * Height of the row.
      */
     height: PropTypes.number.isRequired,
+
+    /**
+     * The vertical position where the row should render itself
+     */
+    offsetTop: PropTypes.number.isRequired,
+
+    /**
+     * Z-index on which the row will be displayed. Used e.g. for keeping
+     * header and footer in front of other rows.
+     */
+    zIndex: PropTypes.number,
 
     /**
      * The row index.
@@ -86,7 +95,15 @@ var FixedDataTableRowImpl = React.createClass({
   },
 
   render() /*object*/ {
-    var style = {
+    var outerStyle = {
+      width: this.props.width,
+      height: this.props.height,
+      zIndex: (this.props.zIndex ? this.props.zIndex : 0),
+    };
+
+    translateDOMPositionXY(outerStyle, 0, this.props.offsetTop);
+
+    var innerStyle = {
       width: this.props.width,
       height: this.props.height,
     };
@@ -129,20 +146,25 @@ var FixedDataTableRowImpl = React.createClass({
 
     return (
       <div
-        className={joinClasses(className, this.props.className)}
-        onClick={this.props.onClick ? this._onClick : null}
-        onDoubleClick={this.props.onDoubleClick ? this._onDoubleClick : null}
-        onMouseDown={this.props.onMouseDown ? this._onMouseDown : null}
-        onMouseEnter={this.props.onMouseEnter ? this._onMouseEnter : null}
-        onMouseLeave={this.props.onMouseLeave ? this._onMouseLeave : null}
-        style={style}>
-        <div className={cx('fixedDataTableRowLayout/body')}>
-          {fixedColumns}
-          {scrollableColumns}
-          {columnsShadow}
+        style={outerStyle}
+        className={cx('fixedDataTableRowLayout/rowWrapper')}>
+        <div
+          className={joinClasses(className, this.props.className)}
+          onClick={this.props.onClick ? this._onClick : null}
+          onDoubleClick={this.props.onDoubleClick ? this._onDoubleClick : null}
+          onMouseDown={this.props.onMouseDown ? this._onMouseDown : null}
+          onMouseEnter={this.props.onMouseEnter ? this._onMouseEnter : null}
+          onMouseLeave={this.props.onMouseLeave ? this._onMouseLeave : null}
+          style={innerStyle}>
+          <div className={cx('fixedDataTableRowLayout/body')}>
+            {fixedColumns}
+            {scrollableColumns}
+            {columnsShadow}
+          </div>
         </div>
       </div>
     );
+
   },
 
   _getColumnsWidth(/*array*/ columns) /*number*/ {
@@ -189,54 +211,5 @@ var FixedDataTableRowImpl = React.createClass({
     this.props.onMouseLeave(event, this.props.index);
   },
 });
-
-var FixedDataTableRow = React.createClass({
-  mixins: [ReactComponentWithPureRenderMixin],
-
-  propTypes: {
-    /**
-     * Height of the row.
-     */
-    height: PropTypes.number.isRequired,
-
-    /**
-     * Z-index on which the row will be displayed. Used e.g. for keeping
-     * header and footer in front of other rows.
-     */
-    zIndex: PropTypes.number,
-
-    /**
-     * The vertical position where the row should render itself
-     */
-    offsetTop: PropTypes.number.isRequired,
-
-    /**
-     * Width of the row.
-     */
-    width: PropTypes.number.isRequired,
-  },
-
-  render() /*object*/ {
-    var style = {
-      width: this.props.width,
-      height: this.props.height,
-      zIndex: (this.props.zIndex ? this.props.zIndex : 0),
-    };
-    translateDOMPositionXY(style, 0, this.props.offsetTop);
-
-    return (
-      <div
-        style={style}
-        className={cx('fixedDataTableRowLayout/rowWrapper')}>
-        <FixedDataTableRowImpl
-          {...this.props}
-          offsetTop={undefined}
-          zIndex={undefined}
-        />
-      </div>
-    );
-  },
-});
-
 
 module.exports = FixedDataTableRow;
