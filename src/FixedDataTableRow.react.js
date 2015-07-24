@@ -126,7 +126,6 @@ var FixedDataTableRow = React.createClass({
         zIndex={2}
         columns={this.props.fixedColumns}
         onColumnResize={this.props.onColumnResize}
-        rowHeight={this.props.height}
         rowIndex={this.props.index}
       />;
     var columnsShadow = this._renderColumnsShadow(fixedColumnsWidth);
@@ -140,7 +139,6 @@ var FixedDataTableRow = React.createClass({
         zIndex={0}
         columns={this.props.scrollableColumns}
         onColumnResize={this.props.onColumnResize}
-        rowHeight={this.props.height}
         rowIndex={this.props.index}
       />;
 
