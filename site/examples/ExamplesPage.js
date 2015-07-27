@@ -51,50 +51,40 @@ var ExamplesPage = React.createClass({
     require('fixed-data-table/css/style/fixedDataTableRow.css');
     require('fixed-data-table/css/style/Scrollbar.css');
 
-    switch (this.props.example) {
-      case ExamplePages.OBJECT_DATA_EXAMPLE:
-        var ObjectDataExample = require('./old/ObjectDataExample');
-        return (
-          <TouchExampleWrapper {...this.state}>
-            <ObjectDataExample />
-          </TouchExampleWrapper>
-        );
-      case ExamplePages.RESIZE_EXAMPLE:
-        var ResizeExample = require('./old/ResizeExample');
-        return (
-          <TouchExampleWrapper {...this.state}>
-            <ResizeExample />
-          </TouchExampleWrapper>
-        );
-      case ExamplePages.FLEXGROW_EXAMPLE:
-        var FlexGrowExample = require('./old/FlexGrowExample');
-        return (
-          <TouchExampleWrapper {...this.state}>
-            <FlexGrowExample />
-          </TouchExampleWrapper>
-        );
-      case ExamplePages.COLUMN_GROUPS_EXAMPLE:
-        var ColumnGroupsExample = require('./old/ColumnGroupsExample');
-        return (
-          <TouchExampleWrapper {...this.state}>
-            <ColumnGroupsExample />
-          </TouchExampleWrapper>
-        );
-      case ExamplePages.FILTER_EXAMPLE:
-        var FilterExample = require('./old/FilterExample');
-        return (
-          <TouchExampleWrapper {...this.state}>
-            <FilterExample />
-          </TouchExampleWrapper>
-        );
-      case ExamplePages.SORT_EXAMPLE:
-        var SortExample = require('./old/SortExample');
-        return (
-          <TouchExampleWrapper {...this.state}>
-            <SortExample />
-          </TouchExampleWrapper>
-        );
+    var examples = {};
+
+    examples[ExamplePages.OBJECT_DATA_EXAMPLE.location] = {
+      path: './old/ObjectDataExample'
     }
+
+    examples[ExamplePages.RESIZE_EXAMPLE.location] = {
+      path: './old/ResizeExample'
+    }
+
+    examples[ExamplePages.FLEXGROW_EXAMPLE.location] = {
+      path: './old/FlexGrowExample'
+    }
+
+    examples[ExamplePages.COLUMN_GROUPS_EXAMPLE.location] = {
+      path: './old/ColumnGroupsExample'
+    }
+
+    examples[ExamplePages.FILTER_EXAMPLE.location] = {
+      path: './old/FilterExample'
+    }
+
+    examples[ExamplePages.SORT_EXAMPLE.location] = {
+      path: './old/SortExample'
+    }
+
+    var Example = require(examples[this.props.example.location].path);
+
+    return (
+      <TouchExampleWrapper {...this.state}>
+        <Example />
+      </TouchExampleWrapper>
+    )
+
   },
 
   componentDidMount() {
