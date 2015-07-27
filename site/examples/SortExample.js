@@ -8,28 +8,38 @@ var React = require('react');
 var Column = FixedDataTable.Column;
 var PropTypes = React.PropTypes;
 var Table = FixedDataTable.Table;
+var Cell = FixedDataTable.Cell;
 
 var SortTypes = {
   ASC: 'ASC',
   DESC: 'DESC',
 };
 
-function renderDate(/*object*/ cellData) {
-  return <span>{cellData.toLocaleString()}</span>;
-}
-
 var TextCell = React.createClass({
   propTypes: {
     dataKey: PropTypes.string,
   },
   _getData() {
-    return dataList.getObjectAt(this.props.rowIndex)[this.props.dataKey];
+    return this.props.data[this.props.rowIndex][this.props.dataKey];
   },
   render() {
     return (
       <Cell
         {...this.props}>
         {this._getData()}
+      </Cell>
+    )
+  }
+})
+
+var SortHeaderCell = React.createClass({
+  render() {
+    return (
+      <Cell
+        {...this.props}>
+        <a onClick={this.props.sortBy.bind(null, this.props.dataKey)}>
+          {this.props.label + " " + this.props.arrow}
+        </a>
       </Cell>
     )
   }
@@ -42,10 +52,6 @@ var SortExample = React.createClass({
       sortBy: 'year',
       sortDir: null,
     };
-  },
-
-  _rowGetter(rowIndex) {
-    return this.state.rows[rowIndex];
   },
 
   _sortRowsBy(cellDataKey) {
@@ -81,12 +87,6 @@ var SortExample = React.createClass({
     });
   },
 
-  _renderHeader(label, cellDataKey) {
-    return (
-      <a onClick={this._sortRowsBy.bind(null, cellDataKey)}>{label}</a>
-    );
-  },
-
   render() {
     var sortDirArrow = '';
 
@@ -97,40 +97,34 @@ var SortExample = React.createClass({
     return (
       <Table
         rowHeight={50}
-        rowGetter={this._rowGetter}
         rowsCount={this.state.rows.length}
         width={this.props.tableWidth}
         height={this.props.tableHeight}
         headerHeight={50}>
         <Column
-          headerRenderer={this._renderHeader}
-          label={'id' + (this.state.sortBy === 'id' ? sortDirArrow : '')}
+          header={<SortHeaderCell sortBy={this._sortRowsBy} arrow={sortDirArrow} label="id" dataKey='id' />}
+          cell={<TextCell data={this.state.rows} dataKey="id" />}
           width={100}
-          dataKey='id'
         />
         <Column
-          headerRenderer={this._renderHeader}
-          label={'First Name' + (this.state.sortBy === 'firstName' ? sortDirArrow : '')}
+          header={<SortHeaderCell sortBy={this._sortRowsBy} arrow={sortDirArrow} label="First Name" dataKey='firstName' />}
+          cell={<TextCell data={this.state.rows} dataKey="firstName" />}
           width={200}
-          dataKey='firstName'
         />
         <Column
-          headerRenderer={this._renderHeader}
-          label={'Last Name' + (this.state.sortBy === 'lastName' ? sortDirArrow : '')}
+          header={<SortHeaderCell sortBy={this._sortRowsBy} arrow={sortDirArrow} label="Last Name" dataKey='lastName' />}
+          cell={<TextCell data={this.state.rows} dataKey="lastName" />}
           width={200}
-          dataKey='lastName'
         />
         <Column
-          headerRenderer={this._renderHeader}
-          label={'City' + (this.state.sortBy === 'city' ? sortDirArrow : '')}
+          header={<SortHeaderCell sortBy={this._sortRowsBy} arrow={sortDirArrow} label="City" dataKey='city' />}
+          cell={<TextCell data={this.state.rows} dataKey="city" />}
           width={200}
-          dataKey='city'
         />
          <Column
-          headerRenderer={this._renderHeader}
-          label={'Company' + (this.state.sortBy === 'companyName' ? sortDirArrow : '')}
+          header={<SortHeaderCell sortBy={this._sortRowsBy} arrow={sortDirArrow} label="Company Name" dataKey='companyName' />}
+          cell={<TextCell data={this.state.rows} dataKey="companyName" />}
           width={200}
-          dataKey='companyName'
         />
 
       </Table>
