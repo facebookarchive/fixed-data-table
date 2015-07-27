@@ -53,52 +53,45 @@ var ExamplesPage = React.createClass({
 
     switch (this.props.example) {
       case ExamplePages.OBJECT_DATA_EXAMPLE:
-        var ObjectDataExample = require('./ObjectDataExample');
+        var ObjectDataExample = require('./old/ObjectDataExample');
         return (
           <TouchExampleWrapper {...this.state}>
             <ObjectDataExample />
           </TouchExampleWrapper>
         );
       case ExamplePages.RESIZE_EXAMPLE:
-        var ResizeExample = require('./ResizeExample');
+        var ResizeExample = require('./old/ResizeExample');
         return (
           <TouchExampleWrapper {...this.state}>
             <ResizeExample />
           </TouchExampleWrapper>
         );
       case ExamplePages.FLEXGROW_EXAMPLE:
-        var FlexGrowExample = require('./FlexGrowExample');
+        var FlexGrowExample = require('./old/FlexGrowExample');
         return (
           <TouchExampleWrapper {...this.state}>
             <FlexGrowExample />
           </TouchExampleWrapper>
         );
       case ExamplePages.COLUMN_GROUPS_EXAMPLE:
-        var ColumnGroupsExample = require('./ColumnGroupsExample');
+        var ColumnGroupsExample = require('./old/ColumnGroupsExample');
         return (
           <TouchExampleWrapper {...this.state}>
             <ColumnGroupsExample />
           </TouchExampleWrapper>
         );
       case ExamplePages.FILTER_EXAMPLE:
-        var FilterExample = require('./FilterExample');
+        var FilterExample = require('./old/FilterExample');
         return (
           <TouchExampleWrapper {...this.state}>
             <FilterExample />
           </TouchExampleWrapper>
         );
       case ExamplePages.SORT_EXAMPLE:
-        var SortExample = require('./SortExample');
+        var SortExample = require('./old/SortExample');
         return (
           <TouchExampleWrapper {...this.state}>
             <SortExample />
-          </TouchExampleWrapper>
-        );
-      case ExamplePages.PLAYGROUND:
-        var Playground = require('./Playground');
-        return (
-          <TouchExampleWrapper {...this.state}>
-            <Playground />
           </TouchExampleWrapper>
         );
     }
