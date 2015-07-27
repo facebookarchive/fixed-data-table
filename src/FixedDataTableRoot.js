@@ -25,4 +25,9 @@ var FixedDataTableRoot = {
 
 FixedDataTableRoot.version = '0.5.0';
 
-module.exports = FixedDataTableRoot;
+// TODO: Remove when migration complete
+var TRANSITION = require('FixedDataTableTransition.react');
+module.exports = TRANSITION;
+
+// TODO: Add back when migration complete.
+// module.exports = FixedDataTableRoot;
