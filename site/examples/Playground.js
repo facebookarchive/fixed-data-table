@@ -12,7 +12,7 @@
 
 "use strict";
 
-var ROWS = 1000000;
+var ROWS = 10000;
 
 var ExampleImage = require('./ExampleImage');
 var FakeObjectDataListStore = require('./FakeObjectDataListStore');
@@ -25,45 +25,66 @@ var Table = FixedDataTable.Table;
 var Column = FixedDataTable.Column;
 var Cell = FixedDataTable.Cell;
 
-function _getData(el){
-  return el.props.data.getObjectAt(el.props.rowIndex)[el.props.dataKey];
+function renderImage(/*string*/ cellData) {
+  return <ExampleImage src={cellData} />;
 }
 
-var DateCell = React.createClass({
+function renderLink(/*string*/ cellData) {
+  return <a href="#">{cellData}</a>;
+}
+
+function renderDate(/*object*/ cellData) {
+  return <span>{cellData.toLocaleString()}</span>;
+}
+
+var dataList = new FakeObjectDataListStore(ROWS);
+
+var BasicCell = React.createClass({
   render() {
     return (
-      <Cell
-        {...this.props}>
-        {_getData(this).toLocaleString()}
-      </Cell>
+      <div className="public_fixedDataTableCell_cellContent">
+        {this.props.children}
+      </div>
     )
   }
 })
 
 var ImageCell = React.createClass({
+  propTypes: {
+    dataKey: PropTypes.string
+  },
+  _getData() {
+    return dataList.getObjectAt(this.props.rowIndex)[this.props.dataKey];
+  },
   render() {
     return (
-      <ExampleImage src={_getData(this)} />
+      <ExampleImage src={this._getData()} />
     )
   }
 })
 
-var LinkCell = React.createClass({
+var MyHeaderCell = React.createClass({
+  propTypes: {
+    label: PropTypes.string.isRequired
+  },
   render() {
     return (
       <Cell
-        {...this.props}>
-        <a href="#">{_getData(this)}</a>
+      {...this.props}
+      style={{background: 'blue', color: 'white'}}>
+        {this.props.label}
       </Cell>
     )
   }
 })
 
 var TextCell = React.createClass({
-  _getData() {
-    return this.props.data.getObjectAt(this.props.rowIndex)[this.props.dataKey];
+  propTypes: {
+    dataKey: PropTypes.string,
   },
-
+  _getData() {
+    return dataList.getObjectAt(this.props.rowIndex)[this.props.dataKey];
+  },
   render() {
     return (
       <Cell
@@ -71,6 +92,65 @@ var TextCell = React.createClass({
         {this._getData()}
       </Cell>
     )
+  }
+})
+
+var EditableCell = React.createClass({
+  propTypes: {
+    rowIndex: PropTypes.number
+  },
+  getInitialState() {
+    return {
+      editing: false
+    }
+  },
+  _getData() {
+    return dataList.getObjectAt(this.props.rowIndex)[this.props.columnKey];
+  },
+
+  _edit() {
+    if (this.state.editing){
+      return;
+    }
+
+    this.setState({
+      editing: true
+    })
+  },
+
+  _save(e) {
+
+    if (e.keyCode !== 13) {
+      return;
+    }
+
+    // Bad
+    dataList._cache[this.props.rowIndex][this.props.columnKey] = event.target.value;
+
+    this.setState({
+      editing: false
+    });
+  },
+  render() {
+
+    var content = '';
+    if (this.state.editing){
+      content = (
+        <input type="text" defaultValue={this._getData()}
+          onKeyDown={this._save}/>
+      )
+    } else {
+      content = this._getData();
+    }
+
+    var cell =
+      <Cell
+        {...this.props}
+        onClick={this._edit}>
+        {content}
+      </Cell>
+
+      return cell;
   }
 })
 
@@ -87,12 +167,6 @@ var ObjectDataExample = React.createClass({
       this.props.onContentDimensionsChange(contentHeight, 1150);
   },
 
-  getInitialState() {
-    return {
-      dataList: new FakeObjectDataListStore(ROWS)
-    }
-  },
-
   render() {
     var controlledScrolling =
       this.props.left !== undefined || this.props.top !== undefined;
@@ -101,7 +175,8 @@ var ObjectDataExample = React.createClass({
       <Table
         rowHeight={50}
         headerHeight={50}
-        rowsCount={this.state.dataList.getSize()}
+        footerHeight={50}
+        rowsCount={dataList.getSize()}
         width={this.props.tableWidth}
         height={this.props.tableHeight}
         onContentHeightChange={this._onContentHeightChange}
@@ -110,46 +185,36 @@ var ObjectDataExample = React.createClass({
         overflowX={controlledScrolling ? "hidden" : "auto"}
         overflowY={controlledScrolling ? "hidden" : "auto"}>
         <Column
-          cell={<ImageCell data={this.state.dataList} dataKey="avartar" />}
+          cell={<ImageCell dataKey="avartar" />}
           fixed={true}
           width={50}
         />
         <Column
           header="First Name"
-          cell={<TextCell data={this.state.dataList} dataKey="firstName" />}
-          fixed={true}
-          width={100}
+          columnKey="firstName"
+          cell={<EditableCell />}
+          width={200}
         />
         <Column
           header="Last Name"
-          cell={<TextCell data={this.state.dataList} dataKey="lastName" />}
-          fixed={true}
+          cell={<TextCell dataKey="lastName" />}
           width={100}
         />
         <Column
-          header="City"
-          cell={<TextCell data={this.state.dataList} dataKey="city" />}
           width={100}
+          header={<MyHeaderCell label="City" />}
+          cell={<TextCell dataKey="city" />}
         />
         <Column
-          header="Street"
-          cell={<TextCell data={this.state.dataList} dataKey="street" />}
-          width={200}
+          width={100}
+          header={<MyHeaderCell label="Street" />}
+          cell={<TextCell dataKey="street" />}
         />
         <Column
-          header="Zip Code"
-          cell={<TextCell data={this.state.dataList} dataKey="zipCode" />}
           width={200}
-        />
-        <Column
-          header="Email"
-          cell={<LinkCell data={this.state.dataList} dataKey="email" />}
-          width={200}
-        />
-        <Column
-          header="DOB"
-          cell={<DateCell data={this.state.dataList} dataKey="date" />}
-          width={200}
+          header={<MyHeaderCell label="Zip Code" />}
+          cell={<TextCell dataKey="zipCode" />}
+          footer="FOOTER"
         />
       </Table>
     );

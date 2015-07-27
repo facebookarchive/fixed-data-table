@@ -6,6 +6,7 @@ var FakeObjectDataListStore = require('./FakeObjectDataListStore');
 var FixedDataTable = require('fixed-data-table');
 var React = require('react');
 
+var Cell = FixedDataTable.Cell;
 var Column = FixedDataTable.Column;
 var PropTypes = React.PropTypes;
 var Table = FixedDataTable.Table;
@@ -18,6 +19,41 @@ var columnWidths = {
 };
 var isColumnResizing;
 
+var ImageCell = React.createClass({
+  propTypes: {
+    data: PropTypes.any,
+    dataKey: PropTypes.string,
+    rowIndex: PropTypes.number,
+  },
+  _getData() {
+    return this.props.data.getObjectAt(this.props.rowIndex)[this.props.dataKey];
+  },
+  render() {
+    return (
+      <ExampleImage src={this._getData()} />
+    )
+  }
+})
+
+var TextCell = React.createClass({
+  propTypes: {
+    dataKey: PropTypes.string,
+    data: PropTypes.any,
+    rowIndex: PropTypes.number,
+  },
+  _getData() {
+    return this.props.data.getObjectAt(this.props.rowIndex)[this.props.dataKey];
+  },
+  render() {
+    return (
+      <Cell
+        {...this.props}>
+        {this._getData()}
+      </Cell>
+    )
+  }
+})
+
 var ResizeExample = React.createClass({
   propTypes: {
     onContentDimensionsChange: PropTypes.func,
@@ -29,10 +65,6 @@ var ResizeExample = React.createClass({
     return {
       dataList: new FakeObjectDataListStore(ROWS)
     }
-  },
-
-  _rowGetter(index) {
-    return this.state.dataList.getObjectAt(index);
   },
 
   _onContentHeightChange(contentHeight) {
@@ -57,7 +89,6 @@ var ResizeExample = React.createClass({
       <Table
         rowHeight={30}
         headerHeight={50}
-        rowGetter={this._rowGetter}
         rowsCount={this.state.dataList.getSize()}
         width={this.props.tableWidth}
         height={this.props.tableHeight}
@@ -69,29 +100,33 @@ var ResizeExample = React.createClass({
         isColumnResizing={isColumnResizing}
         onColumnResizeEndCallback={this._onColumnResizeEndCallback}>
         <Column
-          dataKey="firstName"
+          columnKey='firstName'
+          header="First Name"
+          cell={<TextCell data={this.state.dataList} dataKey='firstName' />}
           fixed={true}
-          label="First Name"
           width={columnWidths['firstName']}
           isResizable={true}
         />
         <Column
-          label="Last Name (min/max constrained)"
-          dataKey="lastName"
+          columnKey='lastName'
+          header="Last Name (min/max constrained)"
+          cell={<TextCell data={this.state.dataList} dataKey='lastName' />}
           width={columnWidths['lastName']}
           isResizable={true}
           minWidth={70}
           maxWidth={170}
         />
         <Column
-          label="Company"
-          dataKey="companyName"
+          columnKey='companyName'
+          header="Company"
+          cell={<TextCell data={this.state.dataList} dataKey='companyName' />}
           width={columnWidths['companyName']}
           isResizable={true}
         />
         <Column
-          label="Sentence"
-          dataKey="sentence"
+          columnKey='sentence'
+          header="Sentence"
+          cell={<TextCell data={this.state.dataList} dataKey='sentence' />}
           width={columnWidths['sentence']}
           isResizable={true}
         />

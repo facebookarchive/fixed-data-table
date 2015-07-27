@@ -23,7 +23,6 @@ var FixedDataTableRow = require('FixedDataTableRow.react');
 var FixedDataTableScrollHelper = require('FixedDataTableScrollHelper');
 var FixedDataTableWidthHelper = require('FixedDataTableWidthHelper');
 
-var cloneWithProps = require('cloneWithProps');
 var cx = require('cx');
 var debounceCore = require('debounceCore');
 var emptyFunction = require('emptyFunction');
@@ -35,9 +34,11 @@ var translateDOMPositionXY = require('translateDOMPositionXY');
 var {PropTypes} = React;
 var ReactChildren = React.Children;
 
-var renderToString = FixedDataTableHelper.renderToString;
 var EMPTY_OBJECT = {};
 var BORDER_HEIGHT = 1;
+var HEADER = 'header';
+var FOOTER = 'footer';
+var CELL = 'cell';
 
 /**
  * Data grid component with fixed or scrollable header and columns.
@@ -147,14 +148,6 @@ var FixedDataTable = React.createClass({
     rowHeightGetter: PropTypes.func,
 
     /**
-     * To get rows to display in table, `rowGetter(index)`
-     * is called. `rowGetter` should be smart enough to handle async
-     * fetching of data and return temporary objects
-     * while data is being fetched.
-     */
-    rowGetter: PropTypes.func.isRequired,
-
-    /**
      * To get any additional CSS classes that should be added to a row,
      * `rowClassNameGetter(index)` is called.
      */
@@ -171,30 +164,9 @@ var FixedDataTable = React.createClass({
     headerHeight: PropTypes.number.isRequired,
 
     /**
-     * Function that is called to get the data for the header row.
-     * If the function returns null, the header will be set to the
-     * Column's label property.
-     */
-    headerDataGetter: PropTypes.func,
-
-    /**
      * Pixel height of footer.
      */
     footerHeight: PropTypes.number,
-
-    /**
-     * DEPRECATED - use footerDataGetter instead.
-     * Data that will be passed to footer cell renderers.
-     */
-    footerData: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.array,
-    ]),
-
-    /**
-     * Function that is called to get the data for the footer row.
-     */
-    footerDataGetter: PropTypes.func,
 
     /**
      * Value of horizontal scroll.
@@ -269,7 +241,7 @@ var FixedDataTable = React.createClass({
      * ```
      * function(
      *   newColumnWidth: number,
-     *   dataKey: string,
+     *   columnKey: string,
      * )
      * ```
      */
@@ -425,7 +397,6 @@ var FixedDataTable = React.createClass({
             cx('fixedDataTableLayout/header'),
             cx('public/fixedDataTable/header'),
           )}
-          data={state.groupHeaderData}
           width={state.width}
           height={state.groupHeaderHeight}
           index={0}
@@ -506,10 +477,6 @@ var FixedDataTable = React.createClass({
 
     var footer = null;
     if (state.footerHeight) {
-      var footerData = props.footerDataGetter
-        ? props.footerDataGetter()
-        : props.footerData;
-
       footer =
         <FixedDataTableRow
           key="footer"
@@ -517,15 +484,14 @@ var FixedDataTable = React.createClass({
             cx('fixedDataTableLayout/footer'),
             cx('public/fixedDataTable/footer'),
           )}
-          data={footerData}
-          fixedColumns={state.footFixedColumns}
+          width={state.width}
           height={state.footerHeight}
           index={-1}
           zIndex={1}
           offsetTop={footOffsetTop}
+          fixedColumns={state.footFixedColumns}
           scrollableColumns={state.footScrollableColumns}
           scrollLeft={state.scrollX}
-          width={state.width}
         />;
     }
 
@@ -538,7 +504,6 @@ var FixedDataTable = React.createClass({
           cx('fixedDataTableLayout/header'),
           cx('public/fixedDataTable/header'),
         )}
-        data={state.headData}
         width={state.width}
         height={state.headerHeight}
         index={-1}
@@ -713,13 +678,13 @@ var FixedDataTable = React.createClass({
       columnInfo.bodyScrollableColumns = bodyColumnTypes.scrollable;
 
       var headColumnTypes = this._splitColumnTypes(
-        this._createHeadColumns(columns)
+        this._selectColumnElement(HEADER, columns)
       );
       columnInfo.headFixedColumns = headColumnTypes.fixed;
       columnInfo.headScrollableColumns = headColumnTypes.scrollable;
 
       var footColumnTypes = this._splitColumnTypes(
-        this._createFootColumns(columns)
+        this._selectColumnElement(FOOTER, columns)
       );
       columnInfo.footFixedColumns = footColumnTypes.fixed;
       columnInfo.footScrollableColumns = footColumnTypes.scrollable;
@@ -731,16 +696,14 @@ var FixedDataTable = React.createClass({
         oldState.groupHeaderScrollableColumns;
     } else {
       if (columnGroups) {
-        columnInfo.groupHeaderData = this._getGroupHeaderData(columnGroups);
-        columnGroups = this._createGroupHeaderColumns(columnGroups);
-        var groupHeaderColumnTypes = this._splitColumnTypes(columnGroups);
+        var groupHeaderColumnTypes = this._splitColumnTypes(
+          this._selectColumnElement(HEADER, columnGroups)
+        );
         columnInfo.groupHeaderFixedColumns = groupHeaderColumnTypes.fixed;
         columnInfo.groupHeaderScrollableColumns =
           groupHeaderColumnTypes.scrollable;
       }
     }
-
-    columnInfo.headData = this._getHeadData(columns);
 
     return columnInfo;
   },
@@ -954,104 +917,21 @@ var FixedDataTable = React.createClass({
       useGroupHeader,
     };
 
-    // Both `headData` and `groupHeaderData` are generated by
-    // `FixedDataTable` will be passed to each header cell to render.
-    // In order to prevent over-rendering the cells, we do not pass the
-    // new `headData` or `groupHeaderData`
-    // if they haven't changed.
-    if (oldState) {
-      if (
-        oldState.headData &&
-        newState.headData &&
-        shallowEqual(oldState.headData, newState.headData)
-      ) {
-        newState.headData = oldState.headData;
-      }
-      if (
-        oldState.groupHeaderData &&
-        newState.groupHeaderData &&
-        shallowEqual(oldState.groupHeaderData, newState.groupHeaderData)
-      ) {
-        newState.groupHeaderData = oldState.groupHeaderData;
-      }
-    }
-
     return newState;
   },
 
-  _createGroupHeaderColumns(/*array*/ columnGroups) /*array*/  {
-    var newColumnGroups = [];
-    for (var i = 0; i < columnGroups.length; ++i) {
-      newColumnGroups[i] = cloneWithProps(
-        columnGroups[i],
-        {
-          dataKey: i,
-          children: undefined,
-          columnData: columnGroups[i].props.columnGroupData,
-          cellRenderer: columnGroups[i].props.groupHeaderRenderer ||
-            renderToString,
-          isHeaderCell: true,
-        }
-      );
-    }
-    return newColumnGroups;
-  },
-
-  _createHeadColumns(/*array*/ columns) /*array*/ {
-    var headColumns = [];
+  _selectColumnElement(/*string*/ type, /*array*/ columns) /*array*/ {
+    var newColumns = [];
     for (var i = 0; i < columns.length; ++i) {
-      var columnProps = columns[i].props;
-      headColumns.push(cloneWithProps(
-        columns[i],
+      var column = columns[i];
+      newColumns.push(React.cloneElement(
+        column,
         {
-          cellRenderer: columnProps.headerRenderer || renderToString,
-          columnData: columnProps.columnData,
-          dataKey: columnProps.dataKey,
-          isHeaderCell: true,
-          label: columnProps.label,
+          cell: type ?  column.props[type] : column.props['cell']
         }
       ));
     }
-    return headColumns;
-  },
-
-  _createFootColumns(/*array*/ columns) /*array*/ {
-    var footColumns = [];
-    for (var i = 0; i < columns.length; ++i) {
-      var columnProps = columns[i].props;
-      footColumns.push(cloneWithProps(
-        columns[i],
-        {
-          cellRenderer: columnProps.footerRenderer || renderToString,
-          columnData: columnProps.columnData,
-          dataKey: columnProps.dataKey,
-          isFooterCell: true,
-        }
-      ));
-    }
-    return footColumns;
-  },
-
-  _getHeadData(/*array*/ columns) /*?object*/ {
-    if (!this.props.headerDataGetter) {
-      return null;
-    }
-
-    var headData = {};
-    for (var i = 0; i < columns.length; ++i) {
-      var columnProps = columns[i].props;
-      headData[columnProps.dataKey] =
-        this.props.headerDataGetter(columnProps.dataKey);
-    }
-    return headData;
-   },
-
-  _getGroupHeaderData(/*array*/ columnGroups) /*array*/ {
-    var groupHeaderData = [];
-    for (var i = 0; i < columnGroups.length; ++i) {
-      groupHeaderData[i] = columnGroups[i].props.label || '';
-    }
-    return groupHeaderData;
+    return newColumns;
   },
 
   _splitColumnTypes(/*array*/ columns) /*object*/ {

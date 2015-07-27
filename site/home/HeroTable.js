@@ -7,6 +7,7 @@ var Constants = require('../Constants');
 
 var Table = FixedDataTable.Table;
 var Column = FixedDataTable.Column;
+var Cell = FixedDataTable.Cell;
 
 // Require common FixedDataTable CSS.
 require('fixed-data-table/css/layout/ScrollbarLayout.css');
@@ -22,18 +23,23 @@ require('fixed-data-table/css/style/fixedDataTableColumnResizerLine.css');
 require('fixed-data-table/css/style/fixedDataTableRow.css');
 require('fixed-data-table/css/style/Scrollbar.css');
 
+var TextCell = React.createClass({
+  _getData() {
+    return this.props.data.getObjectAt(this.props.rowIndex)[this.props.columnKey];
+  },
+  render() {
+    return (
+      <Cell
+        {...this.props}>
+        {this._getData()}
+      </Cell>
+    )
+  }
+})
+
+var dataList = new FakeObjectDataListStore()
 
 var HeroTable = React.createClass({
-
-  getInitialState() {
-    return {
-      dataList: new FakeObjectDataListStore()
-    }
-  },
-
-  _rowGetter(index) {
-    return this.state.dataList.getObjectAt(index);
-  },
 
   render() {
     return (
@@ -44,70 +50,80 @@ var HeroTable = React.createClass({
         overflowY="hidden"
         rowHeight={50}
         headerHeight={50}
-        rowGetter={this._rowGetter}
-        rowsCount={this.state.dataList.getSize()}
+        rowsCount={dataList.getSize()}
         width={this.props.tableWidth}
         height={this.props.tableHeight}>
         <Column
           flexGrow={1}
-          dataKey="firstName"
+          columnKey="firstName"
           fixed={true}
-          label="First Name"
+          header="First Name"
+          cell={<TextCell data={dataList} />}
           width={150}
         />
         <Column
           flexGrow={1}
-          dataKey="lastName"
+          columnKey="lastName"
           fixed={true}
-          label="Last Name"
+          header="Last Name"
+          cell={<TextCell data={dataList} />}
           width={120}
         />
         <Column
           flexGrow={1}
-          dataKey="city"
-          label="City"
+          columnKey="city"
+          header="City"
+          cell={<TextCell data={dataList} />}
           width={200}
         />
         <Column
-          label="Street"
+          header="Street"
           width={200}
-          dataKey="street"
+          columnKey="street"
+          cell={<TextCell data={dataList} />}
         />
         <Column
-          label="Zip Code"
+          header="Zip Code"
           width={200}
-          dataKey="zipCode"
+          columnKey="zipCode"
+          cell={<TextCell data={dataList} />}
         />
         <Column
-          label="Email"
+          header="Email"
           width={200}
-          dataKey="email"
+          columnKey="email"
+          cell={<TextCell data={dataList} />}
         />
         <Column
-          label="DOB"
+          header="DOB"
           width={400}
-          dataKey="date"
+          columnKey="date"
+          cell={<TextCell data={dataList} />}
         />
         <Column
           flexGrow={1}
-          dataKey="city"
-          label="City"
+          columnKey="city"
+          header="City"
           width={400}
+          cell={<TextCell data={dataList} />}
         />
         <Column
-          dataKey="bs"
-          label="BS!"
+          columnKey="bs"
+          header="BS!"
           width={300}
+          cell={<TextCell data={dataList} />}
         />
         <Column
-          dataKey="catchPhrase"
-          label="Catch Phrase"
+          columnKey="catchPhrase"
+          header="Catch Phrase"
           width={400}
+          cell={<TextCell data={dataList} />}
         />
         <Column
-          dataKey="companyName"
-          label="Company Name"
+          columnKey="companyName"
+          header="Company Name"
           width={700}
+          cell={<TextCell data={dataList} />}
         />
       </Table>
     );

@@ -29,98 +29,86 @@ var FixedDataTableColumn = React.createClass({
     align: PropTypes.oneOf(['left', 'center', 'right']),
 
     /**
-     * className for this column's header cell.
-     */
-    headerClassName: PropTypes.string,
-
-    /**
-     * className for this column's footer cell.
-     */
-    footerClassName: PropTypes.string,
-
-    /**
-     * className for each of this column's data cells.
-     */
-    cellClassName: PropTypes.string,
-
-    /**
-     * The cell renderer that returns React-renderable content for table cell.
-     * ```
-     * function(
-     *   cellData: any,
-     *   cellDataKey: string,
-     *   rowData: object,
-     *   rowIndex: number,
-     *   columnData: any,
-     *   width: number
-     * ): ?$jsx
-     * ```
-     */
-    cellRenderer: PropTypes.func,
-
-    /**
-     * The getter `function(string_cellDataKey, object_rowData)` that returns
-     * the cell data for the `cellRenderer`.
-     * If not provided, the cell data will be collected from
-     * `rowData[cellDataKey]` instead. The value that `cellDataGetter` returns
-     * will be used to determine whether the cell should re-render.
-     */
-    cellDataGetter: PropTypes.func,
-
-    /**
-     * The key to retrieve the cell data from the data row. Provided key type
-     * must be either `string` or `number`. Since we use this
-     * for keys, it must be specified for each column.
-     */
-    dataKey: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]).isRequired,
-
-    /**
      * Controls if the column is fixed when scrolling in the X axis.
      */
     fixed: PropTypes.bool,
 
     /**
-     * The cell renderer that returns React-renderable content for table column
-     * header.
+     * The header cell for this column.
+     * This can either be a string or a React element. Passing in a string
+     * will render a default header cell with that string. By default, the React
+     * element passed in can expect to receive the following props:
+     *
      * ```
-     * function(
-     *   label: ?string,
-     *   cellDataKey: string,
-     *   columnData: any,
-     *   rowData: array<?object>,
-     *   width: number
-     * ): ?$jsx
+     * props: {
+     *   columnKey: string // (of the column, if given)
+     *   cellHeight: number // (supplied from the Table or rowHeightGetter)
+     *   cellWidth: number // (supplied from the Column)
+     * }
      * ```
+     *
+     * Because you are passing in your own React element, you can feel free to
+     * pass in whatever props you may want or need.
      */
-    headerRenderer: PropTypes.func,
+    header: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.string
+    ]),
 
     /**
-     * The cell renderer that returns React-renderable content for table column
-     * footer.
+     * This is the body cell that will be cloned for this column.
+     * This can either be a string or a React element. Passing in a string
+     * will render a default cell with that string. By default, the React
+     * element passed in can expect to receive the following props:
+     *
      * ```
-     * function(
-     *   label: ?string,
-     *   cellDataKey: string,
-     *   columnData: any,
-     *   rowData: array<?object>,
-     *   width: number
-     * ): ?$jsx
+     * props: {
+     *   rowIndex; number // (the row index of the cell)
+     *   columnKey: string // (of the column, if given)
+     *   cellHeight: number // (supplied from the Table or rowHeightGetter)
+     *   cellWidth: number // (supplied from the Column)
+     * }
      * ```
+     *
+     * Because you are passing in your own React element, you can feel free to
+     * pass in whatever props you may want or need.
      */
-    footerRenderer: PropTypes.func,
+    cell: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.string
+    ]),
 
     /**
-     * Bucket for any data to be passed into column renderer functions.
+     * This is the footer cell for this column.
+     * This can either be a string or a React element. Passing in a string
+     * will render a default footer cell with that string. By default, the React
+     * element passed in can expect to receive the following props:
+     *
+     * ```
+     * props: {
+     *   columnKey: string // (of the column, if given)
+     *   cellHeight: number // (supplied from the Table or rowHeightGetter)
+     *   cellWidth: number // (supplied from the Column)
+     * }
+     * ```
+     *
+     * Because you are passing in your own React element, you can feel free to
+     * pass in whatever props you may want or need.
      */
-    columnData: PropTypes.object,
+    footer: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.string
+    ]),
 
     /**
-     * The column's header label.
+     * This is used to uniquely identify the column, and is not required unless
+     * you a resizing columns. This will be the key given in the
+     * `onColumnResizeEndCallback` on the Table.
      */
-    label: PropTypes.string,
+    columnKey: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ]),
 
     /**
      * The pixel width of the column.
@@ -167,7 +155,7 @@ var FixedDataTableColumn = React.createClass({
      * Setting the property to false will keep previous behaviour and keep
      * cell rendered if the row it belongs to is visible.
      */
-      allowCellsRecycling: PropTypes.bool,
+    allowCellsRecycling: PropTypes.bool,
   },
 
   getDefaultProps() /*object*/ {

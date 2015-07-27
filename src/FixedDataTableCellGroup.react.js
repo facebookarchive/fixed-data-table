@@ -27,163 +27,29 @@ var {PropTypes} = React;
 var DIR_SIGN = FixedDataTableHelper.DIR_SIGN;
 var EMPTY_OBJECT = new ImmutableObject({});
 
-var FixedDataTableCellGroupImpl = React.createClass({
-  mixins: [ReactComponentWithPureRenderMixin],
-
-  propTypes: {
-
-    /**
-     * Array of <FixedDataTableColumn />.
-     */
-    columns: PropTypes.array.isRequired,
-
-    /**
-     * The row data to render. The data format can be a simple Map object
-     * or an Array of data.
-     */
-    data: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.array
-    ]),
-
-    left: PropTypes.number,
-
-    onColumnResize: PropTypes.func,
-
-    rowHeight: PropTypes.number.isRequired,
-
-    rowIndex: PropTypes.number.isRequired,
-
-    width: PropTypes.number.isRequired,
-
-    zIndex: PropTypes.number.isRequired,
-  },
-
-  render() /*object*/ {
-    var props = this.props;
-    var columns = props.columns;
-    var cells = new Array(columns.length);
-
-    var currentPosition = 0;
-    for (var i = 0, j = columns.length; i < j; i++) {
-      var columnProps = columns[i].props;
-      if (!columnProps.allowCellsRecycling || (
-            currentPosition - props.left <= props.width &&
-            currentPosition - props.left + columnProps.width >= 0)) {
-        var key = 'cell_' + i;
-        cells[i] = this._renderCell(
-          props.data,
-          props.rowIndex,
-          props.rowHeight,
-          columnProps,
-          currentPosition,
-          key,
-        );
-      }
-      currentPosition += columnProps.width;
-    }
-
-    var contentWidth = this._getColumnsWidth(columns);
-
-    var style = {
-      height: props.height,
-      position: 'absolute',
-      width: contentWidth,
-      zIndex: props.zIndex,
-    };
-    translateDOMPositionXY(style, -1 * DIR_SIGN * props.left, 0);
-
-    return (
-      <div
-        className={cx('fixedDataTableCellGroupLayout/cellGroup')}
-        style={style}>
-        {cells}
-      </div>
-    );
-  },
-
-  _renderCell(
-    /*?object|array*/ rowData,
-    /*number*/ rowIndex,
-    /*number*/ height,
-    /*object*/ columnProps,
-    /*number*/ left,
-    /*string*/ key
-  ) /*object*/ {
-    var cellRenderer = columnProps.cellRenderer || renderToString;
-    var columnData = columnProps.columnData || EMPTY_OBJECT;
-    var cellDataKey = columnProps.dataKey;
-    var isFooterCell = columnProps.isFooterCell;
-    var isHeaderCell = columnProps.isHeaderCell;
-    var cellData;
-
-    if (isHeaderCell || isFooterCell) {
-      if (rowData == null || rowData[cellDataKey] == null) {
-        cellData = columnProps.label;
-      } else {
-        cellData = rowData[cellDataKey];
-      }
-    } else {
-      var cellDataGetter = columnProps.cellDataGetter;
-      cellData = cellDataGetter ?
-        cellDataGetter(cellDataKey, rowData) :
-        rowData[cellDataKey];
-    }
-
-    var cellIsResizable = columnProps.isResizable &&
-      this.props.onColumnResize;
-    var onColumnResize = cellIsResizable ? this.props.onColumnResize : null;
-
-    var className;
-    if (isHeaderCell || isFooterCell) {
-      className = isHeaderCell ?
-        columnProps.headerClassName : columnProps.footerClassName;
-    } else {
-      className = columnProps.cellClassName;
-    }
-
-    return (
-      <FixedDataTableCell
-        align={columnProps.align}
-        cellData={cellData}
-        cellDataKey={cellDataKey}
-        cellRenderer={cellRenderer}
-        className={className}
-        columnData={columnData}
-        height={height}
-        isFooterCell={isFooterCell}
-        isHeaderCell={isHeaderCell}
-        key={key}
-        maxWidth={columnProps.maxWidth}
-        minWidth={columnProps.minWidth}
-        onColumnResize={onColumnResize}
-        rowData={rowData}
-        rowIndex={rowIndex}
-        width={columnProps.width}
-        left={left}
-      />
-    );
-  },
-
-  _getColumnsWidth(columns: array): number {
-    var width = 0;
-    for (var i = 0; i < columns.length; ++i) {
-      width += columns[i].props.width;
-    }
-    return width;
-  },
-});
-
 var FixedDataTableCellGroup = React.createClass({
   mixins: [ReactComponentWithPureRenderMixin],
 
   propTypes: {
     /**
+     * Array of <FixedDataTableColumn />.
+     */
+    columns: PropTypes.array.isRequired,
+
+    offsetLeft: PropTypes.number,
+
+    left: PropTypes.number,
+
+    onColumnResize: PropTypes.func,
+
+    rowIndex: PropTypes.number.isRequired,
+
+    /**
      * Height of the row.
      */
     height: PropTypes.number.isRequired,
 
-    offsetLeft: PropTypes.number,
+    width: PropTypes.number.isRequired,
 
     /**
      * Z-index on which the row will be displayed. Used e.g. for keeping
@@ -201,28 +67,99 @@ var FixedDataTableCellGroup = React.createClass({
   render() /*object*/ {
     var {offsetLeft, ...props} = this.props;
 
-    var style = {
+    var onColumnResize = props.onColumnResize ? this._onColumnResize : null;
+
+    var outerStyle = {
       height: props.height,
     };
 
     if (DIR_SIGN === 1) {
-      style.left = offsetLeft;
+      outerStyle.left = offsetLeft;
     } else {
-      style.right = offsetLeft;
+      outerStyle.right = offsetLeft;
     }
 
-    var onColumnResize = props.onColumnResize ? this._onColumnResize : null;
+    var columns = props.columns;
+    var cells = new Array(columns.length);
+
+    var currentPosition = 0;
+    for (var i = 0, j = columns.length; i < j; i++) {
+      var columnProps = columns[i].props;
+      if (!columnProps.allowCellsRecycling || (
+            currentPosition - props.left <= props.width &&
+            currentPosition - props.left + columnProps.width >= 0)) {
+        var key = 'cell_' + i;
+        cells[i] = this._renderCell(
+          props.rowIndex,
+          props.height,
+          columnProps,
+          onColumnResize,
+          currentPosition,
+          key,
+        );
+      }
+      currentPosition += columnProps.width;
+    }
+
+    var contentWidth = this._getColumnsWidth(columns);
+
+    var innerStyle = {
+      height: props.height,
+      position: 'absolute',
+      width: contentWidth,
+      zIndex: props.zIndex,
+    };
+    translateDOMPositionXY(innerStyle, -1 * DIR_SIGN * props.left, 0);
 
     return (
       <div
-        style={style}
+        style={outerStyle}
         className={cx('fixedDataTableCellGroupLayout/cellGroupWrapper')}>
-        <FixedDataTableCellGroupImpl
-          {...props}
-          onColumnResize={onColumnResize}
-        />
+        <div
+          className={cx('fixedDataTableCellGroupLayout/cellGroup')}
+          style={innerStyle}>
+          {cells}
+        </div>
       </div>
     );
+  },
+
+  _renderCell(
+    /*number*/ rowIndex,
+    /*number*/ height,
+    /*object*/ columnProps,
+    /*function*/ onColumnResize,
+    /*number*/ left,
+    /*string*/ key
+  ) /*object*/ {
+
+    var cellIsResizable = columnProps.isResizable && onColumnResize;
+    var className = columnProps.cellClassName;
+
+    return (
+      <FixedDataTableCell
+        align={columnProps.align}
+        className={className}
+        height={height}
+        key={key}
+        maxWidth={columnProps.maxWidth}
+        minWidth={columnProps.minWidth}
+        onColumnResize={cellIsResizable ? onColumnResize: null}
+        rowIndex={rowIndex}
+        columnKey={columnProps.columnKey}
+        width={columnProps.width}
+        left={left}
+        cell={columnProps.cell}
+      />
+    );
+  },
+
+  _getColumnsWidth(columns: array): number {
+    var width = 0;
+    for (var i = 0; i < columns.length; ++i) {
+      width += columns[i].props.width;
+    }
+    return width;
   },
 
   _onColumnResize(
@@ -230,7 +167,7 @@ var FixedDataTableCellGroup = React.createClass({
     /*number*/ width,
     /*?number*/ minWidth,
     /*?number*/ maxWidth,
-    /*string|number*/ cellDataKey,
+    /*string|number*/ columnKey,
     /*object*/ event
   ) {
     this.props.onColumnResize && this.props.onColumnResize(
@@ -239,11 +176,11 @@ var FixedDataTableCellGroup = React.createClass({
       width,
       minWidth,
       maxWidth,
-      cellDataKey,
+      columnKey,
       event
     );
   },
-});
 
+});
 
 module.exports = FixedDataTableCellGroup;
