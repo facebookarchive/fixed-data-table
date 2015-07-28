@@ -14,7 +14,7 @@
   * This acts to provide an intermediate mapping from the old API to the new API.
   *
   * Remove this entire file and replace the two lines in FixedDataTableRoot when ready
-  * to continue.
+  * to continue to the new API.
   */
 
 'use strict';
@@ -84,14 +84,63 @@ var TransitionCell = React.createClass({
     dataKey: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number
-    ]),
+    ]).isRequired,
+    cellRenderer: PropTypes.func,
+    cellDataGetter: PropTypes.func,
+    width: PropTypes.number,
+    height: PropTypes.number,
+  },
+
+  _getRowData() {
+    return this.props.rowGetter(this.props.rowIndex);
+  },
+
+  _getData() {
+    var dataKey = this.props.dataKey;
+    var rowData = this._getRowData();
+    if (this.props.cellDataGetter){
+      return this.props.cellDataGetter(dataKey, rowData);
+    }
+
+    return rowData[dataKey];
+  },
+
+  render() {
+    if (this.props.cellRenderer){
+      return (
+        <CellDefault
+          {...this.props} >
+          {this.props.cellRenderer(
+            this._getData(),
+            this.props.dataKey,
+            this._getRowData(),
+            this.props.rowIndex,
+            {},
+            this.props.width
+          )}
+        </CellDefault>
+        )
+    } else {
+      return (
+        <CellDefault
+          {...this.props} >
+          {this._getData()}
+        </CellDefault>
+      )
+    }
+  }
+});
+
+var TransitionHeader = React.createClass({
+  propTypes: {
+    label: PropTypes.string
   },
 
   render() {
     return (
       <CellDefault
         {...this.props} >
-        {this.props.rowGetter(this.props.rowIndex)[this.props.dataKey]}
+        {this.props.label}
       </CellDefault>
     )
   }
@@ -114,30 +163,69 @@ var TransitionTable = React.createClass({
   getInitialState() {
     // Throw warnings on deprecated props.
     var state = {}
+    var needsMigration = this._checkDeprecations();
+    state.columns = this._convertColumns(needsMigration);
+    return state;
+  },
+
+  _checkDeprecations() {
+    var needsMigration = false;
+
     if (this.props.rowGetter){
       notifyDeprecated('rowGetter', 'Please use the cell API in Column to fetch data ' +
         'for your cells.');
 
       // This needs a migration.
-      state.migrationNeeded = true;
+      needsMigration = true;
     }
-    return state;
+
+    this.props.children.forEach((child) => {
+
+    })
+
+    return needsMigration;
   },
 
-  _convertedColumns() {
+  _convertColumns(needsMigration) {
     var rowGetter = this.props.rowGetter;
 
+    // If we don't need to migrate, then
+    if (!needsMigration){
+      return this.props.children.map((child, i) => {
+        // Convert them directly
+        if (child.type.__TableColumn__){
+          return <Column {...child.props} />
+        }
+
+        if (child.type.__TableColumnGroup__){
+          return <ColumnGroup {...child.props} />
+        }
+      });
+    }
+
+    // Do some conversions
     return this.props.children.map((child, i) => {
 
       // Constuct the cell to be used using the rowGetter
       return (
         <Column
           key={'columns_' + i}
-          header={child.props.label}
+          header={
+            <TransitionHeader
+              label={child.props.label}
+            />
+          }
           cell={
             <TransitionCell
               dataKey={child.props.dataKey}
-              rowGetter={this.props.rowGetter} />
+              className={child.props.cellClassName}
+              rowGetter={this.props.rowGetter}
+              cellDataGetter={child.props.cellDataGetter}
+              cellRenderer={child.props.cellRenderer}
+            />
+          }
+          footer={
+            null
           }
           {...child.props}
         />
@@ -146,35 +234,12 @@ var TransitionTable = React.createClass({
   },
 
   render() {
-    // If we don't need to do a migration,
-    // Just render the table as is.
-    if (!this.state.migrationNeeded){
-      return (
-        <Table
-          {...this.props}>
-          {this.props.children.map((child, i) => {
-            // Convert them directly
-            if (child.type.__TableColumn__){
-              return <Column key={'column_' + i} {...child.props} />
-            }
-
-            if (child.type.__TableColumnGroup__){
-              return <ColumnGroup key={'column_' + i} {...child.props} />
-            }
-          })}
-        </Table>
-      )
-    }
-
     return (
       <Table
         {...this.props}>
-        {this._convertedColumns()}
+        {this.state.columns}
       </Table>
     )
-    // Otherwise, migrate as needed.
-
-    return null;
   },
 });
 
