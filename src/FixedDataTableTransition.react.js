@@ -78,6 +78,25 @@ var TransitionColumnGroup = React.createClass({
   }
 });
 
+var TransitionCell = React.createClass({
+  propTypes: {
+    rowGetter: PropTypes.func.isRequired,
+    dataKey: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ]),
+  },
+
+  render() {
+    return (
+      <CellDefault
+        {...this.props} >
+        {this.props.rowGetter(this.props.rowIndex)[this.props.dataKey]}
+      </CellDefault>
+    )
+  }
+});
+
 /**
  * Transition Table takes in the table and maps it to the new api.
  *
@@ -105,6 +124,27 @@ var TransitionTable = React.createClass({
     return state;
   },
 
+  _convertedColumns() {
+    var rowGetter = this.props.rowGetter;
+
+    return this.props.children.map((child, i) => {
+
+      // Constuct the cell to be used using the rowGetter
+      return (
+        <Column
+          key={'columns_' + i}
+          header={child.props.label}
+          cell={
+            <TransitionCell
+              dataKey={child.props.dataKey}
+              rowGetter={this.props.rowGetter} />
+          }
+          {...child.props}
+        />
+      )
+    })
+  },
+
   render() {
     // If we don't need to do a migration,
     // Just render the table as is.
@@ -126,6 +166,12 @@ var TransitionTable = React.createClass({
       )
     }
 
+    return (
+      <Table
+        {...this.props}>
+        {this._convertedColumns()}
+      </Table>
+    )
     // Otherwise, migrate as needed.
 
     return null;
