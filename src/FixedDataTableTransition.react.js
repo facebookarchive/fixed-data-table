@@ -22,6 +22,8 @@
 var React = require('React');
 var ReactChildren = React.Children;
 
+var invariant = require('invariant');
+
 var PropTypes = React.PropTypes;
 
 // Current Table API
@@ -33,6 +35,9 @@ var ColumnGroup = require('FixedDataTableColumnGroup.react');
 var NextVersion = '6.0.0';
 var DocumentationUrl = 'http://facebook.github.io/fixed-data-table'
 
+/**
+ * Notify in console that some prop has been deprecated.
+ */
 function notifyDeprecated(prop, reason){
   if (__DEV__){
     console.warn(
@@ -42,12 +47,6 @@ function notifyDeprecated(prop, reason){
     )
   }
 }
-
-var TransitionCell = React.createClass({
-  render() {
-    return <div> "hello" </div>
-  }
-});
 
 var TransitionColumn = React.createClass({
   statics: {
@@ -91,45 +90,50 @@ var TransitionTable = React.createClass({
      * rowGetter(index) to feed data into each cell.
      */
     rowGetter: PropTypes.func
-
   },
 
-  componentWillMount() {
+  getInitialState() {
     // Throw warnings on deprecated props.
+    var state = {}
     if (this.props.rowGetter){
       notifyDeprecated('rowGetter', 'Please use the cell API in Column to fetch data ' +
         'for your cells.');
+
+      // This needs a migration.
+      state.migrationNeeded = true;
     }
-  },
-
-  _checkAPI() {
-
-    var children = [];
-    ReactChildren.forEach(props.children, (child, index) => {
-      if (child == null) {
-        return;
-      }
-      invariant(
-        child.type.__TableColumnGroup__ ||
-        child.type.__TableColumn__,
-        'child type should be <FixedDataTableColumn /> or ' +
-        '<FixedDataTableColumnGroup />'
-      );
-      children.push(child);
-    });
-
+    return state;
   },
 
   render() {
-    if (this.props.rowGetter){
+    // If we don't need to do a migration,
+    // Just render the table as is.
+    if (!this.state.migrationNeeded){
+      return (
+        <Table
+          {...this.props}>
+          {this.props.children.map((child, i) => {
+            // Convert them directly
+            if (child.type.__TableColumn__){
+              return <Column key={'column_' + i} {...child.props} />
+            }
 
+            if (child.type.__TableColumnGroup__){
+              return <ColumnGroup key={'column_' + i} {...child.props} />
+            }
+          })}
+        </Table>
+      )
     }
-    return <div> "hello" </div>
+
+    // Otherwise, migrate as needed.
+
+    return null;
   },
 });
 
 var TransitionRoot = {
-  Cell: TransitionCell,
+  Cell: CellDefault, // NEW API, just use the cell that's provided :)
   Column: TransitionColumn,
   ColumnGroup: TransitionColumnGroup,
   Table: TransitionTable,
