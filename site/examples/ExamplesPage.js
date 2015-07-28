@@ -54,7 +54,7 @@ var ExamplesPage = React.createClass({
     var examples = {};
 
     examples[ExamplePages.OBJECT_DATA_EXAMPLE.location] = {
-      path: './old/ObjectDataExample'
+      path: './ObjectDataExample'
     }
 
     examples[ExamplePages.RESIZE_EXAMPLE.location] = {
@@ -66,11 +66,11 @@ var ExamplesPage = React.createClass({
     }
 
     examples[ExamplePages.COLUMN_GROUPS_EXAMPLE.location] = {
-      path: './old/ColumnGroupsExample'
+      path: './ColumnGroupsExample'
     }
 
     examples[ExamplePages.FILTER_EXAMPLE.location] = {
-      path: './old/FilterExample'
+      path: './FilterExample'
     }
 
     examples[ExamplePages.SORT_EXAMPLE.location] = {
