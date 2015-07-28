@@ -87,6 +87,7 @@ var TransitionCell = React.createClass({
     ]).isRequired,
     cellRenderer: PropTypes.func,
     cellDataGetter: PropTypes.func,
+    columnData: PropTypes.any,
     width: PropTypes.number,
     height: PropTypes.number,
   },
@@ -106,24 +107,26 @@ var TransitionCell = React.createClass({
   },
 
   render() {
-    if (this.props.cellRenderer){
+    var props = this.props;
+
+    if (props.cellRenderer){
       return (
         <CellDefault
-          {...this.props} >
-          {this.props.cellRenderer(
+          {...props} >
+          {props.cellRenderer(
             this._getData(),
-            this.props.dataKey,
+            props.dataKey,
             this._getRowData(),
-            this.props.rowIndex,
-            {},
-            this.props.width
+            props.rowIndex,
+            props.columnData,
+            props.width
           )}
         </CellDefault>
         )
     } else {
       return (
         <CellDefault
-          {...this.props} >
+          {...props} >
           {this._getData()}
         </CellDefault>
       )
@@ -180,6 +183,30 @@ var TransitionTable = React.createClass({
     }
 
     this.props.children.forEach((child) => {
+      var props = child.props;
+
+      if (props.label) {
+        notifyDeprecated('label', 'Please use `header` instead.');
+      }
+
+      if (props.dataKey) {
+        notifyDeprecated('dataKey', 'Please use the `cell` API to pass in a dataKey');
+      }
+
+      if (props.cellRenderer) {
+        notifyDeprecated('cellRenderer', 'Please use the `cell` API to pass in a React Element,' +
+          ' instead of a funciton that returns one.')
+      }
+
+      if (props.headerRenderer) {
+        notifyDeprecated('headerRenderer', 'Please use the `header` API to pass in a React Element,' +
+          ' instead of a function that creates one.')
+      }
+
+      if (props.columnData) {
+        notifyDeprecated('columnData', 'Please pass data in through props to your' +
+          ' header, cell or footer.')
+      }
 
     })
 
@@ -222,6 +249,8 @@ var TransitionTable = React.createClass({
               rowGetter={this.props.rowGetter}
               cellDataGetter={child.props.cellDataGetter}
               cellRenderer={child.props.cellRenderer}
+              columnData={child.props.columnData}
+              width={child.props.width}
             />
           }
           footer={
