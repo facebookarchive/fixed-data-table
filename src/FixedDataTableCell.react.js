@@ -104,17 +104,6 @@ var FixedDataTableCell = React.createClass({
       props.className,
     );
 
-    var content;
-    var contentClass = cx('public/fixedDataTableCell/cellContent');
-    if (React.isValidElement(props.cell)) {
-      content = React.cloneElement(content, {
-        className: joinClasses(content.props.className, contentClass),
-        rowIndex: props.rowIndex,
-      });
-    } else {
-      content = <div className={contentClass}>{content}</div>;
-    }
-
     var columnResizerComponent;
     if (props.onColumnResize) {
       var columnResizerStyle = {
