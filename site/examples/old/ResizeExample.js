@@ -27,7 +27,8 @@ var ResizeExample = React.createClass({
 
   getInitialState() {
     return {
-      dataList: new FakeObjectDataListStore(ROWS)
+      dataList: new FakeObjectDataListStore(ROWS),
+      columnWidths: columnWidths
     }
   },
 
@@ -44,9 +45,12 @@ var ResizeExample = React.createClass({
   },
 
   _onColumnResizeEndCallback(newColumnWidth, dataKey) {
+    var columnWidths = this.state.columnWidths;
     columnWidths[dataKey] = newColumnWidth;
     isColumnResizing = false;
-    this.forceUpdate(); // don't do this, use a store and put into this.state!
+    this.setState({
+      columnWidths
+    })
   },
 
   render() {
