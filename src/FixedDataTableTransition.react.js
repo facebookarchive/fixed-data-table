@@ -22,7 +22,9 @@
 var React = require('React');
 var ReactChildren = React.Children;
 
+var cx = require('cx');
 var invariant = require('invariant');
+var joinClasses = require('joinClasses');
 
 var PropTypes = React.PropTypes;
 
@@ -80,6 +82,7 @@ var TransitionColumnGroup = React.createClass({
 
 var TransitionCell = React.createClass({
   propTypes: {
+    className: PropTypes.string,
     rowGetter: PropTypes.func.isRequired,
     dataKey: PropTypes.oneOfType([
       PropTypes.string,
@@ -109,41 +112,94 @@ var TransitionCell = React.createClass({
   render() {
     var props = this.props;
 
+    var content = this._getData();
+
     if (props.cellRenderer){
-      return (
-        <CellDefault
-          {...props} >
-          {props.cellRenderer(
-            this._getData(),
-            props.dataKey,
-            this._getRowData(),
-            props.rowIndex,
-            props.columnData,
-            props.width
-          )}
-        </CellDefault>
-        )
-    } else {
-      return (
-        <CellDefault
-          {...props} >
-          {this._getData()}
-        </CellDefault>
-      )
+      content = props.cellRenderer(
+        this._getData(),
+        props.dataKey,
+        this._getRowData(),
+        props.rowIndex,
+        props.columnData,
+        props.width
+      );
     }
+
+    if (!React.isValidElement(content)){
+      return (
+        <CellDefault
+          {...props}>
+          {content}
+        </CellDefault>
+      );
+    }
+
+    var innerStyle = {
+      height: this.props.cellHeight,
+      width: this.props.cellWidth,
+      ...this.props.style,
+    };
+
+    var contentClass = cx('public/fixedDataTableCell/cellContent');
+
+    return (
+      <div
+        {...this.props}
+        className={joinClasses(
+          cx('fixedDataTableCellLayout/wrap1'),
+          cx('public/fixedDataTableCell/wrap1'),
+          this.props.className
+        )}
+        style={innerStyle}>
+        <div
+          className={joinClasses(
+            cx('fixedDataTableCellLayout/wrap2'),
+            cx('public/fixedDataTableCell/wrap2'),
+          )}>
+          <div
+            className={joinClasses(
+              cx('fixedDataTableCellLayout/wrap3'),
+              cx('public/fixedDataTableCell/wrap3'),
+            )}>
+            {content}
+          </div>
+        </div>
+      </div>
+    )
+
   }
 });
 
 var TransitionHeader = React.createClass({
   propTypes: {
-    label: PropTypes.string
+    label: PropTypes.string,
+    headerRenderer: PropTypes.func,
+    dataKey: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+    ]),
+    columnData: PropTypes.any,
+    width: PropTypes.number
   },
 
   render() {
+    var props = this.props;
+
+    var content = props.label;
+
+    if (props.headerRenderer){
+      content = props.headerRenderer(
+        props.label,
+        props.dataKey,
+        props.columnData,
+        props.width
+      ) || props.label;
+    }
+
     return (
       <CellDefault
         {...this.props} >
-        {this.props.label}
+        {content}
       </CellDefault>
     )
   }
@@ -233,30 +289,35 @@ var TransitionTable = React.createClass({
     // Do some conversions
     return this.props.children.map((child, i) => {
 
+      var props = child.props;
+
       // Constuct the cell to be used using the rowGetter
       return (
         <Column
-          key={'columns_' + i}
           header={
             <TransitionHeader
-              label={child.props.label}
+              label={props.label}
+              headerRenderer={props.headerRenderer}
+              dataKey={props.dataKey}
+              columnData={props.columnData}
+              width={props.width}
             />
           }
           cell={
             <TransitionCell
-              dataKey={child.props.dataKey}
-              className={child.props.cellClassName}
+              dataKey={props.dataKey}
+              className={props.cellClassName}
               rowGetter={this.props.rowGetter}
-              cellDataGetter={child.props.cellDataGetter}
-              cellRenderer={child.props.cellRenderer}
-              columnData={child.props.columnData}
-              width={child.props.width}
+              cellDataGetter={props.cellDataGetter}
+              cellRenderer={props.cellRenderer}
+              columnData={props.columnData}
+              width={props.width}
             />
           }
           footer={
             null
           }
-          {...child.props}
+          {...props}
         />
       )
     })

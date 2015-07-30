@@ -104,8 +104,6 @@ var FixedDataTableCell = React.createClass({
       props.className,
     );
 
-    var contentClass = cx('public/fixedDataTableCell/cellContent');
-
     var columnResizerComponent;
     if (props.onColumnResize) {
       var columnResizerStyle = {
