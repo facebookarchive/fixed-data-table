@@ -22,15 +22,15 @@ var SortExample = React.createClass({
   getInitialState() {
     return {
       rows: new FakeObjectDataListStore().getAll(),
-      sortBy: 'year',
+      sortBy: 'id',
       sortDir: null,
     };
   },
-  
+
   _rowGetter(rowIndex) {
     return this.state.rows[rowIndex];
   },
-  
+
   _sortRowsBy(cellDataKey) {
     var sortDir = this.state.sortDir;
     var sortBy = cellDataKey;
@@ -39,7 +39,7 @@ var SortExample = React.createClass({
     } else {
       sortDir = SortTypes.DESC;
     }
-    
+
     var rows = this.state.rows.slice();
     rows.sort((a, b) => {
       var sortVal = 0;
@@ -49,14 +49,14 @@ var SortExample = React.createClass({
       if (a[sortBy] < b[sortBy]) {
         sortVal = -1;
       }
-      
+
       if (sortDir === SortTypes.DESC) {
         sortVal = sortVal * -1;
       }
-      
+
       return sortVal;
     });
-    
+
     this.setState({
       rows,
       sortBy,
@@ -69,14 +69,14 @@ var SortExample = React.createClass({
       <a onClick={this._sortRowsBy.bind(null, cellDataKey)}>{label}</a>
     );
   },
-  
+
   render() {
     var sortDirArrow = '';
-    
+
     if (this.state.sortDir !== null){
       sortDirArrow = this.state.sortDir === SortTypes.DESC ? ' ↓' : ' ↑';
     }
-                      
+
     return (
       <Table
         rowHeight={50}
@@ -115,11 +115,11 @@ var SortExample = React.createClass({
           width={200}
           dataKey='companyName'
         />
-        
+
       </Table>
     );
   },
-  
+
 });
 
 module.exports = SortExample;

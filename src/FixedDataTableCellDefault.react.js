@@ -38,29 +38,29 @@ var FixedDataTableCellDefault = React.createClass({
 
     return (
       <div
-          {...this.props}
+        {...this.props}
+        className={joinClasses(
+          cx('fixedDataTableCellLayout/wrap1'),
+          cx('public/fixedDataTableCell/wrap1'),
+          this.props.className
+        )}
+        style={innerStyle}>
+        <div
           className={joinClasses(
-            cx('fixedDataTableCellLayout/wrap1'),
-            cx('public/fixedDataTableCell/wrap1'),
-            this.props.className
-          )}
-          style={innerStyle}>
+            cx('fixedDataTableCellLayout/wrap2'),
+            cx('public/fixedDataTableCell/wrap2'),
+          )}>
           <div
             className={joinClasses(
-              cx('fixedDataTableCellLayout/wrap2'),
-              cx('public/fixedDataTableCell/wrap2'),
+              cx('fixedDataTableCellLayout/wrap3'),
+              cx('public/fixedDataTableCell/wrap3'),
             )}>
-            <div
-              className={joinClasses(
-                cx('fixedDataTableCellLayout/wrap3'),
-                cx('public/fixedDataTableCell/wrap3'),
-              )}>
-              <div className={contentClass}>
-                {this.props.children}
-              </div>
+            <div className={contentClass}>
+              {this.props.children}
             </div>
           </div>
         </div>
+      </div>
     )
 
   }

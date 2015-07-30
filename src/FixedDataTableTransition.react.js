@@ -222,8 +222,8 @@ var TransitionTable = React.createClass({
   getInitialState() {
     // Throw warnings on deprecated props.
     var state = {}
-    var needsMigration = this._checkDeprecations();
-    state.columns = this._convertColumns(needsMigration);
+    state.needsMigration = this._checkDeprecations();
+
     return state;
   },
 
@@ -294,6 +294,8 @@ var TransitionTable = React.createClass({
       // Constuct the cell to be used using the rowGetter
       return (
         <Column
+          key={'column_' + i}
+          {...props}
           header={
             <TransitionHeader
               label={props.label}
@@ -303,6 +305,7 @@ var TransitionTable = React.createClass({
               width={props.width}
             />
           }
+          columnKey={props.dataKey}
           cell={
             <TransitionCell
               dataKey={props.dataKey}
@@ -317,7 +320,6 @@ var TransitionTable = React.createClass({
           footer={
             null
           }
-          {...props}
         />
       )
     })
@@ -327,7 +329,7 @@ var TransitionTable = React.createClass({
     return (
       <Table
         {...this.props}>
-        {this.state.columns}
+        {this._convertColumns(this.state.needsMigration)}
       </Table>
     )
   },
