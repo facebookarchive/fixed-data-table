@@ -40,13 +40,15 @@ var DocumentationUrl = 'http://facebook.github.io/fixed-data-table'
 /**
  * Notify in console that some prop has been deprecated.
  */
+var notified = {}
 function notifyDeprecated(prop, reason){
-  if (__DEV__){
+  if (__DEV__ && !notified[prop]){
     console.warn(
-      prop + ' will be DEPRECATED in versions ' + NextVersion + ' and beyond. \n' +
+      prop + ' will be DEPRECATED in versions ' + NextVersion + ' of FixedDataTable and beyond. \n' +
       reason + '\n' +
       'Read the docs at: ' + DocumentationUrl
-    )
+    );
+    notified[prop] = true;
   }
 }
 
@@ -82,31 +84,49 @@ var TransitionColumnGroup = React.createClass({
 
 var TransitionCell = React.createClass({
   propTypes: {
+    label: PropTypes.string, // header, footer
     className: PropTypes.string,
-    rowGetter: PropTypes.func.isRequired,
-    dataKey: PropTypes.oneOfType([
+    rowGetter: PropTypes.func, // cell
+    dataKey: PropTypes.oneOfType([ // cell, footer
       PropTypes.string,
       PropTypes.number
-    ]).isRequired,
+    ]),
     cellRenderer: PropTypes.func,
     cellDataGetter: PropTypes.func,
-    columnData: PropTypes.any,
+    footerDataGetter: PropTypes.func, // footer
+    footerData: PropTypes.any, // footer
+    columnData: PropTypes.any, // cell, header
     width: PropTypes.number,
     height: PropTypes.number,
+    isHeaderCell: PropTypes.bool, // header
+    isFooterCell: PropTypes.bool // footer
   },
 
   _getRowData() {
-    return this.props.rowGetter(this.props.rowIndex);
+    if (this.props.rowGetter){
+      return this.props.rowGetter(this.props.rowIndex);
+    }
   },
 
   _getData() {
     var dataKey = this.props.dataKey;
     var rowData = this._getRowData();
+
     if (this.props.cellDataGetter){
       return this.props.cellDataGetter(dataKey, rowData);
     }
 
-    return rowData[dataKey];
+    if (rowData && dataKey){
+      return rowData[dataKey];
+    }
+
+    if (this.props.footerDataGetter){
+      return this.props.footerDataGetter()[dataKey];
+    }
+
+    if (this.props.footerData){
+      return this.props.footerData[dataKey];
+    }
   },
 
   render() {
@@ -114,6 +134,7 @@ var TransitionCell = React.createClass({
 
     var content = this._getData();
 
+    // Is it a basic cell?
     if (props.cellRenderer){
       content = props.cellRenderer(
         this._getData(),
@@ -125,7 +146,39 @@ var TransitionCell = React.createClass({
       );
     }
 
-    if (!React.isValidElement(content)){
+    // Is it a header?
+    if (props.isHeaderCell || props.isFooterCell){
+      content = content || props.label;
+    }
+
+    if (props.headerRenderer){
+      content = props.headerRenderer(
+        props.label,
+        props.dataKey,
+        props.columnData,
+        props.width
+      ) || props.label;
+    }
+
+    // Is it a footer?
+    if (props.footerRenderer){
+      content = props.footerRenderer(
+        props.label,
+        props.dataKey,
+        props.columnData,
+        props.width
+      );
+    }
+
+    var contentClass = cx('public/fixedDataTableCell/cellContent');
+
+    if (React.isValidElement(content)){
+      content = React.cloneElement(content,{
+        className: contentClass
+      })
+
+    } else {
+
       return (
         <CellDefault
           {...props}>
@@ -139,8 +192,6 @@ var TransitionCell = React.createClass({
       width: this.props.cellWidth,
       ...this.props.style,
     };
-
-    var contentClass = cx('public/fixedDataTableCell/cellContent');
 
     return (
       <div
@@ -167,41 +218,6 @@ var TransitionCell = React.createClass({
       </div>
     )
 
-  }
-});
-
-var TransitionHeader = React.createClass({
-  propTypes: {
-    label: PropTypes.string,
-    headerRenderer: PropTypes.func,
-    dataKey: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string,
-    ]),
-    columnData: PropTypes.any,
-    width: PropTypes.number
-  },
-
-  render() {
-    var props = this.props;
-
-    var content = props.label;
-
-    if (props.headerRenderer){
-      content = props.headerRenderer(
-        props.label,
-        props.dataKey,
-        props.columnData,
-        props.width
-      ) || props.label;
-    }
-
-    return (
-      <CellDefault
-        {...this.props} >
-        {content}
-      </CellDefault>
-    )
   }
 });
 
@@ -236,6 +252,21 @@ var TransitionTable = React.createClass({
 
       // This needs a migration.
       needsMigration = true;
+    }
+
+    if (this.props.headerDataGetter){
+      notifyDeprecated('headerDataGetter', 'Please use the header API in Column to fetch' +
+        ' data for your header cells.');
+    }
+
+    if (this.props.footerData){
+      notifyDeprecated('footerData', 'Please use teh footer API in Column to fetch ' +
+        'data for your footer cells.');
+    }
+
+    if (this.props.footerDataGetter){
+      notifyDeprecated('footerDataGetter', 'Please use the footer API in Column to fetch' +
+        'data for your footer cells.');
     }
 
     this.props.children.forEach((child) => {
@@ -286,6 +317,8 @@ var TransitionTable = React.createClass({
       });
     }
 
+    var tableProps = this.props;
+
     // Do some conversions
     return this.props.children.map((child, i) => {
 
@@ -297,12 +330,15 @@ var TransitionTable = React.createClass({
           key={'column_' + i}
           {...props}
           header={
-            <TransitionHeader
+            <TransitionCell
+              isHeaderCell={true}
               label={props.label}
-              headerRenderer={props.headerRenderer}
-              dataKey={props.dataKey}
-              columnData={props.columnData}
               width={props.width}
+              dataKey={props.dataKey}
+              className={props.headerClassName}
+              columnData={props.columnData}
+              headerRenderer={props.headerRenderer}
+              headerDataGetter={tableProps.headerRenderer}
             />
           }
           columnKey={props.dataKey}
@@ -311,14 +347,22 @@ var TransitionTable = React.createClass({
               dataKey={props.dataKey}
               className={props.cellClassName}
               rowGetter={this.props.rowGetter}
+              width={props.width}
+              columnData={props.columnData}
               cellDataGetter={props.cellDataGetter}
               cellRenderer={props.cellRenderer}
-              columnData={props.columnData}
-              width={props.width}
             />
           }
           footer={
-            null
+            <TransitionCell
+              isFooterCell={true}
+              label={props.label}
+              className={props.footerClassName}
+              dataKey={props.dataKey}
+              footerRenderer={props.footerRenderer}
+              footerDataGetter={tableProps.footerDataGetter}
+              footerData={tableProps.footerData}
+            />
           }
         />
       )

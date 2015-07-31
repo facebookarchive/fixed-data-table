@@ -66,7 +66,7 @@ var ExamplesPage = React.createClass({
     }
 
     examples[ExamplePages.COLUMN_GROUPS_EXAMPLE.location] = {
-      path: './ColumnGroupsExample'
+      path: './old/ColumnGroupsExample'
     }
 
     examples[ExamplePages.FILTER_EXAMPLE.location] = {
