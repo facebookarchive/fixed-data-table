@@ -247,52 +247,65 @@ var TransitionTable = React.createClass({
     var needsMigration = false;
 
     if (this.props.rowGetter){
-      notifyDeprecated('rowGetter', 'Please use the cell API in Column to fetch data ' +
-        'for your cells.');
+      notifyDeprecated('rowGetter',
+        'Please use the cell API in Column to fetch data for your cells.');
 
       // This needs a migration.
       needsMigration = true;
     }
 
     if (this.props.headerDataGetter){
-      notifyDeprecated('headerDataGetter', 'Please use the header API in Column to fetch' +
-        ' data for your header cells.');
+      notifyDeprecated('headerDataGetter',
+        'Please use the header API in Column to fetch data for your header cells.');
     }
 
     if (this.props.footerData){
-      notifyDeprecated('footerData', 'Please use teh footer API in Column to fetch ' +
-        'data for your footer cells.');
+      notifyDeprecated('footerData',
+        'Please use teh footer API in Column to fetch data for your footer cells.');
     }
 
     if (this.props.footerDataGetter){
-      notifyDeprecated('footerDataGetter', 'Please use the footer API in Column to fetch' +
-        'data for your footer cells.');
+      notifyDeprecated('footerDataGetter',
+        'Please use the footer API in Column to fetch data for your footer cells.');
     }
 
     this.props.children.forEach((child) => {
       var props = child.props;
 
       if (props.label) {
-        notifyDeprecated('label', 'Please use `header` instead.');
+        notifyDeprecated('label',
+          'Please use `header` instead.');
       }
 
       if (props.dataKey) {
-        notifyDeprecated('dataKey', 'Please use the `cell` API to pass in a dataKey');
+        notifyDeprecated('dataKey',
+          'Please use the `cell` API to pass in a dataKey');
       }
 
       if (props.cellRenderer) {
-        notifyDeprecated('cellRenderer', 'Please use the `cell` API to pass in a React Element,' +
-          ' instead of a funciton that returns one.')
+        notifyDeprecated('cellRenderer',
+          'Please use the `cell` API to pass in a React Element instead.')
       }
 
       if (props.headerRenderer) {
-        notifyDeprecated('headerRenderer', 'Please use the `header` API to pass in a React Element,' +
-          ' instead of a function that creates one.')
+        notifyDeprecated('headerRenderer',
+          'Please use the `header` API to pass in a React Element instead.');
       }
 
       if (props.columnData) {
-        notifyDeprecated('columnData', 'Please pass data in through props to your' +
-          ' header, cell or footer.')
+        notifyDeprecated('columnData',
+          'Please pass data in through props to your header, cell or footer.')
+      }
+
+      if (props.groupHeaderRenderer) {
+        notifyDeprecated('groupHeaderRenderer',
+          'Please use the `header` API in ColumnGroup to ' +
+          'pass in a React Element instead of a function that creates one.');
+      }
+
+      if (props.groupHeaderData){
+        notifyDeprecated('groupHeaderData',
+          'Please pass in any data through props to your header.');
       }
 
     })
@@ -300,34 +313,15 @@ var TransitionTable = React.createClass({
     return needsMigration;
   },
 
-  _convertColumns(needsMigration) {
-    var rowGetter = this.props.rowGetter;
+  _transformColumn(column, tableProps, key){
 
-    // If we don't need to migrate, then
-    if (!needsMigration){
-      return this.props.children.map((child, i) => {
-        // Convert them directly
-        if (child.type.__TableColumn__){
-          return <Column {...child.props} />
-        }
+    var props = column.props;
 
-        if (child.type.__TableColumnGroup__){
-          return <ColumnGroup {...child.props} />
-        }
-      });
-    }
-
-    var tableProps = this.props;
-
-    // Do some conversions
-    return this.props.children.map((child, i) => {
-
-      var props = child.props;
-
+    if (column.type.__TableColumn__){
       // Constuct the cell to be used using the rowGetter
       return (
         <Column
-          key={'column_' + i}
+          key={'column_' + key}
           {...props}
           header={
             <TransitionCell
@@ -366,14 +360,87 @@ var TransitionTable = React.createClass({
           }
         />
       )
-    })
+    }
+  },
+
+  _transformColumnGroup(group, tableProps, key, labels){
+    var props = group.props;
+
+    var header = group.props.label;
+
+    var width = props.children.reduce((prev, next) => {
+      return prev + next.props.width;
+    }, 0);
+
+    if (props.groupHeaderRenderer){
+      header = props.groupHeaderRenderer(
+        props.label,
+        key, // index in children
+        props.columnGroupData,
+        labels,
+        props.width
+      ) || header;
+    }
+
+    return (
+      <ColumnGroup
+        {...props}
+        key={'group_' + key}
+        header={header}>
+        {group.props.children.map((child, j) => {
+          return this._transformColumn(child, tableProps, key + '_' + j);
+        }.bind(this))}
+      </ColumnGroup>
+    )
+  },
+
+  _convertedColumns(needsMigration) {
+    var rowGetter = this.props.rowGetter;
+
+    // If we don't need to migrate, then
+    if (!needsMigration){
+      return this.props.children.map((child, i) => {
+        // Convert them directly
+        if (child.type.__TableColumn__){
+          return <Column {...child.props} />
+        }
+
+        if (child.type.__TableColumnGroup__){
+          return <ColumnGroup {...child.props} />
+        }
+      });
+    }
+
+    var tableProps = this.props;
+
+    // Do some conversions
+    var labels;
+    return this.props.children.map((child, i) => {
+
+      if (child.type.__TableColumn__){
+        return this._transformColumn(child, tableProps, i);
+      }
+
+      if (child.type.__TableColumnGroup__){
+        // Since we apparently give an array of labels to groupHeaderRenderer
+        if (!labels){
+          labels = this.props.children.reduce((prev, next) => {
+            prev.push(next.props.label);
+            return prev;
+          }, []);
+        }
+
+        return this._transformColumnGroup(child, tableProps, i, labels);
+      }
+
+    }.bind(this))
   },
 
   render() {
     return (
       <Table
         {...this.props}>
-        {this._convertColumns(this.state.needsMigration)}
+        {this._convertedColumns(this.state.needsMigration)}
       </Table>
     )
   },
