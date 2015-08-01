@@ -16,7 +16,9 @@ var FixedDataTableHelper = require('FixedDataTableHelper');
 var ImmutableObject = require('ImmutableObject');
 var React = require('React');
 var ReactComponentWithPureRenderMixin = require('ReactComponentWithPureRenderMixin');
-var FixedDataTableCell = require('FixedDataTableCell.react');
+// TODO: Switch to next line when no longer new.
+var FixedDataTableCell = require('FixedDataTableCellNew.react');
+// var FixedDataTableCell = require('FixedDataTableCell.react');
 
 var cx = require('cx');
 var renderToString = FixedDataTableHelper.renderToString;
