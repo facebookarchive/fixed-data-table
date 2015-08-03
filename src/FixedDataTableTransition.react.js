@@ -203,9 +203,10 @@ var TransitionTable = React.createClass({
 
     var header = group.props.label;
 
-    var width = props.children.reduce((prev, next) => {
-      return prev + next.props.width;
-    }, 0);
+    var width = 0;
+    ReactChildren.forEach(props.children, (child) => {
+      width += child.props.width;
+    });
 
     if (props.groupHeaderRenderer){
       header = props.groupHeaderRenderer(
@@ -217,14 +218,19 @@ var TransitionTable = React.createClass({
       ) || header;
     }
 
+    var j = 0;
+    var columns = ReactChildren.map(props.children, (child) => {
+      j++;
+      return this._transformColumn(child, tableProps, key + '_' + j);
+    }.bind(this));
+
+
     return (
       <ColumnGroup
         {...props}
         key={'group_' + key}
         header={header}>
-        {group.props.children.map((child, j) => {
-          return this._transformColumn(child, tableProps, key + '_' + j);
-        }.bind(this))}
+        {columns}
       </ColumnGroup>
     )
   },
@@ -234,7 +240,7 @@ var TransitionTable = React.createClass({
 
     // If we don't need to migrate, then
     if (!needsMigration){
-      return this.props.children.map((child, i) => {
+      return ReactChildren.map(this.props.children, (child) => {
         // Convert them directly
         if (child.type.__TableColumn__){
           return <Column {...child.props} />
@@ -249,8 +255,8 @@ var TransitionTable = React.createClass({
     var tableProps = this.props;
 
     // Do some conversions
-    var labels;
-    return this.props.children.map((child, i) => {
+    var i = 0;
+    return ReactChildren.map(this.props.children, (child) => {
 
       if (child.type.__TableColumn__){
         return this._transformColumn(child, tableProps, i);
@@ -258,15 +264,14 @@ var TransitionTable = React.createClass({
 
       if (child.type.__TableColumnGroup__){
         // Since we apparently give an array of labels to groupHeaderRenderer
-        if (!labels){
-          labels = this.props.children.reduce((prev, next) => {
-            prev.push(next.props.label);
-            return prev;
-          }, []);
-        }
+        var labels = ReactChildren.map(this.props.children, (child) => {
+            return child.props.label;
+          });
 
         return this._transformColumnGroup(child, tableProps, i, labels);
       }
+
+      i++;
 
     }.bind(this))
   },
