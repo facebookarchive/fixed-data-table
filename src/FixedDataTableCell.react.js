@@ -28,7 +28,6 @@ var DEFAULT_PROPS = new ImmutableObject({
 });
 
 var FixedDataTableCell = React.createClass({
-  mixins: [ReactComponentWithPureRenderMixin],
 
   propTypes: {
     align: PropTypes.oneOf(['left', 'center', 'right']),
