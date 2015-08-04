@@ -30,7 +30,6 @@ var DIR_SIGN = FixedDataTableHelper.DIR_SIGN;
 var EMPTY_OBJECT = new ImmutableObject({});
 
 var FixedDataTableCellGroup = React.createClass({
-  mixins: [ReactComponentWithPureRenderMixin],
 
   propTypes: {
     /**
