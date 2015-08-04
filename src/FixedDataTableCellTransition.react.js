@@ -114,6 +114,16 @@ var TransitionCell = React.createClass({
       );
     }
 
+    if (props.groupHeaderRenderer){
+      content = props.groupHeaderRenderer(
+        props.label,
+        props.dataKey, // index in children
+        props.groupHeaderData,
+        props.groupHeaderLabels,
+        props.groupHeaderWidth
+      ) || content;
+    }
+
     var contentClass = cx('public/fixedDataTableCell/cellContent');
 
     if (React.isValidElement(content)){

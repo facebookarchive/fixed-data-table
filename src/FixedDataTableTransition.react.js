@@ -208,28 +208,27 @@ var TransitionTable = React.createClass({
       width += child.props.width;
     });
 
-    if (props.groupHeaderRenderer){
-      header = props.groupHeaderRenderer(
-        props.label,
-        key, // index in children
-        props.columnGroupData,
-        labels,
-        props.width
-      ) || header;
-    }
-
     var j = 0;
     var columns = ReactChildren.map(props.children, (child) => {
       j++;
       return this._transformColumn(child, tableProps, key + '_' + j);
     }.bind(this));
 
-
     return (
       <ColumnGroup
         {...props}
         key={'group_' + key}
-        header={header}>
+        header={
+          <TransitionCell
+            isHeaderCell={true}
+            label={group.props.label}
+            dataKey={key}
+            groupHeaderRenderer={props.groupHeaderRenderer}
+            groupHeaderLabels={labels}
+            groupHeaderWidth={width}
+            groupHeaderData={props.columnGroupData}
+          />
+        }>
         {columns}
       </ColumnGroup>
     )
@@ -264,8 +263,9 @@ var TransitionTable = React.createClass({
 
       if (child.type.__TableColumnGroup__){
         // Since we apparently give an array of labels to groupHeaderRenderer
-        var labels = ReactChildren.map(this.props.children, (child) => {
-            return child.props.label;
+        var labels = [];
+        ReactChildren.forEach(this.props.children, (child) => {
+            labels.push(child.props.label);
           });
 
         return this._transformColumnGroup(child, tableProps, i, labels);
