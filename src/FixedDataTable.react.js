@@ -826,7 +826,11 @@ var FixedDataTable = React.createClass({
           totalFixedColumnsWidth += column.props.width;
         }
 
-        var scrollableColumnIndex = this._columnToScrollTo - fixedColumnsCount;
+        var scrollableColumnIndex = Math.min(
+          this._columnToScrollTo - fixedColumnsCount,
+          columnInfo.bodyScrollableColumns.length - 1
+          );
+
         var previousColumnsWidth = 0;
         for (i = 0; i < scrollableColumnIndex; ++i) {
           column = columnInfo.bodyScrollableColumns[i];
@@ -835,7 +839,7 @@ var FixedDataTable = React.createClass({
 
         var availableScrollWidth = props.width - totalFixedColumnsWidth;
         var selectedColumnWidth = columnInfo.bodyScrollableColumns[
-          this._columnToScrollTo - fixedColumnsCount
+          scrollableColumnIndex
         ].props.width;
         var minAcceptableScrollPosition =
           previousColumnsWidth + selectedColumnWidth - availableScrollWidth;
