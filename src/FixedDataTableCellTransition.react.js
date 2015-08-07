@@ -27,6 +27,7 @@ var joinClasses = require('joinClasses');
 var CellDefault = require('FixedDataTableCellDefault.react');
 
 var TransitionCell = React.createClass({
+
   propTypes: {
     label: PropTypes.string, // header, footer
     className: PropTypes.string,
@@ -46,18 +47,21 @@ var TransitionCell = React.createClass({
     isFooterCell: PropTypes.bool // footer
   },
 
-  _getRowData() {
-    if (this.props.rowGetter){
-      return this.props.rowGetter(this.props.rowIndex);
-    }
+  shouldComponentUpdate(nextProps) {
+    return this._getData(this.props) !== this._getData(nextProps);
   },
 
-  _getData() {
-    var dataKey = this.props.dataKey;
-    var rowData = this._getRowData();
+  _getData(props) {
 
-    if (this.props.cellDataGetter){
-      return this.props.cellDataGetter(dataKey, rowData);
+    var dataKey = props.dataKey;
+
+    var rowData;
+    if (props.rowGetter){
+      rowData = props.rowGetter(props.rowIndex);
+    }
+
+    if (props.cellDataGetter){
+      return props.cellDataGetter(dataKey, rowData);
     }
 
     if (rowData && dataKey){
@@ -74,16 +78,18 @@ var TransitionCell = React.createClass({
   },
 
   render() {
+
     var props = this.props;
 
-    var content = this._getData();
+    var data = this._getData(props);
+    var content = data;
 
     // Is it a basic cell?
     if (props.cellRenderer){
       content = props.cellRenderer(
-        this._getData(),
+        data,
         props.dataKey,
-        this._getRowData(),
+        props.rowGetter ? props.rowGetter(props.rowIndex) : {},
         props.rowIndex,
         props.columnData,
         props.width
