@@ -19,7 +19,6 @@ var joinClasses = require('joinClasses');
 var {PropTypes} = React;
 
 var FixedDataTableCellDefault = React.createClass({
-  mixins: [ReactComponentWithPureRenderMixin],
 
   propTypes: {
     cellHeight: PropTypes.number.isRequired,
