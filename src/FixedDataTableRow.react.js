@@ -28,7 +28,6 @@ var {PropTypes} = React;
  * only <FixedDataTable /> should use the component internally.
  */
 var FixedDataTableRowImpl = React.createClass({
-  mixins: [ReactComponentWithPureRenderMixin],
 
   propTypes: {
     /**

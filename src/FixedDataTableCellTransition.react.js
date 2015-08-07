@@ -47,10 +47,6 @@ var TransitionCell = React.createClass({
     isFooterCell: PropTypes.bool // footer
   },
 
-  shouldComponentUpdate(nextProps) {
-    return this._getData(this.props) !== this._getData(nextProps);
-  },
-
   _getData(props) {
 
     var dataKey = props.dataKey;
