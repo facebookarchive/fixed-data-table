@@ -35,7 +35,7 @@ var TransitionCell = React.createClass({
     dataKey: PropTypes.oneOfType([ // cell, footer
       PropTypes.string,
       PropTypes.number
-    ]),
+    ]).isRequired,
     cellRenderer: PropTypes.func,
     cellDataGetter: PropTypes.func,
     footerDataGetter: PropTypes.func, // footer
@@ -60,7 +60,7 @@ var TransitionCell = React.createClass({
       return props.cellDataGetter(dataKey, rowData);
     }
 
-    if (rowData && dataKey){
+    if (rowData){
       return rowData[dataKey];
     }
 
