@@ -261,6 +261,11 @@ var FixedDataTable = React.createClass({
     onRowMouseLeave: PropTypes.func,
 
     /**
+     * Callback that is called when a context-menu event happens on a row.
+     */
+    onRowContextMenu: PropTypes.func,
+
+    /**
      * Callback that is called when resizer has been released
      * and column needs to be updated.
      *
@@ -620,6 +625,7 @@ var FixedDataTable = React.createClass({
         onRowMouseDown={state.onRowMouseDown}
         onRowMouseEnter={state.onRowMouseEnter}
         onRowMouseLeave={state.onRowMouseLeave}
+        onRowContextMenu={state.onRowContextMenu}
         rowClassNameGetter={state.rowClassNameGetter}
         rowsCount={state.rowsCount}
         rowGetter={state.rowGetter}
