@@ -36,7 +36,7 @@ exports.ExamplePages = {
   RESIZE_EXAMPLE: {
     location: 'example-resize.html',
     title: 'Resizable columns',
-    description: 'Table with drag and drop column resizing and a dummy "store" for persistence. The Last Name column demonstrates the ability to contrain to both a min- and max-width.',
+    description: 'Table with drag and drop column resizing and a dummy "store" for persistence. The Last Name column demonstrates the ability to constrain to both a min- and max-width.',
   },
   COLUMN_GROUPS_EXAMPLE: {
     location: 'example-column-groups.html',
