@@ -337,7 +337,7 @@ var FixedDataTable = React.createClass({
       return false;
     }
 
-    return(
+    return (
       (delta < 0 && this.state.scrollX > 0) ||
       (delta >= 0 && this.state.scrollX < this.state.maxScrollX)
     );
@@ -353,7 +353,7 @@ var FixedDataTable = React.createClass({
       return false;
     }
 
-    return(
+    return (
       (delta < 0 && this.state.scrollY > 0) ||
       (delta >= 0 && this.state.scrollY < this.state.maxScrollY)
     );
@@ -862,7 +862,11 @@ var FixedDataTable = React.createClass({
           totalFixedColumnsWidth += column.props.width;
         }
 
-        var scrollableColumnIndex = this._columnToScrollTo - fixedColumnsCount;
+        var scrollableColumnIndex = Math.min(
+          this._columnToScrollTo - fixedColumnsCount,
+          columnInfo.bodyScrollableColumns.length - 1,
+        );
+
         var previousColumnsWidth = 0;
         for (i = 0; i < scrollableColumnIndex; ++i) {
           column = columnInfo.bodyScrollableColumns[i];
@@ -871,7 +875,7 @@ var FixedDataTable = React.createClass({
 
         var availableScrollWidth = props.width - totalFixedColumnsWidth;
         var selectedColumnWidth = columnInfo.bodyScrollableColumns[
-          this._columnToScrollTo - fixedColumnsCount
+          scrollableColumnIndex
         ].props.width;
         var minAcceptableScrollPosition =
           previousColumnsWidth + selectedColumnWidth - availableScrollWidth;
@@ -1043,7 +1047,7 @@ var FixedDataTable = React.createClass({
         this.props.headerDataGetter(columnProps.dataKey);
     }
     return headData;
-   },
+  },
 
   _getGroupHeaderData(/*array*/ columnGroups) /*array*/ {
     var groupHeaderData = [];
