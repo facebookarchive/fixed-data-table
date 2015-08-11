@@ -42,7 +42,7 @@ var Column = FixedDataTable.Column;
 // Table data as a list of array.
 var rows = [
   ['a1', 'b1', 'c1'],
-  ['a2', 'b3', 'c2'],
+  ['a2', 'b2', 'c2'],
   ['a3', 'b3', 'c3'],
   // .... and more
 ];
