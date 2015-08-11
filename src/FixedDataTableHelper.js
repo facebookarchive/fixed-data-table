@@ -17,8 +17,6 @@ var React = require('React');
 var FixedDataTableColumnGroup = require('FixedDataTableColumnGroup.react');
 var FixedDataTableColumn = require('FixedDataTableColumn.react');
 
-var cloneWithProps = require('cloneWithProps');
-
 var DIR_SIGN = (Locale.isRTL() ? -1 : +1);
 // A cell up to 5px outside of the visible area will still be considered visible
 var CELL_VISIBILITY_TOLERANCE = 5; // used for flyouts
@@ -81,8 +79,7 @@ function mapColumns(children, callback) {
       // If the column groups columns have changed clone the group and supply
       // new children
       if (haveColumnsChanged) {
-        newChild = cloneWithProps(originalChild, {
-          key: originalChild.key,
+        newChild = React.cloneElement(originalChild, {
           children: newColumns,
         });
       }

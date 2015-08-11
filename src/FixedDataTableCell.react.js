@@ -14,7 +14,6 @@ var FixedDataTableHelper = require('FixedDataTableHelper');
 var ImmutableObject = require('ImmutableObject');
 var React = require('React');
 var ReactComponentWithPureRenderMixin = require('ReactComponentWithPureRenderMixin');
-var cloneWithProps = require('cloneWithProps');
 var cx = require('cx');
 var joinClasses = require('joinClasses');
 
@@ -151,9 +150,8 @@ var FixedDataTableCell = React.createClass({
 
     var contentClass = cx('public/fixedDataTableCell/cellContent');
     if (React.isValidElement(content)) {
-      content = cloneWithProps(content, {
-        key: content.key,
-        className: contentClass,
+      content = React.cloneElement(content, {
+        className: joinClasses(content.props.className, contentClass),
       });
     } else {
       content = <div className={contentClass}>{content}</div>;

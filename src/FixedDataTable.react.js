@@ -23,7 +23,6 @@ var FixedDataTableRow = require('FixedDataTableRow.react');
 var FixedDataTableScrollHelper = require('FixedDataTableScrollHelper');
 var FixedDataTableWidthHelper = require('FixedDataTableWidthHelper');
 
-var cloneWithProps = require('cloneWithProps');
 var cx = require('cx');
 var debounceCore = require('debounceCore');
 var emptyFunction = require('emptyFunction');
@@ -982,7 +981,7 @@ var FixedDataTable = React.createClass({
   _createGroupHeaderColumns(/*array*/ columnGroups) /*array*/  {
     var newColumnGroups = [];
     for (var i = 0; i < columnGroups.length; ++i) {
-      newColumnGroups[i] = cloneWithProps(
+      newColumnGroups[i] = React.cloneElement(
         columnGroups[i],
         {
           dataKey: i,
@@ -1001,7 +1000,7 @@ var FixedDataTable = React.createClass({
     var headColumns = [];
     for (var i = 0; i < columns.length; ++i) {
       var columnProps = columns[i].props;
-      headColumns.push(cloneWithProps(
+      headColumns.push(React.cloneElement(
         columns[i],
         {
           cellRenderer: columnProps.headerRenderer || renderToString,
@@ -1019,7 +1018,7 @@ var FixedDataTable = React.createClass({
     var footColumns = [];
     for (var i = 0; i < columns.length; ++i) {
       var columnProps = columns[i].props;
-      footColumns.push(cloneWithProps(
+      footColumns.push(React.cloneElement(
         columns[i],
         {
           cellRenderer: columnProps.footerRenderer || renderToString,
