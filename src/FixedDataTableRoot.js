@@ -21,6 +21,6 @@ var FixedDataTableRoot = {
   Table: FixedDataTable,
 };
 
-FixedDataTableRoot.version = '0.4.3';
+FixedDataTableRoot.version = '0.4.4';
 
 module.exports = FixedDataTableRoot;
