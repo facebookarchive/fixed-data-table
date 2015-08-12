@@ -1,5 +1,5 @@
 /**
- * FixedDataTable v0.4.2 
+ * FixedDataTable v0.4.3 
  *
  * Copyright (c) 2015, Facebook, Inc.
  * All rights reserved.
@@ -18,7 +18,7 @@
 		exports["FixedDataTable"] = factory(require("react"));
 	else
 		root["FixedDataTable"] = factory(root["React"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_30__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_31__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -65,23 +65,23 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
+	__webpack_require__(1);
+	__webpack_require__(5);
+	__webpack_require__(7);
+	__webpack_require__(9);
+	__webpack_require__(11);
 	__webpack_require__(13);
 	__webpack_require__(15);
 	__webpack_require__(17);
 	__webpack_require__(19);
 	__webpack_require__(21);
 	__webpack_require__(23);
-	__webpack_require__(1);
-	__webpack_require__(5);
-	__webpack_require__(7);
-	__webpack_require__(9);
-	__webpack_require__(11);
 	module.exports = __webpack_require__(25);
 
 
 /***/ },
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
@@ -90,70 +90,70 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 3 */,
 /* 4 */,
 /* 5 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
 /* 6 */,
 /* 7 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
 /* 8 */,
 /* 9 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
 /* 10 */,
 /* 11 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
 /* 12 */,
 /* 13 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
 /* 14 */,
 /* 15 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
 /* 16 */,
 /* 17 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
 /* 18 */,
 /* 19 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
 /* 20 */,
 /* 21 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
 /* 22 */,
 /* 23 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
@@ -176,8 +176,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var FixedDataTable = __webpack_require__(26);
-	var FixedDataTableColumn = __webpack_require__(32);
-	var FixedDataTableColumnGroup = __webpack_require__(31);
+	var FixedDataTableColumn = __webpack_require__(33);
+	var FixedDataTableColumnGroup = __webpack_require__(32);
 
 	var FixedDataTableRoot = {
 	  Column: FixedDataTableColumn,
@@ -185,7 +185,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  Table: FixedDataTable
 	};
 
-	FixedDataTableRoot.version = '0.4.2';
+	FixedDataTableRoot.version = '0.4.3';
 
 	module.exports = FixedDataTableRoot;
 
@@ -213,22 +213,22 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var FixedDataTableHelper = __webpack_require__(27);
 	var React = __webpack_require__(29);
-	var ReactComponentWithPureRenderMixin = __webpack_require__(33);
-	var ReactWheelHandler = __webpack_require__(34);
-	var Scrollbar = __webpack_require__(42);
-	var FixedDataTableBufferedRows = __webpack_require__(54);
-	var FixedDataTableColumnResizeHandle = __webpack_require__(69);
-	var FixedDataTableRow = __webpack_require__(59);
-	var FixedDataTableScrollHelper = __webpack_require__(70);
-	var FixedDataTableWidthHelper = __webpack_require__(72);
+	var ReactComponentWithPureRenderMixin = __webpack_require__(34);
+	var ReactWheelHandler = __webpack_require__(35);
+	var Scrollbar = __webpack_require__(43);
+	var FixedDataTableBufferedRows = __webpack_require__(55);
+	var FixedDataTableColumnResizeHandle = __webpack_require__(70);
+	var FixedDataTableRow = __webpack_require__(60);
+	var FixedDataTableScrollHelper = __webpack_require__(71);
+	var FixedDataTableWidthHelper = __webpack_require__(73);
 
-	var cx = __webpack_require__(48);
-	var debounceCore = __webpack_require__(73);
-	var emptyFunction = __webpack_require__(35);
-	var invariant = __webpack_require__(53);
-	var joinClasses = __webpack_require__(68);
-	var shallowEqual = __webpack_require__(74);
-	var translateDOMPositionXY = __webpack_require__(49);
+	var cx = __webpack_require__(49);
+	var debounceCore = __webpack_require__(74);
+	var emptyFunction = __webpack_require__(36);
+	var invariant = __webpack_require__(54);
+	var joinClasses = __webpack_require__(69);
+	var shallowEqual = __webpack_require__(75);
+	var translateDOMPositionXY = __webpack_require__(50);
 
 	var PropTypes = React.PropTypes;
 
@@ -1270,8 +1270,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var Locale = __webpack_require__(28);
 	var React = __webpack_require__(29);
-	var FixedDataTableColumnGroup = __webpack_require__(31);
-	var FixedDataTableColumn = __webpack_require__(32);
+	var FixedDataTableColumnGroup = __webpack_require__(32);
+	var FixedDataTableColumn = __webpack_require__(33);
 
 	var DIR_SIGN = Locale.isRTL() ? -1 : +1;
 	// A cell up to 5px outside of the visible area will still be considered visible
@@ -1361,7 +1361,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 28 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -1382,7 +1382,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return false;
 	  },
 	  getDirection: function getDirection() {
-	    return "LTR";
+	    return 'LTR';
 	  }
 	};
 
@@ -1392,7 +1392,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/**
+	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Copyright (c) 2015, Facebook, Inc.
 	 * All rights reserved.
 	 *
@@ -1405,16 +1405,26 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	module.exports = __webpack_require__(30);
+	var React;
+
+	// Check for Atom!
+	if (typeof window === 'undefined' && typeof global === 'object' && global.atom) {
+	  React = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-for-atom\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	} else {
+	  React = __webpack_require__(31);
+	}
+	module.exports = React;
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 30 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __WEBPACK_EXTERNAL_MODULE_30__;
-
-/***/ },
+/* 30 */,
 /* 31 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_31__;
+
+/***/ },
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1500,7 +1510,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = FixedDataTableColumnGroup;
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1694,8 +1704,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = FixedDataTableColumn;
 
 /***/ },
-/* 33 */
-/***/ function(module, exports, __webpack_require__) {
+/* 34 */
+/***/ function(module, exports) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -1770,7 +1780,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ReactComponentWithPureRenderMixin;
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1794,9 +1804,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var emptyFunction = __webpack_require__(35);
-	var normalizeWheel = __webpack_require__(36);
-	var requestAnimationFramePolyfill = __webpack_require__(40);
+	var emptyFunction = __webpack_require__(36);
+	var normalizeWheel = __webpack_require__(37);
+	var requestAnimationFramePolyfill = __webpack_require__(41);
 
 	var ReactWheelHandler = (function () {
 	  /**
@@ -1880,8 +1890,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ReactWheelHandler;
 
 /***/ },
-/* 35 */
-/***/ function(module, exports, __webpack_require__) {
+/* 36 */
+/***/ function(module, exports) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -1923,7 +1933,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = emptyFunction;
 
 /***/ },
-/* 36 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1940,9 +1950,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var UserAgent_DEPRECATED = __webpack_require__(37);
+	var UserAgent_DEPRECATED = __webpack_require__(38);
 
-	var isEventSupported = __webpack_require__(38);
+	var isEventSupported = __webpack_require__(39);
 
 	// Reasonable defaults
 	var PIXEL_STEP = 10;
@@ -2124,8 +2134,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = normalizeWheel;
 
 /***/ },
-/* 37 */
-/***/ function(module, exports, __webpack_require__) {
+/* 38 */
+/***/ function(module, exports) {
 
 	/**
 	 * Copyright 2004-present Facebook. All Rights Reserved.
@@ -2407,7 +2417,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = UserAgent_DEPRECATED;
 
 /***/ },
-/* 38 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2423,7 +2433,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var ExecutionEnvironment = __webpack_require__(39);
+	var ExecutionEnvironment = __webpack_require__(40);
 
 	var useHasFeature;
 	if (ExecutionEnvironment.canUseDOM) {
@@ -2472,8 +2482,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = isEventSupported;
 
 /***/ },
-/* 39 */
-/***/ function(module, exports, __webpack_require__) {
+/* 40 */
+/***/ function(module, exports) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -2515,7 +2525,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ExecutionEnvironment;
 
 /***/ },
-/* 40 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -2531,8 +2541,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var emptyFunction = __webpack_require__(35);
-	var nativeRequestAnimationFrame = __webpack_require__(41);
+	var emptyFunction = __webpack_require__(36);
+	var nativeRequestAnimationFrame = __webpack_require__(42);
 
 	var lastTime = 0;
 
@@ -2556,8 +2566,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 41 */
-/***/ function(module, exports, __webpack_require__) {
+/* 42 */
+/***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -2578,7 +2588,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 42 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2595,16 +2605,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var DOMMouseMoveTracker = __webpack_require__(43);
-	var Keys = __webpack_require__(46);
+	var DOMMouseMoveTracker = __webpack_require__(44);
+	var Keys = __webpack_require__(47);
 	var React = __webpack_require__(29);
-	var ReactComponentWithPureRenderMixin = __webpack_require__(33);
-	var ReactWheelHandler = __webpack_require__(34);
+	var ReactComponentWithPureRenderMixin = __webpack_require__(34);
+	var ReactWheelHandler = __webpack_require__(35);
 
-	var cssVar = __webpack_require__(47);
-	var cx = __webpack_require__(48);
-	var emptyFunction = __webpack_require__(35);
-	var translateDOMPositionXY = __webpack_require__(49);
+	var cssVar = __webpack_require__(48);
+	var cx = __webpack_require__(49);
+	var emptyFunction = __webpack_require__(36);
+	var translateDOMPositionXY = __webpack_require__(50);
 
 	var PropTypes = React.PropTypes;
 
@@ -2792,7 +2802,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return UNSCROLLABLE_STATE;
 	    }
 
-	    var stateKey = '' + position + '_' + size + '_' + contentSize + '_' + orientation;
+	    var stateKey = position + '_' + size + '_' + contentSize + '_' + orientation;
 	    if (this._stateKey === stateKey) {
 	      return this._stateForKey;
 	    }
@@ -2988,7 +2998,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      try {
 	        this._onBlur();
 	        React.findDOMNode(this).blur();
-	      } catch (oops) {}
+	      } catch (oops) {
+	        // pass
+	      }
 	    }
 	  },
 
@@ -3026,10 +3038,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = Scrollbar;
 
-	// pass
-
 /***/ },
-/* 43 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3057,10 +3067,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var EventListener = __webpack_require__(44);
+	var EventListener = __webpack_require__(45);
 
-	var cancelAnimationFramePolyfill = __webpack_require__(45);
-	var requestAnimationFramePolyfill = __webpack_require__(40);
+	var cancelAnimationFramePolyfill = __webpack_require__(46);
+	var requestAnimationFramePolyfill = __webpack_require__(41);
 
 	var DOMMouseMoveTracker = (function () {
 	  /**
@@ -3084,15 +3094,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this._didMouseMove = this._didMouseMove.bind(this);
 	  }
 
+	  /**
+	   * This is to set up the listeners for listening to mouse move
+	   * and mouse up signaling the movement has ended. Please note that these
+	   * listeners are added at the document.body level. It takes in an event
+	   * in order to grab inital state.
+	   */
+
 	  _createClass(DOMMouseMoveTracker, [{
 	    key: 'captureMouseMoves',
-
-	    /**
-	     * This is to set up the listeners for listening to mouse move
-	     * and mouse up signaling the movement has ended. Please note that these
-	     * listeners are added at the document.body level. It takes in an event
-	     * in order to grab inital state.
-	     */
 	    value: function captureMouseMoves( /*object*/event) {
 	      if (!this._eventMoveToken && !this._eventUpToken) {
 	        this._eventMoveToken = EventListener.listen(this._domNode, 'mousemove', this._onMouseMove);
@@ -3108,12 +3118,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	      event.preventDefault();
 	    }
-	  }, {
-	    key: 'releaseMouseMoves',
 
 	    /**
 	     * These releases all of the listeners on document.body.
 	     */
+	  }, {
+	    key: 'releaseMouseMoves',
 	    value: function releaseMouseMoves() {
 	      if (this._eventMoveToken && this._eventUpToken) {
 	        this._eventMoveToken.remove();
@@ -3133,21 +3143,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this._y = null;
 	      }
 	    }
-	  }, {
-	    key: 'isDragging',
 
 	    /**
 	     * Returns whether or not if the mouse movement is being tracked.
 	     */
+	  }, {
+	    key: 'isDragging',
 	    value: function isDragging() /*boolean*/{
 	      return this._isDragging;
 	    }
-	  }, {
-	    key: '_onMouseMove',
 
 	    /**
 	     * Calls onMove passed into constructor and updates internal state.
 	     */
+	  }, {
+	    key: '_onMouseMove',
 	    value: function _onMouseMove( /*object*/event) {
 	      var x = event.clientX;
 	      var y = event.clientY;
@@ -3173,12 +3183,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this._deltaX = 0;
 	      this._deltaY = 0;
 	    }
-	  }, {
-	    key: '_onMouseUp',
 
 	    /**
 	     * Calls onMoveEnd passed into constructor and updates internal state.
 	     */
+	  }, {
+	    key: '_onMouseUp',
 	    value: function _onMouseUp() {
 	      if (this._animationFrameID) {
 	        this._didMouseMove();
@@ -3193,7 +3203,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = DOMMouseMoveTracker;
 
 /***/ },
-/* 44 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3210,7 +3220,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var emptyFunction = __webpack_require__(35);
+	var emptyFunction = __webpack_require__(36);
 
 	/**
 	 * Upstream version of event listener. Does not take into account specific
@@ -3275,8 +3285,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = EventListener;
 
 /***/ },
-/* 45 */
-/***/ function(module, exports, __webpack_require__) {
+/* 46 */
+/***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -3301,8 +3311,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 46 */
-/***/ function(module, exports, __webpack_require__) {
+/* 47 */
+/***/ function(module, exports) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -3343,8 +3353,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 47 */
-/***/ function(module, exports, __webpack_require__) {
+/* 48 */
+/***/ function(module, exports) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -3358,7 +3368,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @typechecks
 	 */
 
-	'use strict';
+	"use strict";
 
 	var CSS_VARS = {
 	  'scrollbar-face-active-color': '#7d7d7d',
@@ -3388,8 +3398,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = cssVar;
 
 /***/ },
-/* 48 */
-/***/ function(module, exports, __webpack_require__) {
+/* 49 */
+/***/ function(module, exports) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -3447,7 +3457,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = cx;
 
 /***/ },
-/* 49 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -3464,9 +3474,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var BrowserSupportCore = __webpack_require__(50);
+	var BrowserSupportCore = __webpack_require__(51);
 
-	var getVendorPrefixedName = __webpack_require__(51);
+	var getVendorPrefixedName = __webpack_require__(52);
 
 	var TRANSFORM = getVendorPrefixedName('transform');
 	var BACKFACE_VISIBILITY = getVendorPrefixedName('backfaceVisibility');
@@ -3501,7 +3511,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 50 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3517,7 +3527,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var getVendorPrefixedName = __webpack_require__(51);
+	var getVendorPrefixedName = __webpack_require__(52);
 
 	var BrowserSupportCore = {
 	  /**
@@ -3552,7 +3562,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = BrowserSupportCore;
 
 /***/ },
-/* 51 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3569,10 +3579,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var ExecutionEnvironment = __webpack_require__(39);
+	var ExecutionEnvironment = __webpack_require__(40);
 
-	var camelize = __webpack_require__(52);
-	var invariant = __webpack_require__(53);
+	var camelize = __webpack_require__(53);
+	var invariant = __webpack_require__(54);
 
 	var memoized = {};
 	var prefixes = ['Webkit', 'ms', 'Moz', 'O'];
@@ -3609,8 +3619,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = getVendorPrefixedName;
 
 /***/ },
-/* 52 */
-/***/ function(module, exports, __webpack_require__) {
+/* 53 */
+/***/ function(module, exports) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -3646,7 +3656,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = camelize;
 
 /***/ },
-/* 53 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3660,7 +3670,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @providesModule invariant
 	 */
 
-	'use strict';
+	"use strict";
 
 	/**
 	 * Use invariant() to assert state which your program assumes to be true.
@@ -3700,7 +3710,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = invariant;
 
 /***/ },
-/* 54 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3718,13 +3728,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var React = __webpack_require__(29);
-	var FixedDataTableRowBuffer = __webpack_require__(55);
-	var FixedDataTableRow = __webpack_require__(59);
+	var FixedDataTableRowBuffer = __webpack_require__(56);
+	var FixedDataTableRow = __webpack_require__(60);
 
-	var cx = __webpack_require__(48);
-	var emptyFunction = __webpack_require__(35);
-	var joinClasses = __webpack_require__(68);
-	var translateDOMPositionXY = __webpack_require__(49);
+	var cx = __webpack_require__(49);
+	var emptyFunction = __webpack_require__(36);
+	var joinClasses = __webpack_require__(69);
+	var translateDOMPositionXY = __webpack_require__(50);
 
 	var PropTypes = React.PropTypes;
 
@@ -3861,7 +3871,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = FixedDataTableBufferedRows;
 
 /***/ },
-/* 55 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3882,10 +3892,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var IntegerBufferSet = __webpack_require__(56);
+	var IntegerBufferSet = __webpack_require__(57);
 
-	var clamp = __webpack_require__(58);
-	var invariant = __webpack_require__(53);
+	var clamp = __webpack_require__(59);
+	var invariant = __webpack_require__(54);
 	var MIN_BUFFER_ROWS = 3;
 	var MAX_BUFFER_ROWS = 6;
 
@@ -3901,7 +3911,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /*?function*/rowHeightGetter) {
 	    _classCallCheck(this, FixedDataTableRowBuffer);
 
-	    invariant(defaultRowHeight !== 0, 'defaultRowHeight musn\'t be equal 0 in FixedDataTableRowBuffer');
+	    invariant(defaultRowHeight !== 0, "defaultRowHeight musn't be equal 0 in FixedDataTableRowBuffer");
 
 	    this._bufferSet = new IntegerBufferSet();
 	    this._defaultRowHeight = defaultRowHeight;
@@ -3989,7 +3999,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = FixedDataTableRowBuffer;
 
 /***/ },
-/* 56 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4010,9 +4020,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var Heap = __webpack_require__(57);
+	var Heap = __webpack_require__(58);
 
-	var invariant = __webpack_require__(53);
+	var invariant = __webpack_require__(54);
 
 	// Data structure that allows to store values and assign positions to them
 	// in a way to minimize changing positions of stored values when new ones are
@@ -4059,7 +4069,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'getNewPositionForValue',
 	    value: function getNewPositionForValue( /*number*/value) /*number*/{
-	      invariant(this._valueToPositionMap[value] === undefined, 'Shouldn\'t try to find new position for value already stored in BufferSet');
+	      invariant(this._valueToPositionMap[value] === undefined, "Shouldn't try to find new position for value already stored in BufferSet");
 	      var newPosition = this._size;
 	      this._size++;
 	      this._pushToHeaps(newPosition, value);
@@ -4072,7 +4082,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    /*number*/lowValue,
 	    /*number*/highValue,
 	    /*number*/newValue) /*?number*/{
-	      invariant(this._valueToPositionMap[newValue] === undefined, 'Shouldn\'t try to replace values with value already stored value in ' + 'BufferSet');
+	      invariant(this._valueToPositionMap[newValue] === undefined, "Shouldn't try to replace values with value already stored value in " + "BufferSet");
 
 	      this._cleanHeaps();
 	      if (this._smallValues.empty() || this._largeValues.empty()) {
@@ -4174,8 +4184,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = IntegerBufferSet;
 
 /***/ },
-/* 57 */
-/***/ function(module, exports, __webpack_require__) {
+/* 58 */
+/***/ function(module, exports) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -4192,15 +4202,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
 	/*
 	 * @param {*} a
 	 * @param {*} b
 	 * @return {boolean}
 	 */
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
 	function defaultComparator(a, b) {
 	  return a < b;
 	}
@@ -4215,21 +4226,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this._heapify();
 	  }
 
+	  /*
+	   * @return {boolean}
+	   */
+
 	  _createClass(Heap, [{
 	    key: 'empty',
-
-	    /*
-	     * @return {boolean}
-	     */
 	    value: function empty() {
 	      return this._size === 0;
 	    }
-	  }, {
-	    key: 'pop',
 
 	    /*
 	     * @return {*}
 	     */
+	  }, {
+	    key: 'pop',
 	    value: function pop() {
 	      if (this._size === 0) {
 	        return;
@@ -4247,31 +4258,31 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      return elt;
 	    }
-	  }, {
-	    key: 'push',
 
 	    /*
 	     * @param {*} item
 	     */
+	  }, {
+	    key: 'push',
 	    value: function push(item) {
 	      this._items[this._size++] = item;
 	      this._bubbleUp(this._size - 1);
 	    }
-	  }, {
-	    key: 'size',
 
 	    /*
 	     * @return {number}
 	     */
+	  }, {
+	    key: 'size',
 	    value: function size() {
 	      return this._size;
 	    }
-	  }, {
-	    key: 'peek',
 
 	    /*
 	     * @return {*}
 	     */
+	  }, {
+	    key: 'peek',
 	    value: function peek() {
 	      if (this._size === 0) {
 	        return;
@@ -4286,12 +4297,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this._sinkDown(index);
 	      }
 	    }
-	  }, {
-	    key: '_bubbleUp',
 
 	    /*
 	     * @parent {number} index
 	     */
+	  }, {
+	    key: '_bubbleUp',
 	    value: function _bubbleUp(index) {
 	      var elt = this._items[index];
 	      while (index > 0) {
@@ -4309,12 +4320,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        index = parentIndex;
 	      }
 	    }
-	  }, {
-	    key: '_sinkDown',
 
 	    /*
 	     * @parent {number} index
 	     */
+	  }, {
+	    key: '_sinkDown',
 	    value: function _sinkDown(index) {
 	      var elt = this._items[index];
 
@@ -4357,8 +4368,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Heap;
 
 /***/ },
-/* 58 */
-/***/ function(module, exports, __webpack_require__) {
+/* 59 */
+/***/ function(module, exports) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -4393,7 +4404,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = clamp;
 
 /***/ },
-/* 59 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4413,12 +4424,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	var React = __webpack_require__(29);
-	var ReactComponentWithPureRenderMixin = __webpack_require__(33);
-	var FixedDataTableCellGroup = __webpack_require__(60);
+	var ReactComponentWithPureRenderMixin = __webpack_require__(34);
+	var FixedDataTableCellGroup = __webpack_require__(61);
 
-	var cx = __webpack_require__(48);
-	var joinClasses = __webpack_require__(68);
-	var translateDOMPositionXY = __webpack_require__(49);
+	var cx = __webpack_require__(49);
+	var joinClasses = __webpack_require__(69);
+	var translateDOMPositionXY = __webpack_require__(50);
 
 	var PropTypes = React.PropTypes;
 
@@ -4660,7 +4671,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = FixedDataTableRow;
 
 /***/ },
-/* 60 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4682,14 +4693,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 	var FixedDataTableHelper = __webpack_require__(27);
-	var ImmutableObject = __webpack_require__(61);
+	var ImmutableObject = __webpack_require__(62);
 	var React = __webpack_require__(29);
-	var ReactComponentWithPureRenderMixin = __webpack_require__(33);
-	var FixedDataTableCell = __webpack_require__(67);
+	var ReactComponentWithPureRenderMixin = __webpack_require__(34);
+	var FixedDataTableCell = __webpack_require__(68);
 
-	var cx = __webpack_require__(48);
+	var cx = __webpack_require__(49);
 	var renderToString = FixedDataTableHelper.renderToString;
-	var translateDOMPositionXY = __webpack_require__(49);
+	var translateDOMPositionXY = __webpack_require__(50);
 
 	var PropTypes = React.PropTypes;
 
@@ -4895,7 +4906,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = FixedDataTableCellGroup;
 
 /***/ },
-/* 61 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4914,17 +4925,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var ImmutableValue = __webpack_require__(62);
+	var ImmutableValue = __webpack_require__(63);
 
-	var invariant = __webpack_require__(53);
-	var keyOf = __webpack_require__(64);
-	var mergeHelpers = __webpack_require__(65);
+	var invariant = __webpack_require__(54);
+	var keyOf = __webpack_require__(65);
+	var mergeHelpers = __webpack_require__(66);
 
 	var checkMergeObjectArgs = mergeHelpers.checkMergeObjectArgs;
 	var isTerminal = mergeHelpers.isTerminal;
@@ -4946,6 +4957,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 
 	var ImmutableObject = (function (_ImmutableValue) {
+	  _inherits(ImmutableObject, _ImmutableValue);
+
 	  /**
 	   * @arguments {array<object>} The arguments is an array of objects that, when
 	   * merged together, will form the immutable objects.
@@ -4961,24 +4974,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }
 
-	  _inherits(ImmutableObject, _ImmutableValue);
+	  /**
+	   * DEPRECATED - prefer to instantiate with new ImmutableObject().
+	   *
+	   * @arguments {array<object>} The arguments is an array of objects that, when
+	   * merged together, will form the immutable objects.
+	   */
 
 	  _createClass(ImmutableObject, null, [{
 	    key: 'create',
-
-	    /**
-	     * DEPRECATED - prefer to instantiate with new ImmutableObject().
-	     *
-	     * @arguments {array<object>} The arguments is an array of objects that, when
-	     * merged together, will form the immutable objects.
-	     */
 	    value: function create() {
 	      var obj = Object.create(ImmutableObject.prototype);
 	      ImmutableObject.apply(obj, arguments);
 	      return obj;
 	    }
-	  }, {
-	    key: 'set',
 
 	    /**
 	     * Returns a new `ImmutableValue` that is identical to the supplied
@@ -4990,13 +4999,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @param {?object} put Fields to merge into the object.
 	     * @return {ImmutableValue} The result of merging in `put` fields.
 	     */
+	  }, {
+	    key: 'set',
 	    value: function set(immutable, put) {
 	      assertImmutable(immutable);
 	      invariant(typeof put === 'object' && put !== undefined && !Array.isArray(put), 'Invalid ImmutableMap.set argument `put`');
 	      return new ImmutableObject(immutable, put);
 	    }
-	  }, {
-	    key: 'setProperty',
 
 	    /**
 	     * Sugar for `ImmutableObject.set(ImmutableObject, {fieldName: putField})`.
@@ -5007,13 +5016,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @param {*} putField Value of the field to set.
 	     * @return {ImmutableValue} new ImmutableValue as described in `set`.
 	     */
+	  }, {
+	    key: 'setProperty',
 	    value: function setProperty(immutableObject, fieldName, putField) {
 	      var put = {};
 	      put[fieldName] = putField;
 	      return ImmutableObject.set(immutableObject, put);
 	    }
-	  }, {
-	    key: 'deleteProperty',
 
 	    /**
 	     * Returns a new immutable object with the given field name removed.
@@ -5023,6 +5032,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @param {string} droppedField Name of the field to delete.
 	     * @return {ImmutableObject} new ImmutableObject without the key
 	     */
+	  }, {
+	    key: 'deleteProperty',
 	    value: function deleteProperty(immutableObject, droppedField) {
 	      var copy = {};
 	      for (var key in immutableObject) {
@@ -5032,8 +5043,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	      return new ImmutableObject(copy);
 	    }
-	  }, {
-	    key: 'setDeep',
 
 	    /**
 	     * Returns a new `ImmutableValue` that is identical to the supplied object but
@@ -5045,12 +5054,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @param {object} put Fields to merge into the object.
 	     * @return {ImmutableValue} The result of merging in `put` fields.
 	     */
+	  }, {
+	    key: 'setDeep',
 	    value: function setDeep(immutable, put) {
 	      assertImmutable(immutable);
 	      return _setDeep(immutable, put);
 	    }
-	  }, {
-	    key: 'values',
 
 	    /**
 	     * Retrieves an ImmutableObject's values as an array.
@@ -5058,6 +5067,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @param {ImmutableValue} immutable
 	     * @return {array}
 	     */
+	  }, {
+	    key: 'values',
 	    value: function values(immutable) {
 	      return Object.keys(immutable).map(function (key) {
 	        return immutable[key];
@@ -5101,7 +5112,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ImmutableObject;
 
 /***/ },
-/* 62 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5126,9 +5137,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var invariant = __webpack_require__(53);
-	var isNode = __webpack_require__(63);
-	var keyOf = __webpack_require__(64);
+	var invariant = __webpack_require__(54);
+	var isNode = __webpack_require__(64);
+	var keyOf = __webpack_require__(65);
 
 	var SECRET_KEY = keyOf({ _DONT_EVER_TYPE_THIS_SECRET_KEY: null });
 
@@ -5167,23 +5178,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	    invariant(secret === ImmutableValue[SECRET_KEY], 'Only certain classes should create instances of `ImmutableValue`.' + 'You probably want something like ImmutableValueObject.create.');
 	  }
 
+	  /**
+	   * Helper method for classes that make use of `ImmutableValue`.
+	   * @param {ImmutableValue} destination Object to merge properties into.
+	   * @param {object} propertyObjects List of objects to merge into
+	   * `destination`.
+	   */
+
 	  _createClass(ImmutableValue, null, [{
 	    key: 'mergeAllPropertiesInto',
-
-	    /**
-	     * Helper method for classes that make use of `ImmutableValue`.
-	     * @param {ImmutableValue} destination Object to merge properties into.
-	     * @param {object} propertyObjects List of objects to merge into
-	     * `destination`.
-	     */
 	    value: function mergeAllPropertiesInto(destination, propertyObjects) {
 	      var argLength = propertyObjects.length;
 	      for (var i = 0; i < argLength; i++) {
 	        _extends(destination, propertyObjects[i]);
 	      }
 	    }
-	  }, {
-	    key: 'deepFreezeRootNode',
 
 	    /**
 	     * Freezes the supplied object deeply. Other classes may implement their own
@@ -5191,6 +5200,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	     *
 	     * @param {*} object The object to freeze.
 	     */
+	  }, {
+	    key: 'deepFreezeRootNode',
 	    value: function deepFreezeRootNode(object) {
 	      if (isNode(object)) {
 	        return; // Don't try to freeze DOM nodes.
@@ -5203,8 +5214,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	      Object.seal(object);
 	    }
-	  }, {
-	    key: 'recurseDeepFreeze',
 
 	    /**
 	     * Differs from `deepFreezeRootNode`, in that we first check if this is a
@@ -5212,6 +5221,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * recursion is unnecessary as it is already frozen. That check obviously
 	     * wouldn't work for the root node version `deepFreezeRootNode`!
 	     */
+	  }, {
+	    key: 'recurseDeepFreeze',
 	    value: function recurseDeepFreeze(object) {
 	      if (isNode(object) || !ImmutableValue.shouldRecurseFreeze(object)) {
 	        return; // Don't try to freeze DOM nodes.
@@ -5224,8 +5235,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	      Object.seal(object);
 	    }
-	  }, {
-	    key: 'shouldRecurseFreeze',
 
 	    /**
 	     * Checks if an object should be deep frozen. Instances of `ImmutableValue`
@@ -5235,6 +5244,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @param {*} object The object to check.
 	     * @return {boolean} Whether or not deep freeze is needed.
 	     */
+	  }, {
+	    key: 'shouldRecurseFreeze',
 	    value: function shouldRecurseFreeze(object) {
 	      return typeof object === 'object' && !(object instanceof ImmutableValue) && object !== null;
 	    }
@@ -5248,8 +5259,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ImmutableValue;
 
 /***/ },
-/* 63 */
-/***/ function(module, exports, __webpack_require__) {
+/* 64 */
+/***/ function(module, exports) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -5276,8 +5287,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = isNode;
 
 /***/ },
-/* 64 */
-/***/ function(module, exports, __webpack_require__) {
+/* 65 */
+/***/ function(module, exports) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -5316,7 +5327,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = keyOf;
 
 /***/ },
-/* 65 */
+/* 66 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5334,8 +5345,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var invariant = __webpack_require__(53);
-	var keyMirror = __webpack_require__(66);
+	var invariant = __webpack_require__(54);
+	var keyMirror = __webpack_require__(67);
 
 	/**
 	 * Maximum number of levels to traverse. Will catch circular structures.
@@ -5440,7 +5451,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = mergeHelpers;
 
 /***/ },
-/* 66 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5457,7 +5468,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var invariant = __webpack_require__(53);
+	var invariant = __webpack_require__(54);
 
 	/**
 	 * Constructs an enumeration with keys equal to their value.
@@ -5493,7 +5504,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = keyMirror;
 
 /***/ },
-/* 67 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5511,11 +5522,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var FixedDataTableHelper = __webpack_require__(27);
-	var ImmutableObject = __webpack_require__(61);
+	var ImmutableObject = __webpack_require__(62);
 	var React = __webpack_require__(29);
-	var ReactComponentWithPureRenderMixin = __webpack_require__(33);
-	var cx = __webpack_require__(48);
-	var joinClasses = __webpack_require__(68);
+	var ReactComponentWithPureRenderMixin = __webpack_require__(34);
+	var cx = __webpack_require__(49);
+	var joinClasses = __webpack_require__(69);
 
 	var DIR_SIGN = FixedDataTableHelper.DIR_SIGN;
 
@@ -5696,8 +5707,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = FixedDataTableCell;
 
 /***/ },
-/* 68 */
-/***/ function(module, exports, __webpack_require__) {
+/* 69 */
+/***/ function(module, exports) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -5740,7 +5751,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = joinClasses;
 
 /***/ },
-/* 69 */
+/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5761,13 +5772,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var DOMMouseMoveTracker = __webpack_require__(43);
+	var DOMMouseMoveTracker = __webpack_require__(44);
 	var Locale = __webpack_require__(28);
 	var React = __webpack_require__(29);
-	var ReactComponentWithPureRenderMixin = __webpack_require__(33);
+	var ReactComponentWithPureRenderMixin = __webpack_require__(34);
 
-	var clamp = __webpack_require__(58);
-	var cx = __webpack_require__(48);
+	var clamp = __webpack_require__(59);
+	var cx = __webpack_require__(49);
 
 	var PropTypes = React.PropTypes;
 
@@ -5905,7 +5916,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = FixedDataTableColumnResizeHandle;
 
 /***/ },
-/* 70 */
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5926,8 +5937,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var PrefixIntervalTree = __webpack_require__(71);
-	var clamp = __webpack_require__(58);
+	var PrefixIntervalTree = __webpack_require__(72);
+	var clamp = __webpack_require__(59);
 
 	var BUFFER_ROWS = 5;
 	var NO_ROWS_SCROLL_RESULT = {
@@ -6166,21 +6177,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	        contentHeight: this._contentHeight
 	      };
 	    }
-	  }, {
-	    key: 'scrollToRow',
 
 	    /**
 	     * Allows to scroll to selected row with specified offset. It always
 	     * brings that row to top of viewport with that offset
 	     */
+	  }, {
+	    key: 'scrollToRow',
 	    value: function scrollToRow( /*number*/rowIndex, /*number*/offset) /*object*/{
 	      rowIndex = clamp(0, rowIndex, Math.max(this._rowCount - 1, 0));
 	      offset = clamp(-this._storedHeights[rowIndex], offset, 0);
 	      var firstRow = this._rowOffsets.sumUntil(rowIndex);
 	      return this.scrollTo(firstRow - offset);
 	    }
-	  }, {
-	    key: 'scrollRowIntoView',
 
 	    /**
 	     * Allows to scroll to selected row by bringing it to viewport with minimal
@@ -6190,6 +6199,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * below end of viewport, it will be scrolled up to be fully visible on the
 	     * bottom of viewport.
 	     */
+	  }, {
+	    key: 'scrollRowIntoView',
 	    value: function scrollRowIntoView( /*number*/rowIndex) /*object*/{
 	      rowIndex = clamp(0, rowIndex, Math.max(this._rowCount - 1, 0));
 	      var rowBegin = this._rowOffsets.sumUntil(rowIndex);
@@ -6210,7 +6221,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = FixedDataTableScrollHelper;
 
 /***/ },
-/* 71 */
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -6222,7 +6233,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
 	 * @providesModule PrefixIntervalTree
-	 * @flow
+	 * 
 	 * @typechecks
 	 */
 
@@ -6232,7 +6243,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var invariant = __webpack_require__(53);
+	var invariant = __webpack_require__(54);
 
 	var parent = function parent(node) {
 	  return Math.floor(node / 2);
@@ -6316,12 +6327,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: function getSize() {
 	      return this._size;
 	    }
-	  }, {
-	    key: 'sumUntil',
 
 	    /**
 	     * Returns the sum get(0) + get(1) + ... + get(end - 1).
 	     */
+	  }, {
+	    key: 'sumUntil',
 	    value: function sumUntil(end) {
 	      invariant(0 <= end && end < this._size + 1, 'Index out of range %s', end);
 
@@ -6339,33 +6350,33 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      return sum;
 	    }
-	  }, {
-	    key: 'sumTo',
 
 	    /**
 	     * Returns the sum get(0) + get(1) + ... + get(inclusiveEnd).
 	     */
+	  }, {
+	    key: 'sumTo',
 	    value: function sumTo(inclusiveEnd) {
 	      invariant(0 <= inclusiveEnd && inclusiveEnd < this._size, 'Index out of range %s', inclusiveEnd);
 	      return this.sumUntil(inclusiveEnd + 1);
 	    }
-	  }, {
-	    key: 'sum',
 
 	    /**
 	     * Returns the sum get(begin) + get(begin + 1) + ... + get(end - 1).
 	     */
+	  }, {
+	    key: 'sum',
 	    value: function sum(begin, end) {
 	      invariant(begin <= end, 'Begin must precede end');
 	      return this.sumUntil(end) - this.sumUntil(begin);
 	    }
-	  }, {
-	    key: 'greatestLowerBound',
 
 	    /**
 	     * Returns the smallest i such that 0 <= i <= size and sumUntil(i) <= t, or
 	     * -1 if no such i exists.
 	     */
+	  }, {
+	    key: 'greatestLowerBound',
 	    value: function greatestLowerBound(t) {
 	      if (t < 0) {
 	        return -1;
@@ -6388,13 +6399,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      return node - this._half;
 	    }
-	  }, {
-	    key: 'greatestStrictLowerBound',
 
 	    /**
 	     * Returns the smallest i such that 0 <= i <= size and sumUntil(i) < t, or
 	     * -1 if no such i exists.
 	     */
+	  }, {
+	    key: 'greatestStrictLowerBound',
 	    value: function greatestStrictLowerBound(t) {
 	      if (t <= 0) {
 	        return -1;
@@ -6417,23 +6428,23 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      return node - this._half;
 	    }
-	  }, {
-	    key: 'leastUpperBound',
 
 	    /**
 	     * Returns the smallest i such that 0 <= i <= size and t <= sumUntil(i), or
 	     * size + 1 if no such i exists.
 	     */
+	  }, {
+	    key: 'leastUpperBound',
 	    value: function leastUpperBound(t) {
 	      return this.greatestStrictLowerBound(t) + 1;
 	    }
-	  }, {
-	    key: 'leastStrictUpperBound',
 
 	    /**
 	     * Returns the smallest i such that 0 <= i <= size and t < sumUntil(i), or
 	     * size + 1 if no such i exists.
 	     */
+	  }, {
+	    key: 'leastStrictUpperBound',
 	    value: function leastStrictUpperBound(t) {
 	      return this.greatestLowerBound(t) + 1;
 	    }
@@ -6474,7 +6485,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 72 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6612,8 +6623,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = FixedDataTableWidthHelper;
 
 /***/ },
-/* 73 */
-/***/ function(module, exports, __webpack_require__) {
+/* 74 */
+/***/ function(module, exports) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -6684,8 +6695,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = debounce;
 
 /***/ },
-/* 74 */
-/***/ function(module, exports, __webpack_require__) {
+/* 75 */
+/***/ function(module, exports) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
