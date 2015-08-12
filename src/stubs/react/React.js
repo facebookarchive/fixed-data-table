@@ -9,4 +9,12 @@
  * @providesModule React
  */
 
-module.exports = require('react');
+var React;
+
+// Check for Atom!
+if (typeof window === 'undefined' && typeof global === 'object' && global.atom){
+  React = require('react-for-atom');
+} else {
+  React = require('react');
+}
+module.exports = React;
