@@ -4,7 +4,9 @@
   "description": "A React table component designed to allow presenting thousands of rows of data.",
   "main": "main.js",
   "peerDependencies": {
-    "react": ">=0.13.0 <0.14.0",
+    "react": ">=0.13.0 <0.14.0"
+  },
+  "optionalDependencies": {
     "react-for-atom": ">=0.13.0 < 0.14.0"
   },
   "devDependencies": {
