@@ -81,7 +81,9 @@ function adjustColumnGroupWidths(
   for (i = 0; i < columnGroups.length; ++i) {
     React.Children.forEach(
       columnGroups[i].props.children,
-      (column) => {allColumns.push(column);}
+      (column) => {
+        allColumns.push(column);
+      }
     );
   }
   var columnsWidth = getTotalWidth(allColumns);
@@ -97,7 +99,9 @@ function adjustColumnGroupWidths(
 
     React.Children.forEach(
       columnGroup.props.children,
-      (column) => {currentColumns.push(column);}
+      (column) => {
+        currentColumns.push(column);
+      }
     );
 
     var columnGroupFlexGrow = getTotalFlexGrow(currentColumns);

@@ -310,7 +310,7 @@ var FixedDataTable = React.createClass({
       return false;
     }
 
-    return(
+    return (
       (delta < 0 && this.state.scrollX > 0) ||
       (delta >= 0 && this.state.scrollX < this.state.maxScrollX)
     );
@@ -326,7 +326,7 @@ var FixedDataTable = React.createClass({
       return false;
     }
 
-    return(
+    return (
       (delta < 0 && this.state.scrollY > 0) ||
       (delta >= 0 && this.state.scrollY < this.state.maxScrollY)
     );
@@ -828,8 +828,8 @@ var FixedDataTable = React.createClass({
 
         var scrollableColumnIndex = Math.min(
           this._columnToScrollTo - fixedColumnsCount,
-          columnInfo.bodyScrollableColumns.length - 1
-          );
+          columnInfo.bodyScrollableColumns.length - 1,
+        );
 
         var previousColumnsWidth = 0;
         for (i = 0; i < scrollableColumnIndex; ++i) {

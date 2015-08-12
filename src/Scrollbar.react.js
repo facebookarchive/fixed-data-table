@@ -258,7 +258,7 @@ var Scrollbar = React.createClass({
     var faceSize = size * scale;
 
     if (faceSize < FACE_SIZE_MIN) {
-      scale = (size - FACE_SIZE_MIN) / (contentSize - FACE_SIZE_MIN);
+      scale = (size - FACE_SIZE_MIN) / (contentSize - size);
       faceSize = FACE_SIZE_MIN;
     }
 
