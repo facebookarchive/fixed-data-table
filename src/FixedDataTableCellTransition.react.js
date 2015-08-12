@@ -81,7 +81,7 @@ var TransitionCell = React.createClass({
     var content = data;
 
     // Is it a basic cell?
-    if (props.cellRenderer){
+    if (props.cellRenderer) {
       content = props.cellRenderer(
         data,
         props.dataKey,
@@ -97,7 +97,7 @@ var TransitionCell = React.createClass({
       content = content || props.label;
     }
 
-    if (props.headerRenderer){
+    if (props.headerRenderer) {
       content = props.headerRenderer(
         props.label,
         props.dataKey,
@@ -107,7 +107,7 @@ var TransitionCell = React.createClass({
     }
 
     // Is it a footer?
-    if (props.footerRenderer){
+    if (props.footerRenderer) {
       content = props.footerRenderer(
         props.label,
         props.dataKey,
@@ -116,7 +116,7 @@ var TransitionCell = React.createClass({
       );
     }
 
-    if (props.groupHeaderRenderer){
+    if (props.groupHeaderRenderer) {
       content = props.groupHeaderRenderer(
         props.label,
         props.dataKey, // index in children
@@ -128,9 +128,9 @@ var TransitionCell = React.createClass({
 
     var contentClass = cx('public/fixedDataTableCell/cellContent');
 
-    if (React.isValidElement(content)){
-      content = React.cloneElement(content,{
-        className: contentClass
+    if (React.isValidElement(content)) {
+      content = React.cloneElement(content, {
+        className: joinClasses(content.className, contentClass)
       })
 
     } else {
