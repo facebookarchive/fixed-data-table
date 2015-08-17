@@ -74,7 +74,6 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       '__DEV__': JSON.stringify(isDev || true)
     }),
-    new webpack.IgnorePlugin(/^react-for-atom$/),
     resolvers.resolveHasteDefines,
   ]
 };

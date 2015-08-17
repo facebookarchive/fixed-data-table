@@ -6,9 +6,6 @@
   "peerDependencies": {
     "react": ">=0.13.0 <0.14.0"
   },
-  "optionalDependencies": {
-    "react-for-atom": ">=0.13.0 < 0.14.0"
-  },
   "devDependencies": {
     "autoprefixer": "^5.0.0",
     "babel-core": "^5.4.7",
