@@ -1,5 +1,5 @@
 /**
- * FixedDataTable v0.4.4 
+ * FixedDataTable v0.4.5 
  *
  * Copyright (c) 2015, Facebook, Inc.
  * All rights reserved.
@@ -185,7 +185,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  Table: FixedDataTable
 	};
 
-	FixedDataTableRoot.version = '0.4.4';
+	FixedDataTableRoot.version = '0.4.5';
 
 	module.exports = FixedDataTableRoot;
 
@@ -1392,7 +1392,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {/**
+	/**
 	 * Copyright (c) 2015, Facebook, Inc.
 	 * All rights reserved.
 	 *
@@ -1405,16 +1405,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var React;
-
-	// Check for Atom!
-	if (typeof global === 'object' && global.atom) {
-	  React = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-for-atom\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-	} else {
-	  React = __webpack_require__(30);
-	}
-	module.exports = React;
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+	module.exports = __webpack_require__(30);
 
 /***/ },
 /* 30 */
