@@ -13,21 +13,17 @@
 'use strict';
 
 var FixedDataTableHelper = require('FixedDataTableHelper');
-var ImmutableObject = require('ImmutableObject');
 var React = require('React');
-var ReactComponentWithPureRenderMixin = require('ReactComponentWithPureRenderMixin');
 // TODO: Switch to next line when no longer new.
 var FixedDataTableCell = require('FixedDataTableCellNew.react');
 // var FixedDataTableCell = require('FixedDataTableCell.react');
 
 var cx = require('cx');
-var renderToString = FixedDataTableHelper.renderToString;
 var translateDOMPositionXY = require('translateDOMPositionXY');
 
 var {PropTypes} = React;
 
 var DIR_SIGN = FixedDataTableHelper.DIR_SIGN;
-var EMPTY_OBJECT = new ImmutableObject({});
 
 var FixedDataTableCellGroupImpl = React.createClass({
 
@@ -37,6 +33,8 @@ var FixedDataTableCellGroupImpl = React.createClass({
      * Array of <FixedDataTableColumn />.
      */
     columns: PropTypes.array.isRequired,
+
+    isScrolling: PropTypes.bool,
 
     left: PropTypes.number,
 
@@ -109,6 +107,7 @@ var FixedDataTableCellGroupImpl = React.createClass({
 
     return (
       <FixedDataTableCell
+        isScrolling={this.props.isScrolling}
         align={columnProps.align}
         className={className}
         height={height}
@@ -125,7 +124,7 @@ var FixedDataTableCellGroupImpl = React.createClass({
     );
   },
 
-  _getColumnsWidth(columns: array): number {
+  _getColumnsWidth(/*array*/ columns) /*number*/ {
     var width = 0;
     for (var i = 0; i < columns.length; ++i) {
       width += columns[i].props.width;
@@ -135,9 +134,10 @@ var FixedDataTableCellGroupImpl = React.createClass({
 });
 
 var FixedDataTableCellGroup = React.createClass({
-  mixins: [ReactComponentWithPureRenderMixin],
 
   propTypes: {
+    isScrolling: PropTypes.bool,
+
     /**
      * Height of the row.
      */
@@ -150,6 +150,14 @@ var FixedDataTableCellGroup = React.createClass({
      * header and footer in front of other rows.
      */
     zIndex: PropTypes.number.isRequired,
+  },
+
+  shouldComponentUpdate(nextProps) {
+    return (
+      !nextProps.isScrolling ||
+      this.props.rowIndex !== nextProps.rowIndex ||
+      this.props.left !== nextProps.left
+    );
   },
 
   getDefaultProps() /*object*/ {
