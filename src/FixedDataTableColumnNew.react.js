@@ -35,9 +35,10 @@ var FixedDataTableColumn = React.createClass({
 
     /**
      * The header cell for this column.
-     * This can either be a string or a React element. Passing in a string
-     * will render a default header cell with that string. By default, the React
-     * element passed in can expect to receive the following props:
+     * This can either be a string a React element, or a function that generates
+     * a React Element. Passing in a string will render a default header cell with
+     * that string. By default, the React element passed in can expect to receive
+     * the following props:
      *
      * ```
      * props: {
@@ -49,17 +50,22 @@ var FixedDataTableColumn = React.createClass({
      *
      * Because you are passing in your own React element, you can feel free to
      * pass in whatever props you may want or need.
+     *
+     * If you pass in a function, you will receive the same props object as the first
+     * argument.
      */
     header: PropTypes.oneOfType([
       PropTypes.element,
-      PropTypes.string
+      PropTypes.string,
+      PropTypes.func,
     ]),
 
     /**
      * This is the body cell that will be cloned for this column.
-     * This can either be a string or a React element. Passing in a string
-     * will render a default cell with that string. By default, the React
-     * element passed in can expect to receive the following props:
+     * This can either be a string a React element, or a function that generates
+     * a React Element. Passing in a string will render a default header cell with
+     * that string. By default, the React element passed in can expect to receive
+     * the following props:
      *
      * ```
      * props: {
@@ -72,17 +78,22 @@ var FixedDataTableColumn = React.createClass({
      *
      * Because you are passing in your own React element, you can feel free to
      * pass in whatever props you may want or need.
+     *
+     * If you pass in a function, you will receive the same props object as the first
+     * argument.
      */
     cell: PropTypes.oneOfType([
       PropTypes.element,
-      PropTypes.string
+      PropTypes.string,
+      PropTypes.func,
     ]),
 
     /**
      * This is the footer cell for this column.
-     * This can either be a string or a React element. Passing in a string
-     * will render a default footer cell with that string. By default, the React
-     * element passed in can expect to receive the following props:
+     * This can either be a string a React element, or a function that generates
+     * a React Element. Passing in a string will render a default header cell with
+     * that string. By default, the React element passed in can expect to receive
+     * the following props:
      *
      * ```
      * props: {
@@ -94,10 +105,14 @@ var FixedDataTableColumn = React.createClass({
      *
      * Because you are passing in your own React element, you can feel free to
      * pass in whatever props you may want or need.
+     *
+     * If you pass in a function, you will receive the same props object as the first
+     * argument.
      */
     footer: PropTypes.oneOfType([
       PropTypes.element,
-      PropTypes.string
+      PropTypes.string,
+      PropTypes.func,
     ]),
 
     /**
