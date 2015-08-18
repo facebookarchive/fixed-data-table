@@ -13,7 +13,6 @@
 'use strict';
 
 var React = require('React');
-var ReactComponentWithPureRenderMixin = require('ReactComponentWithPureRenderMixin');
 var FixedDataTableCellGroup = require('FixedDataTableCellGroup.react');
 
 var cx = require('cx');
@@ -30,6 +29,9 @@ var {PropTypes} = React;
 var FixedDataTableRowImpl = React.createClass({
 
   propTypes: {
+
+    isScrolling: PropTypes.bool,
+
     /**
      * Array of <FixedDataTableColumn /> for the fixed columns.
      */
@@ -102,6 +104,7 @@ var FixedDataTableRowImpl = React.createClass({
     var fixedColumns =
       <FixedDataTableCellGroup
         key="fixed_cells"
+        isScrolling={this.props.isScrolling}
         height={this.props.height}
         left={0}
         width={fixedColumnsWidth}
@@ -115,6 +118,7 @@ var FixedDataTableRowImpl = React.createClass({
     var scrollableColumns =
       <FixedDataTableCellGroup
         key="scrollable_cells"
+        isScrolling={this.props.isScrolling}
         height={this.props.height}
         left={this.props.scrollLeft}
         offsetLeft={fixedColumnsWidth}
@@ -190,9 +194,11 @@ var FixedDataTableRowImpl = React.createClass({
 });
 
 var FixedDataTableRow = React.createClass({
-  mixins: [ReactComponentWithPureRenderMixin],
 
   propTypes: {
+
+    isScrolling: PropTypes.bool,
+
     /**
      * Height of the row.
      */

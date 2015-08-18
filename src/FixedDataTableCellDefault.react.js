@@ -11,7 +11,6 @@
  */
 
 var React = require('React');
-var ReactComponentWithPureRenderMixin = require('ReactComponentWithPureRenderMixin');
 
 var cx = require('cx');
 var joinClasses = require('joinClasses');
@@ -60,9 +59,9 @@ var FixedDataTableCellDefault = React.createClass({
           </div>
         </div>
       </div>
-    )
+    );
 
   }
-})
+});
 
 module.exports = FixedDataTableCellDefault;
