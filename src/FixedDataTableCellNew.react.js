@@ -41,6 +41,7 @@ var FixedDataTableCell = React.createClass({
     cell: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.element,
+      PropTypes.func,
     ]),
 
     columnKey: PropTypes.oneOfType([
@@ -145,6 +146,8 @@ var FixedDataTableCell = React.createClass({
     var content;
     if (React.isValidElement(props.cell)) {
       content = React.cloneElement(props.cell, cellProps);
+    } else if (typeof props.cell === 'function') {
+      content = props.cell(cellProps);
     } else {
       content = (
         <FixedDataTableCellDefault
