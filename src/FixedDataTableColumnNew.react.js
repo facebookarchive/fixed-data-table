@@ -43,8 +43,8 @@ var FixedDataTableColumn = React.createClass({
      * ```
      * props: {
      *   columnKey: string // (of the column, if given)
-     *   cellHeight: number // (supplied from the Table or rowHeightGetter)
-     *   cellWidth: number // (supplied from the Column)
+     *   height: number // (supplied from the Table or rowHeightGetter)
+     *   width: number // (supplied from the Column)
      * }
      * ```
      *
@@ -55,8 +55,7 @@ var FixedDataTableColumn = React.createClass({
      * argument.
      */
     header: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.string,
+      PropTypes.node,
       PropTypes.func,
     ]),
 
@@ -71,8 +70,8 @@ var FixedDataTableColumn = React.createClass({
      * props: {
      *   rowIndex; number // (the row index of the cell)
      *   columnKey: string // (of the column, if given)
-     *   cellHeight: number // (supplied from the Table or rowHeightGetter)
-     *   cellWidth: number // (supplied from the Column)
+     *   height: number // (supplied from the Table or rowHeightGetter)
+     *   width: number // (supplied from the Column)
      * }
      * ```
      *
@@ -83,8 +82,7 @@ var FixedDataTableColumn = React.createClass({
      * argument.
      */
     cell: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.string,
+      PropTypes.node,
       PropTypes.func,
     ]),
 
@@ -98,8 +96,8 @@ var FixedDataTableColumn = React.createClass({
      * ```
      * props: {
      *   columnKey: string // (of the column, if given)
-     *   cellHeight: number // (supplied from the Table or rowHeightGetter)
-     *   cellWidth: number // (supplied from the Column)
+     *   height: number // (supplied from the Table or rowHeightGetter)
+     *   width: number // (supplied from the Column)
      * }
      * ```
      *
@@ -110,8 +108,7 @@ var FixedDataTableColumn = React.createClass({
      * argument.
      */
     footer: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.string,
+      PropTypes.node,
       PropTypes.func,
     ]),
 
@@ -122,7 +119,7 @@ var FixedDataTableColumn = React.createClass({
      */
     columnKey: PropTypes.oneOfType([
       PropTypes.string,
-      PropTypes.number
+      PropTypes.number,
     ]),
 
     /**
@@ -160,7 +157,6 @@ var FixedDataTableColumn = React.createClass({
     isResizable: PropTypes.bool,
 
     /**
-     * Experimental feature
      * Whether cells in this column can be removed from document when outside
      * of viewport as a result of horizontal scrolling.
      * Setting this property to true allows the table to not render cells in

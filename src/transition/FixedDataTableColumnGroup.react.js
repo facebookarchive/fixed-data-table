@@ -21,7 +21,7 @@ var React = require('React');
 
 var TransitionColumnGroup = React.createClass({
   statics: {
-    __TableColumnGroup__: true
+    __TableColumnGroup__: true,
   },
 
   render() {

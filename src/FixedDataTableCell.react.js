@@ -6,13 +6,12 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @providesModule FixedDataTableCellNew.react
+ * @providesModule FixedDataTableCell.react
  * @typechecks
  */
 
 var FixedDataTableCellDefault = require('FixedDataTableCellDefault.react');
 var FixedDataTableHelper = require('FixedDataTableHelper');
-var ImmutableObject = require('ImmutableObject');
 var React = require('React');
 var cx = require('cx');
 var joinClasses = require('joinClasses');
@@ -21,10 +20,10 @@ var DIR_SIGN = FixedDataTableHelper.DIR_SIGN;
 
 var {PropTypes} = React;
 
-var DEFAULT_PROPS = new ImmutableObject({
+var DEFAULT_PROPS = {
   align: 'left',
   highlighted: false,
-});
+};
 
 var FixedDataTableCell = React.createClass({
 
@@ -87,12 +86,13 @@ var FixedDataTableCell = React.createClass({
 
   render() /*object*/ {
 
-    var props = this.props;
+    var {height, width, columnKey, ...props} = this.props;
 
     var style = {
-      height: props.height,
-      width: props.width,
+      height,
+      width,
     };
+
     if (DIR_SIGN === 1) {
       style.left = props.left;
     } else {
@@ -115,7 +115,7 @@ var FixedDataTableCell = React.createClass({
     var columnResizerComponent;
     if (props.onColumnResize) {
       var columnResizerStyle = {
-        height: props.height
+        height
       };
       columnResizerComponent = (
         <div
@@ -134,9 +134,9 @@ var FixedDataTableCell = React.createClass({
     }
 
     var cellProps = {
-      columnKey: props.columnKey,
-      cellHeight: props.height,
-      cellWidth: props.width,
+      columnKey,
+      height,
+      width
     };
 
     if (props.rowIndex >= 0) {
