@@ -330,7 +330,7 @@ var Scrollbar = React.createClass({
       // MouseDown on the scroll-track directly, move the center of the
       // scroll-face to the mouse position.
       var props = this.props;
-      position = position / this.state.scale;
+      position /= this.state.scale;
       nextState = this._calculateState(
         position - (this.state.faceSize * 0.5 / this.state.scale),
         props.size,
@@ -352,7 +352,7 @@ var Scrollbar = React.createClass({
   _onMouseMove(/*number*/ deltaX, /*number*/ deltaY) {
     var props = this.props;
     var delta = this.state.isHorizontal ? deltaX : deltaY;
-    delta = delta / this.state.scale;
+    delta /= this.state.scale;
 
     this._setNextState(
       this._calculateState(

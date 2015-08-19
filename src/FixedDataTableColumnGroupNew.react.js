@@ -19,7 +19,7 @@ var {PropTypes} = React;
  */
 var FixedDataTableColumnGroup = React.createClass({
   statics: {
-    __TableColumnGroup__: true
+    __TableColumnGroup__: true,
   },
 
   propTypes: {
@@ -41,18 +41,22 @@ var FixedDataTableColumnGroup = React.createClass({
      *
      * ```
      * props: {
-     *   cellHeight: number // (supplied from the groupHeaderHeight)
-     *   cellWidth: number // (supplied from the Column)
+     *   height: number // (supplied from the groupHeaderHeight)
+     *   width: number // (supplied from the Column)
      * }
      * ```
      *
      * Because you are passing in your own React element, you can feel free to
      * pass in whatever props you may want or need.
+     *
+     * You can also pass in a function that returns a react elemnt, with the
+     * props object above passed in as the first parameter.
      */
     header: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.node
+      PropTypes.node,
+      PropTypes.func,
     ]),
+
   },
 
   getDefaultProps() /*object*/ {

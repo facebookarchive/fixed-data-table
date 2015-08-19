@@ -20,19 +20,21 @@ var {PropTypes} = React;
 var FixedDataTableCellDefault = React.createClass({
 
   propTypes: {
-    cellHeight: PropTypes.number.isRequired,
-    cellWidth: PropTypes.number.isRequired
+    height: PropTypes.number,
+    width: PropTypes.number,
+    style: PropTypes.string,
+    className: PropTypes.string,
   },
 
   render() {
 
-    var innerStyle = {
-      height: this.props.cellHeight,
-      width: this.props.cellWidth,
-      ...this.props.style,
-    };
+    var {height, width, style, className, ...props} = this.props;
 
-    var contentClass = cx('public/fixedDataTableCell/cellContent');
+    var innerStyle = {
+      height,
+      width,
+      ...style,
+    };
 
     return (
       <div
@@ -40,7 +42,7 @@ var FixedDataTableCellDefault = React.createClass({
         className={joinClasses(
           cx('fixedDataTableCellLayout/wrap1'),
           cx('public/fixedDataTableCell/wrap1'),
-          this.props.className
+          className,
         )}
         style={innerStyle}>
         <div
@@ -53,14 +55,13 @@ var FixedDataTableCellDefault = React.createClass({
               cx('fixedDataTableCellLayout/wrap3'),
               cx('public/fixedDataTableCell/wrap3'),
             )}>
-            <div className={contentClass}>
-              {this.props.children}
+            <div className={cx('public/fixedDataTableCell/cellContent')}>
+              {props.children}
             </div>
           </div>
         </div>
       </div>
     );
-
   }
 });
 

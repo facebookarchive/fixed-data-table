@@ -14,9 +14,7 @@
 
 var FixedDataTableHelper = require('FixedDataTableHelper');
 var React = require('React');
-// TODO: Switch to next line when no longer new.
-var FixedDataTableCell = require('FixedDataTableCellNew.react');
-// var FixedDataTableCell = require('FixedDataTableCell.react');
+var FixedDataTableCell = require('FixedDataTableCell.react');
 
 var cx = require('cx');
 var translateDOMPositionXY = require('translateDOMPositionXY');
@@ -145,6 +143,7 @@ var FixedDataTableCellGroup = React.createClass({
 
     offsetLeft: PropTypes.number,
 
+    left: PropTypes.number,
     /**
      * Z-index on which the row will be displayed. Used e.g. for keeping
      * header and footer in front of other rows.
@@ -152,7 +151,7 @@ var FixedDataTableCellGroup = React.createClass({
     zIndex: PropTypes.number.isRequired,
   },
 
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(/*object*/ nextProps) /*boolean*/ {
     return (
       !nextProps.isScrolling ||
       this.props.rowIndex !== nextProps.rowIndex ||

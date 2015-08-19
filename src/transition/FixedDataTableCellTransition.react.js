@@ -25,7 +25,7 @@ var joinClasses = require('joinClasses');
 
 var CellDefault = require('FixedDataTableCellDefault.react');
 
-var TransitionCellImpl = React.createClass({
+var TransitionCell = React.createClass({
 
   propTypes: {
     label: PropTypes.string, // header, footer
@@ -44,7 +44,7 @@ var TransitionCellImpl = React.createClass({
     width: PropTypes.number,
     height: PropTypes.number,
     isHeaderCell: PropTypes.bool, // header
-    isFooterCell: PropTypes.bool // footer
+    isFooterCell: PropTypes.bool, // footer
   },
 
   _getData(props) {
@@ -81,42 +81,29 @@ var TransitionCellImpl = React.createClass({
     var data = this._getData(props);
     var content = data;
 
-    // Is it a basic cell?
-    if (props.cellRenderer) {
-      content = props.cellRenderer(
-        data,
-        props.dataKey,
-        props.rowGetter ? props.rowGetter(props.rowIndex) : {},
-        props.rowIndex,
-        props.columnData,
-        props.width
-      );
-    }
-
-    // Is it a header?
     if (props.isHeaderCell || props.isFooterCell) {
       content = content || props.label;
     }
 
-    if (props.headerRenderer) {
-      content = props.headerRenderer(
-        props.label,
-        props.dataKey,
-        props.columnData,
-        props.rowGetter ? props.rowGetter(props.rowIndex) : {},
-        props.width
-      ) || props.label;
-    }
-
-    // Is it a footer?
-    if (props.footerRenderer) {
-      content = props.footerRenderer(
-        props.label,
-        props.dataKey,
-        props.columnData,
-        props.rowGetter ? props.rowGetter(props.rowIndex) : {},
-        props.width
-      );
+    if (props.cellRenderer) {
+      if (props.isHeaderCell || props.isFooterCell) {
+        content = props.cellRenderer(
+          props.label,
+          props.dataKey,
+          props.columnData,
+          props.rowGetter ? props.rowGetter(props.rowIndex) : {},
+          props.width,
+        ) || props.label;
+      } else {
+        content = props.cellRenderer(
+          data,
+          props.dataKey,
+          props.rowGetter ? props.rowGetter(props.rowIndex) : {},
+          props.rowIndex,
+          props.columnData,
+          props.width,
+        );
+      }
     }
 
     if (props.groupHeaderRenderer) {
@@ -125,7 +112,7 @@ var TransitionCellImpl = React.createClass({
         props.dataKey, // index in children
         props.groupHeaderData,
         props.groupHeaderLabels,
-        props.groupHeaderWidth
+        props.width,
       ) || content;
     }
 
@@ -135,9 +122,7 @@ var TransitionCellImpl = React.createClass({
       content = React.cloneElement(content, {
         className: joinClasses(content.className, contentClass)
       });
-
     } else {
-
       return (
         <CellDefault
           {...props}>
@@ -147,9 +132,9 @@ var TransitionCellImpl = React.createClass({
     }
 
     var innerStyle = {
-      height: this.props.cellHeight,
-      width: this.props.cellWidth,
-      ...this.props.style,
+      height: props.height,
+      width: props.width,
+      ...props.style,
     };
 
     return (
@@ -180,4 +165,4 @@ var TransitionCellImpl = React.createClass({
   }
 });
 
-module.exports = TransitionCellImpl;
+module.exports = TransitionCell;
