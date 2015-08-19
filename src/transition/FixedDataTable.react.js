@@ -346,7 +346,11 @@ var TransitionTable = React.createClass({
       );
     }
 
-    this.props.children.forEach((child) => {
+    ReactChildren.forEach(this.props.children, (child) => {
+      if (!child || !child.props) {
+        return;
+      }
+
       var props = child.props;
 
       if (props.label) {
@@ -489,6 +493,11 @@ var TransitionTable = React.createClass({
     // If we don't need to migrate, map directly to the new API.
     if (!needsMigration) {
       return ReactChildren.map(this.props.children, (child) => {
+
+        if (!child) {
+          return null;
+        }
+
         if (child.type.__TableColumn__) {
           return <Column {...child.props} />;
         }
@@ -505,6 +514,10 @@ var TransitionTable = React.createClass({
     // or ColumnGroup.
     var i = 0;
     return ReactChildren.map(this.props.children, (child) => {
+
+      if (!child) {
+        return null;
+      }
 
       if (child.type.__TableColumn__) {
         child = this._transformColumn(child, tableProps, i);
