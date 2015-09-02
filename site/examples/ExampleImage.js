@@ -22,7 +22,7 @@ var ExampleImage = React.createClass({
 
   getInitialState() {
     return {
-      ready: false,
+      ready: false
     };
   },
 
@@ -39,7 +39,7 @@ var ExampleImage = React.createClass({
 
   render() {
     var style = this.state.src ?
-      { backgroundImage : 'url(' + this.state.src + ')'} :
+      { backgroundImage: 'url(' + this.state.src + ')'} :
       undefined;
 
     return <div className="exampleImage" style={style} />;
@@ -74,10 +74,10 @@ var ExampleImage = React.createClass({
     ReadyPool[src] = true;
     if (this.isMounted() && src === this.props.src) {
       this.setState({
-        src: src,
+        src: src
       });
     }
-  },
+  }
 });
 
 
