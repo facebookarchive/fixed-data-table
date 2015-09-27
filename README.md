@@ -78,7 +78,7 @@ React.render(
 Contributions
 ------------
 
-Use [Github issues](https://github.com/facebook/fixed-data-table/issues) for requests.
+Use [GitHub issues](https://github.com/facebook/fixed-data-table/issues) for requests.
 
 We actively welcome pull requests; learn how to [contribute](https://github.com/facebook/fixed-data-table/blob/master/CONTRIBUTING.md).
 
@@ -86,7 +86,7 @@ We actively welcome pull requests; learn how to [contribute](https://github.com/
 Changelog
 ---------
 
-Changes are tracked as [Github releases](https://github.com/facebook/fixed-data-table/releases).
+Changes are tracked as [GitHub releases](https://github.com/facebook/fixed-data-table/releases).
 
 
 License
