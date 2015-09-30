@@ -5,49 +5,13 @@ var FakeObjectDataListStore = require('./FakeObjectDataListStore');
 var FixedDataTable = require('fixed-data-table');
 var React = require('react');
 
-var Cell = FixedDataTable.Cell;
 var Column = FixedDataTable.Column;
 var PropTypes = React.PropTypes;
 var Table = FixedDataTable.Table;
 
-var ImageCell = React.createClass({
-  propTypes: {
-    data: PropTypes.any,
-    dataKey: PropTypes.string,
-    rowIndex: PropTypes.number,
-  },
-
-  _getData() {
-    return this.props.data[this.props.rowIndex][this.props.dataKey];
-  },
-
-  render() {
-    return (
-      <ExampleImage src={this._getData()} />
-    )
-  }
-})
-
-var TextCell = React.createClass({
-  propTypes: {
-    dataKey: PropTypes.string,
-    data: PropTypes.any,
-    rowIndex: PropTypes.number,
-  },
-
-  _getData() {
-    return this.props.data[this.props.rowIndex][this.props.dataKey];
-  },
-
-  render() {
-    return (
-      <Cell
-        {...this.props}>
-        {this._getData()}
-      </Cell>
-    )
-  }
-})
+function renderImage(/*string*/ cellData) {
+  return <ExampleImage src={cellData} />;
+}
 
 var FilterExample = React.createClass({
   getInitialState() {
@@ -64,7 +28,7 @@ var FilterExample = React.createClass({
 
   _filterRowsBy(filterBy) {
 
-    var rows = this.state.rows.slice();
+    var rows = this.state.rows.slice();        
     var filteredRows = filterBy ? rows.filter(function(row){
       return row['firstName'].toLowerCase().indexOf(filterBy.toLowerCase()) >= 0
     }) : rows;
@@ -75,17 +39,22 @@ var FilterExample = React.createClass({
     })
   },
 
+  _rowGetter(rowIndex) {
+    return this.state.filteredRows[rowIndex];
+  },
+
   _onFilterChange(e) {
     this._filterRowsBy(e.target.value);
   },
-
+  
 	render() {
 		return (
       <div>
         <input onChange={this._onFilterChange} placeholder='Filter by First Name' />
         <br />
-        <Table
+        <Table 
           rowHeight={50}
+          rowGetter={this._rowGetter}
           rowsCount={this.state.filteredRows.length}
           width={this.props.tableWidth}
           height={this.props.tableHeight}
@@ -93,36 +62,38 @@ var FilterExample = React.createClass({
           scrollLeft={this.props.left}
           headerHeight={50}>
           <Column
-            cell={<ImageCell data={this.state.filteredRows} dataKey='avartar' />}
+            cellRenderer={renderImage}
+            dataKey='avartar'
             fixed={true}
+            label=''
             width={50}
           />
           <Column
-            header='First Name'
-            cell={<TextCell data={this.state.filteredRows} dataKey='firstName' />}
+            dataKey='firstName'
             fixed={true}
+            label='First Name'
             width={100}
           />
           <Column
-            header="Last Name"
-            cell={<TextCell data={this.state.filteredRows} dataKey='lastName' />}
+            dataKey='lastName'
             fixed={true}
+            label='Last Name'
             width={100}
           />
           <Column
-            header="City"
-            cell={<TextCell data={this.state.filteredRows} dataKey='city' />}
+            dataKey='city'
+            label='City'
             width={100}
           />
           <Column
-            header='Street'
-            cell={<TextCell data={this.state.filteredRows} dataKey='street' />}
+            label='Street'
             width={200}
+            dataKey='street'
           />
           <Column
-            header="Zip Code"
-            cell={<TextCell data={this.state.filteredRows} dataKey='zipCode' />}
+            label='Zip Code'
             width={200}
+            dataKey='zipCode'
           />
         </Table>
       </div>

@@ -6,31 +6,10 @@ var FakeObjectDataListStore = require('./FakeObjectDataListStore');
 var FixedDataTable = require('fixed-data-table');
 var React = require('react');
 
-var Cell = FixedDataTable.Cell;
 var Column = FixedDataTable.Column;
 var ColumnGroup = FixedDataTable.ColumnGroup;
 var PropTypes = React.PropTypes;
 var Table = FixedDataTable.Table;
-
-var TextCell = React.createClass({
-  propTypes: {
-    data: PropTypes.any,
-    rowIndex: PropTypes.number,
-  },
-
-  _getData() {
-    return this.props.data.getObjectAt(this.props.rowIndex)[this.props.columnKey];
-  },
-
-  render() {
-    return (
-      <Cell
-        {...this.props}>
-        {this._getData()}
-      </Cell>
-    )
-  }
-})
 
 var ColumnGroupsExample = React.createClass({
   propTypes: {
@@ -45,6 +24,10 @@ var ColumnGroupsExample = React.createClass({
     }
   },
 
+  _rowGetter(index){
+    return this.state.dataList.getObjectAt(index);
+  },
+
   render() {
     var controlledScrolling =
       this.props.left !== undefined || this.props.top !== undefined;
@@ -54,6 +37,7 @@ var ColumnGroupsExample = React.createClass({
         rowHeight={30}
         groupHeaderHeight={30}
         headerHeight={30}
+        rowGetter={this._rowGetter}
         rowsCount={this.state.dataList.getSize()}
         width={this.props.tableWidth}
         height={this.props.tableHeight}
@@ -63,34 +47,30 @@ var ColumnGroupsExample = React.createClass({
         overflowY={controlledScrolling ? "hidden" : "auto"}>
         <ColumnGroup
           fixed={true}
-          header="Name">
+          label="Name">
           <Column
             fixed={true}
-            columnKey="firstName"
-            header="First Name"
-            cell={<TextCell data={this.state.dataList}/>}
+            dataKey="firstName"
+            label="First Name"
             width={150}
           />
           <Column
             fixed={true}
-            header="Last Name"
-            columnKey="lastName"
-            cell={<TextCell data={this.state.dataList}/>}
+            label="Last Name"
+            dataKey="lastName"
             width={150}
           />
         </ColumnGroup>
-        <ColumnGroup header="About">
+        <ColumnGroup label="About">
           <Column
-            header="Company"
-            columnKey="companyName"
-            cell={<TextCell data={this.state.dataList}/>}
+            label="Company"
+            dataKey="companyName"
             flexGrow={1}
             width={150}
           />
           <Column
-            header="Sentence"
-            columnKey="sentence"
-            cell={<TextCell data={this.state.dataList}/>}
+            label="Sentence"
+            dataKey="sentence"
             flexGrow={1}
             width={150}
           />
