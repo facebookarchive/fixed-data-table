@@ -63,7 +63,7 @@ var FilterExample = React.createClass({
           headerHeight={50}>
           <Column
             cellRenderer={renderImage}
-            dataKey='avartar'
+            dataKey='avatar'
             fixed={true}
             label=''
             width={50}

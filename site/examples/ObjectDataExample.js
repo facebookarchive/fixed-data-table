@@ -78,7 +78,7 @@ var ObjectDataExample = React.createClass({
         overflowY={controlledScrolling ? "hidden" : "auto"}>
         <Column
           cellRenderer={renderImage}
-          dataKey="avartar"
+          dataKey="avatar"
           fixed={true}
           label=""
           width={50}
