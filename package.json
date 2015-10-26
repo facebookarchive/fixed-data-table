@@ -4,7 +4,8 @@
   "description": "A React table component designed to allow presenting thousands of rows of data.",
   "main": "main.js",
   "peerDependencies": {
-    "react": ">=0.13.0 <0.15.0 || ^0.14.0-beta3"
+    "react": ">=0.13.0 <0.15.0 || ^0.14.0-beta3",
+    "react-dom": ">=0.14.0 <0.15.0 || ^0.14.0-beta3"
   },
   "devDependencies": {
     "autoprefixer": "^5.0.0",
@@ -23,7 +24,7 @@
     "null-loader": "^0.1.0",
     "postcss": "^4.0.2",
     "postcss-custom-properties": "3.0.1",
-    "react": "^0.13.0",
+    "react": "^0.14.0",
     "react-docgen": "^1.2.0",
     "react-tools": "^0.12.2",
     "style-loader": "^0.8.3",

@@ -34,6 +34,7 @@ Add the default stylesheet `dist/fixed-data-table.css`, then require it into any
 
 ```javascript
 var React = require('react');
+var ReactDOM = require('react-dom');
 var FixedDataTable = require('fixed-data-table');
 
 var Table = FixedDataTable.Table;
@@ -51,7 +52,7 @@ function rowGetter(rowIndex) {
   return rows[rowIndex];
 }
 
-React.render(
+ReactDOM.render(
   <Table
     rowHeight={50}
     rowGetter={rowGetter}

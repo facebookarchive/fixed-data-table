@@ -1,6 +1,7 @@
 "use strict";
 
 var React = require('react');
+var ReactDOM = require('react-dom');
 var Constants = require('../Constants');
 
 var FIXED_THRESHOLD = 680;
@@ -22,7 +23,7 @@ var Header = React.createClass({
 
   componentDidMount() {
     this.offsetWidth = this._getWindowWidth();
-    this.offsetHeight = this.getDOMNode().offsetHeight;
+    this.offsetHeight = ReactDOM.findDOMNode(this).offsetHeight;
     window.addEventListener('scroll', this.handleScroll);
     window.addEventListener('resize', this.handleResize);
 
@@ -39,7 +40,7 @@ var Header = React.createClass({
 
   handleResize(event) {
     this.offsetWidth = this._getWindowWidth();
-    this.offsetHeight = this.getDOMNode().offsetHeight;
+    this.offsetHeight = ReactDOM.findDOMNode(this).offsetHeight;
     this.setState({
       fixed: this.offsetWidth <= FIXED_THRESHOLD,
     });

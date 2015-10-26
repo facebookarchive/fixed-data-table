@@ -18,8 +18,6 @@ var TouchableArea = require('./TouchableArea');
 
 var PropTypes = React.PropTypes;
 
-var cloneWithProps = require('react/lib/cloneWithProps');
-
 function isTouchDevice() {
   return 'ontouchstart' in document.documentElement // works on most browsers
       || 'onmsgesturechange' in window; // works on ie10
@@ -46,7 +44,7 @@ var ExampleTouchWrapper = React.createClass({
 
   render() {
     if (!isTouchDevice()) {
-      return cloneWithProps(this.props.children, {
+      return React.cloneElement(this.props.children, {
         tableHeight: this.props.tableHeight,
         tableWidth: this.props.tableWidth,
       });

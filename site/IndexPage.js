@@ -9,6 +9,7 @@ var ColumnAPIPage = require('./docs/ColumnAPIPage');
 var ColumnGroupAPIPage = require('./docs/ColumnGroupAPIPage');
 var ExamplesPage = require('./examples/ExamplesPage');
 var React = require('react');
+var ReactDOMServer = require('react-dom/server');
 
 var faviconURL = require('./images/favicon.png');
 
@@ -25,7 +26,7 @@ var IndexPage = React.createClass({
 
     renderToString(props) {
       return IndexPage.getDoctype() +
-        React.renderToString(<IndexPage {...props} />);
+        ReactDOMServer.renderToString(<IndexPage {...props} />);
     },
   },
 
