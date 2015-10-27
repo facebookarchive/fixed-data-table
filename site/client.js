@@ -1,9 +1,10 @@
 "use strict";
 
 var React = require('react');
+var ReactDOM = require('react-dom');
 var IndexPage = require('./IndexPage');
 
-React.render(
+ReactDOM.render(
   <IndexPage
     {...window.INITIAL_PROPS}
   />,

@@ -13,6 +13,7 @@
 var DOMMouseMoveTracker = require('DOMMouseMoveTracker');
 var Keys = require('Keys');
 var React = require('React');
+var ReactDOM = require('ReactDOM');
 var ReactComponentWithPureRenderMixin = require('ReactComponentWithPureRenderMixin');
 var ReactWheelHandler = require('ReactWheelHandler');
 
@@ -318,7 +319,7 @@ var Scrollbar = React.createClass({
   _onMouseDown(/*object*/ event) {
     var nextState;
 
-    if (event.target !== React.findDOMNode(this.refs.face)) {
+    if (event.target !== ReactDOM.findDOMNode(this.refs.face)) {
       // Both `offsetX` and `layerX` are non-standard DOM property but they are
       // magically available for browsers somehow.
       var nativeEvent = event.nativeEvent;
@@ -345,7 +346,7 @@ var Scrollbar = React.createClass({
 
     this._mouseMoveTracker.captureMouseMoves(event);
     // Focus the node so it may receive keyboard event.
-    React.findDOMNode(this).focus();
+    ReactDOM.findDOMNode(this).focus();
   },
 
   _onMouseMove(/*number*/ deltaX, /*number*/ deltaY) {
@@ -467,7 +468,7 @@ var Scrollbar = React.createClass({
     if (this.isMounted()) {
       try {
         this._onBlur();
-        React.findDOMNode(this).blur();
+        ReactDOM.findDOMNode(this).blur();
       } catch (oops) {
         // pass
       }
