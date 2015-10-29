@@ -30,6 +30,7 @@ var invariant = require('invariant');
 var joinClasses = require('joinClasses');
 var shallowEqual = require('shallowEqual');
 var translateDOMPositionXY = require('translateDOMPositionXY');
+var warning = require('warning');
 
 var {PropTypes} = React;
 var ReactChildren = React.Children;
@@ -505,6 +506,11 @@ var FixedDataTable = React.createClass({
 
     var footer = null;
     if (state.footerHeight) {
+      warning(
+        'footerDataGetter' in props || 'footerData' in props,
+        "Either 'footerDataGetter' or 'footerData' should be provided to render the footer row."
+      );
+
       var footerData = props.footerDataGetter
         ? props.footerDataGetter()
         : props.footerData;
