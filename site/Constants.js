@@ -51,7 +51,12 @@ exports.ExamplePages = {
   SORT_EXAMPLE: {
     location: 'example-sort.html',
     title: 'Client-side Sort',
-    description: 'A table example that is sortable by column.'
+    description: 'A table example that is sortable by column.',
+  },
+  CHANGE_EXAMPLE: {
+    location: 'example-change.html',
+    title: 'Pure rendering cells',
+    description: 'A table example that shows pure rendering cells: clicking the row of one of the tables changes the value of the first column and paints the rerendered cells in a different background. Table above does not use pureCellRendering and table below does. On the first table the whole row is rerendered and on the one that uses pureCellRendering - only the changed cell.',
   },
 };
 
