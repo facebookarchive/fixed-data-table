@@ -142,6 +142,12 @@ var FixedDataTableCellGroupImpl = React.createClass({
       className = columnProps.cellClassName;
     }
 
+    //don't pass rowData or columnData on pure render
+    if (columnProps.pureCellRendering) {
+      rowData = EMPTY_OBJECT;
+      columnData = EMPTY_OBJECT;
+    }
+
     return (
       <FixedDataTableCell
         align={columnProps.align}
