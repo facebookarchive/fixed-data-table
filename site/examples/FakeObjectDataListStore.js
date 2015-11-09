@@ -11,6 +11,7 @@
  */
 
 var faker = require('faker');
+var ImmutableObject = require('ImmutableObject');
 
 class FakeObjectDataListStore {
   constructor(/*number*/ size){
@@ -42,14 +43,14 @@ class FakeObjectDataListStore {
       return undefined;
     }
     if (this._cache[index] === undefined) {
-      this._cache[index] = this.createFakeRowObjectData(index);
+      this._cache[index] = new ImmutableObject(this.createFakeRowObjectData(index));
     }
     return this._cache[index];
   }
 
   /**
   * Populates the entire cache with data.
-  * Use with Caution! Behaves slowly for large sizes 
+  * Use with Caution! Behaves slowly for large sizes
   * ex. 100,000 rows
   */
   getAll() {
@@ -63,6 +64,13 @@ class FakeObjectDataListStore {
 
   getSize() {
     return this.size;
+  }
+
+  setObjectAt(/*number*/ index, /*?object*/ obj) {
+    if (index < 0 || index > this.size){
+      return;
+    }
+    this._cache[index] = obj;
   }
 }
 

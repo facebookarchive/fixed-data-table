@@ -94,6 +94,13 @@ var ExamplesPage = React.createClass({
             <SortExample />
           </TouchExampleWrapper>
         );
+      case ExamplePages.CHANGE_EXAMPLE:
+        var SortExample = require('./ChangeExample');
+        return (
+          <TouchExampleWrapper {...this.state}>
+            <SortExample />
+          </TouchExampleWrapper>
+        );
     }
   },
 
