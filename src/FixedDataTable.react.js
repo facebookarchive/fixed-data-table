@@ -214,6 +214,11 @@ var FixedDataTable = React.createClass({
      * Index of row to scroll to.
      */
     scrollToRow: PropTypes.number,
+    
+    /**
+     * Disables scroll on wheel event, allowing parent to scroll over the table
+     */
+    scrollLock: PropTypes.bool,
 
     /**
      * Callback that is called when scrolling starts with current horizontal
@@ -584,7 +589,7 @@ var FixedDataTable = React.createClass({
           cx('fixedDataTableLayout/main'),
           cx('public/fixedDataTable/main'),
         )}
-        onWheel={this._wheelHandler.onWheel}
+        onWheel={this.props.scrollLock ? null : this._wheelHandler.onWheel}
         style={{height: state.height, width: state.width}}>
         <div
           className={cx('fixedDataTableLayout/rowsContainer')}
