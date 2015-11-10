@@ -407,7 +407,11 @@ var TransitionTable = React.createClass({
     }
 
     return (e, rowIndex) => {
-      callback(e, rowIndex, props.rowGetter(rowIndex) || EMPTY_OBJECT);
+      callback(
+        e,
+        rowIndex,
+        (props.rowGetter && props.rowGetter(rowIndex)) || EMPTY_OBJECT
+      );
     };
   },
 
@@ -448,7 +452,6 @@ var TransitionTable = React.createClass({
           footer={
             <TransitionCell
               isFooterCell={true}
-              label={props.label}
               className={props.footerClassName}
               dataKey={props.dataKey}
               cellRenderer={props.footerRenderer}

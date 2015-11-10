@@ -80,7 +80,6 @@ function mapColumns(children, callback) {
       // new children
       if (haveColumnsChanged) {
         newChild = React.cloneElement(originalChild, {
-          key: originalChild.key,
           children: newColumns,
         });
       }

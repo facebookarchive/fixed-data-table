@@ -22,7 +22,7 @@ var FixedDataTableCellDefault = React.createClass({
   propTypes: {
     height: PropTypes.number,
     width: PropTypes.number,
-    style: PropTypes.string,
+    style: PropTypes.object,
     className: PropTypes.string,
   },
 

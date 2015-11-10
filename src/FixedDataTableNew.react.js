@@ -8,6 +8,7 @@
  *
  * @providesModule FixedDataTableNew.react
  * @typechecks
+ * @noflow
  */
 
 /*eslint no-bitwise:1*/
@@ -412,6 +413,7 @@ var FixedDataTable = React.createClass({
           scrollLeft={state.scrollX}
           fixedColumns={state.groupHeaderFixedColumns}
           scrollableColumns={state.groupHeaderScrollableColumns}
+          onColumnResize={this._onColumnResize}
         />
       );
     }
