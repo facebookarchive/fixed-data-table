@@ -29,46 +29,22 @@ Install `fixed-data-table` using npm.
 ```shell
 npm install fixed-data-table
 ```
-Add the default stylesheet `dist/fixed-data-table.css`, then require it into any module.
+Add the default stylesheet `dist/fixed-data-table.css`, then import it into any module.
 
 ### Basic Example
 
 ```javascript
-var React = require('react');
-var ReactDOM = require('react-dom');
-var FixedDataTable = require('fixed-data-table');
-
-var Table = FixedDataTable.Table;
-var Column = FixedDataTable.Column;
-var Cell = FixedDataTable.Cell; // A default cell
+import React from 'react');
+import ReactDOM from 'react-dom';
+import {Table, Column, Cell} from 'fixed-data-table';
 
 // Table data as a list of array.
-var rows = [
+const rows = [
   ['a1', 'b1', 'c1'],
   ['a2', 'b2', 'c2'],
   ['a3', 'b3', 'c3'],
   // .... and more
 ];
-
-// Create your cell class
-class BasicCell extends React.Component {
-  // Choose how this cell gets data, with whatever function you want!
-  // You can assume your cell will receive the rowIndex prop.
-  _getData() {
-    return rows[this.props.rowIndex][this.props.dataKey]
-  },
-  render() {
-    // Spread the props (cellWidth and cellHeight) if you want a
-    // basic table cell with vertical alignment and padding.
-    // Otherwise, you can return any valid React element!
-    return (
-      <Cell
-        {...this.props}>
-        {this._getData()}
-      </Cell>
-    )
-  }
-};
 
 // Render your table
 ReactDOM.render(
@@ -79,14 +55,23 @@ ReactDOM.render(
     height={5000}
     headerHeight={50}>
     <Column
-      header="Col 1" // Header text. You can also pass in a React element here!
-      cell={<BasicCell dataKey={1} />} // Add whatever props your cell needs!
-      width={3000}
+      header={<Cell>Col 1</Cell>}
+      cell={<Cell>Column 1 static content</Cell>}
+      width={2000}
     />
     <Column
-      header="Col 2"
+      header={<Cell>Col 2</Cell>}
+      cell={<MyCustomCell mySpecialProp="column2" />}
+      width={1000}
+    />
+    <Column
+      header={<Cell>Col 3</Cell>}
+      cell={({rowIndex, ...props}) => (
+        <Cell {...props}>
+          Data for column 3: {rows[rowIndex][2]}
+        </Cell>
+      )}
       width={2000}
-      cell={<BasicCell dataKey={2} />}
     />
   </Table>,
   document.getElementById('example')
