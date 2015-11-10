@@ -33,8 +33,8 @@ var ColumnGroup = require('FixedDataTableColumnGroupNew.react');
 // Transition Cell
 var TransitionCell = require('FixedDataTableCellTransition.react');
 
-var NEXT_VERSION = '0.6.0';
-var DOCUMENTATION_URL = 'http://facebook.github.io/fixed-data-table';
+var NEXT_VERSION = '0.7.0';
+var DOCUMENTATION_URL = 'https://fburl.com/FixedDataTable-v0.6';
 
 var EMPTY_OBJECT = {};
 
@@ -46,7 +46,7 @@ function notifyDeprecated(prop, reason) {
   if (__DEV__) {
     if (!notified[prop]) {
       console.warn(
-        prop + ' will be DEPRECATED in versions ' +
+        '`' + prop + '` will be DEPRECATED in version ' +
         NEXT_VERSION + ' of FixedDataTable and beyond. \n' +
         reason + '\n' +
         'Read the docs at: ' + DOCUMENTATION_URL
