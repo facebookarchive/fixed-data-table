@@ -22,6 +22,7 @@ var {PropTypes} = React;
 
 var cx = require('cx');
 var joinClasses = require('joinClasses');
+var shallowEqual = require('shallowEqual');
 
 var CellDefault = require('FixedDataTableCellDefault.react');
 
@@ -47,9 +48,39 @@ var TransitionCell = React.createClass({
     isFooterCell: PropTypes.bool, // footer
   },
 
-  _getData(props) {
+  shouldComponentUpdate(/*object*/ nextProps): boolean {
+    var update = false;
+    var rowData;
+    if (nextProps.rowGetter) {
+      rowData = nextProps.rowGetter(nextProps.rowIndex);
+      if (this._rowData !== rowData) {
+        update = true;
+      }
+    }
 
+    var cellData;
+    if (nextProps.dataKey != null) {
+      if (nextProps.cellDataGetter) {
+        cellData = nextProps.cellDataGetter(nextProps.dataKey, rowData);
+      }
+      if (!cellData && rowData) {
+        cellData = rowData[nextProps.dataKey];
+      }
+    }
+    if (this._cellData !== cellData) {
+      update = true;
+    }
+    this._rowData = rowData;
+    this._cellData = cellData;
+
+    return update || !shallowEqual(nextProps, this.props);
+  },
+
+  _getCellData(props) {
     var dataKey = props.dataKey;
+    if (dataKey == null) {
+      return null;
+    }
 
     var rowData;
     if (props.rowGetter) {
@@ -72,14 +103,34 @@ var TransitionCell = React.createClass({
       return props.footerData[dataKey];
     }
 
+    if (props.headerDataGetter) {
+      return props.headerDataGetter[dataKey];
+    }
+  },
+
+  _getRowData(props): Object {
+    if (props.rowGetter) {
+      return props.rowGetter(props.rowIndex) || {};
+    }
+
+    if (props.footerDataGetter) {
+      return props.footerDataGetter() || {};
+    }
+
+    if (props.footerData) {
+      return props.footerData || {};
+    }
+
+    return {};
   },
 
   render() {
-
     var props = this.props;
 
-    var data = this._getData(props);
-    var content = data;
+    var cellData = this._getCellData(props);
+    var content = cellData;
+    var rowData = this._getRowData(props);
+    var usingRenderer = !!(props.cellRenderer || props.groupHeaderRenderer);
 
     if (props.isHeaderCell || props.isFooterCell) {
       content = content || props.label;
@@ -91,14 +142,14 @@ var TransitionCell = React.createClass({
           props.label,
           props.dataKey,
           props.columnData,
-          props.rowGetter ? props.rowGetter(props.rowIndex) : {},
+          rowData,
           props.width,
         ) || props.label;
       } else {
         content = props.cellRenderer(
-          data,
+          cellData,
           props.dataKey,
-          props.rowGetter ? props.rowGetter(props.rowIndex) : {},
+          rowData,
           props.rowIndex,
           props.columnData,
           props.width,
@@ -118,9 +169,9 @@ var TransitionCell = React.createClass({
 
     var contentClass = cx('public/fixedDataTableCell/cellContent');
 
-    if (React.isValidElement(content)) {
+    if (React.isValidElement(content) && usingRenderer) {
       content = React.cloneElement(content, {
-        className: joinClasses(content.className, contentClass)
+        className: joinClasses(content.props.className, contentClass)
       });
     } else {
       return (

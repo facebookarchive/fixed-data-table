@@ -279,7 +279,7 @@ var FixedDataTable = React.createClass({
     if (props.scrollTop) {
       this._scrollHelper.scrollTo(props.scrollTop);
     }
-    this._didScrollStop = debounceCore(this._didScrollStop, 160, this);
+    this._didScrollStop = debounceCore(this._didScrollStop, 200, this);
 
     return this._calculateState(this.props);
   },
@@ -400,7 +400,7 @@ var FixedDataTable = React.createClass({
       groupHeader = (
         <FixedDataTableRow
           key="group_header"
-          isScrolling={state.isScrolling}
+          isScrolling={this._isScrolling}
           className={joinClasses(
             cx('fixedDataTableLayout/header'),
             cx('public/fixedDataTable/header'),
@@ -489,7 +489,7 @@ var FixedDataTable = React.createClass({
       footer =
         <FixedDataTableRow
           key="footer"
-          isScrolling={state.isScrolling}
+          isScrolling={this._isScrolling}
           className={joinClasses(
             cx('fixedDataTableLayout/footer'),
             cx('public/fixedDataTable/footer'),
@@ -510,7 +510,7 @@ var FixedDataTable = React.createClass({
     var header =
       <FixedDataTableRow
         key="header"
-        isScrolling={state.isScrolling}
+        isScrolling={this._isScrolling}
         className={joinClasses(
           cx('fixedDataTableLayout/header'),
           cx('public/fixedDataTable/header'),
@@ -585,7 +585,7 @@ var FixedDataTable = React.createClass({
 
     return (
       <FixedDataTableBufferedRows
-        isScrolling={state.isScrolling}
+        isScrolling={this._isScrolling}
         defaultRowHeight={state.rowHeight}
         firstRowIndex={state.firstRowIndex}
         firstRowOffset={state.firstRowOffset}
@@ -1031,9 +1031,6 @@ var FixedDataTable = React.createClass({
   _didScrollStart() {
     if (this.isMounted() && !this._isScrolling) {
       this._isScrolling = true;
-      this.setState({
-        isScrolling: true
-      });
       if (this.props.onScrollStart) {
         this.props.onScrollStart(this.state.scrollX, this.state.scrollY);
       }
@@ -1043,14 +1040,12 @@ var FixedDataTable = React.createClass({
   _didScrollStop() {
     if (this.isMounted() && this._isScrolling) {
       this._isScrolling = false;
-      this.setState({
-        isScrolling: false
-      });
+      this.setState({redraw: true});
       if (this.props.onScrollEnd) {
         this.props.onScrollEnd(this.state.scrollX, this.state.scrollY);
       }
     }
-  }
+  },
 });
 
 var HorizontalScrollbar = React.createClass({
