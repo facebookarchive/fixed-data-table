@@ -50,6 +50,8 @@ var FixedDataTableCellGroupImpl = React.createClass({
 
     onColumnResize: PropTypes.func,
 
+    rightFixed: PropTypes.bool,
+
     rowHeight: PropTypes.number.isRequired,
 
     rowIndex: PropTypes.number.isRequired,
@@ -71,6 +73,7 @@ var FixedDataTableCellGroupImpl = React.createClass({
             currentPosition - props.left <= props.width &&
             currentPosition - props.left + columnProps.width >= 0)) {
         var key = 'cell_' + i;
+        var borderLeft = props.rightFixed && i===0;
         cells[i] = this._renderCell(
           props.data,
           props.rowIndex,
@@ -78,6 +81,7 @@ var FixedDataTableCellGroupImpl = React.createClass({
           columnProps,
           currentPosition,
           key,
+          borderLeft,
         );
       }
       currentPosition += columnProps.width;
@@ -108,7 +112,8 @@ var FixedDataTableCellGroupImpl = React.createClass({
     /*number*/ height,
     /*object*/ columnProps,
     /*number*/ left,
-    /*string*/ key
+    /*string*/ key,
+    /*bool*/ borderLeft
   ) /*object*/ {
     var cellRenderer = columnProps.cellRenderer || renderToString;
     var columnData = columnProps.columnData || EMPTY_OBJECT;
@@ -161,6 +166,7 @@ var FixedDataTableCellGroupImpl = React.createClass({
         rowIndex={rowIndex}
         width={columnProps.width}
         left={left}
+        borderLeft={borderLeft}
       />
     );
   },

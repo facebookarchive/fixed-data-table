@@ -32,6 +32,16 @@
   width: 0;
 }
 
+.fixedDataTableRowLayout/rightFixedColumnsDivider {
+  backface-visibility: hidden;
+  border-right-style: solid;
+  border-right-width: 1px;
+  right: 0;
+  position: absolute;
+  top: 0;
+  width: 0;
+}
+
 .fixedDataTableRowLayout/columnsShadow {
   width: 4px;
 }

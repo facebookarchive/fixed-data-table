@@ -24,6 +24,12 @@
   border-width: 0 1px 1px 0;
 }
 
+.fixedDataTableCellLayout/borderLeft {
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-width: 0 1px 0 1px;
+}
+
 .fixedDataTableCellLayout/alignRight {
   text-align: right;
 }
