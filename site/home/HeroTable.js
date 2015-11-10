@@ -23,24 +23,14 @@ require('fixed-data-table/css/style/fixedDataTableColumnResizerLine.css');
 require('fixed-data-table/css/style/fixedDataTableRow.css');
 require('fixed-data-table/css/style/Scrollbar.css');
 
-var TextCell = React.createClass({
-  _getData() {
-    return this.props.data.getObjectAt(this.props.rowIndex)[this.props.columnKey];
-  },
-  render() {
-    return (
-      <Cell
-        {...this.props}>
-        {this._getData()}
-      </Cell>
-    )
-  }
-})
+var dataList = new FakeObjectDataListStore();
+var FakeTextCell = ({rowIndex, field, ...props}) => (
+  <Cell {...props}>
+    {dataList.getObjectAt(rowIndex)[field].toString()}
+  </Cell>
+);
 
-var dataList = new FakeObjectDataListStore()
-
-var HeroTable = React.createClass({
-
+class HeroTable extends React.Component {
   render() {
     return (
       <Table
@@ -55,79 +45,68 @@ var HeroTable = React.createClass({
         height={this.props.tableHeight}>
         <Column
           flexGrow={1}
-          columnKey="firstName"
           fixed={true}
-          header="First Name"
-          cell={<TextCell data={dataList} />}
           width={150}
+          header={<Cell>First Name</Cell>}
+          cell={<FakeTextCell field="firstName" />}
         />
         <Column
           flexGrow={1}
-          columnKey="lastName"
           fixed={true}
-          header="Last Name"
-          cell={<TextCell data={dataList} />}
           width={120}
+          header={<Cell>Last Name</Cell>}
+          cell={<FakeTextCell field="lastName" />}
         />
         <Column
           flexGrow={1}
-          columnKey="city"
-          header="City"
-          cell={<TextCell data={dataList} />}
           width={200}
+          header={<Cell>City</Cell>}
+          cell={<FakeTextCell field="city" />}
         />
         <Column
-          header="Street"
           width={200}
-          columnKey="street"
-          cell={<TextCell data={dataList} />}
+          header={<Cell>Street</Cell>}
+          cell={<FakeTextCell field="street" />}
         />
         <Column
-          header="Zip Code"
           width={200}
-          columnKey="zipCode"
-          cell={<TextCell data={dataList} />}
+          header={<Cell>Zip Code</Cell>}
+          cell={<FakeTextCell field="zipCode" />}
         />
         <Column
-          header="Email"
           width={200}
-          columnKey="email"
-          cell={<TextCell data={dataList} />}
+          header={<Cell>Email</Cell>}
+          cell={<FakeTextCell field="email" />}
         />
         <Column
-          header="DOB"
           width={400}
-          columnKey="date"
-          cell={<TextCell data={dataList} />}
+          header={<Cell>DOB</Cell>}
+          cell={<FakeTextCell field="date" />}
         />
         <Column
           flexGrow={1}
-          columnKey="city"
-          header="City"
           width={400}
-          cell={<TextCell data={dataList} />}
+          header={<Cell>City</Cell>}
+          cell={<FakeTextCell field="city" />}
         />
         <Column
-          columnKey="bs"
-          header="BS!"
           width={300}
-          cell={<TextCell data={dataList} />}
+          header={<Cell>BS!</Cell>}
+          cell={<FakeTextCell field="bs" />}
         />
         <Column
-          columnKey="catchPhrase"
-          header="Catch Phrase"
           width={400}
-          cell={<TextCell data={dataList} />}
+          header={<Cell>Catch Phrase</Cell>}
+          cell={<FakeTextCell field="catchPhrase" />}
         />
         <Column
-          columnKey="companyName"
-          header="Company Name"
           width={700}
-          cell={<TextCell data={dataList} />}
+          header={<Cell>Company Name</Cell>}
+          cell={<FakeTextCell field="companyName" />}
         />
       </Table>
     );
   }
-});
+}
 
 module.exports = HeroTable;

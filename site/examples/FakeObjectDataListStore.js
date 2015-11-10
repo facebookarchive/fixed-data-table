@@ -49,7 +49,7 @@ class FakeObjectDataListStore {
 
   /**
   * Populates the entire cache with data.
-  * Use with Caution! Behaves slowly for large sizes 
+  * Use with Caution! Behaves slowly for large sizes
   * ex. 100,000 rows
   */
   getAll() {
