@@ -25,7 +25,12 @@ var DIR_SIGN = FixedDataTableHelper.DIR_SIGN;
 
 var FixedDataTableCellGroupImpl = React.createClass({
 
-  propTypes: {
+  /**
+   * PropTypes are disabled in this component, because having them on slows
+   * down the FixedDataTable hugely in DEV mode. You can enable them back for
+   * development, but please don't commit this component with enabled propTypes.
+   */
+  propTypes_DISABLED_FOR_PERFORMANCE: {
 
     /**
      * Array of <FixedDataTableColumn />.
@@ -133,9 +138,13 @@ var FixedDataTableCellGroupImpl = React.createClass({
 
 var FixedDataTableCellGroup = React.createClass({
 
-  propTypes: {
+  /**
+   * PropTypes are disabled in this component, because having them on slows
+   * down the FixedDataTable hugely in DEV mode. You can enable them back for
+   * development, but please don't commit this component with enabled propTypes.
+   */
+  propTypes_DISABLED_FOR_PERFORMANCE: {
     isScrolling: PropTypes.bool,
-
     /**
      * Height of the row.
      */
