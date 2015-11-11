@@ -12,17 +12,16 @@
 
 "use strict";
 
-var ROWS = 1000000;
-
-var ExampleImage = require('./ExampleImage');
-var FakeObjectDataListStore = require('./FakeObjectDataListStore');
-
+var ExampleImage = require('../helpers/ExampleImage');
+var FakeObjectDataListStore = require('../helpers/FakeObjectDataListStore');
 var FixedDataTable = require('fixed-data-table');
 var React = require('react');
 
+var Column = FixedDataTable.Column;
 var PropTypes = React.PropTypes;
 var Table = FixedDataTable.Table;
-var Column = FixedDataTable.Column;
+
+var ROWS = 1000000;
 
 function renderImage(/*string*/ cellData) {
   return <ExampleImage src={cellData} />;
@@ -37,18 +36,6 @@ function renderDate(/*object*/ cellData) {
 }
 
 var ObjectDataExample = React.createClass({
-
-  propTypes: {
-    onContentDimensionsChange: PropTypes.func,
-    left: PropTypes.number,
-    top: PropTypes.number,
-  },
-
-  _onContentHeightChange(contentHeight) {
-    this.props.onContentDimensionsChange &&
-      this.props.onContentDimensionsChange(contentHeight, 1150);
-  },
-
   getInitialState() {
     return {
       dataList: new FakeObjectDataListStore(ROWS)
@@ -60,22 +47,15 @@ var ObjectDataExample = React.createClass({
   },
 
   render() {
-    var controlledScrolling =
-      this.props.left !== undefined || this.props.top !== undefined;
-
     return (
       <Table
         rowHeight={50}
         headerHeight={50}
         rowGetter={this._rowGetter}
         rowsCount={this.state.dataList.getSize()}
-        width={this.props.tableWidth}
-        height={this.props.tableHeight}
-        onContentHeightChange={this._onContentHeightChange}
-        scrollTop={this.props.top}
-        scrollLeft={this.props.left}
-        overflowX={controlledScrolling ? "hidden" : "auto"}
-        overflowY={controlledScrolling ? "hidden" : "auto"}>
+        width={1000}
+        height={500}
+        {...this.props}>
         <Column
           cellRenderer={renderImage}
           dataKey="avartar"

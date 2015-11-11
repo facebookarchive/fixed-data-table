@@ -12,6 +12,19 @@
 
 "use strict";
 
+// Require common FixedDataTable CSS.
+require('fixed-data-table/css/layout/ScrollbarLayout.css');
+require('fixed-data-table/css/layout/fixedDataTableLayout.css');
+require('fixed-data-table/css/layout/fixedDataTableCellLayout.css');
+require('fixed-data-table/css/layout/fixedDataTableCellGroupLayout.css');
+require('fixed-data-table/css/layout/fixedDataTableColumnResizerLineLayout.css');
+require('fixed-data-table/css/layout/fixedDataTableRowLayout.css');
+require('fixed-data-table/css/style/fixedDataTable.css');
+require('fixed-data-table/css/style/fixedDataTableCell.css');
+require('fixed-data-table/css/style/fixedDataTableColumnResizerLine.css');
+require('fixed-data-table/css/style/fixedDataTableRow.css');
+require('fixed-data-table/css/style/Scrollbar.css');
+
 var ExampleHeader = require('./ExampleHeader');
 var ExamplesWrapper = require('./ExamplesWrapper');
 var TouchExampleWrapper = require('./TouchExampleWrapper');
@@ -19,6 +32,25 @@ var React = require('react');
 var Constants = require('../Constants');
 
 var ExamplePages = Constants.ExamplePages;
+
+var EXAMPLE_COMPONENTS = {
+  [ExamplePages.OBJECT_DATA_EXAMPLE.location]: require('../../examples/ObjectDataExample'),
+  [ExamplePages.RESIZE_EXAMPLE.location]: require('../../examples/ResizeExample'),
+  [ExamplePages.FLEXGROW_EXAMPLE.location]: require('../../examples/FlexGrowExample'),
+  [ExamplePages.COLUMN_GROUPS_EXAMPLE.location]: require('../../examples/ColumnGroupsExample'),
+  [ExamplePages.FILTER_EXAMPLE.location]: require('../../examples/FilterExample'),
+  [ExamplePages.SORT_EXAMPLE.location]: require('../../examples/SortExample'),
+};
+
+// Render old examples
+// var EXAMPLE_COMPONENTS_OLD = {
+//   [ExamplePages.OBJECT_DATA_EXAMPLE.location]: require('../../examples/old/ObjectDataExample'),
+//   [ExamplePages.RESIZE_EXAMPLE.location]: require('../../examples/old/ResizeExample'),
+//   [ExamplePages.FLEXGROW_EXAMPLE.location]: require('../../examples/old/FlexGrowExample'),
+//   [ExamplePages.COLUMN_GROUPS_EXAMPLE.location]: require('../../examples/old/ColumnGroupsExample'),
+//   [ExamplePages.FILTER_EXAMPLE.location]: require('../../examples/old/FilterExample'),
+//   [ExamplePages.SORT_EXAMPLE.location]: require('../../examples/old/SortExample'),
+// };
 
 var ExamplesPage = React.createClass({
   getInitialState() {
@@ -37,54 +69,13 @@ var ExamplesPage = React.createClass({
   },
 
   _renderPage() {
-    // Require common FixedDataTable CSS.
-    require('fixed-data-table/css/layout/ScrollbarLayout.css');
-    require('fixed-data-table/css/layout/fixedDataTableLayout.css');
-    require('fixed-data-table/css/layout/fixedDataTableCellLayout.css');
-    require('fixed-data-table/css/layout/fixedDataTableCellGroupLayout.css');
-    require('fixed-data-table/css/layout/fixedDataTableColumnResizerLineLayout.css');
-    require('fixed-data-table/css/layout/fixedDataTableRowLayout.css');
-
-    require('fixed-data-table/css/style/fixedDataTable.css');
-    require('fixed-data-table/css/style/fixedDataTableCell.css');
-    require('fixed-data-table/css/style/fixedDataTableColumnResizerLine.css');
-    require('fixed-data-table/css/style/fixedDataTableRow.css');
-    require('fixed-data-table/css/style/Scrollbar.css');
-
-    var examples = {};
-
-    examples[ExamplePages.OBJECT_DATA_EXAMPLE.location] = {
-      path: './old/ObjectDataExample'
-    }
-
-    examples[ExamplePages.RESIZE_EXAMPLE.location] = {
-      path: './old/ResizeExample'
-    }
-
-    examples[ExamplePages.FLEXGROW_EXAMPLE.location] = {
-      path: './old/FlexGrowExample'
-    }
-
-    examples[ExamplePages.COLUMN_GROUPS_EXAMPLE.location] = {
-      path: './old/ColumnGroupsExample'
-    }
-
-    examples[ExamplePages.FILTER_EXAMPLE.location] = {
-      path: './old/FilterExample'
-    }
-
-    examples[ExamplePages.SORT_EXAMPLE.location] = {
-      path: './old/SortExample'
-    }
-
-    var Example = require(examples[this.props.example.location].path);
+    var Example = EXAMPLE_COMPONENTS[this.props.example.location];
 
     return (
       <TouchExampleWrapper {...this.state}>
         <Example />
       </TouchExampleWrapper>
-    )
-
+    );
   },
 
   componentDidMount() {

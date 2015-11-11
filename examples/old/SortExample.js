@@ -1,12 +1,22 @@
+/**
+ * This file provided by Facebook is for non-commercial testing and evaluation
+ * purposes only. Facebook reserves all rights not expressly granted.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * FACEBOOK BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 "use strict";
 
-var ExampleImage = require('./ExampleImage');
-var FakeObjectDataListStore = require('./FakeObjectDataListStore');
+var FakeObjectDataListStore = require('../helpers/FakeObjectDataListStore');
 var FixedDataTable = require('fixed-data-table');
 var React = require('react');
 
 var Column = FixedDataTable.Column;
-var PropTypes = React.PropTypes;
 var Table = FixedDataTable.Table;
 
 var SortTypes = {
@@ -82,9 +92,10 @@ var SortExample = React.createClass({
         rowHeight={50}
         rowGetter={this._rowGetter}
         rowsCount={this.state.rows.length}
-        width={this.props.tableWidth}
-        height={this.props.tableHeight}
-        headerHeight={50}>
+        headerHeight={50}
+        width={1000}
+        height={500}
+        {...this.props}>
         <Column
           headerRenderer={this._renderHeader}
           label={'id' + (this.state.sortBy === 'id' ? sortDirArrow : '')}
@@ -115,11 +126,9 @@ var SortExample = React.createClass({
           width={200}
           dataKey='companyName'
         />
-
       </Table>
     );
   },
-
 });
 
 module.exports = SortExample;

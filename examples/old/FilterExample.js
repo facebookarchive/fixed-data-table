@@ -1,13 +1,26 @@
+/**
+ * This file provided by Facebook is for non-commercial testing and evaluation
+ * purposes only. Facebook reserves all rights not expressly granted.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * FACEBOOK BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 "use strict";
 
-var ExampleImage = require('./ExampleImage');
-var FakeObjectDataListStore = require('./FakeObjectDataListStore');
+var ExampleImage = require('../helpers/ExampleImage');
+var FakeObjectDataListStore = require('../helpers/FakeObjectDataListStore');
 var FixedDataTable = require('fixed-data-table');
 var React = require('react');
 
 var Column = FixedDataTable.Column;
-var PropTypes = React.PropTypes;
 var Table = FixedDataTable.Table;
+
+var ROWS = 1000000;
 
 function renderImage(/*string*/ cellData) {
   return <ExampleImage src={cellData} />;
@@ -27,8 +40,7 @@ var FilterExample = React.createClass({
   },
 
   _filterRowsBy(filterBy) {
-
-    var rows = this.state.rows.slice();        
+    var rows = this.state.rows.slice();
     var filteredRows = filterBy ? rows.filter(function(row){
       return row['firstName'].toLowerCase().indexOf(filterBy.toLowerCase()) >= 0
     }) : rows;
@@ -36,7 +48,7 @@ var FilterExample = React.createClass({
     this.setState({
       filteredRows,
       filterBy,
-    })
+    });
   },
 
   _rowGetter(rowIndex) {
@@ -46,21 +58,20 @@ var FilterExample = React.createClass({
   _onFilterChange(e) {
     this._filterRowsBy(e.target.value);
   },
-  
+
 	render() {
 		return (
       <div>
         <input onChange={this._onFilterChange} placeholder='Filter by First Name' />
         <br />
-        <Table 
+        <Table
           rowHeight={50}
           rowGetter={this._rowGetter}
           rowsCount={this.state.filteredRows.length}
-          width={this.props.tableWidth}
-          height={this.props.tableHeight}
-          scrollTop={this.props.top}
-          scrollLeft={this.props.left}
-          headerHeight={50}>
+          headerHeight={50}
+          width={1000}
+          height={500}
+          {...this.props}>
           <Column
             cellRenderer={renderImage}
             dataKey='avartar'
@@ -97,8 +108,8 @@ var FilterExample = React.createClass({
           />
         </Table>
       </div>
-    )
+    );
 	},
-})
+});
 
 module.exports = FilterExample;
