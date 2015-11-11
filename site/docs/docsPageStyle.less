@@ -12,6 +12,31 @@
     padding: 64px 0;
   }
 
+  .sidebarItemText,
+  .arrowBullet {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .arrowBullet {
+    visibility: hidden;
+    width: 6px;
+    height: 9px;
+    background: url(../images/arrowBullet.png) no-repeat scroll;
+    margin-left: 9px;
+
+    @media only screen and (-webkit-min-device-pixel-ratio: 2),
+      only screen and ( min-resolution: 192dpi),
+      only screen and ( min-resolution: 2dppx) {
+        background-image: url(../images/arrowBullet-2x.png);
+        background-size: contain;
+    }
+  }
+
+  .sideBar .curSideItem .arrowBullet {
+    visibility: visible;
+  }
+
   .disclaimer {
     margin: 60px 20px 0 260px;
     border: solid 1px #eecccc;

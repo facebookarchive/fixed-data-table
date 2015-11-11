@@ -4,19 +4,37 @@ require('./base.less');
 
 var Constants = require('./Constants');
 var HomePage = require('./home/HomePage');
-var TableAPIPage = require('./docs/TableAPIPage');
-var ColumnAPIPage = require('./docs/ColumnAPIPage');
-var ColumnGroupAPIPage = require('./docs/ColumnGroupAPIPage');
+var DocsPage = require('./docs/DocsPage');
 var ExamplesPage = require('./examples/ExamplesPage');
 var React = require('react');
 var ReactDOMServer = require('react-dom/server');
 
 var faviconURL = require('./images/favicon.png');
 
-var APIPages = Constants.APIPages;
+var DocsPages = Constants.DocsPages;
 var ExamplePages = Constants.ExamplePages;
 var OtherPages = Constants.OtherPages;
-var Pages = Constants.Pages;
+
+function getPageForLocation(pages, location) {
+  for (var key in pages) {
+    if (!pages.hasOwnProperty(key) || typeof pages[key] !== 'object') {
+      continue;
+    }
+
+    if (pages[key].groupTitle) {
+      var nestedPage = getPageForLocation(pages[key], location);
+      if (nestedPage) {
+        return nestedPage;
+      }
+    }
+
+    if (pages[key].location === location) {
+      return {pageType: key, page: pages[key]};
+    }
+  }
+
+  return null;
+}
 
 var IndexPage = React.createClass({
   statics: {
@@ -71,19 +89,26 @@ var IndexPage = React.createClass({
     switch (this.props.location) {
       case OtherPages.HOME.location:
         return <HomePage />;
-      case APIPages.TABLE_API.location:
-        return <TableAPIPage />;
-      case APIPages.COLUMN_API.location:
-        return <ColumnAPIPage />;
-      case APIPages.COLUMNGROUP_API.location:
-        return <ColumnGroupAPIPage />;
     }
 
-    for (var key in ExamplePages) {
-      if (ExamplePages.hasOwnProperty(key) &&
-        ExamplePages[key].location === this.props.location) {
-        return <ExamplesPage example={ExamplePages[key]} />;
-      }
+    var activeDocsPage = getPageForLocation(DocsPages, this.props.location);
+    if (activeDocsPage) {
+      return (
+        <DocsPage
+          page={activeDocsPage.page}
+          pageType={activeDocsPage.pageType}
+        />
+      );
+    }
+
+    var activeExamplePage = getPageForLocation(ExamplePages, this.props.location);
+    if (activeExamplePage) {
+      return (
+        <ExamplesPage
+          page={activeExamplePage.page}
+          pageType={activeExamplePage.pageType}
+        />
+      );
     }
 
     throw new Error(

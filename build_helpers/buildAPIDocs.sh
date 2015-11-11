@@ -7,7 +7,7 @@ var generateMarkdown = require('./react_documentation/generateMarkdown');
 var path = require('path');
 var ReactDocGen = require('react-docgen');
 
-var docsPath = path.join(__dirname, '../docs');
+var docsPath = path.join(__dirname, '../docs/api');
 if (!fs.existsSync(docsPath)) {
   fs.mkdirSync(docsPath);
 }

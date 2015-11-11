@@ -8,22 +8,43 @@ var SideBar = React.createClass({
     return (
       <div className="sideBar">
         <div className="scrollContent">
-          <h4 className="groupTitle">{this.props.title}</h4>
-          {Object.keys(this.props.pages).map(
-              page => this.renderLink(
-                this.props.pages[page].title,
-                this.props.pages[page].location
-              )
-            )}
+          {this._renderSections(this.props.pages)}
         </div>
       </div>
     );
   },
 
-  renderLink(linkName, linkUrl) {
+  _renderSections(pages) {
+    return Object.keys(pages).map(pageKey => {
+      var page = pages[pageKey];
+      if (typeof page !== 'object') {
+        return null;
+      }
+
+      if (page.groupTitle) {
+        return [
+          this._renderGroupTitle(page.groupTitle),
+          ...this._renderSections(page),
+        ];
+      }
+
+      return this._renderLink(
+        page.title,
+        page.location
+      );
+    });
+  },
+
+  _renderGroupTitle(title) {
+    return (
+      <h4 className="groupTitle">{title}</h4>
+    );
+  },
+
+  _renderLink(linkName, linkUrl) {
     var arrow = <span className="arrowBullet" />;
     var linkClass = 'sideItem';
-    if (this.props.example.location === linkUrl) {
+    if (this.props.page.location === linkUrl) {
       linkClass += ' curSideItem';
     }
 
@@ -35,7 +56,7 @@ var SideBar = React.createClass({
         </a>
       </h2>
     );
-  }
+  },
 });
 
 module.exports = SideBar;
