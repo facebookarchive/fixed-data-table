@@ -114,7 +114,7 @@ class FixedDataTableScrollHelper {
       return NO_ROWS_SCROLL_RESULT;
     }
     var firstRow = this._rowOffsets.greatestLowerBound(this._position);
-    firstRow = clamp(0, firstRow, Math.max(this._rowCount - 1, 0));
+    firstRow = clamp(firstRow, 0, Math.max(this._rowCount - 1, 0));
     var firstRowPosition = this._rowOffsets.sumUntil(firstRow);
     var rowIndex = firstRow;
     var position = this._position;
@@ -164,10 +164,10 @@ class FixedDataTableScrollHelper {
     }
 
     var maxPosition = this._contentHeight - this._viewportHeight;
-    position = clamp(0, position, maxPosition);
+    position = clamp(position, 0, maxPosition);
     this._position = position;
     var firstRowIndex = this._rowOffsets.greatestLowerBound(position);
-    firstRowIndex = clamp(0, firstRowIndex, Math.max(this._rowCount - 1, 0));
+    firstRowIndex = clamp(firstRowIndex, 0, Math.max(this._rowCount - 1, 0));
     firstRowPosition = this._rowOffsets.sumUntil(firstRowIndex);
     var firstRowOffset = firstRowPosition - position;
 
@@ -228,7 +228,7 @@ class FixedDataTableScrollHelper {
     this._position = position;
 
     var firstRowIndex = this._rowOffsets.greatestLowerBound(position);
-    firstRowIndex = clamp(0, firstRowIndex, Math.max(this._rowCount - 1, 0));
+    firstRowIndex = clamp(firstRowIndex, 0, Math.max(this._rowCount - 1, 0));
     var firstRowPosition = this._rowOffsets.sumUntil(firstRowIndex);
     var firstRowOffset = firstRowPosition - position;
 
@@ -248,8 +248,8 @@ class FixedDataTableScrollHelper {
    * brings that row to top of viewport with that offset
    */
   scrollToRow(/*number*/ rowIndex, /*number*/ offset) /*object*/ {
-    rowIndex = clamp(0, rowIndex, Math.max(this._rowCount - 1, 0));
-    offset = clamp(-this._storedHeights[rowIndex], offset, 0);
+    rowIndex = clamp(rowIndex, 0, Math.max(this._rowCount - 1, 0));
+    offset = clamp(offset, -this._storedHeights[rowIndex], 0);
     var firstRow = this._rowOffsets.sumUntil(rowIndex);
     return this.scrollTo(firstRow - offset);
   }
@@ -263,7 +263,7 @@ class FixedDataTableScrollHelper {
    * bottom of viewport.
    */
   scrollRowIntoView(/*number*/ rowIndex) /*object*/ {
-    rowIndex = clamp(0, rowIndex, Math.max(this._rowCount - 1, 0));
+    rowIndex = clamp(rowIndex, 0, Math.max(this._rowCount - 1, 0));
     var rowBegin = this._rowOffsets.sumUntil(rowIndex);
     var rowEnd = rowBegin + this._storedHeights[rowIndex];
     if (rowBegin < this._position) {

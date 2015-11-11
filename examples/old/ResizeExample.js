@@ -1,14 +1,25 @@
+/**
+ * This file provided by Facebook is for non-commercial testing and evaluation
+ * purposes only. Facebook reserves all rights not expressly granted.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * FACEBOOK BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 "use strict";
 
-var ROWS = 1000000;
-
-var FakeObjectDataListStore = require('./FakeObjectDataListStore');
+var FakeObjectDataListStore = require('../helpers/FakeObjectDataListStore');
 var FixedDataTable = require('fixed-data-table');
 var React = require('react');
 
 var Column = FixedDataTable.Column;
-var PropTypes = React.PropTypes;
 var Table = FixedDataTable.Table;
+
+var ROWS = 1000000;
 
 var columnWidths = {
   firstName: 240,
@@ -19,15 +30,10 @@ var columnWidths = {
 var isColumnResizing;
 
 var ResizeExample = React.createClass({
-  propTypes: {
-    onContentDimensionsChange: PropTypes.func,
-    left: PropTypes.number,
-    top: PropTypes.number,
-  },
-
   getInitialState() {
     return {
-      dataList: new FakeObjectDataListStore(ROWS)
+      dataList: new FakeObjectDataListStore(ROWS),
+      columnWidths: columnWidths
     }
   },
 
@@ -35,39 +41,27 @@ var ResizeExample = React.createClass({
     return this.state.dataList.getObjectAt(index);
   },
 
-  _onContentHeightChange(contentHeight) {
-    this.props.onContentDimensionsChange &&
-      this.props.onContentDimensionsChange(
-        contentHeight,
-        Math.max(600, this.props.tableWidth)
-      );
-  },
-
   _onColumnResizeEndCallback(newColumnWidth, dataKey) {
+    var columnWidths = this.state.columnWidths;
     columnWidths[dataKey] = newColumnWidth;
     isColumnResizing = false;
-    this.forceUpdate(); // don't do this, use a store and put into this.state!
+    this.setState({
+      columnWidths
+    })
   },
 
   render() {
-    var controlledScrolling =
-      this.props.left !== undefined || this.props.top !== undefined;
-
     return (
       <Table
         rowHeight={30}
         headerHeight={50}
         rowGetter={this._rowGetter}
         rowsCount={this.state.dataList.getSize()}
-        width={this.props.tableWidth}
-        height={this.props.tableHeight}
-        onContentHeightChange={this._onContentHeightChange}
-        scrollTop={this.props.top}
-        scrollLeft={this.props.left}
-        overflowX={controlledScrolling ? "hidden" : "auto"}
-        overflowY={controlledScrolling ? "hidden" : "auto"}
         isColumnResizing={isColumnResizing}
-        onColumnResizeEndCallback={this._onColumnResizeEndCallback}>
+        onColumnResizeEndCallback={this._onColumnResizeEndCallback}
+        width={1000}
+        height={500}
+        {...this.props}>
         <Column
           dataKey="firstName"
           fixed={true}

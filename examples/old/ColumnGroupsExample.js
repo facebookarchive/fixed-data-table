@@ -1,23 +1,28 @@
+/**
+ * This file provided by Facebook is for non-commercial testing and evaluation
+ * purposes only. Facebook reserves all rights not expressly granted.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * FACEBOOK BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 "use strict";
 
-var ROWS = 1000000;
-
-var FakeObjectDataListStore = require('./FakeObjectDataListStore');
+var FakeObjectDataListStore = require('../helpers/FakeObjectDataListStore');
 var FixedDataTable = require('fixed-data-table');
 var React = require('react');
 
 var Column = FixedDataTable.Column;
-var ColumnGroup = FixedDataTable.ColumnGroup;
-var PropTypes = React.PropTypes;
 var Table = FixedDataTable.Table;
+var ColumnGroup = FixedDataTable.ColumnGroup;
+
+var ROWS = 1000000;
 
 var ColumnGroupsExample = React.createClass({
-  propTypes: {
-    onContentDimensionsChange: PropTypes.func,
-    left: PropTypes.number,
-    top: PropTypes.number,
-  },
-
   getInitialState() {
     return {
       dataList: new FakeObjectDataListStore(ROWS)
@@ -29,9 +34,6 @@ var ColumnGroupsExample = React.createClass({
   },
 
   render() {
-    var controlledScrolling =
-      this.props.left !== undefined || this.props.top !== undefined;
-
     return (
       <Table
         rowHeight={30}
@@ -39,12 +41,9 @@ var ColumnGroupsExample = React.createClass({
         headerHeight={30}
         rowGetter={this._rowGetter}
         rowsCount={this.state.dataList.getSize()}
-        width={this.props.tableWidth}
-        height={this.props.tableHeight}
-        scrollTop={this.props.top}
-        scrollLeft={this.props.left}
-        overflowX={controlledScrolling ? "hidden" : "auto"}
-        overflowY={controlledScrolling ? "hidden" : "auto"}>
+        width={1000}
+        height={500}
+        {...this.props}>
         <ColumnGroup
           fixed={true}
           label="Name">

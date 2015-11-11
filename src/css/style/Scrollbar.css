@@ -20,11 +20,6 @@
   background-color: var(scrollbar-track-color);
 }
 
-.public/Scrollbar/main.public/Scrollbar/mainActive,
-.public/Scrollbar/main:hover {
-  background-color: var(scrollbar-track-color);
-}
-
 .public/Scrollbar/mainOpaque,
 .public/Scrollbar/mainOpaque.public/Scrollbar/mainActive,
 .public/Scrollbar/mainOpaque:hover {

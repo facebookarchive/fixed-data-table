@@ -24,6 +24,7 @@ var {PropTypes} = React;
 var FixedDataTableBufferedRows = React.createClass({
 
   propTypes: {
+    isScrolling: PropTypes.bool,
     defaultRowHeight: PropTypes.number.isRequired,
     firstRowIndex: PropTypes.number.isRequired,
     firstRowOffset: PropTypes.number.isRequired,
@@ -37,7 +38,6 @@ var FixedDataTableBufferedRows = React.createClass({
     onRowMouseLeave: PropTypes.func,
     rowClassNameGetter: PropTypes.func,
     rowsCount: PropTypes.number.isRequired,
-    rowGetter: PropTypes.func.isRequired,
     rowHeightGetter: PropTypes.func,
     rowPositionGetter: PropTypes.func.isRequired,
     scrollLeft: PropTypes.number.isRequired,
@@ -67,7 +67,7 @@ var FixedDataTableBufferedRows = React.createClass({
   },
 
   componentDidMount() {
-    this._bufferUpdateTimer = setTimeout(this._updateBuffer, 1000);
+    setTimeout(this._updateBuffer, 1000);
   },
 
   componentWillReceiveProps(/*object*/ nextProps) {
@@ -82,20 +82,19 @@ var FixedDataTableBufferedRows = React.createClass({
           this._getRowHeight
         );
     }
-    this.setState({
-      rowsToRender: this._rowBuffer.getRows(
-        nextProps.firstRowIndex,
-        nextProps.firstRowOffset
-      ),
-    });
-    if (this._bufferUpdateTimer) {
-      clearTimeout(this._bufferUpdateTimer);
+    if (this.props.isScrolling && !nextProps.isScrolling) {
+      this._updateBuffer();
+    } else {
+      this.setState({
+        rowsToRender: this._rowBuffer.getRows(
+          nextProps.firstRowIndex,
+          nextProps.firstRowOffset
+        ),
+      });
     }
-    this._bufferUpdateTimer = setTimeout(this._updateBuffer, 400);
   },
 
   _updateBuffer() {
-    this._bufferUpdateTimer = null;
     if (this.isMounted()) {
       this.setState({
         rowsToRender: this._rowBuffer.getRowsWithUpdatedBuffer(),
@@ -115,7 +114,6 @@ var FixedDataTableBufferedRows = React.createClass({
   render() /*object*/ {
     var props = this.props;
     var rowClassNameGetter = props.rowClassNameGetter || emptyFunction;
-    var rowGetter = props.rowGetter;
     var rowPositionGetter = props.rowPositionGetter;
 
     var rowsToRender = this.state.rowsToRender;
@@ -132,8 +130,8 @@ var FixedDataTableBufferedRows = React.createClass({
       this._staticRowArray[i] =
         <FixedDataTableRow
           key={i}
+          isScrolling={props.isScrolling}
           index={rowIndex}
-          data={rowGetter(rowIndex)}
           width={props.width}
           height={currentRowHeight}
           scrollLeft={Math.round(props.scrollLeft)}
@@ -160,6 +158,7 @@ var FixedDataTableBufferedRows = React.createClass({
 
     var style = {
       position: 'absolute',
+      pointerEvents: props.isScrolling ? 'none' : 'auto',
     };
 
     translateDOMPositionXY(

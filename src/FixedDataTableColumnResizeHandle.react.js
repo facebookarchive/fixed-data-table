@@ -145,7 +145,7 @@ var FixedDataTableColumnResizeHandle = React.createClass({
     }
     var newWidth = this.state.cursorDelta + deltaX;
     var newColumnWidth =
-      clamp(this.props.minWidth, newWidth, this.props.maxWidth);
+      clamp(newWidth, this.props.minWidth, this.props.maxWidth);
 
     // Please note cursor delta is the different between the currently width
     // and the new width.

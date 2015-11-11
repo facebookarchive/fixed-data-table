@@ -40,8 +40,8 @@ class FixedDataTableRowBuffer {
     this._viewportRowsEnd = 0;
     this._maxVisibleRowCount = Math.ceil(viewportHeight / defaultRowHeight) + 1;
     this._bufferRowsCount = clamp(
-      MIN_BUFFER_ROWS,
       Math.floor(this._maxVisibleRowCount/2),
+      MIN_BUFFER_ROWS,
       MAX_BUFFER_ROWS
     );
     this._rowsCount = rowsCount;

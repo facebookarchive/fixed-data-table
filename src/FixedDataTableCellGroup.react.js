@@ -13,38 +13,31 @@
 'use strict';
 
 var FixedDataTableHelper = require('FixedDataTableHelper');
-var ImmutableObject = require('ImmutableObject');
 var React = require('React');
-var ReactComponentWithPureRenderMixin = require('ReactComponentWithPureRenderMixin');
 var FixedDataTableCell = require('FixedDataTableCell.react');
 
 var cx = require('cx');
-var renderToString = FixedDataTableHelper.renderToString;
 var translateDOMPositionXY = require('translateDOMPositionXY');
 
 var {PropTypes} = React;
 
 var DIR_SIGN = FixedDataTableHelper.DIR_SIGN;
-var EMPTY_OBJECT = new ImmutableObject({});
 
 var FixedDataTableCellGroupImpl = React.createClass({
-  mixins: [ReactComponentWithPureRenderMixin],
 
-  propTypes: {
+  /**
+   * PropTypes are disabled in this component, because having them on slows
+   * down the FixedDataTable hugely in DEV mode. You can enable them back for
+   * development, but please don't commit this component with enabled propTypes.
+   */
+  propTypes_DISABLED_FOR_PERFORMANCE: {
 
     /**
      * Array of <FixedDataTableColumn />.
      */
     columns: PropTypes.array.isRequired,
 
-    /**
-     * The row data to render. The data format can be a simple Map object
-     * or an Array of data.
-     */
-    data: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.array
-    ]),
+    isScrolling: PropTypes.bool,
 
     left: PropTypes.number,
 
@@ -72,7 +65,6 @@ var FixedDataTableCellGroupImpl = React.createClass({
             currentPosition - props.left + columnProps.width >= 0)) {
         var key = 'cell_' + i;
         cells[i] = this._renderCell(
-          props.data,
           props.rowIndex,
           props.rowHeight,
           columnProps,
@@ -103,69 +95,39 @@ var FixedDataTableCellGroupImpl = React.createClass({
   },
 
   _renderCell(
-    /*?object|array*/ rowData,
     /*number*/ rowIndex,
     /*number*/ height,
     /*object*/ columnProps,
     /*number*/ left,
     /*string*/ key
   ) /*object*/ {
-    var cellRenderer = columnProps.cellRenderer || renderToString;
-    var columnData = columnProps.columnData || EMPTY_OBJECT;
-    var cellDataKey = columnProps.dataKey;
-    var isFooterCell = columnProps.isFooterCell;
-    var isHeaderCell = columnProps.isHeaderCell;
-    var cellData;
-
-    if (isHeaderCell || isFooterCell) {
-      if (rowData == null || rowData[cellDataKey] == null) {
-        cellData = columnProps.label;
-      } else {
-        cellData = rowData[cellDataKey];
-      }
-    } else {
-      var cellDataGetter = columnProps.cellDataGetter;
-      cellData = cellDataGetter ?
-        cellDataGetter(cellDataKey, rowData) :
-        rowData[cellDataKey];
-    }
 
     var cellIsResizable = columnProps.isResizable &&
       this.props.onColumnResize;
     var onColumnResize = cellIsResizable ? this.props.onColumnResize : null;
 
-    var className;
-    if (isHeaderCell || isFooterCell) {
-      className = isHeaderCell ?
-        columnProps.headerClassName : columnProps.footerClassName;
-    } else {
-      className = columnProps.cellClassName;
-    }
+    var className = columnProps.cellClassName;
 
     return (
       <FixedDataTableCell
+        isScrolling={this.props.isScrolling}
         align={columnProps.align}
-        cellData={cellData}
-        cellDataKey={cellDataKey}
-        cellRenderer={cellRenderer}
         className={className}
-        columnData={columnData}
         height={height}
-        isFooterCell={isFooterCell}
-        isHeaderCell={isHeaderCell}
         key={key}
         maxWidth={columnProps.maxWidth}
         minWidth={columnProps.minWidth}
         onColumnResize={onColumnResize}
-        rowData={rowData}
         rowIndex={rowIndex}
+        columnKey={columnProps.columnKey}
         width={columnProps.width}
         left={left}
+        cell={columnProps.cell}
       />
     );
   },
 
-  _getColumnsWidth(columns: array): number {
+  _getColumnsWidth(/*array*/ columns) /*number*/ {
     var width = 0;
     for (var i = 0; i < columns.length; ++i) {
       width += columns[i].props.width;
@@ -175,9 +137,14 @@ var FixedDataTableCellGroupImpl = React.createClass({
 });
 
 var FixedDataTableCellGroup = React.createClass({
-  mixins: [ReactComponentWithPureRenderMixin],
 
-  propTypes: {
+  /**
+   * PropTypes are disabled in this component, because having them on slows
+   * down the FixedDataTable hugely in DEV mode. You can enable them back for
+   * development, but please don't commit this component with enabled propTypes.
+   */
+  propTypes_DISABLED_FOR_PERFORMANCE: {
+    isScrolling: PropTypes.bool,
     /**
      * Height of the row.
      */
@@ -185,11 +152,20 @@ var FixedDataTableCellGroup = React.createClass({
 
     offsetLeft: PropTypes.number,
 
+    left: PropTypes.number,
     /**
      * Z-index on which the row will be displayed. Used e.g. for keeping
      * header and footer in front of other rows.
      */
     zIndex: PropTypes.number.isRequired,
+  },
+
+  shouldComponentUpdate(/*object*/ nextProps) /*boolean*/ {
+    return (
+      !nextProps.isScrolling ||
+      this.props.rowIndex !== nextProps.rowIndex ||
+      this.props.left !== nextProps.left
+    );
   },
 
   getDefaultProps() /*object*/ {
@@ -230,7 +206,7 @@ var FixedDataTableCellGroup = React.createClass({
     /*number*/ width,
     /*?number*/ minWidth,
     /*?number*/ maxWidth,
-    /*string|number*/ cellDataKey,
+    /*string|number*/ columnKey,
     /*object*/ event
   ) {
     this.props.onColumnResize && this.props.onColumnResize(
@@ -239,7 +215,7 @@ var FixedDataTableCellGroup = React.createClass({
       width,
       minWidth,
       maxWidth,
-      cellDataKey,
+      columnKey,
       event
     );
   },

@@ -45,17 +45,19 @@ var ExampleTouchWrapper = React.createClass({
   render() {
     if (!isTouchDevice()) {
       return React.cloneElement(this.props.children, {
-        tableHeight: this.props.tableHeight,
-        tableWidth: this.props.tableWidth,
+        height: this.props.tableHeight,
+        width: this.props.tableWidth,
       });
     }
 
-    var example = cloneWithProps(this.props.children, {
+    var example = React.cloneElement(this.props.children, {
       onContentDimensionsChange: this._onContentDimensionsChange,
       left: this.state.left,
       top: this.state.top,
-      tableHeight: this.props.tableHeight,
-      tableWidth: this.props.tableWidth,
+      height: this.props.tableHeight,
+      width: this.props.tableWidth,
+      overflowX: 'hidden',
+      overflowY: 'hidden',
     });
 
     return (
@@ -65,11 +67,11 @@ var ExampleTouchWrapper = React.createClass({
     );
   },
 
-  _onContentDimensionsChange(contentHeight, contentWidth) {
+  _onContentDimensionsChange(contentHeight) {
     this.scroller.setDimensions(
       this.props.tableWidth,
       this.props.tableHeight,
-      contentWidth,
+      Math.max(600, this.props.tableWidth),
       contentHeight
     );
   },

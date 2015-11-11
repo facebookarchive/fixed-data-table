@@ -13,7 +13,6 @@
 'use strict';
 
 var React = require('React');
-var ReactComponentWithPureRenderMixin = require('ReactComponentWithPureRenderMixin');
 var FixedDataTableCellGroup = require('FixedDataTableCellGroup.react');
 
 var cx = require('cx');
@@ -28,17 +27,10 @@ var {PropTypes} = React;
  * only <FixedDataTable /> should use the component internally.
  */
 var FixedDataTableRowImpl = React.createClass({
-  mixins: [ReactComponentWithPureRenderMixin],
 
   propTypes: {
-    /**
-     * The row data to render. The data format can be a simple Map object
-     * or an Array of data.
-     */
-    data: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.array
-    ]),
+
+    isScrolling: PropTypes.bool,
 
     /**
      * Array of <FixedDataTableColumn /> for the fixed columns.
@@ -108,26 +100,16 @@ var FixedDataTableRowImpl = React.createClass({
       'public/fixedDataTableRow/even': (this.props.index % 2 === 0),
     });
 
-    var isHeaderOrFooterRow = this.props.index === -1;
-    if (!this.props.data && !isHeaderOrFooterRow) {
-      return (
-        <div
-          className={joinClasses(className, this.props.className)}
-          style={style}
-        />
-      );
-    }
-
     var fixedColumnsWidth = this._getColumnsWidth(this.props.fixedColumns);
     var fixedColumns =
       <FixedDataTableCellGroup
         key="fixed_cells"
+        isScrolling={this.props.isScrolling}
         height={this.props.height}
         left={0}
         width={fixedColumnsWidth}
         zIndex={2}
         columns={this.props.fixedColumns}
-        data={this.props.data}
         onColumnResize={this.props.onColumnResize}
         rowHeight={this.props.height}
         rowIndex={this.props.index}
@@ -136,13 +118,13 @@ var FixedDataTableRowImpl = React.createClass({
     var scrollableColumns =
       <FixedDataTableCellGroup
         key="scrollable_cells"
+        isScrolling={this.props.isScrolling}
         height={this.props.height}
         left={this.props.scrollLeft}
         offsetLeft={fixedColumnsWidth}
         width={this.props.width - fixedColumnsWidth}
         zIndex={0}
         columns={this.props.scrollableColumns}
-        data={this.props.data}
         onColumnResize={this.props.onColumnResize}
         rowHeight={this.props.height}
         rowIndex={this.props.index}
@@ -191,30 +173,32 @@ var FixedDataTableRowImpl = React.createClass({
   },
 
   _onClick(/*object*/ event) {
-    this.props.onClick(event, this.props.index, this.props.data);
+    this.props.onClick(event, this.props.index);
   },
 
   _onDoubleClick(/*object*/ event) {
-    this.props.onDoubleClick(event, this.props.index, this.props.data);
+    this.props.onDoubleClick(event, this.props.index);
   },
 
   _onMouseDown(/*object*/ event) {
-    this.props.onMouseDown(event, this.props.index, this.props.data);
+    this.props.onMouseDown(event, this.props.index);
   },
 
   _onMouseEnter(/*object*/ event) {
-    this.props.onMouseEnter(event, this.props.index, this.props.data);
+    this.props.onMouseEnter(event, this.props.index);
   },
 
   _onMouseLeave(/*object*/ event) {
-    this.props.onMouseLeave(event, this.props.index, this.props.data);
+    this.props.onMouseLeave(event, this.props.index);
   },
 });
 
 var FixedDataTableRow = React.createClass({
-  mixins: [ReactComponentWithPureRenderMixin],
 
   propTypes: {
+
+    isScrolling: PropTypes.bool,
+
     /**
      * Height of the row.
      */
