@@ -55,8 +55,8 @@ function getAllLocations(pages) {
   return locations;
 }
 
-var locations = Constants.ALL_PAGES.reduce(function(allPage, pages) {
-  return [].concat(allPage, getAllLocations(pages));
+var locations = Constants.ALL_PAGES.reduce(function(allPages, pages) {
+  return [].concat(allPages, getAllLocations(pages));
 }, []);
 
 locations.forEach(function(fileName) {

@@ -10,12 +10,14 @@ exports.DocsPages = {
   DOCS: {
     groupTitle: 'Guides',
     GETTING_STARTED: {location: 'getting-started.html', title: 'Getting Started'},
+    V6_MIGRATION: {location: 'v6-migration.html', title: 'v0.6 API Migration'},
   },
   API: {
     groupTitle: 'API',
     TABLE_API: {location: 'api-table.html', title: 'Table'},
     COLUMN_API: {location: 'api-column.html', title: 'Column'},
     COLUMNGROUP_API: {location: 'api-columngroup.html', title: 'Column Group'},
+    CELL_API: {location: 'api-cell.html', title: 'Cell'},
   },
   API_V5: {
     groupTitle: 'API - v0.5',

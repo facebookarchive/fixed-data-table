@@ -17,18 +17,54 @@ var joinClasses = require('joinClasses');
 
 var {PropTypes} = React;
 
+/**
+ * Component that handles default cell layout and styling.
+ *
+ * All props unless specified below will be set onto the top level `div`
+ * rendered by the cell.
+ *
+ * Example usage via from a `Column`:
+ * ```
+ * const MyColumn = (
+ *   <Column
+ *     cell={({rowIndex, width, height}) => (
+ *       <Cell
+ *         width={width}
+ *         height={height}
+ *         className="my-class">
+ *         Cell number: <span>{rowIndex}</span>
+*        </Cell>
+ *     )}
+ *     width={100}
+ *   />
+ * );
+ * ```
+ */
 var FixedDataTableCellDefault = React.createClass({
-
   propTypes: {
+
+    /**
+     * Outer height of the cell.
+     */
     height: PropTypes.number,
+
+    /**
+     * Outer width of the cell.
+     */
     width: PropTypes.number,
-    style: PropTypes.object,
-    className: PropTypes.string,
+
+    /**
+     * Optional prop that if specified on the `Column` will be passed to the
+     * cell. It can be used to uniquely identify which column is the cell is in.
+     */
+    columnKey: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
   },
 
   render() {
-
-    var {height, width, style, className, ...props} = this.props;
+    var {height, width, style, className, children, ...props} = this.props;
 
     var innerStyle = {
       height,
@@ -38,7 +74,7 @@ var FixedDataTableCellDefault = React.createClass({
 
     return (
       <div
-        {...this.props}
+        {...props}
         className={joinClasses(
           cx('fixedDataTableCellLayout/wrap1'),
           cx('public/fixedDataTableCell/wrap1'),
@@ -56,13 +92,13 @@ var FixedDataTableCellDefault = React.createClass({
               cx('public/fixedDataTableCell/wrap3'),
             )}>
             <div className={cx('public/fixedDataTableCell/cellContent')}>
-              {props.children}
+              {children}
             </div>
           </div>
         </div>
       </div>
     );
-  }
+  },
 });
 
 module.exports = FixedDataTableCellDefault;
