@@ -1,5 +1,5 @@
 /**
- * FixedDataTable v0.5.0 
+ * FixedDataTable v0.6.0-rc1 
  *
  * Copyright (c) 2015, Facebook, Inc.
  * All rights reserved.
@@ -155,11 +155,6 @@
  */
 
 /* Touching the scroll-track directly makes the scroll-track bolder */
-.public_Scrollbar_main.public_Scrollbar_mainActive,
-.public_Scrollbar_main:hover {
-  background-color: rgba(255, 255, 255, 0.8);
-}
-
 .public_Scrollbar_main.public_Scrollbar_mainActive,
 .public_Scrollbar_main:hover {
   background-color: rgba(255, 255, 255, 0.8);
