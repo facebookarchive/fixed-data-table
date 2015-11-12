@@ -2,26 +2,29 @@
 
 var EXAMPLES_LOCATION_BASE = 'https://github.com/facebook/fixed-data-table/blob/master/examples/';
 
-exports.Pages = {
-  HOME: 'HOME',
-  TABLE_API: 'TABLE_API',
-  COLUMN_API: 'COLUMN_API',
-  COLUMNGROUP_API: 'COLUMNGROUP_API',
-  OBJECT_DATA_EXAMPLE: 'OBJECT_DATA_EXAMPLE',
-  FLEXGROW_EXAMPLE: 'FLEXGROW_EXAMPLE',
-  RESIZE_EXAMPLE: 'RESIZE_EXAMPLE',
-  FILTER_EXAMPLE: 'FILTER_EXAMPLE',
-  SORT_EXAMPLE: 'SORT_EXAMPLE',
-}
-
 exports.OtherPages = {
   HOME: {location: 'index.html', title: 'Home'},
 };
 
-exports.APIPages = {
-  TABLE_API: {location: 'api-table.html', title: 'Table'},
-  COLUMN_API: {location: 'api-column.html', title: 'Column'},
-  COLUMNGROUP_API: {location: 'api-columngroup.html', title: 'Column Group'},
+exports.DocsPages = {
+  DOCS: {
+    groupTitle: 'Guides',
+    GETTING_STARTED: {location: 'getting-started.html', title: 'Getting Started'},
+    V6_MIGRATION: {location: 'v6-migration.html', title: 'v0.6 API Migration'},
+  },
+  API: {
+    groupTitle: 'API',
+    TABLE_API: {location: 'api-table.html', title: 'Table'},
+    COLUMN_API: {location: 'api-column.html', title: 'Column'},
+    COLUMNGROUP_API: {location: 'api-columngroup.html', title: 'Column Group'},
+    CELL_API: {location: 'api-cell.html', title: 'Cell'},
+  },
+  API_V5: {
+    groupTitle: 'API - v0.5',
+    TABLE_API: {location: 'api-table-v0.5.html', title: 'Table'},
+    COLUMN_API: {location: 'api-column-v0.5.html', title: 'Column'},
+    COLUMNGROUP_API: {location: 'api-columngroup-v0.5.html', title: 'Column Group'},
+  }
 };
 
 exports.ExamplePages = {
@@ -63,5 +66,10 @@ exports.ExamplePages = {
   },
 };
 
-exports.DOCS_DEFAULT = exports.APIPages.TABLE_API;
+exports.DOCS_DEFAULT = exports.DocsPages.DOCS.GETTING_STARTED;
 exports.EXAMPLES_DEFAULT = exports.ExamplePages.OBJECT_DATA_EXAMPLE;
+exports.ALL_PAGES = [
+  exports.OtherPages,
+  exports.DocsPages,
+  exports.ExamplePages,
+];

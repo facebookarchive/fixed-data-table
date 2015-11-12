@@ -7,7 +7,7 @@ var generateMarkdown = require('./react_documentation/generateMarkdown');
 var path = require('path');
 var ReactDocGen = require('react-docgen');
 
-var docsPath = path.join(__dirname, '../docs');
+var docsPath = path.join(__dirname, '../docs/api');
 if (!fs.existsSync(docsPath)) {
   fs.mkdirSync(docsPath);
 }
@@ -28,6 +28,11 @@ var FILES_TO_READ = [
     path: path.join(PROJECT_ROOT, 'src/FixedDataTableColumnGroupNew.react.js'),
     name: 'ColumnGroup',
     markdownFileName: 'ColumnGroupAPI.md'
+  },
+  {
+    path: path.join(PROJECT_ROOT, 'src/FixedDataTableCellDefault.react.js'),
+    name: 'Cell',
+    markdownFileName: 'CellAPI.md'
   }
 ];
 

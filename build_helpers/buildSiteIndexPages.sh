@@ -36,16 +36,27 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-var locations = [
-  Constants.APIPages,
-  Constants.ExamplePages,
-  Constants.OtherPages
-].reduce(function(paths, pages) {
-  return paths.concat(
-    Object.keys(pages).map(function(key) {
-      return pages[key].location;
-    })
-  );
+function getAllLocations(pages) {
+  var locations = [];
+  for (var key in pages) {
+    if (!pages.hasOwnProperty(key) || typeof pages[key] !== 'object') {
+      continue;
+    }
+
+    if (pages[key].groupTitle) {
+      locations = [].concat(locations, getAllLocations(pages[key]));
+    }
+
+    if (pages[key].location) {
+      locations.push(pages[key].location);
+    }
+  }
+
+  return locations;
+}
+
+var locations = Constants.ALL_PAGES.reduce(function(allPages, pages) {
+  return [].concat(allPages, getAllLocations(pages));
 }, []);
 
 locations.forEach(function(fileName) {

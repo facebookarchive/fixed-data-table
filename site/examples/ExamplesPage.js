@@ -69,7 +69,7 @@ var ExamplesPage = React.createClass({
   },
 
   _renderPage() {
-    var Example = EXAMPLE_COMPONENTS[this.props.example.location];
+    var Example = EXAMPLE_COMPONENTS[this.props.page.location];
 
     return (
       <TouchExampleWrapper {...this.state}>
