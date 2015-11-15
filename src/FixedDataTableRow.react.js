@@ -17,7 +17,7 @@ var FixedDataTableCellGroup = require('FixedDataTableCellGroup.react');
 
 var cx = require('cx');
 var joinClasses = require('joinClasses');
-var translateDOMPositionXY = require('translateDOMPositionXY');
+var translateDOMPositionXY = require('FixedDataTableTranslateDOMPosition');
 
 var {PropTypes} = React;
 
@@ -221,13 +221,21 @@ var FixedDataTableRow = React.createClass({
     width: PropTypes.number.isRequired,
   },
 
+  componentWillMount() {
+    this._initialRender = true;
+  },
+
+  componentDidMount() {
+    this._initialRender = false;
+  },
+
   render() /*object*/ {
     var style = {
       width: this.props.width,
       height: this.props.height,
       zIndex: (this.props.zIndex ? this.props.zIndex : 0),
     };
-    translateDOMPositionXY(style, 0, this.props.offsetTop);
+    translateDOMPositionXY(style, 0, this.props.offsetTop, this._initialRender);
 
     return (
       <div

@@ -20,7 +20,7 @@ var ReactWheelHandler = require('ReactWheelHandler');
 var cssVar = require('cssVar');
 var cx = require('cx');
 var emptyFunction = require('emptyFunction');
-var translateDOMPositionXY = require('translateDOMPositionXY');
+var translateDOMPositionXY = require('FixedDataTableTranslateDOMPosition');
 
 var {PropTypes} = React;
 
@@ -137,7 +137,7 @@ var Scrollbar = React.createClass({
       faceStyle = {
         width: faceSize - FACE_MARGIN_2
       };
-      translateDOMPositionXY(faceStyle, position, 0);
+      translateDOMPositionXY(faceStyle, position, 0, this._initialRender);
     } else {
       mainStyle = {
         top: verticalTop,
@@ -146,7 +146,7 @@ var Scrollbar = React.createClass({
       faceStyle = {
         height: faceSize - FACE_MARGIN_2,
       };
-      translateDOMPositionXY(faceStyle, 0, position);
+      translateDOMPositionXY(faceStyle, 0, position, this._initialRender);
     }
 
     mainStyle.zIndex = this.props.zIndex;
@@ -183,6 +183,7 @@ var Scrollbar = React.createClass({
       this._shouldHandleX, // Should hanlde horizontal scroll
       this._shouldHandleY // Should handle vertical scroll
     );
+    this._initialRender = true;
   },
 
   componentDidMount() {
@@ -196,6 +197,7 @@ var Scrollbar = React.createClass({
       this.state.position !== this.props.position) {
       this._didScroll();
     }
+    this._initialRender = false;
   },
 
   componentWillUnmount() {
