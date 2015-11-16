@@ -1,23 +1,23 @@
 Getting Started
 ===============
 
-The easiest way to start using on FixedDataTable is to install it via npm:
+The easiest way to start using FixedDataTable is to install it via npm:
 
 ```shell
 npm install react --save
 npm install fixed-data-table --save
 ```
 
-If your using a standard build system such as [`browserify`](http://browserify.org/) or [`webpack`](https://webpack.github.io/) it can then be required directly:
+If you're using a standard build system such as [`browserify`](http://browserify.org/) or [`webpack`](https://webpack.github.io/) it can then be required directly:
 ```
 const React = require('react');
 const {Table, Column, Cell} = require('fixed-data-table');
 ```
 
-For layout and styling the default stylesheet will need to be added: `fixed-data-table/dist/fixed-data-table.min.css`.
+For layout and styling the default stylesheet needs to be added: `fixed-data-table/dist/fixed-data-table.min.css`.
 
 ## Create your `Table`
-Setting up your table can be done via the `Table` component. To be able to handle large amounts of data the table only renders the parts that are visible to the user, in order to calculate this a static `width`, `height`, `rowsCount` and `rowHeight` are required:
+Setting up your table can be done via the `Table` component. To be able to handle large amounts of data, the table only renders the parts that are visible to the user, in order to calculate this, static `width`, `height`, `rowsCount` and `rowHeight` are required:
 
 ```javascript
 const React = require('react');
@@ -39,7 +39,7 @@ class MyTable extends React.Component {
 ```
 
 ## Create your `Column`s
-For each column that needs to be displayed a `Column` config with 2 important props are required. The `width` of the column and the `cell` content to render. The `Cell` component can wrap any content to provide default table styles and centering.
+For each column that needs to be displayed, a `Column` config with 2 important props are required. The `width` of the column and the `cell` content to render. The `Cell` component can wrap any content to provide default table styles and centering.
 
 ```javascript
 const React = require('react');
