@@ -11,12 +11,13 @@
  */
 
  /**
-  * @param {number} min
+  * Clamps (or clips or confines) the value to be between min and max.
   * @param {number} value
+  * @param {number} min
   * @param {number} max
   * @return {number}
   */
-function clamp(min, value, max) {
+function clamp(value, min, max) {
   if (value < min) {
     return min;
   }

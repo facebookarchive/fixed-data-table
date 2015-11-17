@@ -14,8 +14,6 @@
 
 var React = require('React');
 
-var cloneWithProps = require('cloneWithProps');
-
 function getTotalWidth(/*array*/ columns) /*number*/ {
   var totalWidth = 0;
   for (var i = 0; i < columns.length; ++i) {
@@ -62,7 +60,7 @@ function distributeFlexWidth(
     remainingFlexGrow -= column.props.flexGrow;
     remainingFlexWidth -= columnFlexWidth;
 
-    newColumns.push(cloneWithProps(
+    newColumns.push(React.cloneElement(
       column,
       {width: newColumnWidth}
     ));
@@ -83,7 +81,9 @@ function adjustColumnGroupWidths(
   for (i = 0; i < columnGroups.length; ++i) {
     React.Children.forEach(
       columnGroups[i].props.children,
-      (column) => {allColumns.push(column);}
+      (column) => {
+        allColumns.push(column);
+      }
     );
   }
   var columnsWidth = getTotalWidth(allColumns);
@@ -99,7 +99,9 @@ function adjustColumnGroupWidths(
 
     React.Children.forEach(
       columnGroup.props.children,
-      (column) => {currentColumns.push(column);}
+      (column) => {
+        currentColumns.push(column);
+      }
     );
 
     var columnGroupFlexGrow = getTotalFlexGrow(currentColumns);
@@ -119,7 +121,7 @@ function adjustColumnGroupWidths(
       newAllColumns.push(newColumnSettings.columns[j]);
     }
 
-    newColumnGroups.push(cloneWithProps(
+    newColumnGroups.push(React.cloneElement(
       columnGroup,
       {width: newColumnSettings.width}
     ));

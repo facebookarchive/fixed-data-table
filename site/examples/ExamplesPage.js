@@ -12,6 +12,19 @@
 
 "use strict";
 
+// Require common FixedDataTable CSS.
+require('fixed-data-table/css/layout/ScrollbarLayout.css');
+require('fixed-data-table/css/layout/fixedDataTableLayout.css');
+require('fixed-data-table/css/layout/fixedDataTableCellLayout.css');
+require('fixed-data-table/css/layout/fixedDataTableCellGroupLayout.css');
+require('fixed-data-table/css/layout/fixedDataTableColumnResizerLineLayout.css');
+require('fixed-data-table/css/layout/fixedDataTableRowLayout.css');
+require('fixed-data-table/css/style/fixedDataTable.css');
+require('fixed-data-table/css/style/fixedDataTableCell.css');
+require('fixed-data-table/css/style/fixedDataTableColumnResizerLine.css');
+require('fixed-data-table/css/style/fixedDataTableRow.css');
+require('fixed-data-table/css/style/Scrollbar.css');
+
 var ExampleHeader = require('./ExampleHeader');
 var ExamplesWrapper = require('./ExamplesWrapper');
 var TouchExampleWrapper = require('./TouchExampleWrapper');
@@ -19,6 +32,25 @@ var React = require('react');
 var Constants = require('../Constants');
 
 var ExamplePages = Constants.ExamplePages;
+
+var EXAMPLE_COMPONENTS = {
+  [ExamplePages.OBJECT_DATA_EXAMPLE.location]: require('../../examples/ObjectDataExample'),
+  [ExamplePages.RESIZE_EXAMPLE.location]: require('../../examples/ResizeExample'),
+  [ExamplePages.FLEXGROW_EXAMPLE.location]: require('../../examples/FlexGrowExample'),
+  [ExamplePages.COLUMN_GROUPS_EXAMPLE.location]: require('../../examples/ColumnGroupsExample'),
+  [ExamplePages.FILTER_EXAMPLE.location]: require('../../examples/FilterExample'),
+  [ExamplePages.SORT_EXAMPLE.location]: require('../../examples/SortExample'),
+};
+
+// Render old examples
+// var EXAMPLE_COMPONENTS_OLD = {
+//   [ExamplePages.OBJECT_DATA_EXAMPLE.location]: require('../../examples/old/ObjectDataExample'),
+//   [ExamplePages.RESIZE_EXAMPLE.location]: require('../../examples/old/ResizeExample'),
+//   [ExamplePages.FLEXGROW_EXAMPLE.location]: require('../../examples/old/FlexGrowExample'),
+//   [ExamplePages.COLUMN_GROUPS_EXAMPLE.location]: require('../../examples/old/ColumnGroupsExample'),
+//   [ExamplePages.FILTER_EXAMPLE.location]: require('../../examples/old/FilterExample'),
+//   [ExamplePages.SORT_EXAMPLE.location]: require('../../examples/old/SortExample'),
+// };
 
 var ExamplesPage = React.createClass({
   getInitialState() {
@@ -37,64 +69,13 @@ var ExamplesPage = React.createClass({
   },
 
   _renderPage() {
-    // Require common FixedDataTable CSS.
-    require('fixed-data-table/css/layout/ScrollbarLayout.css');
-    require('fixed-data-table/css/layout/fixedDataTableLayout.css');
-    require('fixed-data-table/css/layout/fixedDataTableCellLayout.css');
-    require('fixed-data-table/css/layout/fixedDataTableCellGroupLayout.css');
-    require('fixed-data-table/css/layout/fixedDataTableColumnResizerLineLayout.css');
-    require('fixed-data-table/css/layout/fixedDataTableRowLayout.css');
+    var Example = EXAMPLE_COMPONENTS[this.props.page.location];
 
-    require('fixed-data-table/css/style/fixedDataTable.css');
-    require('fixed-data-table/css/style/fixedDataTableCell.css');
-    require('fixed-data-table/css/style/fixedDataTableColumnResizerLine.css');
-    require('fixed-data-table/css/style/fixedDataTableRow.css');
-    require('fixed-data-table/css/style/Scrollbar.css');
-
-    switch (this.props.example) {
-      case ExamplePages.OBJECT_DATA_EXAMPLE:
-        var ObjectDataExample = require('./ObjectDataExample');
-        return (
-          <TouchExampleWrapper {...this.state}>
-            <ObjectDataExample />
-          </TouchExampleWrapper>
-        );
-      case ExamplePages.RESIZE_EXAMPLE:
-        var ResizeExample = require('./ResizeExample');
-        return (
-          <TouchExampleWrapper {...this.state}>
-            <ResizeExample />
-          </TouchExampleWrapper>
-        );
-      case ExamplePages.FLEXGROW_EXAMPLE:
-        var FlexGrowExample = require('./FlexGrowExample');
-        return (
-          <TouchExampleWrapper {...this.state}>
-            <FlexGrowExample />
-          </TouchExampleWrapper>
-        );
-      case ExamplePages.COLUMN_GROUPS_EXAMPLE:
-        var ColumnGroupsExample = require('./ColumnGroupsExample');
-        return (
-          <TouchExampleWrapper {...this.state}>
-            <ColumnGroupsExample />
-          </TouchExampleWrapper>
-        );
-      case ExamplePages.FILTER_EXAMPLE:
-        var FilterExample = require('./FilterExample');
-        return (
-          <TouchExampleWrapper {...this.state}>
-            <FilterExample />
-          </TouchExampleWrapper>
-        );
-      case ExamplePages.SORT_EXAMPLE:
-        var SortExample = require('./SortExample');
-        return (
-          <TouchExampleWrapper {...this.state}>
-            <SortExample />
-          </TouchExampleWrapper>
-        );
-    }
+    return (
+      <TouchExampleWrapper {...this.state}>
+        <Example />
+      </TouchExampleWrapper>
+    );
   },
 
   componentDidMount() {

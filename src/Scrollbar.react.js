@@ -13,6 +13,7 @@
 var DOMMouseMoveTracker = require('DOMMouseMoveTracker');
 var Keys = require('Keys');
 var React = require('React');
+var ReactDOM = require('ReactDOM');
 var ReactComponentWithPureRenderMixin = require('ReactComponentWithPureRenderMixin');
 var ReactWheelHandler = require('ReactWheelHandler');
 
@@ -258,7 +259,7 @@ var Scrollbar = React.createClass({
     var faceSize = size * scale;
 
     if (faceSize < FACE_SIZE_MIN) {
-      scale = (size - FACE_SIZE_MIN) / (contentSize - FACE_SIZE_MIN);
+      scale = (size - FACE_SIZE_MIN) / (contentSize - size);
       faceSize = FACE_SIZE_MIN;
     }
 
@@ -318,7 +319,7 @@ var Scrollbar = React.createClass({
   _onMouseDown(/*object*/ event) {
     var nextState;
 
-    if (event.target !== React.findDOMNode(this.refs.face)) {
+    if (event.target !== ReactDOM.findDOMNode(this.refs.face)) {
       // Both `offsetX` and `layerX` are non-standard DOM property but they are
       // magically available for browsers somehow.
       var nativeEvent = event.nativeEvent;
@@ -329,7 +330,7 @@ var Scrollbar = React.createClass({
       // MouseDown on the scroll-track directly, move the center of the
       // scroll-face to the mouse position.
       var props = this.props;
-      position = position / this.state.scale;
+      position /= this.state.scale;
       nextState = this._calculateState(
         position - (this.state.faceSize * 0.5 / this.state.scale),
         props.size,
@@ -345,13 +346,13 @@ var Scrollbar = React.createClass({
 
     this._mouseMoveTracker.captureMouseMoves(event);
     // Focus the node so it may receive keyboard event.
-    React.findDOMNode(this).focus();
+    ReactDOM.findDOMNode(this).focus();
   },
 
   _onMouseMove(/*number*/ deltaX, /*number*/ deltaY) {
     var props = this.props;
     var delta = this.state.isHorizontal ? deltaX : deltaY;
-    delta = delta / this.state.scale;
+    delta /= this.state.scale;
 
     this._setNextState(
       this._calculateState(
@@ -467,7 +468,7 @@ var Scrollbar = React.createClass({
     if (this.isMounted()) {
       try {
         this._onBlur();
-        React.findDOMNode(this).blur();
+        ReactDOM.findDOMNode(this).blur();
       } catch (oops) {
         // pass
       }

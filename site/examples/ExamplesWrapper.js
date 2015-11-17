@@ -30,7 +30,7 @@ var ExamplesWrapper = React.createClass({
             <SideBar
               title="Examples"
               pages={Constants.ExamplePages}
-              example={this.props.example}
+              page={this.props.page}
             />
             <div className="exampleContents">
               {this.props.children}

@@ -1,12 +1,13 @@
 "use strict";
 
-var FakeObjectDataListStore = require('../examples/FakeObjectDataListStore');
+var FakeObjectDataListStore = require('../../examples/helpers/FakeObjectDataListStore');
 var FixedDataTable = require('fixed-data-table');
 var React = require('react');
 var Constants = require('../Constants');
 
 var Table = FixedDataTable.Table;
 var Column = FixedDataTable.Column;
+var Cell = FixedDataTable.Cell;
 
 // Require common FixedDataTable CSS.
 require('fixed-data-table/css/layout/ScrollbarLayout.css');
@@ -22,19 +23,14 @@ require('fixed-data-table/css/style/fixedDataTableColumnResizerLine.css');
 require('fixed-data-table/css/style/fixedDataTableRow.css');
 require('fixed-data-table/css/style/Scrollbar.css');
 
+var dataList = new FakeObjectDataListStore();
+var FakeTextCell = ({rowIndex, field, ...props}) => (
+  <Cell {...props}>
+    {dataList.getObjectAt(rowIndex)[field].toString()}
+  </Cell>
+);
 
-var HeroTable = React.createClass({
-
-  getInitialState() {
-    return {
-      dataList: new FakeObjectDataListStore()
-    }
-  },
-
-  _rowGetter(index) {
-    return this.state.dataList.getObjectAt(index);
-  },
-
+class HeroTable extends React.Component {
   render() {
     return (
       <Table
@@ -44,74 +40,73 @@ var HeroTable = React.createClass({
         overflowY="hidden"
         rowHeight={50}
         headerHeight={50}
-        rowGetter={this._rowGetter}
-        rowsCount={this.state.dataList.getSize()}
+        rowsCount={dataList.getSize()}
         width={this.props.tableWidth}
         height={this.props.tableHeight}>
         <Column
           flexGrow={1}
-          dataKey="firstName"
           fixed={true}
-          label="First Name"
           width={150}
+          header={<Cell>First Name</Cell>}
+          cell={<FakeTextCell field="firstName" />}
         />
         <Column
           flexGrow={1}
-          dataKey="lastName"
           fixed={true}
-          label="Last Name"
           width={120}
+          header={<Cell>Last Name</Cell>}
+          cell={<FakeTextCell field="lastName" />}
         />
         <Column
           flexGrow={1}
-          dataKey="city"
-          label="City"
           width={200}
+          header={<Cell>City</Cell>}
+          cell={<FakeTextCell field="city" />}
         />
         <Column
-          label="Street"
           width={200}
-          dataKey="street"
+          header={<Cell>Street</Cell>}
+          cell={<FakeTextCell field="street" />}
         />
         <Column
-          label="Zip Code"
           width={200}
-          dataKey="zipCode"
+          header={<Cell>Zip Code</Cell>}
+          cell={<FakeTextCell field="zipCode" />}
         />
         <Column
-          label="Email"
           width={200}
-          dataKey="email"
+          header={<Cell>Email</Cell>}
+          cell={<FakeTextCell field="email" />}
         />
         <Column
-          label="DOB"
           width={400}
-          dataKey="date"
+          header={<Cell>DOB</Cell>}
+          cell={<FakeTextCell field="date" />}
         />
         <Column
           flexGrow={1}
-          dataKey="city"
-          label="City"
           width={400}
+          header={<Cell>City</Cell>}
+          cell={<FakeTextCell field="city" />}
         />
         <Column
-          dataKey="bs"
-          label="BS!"
           width={300}
+          header={<Cell>BS!</Cell>}
+          cell={<FakeTextCell field="bs" />}
         />
         <Column
-          dataKey="catchPhrase"
-          label="Catch Phrase"
           width={400}
+          header={<Cell>Catch Phrase</Cell>}
+          cell={<FakeTextCell field="catchPhrase" />}
         />
         <Column
-          dataKey="companyName"
-          label="Company Name"
           width={700}
+          header={<Cell>Company Name</Cell>}
+          cell={<FakeTextCell field="companyName" />}
         />
       </Table>
     );
   }
-});
+}
 
 module.exports = HeroTable;

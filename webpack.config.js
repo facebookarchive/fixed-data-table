@@ -23,7 +23,7 @@ var plugins = [
   new webpack.DefinePlugin({
     '__DEV__': JSON.stringify(process.env.NODE_ENV !== 'production')
   }),
-  resolvers.resolveHasteDefines
+  resolvers.resolveHasteDefines,
 ];
 
 var entry = {};
@@ -98,6 +98,12 @@ module.exports = {
       commonjs: 'react',
       commonjs2: 'react',
       amd: 'react',
+    },
+    'react-dom': {
+      root: 'ReactDOM',
+      commonjs: 'react-dom',
+      commonjs2: 'react-dom',
+      amd: 'react-dom',
     },
   },
 

@@ -18,8 +18,6 @@ var TouchableArea = require('./TouchableArea');
 
 var PropTypes = React.PropTypes;
 
-var cloneWithProps = require('react/lib/cloneWithProps');
-
 function isTouchDevice() {
   return 'ontouchstart' in document.documentElement // works on most browsers
       || 'onmsgesturechange' in window; // works on ie10
@@ -46,18 +44,20 @@ var ExampleTouchWrapper = React.createClass({
 
   render() {
     if (!isTouchDevice()) {
-      return cloneWithProps(this.props.children, {
-        tableHeight: this.props.tableHeight,
-        tableWidth: this.props.tableWidth,
+      return React.cloneElement(this.props.children, {
+        height: this.props.tableHeight,
+        width: this.props.tableWidth,
       });
     }
 
-    var example = cloneWithProps(this.props.children, {
-      onContentDimensionsChange: this._onContentDimensionsChange,
-      left: this.state.left,
-      top: this.state.top,
-      tableHeight: this.props.tableHeight,
-      tableWidth: this.props.tableWidth,
+    var example = React.cloneElement(this.props.children, {
+      onContentHeightChange: this._onContentHeightChange,
+      scrollLeft: this.state.left,
+      scrollTop: this.state.top,
+      height: this.props.tableHeight,
+      width: this.props.tableWidth,
+      overflowX: 'hidden',
+      overflowY: 'hidden',
     });
 
     return (
@@ -67,11 +67,11 @@ var ExampleTouchWrapper = React.createClass({
     );
   },
 
-  _onContentDimensionsChange(contentHeight, contentWidth) {
+  _onContentHeightChange(contentHeight) {
     this.scroller.setDimensions(
       this.props.tableWidth,
       this.props.tableHeight,
-      contentWidth,
+      Math.max(600, this.props.tableWidth),
       contentHeight
     );
   },

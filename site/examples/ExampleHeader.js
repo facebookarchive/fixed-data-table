@@ -26,10 +26,11 @@ var ExampleHeader = React.createClass({
             Example:
           </span>
           {' '}
-          {this.props.example.title}
+          <a href={this.props.page.file}>{this.props.page.title}</a>
         </h1>
         <p className="exampleDescription">
-          {this.props.example.description}
+          <a className="exampleCode" href={this.props.page.file}>Example code</a>
+          {this.props.page.description}
         </p>
       </div>
     );
@@ -37,4 +38,3 @@ var ExampleHeader = React.createClass({
 });
 
 module.exports = ExampleHeader;
-
