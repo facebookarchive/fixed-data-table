@@ -33,7 +33,12 @@
 }
 
 .fixedDataTableRowLayout/columnsShadow {
+  position: absolute;
   width: 4px;
+}
+
+.fixedDataTableRowLayout/columnsRightShadow {
+  right: 1px;
 }
 
 .fixedDataTableRowLayout/rowWrapper {
