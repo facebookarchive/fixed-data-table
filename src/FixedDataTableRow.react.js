@@ -138,7 +138,9 @@ var FixedDataTableRowImpl = React.createClass({
         onMouseDown={this.props.onMouseDown ? this._onMouseDown : null}
         onMouseEnter={this.props.onMouseEnter ? this._onMouseEnter : null}
         onMouseLeave={this.props.onMouseLeave ? this._onMouseLeave : null}
-        style={style}>
+        role="row"
+        style={style}
+        tabIndex="-1">
         <div className={cx('fixedDataTableRowLayout/body')}>
           {fixedColumns}
           {scrollableColumns}
