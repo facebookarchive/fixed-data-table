@@ -38,7 +38,7 @@ class MyTable extends React.Component {
 }
 ```
 
-## Create your `Column`s
+## Create your `Columns`
 For each column that needs to be displayed, a `Column` config with 2 important props are required. The `width` of the column and the `cell` content to render. The `Cell` component can wrap any content to provide default table styles and centering.
 
 ```javascript
