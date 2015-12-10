@@ -17,107 +17,6 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @providesModule ScrollbarLayout
- */
-
-.ScrollbarLayout_main {
-  box-sizing: border-box;
-  outline: none;
-  overflow: hidden;
-  position: absolute;
-  -webkit-transition-duration: 250ms;
-          transition-duration: 250ms;
-  -webkit-transition-timing-function: ease;
-          transition-timing-function: ease;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-}
-
-.ScrollbarLayout_mainVertical {
-  bottom: 0;
-  right: 0;
-  top: 0;
-  -webkit-transition-property: background-color width;
-          transition-property: background-color width;
-  width: 15px;
-}
-
-.ScrollbarLayout_mainVertical.public_Scrollbar_mainActive,
-.ScrollbarLayout_mainVertical:hover {
-  width: 17px;
-}
-
-.ScrollbarLayout_mainHorizontal {
-  bottom: 0;
-  height: 15px;
-  left: 0;
-  -webkit-transition-property: background-color height;
-          transition-property: background-color height;
-}
-
-/* Touching the scroll-track directly makes the scroll-track bolder */
-.ScrollbarLayout_mainHorizontal.public_Scrollbar_mainActive,
-.ScrollbarLayout_mainHorizontal:hover {
-  height: 17px;
-}
-
-.ScrollbarLayout_face {
-  left: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: 1;
-}
-
-/**
- * This selector renders the "nub" of the scrollface. The nub must
- * be rendered as pseudo-element so that it won't receive any UI events then
- * we can get the correct `event.offsetX` and `event.offsetY` from the
- * scrollface element while dragging it.
- */
-.ScrollbarLayout_face:after {
-  border-radius: 6px;
-  content: '';
-  display: block;
-  position: absolute;
-  -webkit-transition: background-color 250ms ease;
-          transition: background-color 250ms ease;
-}
-
-.ScrollbarLayout_faceHorizontal {
-  bottom: 0;
-  left: 0;
-  top: 0;
-}
-
-.ScrollbarLayout_faceHorizontal:after {
-  bottom: 4px;
-  left: 0;
-  top: 4px;
-  width: 100%;
-}
-
-.ScrollbarLayout_faceVertical {
-  left: 0;
-  right: 0;
-  top: 0;
-}
-
-.ScrollbarLayout_faceVertical:after {
-  height: 100%;
-  left: 4px;
-  right: 4px;
-  top: 0;
-}
-/**
- * Copyright (c) 2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
  * @providesModule fixedDataTableCellGroupLayout
  */
 
@@ -339,5 +238,106 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 
 .fixedDataTableRowLayout_rowWrapper {
   position: absolute;
+  top: 0;
+}
+/**
+ * Copyright (c) 2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * @providesModule ScrollbarLayout
+ */
+
+.ScrollbarLayout_main {
+  box-sizing: border-box;
+  outline: none;
+  overflow: hidden;
+  position: absolute;
+  -webkit-transition-duration: 250ms;
+          transition-duration: 250ms;
+  -webkit-transition-timing-function: ease;
+          transition-timing-function: ease;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.ScrollbarLayout_mainVertical {
+  bottom: 0;
+  right: 0;
+  top: 0;
+  -webkit-transition-property: background-color width;
+          transition-property: background-color width;
+  width: 15px;
+}
+
+.ScrollbarLayout_mainVertical.public_Scrollbar_mainActive,
+.ScrollbarLayout_mainVertical:hover {
+  width: 17px;
+}
+
+.ScrollbarLayout_mainHorizontal {
+  bottom: 0;
+  height: 15px;
+  left: 0;
+  -webkit-transition-property: background-color height;
+          transition-property: background-color height;
+}
+
+/* Touching the scroll-track directly makes the scroll-track bolder */
+.ScrollbarLayout_mainHorizontal.public_Scrollbar_mainActive,
+.ScrollbarLayout_mainHorizontal:hover {
+  height: 17px;
+}
+
+.ScrollbarLayout_face {
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: 1;
+}
+
+/**
+ * This selector renders the "nub" of the scrollface. The nub must
+ * be rendered as pseudo-element so that it won't receive any UI events then
+ * we can get the correct `event.offsetX` and `event.offsetY` from the
+ * scrollface element while dragging it.
+ */
+.ScrollbarLayout_face:after {
+  border-radius: 6px;
+  content: '';
+  display: block;
+  position: absolute;
+  -webkit-transition: background-color 250ms ease;
+          transition: background-color 250ms ease;
+}
+
+.ScrollbarLayout_faceHorizontal {
+  bottom: 0;
+  left: 0;
+  top: 0;
+}
+
+.ScrollbarLayout_faceHorizontal:after {
+  bottom: 4px;
+  left: 0;
+  top: 4px;
+  width: 100%;
+}
+
+.ScrollbarLayout_faceVertical {
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.ScrollbarLayout_faceVertical:after {
+  height: 100%;
+  left: 4px;
+  right: 4px;
   top: 0;
 }
