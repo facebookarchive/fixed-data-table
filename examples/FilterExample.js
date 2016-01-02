@@ -99,7 +99,7 @@ class FilterExample extends React.Component {
           height={500}
           {...this.props}>
           <Column
-            cell={<ImageCell data={filteredDataList} col="avartar" />}
+            cell={<ImageCell data={filteredDataList} col="avatar" />}
             fixed={true}
             width={50}
           />
