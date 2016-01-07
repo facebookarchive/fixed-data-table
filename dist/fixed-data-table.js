@@ -4680,6 +4680,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        style: style },
 	      React.createElement(
 	        'div',
+            role: "row",
 	        { className: cx('fixedDataTableRowLayout/body') },
 	        fixedColumns,
 	        scrollableColumns,
