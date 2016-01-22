@@ -51,9 +51,9 @@ var ExampleTouchWrapper = React.createClass({
     }
 
     var example = React.cloneElement(this.props.children, {
-      onContentDimensionsChange: this._onContentDimensionsChange,
-      left: this.state.left,
-      top: this.state.top,
+      onContentHeightChange: this._onContentHeightChange,
+      scrollLeft: this.state.left,
+      scrollTop: this.state.top,
       height: this.props.tableHeight,
       width: this.props.tableWidth,
       overflowX: 'hidden',
@@ -67,7 +67,7 @@ var ExampleTouchWrapper = React.createClass({
     );
   },
 
-  _onContentDimensionsChange(contentHeight) {
+  _onContentHeightChange(contentHeight) {
     this.scroller.setDimensions(
       this.props.tableWidth,
       this.props.tableHeight,
