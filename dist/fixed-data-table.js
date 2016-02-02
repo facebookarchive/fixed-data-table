@@ -18,7 +18,7 @@
 		exports["FixedDataTable"] = factory(require("react"), require("react-dom"));
 	else
 		root["FixedDataTable"] = factory(root["React"], root["ReactDOM"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_28__, __WEBPACK_EXTERNAL_MODULE_45__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_28__, __WEBPACK_EXTERNAL_MODULE_54__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -176,9 +176,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var FixedDataTable = __webpack_require__(26);
-	var FixedDataTableCellDefault = __webpack_require__(65);
-	var FixedDataTableColumn = __webpack_require__(63);
-	var FixedDataTableColumnGroup = __webpack_require__(62);
+	var FixedDataTableCellDefault = __webpack_require__(36);
+	var FixedDataTableColumn = __webpack_require__(37);
+	var FixedDataTableColumnGroup = __webpack_require__(38);
 
 	var FixedDataTableRoot = {
 	  Cell: FixedDataTableCellDefault,
@@ -225,11 +225,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	// New Table API
 	var Table = __webpack_require__(29);
-	var Column = __webpack_require__(73);
-	var ColumnGroup = __webpack_require__(74);
+	var Column = __webpack_require__(30);
+	var ColumnGroup = __webpack_require__(31);
 
 	// Transition Cell
-	var TransitionCell = __webpack_require__(75);
+	var TransitionCell = __webpack_require__(32);
 
 	var NEXT_VERSION = '0.7.0';
 	var DOCUMENTATION_URL = 'https://fburl.com/FixedDataTable-v0.6';
@@ -490,6 +490,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * ```
 	     */
 	    onColumnResizeEndCallback: PropTypes.func,
+	    onResizeHandleDoubleClick: PropTypes.func,
 
 	    /**
 	     * Whether a column is currently being resized.
@@ -763,22 +764,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	var React = __webpack_require__(27);
-	var ReactComponentWithPureRenderMixin = __webpack_require__(30);
-	var ReactWheelHandler = __webpack_require__(31);
-	var Scrollbar = __webpack_require__(39);
-	var FixedDataTableBufferedRows = __webpack_require__(53);
-	var FixedDataTableColumnResizeHandle = __webpack_require__(67);
-	var FixedDataTableRow = __webpack_require__(58);
-	var FixedDataTableScrollHelper = __webpack_require__(68);
-	var FixedDataTableWidthHelper = __webpack_require__(70);
+	var ReactComponentWithPureRenderMixin = __webpack_require__(39);
+	var ReactWheelHandler = __webpack_require__(40);
+	var Scrollbar = __webpack_require__(48);
+	var FixedDataTableBufferedRows = __webpack_require__(61);
+	var FixedDataTableColumnResizeHandle = __webpack_require__(71);
+	var FixedDataTableRow = __webpack_require__(66);
+	var FixedDataTableScrollHelper = __webpack_require__(72);
+	var FixedDataTableWidthHelper = __webpack_require__(74);
 
-	var cx = __webpack_require__(47);
-	var debounceCore = __webpack_require__(71);
-	var emptyFunction = __webpack_require__(32);
-	var invariant = __webpack_require__(52);
-	var joinClasses = __webpack_require__(66);
-	var shallowEqual = __webpack_require__(72);
-	var translateDOMPositionXY = __webpack_require__(48);
+	var cx = __webpack_require__(33);
+	var debounceCore = __webpack_require__(75);
+	var emptyFunction = __webpack_require__(41);
+	var invariant = __webpack_require__(60);
+	var joinClasses = __webpack_require__(34);
+	var shallowEqual = __webpack_require__(35);
+	var translateDOMPositionXY = __webpack_require__(56);
 
 	var PropTypes = React.PropTypes;
 
@@ -997,6 +998,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * ```
 	     */
 	    onColumnResizeEndCallback: PropTypes.func,
+	    onResizeHandleDoubleClick: PropTypes.func,
 
 	    /**
 	     * Whether a column is currently being resized.
@@ -1228,7 +1230,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      scrollLeft: state.scrollX,
 	      fixedColumns: state.headFixedColumns,
 	      scrollableColumns: state.headScrollableColumns,
-	      onColumnResize: this._onColumnResize
+	      onColumnResize: this._onColumnResize,
+	      onResizeHandleDoubleClick: this.props.onResizeHandleDoubleClick
 	    });
 
 	    var topShadow;
@@ -1714,6 +1717,832 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 30 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule FixedDataTableColumnNew.react
+	 * @typechecks
+	 */
+
+	'use strict';
+
+	var React = __webpack_require__(27);
+
+	var PropTypes = React.PropTypes;
+
+	/**
+	 * Component that defines the attributes of table column.
+	 */
+	var FixedDataTableColumn = React.createClass({
+	  displayName: 'FixedDataTableColumn',
+
+	  statics: {
+	    __TableColumn__: true
+	  },
+
+	  propTypes: {
+	    /**
+	     * The horizontal alignment of the table cell content.
+	     */
+	    align: PropTypes.oneOf(['left', 'center', 'right']),
+
+	    /**
+	     * Controls if the column is fixed when scrolling in the X axis.
+	     */
+	    fixed: PropTypes.bool,
+
+	    /**
+	     * The header cell for this column.
+	     * This can either be a string a React element, or a function that generates
+	     * a React Element. Passing in a string will render a default header cell
+	     * with that string. By default, the React element passed in can expect to
+	     * receive the following props:
+	     *
+	     * ```
+	     * props: {
+	     *   columnKey: string // (of the column, if given)
+	     *   height: number // (supplied from the Table or rowHeightGetter)
+	     *   width: number // (supplied from the Column)
+	     * }
+	     * ```
+	     *
+	     * Because you are passing in your own React element, you can feel free to
+	     * pass in whatever props you may want or need.
+	     *
+	     * If you pass in a function, you will receive the same props object as the
+	     * first argument.
+	     */
+	    header: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+
+	    /**
+	     * This is the body cell that will be cloned for this column.
+	     * This can either be a string a React element, or a function that generates
+	     * a React Element. Passing in a string will render a default header cell
+	     * with that string. By default, the React element passed in can expect to
+	     * receive the following props:
+	     *
+	     * ```
+	     * props: {
+	     *   rowIndex; number // (the row index of the cell)
+	     *   columnKey: string // (of the column, if given)
+	     *   height: number // (supplied from the Table or rowHeightGetter)
+	     *   width: number // (supplied from the Column)
+	     * }
+	     * ```
+	     *
+	     * Because you are passing in your own React element, you can feel free to
+	     * pass in whatever props you may want or need.
+	     *
+	     * If you pass in a function, you will receive the same props object as the
+	     * first argument.
+	     */
+	    cell: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+
+	    /**
+	     * This is the footer cell for this column.
+	     * This can either be a string a React element, or a function that generates
+	     * a React Element. Passing in a string will render a default header cell
+	     * with that string. By default, the React element passed in can expect to
+	     * receive the following props:
+	     *
+	     * ```
+	     * props: {
+	     *   columnKey: string // (of the column, if given)
+	     *   height: number // (supplied from the Table or rowHeightGetter)
+	     *   width: number // (supplied from the Column)
+	     * }
+	     * ```
+	     *
+	     * Because you are passing in your own React element, you can feel free to
+	     * pass in whatever props you may want or need.
+	     *
+	     * If you pass in a function, you will receive the same props object as the
+	     * first argument.
+	     */
+	    footer: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+
+	    /**
+	     * This is used to uniquely identify the column, and is not required unless
+	     * you a resizing columns. This will be the key given in the
+	     * `onColumnResizeEndCallback` on the Table.
+	     */
+	    columnKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+	    /**
+	     * The pixel width of the column.
+	     */
+	    width: PropTypes.number.isRequired,
+
+	    /**
+	     * If this is a resizable column this is its minimum pixel width.
+	     */
+	    minWidth: PropTypes.number,
+
+	    /**
+	     * If this is a resizable column this is its maximum pixel width.
+	     */
+	    maxWidth: PropTypes.number,
+
+	    /**
+	     * The grow factor relative to other columns. Same as the flex-grow API
+	     * from http://www.w3.org/TR/css3-flexbox/. Basically, take any available
+	     * extra width and distribute it proportionally according to all columns'
+	     * flexGrow values. Defaults to zero (no-flexing).
+	     */
+	    flexGrow: PropTypes.number,
+
+	    /**
+	     * Whether the column can be resized with the
+	     * FixedDataTableColumnResizeHandle. Please note that if a column
+	     * has a flex grow, once you resize the column this will be set to 0.
+	     *
+	     * This property only provides the UI for the column resizing. If this
+	     * is set to true, you will need to set the onColumnResizeEndCallback table
+	     * property and render your columns appropriately.
+	     */
+	    isResizable: PropTypes.bool,
+
+	    /**
+	     * Whether cells in this column can be removed from document when outside
+	     * of viewport as a result of horizontal scrolling.
+	     * Setting this property to true allows the table to not render cells in
+	     * particular column that are outside of viewport for visible rows. This
+	     * allows to create table with many columns and not have vertical scrolling
+	     * performance drop.
+	     * Setting the property to false will keep previous behaviour and keep
+	     * cell rendered if the row it belongs to is visible.
+	     */
+	    allowCellsRecycling: PropTypes.bool
+	  },
+
+	  getDefaultProps: function getDefaultProps() /*object*/{
+	    return {
+	      allowCellsRecycling: false,
+	      fixed: false
+	    };
+	  },
+
+	  render: function render() {
+	    if (true) {
+	      throw new Error('Component <FixedDataTableColumn /> should never render');
+	    }
+	    return null;
+	  }
+	});
+
+	module.exports = FixedDataTableColumn;
+
+/***/ },
+/* 31 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule FixedDataTableColumnGroupNew.react
+	 * @typechecks
+	 */
+
+	'use strict';
+
+	var React = __webpack_require__(27);
+
+	var PropTypes = React.PropTypes;
+
+	/**
+	 * Component that defines the attributes of a table column group.
+	 */
+	var FixedDataTableColumnGroup = React.createClass({
+	  displayName: 'FixedDataTableColumnGroup',
+
+	  statics: {
+	    __TableColumnGroup__: true
+	  },
+
+	  propTypes: {
+	    /**
+	     * The horizontal alignment of the table cell content.
+	     */
+	    align: PropTypes.oneOf(['left', 'center', 'right']),
+
+	    /**
+	     * Controls if the column group is fixed when scrolling in the X axis.
+	     */
+	    fixed: PropTypes.bool,
+
+	    /**
+	     * This is the header cell for this column group.
+	     * This can either be a string or a React element. Passing in a string
+	     * will render a default footer cell with that string. By default, the React
+	     * element passed in can expect to receive the following props:
+	     *
+	     * ```
+	     * props: {
+	     *   height: number // (supplied from the groupHeaderHeight)
+	     *   width: number // (supplied from the Column)
+	     * }
+	     * ```
+	     *
+	     * Because you are passing in your own React element, you can feel free to
+	     * pass in whatever props you may want or need.
+	     *
+	     * You can also pass in a function that returns a react elemnt, with the
+	     * props object above passed in as the first parameter.
+	     */
+	    header: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+
+	  },
+
+	  getDefaultProps: function getDefaultProps() /*object*/{
+	    return {
+	      fixed: false
+	    };
+	  },
+
+	  render: function render() {
+	    if (true) {
+	      throw new Error('Component <FixedDataTableColumnGroup /> should never render');
+	    }
+	    return null;
+	  }
+	});
+
+	module.exports = FixedDataTableColumnGroup;
+
+/***/ },
+/* 32 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule FixedDataTableCellTransition.react
+	 */
+
+	/**
+	 * TRANSITION SHIM
+	 * This acts to provide an intermediate mapping from the old API to the new API.
+	 *
+	 * When ready, remove this file and rename the providesModule in
+	 * FixedDataTableCellNew.react and dependency in FixedDataTableCellGroup.react
+	 */
+
+	'use strict';
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var React = __webpack_require__(27);
+	var PropTypes = React.PropTypes;
+
+	var cx = __webpack_require__(33);
+	var joinClasses = __webpack_require__(34);
+	var shallowEqual = __webpack_require__(35);
+
+	var CellDefault = __webpack_require__(36);
+
+	var TransitionCell = React.createClass({
+	  displayName: 'TransitionCell',
+
+	  propTypes: {
+	    label: PropTypes.string, // header, footer
+	    className: PropTypes.string,
+	    rowIndex: PropTypes.number,
+	    rowGetter: PropTypes.func, // cell
+	    dataKey: PropTypes.oneOfType([// cell, footer
+	    PropTypes.string, PropTypes.number]),
+	    cellRenderer: PropTypes.func,
+	    cellDataGetter: PropTypes.func,
+	    footerDataGetter: PropTypes.func, // footer
+	    footerData: PropTypes.any, // footer
+	    columnData: PropTypes.any, // cell, header
+	    width: PropTypes.number,
+	    height: PropTypes.number,
+	    isHeaderCell: PropTypes.bool, // header
+	    isFooterCell: PropTypes.bool },
+
+	  // footer
+	  shouldComponentUpdate: function shouldComponentUpdate( /*object*/nextProps) {
+	    var update = false;
+	    var rowData;
+	    if (nextProps.rowGetter) {
+	      rowData = nextProps.rowGetter(nextProps.rowIndex);
+	      if (this._rowData !== rowData) {
+	        update = true;
+	      }
+	    }
+
+	    var cellData;
+	    if (nextProps.dataKey != null) {
+	      if (nextProps.cellDataGetter) {
+	        cellData = nextProps.cellDataGetter(nextProps.dataKey, rowData);
+	      }
+	      if (!cellData && rowData) {
+	        cellData = rowData[nextProps.dataKey];
+	      }
+	    }
+	    if (this._cellData !== cellData) {
+	      update = true;
+	    }
+	    this._rowData = rowData;
+	    this._cellData = cellData;
+
+	    return update || !shallowEqual(nextProps, this.props);
+	  },
+
+	  _getCellData: function _getCellData(props) {
+	    var dataKey = props.dataKey;
+	    if (dataKey == null) {
+	      return null;
+	    }
+
+	    var rowData;
+	    if (props.rowGetter) {
+	      rowData = props.rowGetter(props.rowIndex);
+	    }
+
+	    if (props.cellDataGetter) {
+	      return props.cellDataGetter(dataKey, rowData);
+	    }
+
+	    if (rowData) {
+	      return rowData[dataKey];
+	    }
+
+	    if (props.footerDataGetter) {
+	      return props.footerDataGetter()[dataKey];
+	    }
+
+	    if (props.footerData) {
+	      return props.footerData[dataKey];
+	    }
+
+	    if (props.headerDataGetter) {
+	      return props.headerDataGetter[dataKey];
+	    }
+	  },
+
+	  _getRowData: function _getRowData(props) {
+	    if (props.rowGetter) {
+	      return props.rowGetter(props.rowIndex) || {};
+	    }
+
+	    if (props.footerDataGetter) {
+	      return props.footerDataGetter() || {};
+	    }
+
+	    if (props.footerData) {
+	      return props.footerData || {};
+	    }
+
+	    return {};
+	  },
+
+	  render: function render() {
+	    var props = this.props;
+
+	    var cellData = this._getCellData(props);
+	    var content = cellData;
+	    var rowData = this._getRowData(props);
+	    var usingRenderer = !!(props.cellRenderer || props.groupHeaderRenderer);
+
+	    if (props.isHeaderCell || props.isFooterCell) {
+	      content = content || props.label;
+	    }
+
+	    if (props.cellRenderer) {
+	      if (props.isHeaderCell || props.isFooterCell) {
+	        content = props.cellRenderer(props.label, props.dataKey, props.columnData, rowData, props.width) || props.label;
+	      } else {
+	        content = props.cellRenderer(cellData, props.dataKey, rowData, props.rowIndex, props.columnData, props.width);
+	      }
+	    }
+
+	    if (props.groupHeaderRenderer) {
+	      content = props.groupHeaderRenderer(props.label, props.dataKey, // index in children
+	      props.groupHeaderData, props.groupHeaderLabels, props.width) || content;
+	    }
+
+	    var contentClass = cx('public/fixedDataTableCell/cellContent');
+
+	    if (React.isValidElement(content) && usingRenderer) {
+	      content = React.cloneElement(content, {
+	        className: joinClasses(content.props.className, contentClass)
+	      });
+	    } else {
+	      return React.createElement(
+	        CellDefault,
+	        props,
+	        content
+	      );
+	    }
+
+	    var innerStyle = _extends({
+	      height: props.height,
+	      width: props.width
+	    }, props.style);
+
+	    return React.createElement(
+	      'div',
+	      _extends({}, this.props, {
+	        className: joinClasses(cx('fixedDataTableCellLayout/wrap1'), cx('public/fixedDataTableCell/wrap1'), this.props.className),
+	        style: innerStyle }),
+	      React.createElement(
+	        'div',
+	        {
+	          className: joinClasses(cx('fixedDataTableCellLayout/wrap2'), cx('public/fixedDataTableCell/wrap2')) },
+	        React.createElement(
+	          'div',
+	          {
+	            className: joinClasses(cx('fixedDataTableCellLayout/wrap3'), cx('public/fixedDataTableCell/wrap3')) },
+	          content
+	        )
+	      )
+	    );
+	  }
+	});
+
+	module.exports = TransitionCell;
+
+/***/ },
+/* 33 */
+/***/ function(module, exports) {
+
+	/**
+	 * Copyright (c) 2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule cx
+	 */
+
+	'use strict';
+
+	var slashReplaceRegex = /\//g;
+	var cache = {};
+
+	function getClassName(className) {
+	  if (cache[className]) {
+	    return cache[className];
+	  }
+
+	  cache[className] = className.replace(slashReplaceRegex, '_');
+	  return cache[className];
+	}
+
+	/**
+	 * This function is used to mark string literals representing CSS class names
+	 * so that they can be transformed statically. This allows for modularization
+	 * and minification of CSS class names.
+	 *
+	 * In static_upstream, this function is actually implemented, but it should
+	 * eventually be replaced with something more descriptive, and the transform
+	 * that is used in the main stack should be ported for use elsewhere.
+	 *
+	 * @param string|object className to modularize, or an object of key/values.
+	 *                      In the object case, the values are conditions that
+	 *                      determine if the className keys should be included.
+	 * @param [string ...]  Variable list of classNames in the string case.
+	 * @return string       Renderable space-separated CSS className.
+	 */
+	function cx(classNames) {
+	  var classNamesArray;
+	  if (typeof classNames == 'object') {
+	    classNamesArray = Object.keys(classNames).filter(function (className) {
+	      return classNames[className];
+	    });
+	  } else {
+	    classNamesArray = Array.prototype.slice.call(arguments);
+	  }
+
+	  return classNamesArray.map(getClassName).join(' ');
+	}
+
+	module.exports = cx;
+
+/***/ },
+/* 34 */
+/***/ function(module, exports) {
+
+	/**
+	 * Copyright 2013-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule joinClasses
+	 * @typechecks static-only
+	 */
+
+	'use strict';
+
+	/**
+	 * Combines multiple className strings into one.
+	 * http://jsperf.com/joinclasses-args-vs-array
+	 *
+	 * @param {...?string} className
+	 * @return {string}
+	 */
+	function joinClasses(className /*, ... */) {
+	  if (!className) {
+	    className = '';
+	  }
+	  var nextClass;
+	  var argLength = arguments.length;
+	  if (argLength > 1) {
+	    for (var ii = 1; ii < argLength; ii++) {
+	      nextClass = arguments[ii];
+	      if (nextClass) {
+	        className = (className ? className + ' ' : '') + nextClass;
+	      }
+	    }
+	  }
+	  return className;
+	}
+
+	module.exports = joinClasses;
+
+/***/ },
+/* 35 */
+/***/ function(module, exports) {
+
+	/**
+	 * Copyright (c) 2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule shallowEqual
+	 * @typechecks
+	 * 
+	 */
+
+	'use strict';
+
+	var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+	/**
+	 * Performs equality by iterating through keys on an object and returning false
+	 * when any key has values which are not strictly equal between the arguments.
+	 * Returns true when the values of all keys are strictly equal.
+	 */
+	function shallowEqual(objA, objB) {
+	  if (objA === objB) {
+	    return true;
+	  }
+
+	  if (typeof objA !== 'object' || objA === null || typeof objB !== 'object' || objB === null) {
+	    return false;
+	  }
+
+	  var keysA = Object.keys(objA);
+	  var keysB = Object.keys(objB);
+
+	  if (keysA.length !== keysB.length) {
+	    return false;
+	  }
+
+	  // Test for A's keys different from B.
+	  var bHasOwnProperty = hasOwnProperty.bind(objB);
+	  for (var i = 0; i < keysA.length; i++) {
+	    if (!bHasOwnProperty(keysA[i]) || objA[keysA[i]] !== objB[keysA[i]]) {
+	      return false;
+	    }
+	  }
+
+	  return true;
+	}
+
+	module.exports = shallowEqual;
+
+/***/ },
+/* 36 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule FixedDataTableCellDefault.react
+	 * @typechecks
+	 */
+
+	'use strict';
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+	var React = __webpack_require__(27);
+
+	var cx = __webpack_require__(33);
+	var joinClasses = __webpack_require__(34);
+
+	var PropTypes = React.PropTypes;
+
+	/**
+	 * Component that handles default cell layout and styling.
+	 *
+	 * All props unless specified below will be set onto the top level `div`
+	 * rendered by the cell.
+	 *
+	 * Example usage via from a `Column`:
+	 * ```
+	 * const MyColumn = (
+	 *   <Column
+	 *     cell={({rowIndex, width, height}) => (
+	 *       <Cell
+	 *         width={width}
+	 *         height={height}
+	 *         className="my-class">
+	 *         Cell number: <span>{rowIndex}</span>
+	*        </Cell>
+	 *     )}
+	 *     width={100}
+	 *   />
+	 * );
+	 * ```
+	 */
+	var FixedDataTableCellDefault = React.createClass({
+	  displayName: 'FixedDataTableCellDefault',
+
+	  propTypes: {
+
+	    /**
+	     * Outer height of the cell.
+	     */
+	    height: PropTypes.number,
+
+	    /**
+	     * Outer width of the cell.
+	     */
+	    width: PropTypes.number,
+
+	    /**
+	     * Optional prop that if specified on the `Column` will be passed to the
+	     * cell. It can be used to uniquely identify which column is the cell is in.
+	     */
+	    columnKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+	  },
+
+	  render: function render() {
+	    var _props = this.props;
+	    var height = _props.height;
+	    var width = _props.width;
+	    var style = _props.style;
+	    var className = _props.className;
+	    var children = _props.children;
+
+	    var props = _objectWithoutProperties(_props, ['height', 'width', 'style', 'className', 'children']);
+
+	    var innerStyle = _extends({
+	      height: height,
+	      width: width
+	    }, style);
+
+	    return React.createElement(
+	      'div',
+	      _extends({}, props, {
+	        className: joinClasses(cx('fixedDataTableCellLayout/wrap1'), cx('public/fixedDataTableCell/wrap1'), className),
+	        style: innerStyle }),
+	      React.createElement(
+	        'div',
+	        {
+	          className: joinClasses(cx('fixedDataTableCellLayout/wrap2'), cx('public/fixedDataTableCell/wrap2')) },
+	        React.createElement(
+	          'div',
+	          {
+	            className: joinClasses(cx('fixedDataTableCellLayout/wrap3'), cx('public/fixedDataTableCell/wrap3')) },
+	          React.createElement(
+	            'div',
+	            { className: cx('public/fixedDataTableCell/cellContent') },
+	            children
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+
+	module.exports = FixedDataTableCellDefault;
+
+/***/ },
+/* 37 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule FixedDataTableColumn.react
+	 */
+
+	/**
+	 * TRANSITION SHIM
+	 * This acts to provide an intermediate mapping from the old API to the new API.
+	 *
+	 * When ready, remove this file and rename the providesModule in
+	 * FixedDataTableColumnNew.react
+	 */
+
+	'use strict';
+
+	var React = __webpack_require__(27);
+
+	var TransitionColumn = React.createClass({
+	  displayName: 'TransitionColumn',
+
+	  statics: {
+	    __TableColumn__: true
+	  },
+
+	  render: function render() {
+	    if (true) {
+	      throw new Error('Component <TransitionColumn /> should never render');
+	    }
+	    return null;
+	  }
+	});
+
+	module.exports = TransitionColumn;
+
+/***/ },
+/* 38 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule FixedDataTableColumnGroup.react
+	 */
+
+	/**
+	 * TRANSITION SHIM
+	 * This provides an intermediate mapping from the old API to the new API.
+	 *
+	 * When ready, remove this file and rename the providesModule in
+	 * FixedDataTableColumnNew.react
+	 */
+
+	'use strict';
+
+	var React = __webpack_require__(27);
+
+	var TransitionColumnGroup = React.createClass({
+	  displayName: 'TransitionColumnGroup',
+
+	  statics: {
+	    __TableColumnGroup__: true
+	  },
+
+	  render: function render() {
+	    if (true) {
+	      throw new Error('Component <TransitionColumnGroup /> should never render');
+	    }
+	    return null;
+	  }
+	});
+
+	module.exports = TransitionColumnGroup;
+
+/***/ },
+/* 39 */
 /***/ function(module, exports) {
 
 	/**
@@ -1789,7 +2618,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ReactComponentWithPureRenderMixin;
 
 /***/ },
-/* 31 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1813,9 +2642,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var emptyFunction = __webpack_require__(32);
-	var normalizeWheel = __webpack_require__(33);
-	var requestAnimationFramePolyfill = __webpack_require__(37);
+	var emptyFunction = __webpack_require__(41);
+	var normalizeWheel = __webpack_require__(42);
+	var requestAnimationFramePolyfill = __webpack_require__(46);
 
 	var ReactWheelHandler = (function () {
 	  /**
@@ -1899,7 +2728,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ReactWheelHandler;
 
 /***/ },
-/* 32 */
+/* 41 */
 /***/ function(module, exports) {
 
 	/**
@@ -1942,7 +2771,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = emptyFunction;
 
 /***/ },
-/* 33 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1959,9 +2788,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var UserAgent_DEPRECATED = __webpack_require__(34);
+	var UserAgent_DEPRECATED = __webpack_require__(43);
 
-	var isEventSupported = __webpack_require__(35);
+	var isEventSupported = __webpack_require__(44);
 
 	// Reasonable defaults
 	var PIXEL_STEP = 10;
@@ -2143,7 +2972,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = normalizeWheel;
 
 /***/ },
-/* 34 */
+/* 43 */
 /***/ function(module, exports) {
 
 	/**
@@ -2426,7 +3255,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = UserAgent_DEPRECATED;
 
 /***/ },
-/* 35 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2442,7 +3271,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var ExecutionEnvironment = __webpack_require__(36);
+	var ExecutionEnvironment = __webpack_require__(45);
 
 	var useHasFeature;
 	if (ExecutionEnvironment.canUseDOM) {
@@ -2491,7 +3320,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = isEventSupported;
 
 /***/ },
-/* 36 */
+/* 45 */
 /***/ function(module, exports) {
 
 	/**
@@ -2534,7 +3363,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ExecutionEnvironment;
 
 /***/ },
-/* 37 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -2550,8 +3379,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var emptyFunction = __webpack_require__(32);
-	var nativeRequestAnimationFrame = __webpack_require__(38);
+	var emptyFunction = __webpack_require__(41);
+	var nativeRequestAnimationFrame = __webpack_require__(47);
 
 	var lastTime = 0;
 
@@ -2575,7 +3404,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 38 */
+/* 47 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -2597,7 +3426,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 39 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2614,17 +3443,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var DOMMouseMoveTracker = __webpack_require__(40);
-	var Keys = __webpack_require__(43);
+	var DOMMouseMoveTracker = __webpack_require__(49);
+	var Keys = __webpack_require__(52);
 	var React = __webpack_require__(27);
-	var ReactDOM = __webpack_require__(44);
-	var ReactComponentWithPureRenderMixin = __webpack_require__(30);
-	var ReactWheelHandler = __webpack_require__(31);
+	var ReactDOM = __webpack_require__(53);
+	var ReactComponentWithPureRenderMixin = __webpack_require__(39);
+	var ReactWheelHandler = __webpack_require__(40);
 
-	var cssVar = __webpack_require__(46);
-	var cx = __webpack_require__(47);
-	var emptyFunction = __webpack_require__(32);
-	var translateDOMPositionXY = __webpack_require__(48);
+	var cssVar = __webpack_require__(55);
+	var cx = __webpack_require__(33);
+	var emptyFunction = __webpack_require__(41);
+	var translateDOMPositionXY = __webpack_require__(56);
 
 	var PropTypes = React.PropTypes;
 
@@ -3049,7 +3878,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Scrollbar;
 
 /***/ },
-/* 40 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3077,10 +3906,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var EventListener = __webpack_require__(41);
+	var EventListener = __webpack_require__(50);
 
-	var cancelAnimationFramePolyfill = __webpack_require__(42);
-	var requestAnimationFramePolyfill = __webpack_require__(37);
+	var cancelAnimationFramePolyfill = __webpack_require__(51);
+	var requestAnimationFramePolyfill = __webpack_require__(46);
 
 	var DOMMouseMoveTracker = (function () {
 	  /**
@@ -3213,7 +4042,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = DOMMouseMoveTracker;
 
 /***/ },
-/* 41 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3230,7 +4059,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var emptyFunction = __webpack_require__(32);
+	var emptyFunction = __webpack_require__(41);
 
 	/**
 	 * Upstream version of event listener. Does not take into account specific
@@ -3295,7 +4124,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = EventListener;
 
 /***/ },
-/* 42 */
+/* 51 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -3321,7 +4150,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 43 */
+/* 52 */
 /***/ function(module, exports) {
 
 	/**
@@ -3363,7 +4192,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 44 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3379,16 +4208,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	module.exports = __webpack_require__(45);
+	module.exports = __webpack_require__(54);
 
 /***/ },
-/* 45 */
+/* 54 */
 /***/ function(module, exports) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_45__;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_54__;
 
 /***/ },
-/* 46 */
+/* 55 */
 /***/ function(module, exports) {
 
 	/**
@@ -3433,66 +4262,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = cssVar;
 
 /***/ },
-/* 47 */
-/***/ function(module, exports) {
-
-	/**
-	 * Copyright (c) 2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule cx
-	 */
-
-	'use strict';
-
-	var slashReplaceRegex = /\//g;
-	var cache = {};
-
-	function getClassName(className) {
-	  if (cache[className]) {
-	    return cache[className];
-	  }
-
-	  cache[className] = className.replace(slashReplaceRegex, '_');
-	  return cache[className];
-	}
-
-	/**
-	 * This function is used to mark string literals representing CSS class names
-	 * so that they can be transformed statically. This allows for modularization
-	 * and minification of CSS class names.
-	 *
-	 * In static_upstream, this function is actually implemented, but it should
-	 * eventually be replaced with something more descriptive, and the transform
-	 * that is used in the main stack should be ported for use elsewhere.
-	 *
-	 * @param string|object className to modularize, or an object of key/values.
-	 *                      In the object case, the values are conditions that
-	 *                      determine if the className keys should be included.
-	 * @param [string ...]  Variable list of classNames in the string case.
-	 * @return string       Renderable space-separated CSS className.
-	 */
-	function cx(classNames) {
-	  var classNamesArray;
-	  if (typeof classNames == 'object') {
-	    classNamesArray = Object.keys(classNames).filter(function (className) {
-	      return classNames[className];
-	    });
-	  } else {
-	    classNamesArray = Array.prototype.slice.call(arguments);
-	  }
-
-	  return classNamesArray.map(getClassName).join(' ');
-	}
-
-	module.exports = cx;
-
-/***/ },
-/* 48 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -3509,9 +4279,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var BrowserSupportCore = __webpack_require__(49);
+	var BrowserSupportCore = __webpack_require__(57);
 
-	var getVendorPrefixedName = __webpack_require__(50);
+	var getVendorPrefixedName = __webpack_require__(58);
 
 	var TRANSFORM = getVendorPrefixedName('transform');
 	var BACKFACE_VISIBILITY = getVendorPrefixedName('backfaceVisibility');
@@ -3546,7 +4316,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 49 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3562,7 +4332,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var getVendorPrefixedName = __webpack_require__(50);
+	var getVendorPrefixedName = __webpack_require__(58);
 
 	var BrowserSupportCore = {
 	  /**
@@ -3597,7 +4367,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = BrowserSupportCore;
 
 /***/ },
-/* 50 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3614,10 +4384,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var ExecutionEnvironment = __webpack_require__(36);
+	var ExecutionEnvironment = __webpack_require__(45);
 
-	var camelize = __webpack_require__(51);
-	var invariant = __webpack_require__(52);
+	var camelize = __webpack_require__(59);
+	var invariant = __webpack_require__(60);
 
 	var memoized = {};
 	var prefixes = ['Webkit', 'ms', 'Moz', 'O'];
@@ -3654,7 +4424,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = getVendorPrefixedName;
 
 /***/ },
-/* 51 */
+/* 59 */
 /***/ function(module, exports) {
 
 	/**
@@ -3691,7 +4461,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = camelize;
 
 /***/ },
-/* 52 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3745,7 +4515,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = invariant;
 
 /***/ },
-/* 53 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3763,13 +4533,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var React = __webpack_require__(27);
-	var FixedDataTableRowBuffer = __webpack_require__(54);
-	var FixedDataTableRow = __webpack_require__(58);
+	var FixedDataTableRowBuffer = __webpack_require__(62);
+	var FixedDataTableRow = __webpack_require__(66);
 
-	var cx = __webpack_require__(47);
-	var emptyFunction = __webpack_require__(32);
-	var joinClasses = __webpack_require__(66);
-	var translateDOMPositionXY = __webpack_require__(48);
+	var cx = __webpack_require__(33);
+	var emptyFunction = __webpack_require__(41);
+	var joinClasses = __webpack_require__(34);
+	var translateDOMPositionXY = __webpack_require__(56);
 
 	var PropTypes = React.PropTypes;
 
@@ -3905,7 +4675,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = FixedDataTableBufferedRows;
 
 /***/ },
-/* 54 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3926,10 +4696,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var IntegerBufferSet = __webpack_require__(55);
+	var IntegerBufferSet = __webpack_require__(63);
 
-	var clamp = __webpack_require__(57);
-	var invariant = __webpack_require__(52);
+	var clamp = __webpack_require__(65);
+	var invariant = __webpack_require__(60);
 	var MIN_BUFFER_ROWS = 3;
 	var MAX_BUFFER_ROWS = 6;
 
@@ -4033,7 +4803,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = FixedDataTableRowBuffer;
 
 /***/ },
-/* 55 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4054,9 +4824,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var Heap = __webpack_require__(56);
+	var Heap = __webpack_require__(64);
 
-	var invariant = __webpack_require__(52);
+	var invariant = __webpack_require__(60);
 
 	// Data structure that allows to store values and assign positions to them
 	// in a way to minimize changing positions of stored values when new ones are
@@ -4218,7 +4988,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = IntegerBufferSet;
 
 /***/ },
-/* 56 */
+/* 64 */
 /***/ function(module, exports) {
 
 	/**
@@ -4402,7 +5172,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Heap;
 
 /***/ },
-/* 57 */
+/* 65 */
 /***/ function(module, exports) {
 
 	/**
@@ -4439,7 +5209,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = clamp;
 
 /***/ },
-/* 58 */
+/* 66 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4459,11 +5229,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	var React = __webpack_require__(27);
-	var FixedDataTableCellGroup = __webpack_require__(59);
+	var FixedDataTableCellGroup = __webpack_require__(67);
 
-	var cx = __webpack_require__(47);
-	var joinClasses = __webpack_require__(66);
-	var translateDOMPositionXY = __webpack_require__(48);
+	var cx = __webpack_require__(33);
+	var joinClasses = __webpack_require__(34);
+	var translateDOMPositionXY = __webpack_require__(56);
 
 	var PropTypes = React.PropTypes;
 
@@ -4530,7 +5300,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @param number|string columnKey
 	     * @param object event
 	     */
-	    onColumnResize: PropTypes.func
+	    onColumnResize: PropTypes.func,
+	    onResizeHandleDoubleClick: PropTypes.func
 	  },
 
 	  render: function render() /*object*/{
@@ -4558,7 +5329,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      columns: this.props.fixedColumns,
 	      onColumnResize: this.props.onColumnResize,
 	      rowHeight: this.props.height,
-	      rowIndex: this.props.index
+	      rowIndex: this.props.index,
+	      onResizeHandleDoubleClick: this.props.onResizeHandleDoubleClick
 	    });
 	    var columnsShadow = this._renderColumnsShadow(fixedColumnsWidth);
 	    var scrollableColumns = React.createElement(FixedDataTableCellGroup, {
@@ -4572,7 +5344,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      columns: this.props.scrollableColumns,
 	      onColumnResize: this.props.onColumnResize,
 	      rowHeight: this.props.height,
-	      rowIndex: this.props.index
+	      rowIndex: this.props.index,
+	      onResizeHandleDoubleClick: this.props.onResizeHandleDoubleClick
 	    });
 
 	    return React.createElement(
@@ -4693,7 +5466,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = FixedDataTableRow;
 
 /***/ },
-/* 59 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4714,12 +5487,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-	var FixedDataTableHelper = __webpack_require__(60);
+	var FixedDataTableHelper = __webpack_require__(68);
 	var React = __webpack_require__(27);
-	var FixedDataTableCell = __webpack_require__(64);
+	var FixedDataTableCell = __webpack_require__(70);
 
-	var cx = __webpack_require__(47);
-	var translateDOMPositionXY = __webpack_require__(48);
+	var cx = __webpack_require__(33);
+	var translateDOMPositionXY = __webpack_require__(56);
 
 	var PropTypes = React.PropTypes;
 
@@ -4745,6 +5518,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    left: PropTypes.number,
 
 	    onColumnResize: PropTypes.func,
+
+	    onResizeHandleDoubleClick: PropTypes.func,
 
 	    rowHeight: PropTypes.number.isRequired,
 
@@ -4814,7 +5589,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      columnKey: columnProps.columnKey,
 	      width: columnProps.width,
 	      left: left,
-	      cell: columnProps.cell
+	      cell: columnProps.cell,
+	      onResizeHandleDoubleClick: props.onResizeHandleDoubleClick
 	    });
 	  },
 
@@ -4905,7 +5681,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = FixedDataTableCellGroup;
 
 /***/ },
-/* 60 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4922,10 +5698,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var Locale = __webpack_require__(61);
+	var Locale = __webpack_require__(69);
 	var React = __webpack_require__(27);
-	var FixedDataTableColumnGroup = __webpack_require__(62);
-	var FixedDataTableColumn = __webpack_require__(63);
+	var FixedDataTableColumnGroup = __webpack_require__(38);
+	var FixedDataTableColumn = __webpack_require__(37);
 
 	var DIR_SIGN = Locale.isRTL() ? -1 : +1;
 	// A cell up to 5px outside of the visible area will still be considered visible
@@ -5014,7 +5790,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = FixedDataTableHelper;
 
 /***/ },
-/* 61 */
+/* 69 */
 /***/ function(module, exports) {
 
 	/**
@@ -5043,95 +5819,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Locale;
 
 /***/ },
-/* 62 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule FixedDataTableColumnGroup.react
-	 */
-
-	/**
-	 * TRANSITION SHIM
-	 * This provides an intermediate mapping from the old API to the new API.
-	 *
-	 * When ready, remove this file and rename the providesModule in
-	 * FixedDataTableColumnNew.react
-	 */
-
-	'use strict';
-
-	var React = __webpack_require__(27);
-
-	var TransitionColumnGroup = React.createClass({
-	  displayName: 'TransitionColumnGroup',
-
-	  statics: {
-	    __TableColumnGroup__: true
-	  },
-
-	  render: function render() {
-	    if (true) {
-	      throw new Error('Component <TransitionColumnGroup /> should never render');
-	    }
-	    return null;
-	  }
-	});
-
-	module.exports = TransitionColumnGroup;
-
-/***/ },
-/* 63 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule FixedDataTableColumn.react
-	 */
-
-	/**
-	 * TRANSITION SHIM
-	 * This acts to provide an intermediate mapping from the old API to the new API.
-	 *
-	 * When ready, remove this file and rename the providesModule in
-	 * FixedDataTableColumnNew.react
-	 */
-
-	'use strict';
-
-	var React = __webpack_require__(27);
-
-	var TransitionColumn = React.createClass({
-	  displayName: 'TransitionColumn',
-
-	  statics: {
-	    __TableColumn__: true
-	  },
-
-	  render: function render() {
-	    if (true) {
-	      throw new Error('Component <TransitionColumn /> should never render');
-	    }
-	    return null;
-	  }
-	});
-
-	module.exports = TransitionColumn;
-
-/***/ },
-/* 64 */
+/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5150,11 +5838,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-	var FixedDataTableCellDefault = __webpack_require__(65);
-	var FixedDataTableHelper = __webpack_require__(60);
+	var FixedDataTableCellDefault = __webpack_require__(36);
+	var FixedDataTableHelper = __webpack_require__(68);
 	var React = __webpack_require__(27);
-	var cx = __webpack_require__(47);
-	var joinClasses = __webpack_require__(66);
+	var cx = __webpack_require__(33);
+	var joinClasses = __webpack_require__(34);
 
 	var DIR_SIGN = FixedDataTableHelper.DIR_SIGN;
 
@@ -5205,6 +5893,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * @param object event
 	     */
 	    onColumnResize: PropTypes.func,
+	    onResizeHandleDoubleClick: PropTypes.func,
 
 	    /**
 	     * The left offset in pixels of the cell.
@@ -5297,6 +5986,35 @@ return /******/ (function(modules) { // webpackBootstrap
 	      content
 	    );
 	  },
+	  _clickCount: 0,
+
+	  _onDoubleClick: function _onDoubleClick(event) {
+
+	    var columnKey = this.props.columnKey;
+
+	    console.log("you are genius !");
+
+	    this.props.onResizeHandleDoubleClick(columnKey);
+	  },
+	  _clickDispatcher: function _clickDispatcher(event) {
+	    // to dispatch event based on single click or double click
+
+	    event.stopPropagation();
+
+	    this._clickCount++;
+
+	    if (this._clickCount === 1) {
+
+	      this.props.onColumnResize(this.props.left, this.props.width, this.props.minWidth, this.props.maxWidth, this.props.columnKey, event);
+	    } else if (this._clickCount === 2) {
+
+	      this._onDoubleClick();
+	    }
+
+	    setTimeout((function () {
+	      this._clickCount = 0;
+	    }).bind(this), 500);
+	  },
 
 	  _onColumnResizerMouseDown: function _onColumnResizerMouseDown( /*object*/event) {
 	    this.props.onColumnResize(this.props.left, this.props.width, this.props.minWidth, this.props.maxWidth, this.props.columnKey, event);
@@ -5306,130 +6024,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = FixedDataTableCell;
 
 /***/ },
-/* 65 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule FixedDataTableCellDefault.react
-	 * @typechecks
-	 */
-
-	'use strict';
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-	var React = __webpack_require__(27);
-
-	var cx = __webpack_require__(47);
-	var joinClasses = __webpack_require__(66);
-
-	var PropTypes = React.PropTypes;
-
-	var FixedDataTableCellDefault = React.createClass({
-	  displayName: 'FixedDataTableCellDefault',
-
-	  propTypes: {
-	    height: PropTypes.number,
-	    width: PropTypes.number,
-	    style: PropTypes.object,
-	    className: PropTypes.string
-	  },
-
-	  render: function render() {
-	    var _props = this.props;
-	    var height = _props.height;
-	    var width = _props.width;
-	    var style = _props.style;
-	    var className = _props.className;
-
-	    var props = _objectWithoutProperties(_props, ['height', 'width', 'style', 'className']);
-
-	    var innerStyle = _extends({
-	      height: height,
-	      width: width
-	    }, style);
-
-	    return React.createElement(
-	      'div',
-	      _extends({}, this.props, {
-	        className: joinClasses(cx('fixedDataTableCellLayout/wrap1'), cx('public/fixedDataTableCell/wrap1'), className),
-	        style: innerStyle }),
-	      React.createElement(
-	        'div',
-	        {
-	          className: joinClasses(cx('fixedDataTableCellLayout/wrap2'), cx('public/fixedDataTableCell/wrap2')) },
-	        React.createElement(
-	          'div',
-	          {
-	            className: joinClasses(cx('fixedDataTableCellLayout/wrap3'), cx('public/fixedDataTableCell/wrap3')) },
-	          React.createElement(
-	            'div',
-	            { className: cx('public/fixedDataTableCell/cellContent') },
-	            props.children
-	          )
-	        )
-	      )
-	    );
-	  }
-	});
-
-	module.exports = FixedDataTableCellDefault;
-
-/***/ },
-/* 66 */
-/***/ function(module, exports) {
-
-	/**
-	 * Copyright 2013-2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule joinClasses
-	 * @typechecks static-only
-	 */
-
-	'use strict';
-
-	/**
-	 * Combines multiple className strings into one.
-	 * http://jsperf.com/joinclasses-args-vs-array
-	 *
-	 * @param {...?string} className
-	 * @return {string}
-	 */
-	function joinClasses(className /*, ... */) {
-	  if (!className) {
-	    className = '';
-	  }
-	  var nextClass;
-	  var argLength = arguments.length;
-	  if (argLength > 1) {
-	    for (var ii = 1; ii < argLength; ii++) {
-	      nextClass = arguments[ii];
-	      if (nextClass) {
-	        className = (className ? className + ' ' : '') + nextClass;
-	      }
-	    }
-	  }
-	  return className;
-	}
-
-	module.exports = joinClasses;
-
-/***/ },
-/* 67 */
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5450,13 +6045,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var DOMMouseMoveTracker = __webpack_require__(40);
-	var Locale = __webpack_require__(61);
+	var DOMMouseMoveTracker = __webpack_require__(49);
+	var Locale = __webpack_require__(69);
 	var React = __webpack_require__(27);
-	var ReactComponentWithPureRenderMixin = __webpack_require__(30);
+	var ReactComponentWithPureRenderMixin = __webpack_require__(39);
 
-	var clamp = __webpack_require__(57);
-	var cx = __webpack_require__(47);
+	var clamp = __webpack_require__(65);
+	var cx = __webpack_require__(33);
 
 	var PropTypes = React.PropTypes;
 
@@ -5594,7 +6189,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = FixedDataTableColumnResizeHandle;
 
 /***/ },
-/* 68 */
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5615,8 +6210,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var PrefixIntervalTree = __webpack_require__(69);
-	var clamp = __webpack_require__(57);
+	var PrefixIntervalTree = __webpack_require__(73);
+	var clamp = __webpack_require__(65);
 
 	var BUFFER_ROWS = 5;
 	var NO_ROWS_SCROLL_RESULT = {
@@ -5899,7 +6494,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = FixedDataTableScrollHelper;
 
 /***/ },
-/* 69 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -5921,7 +6516,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var invariant = __webpack_require__(52);
+	var invariant = __webpack_require__(60);
 
 	var parent = function parent(node) {
 	  return Math.floor(node / 2);
@@ -6163,7 +6758,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 70 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -6301,7 +6896,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = FixedDataTableWidthHelper;
 
 /***/ },
-/* 71 */
+/* 75 */
 /***/ function(module, exports) {
 
 	/**
@@ -6371,526 +6966,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	module.exports = debounce;
-
-/***/ },
-/* 72 */
-/***/ function(module, exports) {
-
-	/**
-	 * Copyright (c) 2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule shallowEqual
-	 * @typechecks
-	 * 
-	 */
-
-	'use strict';
-
-	var hasOwnProperty = Object.prototype.hasOwnProperty;
-
-	/**
-	 * Performs equality by iterating through keys on an object and returning false
-	 * when any key has values which are not strictly equal between the arguments.
-	 * Returns true when the values of all keys are strictly equal.
-	 */
-	function shallowEqual(objA, objB) {
-	  if (objA === objB) {
-	    return true;
-	  }
-
-	  if (typeof objA !== 'object' || objA === null || typeof objB !== 'object' || objB === null) {
-	    return false;
-	  }
-
-	  var keysA = Object.keys(objA);
-	  var keysB = Object.keys(objB);
-
-	  if (keysA.length !== keysB.length) {
-	    return false;
-	  }
-
-	  // Test for A's keys different from B.
-	  var bHasOwnProperty = hasOwnProperty.bind(objB);
-	  for (var i = 0; i < keysA.length; i++) {
-	    if (!bHasOwnProperty(keysA[i]) || objA[keysA[i]] !== objB[keysA[i]]) {
-	      return false;
-	    }
-	  }
-
-	  return true;
-	}
-
-	module.exports = shallowEqual;
-
-/***/ },
-/* 73 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule FixedDataTableColumnNew.react
-	 * @typechecks
-	 */
-
-	'use strict';
-
-	var React = __webpack_require__(27);
-
-	var PropTypes = React.PropTypes;
-
-	/**
-	 * Component that defines the attributes of table column.
-	 */
-	var FixedDataTableColumn = React.createClass({
-	  displayName: 'FixedDataTableColumn',
-
-	  statics: {
-	    __TableColumn__: true
-	  },
-
-	  propTypes: {
-	    /**
-	     * The horizontal alignment of the table cell content.
-	     */
-	    align: PropTypes.oneOf(['left', 'center', 'right']),
-
-	    /**
-	     * Controls if the column is fixed when scrolling in the X axis.
-	     */
-	    fixed: PropTypes.bool,
-
-	    /**
-	     * The header cell for this column.
-	     * This can either be a string a React element, or a function that generates
-	     * a React Element. Passing in a string will render a default header cell
-	     * with that string. By default, the React element passed in can expect to
-	     * receive the following props:
-	     *
-	     * ```
-	     * props: {
-	     *   columnKey: string // (of the column, if given)
-	     *   height: number // (supplied from the Table or rowHeightGetter)
-	     *   width: number // (supplied from the Column)
-	     * }
-	     * ```
-	     *
-	     * Because you are passing in your own React element, you can feel free to
-	     * pass in whatever props you may want or need.
-	     *
-	     * If you pass in a function, you will receive the same props object as the
-	     * first argument.
-	     */
-	    header: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-
-	    /**
-	     * This is the body cell that will be cloned for this column.
-	     * This can either be a string a React element, or a function that generates
-	     * a React Element. Passing in a string will render a default header cell
-	     * with that string. By default, the React element passed in can expect to
-	     * receive the following props:
-	     *
-	     * ```
-	     * props: {
-	     *   rowIndex; number // (the row index of the cell)
-	     *   columnKey: string // (of the column, if given)
-	     *   height: number // (supplied from the Table or rowHeightGetter)
-	     *   width: number // (supplied from the Column)
-	     * }
-	     * ```
-	     *
-	     * Because you are passing in your own React element, you can feel free to
-	     * pass in whatever props you may want or need.
-	     *
-	     * If you pass in a function, you will receive the same props object as the
-	     * first argument.
-	     */
-	    cell: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-
-	    /**
-	     * This is the footer cell for this column.
-	     * This can either be a string a React element, or a function that generates
-	     * a React Element. Passing in a string will render a default header cell
-	     * with that string. By default, the React element passed in can expect to
-	     * receive the following props:
-	     *
-	     * ```
-	     * props: {
-	     *   columnKey: string // (of the column, if given)
-	     *   height: number // (supplied from the Table or rowHeightGetter)
-	     *   width: number // (supplied from the Column)
-	     * }
-	     * ```
-	     *
-	     * Because you are passing in your own React element, you can feel free to
-	     * pass in whatever props you may want or need.
-	     *
-	     * If you pass in a function, you will receive the same props object as the
-	     * first argument.
-	     */
-	    footer: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-
-	    /**
-	     * This is used to uniquely identify the column, and is not required unless
-	     * you a resizing columns. This will be the key given in the
-	     * `onColumnResizeEndCallback` on the Table.
-	     */
-	    columnKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-	    /**
-	     * The pixel width of the column.
-	     */
-	    width: PropTypes.number.isRequired,
-
-	    /**
-	     * If this is a resizable column this is its minimum pixel width.
-	     */
-	    minWidth: PropTypes.number,
-
-	    /**
-	     * If this is a resizable column this is its maximum pixel width.
-	     */
-	    maxWidth: PropTypes.number,
-
-	    /**
-	     * The grow factor relative to other columns. Same as the flex-grow API
-	     * from http://www.w3.org/TR/css3-flexbox/. Basically, take any available
-	     * extra width and distribute it proportionally according to all columns'
-	     * flexGrow values. Defaults to zero (no-flexing).
-	     */
-	    flexGrow: PropTypes.number,
-
-	    /**
-	     * Whether the column can be resized with the
-	     * FixedDataTableColumnResizeHandle. Please note that if a column
-	     * has a flex grow, once you resize the column this will be set to 0.
-	     *
-	     * This property only provides the UI for the column resizing. If this
-	     * is set to true, you will need ot se the onColumnResizeEndCallback table
-	     * property and render your columns appropriately.
-	     */
-	    isResizable: PropTypes.bool,
-
-	    /**
-	     * Whether cells in this column can be removed from document when outside
-	     * of viewport as a result of horizontal scrolling.
-	     * Setting this property to true allows the table to not render cells in
-	     * particular column that are outside of viewport for visible rows. This
-	     * allows to create table with many columns and not have vertical scrolling
-	     * performance drop.
-	     * Setting the property to false will keep previous behaviour and keep
-	     * cell rendered if the row it belongs to is visible.
-	     */
-	    allowCellsRecycling: PropTypes.bool
-	  },
-
-	  getDefaultProps: function getDefaultProps() /*object*/{
-	    return {
-	      allowCellsRecycling: false,
-	      fixed: false
-	    };
-	  },
-
-	  render: function render() {
-	    if (true) {
-	      throw new Error('Component <FixedDataTableColumn /> should never render');
-	    }
-	    return null;
-	  }
-	});
-
-	module.exports = FixedDataTableColumn;
-
-/***/ },
-/* 74 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule FixedDataTableColumnGroupNew.react
-	 * @typechecks
-	 */
-
-	'use strict';
-
-	var React = __webpack_require__(27);
-
-	var PropTypes = React.PropTypes;
-
-	/**
-	 * Component that defines the attributes of a table column group.
-	 */
-	var FixedDataTableColumnGroup = React.createClass({
-	  displayName: 'FixedDataTableColumnGroup',
-
-	  statics: {
-	    __TableColumnGroup__: true
-	  },
-
-	  propTypes: {
-	    /**
-	     * The horizontal alignment of the table cell content.
-	     */
-	    align: PropTypes.oneOf(['left', 'center', 'right']),
-
-	    /**
-	     * Controls if the column group is fixed when scrolling in the X axis.
-	     */
-	    fixed: PropTypes.bool,
-
-	    /**
-	     * This is the header cell for this column group.
-	     * This can either be a string or a React element. Passing in a string
-	     * will render a default footer cell with that string. By default, the React
-	     * element passed in can expect to receive the following props:
-	     *
-	     * ```
-	     * props: {
-	     *   height: number // (supplied from the groupHeaderHeight)
-	     *   width: number // (supplied from the Column)
-	     * }
-	     * ```
-	     *
-	     * Because you are passing in your own React element, you can feel free to
-	     * pass in whatever props you may want or need.
-	     *
-	     * You can also pass in a function that returns a react elemnt, with the
-	     * props object above passed in as the first parameter.
-	     */
-	    header: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
-
-	  },
-
-	  getDefaultProps: function getDefaultProps() /*object*/{
-	    return {
-	      fixed: false
-	    };
-	  },
-
-	  render: function render() {
-	    if (true) {
-	      throw new Error('Component <FixedDataTableColumnGroup /> should never render');
-	    }
-	    return null;
-	  }
-	});
-
-	module.exports = FixedDataTableColumnGroup;
-
-/***/ },
-/* 75 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule FixedDataTableCellTransition.react
-	 */
-
-	/**
-	 * TRANSITION SHIM
-	 * This acts to provide an intermediate mapping from the old API to the new API.
-	 *
-	 * When ready, remove this file and rename the providesModule in
-	 * FixedDataTableCellNew.react and dependency in FixedDataTableCellGroup.react
-	 */
-
-	'use strict';
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var React = __webpack_require__(27);
-	var PropTypes = React.PropTypes;
-
-	var cx = __webpack_require__(47);
-	var joinClasses = __webpack_require__(66);
-	var shallowEqual = __webpack_require__(72);
-
-	var CellDefault = __webpack_require__(65);
-
-	var TransitionCell = React.createClass({
-	  displayName: 'TransitionCell',
-
-	  propTypes: {
-	    label: PropTypes.string, // header, footer
-	    className: PropTypes.string,
-	    rowIndex: PropTypes.number,
-	    rowGetter: PropTypes.func, // cell
-	    dataKey: PropTypes.oneOfType([// cell, footer
-	    PropTypes.string, PropTypes.number]),
-	    cellRenderer: PropTypes.func,
-	    cellDataGetter: PropTypes.func,
-	    footerDataGetter: PropTypes.func, // footer
-	    footerData: PropTypes.any, // footer
-	    columnData: PropTypes.any, // cell, header
-	    width: PropTypes.number,
-	    height: PropTypes.number,
-	    isHeaderCell: PropTypes.bool, // header
-	    isFooterCell: PropTypes.bool },
-
-	  // footer
-	  shouldComponentUpdate: function shouldComponentUpdate( /*object*/nextProps) {
-	    var update = false;
-	    var rowData;
-	    if (nextProps.rowGetter) {
-	      rowData = nextProps.rowGetter(nextProps.rowIndex);
-	      if (this._rowData !== rowData) {
-	        update = true;
-	      }
-	    }
-
-	    var cellData;
-	    if (nextProps.dataKey != null) {
-	      if (nextProps.cellDataGetter) {
-	        cellData = nextProps.cellDataGetter(nextProps.dataKey, rowData);
-	      }
-	      if (!cellData && rowData) {
-	        cellData = rowData[nextProps.dataKey];
-	      }
-	    }
-	    if (this._cellData !== cellData) {
-	      update = true;
-	    }
-	    this._rowData = rowData;
-	    this._cellData = cellData;
-
-	    return update || !shallowEqual(nextProps, this.props);
-	  },
-
-	  _getCellData: function _getCellData(props) {
-	    var dataKey = props.dataKey;
-	    if (dataKey == null) {
-	      return null;
-	    }
-
-	    var rowData;
-	    if (props.rowGetter) {
-	      rowData = props.rowGetter(props.rowIndex);
-	    }
-
-	    if (props.cellDataGetter) {
-	      return props.cellDataGetter(dataKey, rowData);
-	    }
-
-	    if (rowData) {
-	      return rowData[dataKey];
-	    }
-
-	    if (props.footerDataGetter) {
-	      return props.footerDataGetter()[dataKey];
-	    }
-
-	    if (props.footerData) {
-	      return props.footerData[dataKey];
-	    }
-
-	    if (props.headerDataGetter) {
-	      return props.headerDataGetter[dataKey];
-	    }
-	  },
-
-	  _getRowData: function _getRowData(props) {
-	    if (props.rowGetter) {
-	      return props.rowGetter(props.rowIndex) || {};
-	    }
-
-	    if (props.footerDataGetter) {
-	      return props.footerDataGetter() || {};
-	    }
-
-	    if (props.footerData) {
-	      return props.footerData || {};
-	    }
-
-	    return {};
-	  },
-
-	  render: function render() {
-	    var props = this.props;
-
-	    var cellData = this._getCellData(props);
-	    var content = cellData;
-	    var rowData = this._getRowData(props);
-	    var usingRenderer = !!(props.cellRenderer || props.groupHeaderRenderer);
-
-	    if (props.isHeaderCell || props.isFooterCell) {
-	      content = content || props.label;
-	    }
-
-	    if (props.cellRenderer) {
-	      if (props.isHeaderCell || props.isFooterCell) {
-	        content = props.cellRenderer(props.label, props.dataKey, props.columnData, rowData, props.width) || props.label;
-	      } else {
-	        content = props.cellRenderer(cellData, props.dataKey, rowData, props.rowIndex, props.columnData, props.width);
-	      }
-	    }
-
-	    if (props.groupHeaderRenderer) {
-	      content = props.groupHeaderRenderer(props.label, props.dataKey, // index in children
-	      props.groupHeaderData, props.groupHeaderLabels, props.width) || content;
-	    }
-
-	    var contentClass = cx('public/fixedDataTableCell/cellContent');
-
-	    if (React.isValidElement(content) && usingRenderer) {
-	      content = React.cloneElement(content, {
-	        className: joinClasses(content.props.className, contentClass)
-	      });
-	    } else {
-	      return React.createElement(
-	        CellDefault,
-	        props,
-	        content
-	      );
-	    }
-
-	    var innerStyle = _extends({
-	      height: props.height,
-	      width: props.width
-	    }, props.style);
-
-	    return React.createElement(
-	      'div',
-	      _extends({}, this.props, {
-	        className: joinClasses(cx('fixedDataTableCellLayout/wrap1'), cx('public/fixedDataTableCell/wrap1'), this.props.className),
-	        style: innerStyle }),
-	      React.createElement(
-	        'div',
-	        {
-	          className: joinClasses(cx('fixedDataTableCellLayout/wrap2'), cx('public/fixedDataTableCell/wrap2')) },
-	        React.createElement(
-	          'div',
-	          {
-	            className: joinClasses(cx('fixedDataTableCellLayout/wrap3'), cx('public/fixedDataTableCell/wrap3')) },
-	          content
-	        )
-	      )
-	    );
-	  }
-	});
-
-	module.exports = TransitionCell;
 
 /***/ }
 /******/ ])

@@ -298,6 +298,7 @@ var TransitionTable = React.createClass({
      * ```
      */
     onColumnResizeEndCallback: PropTypes.func,
+    onResizeHandleDoubleClick: PropTypes.func,
 
     /**
      * Whether a column is currently being resized.

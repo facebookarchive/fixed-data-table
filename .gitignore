@@ -10,3 +10,4 @@ internal
 docs/api
 dist
 *.swp
+.idea/

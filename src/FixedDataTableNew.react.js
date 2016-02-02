@@ -246,6 +246,7 @@ var FixedDataTable = React.createClass({
      * ```
      */
     onColumnResizeEndCallback: PropTypes.func,
+    onResizeHandleDoubleClick :PropTypes.func,
 
     /**
      * Whether a column is currently being resized.
@@ -524,6 +525,7 @@ var FixedDataTable = React.createClass({
         fixedColumns={state.headFixedColumns}
         scrollableColumns={state.headScrollableColumns}
         onColumnResize={this._onColumnResize}
+        onResizeHandleDoubleClick = {this.props.onResizeHandleDoubleClick}
       />;
 
     var topShadow;
