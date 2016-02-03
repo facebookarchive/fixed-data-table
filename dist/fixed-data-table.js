@@ -5336,7 +5336,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    setTimeout((function () {
 	      this._clickCount = 0;
-	    }).bind(this), 500);
+	    }).bind(this), 500); //if no click in 500 interval, reset click count
 	  },
 
 	  _onColumnResizerMouseDown: function _onColumnResizerMouseDown( /*object*/event) {
@@ -5663,8 +5663,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  _onColumnResizeEnd: function _onColumnResizeEnd() {
-
-	    console.log("end");
 
 	    this.props.onResizeHandleDoubleClick();
 	    this._mouseMoveTracker.releaseMouseMoves();
