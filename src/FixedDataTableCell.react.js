@@ -187,7 +187,6 @@ var FixedDataTableCell = React.createClass({
 
     event.stopPropagation();
 
-
     this._clickCount++;
 
     if(this._clickCount === 1) {
@@ -199,13 +198,9 @@ var FixedDataTableCell = React.createClass({
 
       this._onDoubleClick();
 
-
     }
 
-
-
-    setTimeout(function(){this._clickCount = 0; }.bind(this), 500);
-
+    setTimeout(function(){this._clickCount = 0; }.bind(this), 500);  //if no click in 500 interval, reset click count
 
   },
 
