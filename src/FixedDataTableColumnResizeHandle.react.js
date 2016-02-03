@@ -156,6 +156,11 @@ var FixedDataTableColumnResizeHandle = React.createClass({
   },
 
   _onColumnResizeEnd() {
+
+
+    console.log("end");
+
+    this.props.onResizeHandleDoubleClick();
     this._mouseMoveTracker.releaseMouseMoves();
     this.props.onColumnResizeEnd(
       this.state.width,

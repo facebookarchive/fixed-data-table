@@ -483,6 +483,7 @@ var FixedDataTable = React.createClass({
         initialEvent={state.columnResizingData.initialEvent}
         onColumnResizeEnd={props.onColumnResizeEndCallback}
         columnKey={state.columnResizingData.key}
+        onResizeHandleDoubleClick = {this.props.onResizeHandleDoubleClick}
       />;
 
     var footer = null;

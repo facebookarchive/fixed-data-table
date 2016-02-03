@@ -125,7 +125,7 @@ var FixedDataTableCellGroupImpl = React.createClass({
         width={columnProps.width}
         left={left}
         cell={columnProps.cell}
-        onResizeHandleDoubleClick={props.onResizeHandleDoubleClick}
+        onResizeHandleDoubleClick={this.props.onResizeHandleDoubleClick}
       />
     );
   },
@@ -199,6 +199,7 @@ var FixedDataTableCellGroup = React.createClass({
         <FixedDataTableCellGroupImpl
           {...props}
           onColumnResize={onColumnResize}
+          onResizeHandleDoubleClick={this.props.onResizeHandleDoubleClick}
         />
       </div>
     );
