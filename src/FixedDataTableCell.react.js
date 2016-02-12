@@ -176,9 +176,6 @@ var FixedDataTableCell = React.createClass({
 
     var columnKey = this.props.columnKey;
 
-
-    console.log("you are genius !");
-
     this.props.onResizeHandleDoubleClick(columnKey);
 
 

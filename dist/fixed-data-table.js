@@ -1277,9 +1277,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        groupHeader,
 	        header,
 	        React.createElement(
-	          Loader,
-	          _extends({}, this.props.loaderProps, { loaded: !this.props.isLoading }),
-	          rows
+	          'div',
+	          null,
+	          React.createElement(
+	            Loader,
+	            _extends({}, this.props.loaderProps, { loaded: !this.props.isLoading }),
+	            rows
+	          )
 	        ),
 	        footer,
 	        topShadow,
