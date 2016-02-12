@@ -1277,13 +1277,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        groupHeader,
 	        header,
 	        React.createElement(
-	          'div',
-	          null,
-	          React.createElement(
-	            Loader,
-	            _extends({}, this.props.loaderProps, { loaded: !this.props.isLoading }),
-	            rows
-	          )
+	          Loader,
+	          _extends({}, this.props.loaderProps, { loaded: !this.props.isLoading }),
+	          rows
 	        ),
 	        footer,
 	        topShadow,
@@ -5334,8 +5330,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var columnKey = this.props.columnKey;
 
-	    console.log("you are genius !");
-
 	    this.props.onResizeHandleDoubleClick(columnKey);
 	  },
 	  _clickDispatcher: function _clickDispatcher(event) {
@@ -5683,7 +5677,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  _onColumnResizeEnd: function _onColumnResizeEnd() {
 
-	    this.props.onResizeHandleDoubleClick();
 	    this._mouseMoveTracker.releaseMouseMoves();
 	    this.props.onColumnResizeEnd(this.state.width, this.props.columnKey);
 	  }
