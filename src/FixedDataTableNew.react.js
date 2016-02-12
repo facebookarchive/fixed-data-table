@@ -98,6 +98,7 @@ var FixedDataTable = React.createClass({
     width: PropTypes.number.isRequired,
 
     isLoading: PropTypes.bool,
+    loaderProps: PropTypes.object,
 
     /**
      * Pixel height of table. If all rows do not fit,
@@ -575,7 +576,7 @@ var FixedDataTable = React.createClass({
           {dragKnob}
           {groupHeader}
           {header}
-          <Loader {...props} loaded={!this.props.isLoading}>
+          <Loader {...this.props.loaderProps} loaded={!this.props.isLoading}>
             {rows}
           </Loader>
           {footer}

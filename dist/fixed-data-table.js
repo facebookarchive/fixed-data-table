@@ -308,7 +308,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	     */
 	    width: PropTypes.number.isRequired,
 
-	    isLoading: PropTypes.bool,
+	    isLoading: PropTypes.bool.isRequired,
+
+	    loaderProps: PropTypes.object,
 
 	    /**
 	     * Pixel height of table. If all rows do not fit,
@@ -704,7 +706,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return React.createElement(
 	      Table,
 	      _extends({
-	        isLoading: this.props.isLoading
+	        isLoading: this.props.isLoading,
+	        loaderProps: this.props.loaderProps
 	      }, props, {
 	        onRowMouseDown: this._onRowAction(props, props.onRowMouseDown),
 	        onRowClick: this._onRowAction(props, props.onRowClick),
@@ -854,6 +857,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    width: PropTypes.number.isRequired,
 
 	    isLoading: PropTypes.bool,
+	    loaderProps: PropTypes.object,
 
 	    /**
 	     * Pixel height of table. If all rows do not fit,
@@ -1274,7 +1278,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        header,
 	        React.createElement(
 	          Loader,
-	          _extends({}, props, { loaded: !this.props.isLoading }),
+	          _extends({}, this.props.loaderProps, { loaded: !this.props.isLoading }),
 	          rows
 	        ),
 	        footer,
