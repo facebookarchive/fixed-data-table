@@ -61,5 +61,8 @@
     "table",
     "data-table",
     "fixed-table"
-  ]
+  ],
+  "dependencies": {
+    "react-loader": "^2.0.0"
+  }
 }
