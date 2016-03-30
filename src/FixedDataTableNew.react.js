@@ -28,6 +28,7 @@ var debounceCore = require('debounceCore');
 var emptyFunction = require('emptyFunction');
 var invariant = require('invariant');
 var joinClasses = require('joinClasses');
+var requestAnimationFramePolyfill = require('requestAnimationFramePolyfill');
 var shallowEqual = require('shallowEqual');
 var translateDOMPositionXY = require('translateDOMPositionXY');
 
@@ -383,6 +384,12 @@ var FixedDataTable = React.createClass({
       this._didScrollStart();
     }
     this._didScrollStop();
+
+    if (this.state.scrollY == this.state.maxScrollY) {
+      requestAnimationFramePolyfill(() => {
+        this._scrollTo(this.state.maxScrollY);
+      })
+    }
 
     this.setState(this._calculateState(nextProps, this.state));
   },
@@ -1011,19 +1018,21 @@ var FixedDataTable = React.createClass({
       this._didScrollStop();
     }
   },
-
+  _scrollTo(/*number*/ scrollPos) {
+    var scrollState = this._scrollHelper.scrollTo(Math.round(scrollPos));
+    this.setState({
+      firstRowIndex: scrollState.index,
+      firstRowOffset: scrollState.offset,
+      scrollY: scrollState.position,
+      scrollContentHeight: scrollState.contentHeight,
+    });
+  },
   _onVerticalScroll(/*number*/ scrollPos) {
     if (this.isMounted() && scrollPos !== this.state.scrollY) {
       if (!this._isScrolling) {
         this._didScrollStart();
       }
-      var scrollState = this._scrollHelper.scrollTo(Math.round(scrollPos));
-      this.setState({
-        firstRowIndex: scrollState.index,
-        firstRowOffset: scrollState.offset,
-        scrollY: scrollState.position,
-        scrollContentHeight: scrollState.contentHeight,
-      });
+      this._scrollTo(scrollPos);
       this._didScrollStop();
     }
   },
