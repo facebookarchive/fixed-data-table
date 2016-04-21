@@ -43,7 +43,10 @@ function cx(classNames) {
       return classNames[className];
     });
   } else {
-    classNamesArray = Array.prototype.slice.call(arguments);
+    classNamesArray = Array(arguments.length);
+    for (var i = 0; i < arguments.length; i++) {
+      classNamesArray[i] = arguments[i];
+    }
   }
 
   return classNamesArray.map(getClassName).join(' ');
