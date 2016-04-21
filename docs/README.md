@@ -6,6 +6,7 @@ The easiest way to start using FixedDataTable is to install it via npm:
 ```shell
 npm install react --save
 npm install fixed-data-table --save
+npm install babel-plugin-transform-object-rest-spread --save
 ```
 
 If you're using a standard build system such as [`browserify`](http://browserify.org/) or [`webpack`](https://webpack.github.io/) it can then be required directly:
