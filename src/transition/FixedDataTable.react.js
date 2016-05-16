@@ -253,6 +253,11 @@ var TransitionTable = React.createClass({
     onScrollEnd: PropTypes.func,
 
     /**
+     * Callback that is called when the visible row and column indexes change.
+     */
+    onRangeChange: PropTypes.func,
+
+    /**
      * Callback that is called when `rowHeightGetter` returns a different height
      * for a row than the `rowHeight` prop. This is necessary because initially
      * table estimates heights of some parts of the content.
@@ -303,26 +308,33 @@ var TransitionTable = React.createClass({
      * Whether a column is currently being resized.
      */
     isColumnResizing: PropTypes.bool,
+
+    /**
+     * Whether the table is shown Right-to-Left
+     */
+    isRTL: PropTypes.bool,
   },
 
   getInitialState() {
-    // Throw warnings on deprecated props.
+    /**
+     * We don't want to have all these notices in internal code, but we will
+     * commit notices to opensource versoin, so that people on opensource
+     * could start migrating to the new API.
+     *
+     * this._checkDeprecations();
+     */
+
     var state = {};
-    state.needsMigration = this._checkDeprecations();
+    state.needsMigration = !!this.props.rowGetter;
 
     return state;
   },
 
   _checkDeprecations() {
-    var needsMigration = false;
-
     if (this.props.rowGetter) {
       notifyDeprecated('rowGetter',
         'Please use the cell API in Column to fetch data for your cells.'
       );
-
-      // ROWGETTER??? You need to migrate.
-      needsMigration = true;
     }
 
     if (this.props.headerDataGetter) {
@@ -346,7 +358,7 @@ var TransitionTable = React.createClass({
       );
     }
 
-    ReactChildren.forEach(this.props.children, (child) => {
+    React.Children.forEach(this.props.children, (child) => {
       if (!child || !child.props) {
         return;
       }
@@ -396,8 +408,6 @@ var TransitionTable = React.createClass({
         );
       }
     });
-
-    return needsMigration;
   },
 
   // Wrapper for onRow callbacks, since we don't have rowData at that level.
@@ -468,7 +478,7 @@ var TransitionTable = React.createClass({
     var props = group.props;
 
     var j = 0;
-    var columns = ReactChildren.map(props.children, (child) => {
+    var columns = React.Children.map(props.children, (child) => {
       j++;
       return this._transformColumn(child, tableProps, key + '_' + j);
     });
@@ -495,7 +505,7 @@ var TransitionTable = React.createClass({
   _convertedColumns(needsMigration) {
     // If we don't need to migrate, map directly to the new API.
     if (!needsMigration) {
-      return ReactChildren.map(this.props.children, (child) => {
+      return React.Children.map(this.props.children, (child) => {
 
         if (!child) {
           return null;
@@ -516,7 +526,7 @@ var TransitionTable = React.createClass({
     // Otherwise, if a migration is needed, we need to transform each Column
     // or ColumnGroup.
     var i = 0;
-    return ReactChildren.map(this.props.children, (child) => {
+    return React.Children.map(this.props.children, (child) => {
 
       if (!child) {
         return null;
@@ -529,7 +539,7 @@ var TransitionTable = React.createClass({
       if (child.type.__TableColumnGroup__) {
         // Since we apparently give an array of labels to groupHeaderRenderer
         var labels = [];
-        ReactChildren.forEach(this.props.children, (child) => {
+        React.Children.forEach(this.props.children, (child) => {
           labels.push(child.props.label);
         });
 
@@ -546,6 +556,7 @@ var TransitionTable = React.createClass({
     return (
       <Table
         {...props}
+        ref="fixedDataTable"
         onRowMouseDown={this._onRowAction(props, props.onRowMouseDown)}
         onRowClick={this._onRowAction(props, props.onRowClick)}
         onRowDoubleClick={this._onRowAction(props, props.onRowDoubleClick)}

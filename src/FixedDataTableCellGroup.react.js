@@ -12,18 +12,18 @@
 
 'use strict';
 
-var FixedDataTableHelper = require('FixedDataTableHelper');
-var React = require('React');
-var FixedDataTableCell = require('FixedDataTableCell.react');
+const FixedDataTableHelper = require('FixedDataTableHelper');
+const React = require('React');
+const FixedDataTableCell = require('FixedDataTableCell.react');
 
-var cx = require('cx');
-var translateDOMPositionXY = require('translateDOMPositionXY');
+const cx = require('cx');
+const translateDOMPositionXY = require('translateDOMPositionXY');
 
-var {PropTypes} = React;
+const {PropTypes} = React;
 
-var DIR_SIGN = FixedDataTableHelper.DIR_SIGN;
+const DIR_SIGN = FixedDataTableHelper.DIR_SIGN;
 
-var FixedDataTableCellGroupImpl = React.createClass({
+const FixedDataTableCellGroupImpl = React.createClass({
 
   /**
    * PropTypes are disabled in this component, because having them on slows
@@ -53,17 +53,17 @@ var FixedDataTableCellGroupImpl = React.createClass({
   },
 
   render() /*object*/ {
-    var props = this.props;
-    var columns = props.columns;
-    var cells = new Array(columns.length);
+    const props = this.props;
+    const columns = props.columns;
+    const cells = new Array(columns.length);
 
-    var currentPosition = 0;
-    for (var i = 0, j = columns.length; i < j; i++) {
-      var columnProps = columns[i].props;
+    let currentPosition = 0;
+    for (let i = 0, j = columns.length; i < j; i++) {
+      const columnProps = columns[i].props;
       if (!columnProps.allowCellsRecycling || (
             currentPosition - props.left <= props.width &&
             currentPosition - props.left + columnProps.width >= 0)) {
-        var key = 'cell_' + i;
+        const key = 'cell_' + i;
         cells[i] = this._renderCell(
           props.rowIndex,
           props.rowHeight,
@@ -75,9 +75,9 @@ var FixedDataTableCellGroupImpl = React.createClass({
       currentPosition += columnProps.width;
     }
 
-    var contentWidth = this._getColumnsWidth(columns);
+    const contentWidth = this._getColumnsWidth(columns);
 
-    var style = {
+    const style = {
       height: props.height,
       position: 'absolute',
       width: contentWidth,
@@ -102,11 +102,11 @@ var FixedDataTableCellGroupImpl = React.createClass({
     /*string*/ key
   ) /*object*/ {
 
-    var cellIsResizable = columnProps.isResizable &&
+    const cellIsResizable = columnProps.isResizable &&
       this.props.onColumnResize;
     var onColumnResize = cellIsResizable ? this.props.onColumnResize : null;
 
-    var className = columnProps.cellClassName;
+    const className = columnProps.cellClassName;
 
     return (
       <FixedDataTableCell
@@ -128,15 +128,15 @@ var FixedDataTableCellGroupImpl = React.createClass({
   },
 
   _getColumnsWidth(/*array*/ columns) /*number*/ {
-    var width = 0;
-    for (var i = 0; i < columns.length; ++i) {
+    let width = 0;
+    for (let i = 0; i < columns.length; ++i) {
       width += columns[i].props.width;
     }
     return width;
   },
 });
 
-var FixedDataTableCellGroup = React.createClass({
+const FixedDataTableCellGroup = React.createClass({
 
   /**
    * PropTypes are disabled in this component, because having them on slows
@@ -175,9 +175,9 @@ var FixedDataTableCellGroup = React.createClass({
   },
 
   render() /*object*/ {
-    var {offsetLeft, ...props} = this.props;
+    const {offsetLeft, ...props} = this.props;
 
-    var style = {
+    const style = {
       height: props.height,
     };
 
@@ -187,7 +187,7 @@ var FixedDataTableCellGroup = React.createClass({
       style.right = offsetLeft;
     }
 
-    var onColumnResize = props.onColumnResize ? this._onColumnResize : null;
+    const onColumnResize = props.onColumnResize ? this._onColumnResize : null;
 
     return (
       <div

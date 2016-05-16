@@ -12,19 +12,19 @@
 
 'use strict';
 
-var React = require('React');
+const React = require('React');
 
 function getTotalWidth(/*array*/ columns) /*number*/ {
-  var totalWidth = 0;
-  for (var i = 0; i < columns.length; ++i) {
+  let totalWidth = 0;
+  for (let i = 0; i < columns.length; ++i) {
     totalWidth += columns[i].props.width;
   }
   return totalWidth;
 }
 
 function getTotalFlexGrow(/*array*/ columns) /*number*/ {
-  var totalFlexGrow = 0;
-  for (var i = 0; i < columns.length; ++i) {
+  let totalFlexGrow = 0;
+  for (let i = 0; i < columns.length; ++i) {
     totalFlexGrow += columns[i].props.flexGrow || 0;
   }
   return totalFlexGrow;
@@ -40,21 +40,21 @@ function distributeFlexWidth(
       width: getTotalWidth(columns),
     };
   }
-  var remainingFlexGrow = getTotalFlexGrow(columns);
-  var remainingFlexWidth = flexWidth;
-  var newColumns = [];
-  var totalWidth = 0;
-  for (var i = 0; i < columns.length; ++i) {
-    var column = columns[i];
+  let remainingFlexGrow = getTotalFlexGrow(columns);
+  let remainingFlexWidth = flexWidth;
+  const newColumns = [];
+  let totalWidth = 0;
+  for (let i = 0; i < columns.length; ++i) {
+    const column = columns[i];
     if (!column.props.flexGrow) {
       totalWidth += column.props.width;
       newColumns.push(column);
       continue;
     }
-    var columnFlexWidth = Math.floor(
+    const columnFlexWidth = Math.floor(
       column.props.flexGrow / remainingFlexGrow * remainingFlexWidth
     );
-    var newColumnWidth = Math.floor(column.props.width + columnFlexWidth);
+    const newColumnWidth = Math.floor(column.props.width + columnFlexWidth);
     totalWidth += newColumnWidth;
 
     remainingFlexGrow -= column.props.flexGrow;
@@ -76,8 +76,8 @@ function adjustColumnGroupWidths(
   /*array*/ columnGroups,
   /*number*/ expectedWidth
 ) /*object*/ {
-  var allColumns = [];
-  var i;
+  const allColumns = [];
+  let i;
   for (i = 0; i < columnGroups.length; ++i) {
     React.Children.forEach(
       columnGroups[i].props.children,
@@ -86,15 +86,15 @@ function adjustColumnGroupWidths(
       }
     );
   }
-  var columnsWidth = getTotalWidth(allColumns);
-  var remainingFlexGrow = getTotalFlexGrow(allColumns);
-  var remainingFlexWidth = Math.max(expectedWidth - columnsWidth, 0);
+  const columnsWidth = getTotalWidth(allColumns);
+  let remainingFlexGrow = getTotalFlexGrow(allColumns);
+  let remainingFlexWidth = Math.max(expectedWidth - columnsWidth, 0);
 
-  var newAllColumns = [];
-  var newColumnGroups = [];
+  const newAllColumns = [];
+  const newColumnGroups = [];
 
   for (i = 0; i < columnGroups.length; ++i) {
-    var columnGroup = columnGroups[i];
+    const columnGroup = columnGroups[i];
     var currentColumns = [];
 
     React.Children.forEach(
@@ -104,12 +104,12 @@ function adjustColumnGroupWidths(
       }
     );
 
-    var columnGroupFlexGrow = getTotalFlexGrow(currentColumns);
-    var columnGroupFlexWidth = Math.floor(
+    const columnGroupFlexGrow = getTotalFlexGrow(currentColumns);
+    const columnGroupFlexWidth = Math.floor(
       columnGroupFlexGrow / remainingFlexGrow * remainingFlexWidth
     );
 
-    var newColumnSettings = distributeFlexWidth(
+    const newColumnSettings = distributeFlexWidth(
       currentColumns,
       columnGroupFlexWidth
     );
@@ -117,7 +117,7 @@ function adjustColumnGroupWidths(
     remainingFlexGrow -= columnGroupFlexGrow;
     remainingFlexWidth -= columnGroupFlexWidth;
 
-    for (var j = 0; j < newColumnSettings.columns.length; ++j) {
+    for (let j = 0; j < newColumnSettings.columns.length; ++j) {
       newAllColumns.push(newColumnSettings.columns[j]);
     }
 
@@ -137,14 +137,14 @@ function adjustColumnWidths(
   /*array*/ columns,
   /*number*/ expectedWidth
 ) /*array*/ {
-  var columnsWidth = getTotalWidth(columns);
+  const columnsWidth = getTotalWidth(columns);
   if (columnsWidth < expectedWidth) {
     return distributeFlexWidth(columns, expectedWidth - columnsWidth).columns;
   }
   return columns;
 }
 
-var FixedDataTableWidthHelper = {
+const FixedDataTableWidthHelper = {
   getTotalWidth,
   getTotalFlexGrow,
   distributeFlexWidth,

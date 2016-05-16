@@ -12,12 +12,12 @@
 
 'use strict';
 
-var IntegerBufferSet = require('IntegerBufferSet');
+const IntegerBufferSet = require('IntegerBufferSet');
 
-var clamp = require('clamp');
-var invariant = require('invariant');
-var MIN_BUFFER_ROWS = 3;
-var MAX_BUFFER_ROWS = 6;
+const clamp = require('clamp');
+const invariant = require('invariant');
+const MIN_BUFFER_ROWS = 3;
+const MAX_BUFFER_ROWS = 6;
 
 // FixedDataTableRowBuffer is a helper class that executes row buffering
 // logic for FixedDataTable. It figures out which rows should be rendered
@@ -54,8 +54,8 @@ class FixedDataTableRowBuffer {
   }
 
   getRowsWithUpdatedBuffer() /*array*/ {
-    var remainingBufferRows = 2 * this._bufferRowsCount;
-    var bufferRowIndex =
+    let remainingBufferRows = 2 * this._bufferRowsCount;
+    let bufferRowIndex =
       Math.max(this._viewportRowsBegin - this._bufferRowsCount, 0);
     while (bufferRowIndex < this._viewportRowsBegin) {
       this._addRowToBuffer(
@@ -83,10 +83,10 @@ class FixedDataTableRowBuffer {
     /*number*/ firstRowIndex,
     /*number*/ firstRowOffset
   ) /*array*/ {
-    var top = firstRowOffset;
-    var totalHeight = top;
-    var rowIndex = firstRowIndex;
-    var endIndex =
+    const top = firstRowOffset;
+    let totalHeight = top;
+    let rowIndex = firstRowIndex;
+    const endIndex =
       Math.min(firstRowIndex + this._maxVisibleRowCount, this._rowsCount);
 
     this._viewportRowsBegin = firstRowIndex;
@@ -112,9 +112,9 @@ class FixedDataTableRowBuffer {
     /*number*/ firstViewportRowIndex,
     /*number*/ lastViewportRowIndex
   ) {
-      var rowPosition = this._bufferSet.getValuePosition(rowIndex);
-      var viewportRowsCount = lastViewportRowIndex - firstViewportRowIndex + 1;
-      var allowedRowsCount = viewportRowsCount + this._bufferRowsCount * 2;
+      let rowPosition = this._bufferSet.getValuePosition(rowIndex);
+      const viewportRowsCount = lastViewportRowIndex - firstViewportRowIndex + 1;
+      const allowedRowsCount = viewportRowsCount + this._bufferRowsCount * 2;
       if (rowPosition === null &&
           this._bufferSet.getSize() >= allowedRowsCount) {
         rowPosition =
