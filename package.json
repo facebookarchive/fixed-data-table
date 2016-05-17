@@ -8,13 +8,15 @@
     "react-dom": "^0.14.0 || ^15.0.0"
   },
   "dependencies": {
-    "fbjs": "^0.8.2"
+    "fbjs": "^0.8.2",
+    "object-assign": "^4.1.0",
+    "react-addons-pure-render-mixin": "^15.2.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.6",
     "babel-core": "^5.4.7",
     "babel-loader": "^5.0.0",
-    "babel-preset-fbjs": "^1.0.0",
+    "babel-preset-fbjs": "^2.0.0",
     "bundle-loader": "^0.5.2",
     "css-loader": "^0.9.1",
     "del": "^2.2.0",
@@ -30,6 +32,7 @@
     "gulp-header": "^1.8.2",
     "gulp-postcss": "^6.1.1",
     "gulp-rename": "^1.2.2",
+    "gulp-util": "^3.0.7",
     "html-loader": "^0.2.3",
     "less": "^2.2.0",
     "less-loader": "^2.0.0",
@@ -39,13 +42,14 @@
     "postcss": "^5.0.21",
     "postcss-custom-properties": "3.0.1",
     "react": "^15.0.0",
-    "react-dom": "^15.0.0",
     "react-docgen": "^1.2.0",
+    "react-dom": "^15.0.0",
     "react-tools": "^0.12.2",
     "style-loader": "^0.8.3",
     "url-loader": "^0.5.5",
     "webpack": "^1.8.3",
-    "webpack-dev-server": "^1.8.0"
+    "webpack-dev-server": "^1.8.0",
+    "webpack-stream": "^3.2.0"
   },
   "scripts": {
     "site-dev-server": "./build_helpers/startSiteDevServer.sh",

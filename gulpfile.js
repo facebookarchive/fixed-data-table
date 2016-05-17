@@ -21,15 +21,15 @@ var header = require('gulp-header');
 var rename = require('gulp-rename');
 var packageData = require('./package.json');
 var flatten = require('gulp-flatten');
+var gulpUtil = require('gulp-util');
+var webpackStream = require('webpack-stream');
 
 var fbcss = require('./scripts/postcss/fbcss');
 
 var fbjsConfigurePreset = require('babel-preset-fbjs/configure');
 // var derequire = require('gulp-derequire');
-// var gulpUtil = require('gulp-util');
 // var runSequence = require('run-sequence');
 // var through = require('through2');
-// var webpackStream = require('webpack-stream');
 //
 // var gulpCheckDependencies = require('fbjs-scripts/gulp/check-dependencies');
 
@@ -38,6 +38,7 @@ var moduleMap = Object.assign(
     'React': 'react',
     'ReactDOM': 'react-dom',
     'ReactComponentWithPureRenderMixin': 'react-addons-pure-render-mixin',
+    'object-assign': 'object-assign',
   },
   require('fbjs/module-map')
 );
@@ -93,6 +94,59 @@ function minifyCSSStream(stream) {
     .pipe(gulp.dest(paths.dist));
 }
 
+var buildDist = function(opts) {
+  var webpackOpts = {
+    debug: opts.debug,
+    externals: {
+      react: {
+        root: 'React',
+        commonjs: 'react',
+        commonjs2: 'react',
+        amd: 'react',
+      },
+      'react-dom': {
+        root: 'ReactDOM',
+        commonjs: 'react-dom',
+        commonjs2: 'react-dom',
+        amd: 'react-dom',
+      },
+    },
+    output: {
+      filename: opts.output,
+      libraryTarget: 'umd',
+      library: 'FixedDataTable',
+    },
+    plugins: [
+      new webpackStream.webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify(
+          opts.debug ? 'development' : 'production'
+        ),
+      }),
+      new webpackStream.webpack.optimize.OccurenceOrderPlugin(),
+      new webpackStream.webpack.optimize.DedupePlugin(),
+    ],
+  };
+  if (!opts.debug) {
+    webpackOpts.plugins.push(
+      new webpackStream.webpack.optimize.UglifyJsPlugin({
+        compress: {
+          hoist_vars: true,
+          screw_ie8: true,
+          warnings: false,
+        },
+      })
+    );
+  }
+  return webpackStream(webpackOpts, null, function(err, stats) {
+    if (err) {
+      throw new gulpUtil.PluginError('webpack', err);
+    }
+    if (stats.compilation.errors.length) {
+      gulpUtil.log('webpack', '\n' + stats.toString({colors: true}));
+    }
+  });
+};
+
 gulp.task('dist-clean', function() {
   return del(paths.dist);
 });
@@ -110,6 +164,30 @@ gulp.task('dist-css', function() {
 
   return merge(baseCSS, baseCSSMin, styleCSS, styleCSSMin, allCSS, allCSSMin);
 });
+
+gulp.task('dist-js', ['npm-js'], function() {
+  var opts = {
+    debug: true,
+    output: 'fixed-data-table.js',
+  };
+  var optsMin = {
+    debug: false,
+    output: 'fixed-data-table.min.js'
+  };
+
+  var fdt = gulp.src('./internal/FixedDataTableRoot.js');
+
+  return merge(
+    fdt
+      .pipe(buildDist(opts))
+      .pipe(header(COPYRIGHT_HEADER, {version: packageData.version}))
+      .pipe(gulp.dest(paths.dist)),
+    fdt
+      .pipe(buildDist(optsMin))
+      .pipe(header(COPYRIGHT_HEADER, {version: packageData.version}))
+      .pipe(gulp.dest(paths.dist))
+  );
+})
 
 gulp.task('npm-clean', function() {
   return del(paths.lib);
