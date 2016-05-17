@@ -20,17 +20,17 @@ var merge = require('merge-stream');
 var header = require('gulp-header');
 var rename = require('gulp-rename');
 var packageData = require('./package.json');
+var flatten = require('gulp-flatten');
 
 var fbcss = require('./scripts/postcss/fbcss');
 
+var fbjsConfigurePreset = require('babel-preset-fbjs/configure');
 // var derequire = require('gulp-derequire');
-// var flatten = require('gulp-flatten');
 // var gulpUtil = require('gulp-util');
 // var runSequence = require('run-sequence');
 // var through = require('through2');
 // var webpackStream = require('webpack-stream');
 //
-// var fbjsConfigurePreset = require('babel-preset-fbjs/configure');
 // var gulpCheckDependencies = require('fbjs-scripts/gulp/check-dependencies');
 
 var moduleMap = Object.assign(
@@ -44,7 +44,8 @@ var moduleMap = Object.assign(
 
 var paths = {
   dist: 'dist',
-  lib: 'lib',
+  // TODO: make this 'lib' to match other projects
+  lib: 'internal',
   src: [
     'src/**/*.js',
     '!src/**/__tests__/**/*.js',
@@ -109,5 +110,24 @@ gulp.task('dist-css', function() {
 
   return merge(baseCSS, baseCSSMin, styleCSS, styleCSSMin, allCSS, allCSSMin);
 });
+
+gulp.task('npm-clean', function() {
+  return del(paths.lib);
+})
+
+gulp.task('npm-js', function() {
+  return gulp
+    .src(paths.src)
+    .pipe(babel({
+      presets: [
+        fbjsConfigurePreset({
+          stripDEV: true,
+          rewriteModules: {map: moduleMap},
+        }),
+      ]
+    }))
+    .pipe(flatten())
+    .pipe(gulp.dest(paths.lib))
+})
 
 gulp.task('default', ['dist-css']);

@@ -7,10 +7,14 @@
     "react": "^0.14.0 || ^15.0.0",
     "react-dom": "^0.14.0 || ^15.0.0"
   },
+  "dependencies": {
+    "fbjs": "^0.8.2"
+  },
   "devDependencies": {
     "autoprefixer": "^6.3.6",
     "babel-core": "^5.4.7",
     "babel-loader": "^5.0.0",
+    "babel-preset-fbjs": "^1.0.0",
     "bundle-loader": "^0.5.2",
     "css-loader": "^0.9.1",
     "del": "^2.2.0",
@@ -19,8 +23,10 @@
     "file-loader": "^0.8.1",
     "glob": "^4.3.5",
     "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
     "gulp-clean-css": "^2.0.7",
     "gulp-concat-css": "^2.2.0",
+    "gulp-flatten": "^0.2.0",
     "gulp-header": "^1.8.2",
     "gulp-postcss": "^6.1.1",
     "gulp-rename": "^1.2.2",
