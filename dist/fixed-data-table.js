@@ -187,7 +187,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  Table: FixedDataTable
 	};
 
-	FixedDataTableRoot.version = '0.6.0-rc1';
+	FixedDataTableRoot.version = '0.6.2';
 	module.exports = FixedDataTableRoot;
 
 /***/ },
