@@ -12,6 +12,8 @@
 
 'use strict';
 
+var DOMMouseMoveTracker = require('DOMMouseMoveTracker');
+
 var FixedDataTableHelper = require('FixedDataTableHelper');
 var React = require('React');
 var FixedDataTableCell = require('FixedDataTableCell.react');
@@ -24,6 +26,16 @@ var {PropTypes} = React;
 var DIR_SIGN = FixedDataTableHelper.DIR_SIGN;
 
 var FixedDataTableCellGroupImpl = React.createClass({
+
+  getInitialState: function () {
+    return {
+      mouseMoveTracker: null,
+      reorderingColumn: null,
+      dragOffset: 0,
+      positionShifts: null,
+      curtain: null
+    };
+  },
 
   /**
    * PropTypes are disabled in this component, because having them on slows
@@ -39,6 +51,8 @@ var FixedDataTableCellGroupImpl = React.createClass({
 
     isScrolling: PropTypes.bool,
 
+    isReorderingColumn: PropTypes.bool,
+
     left: PropTypes.number,
 
     onColumnResize: PropTypes.func,
@@ -52,27 +66,132 @@ var FixedDataTableCellGroupImpl = React.createClass({
     zIndex: PropTypes.number.isRequired,
   },
 
+  _onColumnReorderStart (index, event) {
+    var mouseMoveTracker = new DOMMouseMoveTracker(
+      this._onColumnReorderMove,
+      this._onColumnReorderEnd,
+      document.body
+    );
+    mouseMoveTracker.captureMouseMoves(event);
+
+    this.setState({
+      mouseMoveTracker: mouseMoveTracker,
+      reorderColumnIndex: index,
+      reorderColumnWidth: this.props.columns[index].props.width,
+      dragOffset: 0,
+      isInitialDrag: true
+    });
+  },
+
+  _onColumnReorderMove (deltaX) {
+    if (!this.state.curtain) {
+      var curtain = document.createElement('div');
+      curtain.style.zIndex = 10000000;
+      curtain.style.position = 'fixed';
+      curtain.style.top = 0;
+      curtain.style.left = 0;
+      curtain.style.bottom = 0;
+      curtain.style.right = 0;
+      document.body.appendChild(curtain);
+      this.setState({
+        curtain: curtain
+      });
+    }
+
+    var reorderColumnIndex = this.state.reorderColumnIndex;
+    var reorderColumnWidth = this.state.reorderColumnWidth;
+    var currentPosition = 0;
+    var lefts = this.props.columns.map(function (column) {
+      var oldCurrentPosition = currentPosition;
+      currentPosition += column.props.width;
+      return oldCurrentPosition;
+    });
+
+    var reorderColumnLeft = lefts[reorderColumnIndex] + this.state.dragOffset;
+    var reorderColumnRight = reorderColumnLeft + reorderColumnWidth;
+
+    var self = this;
+    var positionShifts = lefts.map(function (left, i) {
+      var centerOfThisColumn = left + (self.props.columns[i].props.width / 2);
+      if (i < reorderColumnIndex && reorderColumnLeft < centerOfThisColumn) {
+        return 1;
+      } else if (i > reorderColumnIndex && reorderColumnRight > centerOfThisColumn) {
+        return -1;
+      }
+      return 0;
+    });
+
+    this.setState({
+      dragOffset: this.state.dragOffset + deltaX,
+      isInitialDrag: false,
+      positionShifts: positionShifts
+    });
+  },
+
+  _onColumnReorderEnd () {
+    console.log('done!');
+    this.state.mouseMoveTracker.releaseMouseMoves();
+    if (this.state.curtain) {
+      var curtain = this.state.curtain;
+      // this stops the mouseUp from triggering a click event.
+      setTimeout(function () {
+        document.body.removeChild(curtain);
+      }, 100);
+    }
+    this.setState(this.getInitialState());
+  },
+
   render() /*object*/ {
     var props = this.props;
     var columns = props.columns;
     var cells = new Array(columns.length);
 
     var currentPosition = 0;
+    var lefts = columns.map(function (column) {
+      var oldCurrentPosition = currentPosition;
+      currentPosition += column.props.width;
+      return oldCurrentPosition;
+    });
+
+    if (this.state.reorderColumnIndex !== null) {
+      var self = this;
+      lefts = lefts.map(function (left, i) {
+        if (i === self.state.reorderColumnIndex) {
+          var fullWidth = columns.reduce(function (acc, column) {
+            return acc + column.props.width;
+          }, 0);
+          left = left + self.state.dragOffset;
+          left = Math.max(left, 0);
+          left = Math.min(left, fullWidth - columns[i].props.width);
+          return left;
+        }
+        switch (self.state.positionShifts && self.state.positionShifts[i]) {
+          case 0:
+          case null:
+            return left;
+          case 1:
+            return left + self.state.reorderColumnWidth;
+          case -1:
+            return left - self.state.reorderColumnWidth;
+        }
+      });
+    }
+
     for (var i = 0, j = columns.length; i < j; i++) {
       var columnProps = columns[i].props;
       if (!columnProps.allowCellsRecycling || (
-            currentPosition - props.left <= props.width &&
-            currentPosition - props.left + columnProps.width >= 0)) {
+            lefts[i] - props.left <= props.width &&
+            lefts[i] - props.left + columnProps.width >= 0)) {
         var key = 'cell_' + i;
         cells[i] = this._renderCell(
           props.rowIndex,
           props.rowHeight,
           columnProps,
-          currentPosition,
+          lefts[i],
           key,
+          i
         );
       }
-      currentPosition += columnProps.width;
     }
 
     var contentWidth = this._getColumnsWidth(columns);
@@ -99,7 +218,8 @@ var FixedDataTableCellGroupImpl = React.createClass({
     /*number*/ height,
     /*object*/ columnProps,
     /*number*/ left,
-    /*string*/ key
+    /*string*/ key,
+    /*number*/ index,
   ) /*object*/ {
 
     var cellIsResizable = columnProps.isResizable &&
@@ -123,6 +243,8 @@ var FixedDataTableCellGroupImpl = React.createClass({
         width={columnProps.width}
         left={left}
         cell={columnProps.cell}
+        onColumnReorderStart={this._onColumnReorderStart.bind(this, index)}
+        isReorderingThisColumn={this.state.reorderColumnIndex === index}
       />
     );
   },

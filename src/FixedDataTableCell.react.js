@@ -104,6 +104,10 @@ var FixedDataTableCell = React.createClass({
       style.right = props.left;
     }
 
+    if (this.props.isReorderingThisColumn) {
+      style.zIndex = 1;
+    }
+
     var className = joinClasses(
       cx({
         'fixedDataTableCellLayout/main': true,
@@ -113,6 +117,7 @@ var FixedDataTableCell = React.createClass({
         'public/fixedDataTableCell/alignRight': props.align === 'right',
         'public/fixedDataTableCell/highlighted': props.highlighted,
         'public/fixedDataTableCell/main': true,
+        'public/fixedDataTableCell/reordering': props.isReorderingThisColumn
       }),
       props.className,
     );
@@ -163,21 +168,10 @@ var FixedDataTableCell = React.createClass({
     }
 
     return (
-      <div className={className} style={style}>
+      <div className={className} style={style} onMouseDown={this.props.onColumnReorderStart}>
         {columnResizerComponent}
         {content}
       </div>
-    );
-  },
-
-  _onColumnResizerMouseDown(/*object*/ event) {
-    this.props.onColumnResize(
-      this.props.left,
-      this.props.width,
-      this.props.minWidth,
-      this.props.maxWidth,
-      this.props.columnKey,
-      event
     );
   },
 });
