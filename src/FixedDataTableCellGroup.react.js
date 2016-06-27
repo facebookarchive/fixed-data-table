@@ -29,11 +29,9 @@ var FixedDataTableCellGroupImpl = React.createClass({
 
   getInitialState: function () {
     return {
-      mouseMoveTracker: null,
       reorderingColumn: null,
       dragOffset: 0,
-      positionShifts: null,
-      curtain: null
+      positionShifts: null
     };
   },
 
@@ -67,15 +65,15 @@ var FixedDataTableCellGroupImpl = React.createClass({
   },
 
   _onColumnReorderStart (index, event) {
-    var mouseMoveTracker = new DOMMouseMoveTracker(
+    console.log('start');
+    this.mouseMoveTracker = new DOMMouseMoveTracker(
       this._onColumnReorderMove,
       this._onColumnReorderEnd,
       document.body
     );
-    mouseMoveTracker.captureMouseMoves(event);
+    this.mouseMoveTracker.captureMouseMoves(event);
 
     this.setState({
-      mouseMoveTracker: mouseMoveTracker,
       reorderColumnIndex: index,
       reorderColumnWidth: this.props.columns[index].props.width,
       dragOffset: 0,
@@ -84,7 +82,8 @@ var FixedDataTableCellGroupImpl = React.createClass({
   },
 
   _onColumnReorderMove (deltaX) {
-    if (!this.state.curtain) {
+    if (!this.curtain) {
+      console.log('adding curtain');
       var curtain = document.createElement('div');
       curtain.style.zIndex = 10000000;
       curtain.style.position = 'fixed';
@@ -93,9 +92,7 @@ var FixedDataTableCellGroupImpl = React.createClass({
       curtain.style.bottom = 0;
       curtain.style.right = 0;
       document.body.appendChild(curtain);
-      this.setState({
-        curtain: curtain
-      });
+      this.curtain = curtain;
     }
 
     var reorderColumnIndex = this.state.reorderColumnIndex;
@@ -130,9 +127,10 @@ var FixedDataTableCellGroupImpl = React.createClass({
 
   _onColumnReorderEnd () {
     console.log('done!');
-    this.state.mouseMoveTracker.releaseMouseMoves();
-    if (this.state.curtain) {
-      var curtain = this.state.curtain;
+    this.mouseMoveTracker.releaseMouseMoves();
+    if (this.curtain) {
+      var curtain = this.curtain;
+      this.curtain = null;
       // this stops the mouseUp from triggering a click event.
       setTimeout(function () {
         document.body.removeChild(curtain);

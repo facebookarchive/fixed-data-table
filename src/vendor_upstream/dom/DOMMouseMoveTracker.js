@@ -113,12 +113,13 @@ class DOMMouseMoveTracker {
     this._deltaX += (x - this._x);
     this._deltaY += (y - this._y);
 
-    if (this._animationFrameID === null) {
-      // The mouse may move faster then the animation frame does.
-      // Use `requestAnimationFramePolyfill` to avoid over-updating.
-      this._animationFrameID =
-        requestAnimationFramePolyfill(this._didMouseMove);
-    }
+    // if (this._animationFrameID === null) {
+    //   // The mouse may move faster then the animation frame does.
+    //   // Use `requestAnimationFramePolyfill` to avoid over-updating.
+    //   this._animationFrameID =
+    //     requestAnimationFramePolyfill();
+    // }
+    this._didMouseMove();
 
     this._x = x;
     this._y = y;
@@ -136,9 +137,10 @@ class DOMMouseMoveTracker {
    * Calls onMoveEnd passed into constructor and updates internal state.
    */
   _onMouseUp() {
-    if (this._animationFrameID) {
+    // console.log(this._animationFrameID);
+    // if (this._animationFrameID) {
       this._didMouseMove();
-    }
+    // }
     this._onMoveEnd();
   }
 }
