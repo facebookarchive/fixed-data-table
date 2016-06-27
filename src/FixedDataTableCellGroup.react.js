@@ -138,6 +138,38 @@ var FixedDataTableCellGroupImpl = React.createClass({
         document.body.removeChild(curtain);
       }, 100);
     }
+    var columnBeforeIndex, columnAfterIndex;
+    var shifts = this.state.positionShifts.reduce(function (a, b) { return a + b; });
+    if (shifts > 0) {
+      // moved left
+      columnAfterIndex = this.state.positionShifts.indexOf(1);
+      columnBeforeIndex = columnAfterIndex - 1;
+    } else if (shifts < 0) {
+      // moved right
+      columnBeforeIndex = this.state.positionShifts.lastIndexOf(-1);
+      columnAfterIndex = columnBeforeIndex + 1;
+    }
+
+    if (columnBeforeIndex || columnAfterIndex) {
+      var columnBefore;
+      var columnAfter;
+      var reorderColumn = this.props.columns[this.state.reorderColumnIndex].props.columnKey;
+      if (columnBeforeIndex !== -1) {
+        columnBefore = this.props.columns[columnBeforeIndex].props.columnKey;
+      }
+      if (columnAfterIndex !== this.props.columns.length) {
+        columnAfter = this.props.columns[columnAfterIndex].props.columnKey;
+      }
+      this.props.onColumnReorder({
+        columnBefore,
+        columnBeforeIndex,
+        columnAfter,
+        columnAfterIndex,
+        reorderColumn,
+        reorderColumnIndex: this.state.reorderColumnIndex
+      });
+    }
+
     this.setState(this.getInitialState());
   },
 
@@ -243,7 +275,7 @@ var FixedDataTableCellGroupImpl = React.createClass({
         width={columnProps.width}
         left={left}
         cell={columnProps.cell}
-        onColumnReorderStart={this._onColumnReorderStart.bind(this, index)}
+        onColumnReorderStart={this.props.onColumnReorder ? this._onColumnReorderStart.bind(this, index) : null}
         isReorderingThisColumn={this.state.reorderColumnIndex === index}
       />
     );

@@ -22,6 +22,7 @@ require('fixed-data-table/css/layout/fixedDataTableRowLayout.css');
 require('fixed-data-table/css/style/fixedDataTable.css');
 require('fixed-data-table/css/style/fixedDataTableCell.css');
 require('fixed-data-table/css/style/fixedDataTableColumnResizerLine.css');
+require('fixed-data-table/css/style/fixedDataTableColumnReorder.css');
 require('fixed-data-table/css/style/fixedDataTableRow.css');
 require('fixed-data-table/css/style/Scrollbar.css');
 
@@ -36,6 +37,7 @@ var ExamplePages = Constants.ExamplePages;
 var EXAMPLE_COMPONENTS = {
   [ExamplePages.OBJECT_DATA_EXAMPLE.location]: require('../../examples/ObjectDataExample'),
   [ExamplePages.RESIZE_EXAMPLE.location]: require('../../examples/ResizeExample'),
+  [ExamplePages.REORDER_EXAMPLE.location]: require('../../examples/ReorderExample'),
   [ExamplePages.FLEXGROW_EXAMPLE.location]: require('../../examples/FlexGrowExample'),
   [ExamplePages.COLUMN_GROUPS_EXAMPLE.location]: require('../../examples/ColumnGroupsExample'),
   [ExamplePages.FILTER_EXAMPLE.location]: require('../../examples/FilterExample'),
