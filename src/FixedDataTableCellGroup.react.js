@@ -91,6 +91,11 @@ var FixedDataTableCellGroupImpl = React.createClass({
       curtain.style.left = 0;
       curtain.style.bottom = 0;
       curtain.style.right = 0;
+      curtain.style.cursor = 'grabbing';
+      if (!curtain.style.cursor) {
+        curtain.style.cursor = '-webkit-grabbing';
+      }
+      curtain.className = cx('fixedDataTable/columnReorderCurtain');
       document.body.appendChild(curtain);
       this.curtain = curtain;
     }
