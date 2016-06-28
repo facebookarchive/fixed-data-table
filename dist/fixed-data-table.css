@@ -422,6 +422,27 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 .public_fixedDataTableCell_columnResizerKnob {
   background-color: #0284ff;
 }
+.public_fixedDataTableCell_hasReorderHandle .public_fixedDataTableCell_cellContent {
+	margin-left: 12px;
+}
+/**
+ * Column reorder goodies.
+ */
+.fixedDataTableCellLayout_columnReorderContainer {
+  border-color: #0284ff;
+  background-color: rgba(0,0,0,0.1);
+  width: 12px;
+  margin-right: -12px;
+  float: left;
+}
+.fixedDataTableCellLayout_columnReorderContainer:after {
+	content: '::';
+	position: absolute;
+	top: 50%;
+	left: 1px;
+	-webkit-transform: translateY(-50%);
+	        transform: translateY(-50%);
+}
 /**
  * Copyright (c) 2015, Facebook, Inc.
  * All rights reserved.
