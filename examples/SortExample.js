@@ -77,7 +77,7 @@ class DataListWrapper {
 
   getObjectAt(index) {
     return this._data.getObjectAt(
-      this._indexMap[index],
+      this._indexMap[index]
     );
   }
 }
