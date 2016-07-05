@@ -1,11 +1,11 @@
 {
   "name": "@buildingconnected/fixed-data-table",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "A React table component designed to allow presenting thousands of rows of data.",
   "main": "main.js",
   "peerDependencies": {
-    "react": "15.0.x",
-    "react-dom": "15.0.x"
+    "react": "^15.0.0",
+    "react-dom": "^15.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^5.0.0",
