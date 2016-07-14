@@ -907,7 +907,7 @@ var FixedDataTable = React.createClass({
     // The order of elements in this object metters and bringing bodyHeight,
     // height or useGroupHeader to the top can break various features
     var newState = {
-      isColumnResizing: oldState && oldState.isColumnResizing,
+      isColumnResizing: false,
       // isColumnResizing should be overwritten by value from props if
       // avaialble
 

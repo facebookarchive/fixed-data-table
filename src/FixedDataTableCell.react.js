@@ -174,6 +174,19 @@ var FixedDataTableCell = React.createClass({
       </div>
     );
   },
+
+  _onColumnResizerMouseDown(/*object*/ event) {
+    event.preventDefault();
+
+    this.props.onColumnResize(
+      this.props.left,
+      this.props.width,
+      this.props.minWidth,
+      this.props.maxWidth,
+      this.props.columnKey,
+      event
+    );
+  },
 });
 
 module.exports = FixedDataTableCell;

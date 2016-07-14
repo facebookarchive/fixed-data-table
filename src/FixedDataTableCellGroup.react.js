@@ -66,7 +66,9 @@ var FixedDataTableCellGroupImpl = React.createClass({
   },
 
   _onColumnReorderStart (index, event) {
-    console.log('start');
+    if (event.isDefaultPrevented()) {
+      return;
+    }
     this.mouseMoveTracker = new DOMMouseMoveTracker(
       this._onColumnReorderMove,
       this._onColumnReorderEnd,

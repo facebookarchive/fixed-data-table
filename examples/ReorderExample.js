@@ -31,13 +31,6 @@ var columnTitles = {
   'companyName': 'Company'
 };
 
-var columnWidths = {
-  firstName: 150,
-  lastName: 150,
-  sentence: 240,
-  companyName: 100,
-};
-
 class ReorderExample extends React.Component {
   constructor(props) {
     super(props);
@@ -63,6 +56,7 @@ class ReorderExample extends React.Component {
   }
 
   _onColumnResizeEndCallback(newColumnWidth, columnKey) {
+    console.log('setting');
     this.setState(({columnWidths}) => ({
       columnWidths: {
         ...columnWidths,
@@ -104,14 +98,14 @@ class ReorderExample extends React.Component {
         width={1000}
         height={500}
         {...this.props}>
-        {this.state.columnOrder.map(function (columnKey, i) {
+        {this.state.columnOrder.map((columnKey, i) => {
           return <Column
             columnKey={columnKey}
             key={i}
             header={<Cell onClick={cellClick}>{columnTitles[columnKey]}</Cell>}
             cell={<TextCell data={dataList} />}
             fixed={i === 0}
-            width={columnWidths[columnKey]}
+            width={this.state.columnWidths[columnKey]}
             isResizable={true}
            />;
         })}
