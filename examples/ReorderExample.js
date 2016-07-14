@@ -44,6 +44,12 @@ class ReorderExample extends React.Component {
 
     this.state = {
       dataList: new FakeObjectDataListStore(1000000),
+      columnWidths: {
+        firstName: 240,
+        lastName: 150,
+        sentence: 140,
+        companyName: 60,
+      },
       columnOrder: [
         'firstName',
         'lastName',
@@ -53,6 +59,16 @@ class ReorderExample extends React.Component {
     };
 
     this._onColumnReorderEndCallback = this._onColumnReorderEndCallback.bind(this);
+    this._onColumnResizeEndCallback = this._onColumnResizeEndCallback.bind(this);
+  }
+
+  _onColumnResizeEndCallback(newColumnWidth, columnKey) {
+    this.setState(({columnWidths}) => ({
+      columnWidths: {
+        ...columnWidths,
+        [columnKey]: newColumnWidth,
+      }
+    }));
   }
 
   _onColumnReorderEndCallback(event) {
@@ -83,6 +99,7 @@ class ReorderExample extends React.Component {
         rowHeight={30}
         headerHeight={50}
         rowsCount={dataList.getSize()}
+        onColumnResizeEndCallback={this._onColumnResizeEndCallback}
         onColumnReorder={this._onColumnReorderEndCallback}
         width={1000}
         height={500}
@@ -95,6 +112,7 @@ class ReorderExample extends React.Component {
             cell={<TextCell data={dataList} />}
             fixed={i === 0}
             width={columnWidths[columnKey]}
+            isResizable={true}
            />;
         })}
        </Table>
