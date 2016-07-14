@@ -313,6 +313,12 @@ var TransitionTable = React.createClass({
      * Whether the table is shown Right-to-Left
      */
     isRTL: PropTypes.bool,
+
+    /**
+     * The number of rows outside the viewport to prerender. Defaults to roughly
+     * half of the number of visible rows.
+     */
+    bufferRowCount: PropTypes.number,
   },
 
   getInitialState() {

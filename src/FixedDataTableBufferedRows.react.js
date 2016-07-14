@@ -24,12 +24,13 @@ var {PropTypes} = React;
 var FixedDataTableBufferedRows = React.createClass({
 
   propTypes: {
-    isScrolling: PropTypes.bool,
+    bufferRowCount: PropTypes.number,
     defaultRowHeight: PropTypes.number.isRequired,
     firstRowIndex: PropTypes.number.isRequired,
     firstRowOffset: PropTypes.number.isRequired,
     fixedColumns: PropTypes.array.isRequired,
     height: PropTypes.number.isRequired,
+    isScrolling: PropTypes.bool,
     offsetTop: PropTypes.number.isRequired,
     onRowClick: PropTypes.func,
     onRowDoubleClick: PropTypes.func,
@@ -37,11 +38,11 @@ var FixedDataTableBufferedRows = React.createClass({
     onRowMouseEnter: PropTypes.func,
     onRowMouseLeave: PropTypes.func,
     rowClassNameGetter: PropTypes.func,
-    rowsCount: PropTypes.number.isRequired,
     rowHeightGetter: PropTypes.func,
     rowPositionGetter: PropTypes.func.isRequired,
-    scrollLeft: PropTypes.number.isRequired,
+    rowsCount: PropTypes.number.isRequired,
     scrollableColumns: PropTypes.array.isRequired,
+    scrollLeft: PropTypes.number.isRequired,
     showLastRowBorder: PropTypes.bool,
     width: PropTypes.number.isRequired,
   },
@@ -52,7 +53,8 @@ var FixedDataTableBufferedRows = React.createClass({
         this.props.rowsCount,
         this.props.defaultRowHeight,
         this.props.height,
-        this._getRowHeight
+        this._getRowHeight,
+        this.props.bufferRowCount,
       );
     return ({
       rowsToRender: this._rowBuffer.getRows(
@@ -73,13 +75,16 @@ var FixedDataTableBufferedRows = React.createClass({
   componentWillReceiveProps(/*object*/ nextProps) {
     if (nextProps.rowsCount !== this.props.rowsCount ||
         nextProps.defaultRowHeight !== this.props.defaultRowHeight ||
-        nextProps.height !== this.props.height) {
+        nextProps.height !== this.props.height ||
+        nextProps.bufferRowCount !== this.props.bufferRowCount
+    ) {
       this._rowBuffer =
         new FixedDataTableRowBuffer(
           nextProps.rowsCount,
           nextProps.defaultRowHeight,
           nextProps.height,
-          this._getRowHeight
+          this._getRowHeight,
+          nextProps.bufferRowCount
         );
     }
     if (this.props.isScrolling && !nextProps.isScrolling) {

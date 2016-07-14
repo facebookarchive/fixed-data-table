@@ -270,6 +270,12 @@ var FixedDataTable = React.createClass({
      * Whether the table is shown Right-to-Left
      */
     isRTL: PropTypes.bool,
+
+    /**
+     * The number of rows outside the viewport to prerender. Defaults to roughly
+     * half of the number of visible rows.
+     */
+    bufferRowCount: PropTypes.number,
   },
 
   getDefaultProps() /*object*/ {
@@ -344,7 +350,7 @@ var FixedDataTable = React.createClass({
   },
 
   _shouldHandleWheelY(/*number*/ delta) /*boolean*/ {
-    if (this.props.overflowY === 'hidden'|| delta === 0) {
+    if (this.props.overflowY === 'hidden' || delta === 0) {
       return false;
     }
 
@@ -614,6 +620,7 @@ var FixedDataTable = React.createClass({
 
     return (
       <FixedDataTableBufferedRows
+        bufferRowCount={this.props.bufferRowCount}
         defaultRowHeight={state.rowHeight}
         firstRowIndex={state.firstRowIndex}
         firstRowOffset={state.firstRowOffset}
