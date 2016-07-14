@@ -29,7 +29,8 @@ var FixedDataTableCellGroupImpl = React.createClass({
 
   getInitialState: function () {
     return {
-      reorderingColumn: null,
+      reorderColumnIndex: null,
+      reorderColumnWidth: null,
       dragOffset: 0,
       positionShifts: null
     };
