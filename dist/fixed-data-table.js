@@ -1544,7 +1544,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // The order of elements in this object metters and bringing bodyHeight,
 	    // height or useGroupHeader to the top can break various features
 	    var newState = _extends({
-	      isColumnResizing: oldState && oldState.isColumnResizing
+	      isColumnResizing: false
 	    }, columnInfo, props, {
 
 	      columns: columns,
@@ -4748,7 +4748,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  getInitialState: function getInitialState() {
 	    return {
-	      reorderingColumn: null,
+	      reorderColumnIndex: null,
+	      reorderColumnWidth: null,
 	      dragOffset: 0,
 	      positionShifts: null
 	    };
@@ -4784,7 +4785,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  _onColumnReorderStart: function _onColumnReorderStart(index, event) {
-	    console.log('start');
+	    if (event.isDefaultPrevented()) {
+	      return;
+	    }
 	    this.mouseMoveTracker = new DOMMouseMoveTracker(this._onColumnReorderMove, this._onColumnReorderEnd, document.body);
 	    this.mouseMoveTracker.captureMouseMoves(event);
 
@@ -5471,6 +5474,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	      columnResizerComponent,
 	      content
 	    );
+	  },
+
+	  _onColumnResizerMouseDown: function _onColumnResizerMouseDown( /*object*/event) {
+	    event.preventDefault();
+
+	    this.props.onColumnResize(this.props.left, this.props.width, this.props.minWidth, this.props.maxWidth, this.props.columnKey, event);
 	  }
 	});
 
