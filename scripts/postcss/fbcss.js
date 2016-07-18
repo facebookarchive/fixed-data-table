@@ -4,8 +4,7 @@ const postcss = require('postcss');
 module.exports = postcss.plugin('fbcss', (options) => {
   return css => {
     css.walkRules(rule => {
-      // TODO: use - instead of _ to match forked cx in fbjs
-      rule.selector = rule.selector.replace(/\//g, '_');
+      rule.selector = rule.selector.replace(/\//g, '-');
     });
     css.walkDecls(decl => {
       const matches = decl.value.match(/var\((.+)\)/);
