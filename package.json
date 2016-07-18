@@ -8,7 +8,7 @@
     "react-dom": "^0.14.0 || ^15.0.0"
   },
   "dependencies": {
-    "fbjs": "^0.8.2",
+    "fbjs": "^0.9.0-alpha.1",
     "object-assign": "^4.1.0",
     "react-addons-pure-render-mixin": "^15.2.1"
   },
