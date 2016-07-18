@@ -208,4 +208,6 @@ gulp.task('npm-js', function() {
     .pipe(gulp.dest(paths.lib));
 });
 
-gulp.task('default', ['dist-css', 'dist-js']);
+gulp.task('build', ['dist-css', 'dist-js'])
+
+gulp.task('default', ['build']);
