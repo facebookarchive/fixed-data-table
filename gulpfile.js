@@ -60,8 +60,8 @@ var paths = {
     style: {
       src: 'src/css/style/*.css',
       dest: 'fixed-data-table-style.css',
-    }
-  }
+    },
+  },
 };
 
 // TODO: rm trailing whitespace after version, use 2015-present
@@ -81,9 +81,9 @@ function makeCSSStream(path) {
   return gulp
     .src(path.src)
     .pipe(concatCSS(path.dest))
-    .pipe(postcss([require('./scripts/postcss/fbcss'), autoprefixer]))
+    .pipe(postcss([fbcss, autoprefixer]))
     .pipe(header(COPYRIGHT_HEADER, {version: packageData.version}))
-    .pipe(gulp.dest(paths.dist))
+    .pipe(gulp.dest(paths.dist));
 }
 
 function minifyCSSStream(stream) {
@@ -172,7 +172,7 @@ gulp.task('dist-js', ['npm-js'], function() {
   };
   var optsMin = {
     debug: false,
-    output: 'fixed-data-table.min.js'
+    output: 'fixed-data-table.min.js',
   };
 
   var fdt = gulp.src('./internal/FixedDataTableRoot.js');
@@ -187,11 +187,11 @@ gulp.task('dist-js', ['npm-js'], function() {
       .pipe(header(COPYRIGHT_HEADER, {version: packageData.version}))
       .pipe(gulp.dest(paths.dist))
   );
-})
+});
 
 gulp.task('npm-clean', function() {
   return del(paths.lib);
-})
+});
 
 gulp.task('npm-js', function() {
   return gulp
@@ -202,10 +202,10 @@ gulp.task('npm-js', function() {
           stripDEV: true,
           rewriteModules: {map: moduleMap},
         }),
-      ]
+      ],
     }))
     .pipe(flatten())
-    .pipe(gulp.dest(paths.lib))
-})
+    .pipe(gulp.dest(paths.lib));
+});
 
 gulp.task('default', ['dist-css']);

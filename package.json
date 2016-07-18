@@ -15,11 +15,17 @@
   "devDependencies": {
     "autoprefixer": "^6.3.6",
     "babel-core": "^5.4.7",
+    "babel-eslint": "^6.1.2",
     "babel-loader": "^5.0.0",
     "babel-preset-fbjs": "^2.0.0",
     "bundle-loader": "^0.5.2",
     "css-loader": "^0.9.1",
     "del": "^2.2.0",
+    "eslint": "^3.0.1",
+    "eslint-config-fbjs": "^1.0.0",
+    "eslint-plugin-babel": "^3.3.0",
+    "eslint-plugin-flow-vars": "^0.4.0",
+    "eslint-plugin-react": "^5.2.2",
     "extract-text-webpack-plugin": "^0.3.8",
     "faker": "^2.1.2",
     "fbjs-css-vars": "^1.0.0",
@@ -60,7 +66,8 @@
     "build-docs": "./build_helpers/buildAPIDocs.sh",
     "publish-site": "./build_helpers/publishStaticSite.sh",
     "publish-package": "./build_helpers/publishPackage.sh",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
