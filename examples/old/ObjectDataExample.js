@@ -58,7 +58,7 @@ var ObjectDataExample = React.createClass({
         {...this.props}>
         <Column
           cellRenderer={renderImage}
-          dataKey="avartar"
+          dataKey="avatar"
           fixed={true}
           label=""
           width={50}

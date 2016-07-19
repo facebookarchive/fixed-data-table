@@ -21,7 +21,7 @@ class FakeObjectDataListStore {
   createFakeRowObjectData(/*number*/ index) /*object*/ {
     return {
       id: index,
-      avartar: faker.image.avatar(),
+      avatar: faker.image.avatar(),
       city: faker.address.city(),
       email: faker.internet.email(),
       firstName: faker.name.firstName(),
