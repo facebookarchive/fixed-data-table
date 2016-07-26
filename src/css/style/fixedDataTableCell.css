@@ -28,3 +28,6 @@
 .public/fixedDataTableCell/columnResizerKnob {
   background-color: #0284ff;
 }
+.public/fixedDataTableCell/hasReorderHandle .public/fixedDataTableCell/cellContent {
+	margin-left: 12px;
+}

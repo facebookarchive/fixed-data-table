@@ -414,6 +414,7 @@ var FixedDataTable = React.createClass({
           fixedColumns={state.groupHeaderFixedColumns}
           scrollableColumns={state.groupHeaderScrollableColumns}
           onColumnResize={this._onColumnResize}
+          onColumnReorder={this.props.onColumnReorder}
         />
       );
     }
@@ -524,6 +525,7 @@ var FixedDataTable = React.createClass({
         fixedColumns={state.headFixedColumns}
         scrollableColumns={state.headScrollableColumns}
         onColumnResize={this._onColumnResize}
+        onColumnReorder={this.props.onColumnReorder}
       />;
 
     var topShadow;
@@ -905,7 +907,7 @@ var FixedDataTable = React.createClass({
     // The order of elements in this object metters and bringing bodyHeight,
     // height or useGroupHeader to the top can break various features
     var newState = {
-      isColumnResizing: oldState && oldState.isColumnResizing,
+      isColumnResizing: false,
       // isColumnResizing should be overwritten by value from props if
       // avaialble
 
