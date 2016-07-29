@@ -11,12 +11,12 @@
 
 'use strict';
 
-var FixedDataTable = require('FixedDataTable.react');
-var FixedDataTableCellDefault = require('FixedDataTableCellDefault.react');
-var FixedDataTableColumn = require('FixedDataTableColumn.react');
-var FixedDataTableColumnGroup = require('FixedDataTableColumnGroup.react');
+const FixedDataTable = require('FixedDataTable.react');
+const FixedDataTableCellDefault = require('FixedDataTableCellDefault.react');
+const FixedDataTableColumn = require('FixedDataTableColumn.react');
+const FixedDataTableColumnGroup = require('FixedDataTableColumnGroup.react');
 
-var FixedDataTableRoot = {
+const FixedDataTableRoot = {
   Cell: FixedDataTableCellDefault,
   Column: FixedDataTableColumn,
   ColumnGroup: FixedDataTableColumnGroup,
@@ -24,4 +24,5 @@ var FixedDataTableRoot = {
 };
 
 FixedDataTableRoot.version = '0.6.2';
+
 module.exports = FixedDataTableRoot;

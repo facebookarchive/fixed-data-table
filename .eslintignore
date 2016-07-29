@@ -1,0 +1,12 @@
+# Build/install artifacts, never lint these
+node_modules
+internal
+dist
+__site__
+__site_prerender__
+
+# TODO: turn these on 1 by 1 and fix.
+build_helpers/
+examples/
+site/
+src/

@@ -18,8 +18,7 @@ sed -i.DELETEME -e "s/version = '$current_version';/version = '$next_version';/g
 rm src/*.js.DELETEME
 echo "Updated version to ${next_version}"
 
-npm run build-dist
-npm run build-npm
+npm run build-package
 
 git add -A
 git add -f dist/fixed-data-table-base.css

@@ -21,7 +21,7 @@ var banner = (
 var plugins = [
   new ExtractTextPlugin('[name].css'),
   new webpack.DefinePlugin({
-    '__DEV__': JSON.stringify(process.env.NODE_ENV !== 'production')
+    '__DEV__': JSON.stringify(process.env.NODE_ENV !== 'production'),
   }),
   resolvers.resolveHasteDefines,
 ];
@@ -44,9 +44,9 @@ if (process.env.COMPRESS) {
   plugins.push(
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
-        warnings: false
+        warnings: false,
       },
-      output: {comments: false}
+      output: {comments: false},
     })
   );
   entry['fixed-data-table-base.min'] = baseEntryPoints;
@@ -68,7 +68,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
       },
       {
         test: /\.css$/,
@@ -76,9 +76,9 @@ module.exports = {
           'style-loader',
           [
             'css-loader',
-            path.join(__dirname, './build_helpers/cssTransformLoader.js')
+            path.join(__dirname, './build_helpers/cssTransformLoader.js'),
           ].join('!')
-        )
+        ),
       },
     ],
   },
@@ -108,8 +108,8 @@ module.exports = {
   },
 
   node: {
-    Buffer: false
+    Buffer: false,
   },
 
-  plugins: plugins
+  plugins: plugins,
 };

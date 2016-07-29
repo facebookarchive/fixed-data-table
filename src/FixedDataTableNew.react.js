@@ -23,6 +23,7 @@ var FixedDataTableRow = require('FixedDataTableRow.react');
 var FixedDataTableScrollHelper = require('FixedDataTableScrollHelper');
 var FixedDataTableWidthHelper = require('FixedDataTableWidthHelper');
 
+var areEqual = require('areEqual');
 var cx = require('cx');
 var debounceCore = require('debounceCore');
 var emptyFunction = require('emptyFunction');
@@ -35,7 +36,6 @@ var {PropTypes} = React;
 var ReactChildren = React.Children;
 
 var EMPTY_OBJECT = {};
-var BORDER_HEIGHT = 1;
 var HEADER = 'header';
 var FOOTER = 'footer';
 var CELL = 'cell';
@@ -103,6 +103,11 @@ var FixedDataTable = React.createClass({
      * Either `height` or `maxHeight` must be specified.
      */
     height: PropTypes.number,
+
+    /**
+     * Pixel height of table's border. Default is 1px.
+     */
+    borderHeight: PropTypes.number,
 
     /**
      * Maximum pixel height of table. If all rows do not fit,
@@ -201,6 +206,15 @@ var FixedDataTable = React.createClass({
     onScrollEnd: PropTypes.func,
 
     /**
+     * Callback that is called when the visible row and column indexes change.
+     * The first argument looks like {rows: [0, 5], columns: [2, 4]}, where
+     * columns include indexes of only the scrollable scolumns. Both intervals
+     * are half open. The second argument is 'wheel', 'scrollbar', or 'props'
+     * indicating why the viewport changed.
+     */
+    onRangeChange: PropTypes.func,
+
+    /**
      * Callback that is called when `rowHeightGetter` returns a different height
      * for a row than the `rowHeight` prop. This is necessary because initially
      * table estimates heights of some parts of the content.
@@ -251,10 +265,22 @@ var FixedDataTable = React.createClass({
      * Whether a column is currently being resized.
      */
     isColumnResizing: PropTypes.bool,
+
+    /**
+     * Whether the table is shown Right-to-Left
+     */
+    isRTL: PropTypes.bool,
+
+    /**
+     * The number of rows outside the viewport to prerender. Defaults to roughly
+     * half of the number of visible rows.
+     */
+    bufferRowCount: PropTypes.number,
   },
 
   getDefaultProps() /*object*/ {
     return {
+      borderHeight: 1,
       footerHeight: 0,
       groupHeaderHeight: 0,
       headerHeight: 0,
@@ -310,14 +336,21 @@ var FixedDataTable = React.createClass({
       return false;
     }
 
-    return (
-      (delta < 0 && this.state.scrollX > 0) ||
-      (delta >= 0 && this.state.scrollX < this.state.maxScrollX)
-    );
+    if (this.props.isRTL) {
+      return (
+        (delta > 0 && this.state.scrollX > 0) ||
+        (delta <= 0 && this.state.scrollX < this.state.maxScrollX)
+      );
+    } else {
+      return (
+        (delta < 0 && this.state.scrollX > 0) ||
+        (delta >= 0 && this.state.scrollX < this.state.maxScrollX)
+      );
+    }
   },
 
   _shouldHandleWheelY(/*number*/ delta) /*boolean*/ {
-    if (this.props.overflowY === 'hidden'|| delta === 0) {
+    if (this.props.overflowY === 'hidden' || delta === 0) {
       return false;
     }
 
@@ -383,6 +416,7 @@ var FixedDataTable = React.createClass({
       this._didScrollStart();
     }
     this._didScrollStop();
+    this._onScroll('props');
 
     this.setState(this._calculateState(nextProps, this.state));
   },
@@ -423,7 +457,7 @@ var FixedDataTable = React.createClass({
     var showScrollbarY = maxScrollY > 0 && state.overflowY !== 'hidden';
     var scrollbarXHeight = showScrollbarX ? Scrollbar.SIZE : 0;
     var scrollbarYHeight = state.height - scrollbarXHeight -
-        (2 * BORDER_HEIGHT) - state.footerHeight;
+        (2 * props.borderHeight) - state.footerHeight;
 
     var headerOffsetTop = state.useGroupHeader ? state.groupHeaderHeight : 0;
     var bodyOffsetTop = headerOffsetTop + state.headerHeight;
@@ -467,6 +501,7 @@ var FixedDataTable = React.createClass({
           onScroll={this._onHorizontalScroll}
           position={state.scrollX}
           size={scrollbarXWidth}
+          isRTL={props.isRTL}
         />;
     }
 
@@ -585,12 +620,13 @@ var FixedDataTable = React.createClass({
 
     return (
       <FixedDataTableBufferedRows
-        isScrolling={this._isScrolling}
+        bufferRowCount={this.props.bufferRowCount}
         defaultRowHeight={state.rowHeight}
         firstRowIndex={state.firstRowIndex}
         firstRowOffset={state.firstRowOffset}
         fixedColumns={state.bodyFixedColumns}
         height={state.bodyHeight}
+        isScrolling={this._isScrolling}
         offsetTop={offsetTop}
         onRowClick={state.onRowClick}
         onRowDoubleClick={state.onRowDoubleClick}
@@ -598,14 +634,14 @@ var FixedDataTable = React.createClass({
         onRowMouseEnter={state.onRowMouseEnter}
         onRowMouseLeave={state.onRowMouseLeave}
         rowClassNameGetter={state.rowClassNameGetter}
-        rowsCount={state.rowsCount}
         rowGetter={state.rowGetter}
         rowHeightGetter={state.rowHeightGetter}
-        scrollLeft={state.scrollX}
+        rowPositionGetter={this._scrollHelper.getRowPosition}
+        rowsCount={state.rowsCount}
         scrollableColumns={state.bodyScrollableColumns}
+        scrollLeft={state.scrollX}
         showLastRowBorder={true}
         width={state.width}
-        rowPositionGetter={this._scrollHelper.getRowPosition}
       />
     );
   },
@@ -727,7 +763,7 @@ var FixedDataTable = React.createClass({
     );
 
     var children = [];
-    ReactChildren.forEach(props.children, (child, index) => {
+    React.Children.forEach(props.children, (child, index) => {
       if (child == null) {
         return;
       }
@@ -870,7 +906,7 @@ var FixedDataTable = React.createClass({
     var useMaxHeight = props.height === undefined;
     var height = Math.round(useMaxHeight ? props.maxHeight : props.height);
     var totalHeightReserved = props.footerHeight + props.headerHeight +
-      groupHeaderHeight + 2 * BORDER_HEIGHT;
+      groupHeaderHeight + 2 * props.borderHeight;
     var bodyHeight = height - totalHeightReserved;
     var scrollContentHeight = this._scrollHelper.getContentHeight();
     var totalHeightNeeded = scrollContentHeight + totalHeightReserved;
@@ -987,7 +1023,7 @@ var FixedDataTable = React.createClass({
           maxScrollY: maxScrollY,
         });
       } else if (deltaX && this.props.overflowX !== 'hidden') {
-        x += deltaX;
+        x += deltaX * (this.props.isRTL ? -1 : 1);
         x = x < 0 ? 0 : x;
         x = x > this.state.maxScrollX ? this.state.maxScrollX : x;
         this.setState({
@@ -996,6 +1032,7 @@ var FixedDataTable = React.createClass({
       }
 
       this._didScrollStop();
+      this._onScroll('wheel');
     }
   },
 
@@ -1009,6 +1046,7 @@ var FixedDataTable = React.createClass({
         scrollX: scrollPos,
       });
       this._didScrollStop();
+      this._onScroll('scrollbar');
     }
   },
 
@@ -1025,6 +1063,7 @@ var FixedDataTable = React.createClass({
         scrollContentHeight: scrollState.contentHeight,
       });
       this._didScrollStop();
+      this._onScroll('scrollbar');
     }
   },
 
@@ -1046,6 +1085,118 @@ var FixedDataTable = React.createClass({
       }
     }
   },
+
+  _onScroll(/*string*/ sourceEventType) {
+    if (this.props.onRangeChange) {
+      const range = this.getViewportRange();
+
+      if (!areEqual(range, this._range)) {
+        this._range = range;
+        this.props.onRangeChange(range, {sourceEventType});
+      }
+    } else {
+      this._range = undefined;
+    }
+  },
+
+  /**
+   * Returns the range of the viewport. Cells partially in the viewport are
+   * considered inside.
+   */
+  getViewportRange() /*object*/ {
+    return {
+      row: this._getViewportRowIntervalForActualBodyHeight(),
+      column: this._getViewportScrollableColumnInterval(),
+    };
+  },
+
+  /**
+   * Returns the interval of row indexes visible in the viewport. The interval
+   * is half open. Rows partially in the viewport are considered inside.
+   *
+   * This method uses ownerHeight instead of height to compute the viewport, if
+   * available.
+   */
+  _getViewportRowIntervalForActualBodyHeight() /*array*/ {
+    const actualBodyHeight = this._scrollHelper.getViewportHeight()
+      + (this.props.ownerHeight || this.props.height)
+      - this.state.height;
+
+    const lastRowIndex = this._scrollHelper.getLastRowIndex(
+      this.state.firstRowIndex,
+      this.state.firstRowOffset,
+      actualBodyHeight,
+    );
+
+    return [
+      this.state.firstRowIndex,
+      Math.min(lastRowIndex, this.props.rowsCount),
+    ];
+  },
+
+  /**
+   * Returns the interval of scrollable column indexes visible in the viewport.
+   * The interval is half open. Columns partially in the viewport are considered
+   * inside.
+   */
+  _getViewportScrollableColumnInterval() /*array*/ {
+    const {
+      bodyFixedColumns: fixedColumns,
+      bodyScrollableColumns: scrollableColumns,
+      scrollX,
+      width,
+    } = this.state;
+
+    // Find the total width of fixed columns
+    let fixedColumnsWidth = 0;
+    for (let i = 0; i < fixedColumns.length; i++) {
+      fixedColumnsWidth += fixedColumns[i].props.width;
+    }
+
+    const scrollableWidth = width - fixedColumnsWidth;
+
+    return this._getVisibleColumnInterval(
+      scrollableColumns,
+      scrollX,
+      scrollableWidth,
+    ).map(x => x + fixedColumns.length);
+  },
+
+  _getVisibleColumnInterval(
+    /*array*/ columns,
+    /*number*/ scrollLeft,
+    /*number*/ width,
+  ) /*array*/ {
+    let startIx = undefined;
+    let endIx = undefined;
+
+    let runningLeft = -scrollLeft;
+    for (let i = 0; i < columns.length; i++) {
+      const columnProps = columns[i].props;
+      const visible = 0 <= runningLeft + columnProps.width
+        && runningLeft < width;
+
+      // Edge detection
+      if (visible && startIx == null) {
+        startIx = i;
+      }
+      if (!visible && startIx != null && endIx == null) {
+        endIx = i;
+        break;
+      }
+
+      runningLeft += columnProps.width;
+    }
+
+    return [
+      startIx != null ? startIx : 0,
+      endIx != null ? endIx : columns.length,
+    ];
+  },
+
+  getScrollHelper() {
+    return this._scrollHelper;
+  },
 });
 
 var HorizontalScrollbar = React.createClass({
@@ -1056,6 +1207,7 @@ var HorizontalScrollbar = React.createClass({
     onScroll: PropTypes.func.isRequired,
     position: PropTypes.number.isRequired,
     size: PropTypes.number.isRequired,
+    isRTL: PropTypes.bool,
   },
 
   render() /*object*/ {

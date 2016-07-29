@@ -43,6 +43,7 @@ var Scrollbar = React.createClass({
     contentSize: PropTypes.number.isRequired,
     defaultPosition: PropTypes.number,
     isOpaque: PropTypes.bool,
+    isRTL: PropTypes.bool,
     orientation: PropTypes.oneOf(['vertical', 'horizontal']),
     onScroll: PropTypes.func,
     position: PropTypes.number,
@@ -137,6 +138,7 @@ var Scrollbar = React.createClass({
       faceStyle = {
         width: faceSize - FACE_MARGIN_2
       };
+      position = this.props.isRTL ? -position : position;
       translateDOMPositionXY(faceStyle, position, 0);
     } else {
       mainStyle = {
@@ -180,7 +182,7 @@ var Scrollbar = React.createClass({
 
     this._wheelHandler = new ReactWheelHandler(
       onWheel,
-      this._shouldHandleX, // Should hanlde horizontal scroll
+      this._shouldHandleX, // Should handle horizontal scroll
       this._shouldHandleY // Should handle vertical scroll
     );
   },
@@ -224,6 +226,10 @@ var Scrollbar = React.createClass({
   },
 
   _shouldHandleChange(/*number*/ delta) /*boolean*/ {
+    if (this.props.orientation === 'horizontal' && this.props.isRTL) {
+      delta *= -1;
+    }
+
     var nextState = this._calculateState(
       this.state.position + delta,
       this.props.size,
@@ -304,6 +310,10 @@ var Scrollbar = React.createClass({
   _onWheel(/*number*/ delta) {
     var props = this.props;
 
+    if (props.orientation === 'horizontal' && props.isRTL) {
+      delta *= -1;
+    }
+
     // The mouse may move faster then the animation frame does.
     // Use `requestAnimationFrame` to avoid over-updating.
     this._setNextState(
@@ -326,6 +336,11 @@ var Scrollbar = React.createClass({
       var position = this.state.isHorizontal ?
         nativeEvent.offsetX || nativeEvent.layerX :
         nativeEvent.offsetY || nativeEvent.layerY;
+
+      // Reverse position for RTL
+      if (this.state.isHorizontal && this.props.isRTL) {
+        position = this.props.size - position;
+      }
 
       // MouseDown on the scroll-track directly, move the center of the
       // scroll-face to the mouse position.
@@ -352,6 +367,10 @@ var Scrollbar = React.createClass({
   _onMouseMove(/*number*/ deltaX, /*number*/ deltaY) {
     var props = this.props;
     var delta = this.state.isHorizontal ? deltaX : deltaY;
+
+    if (this.state.isHorizontal && this.props.isRTL) {
+      delta *= -1;
+    }
     delta /= this.state.scale;
 
     this._setNextState(
@@ -389,11 +408,11 @@ var Scrollbar = React.createClass({
           break;
 
         case Keys.LEFT:
-          direction = -1;
+          direction = this.props.isRTL ? 1 : -1;
           break;
 
         case Keys.RIGHT:
-          direction = 1;
+          direction = this.props.isRTL ? -1 : 1;
           break;
 
         default:
