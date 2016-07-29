@@ -762,15 +762,6 @@ var FixedDataTable = React.createClass({
       scrollY = scrollState.position;
     }
 
-    if (this._rowToScrollTo !== undefined) {
-      scrollState =
-        this._scrollHelper.scrollRowIntoView(this._rowToScrollTo);
-      firstRowIndex = scrollState.index;
-      firstRowOffset = scrollState.offset;
-      scrollY = scrollState.position;
-      delete this._rowToScrollTo;
-    }
-
     var groupHeaderHeight = useGroupHeader ? props.groupHeaderHeight : 0;
 
     if (oldState && props.rowsCount !== oldState.rowsCount) {
@@ -794,6 +785,15 @@ var FixedDataTable = React.createClass({
       scrollY = scrollState.position;
     } else if (oldState && props.rowHeightGetter !== oldState.rowHeightGetter) {
       this._scrollHelper.setRowHeightGetter(props.rowHeightGetter);
+    }
+
+    if (this._rowToScrollTo !== undefined) {
+      scrollState =
+        this._scrollHelper.scrollRowIntoView(this._rowToScrollTo);
+      firstRowIndex = scrollState.index;
+      firstRowOffset = scrollState.offset;
+      scrollY = scrollState.position;
+      delete this._rowToScrollTo;
     }
 
     var columnResizingData;
