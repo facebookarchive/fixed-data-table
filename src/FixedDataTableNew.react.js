@@ -263,8 +263,23 @@ var FixedDataTable = React.createClass({
     };
   },
 
-  getInitialState() /*object*/ {
+  componentWillMount() {
     var props = this.props;
+
+    var scrollToRow = props.scrollToRow;
+    if (scrollToRow !== undefined && scrollToRow !== null) {
+      this._rowToScrollTo = scrollToRow;
+    }
+    var scrollToColumn = props.scrollToColumn;
+    if (scrollToColumn !== undefined && scrollToColumn !== null) {
+      this._columnToScrollTo = scrollToColumn;
+    }
+    this._wheelHandler = new ReactWheelHandler(
+      this._onWheel,
+      this._shouldHandleWheelX,
+      this._shouldHandleWheelY
+    );
+
     var viewportHeight =
       (props.height === undefined ? props.maxHeight : props.height) -
       (props.headerHeight || 0) -
@@ -281,23 +296,7 @@ var FixedDataTable = React.createClass({
     }
     this._didScrollStop = debounceCore(this._didScrollStop, 200, this);
 
-    return this._calculateState(this.props);
-  },
-
-  componentWillMount() {
-    var scrollToRow = this.props.scrollToRow;
-    if (scrollToRow !== undefined && scrollToRow !== null) {
-      this._rowToScrollTo = scrollToRow;
-    }
-    var scrollToColumn = this.props.scrollToColumn;
-    if (scrollToColumn !== undefined && scrollToColumn !== null) {
-      this._columnToScrollTo = scrollToColumn;
-    }
-    this._wheelHandler = new ReactWheelHandler(
-      this._onWheel,
-      this._shouldHandleWheelX,
-      this._shouldHandleWheelY
-    );
+    this.setState(this._calculateState(this.props));
   },
 
   _shouldHandleWheelX(/*number*/ delta) /*boolean*/ {
