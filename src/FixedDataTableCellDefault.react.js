@@ -64,7 +64,16 @@ var FixedDataTableCellDefault = React.createClass({
   },
 
   render() {
-    var {height, width, style, className, children, ...props} = this.props;
+    var {
+      height,
+      width,
+      style,
+      className,
+      children,
+      columnKey, // Unused but should not be passed through
+      rowIndex, // Unused but should not be passed through
+      ...props
+    } = this.props;
 
     var innerStyle = {
       height,

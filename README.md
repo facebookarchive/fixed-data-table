@@ -34,7 +34,7 @@ Add the default stylesheet `dist/fixed-data-table.css`, then import it into any 
 ### Basic Example
 
 ```javascript
-import React from 'react');
+import React from 'react';
 import ReactDOM from 'react-dom';
 import {Table, Column, Cell} from 'fixed-data-table';
 
