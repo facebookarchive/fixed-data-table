@@ -1,5 +1,5 @@
 /**
- * FixedDataTable v0.6.2 
+ * FixedDataTable v0.6.3 
  *
  * Copyright (c) 2015, Facebook, Inc.
  * All rights reserved.
@@ -5440,8 +5440,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var style = _props.style;
 	    var className = _props.className;
 	    var children = _props.children;
+	    var columnKey = _props.columnKey;
+	    var // Unused but should not be passed through
+	    rowIndex = _props.rowIndex;
 
-	    var props = _objectWithoutProperties(_props, ['height', 'width', 'style', 'className', 'children']);
+	    var props = _objectWithoutProperties(_props, ['height', 'width', 'style', 'className', 'children', 'columnKey', 'rowIndex']);
 
 	    var innerStyle = _extends({
 	      height: height,
@@ -5473,6 +5476,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 
 	module.exports = FixedDataTableCellDefault;
+	// Unused but should not be passed through
 
 /***/ },
 /* 66 */
@@ -6409,30 +6413,37 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  var Loader = React.createClass({displayName: "Loader",
 	    propTypes: {
-	      component: React.PropTypes.any,
-	      loaded:    React.PropTypes.bool,
-	      options:   React.PropTypes.object,
-	      scale:     React.PropTypes.number,
-	      lines:     React.PropTypes.number,
-	      length:    React.PropTypes.number,
-	      width:     React.PropTypes.number,
-	      radius:    React.PropTypes.number,
-	      corners:   React.PropTypes.number,
-	      rotate:    React.PropTypes.number,
-	      direction: React.PropTypes.oneOf([1, -1]),
-	      color:     React.PropTypes.string,
-	      speed:     React.PropTypes.number,
-	      trail:     React.PropTypes.number,
-	      shadow:    React.PropTypes.bool,
-	      hwaccell:  React.PropTypes.bool,
-	      className: React.PropTypes.string,
-	      zIndex:    React.PropTypes.number,
-	      top:       React.PropTypes.string,
-	      left:      React.PropTypes.string
+	      className:       React.PropTypes.string,
+	      color:           React.PropTypes.string,
+	      component:       React.PropTypes.any,
+	      corners:         React.PropTypes.number,
+	      direction:       React.PropTypes.oneOf([1, -1]),
+	      hwaccell:        React.PropTypes.bool,
+	      left:            React.PropTypes.string,
+	      length:          React.PropTypes.number,
+	      lines:           React.PropTypes.number,
+	      loaded:          React.PropTypes.bool,
+	      loadedClassName: React.PropTypes.string,
+	      opacity:         React.PropTypes.number,
+	      options:         React.PropTypes.object,
+	      parentClassName: React.PropTypes.string,
+	      radius:          React.PropTypes.number,
+	      rotate:          React.PropTypes.number,
+	      scale:           React.PropTypes.number,
+	      shadow:          React.PropTypes.bool,
+	      speed:           React.PropTypes.number,
+	      top:             React.PropTypes.string,
+	      trail:           React.PropTypes.number,
+	      width:           React.PropTypes.number,
+	      zIndex:          React.PropTypes.number
 	    },
 
 	    getDefaultProps: function () {
-	      return { component: 'div' };
+	      return {
+	        component: 'div',
+	        loadedClassName: 'loadedContent',
+	        parentClassName: 'loader'
+	      };
 	    },
 
 	    getInitialState: function () {
@@ -6476,7 +6487,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 
 	    spin: function () {
-	      if (this.isMounted() && !this.state.loaded) {
+	      var canUseDOM = !!(
+	        typeof window !== 'undefined' &&
+	        window.document &&
+	        window.document.createElement
+	      );
+
+	      if (canUseDOM && this.isMounted() && !this.state.loaded) {
 	        var spinner = new Spinner(this.state.options);
 	        var target =  ReactDOM.findDOMNode(this.refs.loader);
 
@@ -6490,10 +6507,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var props, children;
 
 	      if (this.state.loaded) {
-	        props = { key: 'content', className: 'loadedContent' };
+	        props = { key: 'content', className: this.props.loadedClassName };
 	        children = this.props.children;
 	      } else {
-	        props = { key: 'loader', ref: 'loader', className: 'loader' };
+	        props = { key: 'loader', ref: 'loader', className: this.props.parentClassName };
 	      }
 
 	      return React.createElement(this.props.component, props, children);
