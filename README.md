@@ -51,18 +51,18 @@ ReactDOM.render(
   <Table
     rowHeight={50}
     rowsCount={rows.length}
-    width={5000}
-    height={5000}
+    width={500}
+    height={500}
     headerHeight={50}>
     <Column
       header={<Cell>Col 1</Cell>}
       cell={<Cell>Column 1 static content</Cell>}
-      width={2000}
+      width={200}
     />
     <Column
       header={<Cell>Col 2</Cell>}
       cell={<MyCustomCell mySpecialProp="column2" />}
-      width={1000}
+      width={100}
     />
     <Column
       header={<Cell>Col 3</Cell>}
@@ -71,7 +71,7 @@ ReactDOM.render(
           Data for column 3: {rows[rowIndex][2]}
         </Cell>
       )}
-      width={2000}
+      width={200}
     />
   </Table>,
   document.getElementById('example')
