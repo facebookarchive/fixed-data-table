@@ -102,6 +102,8 @@ class ObjectDataExample extends React.Component {
         <Column
           header={<Cell>DOB</Cell>}
           cell={<DateCell data={dataList} col="date" />}
+          fixed={true}
+          fixedPosition="right"
           width={200}
         />
       </Table>
