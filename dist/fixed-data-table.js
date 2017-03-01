@@ -1,5 +1,5 @@
 /**
- * FixedDataTable v0.6.3 
+ * FixedDataTable v0.6.3
  *
  * Copyright (c) 2015, Facebook, Inc.
  * All rights reserved.
@@ -904,6 +904,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	     */
 	    rowClassNameGetter: PropTypes.func,
 
+			/**
+		     * Added boolean to determine if the fix for dynamic row heights is necessary
+		     */
+				hasDynamicRowHeight: PropTypes.bool,
 	    /**
 	     * Pixel height of the column group header.
 	     */
@@ -1499,6 +1503,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	      delete this._columnToScrollTo;
 	    }
 
+			if(props.hasDynamicRowHeight){
+				//Change for correcting dynamic row height update bug
+				//This forces each row height to recalculate before table height is determined, otherwise it will use stale row heights
+				for(var i=0;i<props.rowsCount;i++){
+					this._scrollHelper.getRowPosition(i);
+				}
+			}
+			
 	    var useMaxHeight = props.height === undefined;
 	    var height = Math.round(useMaxHeight ? props.maxHeight : props.height);
 	    var totalHeightReserved = props.footerHeight + props.headerHeight + groupHeaderHeight + 2 * BORDER_HEIGHT;
@@ -5951,7 +5963,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
 	 * @providesModule PrefixIntervalTree
-	 * 
+	 *
 	 * @typechecks
 	 */
 
@@ -6426,7 +6438,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * @providesModule shallowEqual
 	 * @typechecks
-	 * 
+	 *
 	 */
 
 	'use strict';
