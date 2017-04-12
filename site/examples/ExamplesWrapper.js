@@ -17,9 +17,10 @@ require('./examplesPageStyle.less');
 var MiniHeader = require('../MiniHeader');
 var SideBar = require('../SideBar');
 var React = require('react');
+var createClass = require('create-react-class');
 var Constants = require('../Constants');
 
-var ExamplesWrapper = React.createClass({
+var ExamplesWrapper = createClass({
   render() {
     return (
       <div className="examplesPage">

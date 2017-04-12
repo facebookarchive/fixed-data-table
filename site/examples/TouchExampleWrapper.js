@@ -13,6 +13,7 @@
 "use strict";
 
 var React = require('react');
+var createClass = require('create-react-class');
 var ZyngaScroller = require('../ZyngaScroller');
 var TouchableArea = require('./TouchableArea');
 
@@ -23,7 +24,7 @@ function isTouchDevice() {
       || 'onmsgesturechange' in window; // works on ie10
 };
 
-var ExampleTouchWrapper = React.createClass({
+var ExampleTouchWrapper = createClass({
   propTypes: {
     tableWidth: PropTypes.number.isRequired,
     tableHeight: PropTypes.number.isRequired,

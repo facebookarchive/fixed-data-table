@@ -13,9 +13,10 @@
 "use strict";
 
 var React = require('react');
+var createClass = require('create-react-class');
 var Constants = require('../Constants');
 
-var ExampleHeader = React.createClass({
+var ExampleHeader = createClass({
   render() {
     return (
       <div className="exampleHeader">

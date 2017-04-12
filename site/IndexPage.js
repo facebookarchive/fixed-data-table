@@ -8,6 +8,7 @@ var DocsPage = require('./docs/DocsPage');
 var ExamplesPage = require('./examples/ExamplesPage');
 var React = require('react');
 var ReactDOMServer = require('react-dom/server');
+var createClass = require('create-react-class');
 
 var faviconURL = require('./images/favicon.png');
 
@@ -36,7 +37,7 @@ function getPageForLocation(pages, location) {
   return null;
 }
 
-var IndexPage = React.createClass({
+var IndexPage = createClass({
   statics: {
     getDoctype() {
       return '<!doctype html>';

@@ -18,6 +18,7 @@
  */
 
 var React = require('React');
+var createClass = require('create-react-class');
 var {PropTypes} = React;
 
 var cx = require('cx');
@@ -26,7 +27,7 @@ var shallowEqual = require('shallowEqual');
 
 var CellDefault = require('FixedDataTableCellDefault.react');
 
-var TransitionCell = React.createClass({
+var TransitionCell = createClass({
 
   propTypes: {
     label: PropTypes.string, // header, footer
