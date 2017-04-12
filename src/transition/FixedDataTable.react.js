@@ -23,7 +23,7 @@ var React = require('React');
 
 var ReactChildren = React.Children;
 
-var {PropTypes} = React;
+var PropTypes = require('prop-types');
 
 // New Table API
 var Table = require('FixedDataTableNew.react');

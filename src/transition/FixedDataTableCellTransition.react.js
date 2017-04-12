@@ -18,7 +18,7 @@
  */
 
 var React = require('React');
-var {PropTypes} = React;
+var PropTypes = require('prop-types');
 
 var cx = require('cx');
 var joinClasses = require('joinClasses');

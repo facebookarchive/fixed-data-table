@@ -19,7 +19,7 @@ var emptyFunction = require('emptyFunction');
 var joinClasses = require('joinClasses');
 var translateDOMPositionXY = require('translateDOMPositionXY');
 
-var {PropTypes} = React;
+var PropTypes = require('prop-types');
 
 var FixedDataTableBufferedRows = React.createClass({
 
