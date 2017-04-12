@@ -6,6 +6,7 @@ var MiniHeader = require('../MiniHeader');
 var SideBar = require('../SideBar');
 var StaticHTMLBlock = require('../StaticHTMLBlock');
 var React = require('react');
+var createClass = require('create-react-class');
 var Constants = require('../Constants');
 
 var DocsPages = Constants.DocsPages;
@@ -26,7 +27,7 @@ var DOCS_MARKDOWN_FILES = {
   [DocsPages.API_V5.COLUMNGROUP_API.location]: require('../../docs/api-v0.5/ColumnGroupAPI.md'),
 };
 
-var DocsPage = React.createClass({
+var DocsPage = createClass({
   render() {
     var HTML = DOCS_MARKDOWN_FILES[this.props.page.location];
 

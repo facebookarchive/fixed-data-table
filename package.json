@@ -62,5 +62,8 @@
     "table",
     "data-table",
     "fixed-table"
-  ]
+  ],
+  "dependencies": {
+    "create-react-class": "^15.5.2"
+  }
 }

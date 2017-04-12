@@ -14,6 +14,7 @@
 
 var FixedDataTableHelper = require('FixedDataTableHelper');
 var React = require('React');
+var createClass = require('create-react-class');
 var FixedDataTableCell = require('FixedDataTableCell.react');
 
 var cx = require('cx');
@@ -23,7 +24,7 @@ var {PropTypes} = React;
 
 var DIR_SIGN = FixedDataTableHelper.DIR_SIGN;
 
-var FixedDataTableCellGroupImpl = React.createClass({
+var FixedDataTableCellGroupImpl = createClass({
 
   /**
    * PropTypes are disabled in this component, because having them on slows
@@ -136,7 +137,7 @@ var FixedDataTableCellGroupImpl = React.createClass({
   },
 });
 
-var FixedDataTableCellGroup = React.createClass({
+var FixedDataTableCellGroup = createClass({
 
   /**
    * PropTypes are disabled in this component, because having them on slows

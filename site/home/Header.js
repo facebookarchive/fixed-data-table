@@ -2,6 +2,7 @@
 
 var React = require('react');
 var ReactDOM = require('react-dom');
+var createClass = require('create-react-class');
 var Constants = require('../Constants');
 
 var FIXED_THRESHOLD = 680;
@@ -12,7 +13,7 @@ var GITHUB_URL = 'https://github.com/facebook/fixed-data-table';
 var DOCS_DEFAULT_LOCATION = Constants.DOCS_DEFAULT.location;
 var EXAMPLES_DEFAULT_LOCATION = Constants.EXAMPLES_DEFAULT.location;
 
-var Header = React.createClass({
+var Header = createClass({
   getInitialState() {
     return {
       scroll: 0,

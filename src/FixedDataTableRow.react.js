@@ -13,6 +13,7 @@
 'use strict';
 
 var React = require('React');
+var createClass = require('create-react-class');
 var FixedDataTableCellGroup = require('FixedDataTableCellGroup.react');
 
 var cx = require('cx');
@@ -26,7 +27,7 @@ var {PropTypes} = React;
  * This component should not be used directly by developer. Instead,
  * only <FixedDataTable /> should use the component internally.
  */
-var FixedDataTableRowImpl = React.createClass({
+var FixedDataTableRowImpl = createClass({
 
   propTypes: {
 
@@ -193,7 +194,7 @@ var FixedDataTableRowImpl = React.createClass({
   },
 });
 
-var FixedDataTableRow = React.createClass({
+var FixedDataTableRow = createClass({
 
   propTypes: {
 

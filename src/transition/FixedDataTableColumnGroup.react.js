@@ -18,8 +18,9 @@
   */
 
 var React = require('React');
+var createClass = require('create-react-class');
 
-var TransitionColumnGroup = React.createClass({
+var TransitionColumnGroup = createClass({
   statics: {
     __TableColumnGroup__: true,
   },
