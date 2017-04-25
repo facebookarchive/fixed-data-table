@@ -12,7 +12,7 @@
 
 var React = require('React');
 
-var {PropTypes} = React;
+var PropTypes = require('prop-types');
 
 /**
  * Component that defines the attributes of a table column group.

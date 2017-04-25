@@ -31,7 +31,7 @@ var joinClasses = require('joinClasses');
 var shallowEqual = require('shallowEqual');
 var translateDOMPositionXY = require('translateDOMPositionXY');
 
-var {PropTypes} = React;
+var PropTypes = require('prop-types');
 var ReactChildren = React.Children;
 
 var EMPTY_OBJECT = {};

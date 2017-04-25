@@ -15,7 +15,7 @@ var React = require('React');
 var cx = require('cx');
 var joinClasses = require('joinClasses');
 
-var {PropTypes} = React;
+var PropTypes = require('prop-types');
 
 /**
  * Component that handles default cell layout and styling.

@@ -18,7 +18,7 @@ var joinClasses = require('joinClasses');
 
 var DIR_SIGN = FixedDataTableHelper.DIR_SIGN;
 
-var {PropTypes} = React;
+var PropTypes = require('prop-types');
 
 var DEFAULT_PROPS = {
   align: 'left',
