@@ -1,5 +1,5 @@
 /**
- * FixedDataTable v0.6.3 
+ * FixedDataTable v0.6.4 
  *
  * Copyright (c) 2015, Facebook, Inc.
  * All rights reserved.
@@ -40,7 +40,6 @@
 .public_fixedDataTable_header,
 .public_fixedDataTable_header .public_fixedDataTableCell_main {
   background-color: #f6f7f8;
-  background-image: -webkit-linear-gradient(#fff, #efefef);
   background-image: linear-gradient(#fff, #efefef);
 }
 
