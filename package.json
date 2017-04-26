@@ -33,7 +33,7 @@
     "react-tools": "^0.12.2",
     "style-loader": "^0.8.3",
     "url-loader": "^0.5.5",
-    "webpack": "^1.8.3",
+    "webpack": "^1.12.3",
     "webpack-dev-server": "^1.8.0"
   },
   "scripts": {
@@ -65,5 +65,8 @@
     "table",
     "data-table",
     "fixed-table"
-  ]
+  ],
+  "dependencies": {
+    "react-loader": "^2.0.0"
+  }
 }

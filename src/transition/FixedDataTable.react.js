@@ -113,6 +113,10 @@ var TransitionTable = React.createClass({
      */
     width: PropTypes.number.isRequired,
 
+    isLoading: PropTypes.bool.isRequired,
+
+    loaderProps: PropTypes.object,
+
     /**
      * Pixel height of table. If all rows do not fit,
      * a vertical scrollbar will appear.
@@ -298,6 +302,7 @@ var TransitionTable = React.createClass({
      * ```
      */
     onColumnResizeEndCallback: PropTypes.func,
+    onResizeHandleDoubleClick: PropTypes.func,
 
     /**
      * Whether a column is currently being resized.
@@ -545,6 +550,8 @@ var TransitionTable = React.createClass({
     var props = this.props;
     return (
       <Table
+        isLoading = {this.props.isLoading}
+        loaderProps = {this.props.loaderProps}
         {...props}
         onRowMouseDown={this._onRowAction(props, props.onRowMouseDown)}
         onRowClick={this._onRowAction(props, props.onRowClick)}

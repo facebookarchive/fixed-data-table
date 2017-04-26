@@ -22,6 +22,7 @@ var FixedDataTableColumnResizeHandle = require('FixedDataTableColumnResizeHandle
 var FixedDataTableRow = require('FixedDataTableRow.react');
 var FixedDataTableScrollHelper = require('FixedDataTableScrollHelper');
 var FixedDataTableWidthHelper = require('FixedDataTableWidthHelper');
+var Loader = require('react-loader');
 
 var cx = require('cx');
 var debounceCore = require('debounceCore');
@@ -95,6 +96,9 @@ var FixedDataTable = React.createClass({
      * a horizontal scrollbar will appear.
      */
     width: PropTypes.number.isRequired,
+
+    isLoading: PropTypes.bool,
+    loaderProps: PropTypes.object,
 
     /**
      * Pixel height of table. If all rows do not fit,
@@ -246,6 +250,7 @@ var FixedDataTable = React.createClass({
      * ```
      */
     onColumnResizeEndCallback: PropTypes.func,
+    onResizeHandleDoubleClick :PropTypes.func,
 
     /**
      * Whether a column is currently being resized.
@@ -482,6 +487,7 @@ var FixedDataTable = React.createClass({
         initialEvent={state.columnResizingData.initialEvent}
         onColumnResizeEnd={props.onColumnResizeEndCallback}
         columnKey={state.columnResizingData.key}
+        onResizeHandleDoubleClick = {this.props.onResizeHandleDoubleClick}
       />;
 
     var footer = null;
@@ -524,6 +530,7 @@ var FixedDataTable = React.createClass({
         fixedColumns={state.headFixedColumns}
         scrollableColumns={state.headScrollableColumns}
         onColumnResize={this._onColumnResize}
+        onResizeHandleDoubleClick = {this.props.onResizeHandleDoubleClick}
       />;
 
     var topShadow;
@@ -569,7 +576,9 @@ var FixedDataTable = React.createClass({
           {dragKnob}
           {groupHeader}
           {header}
-          {rows}
+          <Loader {...this.props.loaderProps} loaded={!this.props.isLoading}>
+            {rows}
+          </Loader>
           {footer}
           {topShadow}
           {bottomShadow}

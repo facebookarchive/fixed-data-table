@@ -84,6 +84,7 @@ var FixedDataTableRowImpl = React.createClass({
      * @param object event
      */
     onColumnResize: PropTypes.func,
+    onResizeHandleDoubleClick: PropTypes.func,
   },
 
   render() /*object*/ {
@@ -113,6 +114,7 @@ var FixedDataTableRowImpl = React.createClass({
         onColumnResize={this.props.onColumnResize}
         rowHeight={this.props.height}
         rowIndex={this.props.index}
+        onResizeHandleDoubleClick = {this.props.onResizeHandleDoubleClick}
       />;
     var columnsShadow = this._renderColumnsShadow(fixedColumnsWidth);
     var scrollableColumns =
@@ -128,6 +130,7 @@ var FixedDataTableRowImpl = React.createClass({
         onColumnResize={this.props.onColumnResize}
         rowHeight={this.props.height}
         rowIndex={this.props.index}
+        onResizeHandleDoubleClick = {this.props.onResizeHandleDoubleClick}
       />;
 
     return (

@@ -71,6 +71,7 @@ var FixedDataTableCell = React.createClass({
      * @param object event
      */
     onColumnResize: PropTypes.func,
+    onResizeHandleDoubleClick: PropTypes.func,
 
     /**
      * The left offset in pixels of the cell.
@@ -126,7 +127,7 @@ var FixedDataTableCell = React.createClass({
         <div
           className={cx('fixedDataTableCellLayout/columnResizerContainer')}
           style={columnResizerStyle}
-          onMouseDown={this._onColumnResizerMouseDown}>
+          onMouseDown={this._clickDispatcher}>
           <div
             className={joinClasses(
               cx('fixedDataTableCellLayout/columnResizerKnob'),
@@ -168,6 +169,36 @@ var FixedDataTableCell = React.createClass({
         {content}
       </div>
     );
+  },
+  _clickCount : 0,
+
+  _onDoubleClick: function (event){
+
+    var columnKey = this.props.columnKey;
+
+    this.props.onResizeHandleDoubleClick(columnKey);
+
+
+  },
+  _clickDispatcher: function(event) {     // to dispatch event based on single click or double click
+
+    event.stopPropagation();
+
+    this._clickCount++;
+
+    if(this._clickCount === 1) {
+
+      this.props.onColumnResize(this.props.left, this.props.width, this.props.minWidth, this.props.maxWidth, this.props.columnKey, event);
+
+    }
+    else if (this._clickCount ===2) {
+
+      this._onDoubleClick();
+
+    }
+
+    setTimeout(function(){this._clickCount = 0; }.bind(this), 500);  //if no click in 500 interval, reset click count
+
   },
 
   _onColumnResizerMouseDown(/*object*/ event) {
