@@ -745,6 +745,14 @@ var FixedDataTable = React.createClass({
       useGroupHeader = true;
     }
 
+    if (oldState && (
+      (props.width !== undefined && props.width !== oldState.width) ||
+      (props.height !== undefined && props.height !== oldState.height) ||
+      (props.maxWidth !== undefined && props.maxWidth !== oldState.maxWidth) ||
+      (props.maxHeight !== undefined && props.maxHeight !== oldState.maxHeight))) {
+      oldState = null
+    }
+
     var firstRowIndex = (oldState && oldState.firstRowIndex) || 0;
     var firstRowOffset = (oldState && oldState.firstRowOffset) || 0;
     var scrollX, scrollY;
