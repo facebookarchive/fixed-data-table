@@ -32,13 +32,27 @@ var FixedDataTableColumnGroup = React.createClass({
      * Controls if the column group is fixed when scrolling in the X axis.
      */
     fixed: PropTypes.bool,
+      
+    /**
+     * Controls if the column group is fixed at the left or the right of the
+     * table.
+     */
+    fixedPosition: PropTypes.oneOf(['left', 'right']),
 
     /**
-     * This is the header cell for this column group.
-     * This can either be a string or a React element. Passing in a string
-     * will render a default footer cell with that string. By default, the React
-     * element passed in can expect to receive the following props:
-     *
+     * Bucket for any data to be passed into column group renderer functions.
+     */
+    columnGroupData: PropTypes.object,
+
+    /**
+     * The column group's header label.
+     */
+    label: PropTypes.string,
+
+    /**
+     * The cell renderer that returns React-renderable content for a table
+     * column group header. If it's not specified, the label from props will
+     * be rendered as header content.
      * ```
      * props: {
      *   height: number // (supplied from the groupHeaderHeight)
@@ -62,6 +76,7 @@ var FixedDataTableColumnGroup = React.createClass({
   getDefaultProps() /*object*/ {
     return {
       fixed: false,
+      fixedPosition: 'left',
     };
   },
 

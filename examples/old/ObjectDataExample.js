@@ -94,6 +94,8 @@ var ObjectDataExample = React.createClass({
           cellRenderer={renderLink}
           label="Email"
           width={200}
+          fixed={true}
+          fixedPosition="right"
           dataKey="email"
         />
         <Column
