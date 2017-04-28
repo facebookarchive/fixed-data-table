@@ -1,5 +1,3 @@
 {
-  "stage": 1,
-  "plugins": ["./build_helpers/objectAssignTransformer.js"],
-  "blacklist": ["validation.react"]
+  "presets": ["es2015", "react", "stage-1"]
 }
