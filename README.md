@@ -1,3 +1,5 @@
+**DEPRECATED:** This is no longer supported, please consider using [fixed-data-table-2](https://github.com/schrodinger/fixed-data-table-2) instead.
+
 Fixed Data Tables for React
 ====================================
 
