@@ -1,5 +1,7 @@
-Fixed Data Tables for React
+Fixed Data Tables for React 
 ====================================
+
+# Note: fixed-data-table is not actively maintained anymore, and doesn't work with the latest React versions.
 
 FixedDataTable is a React component for building and presenting data in a flexible, powerful way. It supports standard table features, like headers, columns, rows, header groupings, and both fixed-position and scrolling columns.
 
