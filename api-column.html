@@ -1,13 +1,13 @@
-<!doctype html><html data-reactroot="" data-reactid="1" data-react-checksum="-915396469"><head data-reactid="2"><meta charset="utf-8" data-reactid="3"/><title data-reactid="4">FixedDataTable</title><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" data-reactid="5"/><link rel="stylesheet" href="//code.cdn.mozilla.net/fonts/fira.css" data-reactid="6"/><link rel="stylesheet" type="text/css" href="main-a4c1ef43e5a152b5d467.css" data-reactid="7"/><link rel="shortcut icon" type="image/png" href="images/favicon-b4fca2450cb5aa407a2e106f42a92838.png" data-reactid="8"/><base target="_blank" data-reactid="9"/></head><body data-reactid="10"><div class="docsPage" data-reactid="11"><div class="header" data-reactid="12"><div class="miniHeader" data-reactid="13"><div class="miniHeaderContents" data-reactid="14"><a href="./" target="_self" class="miniLogo" data-reactid="15"></a><a class="homeLink" href="./" target="_self" data-reactid="16">Home</a><a href="getting-started.html" target="_self" data-reactid="17">Docs</a><a href="example-object-data.html" target="_self" data-reactid="18">Examples</a><a href="https://github.com/facebook/fixed-data-table" data-reactid="19">Github</a></div></div></div><div class="pageBody" id="body" data-reactid="20"><div class="contents" data-reactid="21"><div class="sideBar" data-reactid="22"><div class="scrollContent" data-reactid="23"><h4 class="groupTitle" data-reactid="24">Guides</h4><h2 data-reactid="25"><a href="getting-started.html" target="_self" class="sideItem" data-reactid="26"><span class="sidebarItemText" data-reactid="27">Getting Started</span><span class="arrowBullet" data-reactid="28"></span></a></h2><h2 data-reactid="29"><a href="v6-migration.html" target="_self" class="sideItem" data-reactid="30"><span class="sidebarItemText" data-reactid="31">v0.6 API Migration</span><span class="arrowBullet" data-reactid="32"></span></a></h2><h4 class="groupTitle" data-reactid="33">API</h4><h2 data-reactid="34"><a href="api-table.html" target="_self" class="sideItem" data-reactid="35"><span class="sidebarItemText" data-reactid="36">Table</span><span class="arrowBullet" data-reactid="37"></span></a></h2><h2 data-reactid="38"><a href="api-column.html" target="_self" class="sideItem curSideItem" data-reactid="39"><span class="sidebarItemText" data-reactid="40">Column</span><span class="arrowBullet" data-reactid="41"></span></a></h2><h2 data-reactid="42"><a href="api-columngroup.html" target="_self" class="sideItem" data-reactid="43"><span class="sidebarItemText" data-reactid="44">Column Group</span><span class="arrowBullet" data-reactid="45"></span></a></h2><h2 data-reactid="46"><a href="api-cell.html" target="_self" class="sideItem" data-reactid="47"><span class="sidebarItemText" data-reactid="48">Cell</span><span class="arrowBullet" data-reactid="49"></span></a></h2><h4 class="groupTitle" data-reactid="50">API - v0.5</h4><h2 data-reactid="51"><a href="api-table-v0.5.html" target="_self" class="sideItem" data-reactid="52"><span class="sidebarItemText" data-reactid="53">Table</span><span class="arrowBullet" data-reactid="54"></span></a></h2><h2 data-reactid="55"><a href="api-column-v0.5.html" target="_self" class="sideItem" data-reactid="56"><span class="sidebarItemText" data-reactid="57">Column</span><span class="arrowBullet" data-reactid="58"></span></a></h2><h2 data-reactid="59"><a href="api-columngroup-v0.5.html" target="_self" class="sideItem" data-reactid="60"><span class="sidebarItemText" data-reactid="61">Column Group</span><span class="arrowBullet" data-reactid="62"></span></a></h2></div></div><div class="docContents" data-reactid="63"><!-- File generated from "src/FixedDataTableColumnNew.react.js" -->
+<!doctype html><html data-reactroot=""><head><meta charSet="utf-8"/><title>FixedDataTable</title><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/><link rel="stylesheet" href="//code.cdn.mozilla.net/fonts/fira.css"/><link rel="stylesheet" type="text/css" href="main-9ede941bec39be45c531.css"/><link rel="shortcut icon" type="image/png" href="images/favicon-b4fca2450cb5aa407a2e106f42a92838.png"/><base target="_blank"/></head><body><div class="docsPage"><div class="header"><div class="miniHeader"><div class="miniHeaderContents"><a href="./" target="_self" class="miniLogo"></a><a class="homeLink" href="./" target="_self">Home</a><a href="getting-started.html" target="_self">Docs</a><a href="example-object-data.html" target="_self">Examples</a><a href="https://github.com/facebook/fixed-data-table">Github</a></div></div></div><div class="pageBody" id="body"><div class="contents"><div class="sideBar"><div class="scrollContent"><h4 class="groupTitle">Guides</h4><h2><a href="getting-started.html" target="_self" class="sideItem"><span class="sidebarItemText">Getting Started</span><span class="arrowBullet"></span></a></h2><h2><a href="v6-migration.html" target="_self" class="sideItem"><span class="sidebarItemText">v0.6 API Migration</span><span class="arrowBullet"></span></a></h2><h4 class="groupTitle">API</h4><h2><a href="api-table.html" target="_self" class="sideItem"><span class="sidebarItemText">Table</span><span class="arrowBullet"></span></a></h2><h2><a href="api-column.html" target="_self" class="sideItem curSideItem"><span class="sidebarItemText">Column</span><span class="arrowBullet"></span></a></h2><h2><a href="api-columngroup.html" target="_self" class="sideItem"><span class="sidebarItemText">Column Group</span><span class="arrowBullet"></span></a></h2><h2><a href="api-cell.html" target="_self" class="sideItem"><span class="sidebarItemText">Cell</span><span class="arrowBullet"></span></a></h2><h4 class="groupTitle">API - v0.5</h4><h2><a href="api-table-v0.5.html" target="_self" class="sideItem"><span class="sidebarItemText">Table</span><span class="arrowBullet"></span></a></h2><h2><a href="api-column-v0.5.html" target="_self" class="sideItem"><span class="sidebarItemText">Column</span><span class="arrowBullet"></span></a></h2><h2><a href="api-columngroup-v0.5.html" target="_self" class="sideItem"><span class="sidebarItemText">Column Group</span><span class="arrowBullet"></span></a></h2></div></div><div class="docContents"><!-- File generated from "src/FixedDataTableColumnNew.react.js" -->
 <h1 id="-column-component-"><code>Column</code> (component)</h1>
 <p>Component that defines the attributes of table column.</p>
 <h2 id="props">Props</h2>
 <h3 id="-align-"><code>align</code></h3>
 <p>The horizontal alignment of the table cell content.</p>
-<p>type: <code>custom</code></p>
+<p>type: <code>enum(&#39;left&#39;|&#39;center&#39;|&#39;right&#39;)</code></p>
 <h3 id="-fixed-"><code>fixed</code></h3>
 <p>Controls if the column is fixed when scrolling in the X axis.</p>
-<p>type: <code>custom</code>
+<p>type: <code>bool</code>
 defaultValue: <code>false</code></p>
 <h3 id="-header-"><code>header</code></h3>
 <p>The header cell for this column.
@@ -23,7 +23,7 @@ receive the following props:</p>
 pass in whatever props you may want or need.</p>
 <p>If you pass in a function, you will receive the same props object as the
 first argument.</p>
-<p>type: <code>custom</code></p>
+<p>type: <code>union(node|func)</code></p>
 <h3 id="-cell-"><code>cell</code></h3>
 <p>This is the body cell that will be cloned for this column.
 This can either be a string a React element, or a function that generates
@@ -39,7 +39,7 @@ receive the following props:</p>
 pass in whatever props you may want or need.</p>
 <p>If you pass in a function, you will receive the same props object as the
 first argument.</p>
-<p>type: <code>custom</code></p>
+<p>type: <code>union(node|func)</code></p>
 <h3 id="-footer-"><code>footer</code></h3>
 <p>This is the footer cell for this column.
 This can either be a string a React element, or a function that generates
@@ -54,27 +54,27 @@ receive the following props:</p>
 pass in whatever props you may want or need.</p>
 <p>If you pass in a function, you will receive the same props object as the
 first argument.</p>
-<p>type: <code>custom</code></p>
+<p>type: <code>union(node|func)</code></p>
 <h3 id="-columnkey-"><code>columnKey</code></h3>
 <p>This is used to uniquely identify the column, and is not required unless
 you a resizing columns. This will be the key given in the
 <code>onColumnResizeEndCallback</code> on the Table.</p>
-<p>type: <code>custom</code></p>
-<h3 id="-width-"><code>width</code></h3>
+<p>type: <code>union(string|number)</code></p>
+<h3 id="-width-required-"><code>width</code> (required)</h3>
 <p>The pixel width of the column.</p>
-<p>type: <code>custom</code></p>
+<p>type: <code>number</code></p>
 <h3 id="-minwidth-"><code>minWidth</code></h3>
 <p>If this is a resizable column this is its minimum pixel width.</p>
-<p>type: <code>custom</code></p>
+<p>type: <code>number</code></p>
 <h3 id="-maxwidth-"><code>maxWidth</code></h3>
 <p>If this is a resizable column this is its maximum pixel width.</p>
-<p>type: <code>custom</code></p>
+<p>type: <code>number</code></p>
 <h3 id="-flexgrow-"><code>flexGrow</code></h3>
 <p>The grow factor relative to other columns. Same as the flex-grow API
 from <a href="http://www.w3.org/TR/css3-flexbox/">http://www.w3.org/TR/css3-flexbox/</a>. Basically, take any available
 extra width and distribute it proportionally according to all columns&#39;
 flexGrow values. Defaults to zero (no-flexing).</p>
-<p>type: <code>custom</code></p>
+<p>type: <code>number</code></p>
 <h3 id="-isresizable-"><code>isResizable</code></h3>
 <p>Whether the column can be resized with the
 FixedDataTableColumnResizeHandle. Please note that if a column
@@ -82,7 +82,7 @@ has a flex grow, once you resize the column this will be set to 0.</p>
 <p>This property only provides the UI for the column resizing. If this
 is set to true, you will need to set the onColumnResizeEndCallback table
 property and render your columns appropriately.</p>
-<p>type: <code>custom</code></p>
+<p>type: <code>bool</code></p>
 <h3 id="-allowcellsrecycling-"><code>allowCellsRecycling</code></h3>
 <p>Whether cells in this column can be removed from document when outside
 of viewport as a result of horizontal scrolling.
@@ -92,7 +92,7 @@ allows to create table with many columns and not have vertical scrolling
 performance drop.
 Setting the property to false will keep previous behaviour and keep
 cell rendered if the row it belongs to is visible.</p>
-<p>type: <code>custom</code>
+<p>type: <code>bool</code>
 defaultValue: <code>false</code></p>
-</div></div></div></div><script data-reactid="64">window.INITIAL_PROPS = {"location":"api-column.html","devMode":false,"files":{"main.css":"main-a4c1ef43e5a152b5d467.css","main.js":"main-a4c1ef43e5a152b5d467.js"}};
-</script><script src="https://cdn.rawgit.com/zynga/scroller/master/src/Animate.js" data-reactid="65"></script><script src="https://cdn.rawgit.com/zynga/scroller/master/src/Scroller.js" data-reactid="66"></script><script src="main-a4c1ef43e5a152b5d467.js" data-reactid="67"></script></body></html>
+</div></div></div></div><script>window.INITIAL_PROPS = {"location":"api-column.html","devMode":false,"files":{"main.css":"main-9ede941bec39be45c531.css","main.js":"main-9ede941bec39be45c531.js"}};
+</script><script src="https://cdn.rawgit.com/zynga/scroller/master/src/Animate.js"></script><script src="https://cdn.rawgit.com/zynga/scroller/master/src/Scroller.js"></script><script src="main-9ede941bec39be45c531.js"></script></body></html>
