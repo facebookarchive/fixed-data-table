@@ -15,6 +15,7 @@
 var FakeObjectDataListStore = require('../helpers/FakeObjectDataListStore');
 var FixedDataTable = require('fixed-data-table');
 var React = require('react');
+var createReactClass = require('create-react-class');
 
 var Column = FixedDataTable.Column;
 var Table = FixedDataTable.Table;
@@ -22,7 +23,7 @@ var ColumnGroup = FixedDataTable.ColumnGroup;
 
 var ROWS = 1000000;
 
-var ColumnGroupsExample = React.createClass({
+var ColumnGroupsExample = createReactClass({
   getInitialState() {
     return {
       dataList: new FakeObjectDataListStore(ROWS)

@@ -11,13 +11,15 @@
  */
 
 var React = require('react');
+var createReactClass = require('create-react-class');
+var PropTypes = require('prop-types');
 
 var PendingPool = {};
 var ReadyPool = {};
 
-var ExampleImage = React.createClass({
+var ExampleImage = createReactClass({
   propTypes: {
-    src: React.PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired,
   },
 
   getInitialState() {

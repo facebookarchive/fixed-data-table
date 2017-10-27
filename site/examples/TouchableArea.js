@@ -11,8 +11,9 @@
  */
 
 var React = require('React');
+var createReactClass = require('create-react-class');
 
-var TouchableArea = React.createClass({
+var TouchableArea = createReactClass({
   getDefaultProps() {
     return {
       touchable: true

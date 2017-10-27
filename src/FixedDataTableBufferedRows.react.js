@@ -11,6 +11,7 @@
  */
 
 var React = require('React');
+var createReactClass = require('create-react-class');
 var FixedDataTableRowBuffer = require('FixedDataTableRowBuffer');
 var FixedDataTableRow = require('FixedDataTableRow.react');
 
@@ -21,7 +22,7 @@ var translateDOMPositionXY = require('translateDOMPositionXY');
 
 var PropTypes = require('prop-types');
 
-var FixedDataTableBufferedRows = React.createClass({
+var FixedDataTableBufferedRows = createReactClass({
 
   propTypes: {
     isScrolling: PropTypes.bool,

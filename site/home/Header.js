@@ -1,6 +1,7 @@
 "use strict";
 
 var React = require('react');
+var createReactClass = require('create-react-class');
 var ReactDOM = require('react-dom');
 var Constants = require('../Constants');
 
@@ -12,7 +13,7 @@ var GITHUB_URL = 'https://github.com/facebook/fixed-data-table';
 var DOCS_DEFAULT_LOCATION = Constants.DOCS_DEFAULT.location;
 var EXAMPLES_DEFAULT_LOCATION = Constants.EXAMPLES_DEFAULT.location;
 
-var Header = React.createClass({
+var Header = createReactClass({
   getInitialState() {
     return {
       scroll: 0,
