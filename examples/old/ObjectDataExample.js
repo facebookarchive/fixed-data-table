@@ -16,9 +16,10 @@ var ExampleImage = require('../helpers/ExampleImage');
 var FakeObjectDataListStore = require('../helpers/FakeObjectDataListStore');
 var FixedDataTable = require('fixed-data-table');
 var React = require('react');
+var createReactClass = require('create-react-class');
 
 var Column = FixedDataTable.Column;
-var PropTypes = React.PropTypes;
+var PropTypes = require('prop-types');
 var Table = FixedDataTable.Table;
 
 var ROWS = 1000000;
@@ -35,7 +36,7 @@ function renderDate(/*object*/ cellData) {
   return <span>{cellData.toLocaleString()}</span>;
 }
 
-var ObjectDataExample = React.createClass({
+var ObjectDataExample = createReactClass({
   getInitialState() {
     return {
       dataList: new FakeObjectDataListStore(ROWS)

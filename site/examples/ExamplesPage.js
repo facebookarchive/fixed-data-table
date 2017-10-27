@@ -29,6 +29,7 @@ var ExampleHeader = require('./ExampleHeader');
 var ExamplesWrapper = require('./ExamplesWrapper');
 var TouchExampleWrapper = require('./TouchExampleWrapper');
 var React = require('react');
+var createReactClass = require('create-react-class');
 var Constants = require('../Constants');
 
 var ExamplePages = Constants.ExamplePages;
@@ -52,7 +53,7 @@ var EXAMPLE_COMPONENTS = {
 //   [ExamplePages.SORT_EXAMPLE.location]: require('../../examples/old/SortExample'),
 // };
 
-var ExamplesPage = React.createClass({
+var ExamplesPage = createReactClass({
   getInitialState() {
     return {
       renderPage: false

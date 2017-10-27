@@ -1,6 +1,7 @@
 "use strict";
 
 var React = require('react');
+var createReactClass = require('create-react-class');
 var Constants = require('./Constants');
 
 require('./miniHeader.less');
@@ -9,7 +10,7 @@ var GITHUB_URL = 'https://github.com/facebook/fixed-data-table';
 var DOCS_DEFAULT_LOCATION = Constants.DOCS_DEFAULT.location;
 var EXAMPLES_DEFAULT_LOCATION = Constants.EXAMPLES_DEFAULT.location;
 
-var MiniHeader = React.createClass({
+var MiniHeader = createReactClass({
   render() {
     return (
       <div className="header">

@@ -16,6 +16,7 @@ var ExampleImage = require('../helpers/ExampleImage');
 var FakeObjectDataListStore = require('../helpers/FakeObjectDataListStore');
 var FixedDataTable = require('fixed-data-table');
 var React = require('react');
+var createReactClass = require('create-react-class');
 
 var Column = FixedDataTable.Column;
 var Table = FixedDataTable.Table;
@@ -26,7 +27,7 @@ function renderImage(/*string*/ cellData) {
   return <ExampleImage src={cellData} />;
 }
 
-var FilterExample = React.createClass({
+var FilterExample = createReactClass({
   getInitialState() {
     return {
       rows : new FakeObjectDataListStore().getAll(),

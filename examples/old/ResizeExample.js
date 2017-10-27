@@ -15,6 +15,7 @@
 var FakeObjectDataListStore = require('../helpers/FakeObjectDataListStore');
 var FixedDataTable = require('fixed-data-table');
 var React = require('react');
+var createReactClass = require('create-react-class');
 
 var Column = FixedDataTable.Column;
 var Table = FixedDataTable.Table;
@@ -29,7 +30,7 @@ var columnWidths = {
 };
 var isColumnResizing;
 
-var ResizeExample = React.createClass({
+var ResizeExample = createReactClass({
   getInitialState() {
     return {
       dataList: new FakeObjectDataListStore(ROWS),

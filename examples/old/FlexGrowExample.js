@@ -15,6 +15,7 @@
 var FakeObjectDataListStore = require('../helpers/FakeObjectDataListStore');
 var FixedDataTable = require('fixed-data-table');
 var React = require('react');
+var createReactClass = require('create-react-class');
 
 var Column = FixedDataTable.Column;
 var Table = FixedDataTable.Table;
@@ -30,7 +31,7 @@ function colorizeText(/*string*/ str, key, data, index) {
   });
 }
 
-var FlexGrowExample = React.createClass({
+var FlexGrowExample = createReactClass({
   getInitialState() {
     return {
       dataList: new FakeObjectDataListStore(ROWS)

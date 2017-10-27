@@ -1,10 +1,12 @@
 "use strict";
 
 var React = require('react');
+var createReactClass = require('create-react-class');
+var PropTypes = require('prop-types');
 
-var StaticHTMLBlock = React.createClass({
+var StaticHTMLBlock = createReactClass({
   propTypes: {
-    html: React.PropTypes.string.isRequired
+    html: PropTypes.string.isRequired
   },
 
   shouldComponentUpdate() {

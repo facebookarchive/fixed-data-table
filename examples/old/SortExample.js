@@ -15,6 +15,7 @@
 var FakeObjectDataListStore = require('../helpers/FakeObjectDataListStore');
 var FixedDataTable = require('fixed-data-table');
 var React = require('react');
+var createReactClass = require('create-react-class');
 
 var Column = FixedDataTable.Column;
 var Table = FixedDataTable.Table;
@@ -28,7 +29,7 @@ function renderDate(/*object*/ cellData) {
   return <span>{cellData.toLocaleString()}</span>;
 }
 
-var SortExample = React.createClass({
+var SortExample = createReactClass({
   getInitialState() {
     return {
       rows: new FakeObjectDataListStore().getAll(),
