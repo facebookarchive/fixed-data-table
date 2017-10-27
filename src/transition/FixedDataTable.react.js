@@ -20,6 +20,7 @@
 'use strict';
 
 var React = require('React');
+var createReactClass = require('create-react-class');
 
 var ReactChildren = React.Children;
 
@@ -105,7 +106,7 @@ function notifyDeprecated(prop, reason) {
  * - Scrollable Body Columns: The body columns that move while scrolling
  *   vertically or horizontally.
  */
-var TransitionTable = React.createClass({
+var TransitionTable = createReactClass({
   propTypes: {
     /**
      * Pixel width of table. If all columns do not fit,
