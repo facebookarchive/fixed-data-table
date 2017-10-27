@@ -38,7 +38,7 @@ class FakeObjectDataListStore {
   }
 
   getObjectAt(/*number*/ index) /*?object*/ {
-    if (index < 0 || index > this.size){
+    if (index < 0 || index >= this.size){
       return undefined;
     }
     if (this._cache[index] === undefined) {
