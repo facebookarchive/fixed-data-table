@@ -168,7 +168,7 @@ var FixedDataTableBufferedRows = createReactClass({
       props.firstRowOffset - firstRowPosition + props.offsetTop
     );
 
-    return <div style={style}>{this._staticRowArray}</div>;
+    return <div className={cx('fixedDataTable/body')} style={style}>{this._staticRowArray}</div>;
   },
 
   _getRowHeight(/*number*/ index) /*number*/ {
