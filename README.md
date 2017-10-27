@@ -1,3 +1,15 @@
+# Project Status:  🚨 Unmaintained 🚨
+
+This project is no longer maintained. We will not be accepting pull requests, addressing issues, nor making future releases.
+
+## Alternatives
+
+- [react-virtualized](https://github.com/bvaughn/react-virtualized)
+- [fixed-data-table-2](https://github.com/schrodinger/fixed-data-table-2)
+
+
+* * *
+
 Fixed Data Tables for React
 ====================================
 
