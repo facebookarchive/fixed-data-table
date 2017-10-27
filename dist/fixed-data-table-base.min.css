@@ -1,5 +1,5 @@
 /**
- * FixedDataTable v0.6.4 
+ * FixedDataTable v0.6.5 
  *
  * Copyright (c) 2015, Facebook, Inc.
  * All rights reserved.
