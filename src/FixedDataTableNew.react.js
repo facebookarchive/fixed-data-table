@@ -356,6 +356,7 @@ var FixedDataTable = createReactClass({
 
   componentDidMount() {
     this._reportContentHeight();
+    this._isMounted = true;
   },
 
   componentWillReceiveProps(/*object*/ nextProps) {
@@ -580,6 +581,10 @@ var FixedDataTable = createReactClass({
         {horizontalScrollbar}
       </div>
     );
+  },
+
+  componentWillUnmount() {
+    this._isMounted = false;
   },
 
   _renderRows(/*number*/ offsetTop) /*object*/ {
@@ -977,7 +982,7 @@ var FixedDataTable = createReactClass({
   },
 
   _onWheel(/*number*/ deltaX, /*number*/ deltaY) {
-    if (this.isMounted()) {
+    if (this._isMounted) {
       if (!this._isScrolling) {
         this._didScrollStart();
       }
@@ -1010,7 +1015,7 @@ var FixedDataTable = createReactClass({
   },
 
   _onHorizontalScroll(/*number*/ scrollPos) {
-    if (this.isMounted() && scrollPos !== this.state.scrollX) {
+    if (this._isMounted && scrollPos !== this.state.scrollX) {
       if (!this._isScrolling) {
         this._didScrollStart();
       }
@@ -1022,7 +1027,7 @@ var FixedDataTable = createReactClass({
   },
 
   _onVerticalScroll(/*number*/ scrollPos) {
-    if (this.isMounted() && scrollPos !== this.state.scrollY) {
+    if (this._isMounted && scrollPos !== this.state.scrollY) {
       if (!this._isScrolling) {
         this._didScrollStart();
       }
@@ -1038,7 +1043,7 @@ var FixedDataTable = createReactClass({
   },
 
   _didScrollStart() {
-    if (this.isMounted() && !this._isScrolling) {
+    if (this._isMounted && !this._isScrolling) {
       this._isScrolling = true;
       if (this.props.onScrollStart) {
         this.props.onScrollStart(this.state.scrollX, this.state.scrollY);
@@ -1047,7 +1052,7 @@ var FixedDataTable = createReactClass({
   },
 
   _didScrollStop() {
-    if (this.isMounted() && this._isScrolling) {
+    if (this._isMounted && this._isScrolling) {
       this._isScrolling = false;
       this.setState({redraw: true});
       if (this.props.onScrollEnd) {

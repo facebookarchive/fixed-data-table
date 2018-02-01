@@ -197,6 +197,8 @@ var Scrollbar = createReactClass({
       this.state.position !== this.props.position) {
       this._didScroll();
     }
+
+    this._isMounted = true;
   },
 
   componentWillUnmount() {
@@ -206,6 +208,8 @@ var Scrollbar = createReactClass({
       _lastScrolledScrollbar = null;
     }
     delete this._mouseMoveTracker;
+
+    this._isMounted = false;
   },
 
   scrollBy(/*number*/ delta) {
@@ -466,7 +470,7 @@ var Scrollbar = createReactClass({
   },
 
   _blur() {
-    if (this.isMounted()) {
+    if (this._isMounted) {
       try {
         this._onBlur();
         ReactDOM.findDOMNode(this).blur();
