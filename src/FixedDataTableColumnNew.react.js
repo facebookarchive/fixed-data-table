@@ -1,3 +1,4 @@
+var PropTypes = require('prop-types');
 /**
  * Copyright (c) 2015, Facebook, Inc.
  * All rights reserved.
@@ -11,8 +12,6 @@
  */
 
 var React = require('React');
-
-var {PropTypes} = React;
 
 /**
  * Component that defines the attributes of table column.

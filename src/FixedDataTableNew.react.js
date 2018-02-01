@@ -1,3 +1,4 @@
+var PropTypes = require('prop-types');
 /**
  * Copyright (c) 2015, Facebook, Inc.
  * All rights reserved.
@@ -32,7 +33,6 @@ var joinClasses = require('joinClasses');
 var shallowEqual = require('shallowEqual');
 var translateDOMPositionXY = require('translateDOMPositionXY');
 
-var {PropTypes} = React;
 var ReactChildren = React.Children;
 
 var EMPTY_OBJECT = {};

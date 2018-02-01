@@ -1,3 +1,4 @@
+var PropTypes = require('prop-types');
 /**
  * Copyright (c) 2015, Facebook, Inc.
  * All rights reserved.
@@ -19,8 +20,6 @@ var cx = require('cx');
 var emptyFunction = require('emptyFunction');
 var joinClasses = require('joinClasses');
 var translateDOMPositionXY = require('translateDOMPositionXY');
-
-var {PropTypes} = React;
 
 var FixedDataTableBufferedRows = createReactClass({
   displayName: "FixedDataTableBufferedRows",

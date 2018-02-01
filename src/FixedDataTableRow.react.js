@@ -12,14 +12,14 @@
 
 'use strict';
 
+var PropTypes = require('prop-types');
+
 var React = require('React');
 var FixedDataTableCellGroup = require('FixedDataTableCellGroup.react');
 
 var cx = require('cx');
 var joinClasses = require('joinClasses');
 var translateDOMPositionXY = require('translateDOMPositionXY');
-
-var {PropTypes} = React;
 
 /**
  * Component that renders the row for <FixedDataTable />.

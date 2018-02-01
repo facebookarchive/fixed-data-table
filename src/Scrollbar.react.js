@@ -12,6 +12,7 @@
 
 var DOMMouseMoveTracker = require('DOMMouseMoveTracker');
 var Keys = require('Keys');
+var PropTypes = require('prop-types');
 var React = require('React');
 var createReactClass = require('create-react-class');
 var ReactDOM = require('ReactDOM');
@@ -22,8 +23,6 @@ var cssVar = require('cssVar');
 var cx = require('cx');
 var emptyFunction = require('emptyFunction');
 var translateDOMPositionXY = require('translateDOMPositionXY');
-
-var {PropTypes} = React;
 
 var UNSCROLLABLE_STATE = {
   position: 0,

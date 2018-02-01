@@ -1,3 +1,4 @@
+var PropTypes = require('prop-types');
 /**
  * Copyright (c) 2015, Facebook, Inc.
  * All rights reserved.
@@ -18,7 +19,6 @@
  */
 
 var React = require('React');
-var {PropTypes} = React;
 
 var cx = require('cx');
 var joinClasses = require('joinClasses');

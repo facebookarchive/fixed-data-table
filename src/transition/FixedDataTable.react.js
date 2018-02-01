@@ -19,11 +19,11 @@
 
 'use strict';
 
+var PropTypes = require('prop-types');
+
 var React = require('React');
 
 var ReactChildren = React.Children;
-
-var {PropTypes} = React;
 
 // New Table API
 var Table = require('FixedDataTableNew.react');
