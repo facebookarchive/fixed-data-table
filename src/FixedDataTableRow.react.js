@@ -26,9 +26,8 @@ var {PropTypes} = React;
  * This component should not be used directly by developer. Instead,
  * only <FixedDataTable /> should use the component internally.
  */
-var FixedDataTableRowImpl = React.createClass({
-
-  propTypes: {
+class FixedDataTableRowImpl extends React.Component {
+  static propTypes = {
 
     isScrolling: PropTypes.bool,
 
@@ -84,7 +83,7 @@ var FixedDataTableRowImpl = React.createClass({
      * @param object event
      */
     onColumnResize: PropTypes.func,
-  },
+  };
 
   render() /*object*/ {
     var style = {
@@ -146,17 +145,17 @@ var FixedDataTableRowImpl = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 
-  _getColumnsWidth(/*array*/ columns) /*number*/ {
+  _getColumnsWidth = /*array*/ columns => /*number*/ {
     var width = 0;
     for (var i = 0; i < columns.length; ++i) {
       width += columns[i].props.width;
     }
     return width;
-  },
+  };
 
-  _renderColumnsShadow(/*number*/ left) /*?object*/ {
+  _renderColumnsShadow = /*number*/ left => /*?object*/ {
     if (left > 0) {
       var className = cx({
         'fixedDataTableRowLayout/fixedColumnsDivider': true,
@@ -170,32 +169,31 @@ var FixedDataTableRowImpl = React.createClass({
       };
       return <div className={className} style={style} />;
     }
-  },
+  };
 
-  _onClick(/*object*/ event) {
+  _onClick = /*object*/ event => {
     this.props.onClick(event, this.props.index);
-  },
+  };
 
-  _onDoubleClick(/*object*/ event) {
+  _onDoubleClick = /*object*/ event => {
     this.props.onDoubleClick(event, this.props.index);
-  },
+  };
 
-  _onMouseDown(/*object*/ event) {
+  _onMouseDown = /*object*/ event => {
     this.props.onMouseDown(event, this.props.index);
-  },
+  };
 
-  _onMouseEnter(/*object*/ event) {
+  _onMouseEnter = /*object*/ event => {
     this.props.onMouseEnter(event, this.props.index);
-  },
+  };
 
-  _onMouseLeave(/*object*/ event) {
+  _onMouseLeave = /*object*/ event => {
     this.props.onMouseLeave(event, this.props.index);
-  },
-});
+  };
+}
 
-var FixedDataTableRow = React.createClass({
-
-  propTypes: {
+class FixedDataTableRow extends React.Component {
+  static propTypes = {
 
     isScrolling: PropTypes.bool,
 
@@ -219,7 +217,7 @@ var FixedDataTableRow = React.createClass({
      * Width of the row.
      */
     width: PropTypes.number.isRequired,
-  },
+  };
 
   render() /*object*/ {
     var style = {
@@ -240,8 +238,8 @@ var FixedDataTableRow = React.createClass({
         />
       </div>
     );
-  },
-});
+  }
+}
 
 
 module.exports = FixedDataTableRow;

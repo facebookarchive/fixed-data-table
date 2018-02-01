@@ -40,8 +40,8 @@ var {PropTypes} = React;
  * );
  * ```
  */
-var FixedDataTableCellDefault = React.createClass({
-  propTypes: {
+class FixedDataTableCellDefault extends React.Component {
+  static propTypes = {
 
     /**
      * Outer height of the cell.
@@ -61,7 +61,7 @@ var FixedDataTableCellDefault = React.createClass({
       PropTypes.string,
       PropTypes.number,
     ]),
-  },
+  };
 
   render() {
     var {height, width, style, className, children, ...props} = this.props;
@@ -98,7 +98,7 @@ var FixedDataTableCellDefault = React.createClass({
         </div>
       </div>
     );
-  },
-});
+  }
+}
 
 module.exports = FixedDataTableCellDefault;

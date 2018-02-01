@@ -19,10 +19,8 @@
 
 var React = require('React');
 
-var TransitionColumn = React.createClass({
-  statics: {
-    __TableColumn__: true
-  },
+class TransitionColumn extends React.Component {
+  static __TableColumn__ = true;
 
   render() {
     if (__DEV__) {
@@ -32,6 +30,6 @@ var TransitionColumn = React.createClass({
     }
     return null;
   }
-});
+}
 
 module.exports = TransitionColumn;

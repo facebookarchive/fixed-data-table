@@ -14,6 +14,7 @@
 /*eslint no-bitwise:1*/
 
 var React = require('React');
+var createReactClass = require('create-react-class');
 var ReactComponentWithPureRenderMixin = require('ReactComponentWithPureRenderMixin');
 var ReactWheelHandler = require('ReactWheelHandler');
 var Scrollbar = require('Scrollbar.react');
@@ -86,7 +87,8 @@ var CELL = 'cell';
  * - Scrollable Body Columns: The body columns that move while scrolling
  *   vertically or horizontally.
  */
-var FixedDataTable = React.createClass({
+var FixedDataTable = createReactClass({
+  displayName: "FixedDataTable",
 
   propTypes: {
 
@@ -1007,7 +1009,6 @@ var FixedDataTable = React.createClass({
     }
   },
 
-
   _onHorizontalScroll(/*number*/ scrollPos) {
     if (this.isMounted() && scrollPos !== this.state.scrollX) {
       if (!this._isScrolling) {
@@ -1053,11 +1054,13 @@ var FixedDataTable = React.createClass({
         this.props.onScrollEnd(this.state.scrollX, this.state.scrollY);
       }
     }
-  },
+  }
 });
 
-var HorizontalScrollbar = React.createClass({
+var HorizontalScrollbar = createReactClass({
+  displayName: "HorizontalScrollbar",
   mixins: [ReactComponentWithPureRenderMixin],
+
   propTypes: {
     contentSize: PropTypes.number.isRequired,
     offset: PropTypes.number.isRequired,
@@ -1100,7 +1103,7 @@ var HorizontalScrollbar = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 });
 
 module.exports = FixedDataTable;

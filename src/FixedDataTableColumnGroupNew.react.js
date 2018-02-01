@@ -17,12 +17,10 @@ var {PropTypes} = React;
 /**
  * Component that defines the attributes of a table column group.
  */
-var FixedDataTableColumnGroup = React.createClass({
-  statics: {
-    __TableColumnGroup__: true,
-  },
+class FixedDataTableColumnGroup extends React.Component {
+  static __TableColumnGroup__ = true;
 
-  propTypes: {
+  static propTypes = {
     /**
      * The horizontal alignment of the table cell content.
      */
@@ -57,13 +55,11 @@ var FixedDataTableColumnGroup = React.createClass({
       PropTypes.func,
     ]),
 
-  },
+  };
 
-  getDefaultProps() /*object*/ {
-    return {
-      fixed: false,
-    };
-  },
+  static defaultProps = {
+	fixed: false,
+  };
 
   render() {
     if (__DEV__) {
@@ -72,7 +68,7 @@ var FixedDataTableColumnGroup = React.createClass({
       );
     }
     return null;
-  },
-});
+  }
+}
 
 module.exports = FixedDataTableColumnGroup;

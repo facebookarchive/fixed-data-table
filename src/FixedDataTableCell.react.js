@@ -13,6 +13,7 @@
 var FixedDataTableCellDefault = require('FixedDataTableCellDefault.react');
 var FixedDataTableHelper = require('FixedDataTableHelper');
 var React = require('React');
+var createReactClass = require('create-react-class');
 var cx = require('cx');
 var joinClasses = require('joinClasses');
 
@@ -25,7 +26,8 @@ var DEFAULT_PROPS = {
   highlighted: false,
 };
 
-var FixedDataTableCell = React.createClass({
+var FixedDataTableCell = createReactClass({
+  displayName: "FixedDataTableCell",
 
   /**
    * PropTypes are disabled in this component, because having them on slows
@@ -179,7 +181,7 @@ var FixedDataTableCell = React.createClass({
       this.props.columnKey,
       event
     );
-  },
+  }
 });
 
 module.exports = FixedDataTableCell;

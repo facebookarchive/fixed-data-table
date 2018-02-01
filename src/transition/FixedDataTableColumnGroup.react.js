@@ -9,20 +9,18 @@
  * @providesModule FixedDataTableColumnGroup.react
  */
 
- /**
-  * TRANSITION SHIM
-  * This provides an intermediate mapping from the old API to the new API.
-  *
-  * When ready, remove this file and rename the providesModule in
-  * FixedDataTableColumnNew.react
-  */
+/**
+ * TRANSITION SHIM
+ * This provides an intermediate mapping from the old API to the new API.
+ *
+ * When ready, remove this file and rename the providesModule in
+ * FixedDataTableColumnNew.react
+ */
 
 var React = require('React');
 
-var TransitionColumnGroup = React.createClass({
-  statics: {
-    __TableColumnGroup__: true,
-  },
+class TransitionColumnGroup extends React.Component {
+  static __TableColumnGroup__ = true;
 
   render() {
     if (__DEV__) {
@@ -32,6 +30,6 @@ var TransitionColumnGroup = React.createClass({
     }
     return null;
   }
-});
+}
 
 module.exports = TransitionColumnGroup;
