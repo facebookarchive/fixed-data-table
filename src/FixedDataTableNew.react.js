@@ -1,3 +1,4 @@
+var PropTypes = require('prop-types');
 /**
  * Copyright (c) 2015, Facebook, Inc.
  * All rights reserved.
@@ -14,6 +15,7 @@
 /*eslint no-bitwise:1*/
 
 var React = require('React');
+var createReactClass = require('create-react-class');
 var ReactComponentWithPureRenderMixin = require('ReactComponentWithPureRenderMixin');
 var ReactWheelHandler = require('ReactWheelHandler');
 var Scrollbar = require('Scrollbar.react');
@@ -31,7 +33,6 @@ var joinClasses = require('joinClasses');
 var shallowEqual = require('shallowEqual');
 var translateDOMPositionXY = require('translateDOMPositionXY');
 
-var {PropTypes} = React;
 var ReactChildren = React.Children;
 
 var EMPTY_OBJECT = {};
@@ -86,7 +87,8 @@ var CELL = 'cell';
  * - Scrollable Body Columns: The body columns that move while scrolling
  *   vertically or horizontally.
  */
-var FixedDataTable = React.createClass({
+var FixedDataTable = createReactClass({
+  displayName: "FixedDataTable",
 
   propTypes: {
 
@@ -354,6 +356,7 @@ var FixedDataTable = React.createClass({
 
   componentDidMount() {
     this._reportContentHeight();
+    this._isMounted = true;
   },
 
   componentWillReceiveProps(/*object*/ nextProps) {
@@ -578,6 +581,10 @@ var FixedDataTable = React.createClass({
         {horizontalScrollbar}
       </div>
     );
+  },
+
+  componentWillUnmount() {
+    this._isMounted = false;
   },
 
   _renderRows(/*number*/ offsetTop) /*object*/ {
@@ -975,7 +982,7 @@ var FixedDataTable = React.createClass({
   },
 
   _onWheel(/*number*/ deltaX, /*number*/ deltaY) {
-    if (this.isMounted()) {
+    if (this._isMounted) {
       if (!this._isScrolling) {
         this._didScrollStart();
       }
@@ -1007,9 +1014,8 @@ var FixedDataTable = React.createClass({
     }
   },
 
-
   _onHorizontalScroll(/*number*/ scrollPos) {
-    if (this.isMounted() && scrollPos !== this.state.scrollX) {
+    if (this._isMounted && scrollPos !== this.state.scrollX) {
       if (!this._isScrolling) {
         this._didScrollStart();
       }
@@ -1021,7 +1027,7 @@ var FixedDataTable = React.createClass({
   },
 
   _onVerticalScroll(/*number*/ scrollPos) {
-    if (this.isMounted() && scrollPos !== this.state.scrollY) {
+    if (this._isMounted && scrollPos !== this.state.scrollY) {
       if (!this._isScrolling) {
         this._didScrollStart();
       }
@@ -1037,7 +1043,7 @@ var FixedDataTable = React.createClass({
   },
 
   _didScrollStart() {
-    if (this.isMounted() && !this._isScrolling) {
+    if (this._isMounted && !this._isScrolling) {
       this._isScrolling = true;
       if (this.props.onScrollStart) {
         this.props.onScrollStart(this.state.scrollX, this.state.scrollY);
@@ -1046,18 +1052,20 @@ var FixedDataTable = React.createClass({
   },
 
   _didScrollStop() {
-    if (this.isMounted() && this._isScrolling) {
+    if (this._isMounted && this._isScrolling) {
       this._isScrolling = false;
       this.setState({redraw: true});
       if (this.props.onScrollEnd) {
         this.props.onScrollEnd(this.state.scrollX, this.state.scrollY);
       }
     }
-  },
+  }
 });
 
-var HorizontalScrollbar = React.createClass({
+var HorizontalScrollbar = createReactClass({
+  displayName: "HorizontalScrollbar",
   mixins: [ReactComponentWithPureRenderMixin],
+
   propTypes: {
     contentSize: PropTypes.number.isRequired,
     offset: PropTypes.number.isRequired,
@@ -1100,7 +1108,7 @@ var HorizontalScrollbar = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 });
 
 module.exports = FixedDataTable;

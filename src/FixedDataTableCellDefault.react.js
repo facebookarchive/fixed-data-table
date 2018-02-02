@@ -1,3 +1,4 @@
+var PropTypes = require('prop-types');
 /**
  * Copyright (c) 2015, Facebook, Inc.
  * All rights reserved.
@@ -14,8 +15,6 @@ var React = require('React');
 
 var cx = require('cx');
 var joinClasses = require('joinClasses');
-
-var {PropTypes} = React;
 
 /**
  * Component that handles default cell layout and styling.
@@ -40,8 +39,8 @@ var {PropTypes} = React;
  * );
  * ```
  */
-var FixedDataTableCellDefault = React.createClass({
-  propTypes: {
+class FixedDataTableCellDefault extends React.Component {
+  static propTypes = {
 
     /**
      * Outer height of the cell.
@@ -61,7 +60,7 @@ var FixedDataTableCellDefault = React.createClass({
       PropTypes.string,
       PropTypes.number,
     ]),
-  },
+  };
 
   render() {
     var {height, width, style, className, children, ...props} = this.props;
@@ -98,7 +97,7 @@ var FixedDataTableCellDefault = React.createClass({
         </div>
       </div>
     );
-  },
-});
+  }
+}
 
 module.exports = FixedDataTableCellDefault;

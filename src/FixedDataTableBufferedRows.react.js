@@ -1,3 +1,4 @@
+var PropTypes = require('prop-types');
 /**
  * Copyright (c) 2015, Facebook, Inc.
  * All rights reserved.
@@ -11,6 +12,7 @@
  */
 
 var React = require('React');
+var createReactClass = require('create-react-class');
 var FixedDataTableRowBuffer = require('FixedDataTableRowBuffer');
 var FixedDataTableRow = require('FixedDataTableRow.react');
 
@@ -19,9 +21,8 @@ var emptyFunction = require('emptyFunction');
 var joinClasses = require('joinClasses');
 var translateDOMPositionXY = require('translateDOMPositionXY');
 
-var {PropTypes} = React;
-
-var FixedDataTableBufferedRows = React.createClass({
+var FixedDataTableBufferedRows = createReactClass({
+  displayName: "FixedDataTableBufferedRows",
 
   propTypes: {
     isScrolling: PropTypes.bool,
@@ -68,6 +69,7 @@ var FixedDataTableBufferedRows = React.createClass({
 
   componentDidMount() {
     setTimeout(this._updateBuffer, 1000);
+    this._isMounted = true;
   },
 
   componentWillReceiveProps(/*object*/ nextProps) {
@@ -95,7 +97,7 @@ var FixedDataTableBufferedRows = React.createClass({
   },
 
   _updateBuffer() {
-    if (this.isMounted()) {
+    if (this._isMounted) {
       this.setState({
         rowsToRender: this._rowBuffer.getRowsWithUpdatedBuffer(),
       });
@@ -109,6 +111,7 @@ var FixedDataTableBufferedRows = React.createClass({
 
   componentWillUnmount() {
     this._staticRowArray.length = 0;
+    this._isMounted = false;
   },
 
   render() /*object*/ {
@@ -174,7 +177,7 @@ var FixedDataTableBufferedRows = React.createClass({
     return this.props.rowHeightGetter ?
       this.props.rowHeightGetter(index) :
       this.props.defaultRowHeight;
-  },
+  }
 });
 
 module.exports = FixedDataTableBufferedRows;

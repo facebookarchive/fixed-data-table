@@ -1,3 +1,4 @@
+var PropTypes = require('prop-types');
 /**
  * Copyright (c) 2015, Facebook, Inc.
  * All rights reserved.
@@ -18,7 +19,6 @@
  */
 
 var React = require('React');
-var {PropTypes} = React;
 
 var cx = require('cx');
 var joinClasses = require('joinClasses');
@@ -26,9 +26,8 @@ var shallowEqual = require('shallowEqual');
 
 var CellDefault = require('FixedDataTableCellDefault.react');
 
-var TransitionCell = React.createClass({
-
-  propTypes: {
+class TransitionCell extends React.Component {
+  static propTypes = {
     label: PropTypes.string, // header, footer
     className: PropTypes.string,
     rowIndex: PropTypes.number,
@@ -46,7 +45,7 @@ var TransitionCell = React.createClass({
     height: PropTypes.number,
     isHeaderCell: PropTypes.bool, // header
     isFooterCell: PropTypes.bool, // footer
-  },
+  };
 
   shouldComponentUpdate(/*object*/ nextProps): boolean {
     var update = false;
@@ -74,9 +73,9 @@ var TransitionCell = React.createClass({
     this._cellData = cellData;
 
     return update || !shallowEqual(nextProps, this.props);
-  },
+  }
 
-  _getCellData(props) {
+  _getCellData = props => {
     var dataKey = props.dataKey;
     if (dataKey == null) {
       return null;
@@ -106,9 +105,9 @@ var TransitionCell = React.createClass({
     if (props.headerDataGetter) {
       return props.headerDataGetter[dataKey];
     }
-  },
+  };
 
-  _getRowData(props): Object {
+  _getRowData = (props): Object => {
     if (props.rowGetter) {
       return props.rowGetter(props.rowIndex) || {};
     }
@@ -122,7 +121,7 @@ var TransitionCell = React.createClass({
     }
 
     return {};
-  },
+  };
 
   render() {
     var props = this.props;
@@ -214,6 +213,6 @@ var TransitionCell = React.createClass({
     );
 
   }
-});
+}
 
 module.exports = TransitionCell;

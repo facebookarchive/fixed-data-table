@@ -9,21 +9,21 @@
  * @providesModule FixedDataTable.react
  */
 
- /**
-  * TRANSITION SHIM
-  * This acts to provide an intermediate mapping from the old API to the new API
-  *
-  * Remove this entire file and replace the two lines in FixedDataTableRoot
-  * when ready to continue to the new API.
-  */
+/**
+ * TRANSITION SHIM
+ * This acts to provide an intermediate mapping from the old API to the new API
+ *
+ * Remove this entire file and replace the two lines in FixedDataTableRoot
+ * when ready to continue to the new API.
+ */
 
 'use strict';
+
+var PropTypes = require('prop-types');
 
 var React = require('React');
 
 var ReactChildren = React.Children;
-
-var {PropTypes} = React;
 
 // New Table API
 var Table = require('FixedDataTableNew.react');
@@ -105,8 +105,8 @@ function notifyDeprecated(prop, reason) {
  * - Scrollable Body Columns: The body columns that move while scrolling
  *   vertically or horizontally.
  */
-var TransitionTable = React.createClass({
-  propTypes: {
+class TransitionTable extends React.Component {
+  static propTypes = {
     /**
      * Pixel width of table. If all columns do not fit,
      * a horizontal scrollbar will appear.
@@ -303,17 +303,18 @@ var TransitionTable = React.createClass({
      * Whether a column is currently being resized.
      */
     isColumnResizing: PropTypes.bool,
-  },
+  };
 
-  getInitialState() {
-    // Throw warnings on deprecated props.
-    var state = {};
-    state.needsMigration = this._checkDeprecations();
+  constructor(props, context) {
+    super(props, context);
+	// Throw warnings on deprecated props.
+	var state = {};
+	state.needsMigration = this._checkDeprecations();
 
-    return state;
-  },
+	this.state = state;
+  }
 
-  _checkDeprecations() {
+  _checkDeprecations = () => {
     var needsMigration = false;
 
     if (this.props.rowGetter) {
@@ -398,10 +399,10 @@ var TransitionTable = React.createClass({
     });
 
     return needsMigration;
-  },
+  };
 
   // Wrapper for onRow callbacks, since we don't have rowData at that level.
-  _onRowAction(props, callback) {
+  _onRowAction = (props, callback) => {
     if (!callback) {
       return undefined;
     }
@@ -413,9 +414,9 @@ var TransitionTable = React.createClass({
         (props.rowGetter && props.rowGetter(rowIndex)) || EMPTY_OBJECT
       );
     };
-  },
+  };
 
-  _transformColumn(column, tableProps, key) {
+  _transformColumn = (column, tableProps, key) => {
 
     var props = column.props;
 
@@ -462,9 +463,9 @@ var TransitionTable = React.createClass({
         />
       );
     }
-  },
+  };
 
-  _transformColumnGroup(group, tableProps, key, labels) {
+  _transformColumnGroup = (group, tableProps, key, labels) => {
     var props = group.props;
 
     var j = 0;
@@ -490,9 +491,9 @@ var TransitionTable = React.createClass({
         {columns}
       </ColumnGroup>
     );
-  },
+  };
 
-  _convertedColumns(needsMigration) {
+  _convertedColumns = needsMigration => {
     // If we don't need to migrate, map directly to the new API.
     if (!needsMigration) {
       return ReactChildren.map(this.props.children, (child) => {
@@ -539,7 +540,7 @@ var TransitionTable = React.createClass({
       i++;
       return child;
     });
-  },
+  };
 
   render() {
     var props = this.props;
@@ -555,7 +556,7 @@ var TransitionTable = React.createClass({
         {this._convertedColumns(this.state.needsMigration)}
       </Table>
     );
-  },
-});
+  }
+}
 
 module.exports = TransitionTable;
