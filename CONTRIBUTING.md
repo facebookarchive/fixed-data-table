@@ -33,7 +33,7 @@ We use GitHub issues to track public bugs. Please ensure your description is cle
 * Commas last,
 * 2 spaces for indentation (no tabs)
 * Prefer `'` over `"`
-* `"use strict";`
+* `'use strict';`
 * 80 character line length
 * "Attractive"
 * Do not use the optional parameters of `setTimeout` and `setInterval`
