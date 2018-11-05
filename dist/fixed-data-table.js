@@ -1,5 +1,5 @@
 /**
- * FixedDataTable v0.7.2 
+ * FixedDataTable v0.7.5 
  *
  * Copyright (c) 2015, Facebook, Inc.
  * All rights reserved.
@@ -18,7 +18,7 @@
 		exports["FixedDataTable"] = factory(require("react"), require("react-dom"));
 	else
 		root["FixedDataTable"] = factory(root["React"], root["ReactDOM"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_28__, __WEBPACK_EXTERNAL_MODULE_45__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_35__, __WEBPACK_EXTERNAL_MODULE_58__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -63,7 +63,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1);
 	__webpack_require__(5);
@@ -79,88 +79,88 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = __webpack_require__(25);
 
 
-/***/ },
+/***/ }),
 /* 1 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
-/***/ },
+/***/ }),
 /* 2 */,
 /* 3 */,
 /* 4 */,
 /* 5 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
-/***/ },
+/***/ }),
 /* 6 */,
 /* 7 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
-/***/ },
+/***/ }),
 /* 8 */,
 /* 9 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
-/***/ },
+/***/ }),
 /* 10 */,
 /* 11 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
-/***/ },
+/***/ }),
 /* 12 */,
 /* 13 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
-/***/ },
+/***/ }),
 /* 14 */,
 /* 15 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
-/***/ },
+/***/ }),
 /* 16 */,
 /* 17 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
-/***/ },
+/***/ }),
 /* 18 */,
 /* 19 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
-/***/ },
+/***/ }),
 /* 20 */,
 /* 21 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
-/***/ },
+/***/ }),
 /* 22 */,
 /* 23 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
-/***/ },
+/***/ }),
 /* 24 */,
 /* 25 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -176,9 +176,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var FixedDataTable = __webpack_require__(26);
-	var FixedDataTableCellDefault = __webpack_require__(65);
-	var FixedDataTableColumn = __webpack_require__(63);
-	var FixedDataTableColumnGroup = __webpack_require__(62);
+	var FixedDataTableCellDefault = __webpack_require__(78);
+	var FixedDataTableColumn = __webpack_require__(76);
+	var FixedDataTableColumnGroup = __webpack_require__(75);
 
 	var FixedDataTableRoot = {
 	  Cell: FixedDataTableCellDefault,
@@ -190,9 +190,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	FixedDataTableRoot.version = '0.7.0';
 	module.exports = FixedDataTableRoot;
 
-/***/ },
+/***/ }),
 /* 26 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -217,19 +217,27 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = __webpack_require__(27);
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var PropTypes = __webpack_require__(27);
+
+	var React = __webpack_require__(34);
 
 	var ReactChildren = React.Children;
 
-	var PropTypes = React.PropTypes;
-
 	// New Table API
-	var Table = __webpack_require__(29);
-	var Column = __webpack_require__(73);
-	var ColumnGroup = __webpack_require__(74);
+	var Table = __webpack_require__(36);
+	var Column = __webpack_require__(86);
+	var ColumnGroup = __webpack_require__(87);
 
 	// Transition Cell
-	var TransitionCell = __webpack_require__(75);
+	var TransitionCell = __webpack_require__(88);
 
 	var NEXT_VERSION = '0.7.0';
 	var DOCUMENTATION_URL = 'https://fburl.com/FixedDataTable-v0.6';
@@ -298,425 +306,1502 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * - Scrollable Body Columns: The body columns that move while scrolling
 	 *   vertically or horizontally.
 	 */
-	var TransitionTable = React.createClass({
-	  displayName: 'TransitionTable',
 
-	  propTypes: {
-	    /**
-	     * Pixel width of table. If all columns do not fit,
-	     * a horizontal scrollbar will appear.
-	     */
-	    width: PropTypes.number.isRequired,
+	var TransitionTable = (function (_React$Component) {
+	  _inherits(TransitionTable, _React$Component);
 
-	    /**
-	     * Pixel height of table. If all rows do not fit,
-	     * a vertical scrollbar will appear.
-	     *
-	     * Either `height` or `maxHeight` must be specified.
-	     */
-	    height: PropTypes.number,
+	  _createClass(TransitionTable, null, [{
+	    key: 'propTypes',
+	    value: {
+	      /**
+	       * Pixel width of table. If all columns do not fit,
+	       * a horizontal scrollbar will appear.
+	       */
+	      width: PropTypes.number.isRequired,
 
-	    /**
-	     * Maximum pixel height of table. If all rows do not fit,
-	     * a vertical scrollbar will appear.
-	     *
-	     * Either `height` or `maxHeight` must be specified.
-	     */
-	    maxHeight: PropTypes.number,
+	      /**
+	       * Pixel height of table. If all rows do not fit,
+	       * a vertical scrollbar will appear.
+	       *
+	       * Either `height` or `maxHeight` must be specified.
+	       */
+	      height: PropTypes.number,
 
-	    /**
-	     * Pixel height of table's owner, this is used in a managed scrolling
-	     * situation when you want to slide the table up from below the fold
-	     * without having to constantly update the height on every scroll tick.
-	     * Instead, vary this property on scroll. By using `ownerHeight`, we
-	     * over-render the table while making sure the footer and horizontal
-	     * scrollbar of the table are visible when the current space for the table
-	     * in view is smaller than the final, over-flowing height of table. It
-	     * allows us to avoid resizing and reflowing table when it is moving in the
-	     * view.
-	     *
-	     * This is used if `ownerHeight < height` (or `maxHeight`).
-	     */
-	    ownerHeight: PropTypes.number,
+	      /**
+	       * Maximum pixel height of table. If all rows do not fit,
+	       * a vertical scrollbar will appear.
+	       *
+	       * Either `height` or `maxHeight` must be specified.
+	       */
+	      maxHeight: PropTypes.number,
 
-	    overflowX: PropTypes.oneOf(['hidden', 'auto']),
-	    overflowY: PropTypes.oneOf(['hidden', 'auto']),
+	      /**
+	       * Pixel height of table's owner, this is used in a managed scrolling
+	       * situation when you want to slide the table up from below the fold
+	       * without having to constantly update the height on every scroll tick.
+	       * Instead, vary this property on scroll. By using `ownerHeight`, we
+	       * over-render the table while making sure the footer and horizontal
+	       * scrollbar of the table are visible when the current space for the table
+	       * in view is smaller than the final, over-flowing height of table. It
+	       * allows us to avoid resizing and reflowing table when it is moving in the
+	       * view.
+	       *
+	       * This is used if `ownerHeight < height` (or `maxHeight`).
+	       */
+	      ownerHeight: PropTypes.number,
 
-	    /**
-	     * Number of rows in the table.
-	     */
-	    rowsCount: PropTypes.number.isRequired,
+	      overflowX: PropTypes.oneOf(['hidden', 'auto']),
+	      overflowY: PropTypes.oneOf(['hidden', 'auto']),
 
-	    /**
-	     * Pixel height of rows unless `rowHeightGetter` is specified and returns
-	     * different value.
-	     */
-	    rowHeight: PropTypes.number.isRequired,
+	      /**
+	       * Number of rows in the table.
+	       */
+	      rowsCount: PropTypes.number.isRequired,
 
-	    /**
-	     * If specified, `rowHeightGetter(index)` is called for each row and the
-	     * returned value overrides `rowHeight` for particular row.
-	     */
-	    rowHeightGetter: PropTypes.func,
+	      /**
+	       * Pixel height of rows unless `rowHeightGetter` is specified and returns
+	       * different value.
+	       */
+	      rowHeight: PropTypes.number.isRequired,
 
-	    /**
-	     * DEPRECATED
-	     *
-	     * To get rows to display in table, `rowGetter(index)`
-	     * is called. `rowGetter` should be smart enough to handle async
-	     * fetching of data and return temporary objects
-	     * while data is being fetched.
-	     */
-	    rowGetter: PropTypes.func,
+	      /**
+	       * If specified, `rowHeightGetter(index)` is called for each row and the
+	       * returned value overrides `rowHeight` for particular row.
+	       */
+	      rowHeightGetter: PropTypes.func,
 
-	    /**
-	     * To get any additional CSS classes that should be added to a row,
-	     * `rowClassNameGetter(index)` is called.
-	     */
-	    rowClassNameGetter: PropTypes.func,
+	      /**
+	       * DEPRECATED
+	       *
+	       * To get rows to display in table, `rowGetter(index)`
+	       * is called. `rowGetter` should be smart enough to handle async
+	       * fetching of data and return temporary objects
+	       * while data is being fetched.
+	       */
+	      rowGetter: PropTypes.func,
 
-	    /**
-	     * Pixel height of the column group header.
-	     */
-	    groupHeaderHeight: PropTypes.number,
+	      /**
+	       * To get any additional CSS classes that should be added to a row,
+	       * `rowClassNameGetter(index)` is called.
+	       */
+	      rowClassNameGetter: PropTypes.func,
 
-	    /**
-	     * Pixel height of header.
-	     */
-	    headerHeight: PropTypes.number.isRequired,
+	      /**
+	       * Pixel height of the column group header.
+	       */
+	      groupHeaderHeight: PropTypes.number,
 
-	    /**
-	     * DEPRECATED
-	     *
-	     * Function that is called to get the data for the header row.
-	     * If the function returns null, the header will be set to the
-	     * Column's label property.
-	     */
-	    headerDataGetter: PropTypes.func,
+	      /**
+	       * Pixel height of header.
+	       */
+	      headerHeight: PropTypes.number.isRequired,
 
-	    /**
-	     * Pixel height of footer.
-	     */
-	    footerHeight: PropTypes.number,
+	      /**
+	       * DEPRECATED
+	       *
+	       * Function that is called to get the data for the header row.
+	       * If the function returns null, the header will be set to the
+	       * Column's label property.
+	       */
+	      headerDataGetter: PropTypes.func,
 
-	    /**
-	     * DEPRECATED - use footerDataGetter instead.
-	     * Data that will be passed to footer cell renderers.
-	     */
-	    footerData: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+	      /**
+	       * Pixel height of footer.
+	       */
+	      footerHeight: PropTypes.number,
 
-	    /**
-	     * DEPRECATED
-	     *
-	     * Function that is called to get the data for the footer row.
-	     */
-	    footerDataGetter: PropTypes.func,
+	      /**
+	       * DEPRECATED - use footerDataGetter instead.
+	       * Data that will be passed to footer cell renderers.
+	       */
+	      footerData: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 
-	    /**
-	     * Value of horizontal scroll.
-	     */
-	    scrollLeft: PropTypes.number,
+	      /**
+	       * DEPRECATED
+	       *
+	       * Function that is called to get the data for the footer row.
+	       */
+	      footerDataGetter: PropTypes.func,
 
-	    /**
-	     * Index of column to scroll to.
-	     */
-	    scrollToColumn: PropTypes.number,
+	      /**
+	       * Value of horizontal scroll.
+	       */
+	      scrollLeft: PropTypes.number,
 
-	    /**
-	     * Value of vertical scroll.
-	     */
-	    scrollTop: PropTypes.number,
+	      /**
+	       * Index of column to scroll to.
+	       */
+	      scrollToColumn: PropTypes.number,
 
-	    /**
-	     * Index of row to scroll to.
-	     */
-	    scrollToRow: PropTypes.number,
+	      /**
+	       * Value of vertical scroll.
+	       */
+	      scrollTop: PropTypes.number,
 
-	    /**
-	     * Callback that is called when scrolling starts with current horizontal
-	     * and vertical scroll values.
-	     */
-	    onScrollStart: PropTypes.func,
+	      /**
+	       * Index of row to scroll to.
+	       */
+	      scrollToRow: PropTypes.number,
 
-	    /**
-	     * Callback that is called when scrolling ends or stops with new horizontal
-	     * and vertical scroll values.
-	     */
-	    onScrollEnd: PropTypes.func,
+	      /**
+	       * Callback that is called when scrolling starts with current horizontal
+	       * and vertical scroll values.
+	       */
+	      onScrollStart: PropTypes.func,
 
-	    /**
-	     * Callback that is called when `rowHeightGetter` returns a different height
-	     * for a row than the `rowHeight` prop. This is necessary because initially
-	     * table estimates heights of some parts of the content.
-	     */
-	    onContentHeightChange: PropTypes.func,
+	      /**
+	       * Callback that is called when scrolling ends or stops with new horizontal
+	       * and vertical scroll values.
+	       */
+	      onScrollEnd: PropTypes.func,
 
-	    /**
-	     * Callback that is called when a row is clicked.
-	     */
-	    onRowClick: PropTypes.func,
+	      /**
+	       * Callback that is called when `rowHeightGetter` returns a different height
+	       * for a row than the `rowHeight` prop. This is necessary because initially
+	       * table estimates heights of some parts of the content.
+	       */
+	      onContentHeightChange: PropTypes.func,
 
-	    /**
-	     * Callback that is called when a row is double clicked.
-	     */
-	    onRowDoubleClick: PropTypes.func,
+	      /**
+	       * Callback that is called when a row is clicked.
+	       */
+	      onRowClick: PropTypes.func,
 
-	    /**
-	     * Callback that is called when a mouse-down event happens on a row.
-	     */
-	    onRowMouseDown: PropTypes.func,
+	      /**
+	       * Callback that is called when a row is double clicked.
+	       */
+	      onRowDoubleClick: PropTypes.func,
 
-	    /**
-	     * Callback that is called when a mouse-enter event happens on a row.
-	     */
-	    onRowMouseEnter: PropTypes.func,
+	      /**
+	       * Callback that is called when a mouse-down event happens on a row.
+	       */
+	      onRowMouseDown: PropTypes.func,
 
-	    /**
-	     * Callback that is called when a mouse-leave event happens on a row.
-	     */
-	    onRowMouseLeave: PropTypes.func,
+	      /**
+	       * Callback that is called when a mouse-enter event happens on a row.
+	       */
+	      onRowMouseEnter: PropTypes.func,
 
-	    /**
-	     * Callback that is called when resizer has been released
-	     * and column needs to be updated.
-	     *
-	     * Required if the isResizable property is true on any column.
-	     *
-	     * ```
-	     * function(
-	     *   newColumnWidth: number,
-	     *   dataKey: string,
-	     * )
-	     * ```
-	     */
-	    onColumnResizeEndCallback: PropTypes.func,
+	      /**
+	       * Callback that is called when a mouse-leave event happens on a row.
+	       */
+	      onRowMouseLeave: PropTypes.func,
 
-	    /**
-	     * Whether a column is currently being resized.
-	     */
-	    isColumnResizing: PropTypes.bool
-	  },
+	      /**
+	       * Callback that is called when resizer has been released
+	       * and column needs to be updated.
+	       *
+	       * Required if the isResizable property is true on any column.
+	       *
+	       * ```
+	       * function(
+	       *   newColumnWidth: number,
+	       *   dataKey: string,
+	       * )
+	       * ```
+	       */
+	      onColumnResizeEndCallback: PropTypes.func,
 
-	  getInitialState: function getInitialState() {
-	    // Throw warnings on deprecated props.
-	    var state = {};
-	    state.needsMigration = this._checkDeprecations();
+	      /**
+	       * Whether a column is currently being resized.
+	       */
+	      isColumnResizing: PropTypes.bool
+	    },
+	    enumerable: true
+	  }]);
 
-	    return state;
-	  },
-
-	  _checkDeprecations: function _checkDeprecations() {
-	    var needsMigration = false;
-
-	    if (this.props.rowGetter) {
-	      notifyDeprecated('rowGetter', 'Please use the cell API in Column to fetch data for your cells.');
-
-	      // ROWGETTER??? You need to migrate.
-	      needsMigration = true;
-	    }
-
-	    if (this.props.headerDataGetter) {
-	      notifyDeprecated('headerDataGetter', 'Please use the header API in Column to ' + 'fetch data for your header cells.');
-	    }
-
-	    if (this.props.footerData) {
-	      notifyDeprecated('footerData', 'Please use the footer API in Column to ' + 'fetch data for your footer cells.');
-	    }
-
-	    if (this.props.footerDataGetter) {
-	      notifyDeprecated('footerDataGetter', 'Please use the footer API in Column to ' + 'fetch data for your footer cells.');
-	    }
-
-	    ReactChildren.forEach(this.props.children, function (child) {
-	      if (!child || !child.props) {
-	        return;
-	      }
-
-	      var props = child.props;
-
-	      if (props.label) {
-	        notifyDeprecated('label', 'Please use `header` instead.');
-	      }
-
-	      if (props.dataKey) {
-	        notifyDeprecated('dataKey', 'Please use the `cell` API to pass in a dataKey');
-	      }
-
-	      if (props.cellRenderer) {
-	        notifyDeprecated('cellRenderer', 'Please use the `cell` API to pass in a React Element instead.');
-	      }
-
-	      if (props.headerRenderer) {
-	        notifyDeprecated('headerRenderer', 'Please use the `header` API to pass in a React Element instead.');
-	      }
-
-	      if (props.columnData) {
-	        notifyDeprecated('columnData', 'Please pass data in through props to your header, cell or footer.');
-	      }
-
-	      if (props.groupHeaderRenderer) {
-	        notifyDeprecated('groupHeaderRenderer', 'Please use the `header` API in ColumnGroup to ' + 'pass in a React Element instead of a function that creates one.');
-	      }
-
-	      if (props.groupHeaderData) {
-	        notifyDeprecated('groupHeaderData', 'Please pass in any data through props to your header.');
-	      }
-	    });
-
-	    return needsMigration;
-	  },
-
-	  // Wrapper for onRow callbacks, since we don't have rowData at that level.
-	  _onRowAction: function _onRowAction(props, callback) {
-	    if (!callback) {
-	      return undefined;
-	    }
-
-	    return function (e, rowIndex) {
-	      callback(e, rowIndex, props.rowGetter && props.rowGetter(rowIndex) || EMPTY_OBJECT);
-	    };
-	  },
-
-	  _transformColumn: function _transformColumn(column, tableProps, key) {
-
-	    var props = column.props;
-
-	    if (column.type.__TableColumn__) {
-	      // Constuct the cell to be used using the rowGetter
-	      return React.createElement(Column, _extends({
-	        key: 'column_' + key
-	      }, props, {
-	        header: React.createElement(TransitionCell, {
-	          isHeaderCell: true,
-	          label: props.label,
-	          width: props.width,
-	          dataKey: props.dataKey,
-	          className: props.headerClassName,
-	          columnData: props.columnData || EMPTY_OBJECT,
-	          cellRenderer: props.headerRenderer,
-	          headerDataGetter: tableProps.headerDataGetter
-	        }),
-	        columnKey: props.dataKey,
-	        cell: React.createElement(TransitionCell, {
-	          dataKey: props.dataKey,
-	          className: props.cellClassName,
-	          rowGetter: tableProps.rowGetter,
-	          width: props.width,
-	          columnData: props.columnData || EMPTY_OBJECT,
-	          cellDataGetter: props.cellDataGetter,
-	          cellRenderer: props.cellRenderer
-	        }),
-	        footer: React.createElement(TransitionCell, {
-	          isFooterCell: true,
-	          className: props.footerClassName,
-	          dataKey: props.dataKey,
-	          cellRenderer: props.footerRenderer,
-	          footerDataGetter: tableProps.footerDataGetter,
-	          footerData: tableProps.footerData || EMPTY_OBJECT
-	        })
-	      }));
-	    }
-	  },
-
-	  _transformColumnGroup: function _transformColumnGroup(group, tableProps, key, labels) {
+	  function TransitionTable(props, context) {
 	    var _this = this;
 
-	    var props = group.props;
+	    _classCallCheck(this, TransitionTable);
 
-	    var j = 0;
-	    var columns = ReactChildren.map(props.children, function (child) {
-	      j++;
-	      return _this._transformColumn(child, tableProps, key + '_' + j);
-	    });
+	    _get(Object.getPrototypeOf(TransitionTable.prototype), 'constructor', this).call(this, props, context);
+	    // Throw warnings on deprecated props.
 
-	    return React.createElement(
-	      ColumnGroup,
-	      _extends({}, props, {
-	        key: 'group_' + key,
-	        header: React.createElement(TransitionCell, {
-	          isHeaderCell: true,
-	          label: group.props.label,
-	          dataKey: key,
-	          groupHeaderRenderer: props.groupHeaderRenderer,
-	          groupHeaderLabels: labels,
-	          groupHeaderData: props.columnGroupData || EMPTY_OBJECT
-	        }) }),
-	      columns
-	    );
-	  },
+	    this._checkDeprecations = function () {
+	      var needsMigration = false;
 
-	  _convertedColumns: function _convertedColumns(needsMigration) {
-	    var _this2 = this;
+	      if (_this.props.rowGetter) {
+	        notifyDeprecated('rowGetter', 'Please use the cell API in Column to fetch data for your cells.');
 
-	    // If we don't need to migrate, map directly to the new API.
-	    if (!needsMigration) {
-	      return ReactChildren.map(this.props.children, function (child) {
+	        // ROWGETTER??? You need to migrate.
+	        needsMigration = true;
+	      }
+
+	      if (_this.props.headerDataGetter) {
+	        notifyDeprecated('headerDataGetter', 'Please use the header API in Column to ' + 'fetch data for your header cells.');
+	      }
+
+	      if (_this.props.footerData) {
+	        notifyDeprecated('footerData', 'Please use the footer API in Column to ' + 'fetch data for your footer cells.');
+	      }
+
+	      if (_this.props.footerDataGetter) {
+	        notifyDeprecated('footerDataGetter', 'Please use the footer API in Column to ' + 'fetch data for your footer cells.');
+	      }
+
+	      ReactChildren.forEach(_this.props.children, function (child) {
+	        if (!child || !child.props) {
+	          return;
+	        }
+
+	        var props = child.props;
+
+	        if (props.label) {
+	          notifyDeprecated('label', 'Please use `header` instead.');
+	        }
+
+	        if (props.dataKey) {
+	          notifyDeprecated('dataKey', 'Please use the `cell` API to pass in a dataKey');
+	        }
+
+	        if (props.cellRenderer) {
+	          notifyDeprecated('cellRenderer', 'Please use the `cell` API to pass in a React Element instead.');
+	        }
+
+	        if (props.headerRenderer) {
+	          notifyDeprecated('headerRenderer', 'Please use the `header` API to pass in a React Element instead.');
+	        }
+
+	        if (props.columnData) {
+	          notifyDeprecated('columnData', 'Please pass data in through props to your header, cell or footer.');
+	        }
+
+	        if (props.groupHeaderRenderer) {
+	          notifyDeprecated('groupHeaderRenderer', 'Please use the `header` API in ColumnGroup to ' + 'pass in a React Element instead of a function that creates one.');
+	        }
+
+	        if (props.groupHeaderData) {
+	          notifyDeprecated('groupHeaderData', 'Please pass in any data through props to your header.');
+	        }
+	      });
+
+	      return needsMigration;
+	    };
+
+	    this._onRowAction = function (props, callback) {
+	      if (!callback) {
+	        return undefined;
+	      }
+
+	      return function (e, rowIndex) {
+	        callback(e, rowIndex, props.rowGetter && props.rowGetter(rowIndex) || EMPTY_OBJECT);
+	      };
+	    };
+
+	    this._transformColumn = function (column, tableProps, key) {
+
+	      var props = column.props;
+
+	      if (column.type.__TableColumn__) {
+	        // Constuct the cell to be used using the rowGetter
+	        return React.createElement(Column, _extends({
+	          key: 'column_' + key
+	        }, props, {
+	          header: React.createElement(TransitionCell, {
+	            isHeaderCell: true,
+	            label: props.label,
+	            width: props.width,
+	            dataKey: props.dataKey,
+	            className: props.headerClassName,
+	            columnData: props.columnData || EMPTY_OBJECT,
+	            cellRenderer: props.headerRenderer,
+	            headerDataGetter: tableProps.headerDataGetter
+	          }),
+	          columnKey: props.dataKey,
+	          cell: React.createElement(TransitionCell, {
+	            dataKey: props.dataKey,
+	            className: props.cellClassName,
+	            rowGetter: tableProps.rowGetter,
+	            width: props.width,
+	            columnData: props.columnData || EMPTY_OBJECT,
+	            cellDataGetter: props.cellDataGetter,
+	            cellRenderer: props.cellRenderer
+	          }),
+	          footer: React.createElement(TransitionCell, {
+	            isFooterCell: true,
+	            className: props.footerClassName,
+	            dataKey: props.dataKey,
+	            cellRenderer: props.footerRenderer,
+	            footerDataGetter: tableProps.footerDataGetter,
+	            footerData: tableProps.footerData || EMPTY_OBJECT
+	          })
+	        }));
+	      }
+	    };
+
+	    this._transformColumnGroup = function (group, tableProps, key, labels) {
+	      var props = group.props;
+
+	      var j = 0;
+	      var columns = ReactChildren.map(props.children, function (child) {
+	        j++;
+	        return _this._transformColumn(child, tableProps, key + '_' + j);
+	      });
+
+	      return React.createElement(
+	        ColumnGroup,
+	        _extends({}, props, {
+	          key: 'group_' + key,
+	          header: React.createElement(TransitionCell, {
+	            isHeaderCell: true,
+	            label: group.props.label,
+	            dataKey: key,
+	            groupHeaderRenderer: props.groupHeaderRenderer,
+	            groupHeaderLabels: labels,
+	            groupHeaderData: props.columnGroupData || EMPTY_OBJECT
+	          }) }),
+	        columns
+	      );
+	    };
+
+	    this._convertedColumns = function (needsMigration) {
+	      // If we don't need to migrate, map directly to the new API.
+	      if (!needsMigration) {
+	        return ReactChildren.map(_this.props.children, function (child) {
+
+	          if (!child) {
+	            return null;
+	          }
+
+	          if (child.type.__TableColumn__) {
+	            return React.createElement(Column, child.props);
+	          }
+
+	          if (child.type.__TableColumnGroup__) {
+	            return React.createElement(ColumnGroup, child.props);
+	          }
+	        });
+	      }
+
+	      var tableProps = _this.props;
+
+	      // Otherwise, if a migration is needed, we need to transform each Column
+	      // or ColumnGroup.
+	      var i = 0;
+	      return ReactChildren.map(_this.props.children, function (child) {
 
 	        if (!child) {
 	          return null;
 	        }
 
 	        if (child.type.__TableColumn__) {
-	          return React.createElement(Column, child.props);
+	          child = _this._transformColumn(child, tableProps, i);
 	        }
 
 	        if (child.type.__TableColumnGroup__) {
-	          return React.createElement(ColumnGroup, child.props);
+	          // Since we apparently give an array of labels to groupHeaderRenderer
+	          var labels = [];
+	          ReactChildren.forEach(_this.props.children, function (child) {
+	            labels.push(child.props.label);
+	          });
+
+	          child = _this._transformColumnGroup(child, tableProps, i, labels);
 	        }
+
+	        i++;
+	        return child;
 	      });
-	    }
+	    };
 
-	    var tableProps = this.props;
+	    var state = {};
+	    state.needsMigration = this._checkDeprecations();
 
-	    // Otherwise, if a migration is needed, we need to transform each Column
-	    // or ColumnGroup.
-	    var i = 0;
-	    return ReactChildren.map(this.props.children, function (child) {
-
-	      if (!child) {
-	        return null;
-	      }
-
-	      if (child.type.__TableColumn__) {
-	        child = _this2._transformColumn(child, tableProps, i);
-	      }
-
-	      if (child.type.__TableColumnGroup__) {
-	        // Since we apparently give an array of labels to groupHeaderRenderer
-	        var labels = [];
-	        ReactChildren.forEach(_this2.props.children, function (child) {
-	          labels.push(child.props.label);
-	        });
-
-	        child = _this2._transformColumnGroup(child, tableProps, i, labels);
-	      }
-
-	      i++;
-	      return child;
-	    });
-	  },
-
-	  render: function render() {
-	    var props = this.props;
-	    return React.createElement(
-	      Table,
-	      _extends({}, props, {
-	        onRowMouseDown: this._onRowAction(props, props.onRowMouseDown),
-	        onRowClick: this._onRowAction(props, props.onRowClick),
-	        onRowDoubleClick: this._onRowAction(props, props.onRowDoubleClick),
-	        onRowMouseEnter: this._onRowAction(props, props.onRowMouseEnter),
-	        onRowMouseLeave: this._onRowAction(props, props.onRowMouseLeave)
-	      }),
-	      this._convertedColumns(this.state.needsMigration)
-	    );
+	    this.state = state;
 	  }
-	});
+
+	  _createClass(TransitionTable, [{
+	    key: 'render',
+	    value: function render() {
+	      var props = this.props;
+	      return React.createElement(
+	        Table,
+	        _extends({}, props, {
+	          onRowMouseDown: this._onRowAction(props, props.onRowMouseDown),
+	          onRowClick: this._onRowAction(props, props.onRowClick),
+	          onRowDoubleClick: this._onRowAction(props, props.onRowDoubleClick),
+	          onRowMouseEnter: this._onRowAction(props, props.onRowMouseEnter),
+	          onRowMouseLeave: this._onRowAction(props, props.onRowMouseLeave)
+	        }),
+	        this._convertedColumns(this.state.needsMigration)
+	      );
+	    }
+	  }]);
+
+	  return TransitionTable;
+	})(React.Component);
 
 	module.exports = TransitionTable;
 
-/***/ },
+	// Wrapper for onRow callbacks, since we don't have rowData at that level.
+
+/***/ }),
 /* 27 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 */
+
+	if (process.env.NODE_ENV !== 'production') {
+	  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
+	    Symbol.for &&
+	    Symbol.for('react.element')) ||
+	    0xeac7;
+
+	  var isValidElement = function(object) {
+	    return typeof object === 'object' &&
+	      object !== null &&
+	      object.$$typeof === REACT_ELEMENT_TYPE;
+	  };
+
+	  // By explicitly using `prop-types` you are opting into new development behavior.
+	  // http://fb.me/prop-types-in-prod
+	  var throwOnDirectAccess = true;
+	  module.exports = __webpack_require__(29)(isValidElement, throwOnDirectAccess);
+	} else {
+	  // By explicitly using `prop-types` you are opting into new production behavior.
+	  // http://fb.me/prop-types-in-prod
+	  module.exports = __webpack_require__(33)();
+	}
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28)))
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports) {
+
+	// shim for using process in browser
+	var process = module.exports = {};
+
+	// cached from whatever global is present so that test runners that stub it
+	// don't break things.  But we need to wrap it in a try catch in case it is
+	// wrapped in strict mode code which doesn't define any globals.  It's inside a
+	// function because try/catches deoptimize in certain engines.
+
+	var cachedSetTimeout;
+	var cachedClearTimeout;
+
+	function defaultSetTimout() {
+	    throw new Error('setTimeout has not been defined');
+	}
+	function defaultClearTimeout () {
+	    throw new Error('clearTimeout has not been defined');
+	}
+	(function () {
+	    try {
+	        if (typeof setTimeout === 'function') {
+	            cachedSetTimeout = setTimeout;
+	        } else {
+	            cachedSetTimeout = defaultSetTimout;
+	        }
+	    } catch (e) {
+	        cachedSetTimeout = defaultSetTimout;
+	    }
+	    try {
+	        if (typeof clearTimeout === 'function') {
+	            cachedClearTimeout = clearTimeout;
+	        } else {
+	            cachedClearTimeout = defaultClearTimeout;
+	        }
+	    } catch (e) {
+	        cachedClearTimeout = defaultClearTimeout;
+	    }
+	} ())
+	function runTimeout(fun) {
+	    if (cachedSetTimeout === setTimeout) {
+	        //normal enviroments in sane situations
+	        return setTimeout(fun, 0);
+	    }
+	    // if setTimeout wasn't available but was latter defined
+	    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+	        cachedSetTimeout = setTimeout;
+	        return setTimeout(fun, 0);
+	    }
+	    try {
+	        // when when somebody has screwed with setTimeout but no I.E. maddness
+	        return cachedSetTimeout(fun, 0);
+	    } catch(e){
+	        try {
+	            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+	            return cachedSetTimeout.call(null, fun, 0);
+	        } catch(e){
+	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+	            return cachedSetTimeout.call(this, fun, 0);
+	        }
+	    }
+
+
+	}
+	function runClearTimeout(marker) {
+	    if (cachedClearTimeout === clearTimeout) {
+	        //normal enviroments in sane situations
+	        return clearTimeout(marker);
+	    }
+	    // if clearTimeout wasn't available but was latter defined
+	    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+	        cachedClearTimeout = clearTimeout;
+	        return clearTimeout(marker);
+	    }
+	    try {
+	        // when when somebody has screwed with setTimeout but no I.E. maddness
+	        return cachedClearTimeout(marker);
+	    } catch (e){
+	        try {
+	            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+	            return cachedClearTimeout.call(null, marker);
+	        } catch (e){
+	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+	            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+	            return cachedClearTimeout.call(this, marker);
+	        }
+	    }
+
+
+
+	}
+	var queue = [];
+	var draining = false;
+	var currentQueue;
+	var queueIndex = -1;
+
+	function cleanUpNextTick() {
+	    if (!draining || !currentQueue) {
+	        return;
+	    }
+	    draining = false;
+	    if (currentQueue.length) {
+	        queue = currentQueue.concat(queue);
+	    } else {
+	        queueIndex = -1;
+	    }
+	    if (queue.length) {
+	        drainQueue();
+	    }
+	}
+
+	function drainQueue() {
+	    if (draining) {
+	        return;
+	    }
+	    var timeout = runTimeout(cleanUpNextTick);
+	    draining = true;
+
+	    var len = queue.length;
+	    while(len) {
+	        currentQueue = queue;
+	        queue = [];
+	        while (++queueIndex < len) {
+	            if (currentQueue) {
+	                currentQueue[queueIndex].run();
+	            }
+	        }
+	        queueIndex = -1;
+	        len = queue.length;
+	    }
+	    currentQueue = null;
+	    draining = false;
+	    runClearTimeout(timeout);
+	}
+
+	process.nextTick = function (fun) {
+	    var args = new Array(arguments.length - 1);
+	    if (arguments.length > 1) {
+	        for (var i = 1; i < arguments.length; i++) {
+	            args[i - 1] = arguments[i];
+	        }
+	    }
+	    queue.push(new Item(fun, args));
+	    if (queue.length === 1 && !draining) {
+	        runTimeout(drainQueue);
+	    }
+	};
+
+	// v8 likes predictible objects
+	function Item(fun, array) {
+	    this.fun = fun;
+	    this.array = array;
+	}
+	Item.prototype.run = function () {
+	    this.fun.apply(null, this.array);
+	};
+	process.title = 'browser';
+	process.browser = true;
+	process.env = {};
+	process.argv = [];
+	process.version = ''; // empty string to avoid regexp issues
+	process.versions = {};
+
+	function noop() {}
+
+	process.on = noop;
+	process.addListener = noop;
+	process.once = noop;
+	process.off = noop;
+	process.removeListener = noop;
+	process.removeAllListeners = noop;
+	process.emit = noop;
+	process.prependListener = noop;
+	process.prependOnceListener = noop;
+
+	process.listeners = function (name) { return [] }
+
+	process.binding = function (name) {
+	    throw new Error('process.binding is not supported');
+	};
+
+	process.cwd = function () { return '/' };
+	process.chdir = function (dir) {
+	    throw new Error('process.chdir is not supported');
+	};
+	process.umask = function() { return 0; };
+
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 */
+
+	'use strict';
+
+	var assign = __webpack_require__(30);
+
+	var ReactPropTypesSecret = __webpack_require__(31);
+	var checkPropTypes = __webpack_require__(32);
+
+	var printWarning = function() {};
+
+	if (process.env.NODE_ENV !== 'production') {
+	  printWarning = function(text) {
+	    var message = 'Warning: ' + text;
+	    if (typeof console !== 'undefined') {
+	      console.error(message);
+	    }
+	    try {
+	      // --- Welcome to debugging React ---
+	      // This error was thrown as a convenience so that you can use this stack
+	      // to find the callsite that caused this warning to fire.
+	      throw new Error(message);
+	    } catch (x) {}
+	  };
+	}
+
+	function emptyFunctionThatReturnsNull() {
+	  return null;
+	}
+
+	module.exports = function(isValidElement, throwOnDirectAccess) {
+	  /* global Symbol */
+	  var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
+	  var FAUX_ITERATOR_SYMBOL = '@@iterator'; // Before Symbol spec.
+
+	  /**
+	   * Returns the iterator method function contained on the iterable object.
+	   *
+	   * Be sure to invoke the function with the iterable as context:
+	   *
+	   *     var iteratorFn = getIteratorFn(myIterable);
+	   *     if (iteratorFn) {
+	   *       var iterator = iteratorFn.call(myIterable);
+	   *       ...
+	   *     }
+	   *
+	   * @param {?object} maybeIterable
+	   * @return {?function}
+	   */
+	  function getIteratorFn(maybeIterable) {
+	    var iteratorFn = maybeIterable && (ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL]);
+	    if (typeof iteratorFn === 'function') {
+	      return iteratorFn;
+	    }
+	  }
+
+	  /**
+	   * Collection of methods that allow declaration and validation of props that are
+	   * supplied to React components. Example usage:
+	   *
+	   *   var Props = require('ReactPropTypes');
+	   *   var MyArticle = React.createClass({
+	   *     propTypes: {
+	   *       // An optional string prop named "description".
+	   *       description: Props.string,
+	   *
+	   *       // A required enum prop named "category".
+	   *       category: Props.oneOf(['News','Photos']).isRequired,
+	   *
+	   *       // A prop named "dialog" that requires an instance of Dialog.
+	   *       dialog: Props.instanceOf(Dialog).isRequired
+	   *     },
+	   *     render: function() { ... }
+	   *   });
+	   *
+	   * A more formal specification of how these methods are used:
+	   *
+	   *   type := array|bool|func|object|number|string|oneOf([...])|instanceOf(...)
+	   *   decl := ReactPropTypes.{type}(.isRequired)?
+	   *
+	   * Each and every declaration produces a function with the same signature. This
+	   * allows the creation of custom validation functions. For example:
+	   *
+	   *  var MyLink = React.createClass({
+	   *    propTypes: {
+	   *      // An optional string or URI prop named "href".
+	   *      href: function(props, propName, componentName) {
+	   *        var propValue = props[propName];
+	   *        if (propValue != null && typeof propValue !== 'string' &&
+	   *            !(propValue instanceof URI)) {
+	   *          return new Error(
+	   *            'Expected a string or an URI for ' + propName + ' in ' +
+	   *            componentName
+	   *          );
+	   *        }
+	   *      }
+	   *    },
+	   *    render: function() {...}
+	   *  });
+	   *
+	   * @internal
+	   */
+
+	  var ANONYMOUS = '<<anonymous>>';
+
+	  // Important!
+	  // Keep this list in sync with production version in `./factoryWithThrowingShims.js`.
+	  var ReactPropTypes = {
+	    array: createPrimitiveTypeChecker('array'),
+	    bool: createPrimitiveTypeChecker('boolean'),
+	    func: createPrimitiveTypeChecker('function'),
+	    number: createPrimitiveTypeChecker('number'),
+	    object: createPrimitiveTypeChecker('object'),
+	    string: createPrimitiveTypeChecker('string'),
+	    symbol: createPrimitiveTypeChecker('symbol'),
+
+	    any: createAnyTypeChecker(),
+	    arrayOf: createArrayOfTypeChecker,
+	    element: createElementTypeChecker(),
+	    instanceOf: createInstanceTypeChecker,
+	    node: createNodeChecker(),
+	    objectOf: createObjectOfTypeChecker,
+	    oneOf: createEnumTypeChecker,
+	    oneOfType: createUnionTypeChecker,
+	    shape: createShapeTypeChecker,
+	    exact: createStrictShapeTypeChecker,
+	  };
+
+	  /**
+	   * inlined Object.is polyfill to avoid requiring consumers ship their own
+	   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+	   */
+	  /*eslint-disable no-self-compare*/
+	  function is(x, y) {
+	    // SameValue algorithm
+	    if (x === y) {
+	      // Steps 1-5, 7-10
+	      // Steps 6.b-6.e: +0 != -0
+	      return x !== 0 || 1 / x === 1 / y;
+	    } else {
+	      // Step 6.a: NaN == NaN
+	      return x !== x && y !== y;
+	    }
+	  }
+	  /*eslint-enable no-self-compare*/
+
+	  /**
+	   * We use an Error-like object for backward compatibility as people may call
+	   * PropTypes directly and inspect their output. However, we don't use real
+	   * Errors anymore. We don't inspect their stack anyway, and creating them
+	   * is prohibitively expensive if they are created too often, such as what
+	   * happens in oneOfType() for any type before the one that matched.
+	   */
+	  function PropTypeError(message) {
+	    this.message = message;
+	    this.stack = '';
+	  }
+	  // Make `instanceof Error` still work for returned errors.
+	  PropTypeError.prototype = Error.prototype;
+
+	  function createChainableTypeChecker(validate) {
+	    if (process.env.NODE_ENV !== 'production') {
+	      var manualPropTypeCallCache = {};
+	      var manualPropTypeWarningCount = 0;
+	    }
+	    function checkType(isRequired, props, propName, componentName, location, propFullName, secret) {
+	      componentName = componentName || ANONYMOUS;
+	      propFullName = propFullName || propName;
+
+	      if (secret !== ReactPropTypesSecret) {
+	        if (throwOnDirectAccess) {
+	          // New behavior only for users of `prop-types` package
+	          var err = new Error(
+	            'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
+	            'Use `PropTypes.checkPropTypes()` to call them. ' +
+	            'Read more at http://fb.me/use-check-prop-types'
+	          );
+	          err.name = 'Invariant Violation';
+	          throw err;
+	        } else if (process.env.NODE_ENV !== 'production' && typeof console !== 'undefined') {
+	          // Old behavior for people using React.PropTypes
+	          var cacheKey = componentName + ':' + propName;
+	          if (
+	            !manualPropTypeCallCache[cacheKey] &&
+	            // Avoid spamming the console because they are often not actionable except for lib authors
+	            manualPropTypeWarningCount < 3
+	          ) {
+	            printWarning(
+	              'You are manually calling a React.PropTypes validation ' +
+	              'function for the `' + propFullName + '` prop on `' + componentName  + '`. This is deprecated ' +
+	              'and will throw in the standalone `prop-types` package. ' +
+	              'You may be seeing this warning due to a third-party PropTypes ' +
+	              'library. See https://fb.me/react-warning-dont-call-proptypes ' + 'for details.'
+	            );
+	            manualPropTypeCallCache[cacheKey] = true;
+	            manualPropTypeWarningCount++;
+	          }
+	        }
+	      }
+	      if (props[propName] == null) {
+	        if (isRequired) {
+	          if (props[propName] === null) {
+	            return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required ' + ('in `' + componentName + '`, but its value is `null`.'));
+	          }
+	          return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required in ' + ('`' + componentName + '`, but its value is `undefined`.'));
+	        }
+	        return null;
+	      } else {
+	        return validate(props, propName, componentName, location, propFullName);
+	      }
+	    }
+
+	    var chainedCheckType = checkType.bind(null, false);
+	    chainedCheckType.isRequired = checkType.bind(null, true);
+
+	    return chainedCheckType;
+	  }
+
+	  function createPrimitiveTypeChecker(expectedType) {
+	    function validate(props, propName, componentName, location, propFullName, secret) {
+	      var propValue = props[propName];
+	      var propType = getPropType(propValue);
+	      if (propType !== expectedType) {
+	        // `propValue` being instance of, say, date/regexp, pass the 'object'
+	        // check, but we can offer a more precise error message here rather than
+	        // 'of type `object`'.
+	        var preciseType = getPreciseType(propValue);
+
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + preciseType + '` supplied to `' + componentName + '`, expected ') + ('`' + expectedType + '`.'));
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function createAnyTypeChecker() {
+	    return createChainableTypeChecker(emptyFunctionThatReturnsNull);
+	  }
+
+	  function createArrayOfTypeChecker(typeChecker) {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      if (typeof typeChecker !== 'function') {
+	        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside arrayOf.');
+	      }
+	      var propValue = props[propName];
+	      if (!Array.isArray(propValue)) {
+	        var propType = getPropType(propValue);
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an array.'));
+	      }
+	      for (var i = 0; i < propValue.length; i++) {
+	        var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']', ReactPropTypesSecret);
+	        if (error instanceof Error) {
+	          return error;
+	        }
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function createElementTypeChecker() {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      var propValue = props[propName];
+	      if (!isValidElement(propValue)) {
+	        var propType = getPropType(propValue);
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement.'));
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function createInstanceTypeChecker(expectedClass) {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      if (!(props[propName] instanceof expectedClass)) {
+	        var expectedClassName = expectedClass.name || ANONYMOUS;
+	        var actualClassName = getClassName(props[propName]);
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + actualClassName + '` supplied to `' + componentName + '`, expected ') + ('instance of `' + expectedClassName + '`.'));
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function createEnumTypeChecker(expectedValues) {
+	    if (!Array.isArray(expectedValues)) {
+	      process.env.NODE_ENV !== 'production' ? printWarning('Invalid argument supplied to oneOf, expected an instance of array.') : void 0;
+	      return emptyFunctionThatReturnsNull;
+	    }
+
+	    function validate(props, propName, componentName, location, propFullName) {
+	      var propValue = props[propName];
+	      for (var i = 0; i < expectedValues.length; i++) {
+	        if (is(propValue, expectedValues[i])) {
+	          return null;
+	        }
+	      }
+
+	      var valuesString = JSON.stringify(expectedValues);
+	      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of value `' + propValue + '` ' + ('supplied to `' + componentName + '`, expected one of ' + valuesString + '.'));
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function createObjectOfTypeChecker(typeChecker) {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      if (typeof typeChecker !== 'function') {
+	        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside objectOf.');
+	      }
+	      var propValue = props[propName];
+	      var propType = getPropType(propValue);
+	      if (propType !== 'object') {
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));
+	      }
+	      for (var key in propValue) {
+	        if (propValue.hasOwnProperty(key)) {
+	          var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
+	          if (error instanceof Error) {
+	            return error;
+	          }
+	        }
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function createUnionTypeChecker(arrayOfTypeCheckers) {
+	    if (!Array.isArray(arrayOfTypeCheckers)) {
+	      process.env.NODE_ENV !== 'production' ? printWarning('Invalid argument supplied to oneOfType, expected an instance of array.') : void 0;
+	      return emptyFunctionThatReturnsNull;
+	    }
+
+	    for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
+	      var checker = arrayOfTypeCheckers[i];
+	      if (typeof checker !== 'function') {
+	        printWarning(
+	          'Invalid argument supplied to oneOfType. Expected an array of check functions, but ' +
+	          'received ' + getPostfixForTypeWarning(checker) + ' at index ' + i + '.'
+	        );
+	        return emptyFunctionThatReturnsNull;
+	      }
+	    }
+
+	    function validate(props, propName, componentName, location, propFullName) {
+	      for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
+	        var checker = arrayOfTypeCheckers[i];
+	        if (checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret) == null) {
+	          return null;
+	        }
+	      }
+
+	      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`.'));
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function createNodeChecker() {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      if (!isNode(props[propName])) {
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`, expected a ReactNode.'));
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function createShapeTypeChecker(shapeTypes) {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      var propValue = props[propName];
+	      var propType = getPropType(propValue);
+	      if (propType !== 'object') {
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
+	      }
+	      for (var key in shapeTypes) {
+	        var checker = shapeTypes[key];
+	        if (!checker) {
+	          continue;
+	        }
+	        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
+	        if (error) {
+	          return error;
+	        }
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function createStrictShapeTypeChecker(shapeTypes) {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      var propValue = props[propName];
+	      var propType = getPropType(propValue);
+	      if (propType !== 'object') {
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
+	      }
+	      // We need to check all keys in case some are required but missing from
+	      // props.
+	      var allKeys = assign({}, props[propName], shapeTypes);
+	      for (var key in allKeys) {
+	        var checker = shapeTypes[key];
+	        if (!checker) {
+	          return new PropTypeError(
+	            'Invalid ' + location + ' `' + propFullName + '` key `' + key + '` supplied to `' + componentName + '`.' +
+	            '\nBad object: ' + JSON.stringify(props[propName], null, '  ') +
+	            '\nValid keys: ' +  JSON.stringify(Object.keys(shapeTypes), null, '  ')
+	          );
+	        }
+	        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
+	        if (error) {
+	          return error;
+	        }
+	      }
+	      return null;
+	    }
+
+	    return createChainableTypeChecker(validate);
+	  }
+
+	  function isNode(propValue) {
+	    switch (typeof propValue) {
+	      case 'number':
+	      case 'string':
+	      case 'undefined':
+	        return true;
+	      case 'boolean':
+	        return !propValue;
+	      case 'object':
+	        if (Array.isArray(propValue)) {
+	          return propValue.every(isNode);
+	        }
+	        if (propValue === null || isValidElement(propValue)) {
+	          return true;
+	        }
+
+	        var iteratorFn = getIteratorFn(propValue);
+	        if (iteratorFn) {
+	          var iterator = iteratorFn.call(propValue);
+	          var step;
+	          if (iteratorFn !== propValue.entries) {
+	            while (!(step = iterator.next()).done) {
+	              if (!isNode(step.value)) {
+	                return false;
+	              }
+	            }
+	          } else {
+	            // Iterator will provide entry [k,v] tuples rather than values.
+	            while (!(step = iterator.next()).done) {
+	              var entry = step.value;
+	              if (entry) {
+	                if (!isNode(entry[1])) {
+	                  return false;
+	                }
+	              }
+	            }
+	          }
+	        } else {
+	          return false;
+	        }
+
+	        return true;
+	      default:
+	        return false;
+	    }
+	  }
+
+	  function isSymbol(propType, propValue) {
+	    // Native Symbol.
+	    if (propType === 'symbol') {
+	      return true;
+	    }
+
+	    // 19.4.3.5 Symbol.prototype[@@toStringTag] === 'Symbol'
+	    if (propValue['@@toStringTag'] === 'Symbol') {
+	      return true;
+	    }
+
+	    // Fallback for non-spec compliant Symbols which are polyfilled.
+	    if (typeof Symbol === 'function' && propValue instanceof Symbol) {
+	      return true;
+	    }
+
+	    return false;
+	  }
+
+	  // Equivalent of `typeof` but with special handling for array and regexp.
+	  function getPropType(propValue) {
+	    var propType = typeof propValue;
+	    if (Array.isArray(propValue)) {
+	      return 'array';
+	    }
+	    if (propValue instanceof RegExp) {
+	      // Old webkits (at least until Android 4.0) return 'function' rather than
+	      // 'object' for typeof a RegExp. We'll normalize this here so that /bla/
+	      // passes PropTypes.object.
+	      return 'object';
+	    }
+	    if (isSymbol(propType, propValue)) {
+	      return 'symbol';
+	    }
+	    return propType;
+	  }
+
+	  // This handles more types than `getPropType`. Only used for error messages.
+	  // See `createPrimitiveTypeChecker`.
+	  function getPreciseType(propValue) {
+	    if (typeof propValue === 'undefined' || propValue === null) {
+	      return '' + propValue;
+	    }
+	    var propType = getPropType(propValue);
+	    if (propType === 'object') {
+	      if (propValue instanceof Date) {
+	        return 'date';
+	      } else if (propValue instanceof RegExp) {
+	        return 'regexp';
+	      }
+	    }
+	    return propType;
+	  }
+
+	  // Returns a string that is postfixed to a warning about an invalid type.
+	  // For example, "undefined" or "of type array"
+	  function getPostfixForTypeWarning(value) {
+	    var type = getPreciseType(value);
+	    switch (type) {
+	      case 'array':
+	      case 'object':
+	        return 'an ' + type;
+	      case 'boolean':
+	      case 'date':
+	      case 'regexp':
+	        return 'a ' + type;
+	      default:
+	        return type;
+	    }
+	  }
+
+	  // Returns class name of the object, if any.
+	  function getClassName(propValue) {
+	    if (!propValue.constructor || !propValue.constructor.name) {
+	      return ANONYMOUS;
+	    }
+	    return propValue.constructor.name;
+	  }
+
+	  ReactPropTypes.checkPropTypes = checkPropTypes;
+	  ReactPropTypes.PropTypes = ReactPropTypes;
+
+	  return ReactPropTypes;
+	};
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28)))
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports) {
+
+	/*
+	object-assign
+	(c) Sindre Sorhus
+	@license MIT
+	*/
+
+	'use strict';
+	/* eslint-disable no-unused-vars */
+	var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+	var hasOwnProperty = Object.prototype.hasOwnProperty;
+	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+	function toObject(val) {
+		if (val === null || val === undefined) {
+			throw new TypeError('Object.assign cannot be called with null or undefined');
+		}
+
+		return Object(val);
+	}
+
+	function shouldUseNative() {
+		try {
+			if (!Object.assign) {
+				return false;
+			}
+
+			// Detect buggy property enumeration order in older V8 versions.
+
+			// https://bugs.chromium.org/p/v8/issues/detail?id=4118
+			var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
+			test1[5] = 'de';
+			if (Object.getOwnPropertyNames(test1)[0] === '5') {
+				return false;
+			}
+
+			// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+			var test2 = {};
+			for (var i = 0; i < 10; i++) {
+				test2['_' + String.fromCharCode(i)] = i;
+			}
+			var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
+				return test2[n];
+			});
+			if (order2.join('') !== '0123456789') {
+				return false;
+			}
+
+			// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+			var test3 = {};
+			'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
+				test3[letter] = letter;
+			});
+			if (Object.keys(Object.assign({}, test3)).join('') !==
+					'abcdefghijklmnopqrst') {
+				return false;
+			}
+
+			return true;
+		} catch (err) {
+			// We don't expect any of the above to throw, but better to be safe.
+			return false;
+		}
+	}
+
+	module.exports = shouldUseNative() ? Object.assign : function (target, source) {
+		var from;
+		var to = toObject(target);
+		var symbols;
+
+		for (var s = 1; s < arguments.length; s++) {
+			from = Object(arguments[s]);
+
+			for (var key in from) {
+				if (hasOwnProperty.call(from, key)) {
+					to[key] = from[key];
+				}
+			}
+
+			if (getOwnPropertySymbols) {
+				symbols = getOwnPropertySymbols(from);
+				for (var i = 0; i < symbols.length; i++) {
+					if (propIsEnumerable.call(from, symbols[i])) {
+						to[symbols[i]] = from[symbols[i]];
+					}
+				}
+			}
+		}
+
+		return to;
+	};
+
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports) {
+
+	/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 */
+
+	'use strict';
+
+	var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
+
+	module.exports = ReactPropTypesSecret;
+
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 */
+
+	'use strict';
+
+	var printWarning = function() {};
+
+	if (process.env.NODE_ENV !== 'production') {
+	  var ReactPropTypesSecret = __webpack_require__(31);
+	  var loggedTypeFailures = {};
+
+	  printWarning = function(text) {
+	    var message = 'Warning: ' + text;
+	    if (typeof console !== 'undefined') {
+	      console.error(message);
+	    }
+	    try {
+	      // --- Welcome to debugging React ---
+	      // This error was thrown as a convenience so that you can use this stack
+	      // to find the callsite that caused this warning to fire.
+	      throw new Error(message);
+	    } catch (x) {}
+	  };
+	}
+
+	/**
+	 * Assert that the values match with the type specs.
+	 * Error messages are memorized and will only be shown once.
+	 *
+	 * @param {object} typeSpecs Map of name to a ReactPropType
+	 * @param {object} values Runtime values that need to be type-checked
+	 * @param {string} location e.g. "prop", "context", "child context"
+	 * @param {string} componentName Name of the component for error messages.
+	 * @param {?Function} getStack Returns the component stack.
+	 * @private
+	 */
+	function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
+	  if (process.env.NODE_ENV !== 'production') {
+	    for (var typeSpecName in typeSpecs) {
+	      if (typeSpecs.hasOwnProperty(typeSpecName)) {
+	        var error;
+	        // Prop type validation may throw. In case they do, we don't want to
+	        // fail the render phase where it didn't fail before. So we log it.
+	        // After these have been cleaned up, we'll let them throw.
+	        try {
+	          // This is intentionally an invariant that gets caught. It's the same
+	          // behavior as without this statement except with a better message.
+	          if (typeof typeSpecs[typeSpecName] !== 'function') {
+	            var err = Error(
+	              (componentName || 'React class') + ': ' + location + ' type `' + typeSpecName + '` is invalid; ' +
+	              'it must be a function, usually from the `prop-types` package, but received `' + typeof typeSpecs[typeSpecName] + '`.'
+	            );
+	            err.name = 'Invariant Violation';
+	            throw err;
+	          }
+	          error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
+	        } catch (ex) {
+	          error = ex;
+	        }
+	        if (error && !(error instanceof Error)) {
+	          printWarning(
+	            (componentName || 'React class') + ': type specification of ' +
+	            location + ' `' + typeSpecName + '` is invalid; the type checker ' +
+	            'function must return `null` or an `Error` but returned a ' + typeof error + '. ' +
+	            'You may have forgotten to pass an argument to the type checker ' +
+	            'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' +
+	            'shape all require an argument).'
+	          )
+
+	        }
+	        if (error instanceof Error && !(error.message in loggedTypeFailures)) {
+	          // Only monitor this failure once because there tends to be a lot of the
+	          // same error.
+	          loggedTypeFailures[error.message] = true;
+
+	          var stack = getStack ? getStack() : '';
+
+	          printWarning(
+	            'Failed ' + location + ' type: ' + error.message + (stack != null ? stack : '')
+	          );
+	        }
+	      }
+	    }
+	  }
+	}
+
+	module.exports = checkPropTypes;
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28)))
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 */
+
+	'use strict';
+
+	var ReactPropTypesSecret = __webpack_require__(31);
+
+	function emptyFunction() {}
+
+	module.exports = function() {
+	  function shim(props, propName, componentName, location, propFullName, secret) {
+	    if (secret === ReactPropTypesSecret) {
+	      // It is still safe when called from React.
+	      return;
+	    }
+	    var err = new Error(
+	      'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
+	      'Use PropTypes.checkPropTypes() to call them. ' +
+	      'Read more at http://fb.me/use-check-prop-types'
+	    );
+	    err.name = 'Invariant Violation';
+	    throw err;
+	  };
+	  shim.isRequired = shim;
+	  function getShim() {
+	    return shim;
+	  };
+	  // Important!
+	  // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
+	  var ReactPropTypes = {
+	    array: shim,
+	    bool: shim,
+	    func: shim,
+	    number: shim,
+	    object: shim,
+	    string: shim,
+	    symbol: shim,
+
+	    any: shim,
+	    arrayOf: getShim,
+	    element: shim,
+	    instanceOf: getShim,
+	    node: shim,
+	    objectOf: getShim,
+	    oneOf: getShim,
+	    oneOfType: getShim,
+	    shape: getShim,
+	    exact: getShim
+	  };
+
+	  ReactPropTypes.checkPropTypes = emptyFunction;
+	  ReactPropTypes.PropTypes = ReactPropTypes;
+
+	  return ReactPropTypes;
+	};
+
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -731,18 +1816,23 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	module.exports = __webpack_require__(28);
+	module.exports = __webpack_require__(35);
 
-/***/ },
-/* 28 */
-/***/ function(module, exports) {
+/***/ }),
+/* 35 */
+/***/ (function(module, exports) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_28__;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_35__;
 
-/***/ },
-/* 29 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
 
+	"use strict";
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var PropTypes = __webpack_require__(27);
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
 	 * All rights reserved.
@@ -758,37 +1848,32 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/*eslint no-bitwise:1*/
 
-	'use strict';
+	var React = __webpack_require__(34);
+	var createReactClass = __webpack_require__(37);
+	var ReactComponentWithPureRenderMixin = __webpack_require__(43);
+	var ReactWheelHandler = __webpack_require__(44);
+	var Scrollbar = __webpack_require__(52);
+	var FixedDataTableBufferedRows = __webpack_require__(66);
+	var FixedDataTableColumnResizeHandle = __webpack_require__(80);
+	var FixedDataTableRow = __webpack_require__(71);
+	var FixedDataTableScrollHelper = __webpack_require__(81);
+	var FixedDataTableWidthHelper = __webpack_require__(83);
 
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var React = __webpack_require__(27);
-	var ReactComponentWithPureRenderMixin = __webpack_require__(30);
-	var ReactWheelHandler = __webpack_require__(31);
-	var Scrollbar = __webpack_require__(39);
-	var FixedDataTableBufferedRows = __webpack_require__(53);
-	var FixedDataTableColumnResizeHandle = __webpack_require__(67);
-	var FixedDataTableRow = __webpack_require__(58);
-	var FixedDataTableScrollHelper = __webpack_require__(68);
-	var FixedDataTableWidthHelper = __webpack_require__(70);
-
-	var cx = __webpack_require__(47);
-	var debounceCore = __webpack_require__(71);
-	var emptyFunction = __webpack_require__(32);
-	var invariant = __webpack_require__(52);
-	var joinClasses = __webpack_require__(66);
-	var shallowEqual = __webpack_require__(72);
-	var translateDOMPositionXY = __webpack_require__(48);
-
-	var PropTypes = React.PropTypes;
+	var cx = __webpack_require__(60);
+	var debounceCore = __webpack_require__(84);
+	var emptyFunction = __webpack_require__(45);
+	var invariant = __webpack_require__(65);
+	var joinClasses = __webpack_require__(79);
+	var shallowEqual = __webpack_require__(85);
+	var translateDOMPositionXY = __webpack_require__(61);
 
 	var ReactChildren = React.Children;
 
 	var EMPTY_OBJECT = {};
 	var BORDER_HEIGHT = 1;
-	var HEADER = 'header';
-	var FOOTER = 'footer';
-	var CELL = 'cell';
+	var HEADER = "header";
+	var FOOTER = "footer";
+	var CELL = "cell";
 
 	/**
 	 * Data grid component with fixed or scrollable header and columns.
@@ -836,11 +1921,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * - Scrollable Body Columns: The body columns that move while scrolling
 	 *   vertically or horizontally.
 	 */
-	var FixedDataTable = React.createClass({
-	  displayName: 'FixedDataTable',
+	var FixedDataTable = createReactClass({
+	  displayName: "FixedDataTable",
 
 	  propTypes: {
-
 	    /**
 	     * Pixel width of table. If all columns do not fit,
 	     * a horizontal scrollbar will appear.
@@ -878,8 +1962,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	     */
 	    ownerHeight: PropTypes.number,
 
-	    overflowX: PropTypes.oneOf(['hidden', 'auto']),
-	    overflowY: PropTypes.oneOf(['hidden', 'auto']),
+	    overflowX: PropTypes.oneOf(["hidden", "auto"]),
+	    overflowY: PropTypes.oneOf(["hidden", "auto"]),
 
 	    /**
 	     * Number of rows in the table.
@@ -1001,7 +2085,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    /**
 	     * Whether a column is currently being resized.
 	     */
-	    isColumnResizing: PropTypes.bool
+	    isColumnResizing: PropTypes.bool,
+
+	    /**
+	     * CSS style props to pass to the box shadow that shows up on the fixed
+	     * header while scrolling
+	     */
+	    topShadowStyle: PropTypes.object
 	  },
 
 	  getDefaultProps: function getDefaultProps() /*object*/{
@@ -1039,7 +2129,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  _shouldHandleWheelX: function _shouldHandleWheelX( /*number*/delta) /*boolean*/{
-	    if (this.props.overflowX === 'hidden') {
+	    if (this.props.overflowX === "hidden") {
 	      return false;
 	    }
 
@@ -1052,7 +2142,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  _shouldHandleWheelY: function _shouldHandleWheelY( /*number*/delta) /*boolean*/{
-	    if (this.props.overflowY === 'hidden' || delta === 0) {
+	    if (this.props.overflowY === "hidden" || delta === 0) {
 	      return false;
 	    }
 
@@ -1085,6 +2175,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  componentDidMount: function componentDidMount() {
 	    this._reportContentHeight();
+	    this._isMounted = true;
 	  },
 
 	  componentWillReceiveProps: function componentWillReceiveProps( /*object*/nextProps) {
@@ -1100,8 +2191,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var newOverflowX = nextProps.overflowX;
 	    var newOverflowY = nextProps.overflowY;
 	    if (newOverflowX !== this.props.overflowX || newOverflowY !== this.props.overflowY) {
-	      this._wheelHandler = new ReactWheelHandler(this._onWheel, newOverflowX !== 'hidden', // Should handle horizontal scroll
-	      newOverflowY !== 'hidden' // Should handle vertical scroll
+	      this._wheelHandler = new ReactWheelHandler(this._onWheel, newOverflowX !== "hidden", // Should handle horizontal scroll
+	      newOverflowY !== "hidden" // Should handle vertical scroll
 	      );
 	    }
 
@@ -1125,9 +2216,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var groupHeader;
 	    if (state.useGroupHeader) {
 	      groupHeader = React.createElement(FixedDataTableRow, {
-	        key: 'group_header',
+	        key: "group_header",
 	        isScrolling: this._isScrolling,
-	        className: joinClasses(cx('fixedDataTableLayout/header'), cx('public/fixedDataTable/header')),
+	        className: joinClasses(cx("fixedDataTableLayout/header"), cx("public/fixedDataTable/header")),
 	        width: state.width,
 	        height: state.groupHeaderHeight,
 	        index: 0,
@@ -1141,8 +2232,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    var maxScrollY = this.state.maxScrollY;
-	    var showScrollbarX = state.maxScrollX > 0 && state.overflowX !== 'hidden';
-	    var showScrollbarY = maxScrollY > 0 && state.overflowY !== 'hidden';
+	    var showScrollbarX = state.maxScrollX > 0 && state.overflowX !== "hidden";
+	    var showScrollbarY = maxScrollY > 0 && state.overflowY !== "hidden";
 	    var scrollbarXHeight = showScrollbarX ? Scrollbar.SIZE : 0;
 	    var scrollbarYHeight = state.height - scrollbarXHeight - 2 * BORDER_HEIGHT - state.footerHeight;
 
@@ -1200,9 +2291,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var footer = null;
 	    if (state.footerHeight) {
 	      footer = React.createElement(FixedDataTableRow, {
-	        key: 'footer',
+	        key: "footer",
 	        isScrolling: this._isScrolling,
-	        className: joinClasses(cx('fixedDataTableLayout/footer'), cx('public/fixedDataTable/footer')),
+	        className: joinClasses(cx("fixedDataTableLayout/footer"), cx("public/fixedDataTable/footer")),
 	        width: state.width,
 	        height: state.footerHeight,
 	        index: -1,
@@ -1217,9 +2308,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var rows = this._renderRows(bodyOffsetTop);
 
 	    var header = React.createElement(FixedDataTableRow, {
-	      key: 'header',
+	      key: "header",
 	      isScrolling: this._isScrolling,
-	      className: joinClasses(cx('fixedDataTableLayout/header'), cx('public/fixedDataTable/header')),
+	      className: joinClasses(cx("fixedDataTableLayout/header"), cx("public/fixedDataTable/header")),
 	      width: state.width,
 	      height: state.headerHeight,
 	      index: -1,
@@ -1234,30 +2325,32 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var topShadow;
 	    var bottomShadow;
 	    if (state.scrollY) {
-	      topShadow = React.createElement('div', {
-	        className: joinClasses(cx('fixedDataTableLayout/topShadow'), cx('public/fixedDataTable/topShadow')),
-	        style: { top: bodyOffsetTop }
+	      topShadow = React.createElement("div", {
+	        className: joinClasses(cx("fixedDataTableLayout/topShadow"), cx("public/fixedDataTable/topShadow")),
+	        style: _extends({}, topShadowStyle, { top: bodyOffsetTop })
 	      });
 	    }
 
 	    if (state.ownerHeight != null && state.ownerHeight < state.height && state.scrollContentHeight + state.reservedHeight > state.ownerHeight || state.scrollY < maxScrollY) {
-	      bottomShadow = React.createElement('div', {
-	        className: joinClasses(cx('fixedDataTableLayout/bottomShadow'), cx('public/fixedDataTable/bottomShadow')),
+	      bottomShadow = React.createElement("div", {
+	        className: joinClasses(cx("fixedDataTableLayout/bottomShadow"), cx("public/fixedDataTable/bottomShadow")),
 	        style: { top: footOffsetTop }
 	      });
 	    }
 
 	    return React.createElement(
-	      'div',
+	      "div",
 	      {
-	        className: joinClasses(cx('fixedDataTableLayout/main'), cx('public/fixedDataTable/main')),
+	        className: joinClasses(cx("fixedDataTableLayout/main"), cx("public/fixedDataTable/main")),
 	        onWheel: this._wheelHandler.onWheel,
-	        style: { height: state.height, width: state.width } },
+	        style: { height: state.height, width: state.width }
+	      },
 	      React.createElement(
-	        'div',
+	        "div",
 	        {
-	          className: cx('fixedDataTableLayout/rowsContainer'),
-	          style: { height: rowsContainerHeight, width: state.width } },
+	          className: cx("fixedDataTableLayout/rowsContainer"),
+	          style: { height: rowsContainerHeight, width: state.width }
+	        },
 	        dragKnob,
 	        groupHeader,
 	        header,
@@ -1269,6 +2362,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      verticalScrollbar,
 	      horizontalScrollbar
 	    );
+	  },
+
+	  componentWillUnmount: function componentWillUnmount() {
+	    this._isMounted = false;
 	  },
 
 	  _renderRows: function _renderRows( /*number*/offsetTop) /*object*/{
@@ -1389,14 +2486,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  _calculateState: function _calculateState( /*object*/props, /*?object*/oldState) /*object*/{
-	    invariant(props.height !== undefined || props.maxHeight !== undefined, 'You must set either a height or a maxHeight');
+	    invariant(props.height !== undefined || props.maxHeight !== undefined, "You must set either a height or a maxHeight");
 
 	    var children = [];
 	    ReactChildren.forEach(props.children, function (child, index) {
 	      if (child == null) {
 	        return;
 	      }
-	      invariant(child.type.__TableColumnGroup__ || child.type.__TableColumn__, 'child type should be <FixedDataTableColumn /> or ' + '<FixedDataTableColumnGroup />');
+	      invariant(child.type.__TableColumnGroup__ || child.type.__TableColumn__, "child type should be <FixedDataTableColumn /> or " + "<FixedDataTableColumnGroup />");
 	      children.push(child);
 	    });
 
@@ -1412,12 +2509,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var firstRowIndex = oldState && oldState.firstRowIndex || 0;
 	    var firstRowOffset = oldState && oldState.firstRowOffset || 0;
 	    var scrollX, scrollY;
-	    if (oldState && props.overflowX !== 'hidden') {
+	    if (oldState && props.overflowX !== "hidden") {
 	      scrollX = oldState.scrollX;
 	    } else {
 	      scrollX = props.scrollLeft;
 	    }
-	    if (oldState && props.overflowY !== 'hidden') {
+	    if (oldState && props.overflowY !== "hidden") {
 	      scrollY = oldState.scrollY;
 	    } else {
 	      scrollState = this._scrollHelper.scrollTo(props.scrollTop);
@@ -1511,7 +2608,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var totalHeightNeeded = scrollContentHeight + totalHeightReserved;
 	    var scrollContentWidth = FixedDataTableWidthHelper.getTotalWidth(columns);
 
-	    var horizontalScrollbarVisible = scrollContentWidth > props.width && props.overflowX !== 'hidden';
+	    var horizontalScrollbarVisible = scrollContentWidth > props.width && props.overflowX !== "hidden";
 
 	    if (horizontalScrollbarVisible) {
 	      bodyHeight -= Scrollbar.SIZE;
@@ -1593,12 +2690,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  _onWheel: function _onWheel( /*number*/deltaX, /*number*/deltaY) {
-	    if (this.isMounted()) {
+	    if (this._isMounted) {
 	      if (!this._isScrolling) {
 	        this._didScrollStart();
 	      }
 	      var x = this.state.scrollX;
-	      if (Math.abs(deltaY) > Math.abs(deltaX) && this.props.overflowY !== 'hidden') {
+	      if (Math.abs(deltaY) > Math.abs(deltaX) && this.props.overflowY !== "hidden") {
 	        var scrollState = this._scrollHelper.scrollBy(Math.round(deltaY));
 	        var maxScrollY = Math.max(0, scrollState.contentHeight - this.state.bodyHeight);
 	        this.setState({
@@ -1608,7 +2705,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          scrollContentHeight: scrollState.contentHeight,
 	          maxScrollY: maxScrollY
 	        });
-	      } else if (deltaX && this.props.overflowX !== 'hidden') {
+	      } else if (deltaX && this.props.overflowX !== "hidden") {
 	        x += deltaX;
 	        x = x < 0 ? 0 : x;
 	        x = x > this.state.maxScrollX ? this.state.maxScrollX : x;
@@ -1622,7 +2719,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  _onHorizontalScroll: function _onHorizontalScroll( /*number*/scrollPos) {
-	    if (this.isMounted() && scrollPos !== this.state.scrollX) {
+	    if (this._isMounted && scrollPos !== this.state.scrollX) {
 	      if (!this._isScrolling) {
 	        this._didScrollStart();
 	      }
@@ -1634,7 +2731,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  _onVerticalScroll: function _onVerticalScroll( /*number*/scrollPos) {
-	    if (this.isMounted() && scrollPos !== this.state.scrollY) {
+	    if (this._isMounted && scrollPos !== this.state.scrollY) {
 	      if (!this._isScrolling) {
 	        this._didScrollStart();
 	      }
@@ -1650,7 +2747,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  _didScrollStart: function _didScrollStart() {
-	    if (this.isMounted() && !this._isScrolling) {
+	    if (this._isMounted && !this._isScrolling) {
 	      this._isScrolling = true;
 	      if (this.props.onScrollStart) {
 	        this.props.onScrollStart(this.state.scrollX, this.state.scrollY);
@@ -1659,7 +2756,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  _didScrollStop: function _didScrollStop() {
-	    if (this.isMounted() && this._isScrolling) {
+	    if (this._isMounted && this._isScrolling) {
 	      this._isScrolling = false;
 	      this.setState({ redraw: true });
 	      if (this.props.onScrollEnd) {
@@ -1669,10 +2766,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 
-	var HorizontalScrollbar = React.createClass({
-	  displayName: 'HorizontalScrollbar',
-
+	var HorizontalScrollbar = createReactClass({
+	  displayName: "HorizontalScrollbar",
 	  mixins: [ReactComponentWithPureRenderMixin],
+
 	  propTypes: {
 	    contentSize: PropTypes.number.isRequired,
 	    offset: PropTypes.number.isRequired,
@@ -1688,23 +2785,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	    var innerContainerStyle = {
 	      height: Scrollbar.SIZE,
-	      position: 'absolute',
-	      overflow: 'hidden',
+	      position: "absolute",
+	      overflow: "hidden",
 	      width: this.props.size
 	    };
 	    translateDOMPositionXY(innerContainerStyle, 0, this.props.offset);
 
 	    return React.createElement(
-	      'div',
+	      "div",
 	      {
-	        className: joinClasses(cx('fixedDataTableLayout/horizontalScrollbar'), cx('public/fixedDataTable/horizontalScrollbar')),
-	        style: outerContainerStyle },
+	        className: joinClasses(cx("fixedDataTableLayout/horizontalScrollbar"), cx("public/fixedDataTable/horizontalScrollbar")),
+	        style: outerContainerStyle
+	      },
 	      React.createElement(
-	        'div',
+	        "div",
 	        { style: innerContainerStyle },
 	        React.createElement(Scrollbar, _extends({}, this.props, {
 	          isOpaque: true,
-	          orientation: 'horizontal',
+	          orientation: "horizontal",
 	          offset: undefined
 	        }))
 	      )
@@ -1716,9 +2814,1167 @@ return /******/ (function(modules) { // webpackBootstrap
 	// isColumnResizing should be overwritten by value from props if
 	// avaialble
 
-/***/ },
-/* 30 */
-/***/ function(module, exports) {
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 *
+	 */
+
+	'use strict';
+
+	var React = __webpack_require__(35);
+	var factory = __webpack_require__(38);
+
+	if (typeof React === 'undefined') {
+	  throw Error(
+	    'create-react-class could not find the React object. If you are using script tags, ' +
+	      'make sure that React is being loaded before create-react-class.'
+	  );
+	}
+
+	// Hack to grab NoopUpdateQueue from isomorphic React
+	var ReactNoopUpdateQueue = new React.Component().updater;
+
+	module.exports = factory(
+	  React.Component,
+	  React.isValidElement,
+	  ReactNoopUpdateQueue
+	);
+
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 *
+	 */
+
+	'use strict';
+
+	var _assign = __webpack_require__(30);
+
+	var emptyObject = __webpack_require__(39);
+	var _invariant = __webpack_require__(40);
+
+	if (process.env.NODE_ENV !== 'production') {
+	  var warning = __webpack_require__(41);
+	}
+
+	var MIXINS_KEY = 'mixins';
+
+	// Helper function to allow the creation of anonymous functions which do not
+	// have .name set to the name of the variable being assigned to.
+	function identity(fn) {
+	  return fn;
+	}
+
+	var ReactPropTypeLocationNames;
+	if (process.env.NODE_ENV !== 'production') {
+	  ReactPropTypeLocationNames = {
+	    prop: 'prop',
+	    context: 'context',
+	    childContext: 'child context'
+	  };
+	} else {
+	  ReactPropTypeLocationNames = {};
+	}
+
+	function factory(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
+	  /**
+	   * Policies that describe methods in `ReactClassInterface`.
+	   */
+
+	  var injectedMixins = [];
+
+	  /**
+	   * Composite components are higher-level components that compose other composite
+	   * or host components.
+	   *
+	   * To create a new type of `ReactClass`, pass a specification of
+	   * your new class to `React.createClass`. The only requirement of your class
+	   * specification is that you implement a `render` method.
+	   *
+	   *   var MyComponent = React.createClass({
+	   *     render: function() {
+	   *       return <div>Hello World</div>;
+	   *     }
+	   *   });
+	   *
+	   * The class specification supports a specific protocol of methods that have
+	   * special meaning (e.g. `render`). See `ReactClassInterface` for
+	   * more the comprehensive protocol. Any other properties and methods in the
+	   * class specification will be available on the prototype.
+	   *
+	   * @interface ReactClassInterface
+	   * @internal
+	   */
+	  var ReactClassInterface = {
+	    /**
+	     * An array of Mixin objects to include when defining your component.
+	     *
+	     * @type {array}
+	     * @optional
+	     */
+	    mixins: 'DEFINE_MANY',
+
+	    /**
+	     * An object containing properties and methods that should be defined on
+	     * the component's constructor instead of its prototype (static methods).
+	     *
+	     * @type {object}
+	     * @optional
+	     */
+	    statics: 'DEFINE_MANY',
+
+	    /**
+	     * Definition of prop types for this component.
+	     *
+	     * @type {object}
+	     * @optional
+	     */
+	    propTypes: 'DEFINE_MANY',
+
+	    /**
+	     * Definition of context types for this component.
+	     *
+	     * @type {object}
+	     * @optional
+	     */
+	    contextTypes: 'DEFINE_MANY',
+
+	    /**
+	     * Definition of context types this component sets for its children.
+	     *
+	     * @type {object}
+	     * @optional
+	     */
+	    childContextTypes: 'DEFINE_MANY',
+
+	    // ==== Definition methods ====
+
+	    /**
+	     * Invoked when the component is mounted. Values in the mapping will be set on
+	     * `this.props` if that prop is not specified (i.e. using an `in` check).
+	     *
+	     * This method is invoked before `getInitialState` and therefore cannot rely
+	     * on `this.state` or use `this.setState`.
+	     *
+	     * @return {object}
+	     * @optional
+	     */
+	    getDefaultProps: 'DEFINE_MANY_MERGED',
+
+	    /**
+	     * Invoked once before the component is mounted. The return value will be used
+	     * as the initial value of `this.state`.
+	     *
+	     *   getInitialState: function() {
+	     *     return {
+	     *       isOn: false,
+	     *       fooBaz: new BazFoo()
+	     *     }
+	     *   }
+	     *
+	     * @return {object}
+	     * @optional
+	     */
+	    getInitialState: 'DEFINE_MANY_MERGED',
+
+	    /**
+	     * @return {object}
+	     * @optional
+	     */
+	    getChildContext: 'DEFINE_MANY_MERGED',
+
+	    /**
+	     * Uses props from `this.props` and state from `this.state` to render the
+	     * structure of the component.
+	     *
+	     * No guarantees are made about when or how often this method is invoked, so
+	     * it must not have side effects.
+	     *
+	     *   render: function() {
+	     *     var name = this.props.name;
+	     *     return <div>Hello, {name}!</div>;
+	     *   }
+	     *
+	     * @return {ReactComponent}
+	     * @required
+	     */
+	    render: 'DEFINE_ONCE',
+
+	    // ==== Delegate methods ====
+
+	    /**
+	     * Invoked when the component is initially created and about to be mounted.
+	     * This may have side effects, but any external subscriptions or data created
+	     * by this method must be cleaned up in `componentWillUnmount`.
+	     *
+	     * @optional
+	     */
+	    componentWillMount: 'DEFINE_MANY',
+
+	    /**
+	     * Invoked when the component has been mounted and has a DOM representation.
+	     * However, there is no guarantee that the DOM node is in the document.
+	     *
+	     * Use this as an opportunity to operate on the DOM when the component has
+	     * been mounted (initialized and rendered) for the first time.
+	     *
+	     * @param {DOMElement} rootNode DOM element representing the component.
+	     * @optional
+	     */
+	    componentDidMount: 'DEFINE_MANY',
+
+	    /**
+	     * Invoked before the component receives new props.
+	     *
+	     * Use this as an opportunity to react to a prop transition by updating the
+	     * state using `this.setState`. Current props are accessed via `this.props`.
+	     *
+	     *   componentWillReceiveProps: function(nextProps, nextContext) {
+	     *     this.setState({
+	     *       likesIncreasing: nextProps.likeCount > this.props.likeCount
+	     *     });
+	     *   }
+	     *
+	     * NOTE: There is no equivalent `componentWillReceiveState`. An incoming prop
+	     * transition may cause a state change, but the opposite is not true. If you
+	     * need it, you are probably looking for `componentWillUpdate`.
+	     *
+	     * @param {object} nextProps
+	     * @optional
+	     */
+	    componentWillReceiveProps: 'DEFINE_MANY',
+
+	    /**
+	     * Invoked while deciding if the component should be updated as a result of
+	     * receiving new props, state and/or context.
+	     *
+	     * Use this as an opportunity to `return false` when you're certain that the
+	     * transition to the new props/state/context will not require a component
+	     * update.
+	     *
+	     *   shouldComponentUpdate: function(nextProps, nextState, nextContext) {
+	     *     return !equal(nextProps, this.props) ||
+	     *       !equal(nextState, this.state) ||
+	     *       !equal(nextContext, this.context);
+	     *   }
+	     *
+	     * @param {object} nextProps
+	     * @param {?object} nextState
+	     * @param {?object} nextContext
+	     * @return {boolean} True if the component should update.
+	     * @optional
+	     */
+	    shouldComponentUpdate: 'DEFINE_ONCE',
+
+	    /**
+	     * Invoked when the component is about to update due to a transition from
+	     * `this.props`, `this.state` and `this.context` to `nextProps`, `nextState`
+	     * and `nextContext`.
+	     *
+	     * Use this as an opportunity to perform preparation before an update occurs.
+	     *
+	     * NOTE: You **cannot** use `this.setState()` in this method.
+	     *
+	     * @param {object} nextProps
+	     * @param {?object} nextState
+	     * @param {?object} nextContext
+	     * @param {ReactReconcileTransaction} transaction
+	     * @optional
+	     */
+	    componentWillUpdate: 'DEFINE_MANY',
+
+	    /**
+	     * Invoked when the component's DOM representation has been updated.
+	     *
+	     * Use this as an opportunity to operate on the DOM when the component has
+	     * been updated.
+	     *
+	     * @param {object} prevProps
+	     * @param {?object} prevState
+	     * @param {?object} prevContext
+	     * @param {DOMElement} rootNode DOM element representing the component.
+	     * @optional
+	     */
+	    componentDidUpdate: 'DEFINE_MANY',
+
+	    /**
+	     * Invoked when the component is about to be removed from its parent and have
+	     * its DOM representation destroyed.
+	     *
+	     * Use this as an opportunity to deallocate any external resources.
+	     *
+	     * NOTE: There is no `componentDidUnmount` since your component will have been
+	     * destroyed by that point.
+	     *
+	     * @optional
+	     */
+	    componentWillUnmount: 'DEFINE_MANY',
+
+	    /**
+	     * Replacement for (deprecated) `componentWillMount`.
+	     *
+	     * @optional
+	     */
+	    UNSAFE_componentWillMount: 'DEFINE_MANY',
+
+	    /**
+	     * Replacement for (deprecated) `componentWillReceiveProps`.
+	     *
+	     * @optional
+	     */
+	    UNSAFE_componentWillReceiveProps: 'DEFINE_MANY',
+
+	    /**
+	     * Replacement for (deprecated) `componentWillUpdate`.
+	     *
+	     * @optional
+	     */
+	    UNSAFE_componentWillUpdate: 'DEFINE_MANY',
+
+	    // ==== Advanced methods ====
+
+	    /**
+	     * Updates the component's currently mounted DOM representation.
+	     *
+	     * By default, this implements React's rendering and reconciliation algorithm.
+	     * Sophisticated clients may wish to override this.
+	     *
+	     * @param {ReactReconcileTransaction} transaction
+	     * @internal
+	     * @overridable
+	     */
+	    updateComponent: 'OVERRIDE_BASE'
+	  };
+
+	  /**
+	   * Similar to ReactClassInterface but for static methods.
+	   */
+	  var ReactClassStaticInterface = {
+	    /**
+	     * This method is invoked after a component is instantiated and when it
+	     * receives new props. Return an object to update state in response to
+	     * prop changes. Return null to indicate no change to state.
+	     *
+	     * If an object is returned, its keys will be merged into the existing state.
+	     *
+	     * @return {object || null}
+	     * @optional
+	     */
+	    getDerivedStateFromProps: 'DEFINE_MANY_MERGED'
+	  };
+
+	  /**
+	   * Mapping from class specification keys to special processing functions.
+	   *
+	   * Although these are declared like instance properties in the specification
+	   * when defining classes using `React.createClass`, they are actually static
+	   * and are accessible on the constructor instead of the prototype. Despite
+	   * being static, they must be defined outside of the "statics" key under
+	   * which all other static methods are defined.
+	   */
+	  var RESERVED_SPEC_KEYS = {
+	    displayName: function(Constructor, displayName) {
+	      Constructor.displayName = displayName;
+	    },
+	    mixins: function(Constructor, mixins) {
+	      if (mixins) {
+	        for (var i = 0; i < mixins.length; i++) {
+	          mixSpecIntoComponent(Constructor, mixins[i]);
+	        }
+	      }
+	    },
+	    childContextTypes: function(Constructor, childContextTypes) {
+	      if (process.env.NODE_ENV !== 'production') {
+	        validateTypeDef(Constructor, childContextTypes, 'childContext');
+	      }
+	      Constructor.childContextTypes = _assign(
+	        {},
+	        Constructor.childContextTypes,
+	        childContextTypes
+	      );
+	    },
+	    contextTypes: function(Constructor, contextTypes) {
+	      if (process.env.NODE_ENV !== 'production') {
+	        validateTypeDef(Constructor, contextTypes, 'context');
+	      }
+	      Constructor.contextTypes = _assign(
+	        {},
+	        Constructor.contextTypes,
+	        contextTypes
+	      );
+	    },
+	    /**
+	     * Special case getDefaultProps which should move into statics but requires
+	     * automatic merging.
+	     */
+	    getDefaultProps: function(Constructor, getDefaultProps) {
+	      if (Constructor.getDefaultProps) {
+	        Constructor.getDefaultProps = createMergedResultFunction(
+	          Constructor.getDefaultProps,
+	          getDefaultProps
+	        );
+	      } else {
+	        Constructor.getDefaultProps = getDefaultProps;
+	      }
+	    },
+	    propTypes: function(Constructor, propTypes) {
+	      if (process.env.NODE_ENV !== 'production') {
+	        validateTypeDef(Constructor, propTypes, 'prop');
+	      }
+	      Constructor.propTypes = _assign({}, Constructor.propTypes, propTypes);
+	    },
+	    statics: function(Constructor, statics) {
+	      mixStaticSpecIntoComponent(Constructor, statics);
+	    },
+	    autobind: function() {}
+	  };
+
+	  function validateTypeDef(Constructor, typeDef, location) {
+	    for (var propName in typeDef) {
+	      if (typeDef.hasOwnProperty(propName)) {
+	        // use a warning instead of an _invariant so components
+	        // don't show up in prod but only in __DEV__
+	        if (process.env.NODE_ENV !== 'production') {
+	          warning(
+	            typeof typeDef[propName] === 'function',
+	            '%s: %s type `%s` is invalid; it must be a function, usually from ' +
+	              'React.PropTypes.',
+	            Constructor.displayName || 'ReactClass',
+	            ReactPropTypeLocationNames[location],
+	            propName
+	          );
+	        }
+	      }
+	    }
+	  }
+
+	  function validateMethodOverride(isAlreadyDefined, name) {
+	    var specPolicy = ReactClassInterface.hasOwnProperty(name)
+	      ? ReactClassInterface[name]
+	      : null;
+
+	    // Disallow overriding of base class methods unless explicitly allowed.
+	    if (ReactClassMixin.hasOwnProperty(name)) {
+	      _invariant(
+	        specPolicy === 'OVERRIDE_BASE',
+	        'ReactClassInterface: You are attempting to override ' +
+	          '`%s` from your class specification. Ensure that your method names ' +
+	          'do not overlap with React methods.',
+	        name
+	      );
+	    }
+
+	    // Disallow defining methods more than once unless explicitly allowed.
+	    if (isAlreadyDefined) {
+	      _invariant(
+	        specPolicy === 'DEFINE_MANY' || specPolicy === 'DEFINE_MANY_MERGED',
+	        'ReactClassInterface: You are attempting to define ' +
+	          '`%s` on your component more than once. This conflict may be due ' +
+	          'to a mixin.',
+	        name
+	      );
+	    }
+	  }
+
+	  /**
+	   * Mixin helper which handles policy validation and reserved
+	   * specification keys when building React classes.
+	   */
+	  function mixSpecIntoComponent(Constructor, spec) {
+	    if (!spec) {
+	      if (process.env.NODE_ENV !== 'production') {
+	        var typeofSpec = typeof spec;
+	        var isMixinValid = typeofSpec === 'object' && spec !== null;
+
+	        if (process.env.NODE_ENV !== 'production') {
+	          warning(
+	            isMixinValid,
+	            "%s: You're attempting to include a mixin that is either null " +
+	              'or not an object. Check the mixins included by the component, ' +
+	              'as well as any mixins they include themselves. ' +
+	              'Expected object but got %s.',
+	            Constructor.displayName || 'ReactClass',
+	            spec === null ? null : typeofSpec
+	          );
+	        }
+	      }
+
+	      return;
+	    }
+
+	    _invariant(
+	      typeof spec !== 'function',
+	      "ReactClass: You're attempting to " +
+	        'use a component class or function as a mixin. Instead, just use a ' +
+	        'regular object.'
+	    );
+	    _invariant(
+	      !isValidElement(spec),
+	      "ReactClass: You're attempting to " +
+	        'use a component as a mixin. Instead, just use a regular object.'
+	    );
+
+	    var proto = Constructor.prototype;
+	    var autoBindPairs = proto.__reactAutoBindPairs;
+
+	    // By handling mixins before any other properties, we ensure the same
+	    // chaining order is applied to methods with DEFINE_MANY policy, whether
+	    // mixins are listed before or after these methods in the spec.
+	    if (spec.hasOwnProperty(MIXINS_KEY)) {
+	      RESERVED_SPEC_KEYS.mixins(Constructor, spec.mixins);
+	    }
+
+	    for (var name in spec) {
+	      if (!spec.hasOwnProperty(name)) {
+	        continue;
+	      }
+
+	      if (name === MIXINS_KEY) {
+	        // We have already handled mixins in a special case above.
+	        continue;
+	      }
+
+	      var property = spec[name];
+	      var isAlreadyDefined = proto.hasOwnProperty(name);
+	      validateMethodOverride(isAlreadyDefined, name);
+
+	      if (RESERVED_SPEC_KEYS.hasOwnProperty(name)) {
+	        RESERVED_SPEC_KEYS[name](Constructor, property);
+	      } else {
+	        // Setup methods on prototype:
+	        // The following member methods should not be automatically bound:
+	        // 1. Expected ReactClass methods (in the "interface").
+	        // 2. Overridden methods (that were mixed in).
+	        var isReactClassMethod = ReactClassInterface.hasOwnProperty(name);
+	        var isFunction = typeof property === 'function';
+	        var shouldAutoBind =
+	          isFunction &&
+	          !isReactClassMethod &&
+	          !isAlreadyDefined &&
+	          spec.autobind !== false;
+
+	        if (shouldAutoBind) {
+	          autoBindPairs.push(name, property);
+	          proto[name] = property;
+	        } else {
+	          if (isAlreadyDefined) {
+	            var specPolicy = ReactClassInterface[name];
+
+	            // These cases should already be caught by validateMethodOverride.
+	            _invariant(
+	              isReactClassMethod &&
+	                (specPolicy === 'DEFINE_MANY_MERGED' ||
+	                  specPolicy === 'DEFINE_MANY'),
+	              'ReactClass: Unexpected spec policy %s for key %s ' +
+	                'when mixing in component specs.',
+	              specPolicy,
+	              name
+	            );
+
+	            // For methods which are defined more than once, call the existing
+	            // methods before calling the new property, merging if appropriate.
+	            if (specPolicy === 'DEFINE_MANY_MERGED') {
+	              proto[name] = createMergedResultFunction(proto[name], property);
+	            } else if (specPolicy === 'DEFINE_MANY') {
+	              proto[name] = createChainedFunction(proto[name], property);
+	            }
+	          } else {
+	            proto[name] = property;
+	            if (process.env.NODE_ENV !== 'production') {
+	              // Add verbose displayName to the function, which helps when looking
+	              // at profiling tools.
+	              if (typeof property === 'function' && spec.displayName) {
+	                proto[name].displayName = spec.displayName + '_' + name;
+	              }
+	            }
+	          }
+	        }
+	      }
+	    }
+	  }
+
+	  function mixStaticSpecIntoComponent(Constructor, statics) {
+	    if (!statics) {
+	      return;
+	    }
+
+	    for (var name in statics) {
+	      var property = statics[name];
+	      if (!statics.hasOwnProperty(name)) {
+	        continue;
+	      }
+
+	      var isReserved = name in RESERVED_SPEC_KEYS;
+	      _invariant(
+	        !isReserved,
+	        'ReactClass: You are attempting to define a reserved ' +
+	          'property, `%s`, that shouldn\'t be on the "statics" key. Define it ' +
+	          'as an instance property instead; it will still be accessible on the ' +
+	          'constructor.',
+	        name
+	      );
+
+	      var isAlreadyDefined = name in Constructor;
+	      if (isAlreadyDefined) {
+	        var specPolicy = ReactClassStaticInterface.hasOwnProperty(name)
+	          ? ReactClassStaticInterface[name]
+	          : null;
+
+	        _invariant(
+	          specPolicy === 'DEFINE_MANY_MERGED',
+	          'ReactClass: You are attempting to define ' +
+	            '`%s` on your component more than once. This conflict may be ' +
+	            'due to a mixin.',
+	          name
+	        );
+
+	        Constructor[name] = createMergedResultFunction(Constructor[name], property);
+
+	        return;
+	      }
+
+	      Constructor[name] = property;
+	    }
+	  }
+
+	  /**
+	   * Merge two objects, but throw if both contain the same key.
+	   *
+	   * @param {object} one The first object, which is mutated.
+	   * @param {object} two The second object
+	   * @return {object} one after it has been mutated to contain everything in two.
+	   */
+	  function mergeIntoWithNoDuplicateKeys(one, two) {
+	    _invariant(
+	      one && two && typeof one === 'object' && typeof two === 'object',
+	      'mergeIntoWithNoDuplicateKeys(): Cannot merge non-objects.'
+	    );
+
+	    for (var key in two) {
+	      if (two.hasOwnProperty(key)) {
+	        _invariant(
+	          one[key] === undefined,
+	          'mergeIntoWithNoDuplicateKeys(): ' +
+	            'Tried to merge two objects with the same key: `%s`. This conflict ' +
+	            'may be due to a mixin; in particular, this may be caused by two ' +
+	            'getInitialState() or getDefaultProps() methods returning objects ' +
+	            'with clashing keys.',
+	          key
+	        );
+	        one[key] = two[key];
+	      }
+	    }
+	    return one;
+	  }
+
+	  /**
+	   * Creates a function that invokes two functions and merges their return values.
+	   *
+	   * @param {function} one Function to invoke first.
+	   * @param {function} two Function to invoke second.
+	   * @return {function} Function that invokes the two argument functions.
+	   * @private
+	   */
+	  function createMergedResultFunction(one, two) {
+	    return function mergedResult() {
+	      var a = one.apply(this, arguments);
+	      var b = two.apply(this, arguments);
+	      if (a == null) {
+	        return b;
+	      } else if (b == null) {
+	        return a;
+	      }
+	      var c = {};
+	      mergeIntoWithNoDuplicateKeys(c, a);
+	      mergeIntoWithNoDuplicateKeys(c, b);
+	      return c;
+	    };
+	  }
+
+	  /**
+	   * Creates a function that invokes two functions and ignores their return vales.
+	   *
+	   * @param {function} one Function to invoke first.
+	   * @param {function} two Function to invoke second.
+	   * @return {function} Function that invokes the two argument functions.
+	   * @private
+	   */
+	  function createChainedFunction(one, two) {
+	    return function chainedFunction() {
+	      one.apply(this, arguments);
+	      two.apply(this, arguments);
+	    };
+	  }
+
+	  /**
+	   * Binds a method to the component.
+	   *
+	   * @param {object} component Component whose method is going to be bound.
+	   * @param {function} method Method to be bound.
+	   * @return {function} The bound method.
+	   */
+	  function bindAutoBindMethod(component, method) {
+	    var boundMethod = method.bind(component);
+	    if (process.env.NODE_ENV !== 'production') {
+	      boundMethod.__reactBoundContext = component;
+	      boundMethod.__reactBoundMethod = method;
+	      boundMethod.__reactBoundArguments = null;
+	      var componentName = component.constructor.displayName;
+	      var _bind = boundMethod.bind;
+	      boundMethod.bind = function(newThis) {
+	        for (
+	          var _len = arguments.length,
+	            args = Array(_len > 1 ? _len - 1 : 0),
+	            _key = 1;
+	          _key < _len;
+	          _key++
+	        ) {
+	          args[_key - 1] = arguments[_key];
+	        }
+
+	        // User is trying to bind() an autobound method; we effectively will
+	        // ignore the value of "this" that the user is trying to use, so
+	        // let's warn.
+	        if (newThis !== component && newThis !== null) {
+	          if (process.env.NODE_ENV !== 'production') {
+	            warning(
+	              false,
+	              'bind(): React component methods may only be bound to the ' +
+	                'component instance. See %s',
+	              componentName
+	            );
+	          }
+	        } else if (!args.length) {
+	          if (process.env.NODE_ENV !== 'production') {
+	            warning(
+	              false,
+	              'bind(): You are binding a component method to the component. ' +
+	                'React does this for you automatically in a high-performance ' +
+	                'way, so you can safely remove this call. See %s',
+	              componentName
+	            );
+	          }
+	          return boundMethod;
+	        }
+	        var reboundMethod = _bind.apply(boundMethod, arguments);
+	        reboundMethod.__reactBoundContext = component;
+	        reboundMethod.__reactBoundMethod = method;
+	        reboundMethod.__reactBoundArguments = args;
+	        return reboundMethod;
+	      };
+	    }
+	    return boundMethod;
+	  }
+
+	  /**
+	   * Binds all auto-bound methods in a component.
+	   *
+	   * @param {object} component Component whose method is going to be bound.
+	   */
+	  function bindAutoBindMethods(component) {
+	    var pairs = component.__reactAutoBindPairs;
+	    for (var i = 0; i < pairs.length; i += 2) {
+	      var autoBindKey = pairs[i];
+	      var method = pairs[i + 1];
+	      component[autoBindKey] = bindAutoBindMethod(component, method);
+	    }
+	  }
+
+	  var IsMountedPreMixin = {
+	    componentDidMount: function() {
+	      this.__isMounted = true;
+	    }
+	  };
+
+	  var IsMountedPostMixin = {
+	    componentWillUnmount: function() {
+	      this.__isMounted = false;
+	    }
+	  };
+
+	  /**
+	   * Add more to the ReactClass base class. These are all legacy features and
+	   * therefore not already part of the modern ReactComponent.
+	   */
+	  var ReactClassMixin = {
+	    /**
+	     * TODO: This will be deprecated because state should always keep a consistent
+	     * type signature and the only use case for this, is to avoid that.
+	     */
+	    replaceState: function(newState, callback) {
+	      this.updater.enqueueReplaceState(this, newState, callback);
+	    },
+
+	    /**
+	     * Checks whether or not this composite component is mounted.
+	     * @return {boolean} True if mounted, false otherwise.
+	     * @protected
+	     * @final
+	     */
+	    isMounted: function() {
+	      if (process.env.NODE_ENV !== 'production') {
+	        warning(
+	          this.__didWarnIsMounted,
+	          '%s: isMounted is deprecated. Instead, make sure to clean up ' +
+	            'subscriptions and pending requests in componentWillUnmount to ' +
+	            'prevent memory leaks.',
+	          (this.constructor && this.constructor.displayName) ||
+	            this.name ||
+	            'Component'
+	        );
+	        this.__didWarnIsMounted = true;
+	      }
+	      return !!this.__isMounted;
+	    }
+	  };
+
+	  var ReactClassComponent = function() {};
+	  _assign(
+	    ReactClassComponent.prototype,
+	    ReactComponent.prototype,
+	    ReactClassMixin
+	  );
+
+	  /**
+	   * Creates a composite component class given a class specification.
+	   * See https://facebook.github.io/react/docs/top-level-api.html#react.createclass
+	   *
+	   * @param {object} spec Class specification (which must define `render`).
+	   * @return {function} Component constructor function.
+	   * @public
+	   */
+	  function createClass(spec) {
+	    // To keep our warnings more understandable, we'll use a little hack here to
+	    // ensure that Constructor.name !== 'Constructor'. This makes sure we don't
+	    // unnecessarily identify a class without displayName as 'Constructor'.
+	    var Constructor = identity(function(props, context, updater) {
+	      // This constructor gets overridden by mocks. The argument is used
+	      // by mocks to assert on what gets mounted.
+
+	      if (process.env.NODE_ENV !== 'production') {
+	        warning(
+	          this instanceof Constructor,
+	          'Something is calling a React component directly. Use a factory or ' +
+	            'JSX instead. See: https://fb.me/react-legacyfactory'
+	        );
+	      }
+
+	      // Wire up auto-binding
+	      if (this.__reactAutoBindPairs.length) {
+	        bindAutoBindMethods(this);
+	      }
+
+	      this.props = props;
+	      this.context = context;
+	      this.refs = emptyObject;
+	      this.updater = updater || ReactNoopUpdateQueue;
+
+	      this.state = null;
+
+	      // ReactClasses doesn't have constructors. Instead, they use the
+	      // getInitialState and componentWillMount methods for initialization.
+
+	      var initialState = this.getInitialState ? this.getInitialState() : null;
+	      if (process.env.NODE_ENV !== 'production') {
+	        // We allow auto-mocks to proceed as if they're returning null.
+	        if (
+	          initialState === undefined &&
+	          this.getInitialState._isMockFunction
+	        ) {
+	          // This is probably bad practice. Consider warning here and
+	          // deprecating this convenience.
+	          initialState = null;
+	        }
+	      }
+	      _invariant(
+	        typeof initialState === 'object' && !Array.isArray(initialState),
+	        '%s.getInitialState(): must return an object or null',
+	        Constructor.displayName || 'ReactCompositeComponent'
+	      );
+
+	      this.state = initialState;
+	    });
+	    Constructor.prototype = new ReactClassComponent();
+	    Constructor.prototype.constructor = Constructor;
+	    Constructor.prototype.__reactAutoBindPairs = [];
+
+	    injectedMixins.forEach(mixSpecIntoComponent.bind(null, Constructor));
+
+	    mixSpecIntoComponent(Constructor, IsMountedPreMixin);
+	    mixSpecIntoComponent(Constructor, spec);
+	    mixSpecIntoComponent(Constructor, IsMountedPostMixin);
+
+	    // Initialize the defaultProps property after all mixins have been merged.
+	    if (Constructor.getDefaultProps) {
+	      Constructor.defaultProps = Constructor.getDefaultProps();
+	    }
+
+	    if (process.env.NODE_ENV !== 'production') {
+	      // This is a tag to indicate that the use of these method names is ok,
+	      // since it's used with createClass. If it's not, then it's likely a
+	      // mistake so we'll warn you to use the static property, property
+	      // initializer or constructor respectively.
+	      if (Constructor.getDefaultProps) {
+	        Constructor.getDefaultProps.isReactClassApproved = {};
+	      }
+	      if (Constructor.prototype.getInitialState) {
+	        Constructor.prototype.getInitialState.isReactClassApproved = {};
+	      }
+	    }
+
+	    _invariant(
+	      Constructor.prototype.render,
+	      'createClass(...): Class specification must implement a `render` method.'
+	    );
+
+	    if (process.env.NODE_ENV !== 'production') {
+	      warning(
+	        !Constructor.prototype.componentShouldUpdate,
+	        '%s has a method called ' +
+	          'componentShouldUpdate(). Did you mean shouldComponentUpdate()? ' +
+	          'The name is phrased as a question because the function is ' +
+	          'expected to return a value.',
+	        spec.displayName || 'A component'
+	      );
+	      warning(
+	        !Constructor.prototype.componentWillRecieveProps,
+	        '%s has a method called ' +
+	          'componentWillRecieveProps(). Did you mean componentWillReceiveProps()?',
+	        spec.displayName || 'A component'
+	      );
+	      warning(
+	        !Constructor.prototype.UNSAFE_componentWillRecieveProps,
+	        '%s has a method called UNSAFE_componentWillRecieveProps(). ' +
+	          'Did you mean UNSAFE_componentWillReceiveProps()?',
+	        spec.displayName || 'A component'
+	      );
+	    }
+
+	    // Reduce time spent doing lookups by setting these on the prototype.
+	    for (var methodName in ReactClassInterface) {
+	      if (!Constructor.prototype[methodName]) {
+	        Constructor.prototype[methodName] = null;
+	      }
+	    }
+
+	    return Constructor;
+	  }
+
+	  return createClass;
+	}
+
+	module.exports = factory;
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28)))
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 *
+	 */
+
+	'use strict';
+
+	var emptyObject = {};
+
+	if (process.env.NODE_ENV !== 'production') {
+	  Object.freeze(emptyObject);
+	}
+
+	module.exports = emptyObject;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28)))
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 *
+	 */
+
+	'use strict';
+
+	/**
+	 * Use invariant() to assert state which your program assumes to be true.
+	 *
+	 * Provide sprintf-style format (only %s is supported) and arguments
+	 * to provide information about what broke and what you were
+	 * expecting.
+	 *
+	 * The invariant message will be stripped in production, but the invariant
+	 * will remain to ensure logic does not differ in production.
+	 */
+
+	var validateFormat = function validateFormat(format) {};
+
+	if (process.env.NODE_ENV !== 'production') {
+	  validateFormat = function validateFormat(format) {
+	    if (format === undefined) {
+	      throw new Error('invariant requires an error message argument');
+	    }
+	  };
+	}
+
+	function invariant(condition, format, a, b, c, d, e, f) {
+	  validateFormat(format);
+
+	  if (!condition) {
+	    var error;
+	    if (format === undefined) {
+	      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
+	    } else {
+	      var args = [a, b, c, d, e, f];
+	      var argIndex = 0;
+	      error = new Error(format.replace(/%s/g, function () {
+	        return args[argIndex++];
+	      }));
+	      error.name = 'Invariant Violation';
+	    }
+
+	    error.framesToPop = 1; // we don't care about invariant's own frame
+	    throw error;
+	  }
+	}
+
+	module.exports = invariant;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28)))
+
+/***/ }),
+/* 41 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright (c) 2014-present, Facebook, Inc.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 *
+	 */
+
+	'use strict';
+
+	var emptyFunction = __webpack_require__(42);
+
+	/**
+	 * Similar to invariant but only logs a warning if the condition is not met.
+	 * This can be used to log issues in development environments in critical
+	 * paths. Removing the logging code for production environments will keep the
+	 * same logic and follow the same code paths.
+	 */
+
+	var warning = emptyFunction;
+
+	if (process.env.NODE_ENV !== 'production') {
+	  var printWarning = function printWarning(format) {
+	    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+	      args[_key - 1] = arguments[_key];
+	    }
+
+	    var argIndex = 0;
+	    var message = 'Warning: ' + format.replace(/%s/g, function () {
+	      return args[argIndex++];
+	    });
+	    if (typeof console !== 'undefined') {
+	      console.error(message);
+	    }
+	    try {
+	      // --- Welcome to debugging React ---
+	      // This error was thrown as a convenience so that you can use this stack
+	      // to find the callsite that caused this warning to fire.
+	      throw new Error(message);
+	    } catch (x) {}
+	  };
+
+	  warning = function warning(condition, format) {
+	    if (format === undefined) {
+	      throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
+	    }
+
+	    if (format.indexOf('Failed Composite propType: ') === 0) {
+	      return; // Ignore CompositeComponent proptype check.
+	    }
+
+	    if (!condition) {
+	      for (var _len2 = arguments.length, args = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
+	        args[_key2 - 2] = arguments[_key2];
+	      }
+
+	      printWarning.apply(undefined, [format].concat(args));
+	    }
+	  };
+	}
+
+	module.exports = warning;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28)))
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 *
+	 * 
+	 */
+
+	function makeEmptyFunction(arg) {
+	  return function () {
+	    return arg;
+	  };
+	}
+
+	/**
+	 * This function accepts and discards inputs; it has no side effects. This is
+	 * primarily useful idiomatically for overridable function endpoints which
+	 * always need to be callable, since JS lacks a null-call idiom ala Cocoa.
+	 */
+	var emptyFunction = function emptyFunction() {};
+
+	emptyFunction.thatReturns = makeEmptyFunction;
+	emptyFunction.thatReturnsFalse = makeEmptyFunction(false);
+	emptyFunction.thatReturnsTrue = makeEmptyFunction(true);
+	emptyFunction.thatReturnsNull = makeEmptyFunction(null);
+	emptyFunction.thatReturnsThis = function () {
+	  return this;
+	};
+	emptyFunction.thatReturnsArgument = function (arg) {
+	  return arg;
+	};
+
+	module.exports = emptyFunction;
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -1792,9 +4048,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = ReactComponentWithPureRenderMixin;
 
-/***/ },
-/* 31 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -1817,9 +4073,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var emptyFunction = __webpack_require__(32);
-	var normalizeWheel = __webpack_require__(33);
-	var requestAnimationFramePolyfill = __webpack_require__(37);
+	var emptyFunction = __webpack_require__(45);
+	var normalizeWheel = __webpack_require__(46);
+	var requestAnimationFramePolyfill = __webpack_require__(50);
 
 	var ReactWheelHandler = (function () {
 	  /**
@@ -1902,9 +4158,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = ReactWheelHandler;
 
-/***/ },
-/* 32 */
-/***/ function(module, exports) {
+/***/ }),
+/* 45 */
+/***/ (function(module, exports) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -1945,9 +4201,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = emptyFunction;
 
-/***/ },
-/* 33 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -1963,9 +4219,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var UserAgent_DEPRECATED = __webpack_require__(34);
+	var UserAgent_DEPRECATED = __webpack_require__(47);
 
-	var isEventSupported = __webpack_require__(35);
+	var isEventSupported = __webpack_require__(48);
 
 	// Reasonable defaults
 	var PIXEL_STEP = 10;
@@ -2146,9 +4402,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = normalizeWheel;
 
-/***/ },
-/* 34 */
-/***/ function(module, exports) {
+/***/ }),
+/* 47 */
+/***/ (function(module, exports) {
 
 	/**
 	 * Copyright 2004-present Facebook. All Rights Reserved.
@@ -2429,9 +4685,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = UserAgent_DEPRECATED;
 
-/***/ },
-/* 35 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
@@ -2446,7 +4702,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var ExecutionEnvironment = __webpack_require__(36);
+	var ExecutionEnvironment = __webpack_require__(49);
 
 	var useHasFeature;
 	if (ExecutionEnvironment.canUseDOM) {
@@ -2494,9 +4750,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = isEventSupported;
 
-/***/ },
-/* 36 */
-/***/ function(module, exports) {
+/***/ }),
+/* 49 */
+/***/ (function(module, exports) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -2537,9 +4793,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = ExecutionEnvironment;
 
-/***/ },
-/* 37 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -2554,8 +4810,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var emptyFunction = __webpack_require__(32);
-	var nativeRequestAnimationFrame = __webpack_require__(38);
+	var emptyFunction = __webpack_require__(45);
+	var nativeRequestAnimationFrame = __webpack_require__(51);
 
 	var lastTime = 0;
 
@@ -2578,9 +4834,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = requestAnimationFrame;
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
-/***/ },
-/* 38 */
-/***/ function(module, exports) {
+/***/ }),
+/* 51 */
+/***/ (function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -2600,9 +4856,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = nativeRequestAnimationFrame;
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
-/***/ },
-/* 39 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -2618,19 +4874,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var DOMMouseMoveTracker = __webpack_require__(40);
-	var Keys = __webpack_require__(43);
-	var React = __webpack_require__(27);
-	var ReactDOM = __webpack_require__(44);
-	var ReactComponentWithPureRenderMixin = __webpack_require__(30);
-	var ReactWheelHandler = __webpack_require__(31);
+	var DOMMouseMoveTracker = __webpack_require__(53);
+	var Keys = __webpack_require__(56);
+	var PropTypes = __webpack_require__(27);
+	var React = __webpack_require__(34);
+	var createReactClass = __webpack_require__(37);
+	var ReactDOM = __webpack_require__(57);
+	var ReactComponentWithPureRenderMixin = __webpack_require__(43);
+	var ReactWheelHandler = __webpack_require__(44);
 
-	var cssVar = __webpack_require__(46);
-	var cx = __webpack_require__(47);
-	var emptyFunction = __webpack_require__(32);
-	var translateDOMPositionXY = __webpack_require__(48);
-
-	var PropTypes = React.PropTypes;
+	var cssVar = __webpack_require__(59);
+	var cx = __webpack_require__(60);
+	var emptyFunction = __webpack_require__(45);
+	var translateDOMPositionXY = __webpack_require__(61);
 
 	var UNSCROLLABLE_STATE = {
 	  position: 0,
@@ -2644,9 +4900,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _lastScrolledScrollbar = null;
 
-	var Scrollbar = React.createClass({
-	  displayName: 'Scrollbar',
-
+	var Scrollbar = createReactClass({
+	  displayName: "Scrollbar",
 	  mixins: [ReactComponentWithPureRenderMixin],
 
 	  propTypes: {
@@ -2779,6 +5034,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (this.props.position !== undefined && this.state.position !== this.props.position) {
 	      this._didScroll();
 	    }
+
+	    this._isMounted = true;
 	  },
 
 	  componentWillUnmount: function componentWillUnmount() {
@@ -2788,6 +5045,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      _lastScrolledScrollbar = null;
 	    }
 	    delete this._mouseMoveTracker;
+
+	    this._isMounted = false;
 	  },
 
 	  scrollBy: function scrollBy( /*number*/delta) {
@@ -3008,7 +5267,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  _blur: function _blur() {
-	    if (this.isMounted()) {
+	    if (this._isMounted) {
 	      try {
 	        this._onBlur();
 	        ReactDOM.findDOMNode(this).blur();
@@ -3052,9 +5311,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = Scrollbar;
 
-/***/ },
-/* 40 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -3081,10 +5340,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var EventListener = __webpack_require__(41);
+	var EventListener = __webpack_require__(54);
 
-	var cancelAnimationFramePolyfill = __webpack_require__(42);
-	var requestAnimationFramePolyfill = __webpack_require__(37);
+	var cancelAnimationFramePolyfill = __webpack_require__(55);
+	var requestAnimationFramePolyfill = __webpack_require__(50);
 
 	var DOMMouseMoveTracker = (function () {
 	  /**
@@ -3216,9 +5475,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = DOMMouseMoveTracker;
 
-/***/ },
-/* 41 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -3234,7 +5493,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var emptyFunction = __webpack_require__(32);
+	var emptyFunction = __webpack_require__(45);
 
 	/**
 	 * Upstream version of event listener. Does not take into account specific
@@ -3298,9 +5557,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = EventListener;
 
-/***/ },
-/* 42 */
-/***/ function(module, exports) {
+/***/ }),
+/* 55 */
+/***/ (function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -3324,9 +5583,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = cancelAnimationFrame;
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
-/***/ },
-/* 43 */
-/***/ function(module, exports) {
+/***/ }),
+/* 56 */
+/***/ (function(module, exports) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -3366,9 +5625,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  NUMPAD_9: 105
 	};
 
-/***/ },
-/* 44 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 57 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -3383,17 +5642,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	module.exports = __webpack_require__(45);
+	module.exports = __webpack_require__(58);
 
-/***/ },
-/* 45 */
-/***/ function(module, exports) {
+/***/ }),
+/* 58 */
+/***/ (function(module, exports) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_45__;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_58__;
 
-/***/ },
-/* 46 */
-/***/ function(module, exports) {
+/***/ }),
+/* 59 */
+/***/ (function(module, exports) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -3436,9 +5695,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = cssVar;
 
-/***/ },
-/* 47 */
-/***/ function(module, exports) {
+/***/ }),
+/* 60 */
+/***/ (function(module, exports) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -3495,9 +5754,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = cx;
 
-/***/ },
-/* 48 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 61 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -3513,9 +5772,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var BrowserSupportCore = __webpack_require__(49);
+	var BrowserSupportCore = __webpack_require__(62);
 
-	var getVendorPrefixedName = __webpack_require__(50);
+	var getVendorPrefixedName = __webpack_require__(63);
 
 	var TRANSFORM = getVendorPrefixedName('transform');
 	var BACKFACE_VISIBILITY = getVendorPrefixedName('backfaceVisibility');
@@ -3549,9 +5808,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = translateDOMPositionXY;
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
-/***/ },
-/* 49 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -3566,7 +5825,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var getVendorPrefixedName = __webpack_require__(50);
+	var getVendorPrefixedName = __webpack_require__(63);
 
 	var BrowserSupportCore = {
 	  /**
@@ -3600,9 +5859,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = BrowserSupportCore;
 
-/***/ },
-/* 50 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -3618,10 +5877,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var ExecutionEnvironment = __webpack_require__(36);
+	var ExecutionEnvironment = __webpack_require__(49);
 
-	var camelize = __webpack_require__(51);
-	var invariant = __webpack_require__(52);
+	var camelize = __webpack_require__(64);
+	var invariant = __webpack_require__(65);
 
 	var memoized = {};
 	var prefixes = ['Webkit', 'ms', 'Moz', 'O'];
@@ -3657,9 +5916,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = getVendorPrefixedName;
 
-/***/ },
-/* 51 */
-/***/ function(module, exports) {
+/***/ }),
+/* 64 */
+/***/ (function(module, exports) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -3694,9 +5953,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = camelize;
 
-/***/ },
-/* 52 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 65 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -3748,10 +6007,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = invariant;
 
-/***/ },
-/* 53 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	var PropTypes = __webpack_require__(27);
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
 	 * All rights reserved.
@@ -3764,21 +6026,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @typechecks
 	 */
 
-	'use strict';
+	var React = __webpack_require__(34);
+	var createReactClass = __webpack_require__(37);
+	var FixedDataTableRowBuffer = __webpack_require__(67);
+	var FixedDataTableRow = __webpack_require__(71);
 
-	var React = __webpack_require__(27);
-	var FixedDataTableRowBuffer = __webpack_require__(54);
-	var FixedDataTableRow = __webpack_require__(58);
+	var cx = __webpack_require__(60);
+	var emptyFunction = __webpack_require__(45);
+	var joinClasses = __webpack_require__(79);
+	var translateDOMPositionXY = __webpack_require__(61);
 
-	var cx = __webpack_require__(47);
-	var emptyFunction = __webpack_require__(32);
-	var joinClasses = __webpack_require__(66);
-	var translateDOMPositionXY = __webpack_require__(48);
-
-	var PropTypes = React.PropTypes;
-
-	var FixedDataTableBufferedRows = React.createClass({
-	  displayName: 'FixedDataTableBufferedRows',
+	var FixedDataTableBufferedRows = createReactClass({
+	  displayName: "FixedDataTableBufferedRows",
 
 	  propTypes: {
 	    isScrolling: PropTypes.bool,
@@ -3816,6 +6075,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  componentDidMount: function componentDidMount() {
 	    setTimeout(this._updateBuffer, 1000);
+	    this._isMounted = true;
 	  },
 
 	  componentWillReceiveProps: function componentWillReceiveProps( /*object*/nextProps) {
@@ -3832,7 +6092,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  _updateBuffer: function _updateBuffer() {
-	    if (this.isMounted()) {
+	    if (this._isMounted) {
 	      this.setState({
 	        rowsToRender: this._rowBuffer.getRowsWithUpdatedBuffer()
 	      });
@@ -3846,6 +6106,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  componentWillUnmount: function componentWillUnmount() {
 	    this._staticRowArray.length = 0;
+	    this._isMounted = false;
 	  },
 
 	  render: function render() /*object*/{
@@ -3908,9 +6169,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = FixedDataTableBufferedRows;
 
-/***/ },
-/* 54 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 67 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -3930,10 +6191,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var IntegerBufferSet = __webpack_require__(55);
+	var IntegerBufferSet = __webpack_require__(68);
 
-	var clamp = __webpack_require__(57);
-	var invariant = __webpack_require__(52);
+	var clamp = __webpack_require__(70);
+	var invariant = __webpack_require__(65);
 	var MIN_BUFFER_ROWS = 3;
 	var MAX_BUFFER_ROWS = 6;
 
@@ -4036,9 +6297,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = FixedDataTableRowBuffer;
 
-/***/ },
-/* 55 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 68 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -4058,9 +6319,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var Heap = __webpack_require__(56);
+	var Heap = __webpack_require__(69);
 
-	var invariant = __webpack_require__(52);
+	var invariant = __webpack_require__(65);
 
 	// Data structure that allows to store values and assign positions to them
 	// in a way to minimize changing positions of stored values when new ones are
@@ -4221,9 +6482,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = IntegerBufferSet;
 
-/***/ },
-/* 56 */
-/***/ function(module, exports) {
+/***/ }),
+/* 69 */
+/***/ (function(module, exports) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -4405,9 +6666,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = Heap;
 
-/***/ },
-/* 57 */
-/***/ function(module, exports) {
+/***/ }),
+/* 70 */
+/***/ (function(module, exports) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -4442,9 +6703,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = clamp;
 
-/***/ },
-/* 58 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -4462,243 +6723,280 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = __webpack_require__(27);
-	var FixedDataTableCellGroup = __webpack_require__(59);
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-	var cx = __webpack_require__(47);
-	var joinClasses = __webpack_require__(66);
-	var translateDOMPositionXY = __webpack_require__(48);
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
-	var PropTypes = React.PropTypes;
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var PropTypes = __webpack_require__(27);
+
+	var React = __webpack_require__(34);
+	var FixedDataTableCellGroup = __webpack_require__(72);
+
+	var cx = __webpack_require__(60);
+	var joinClasses = __webpack_require__(79);
+	var translateDOMPositionXY = __webpack_require__(61);
 
 	/**
 	 * Component that renders the row for <FixedDataTable />.
 	 * This component should not be used directly by developer. Instead,
 	 * only <FixedDataTable /> should use the component internally.
 	 */
-	var FixedDataTableRowImpl = React.createClass({
-	  displayName: 'FixedDataTableRowImpl',
 
-	  propTypes: {
+	var FixedDataTableRowImpl = (function (_React$Component) {
+	  _inherits(FixedDataTableRowImpl, _React$Component);
 
-	    isScrolling: PropTypes.bool,
+	  function FixedDataTableRowImpl() {
+	    var _this = this;
 
-	    /**
-	     * Array of <FixedDataTableColumn /> for the fixed columns.
-	     */
-	    fixedColumns: PropTypes.array.isRequired,
+	    _classCallCheck(this, FixedDataTableRowImpl);
 
-	    /**
-	     * Height of the row.
-	     */
-	    height: PropTypes.number.isRequired,
+	    _get(Object.getPrototypeOf(FixedDataTableRowImpl.prototype), 'constructor', this).apply(this, arguments);
 
-	    /**
-	     * The row index.
-	     */
-	    index: PropTypes.number.isRequired,
-
-	    /**
-	     * Array of <FixedDataTableColumn /> for the scrollable columns.
-	     */
-	    scrollableColumns: PropTypes.array.isRequired,
-
-	    /**
-	     * The distance between the left edge of the table and the leftmost portion
-	     * of the row currently visible in the table.
-	     */
-	    scrollLeft: PropTypes.number.isRequired,
-
-	    /**
-	     * Width of the row.
-	     */
-	    width: PropTypes.number.isRequired,
-
-	    /**
-	     * Fire when a row is clicked.
-	     */
-	    onClick: PropTypes.func,
-
-	    /**
-	     * Fire when a row is double clicked.
-	     */
-	    onDoubleClick: PropTypes.func,
-
-	    /**
-	     * Callback for when resizer knob (in FixedDataTableCell) is clicked
-	     * to initialize resizing. Please note this is only on the cells
-	     * in the header.
-	     * @param number combinedWidth
-	     * @param number leftOffset
-	     * @param number cellWidth
-	     * @param number|string columnKey
-	     * @param object event
-	     */
-	    onColumnResize: PropTypes.func
-	  },
-
-	  render: function render() /*object*/{
-	    var style = {
-	      width: this.props.width,
-	      height: this.props.height
+	    this._getColumnsWidth = /*array*/function (columns) /*number*/{
+	      var width = 0;
+	      for (var i = 0; i < columns.length; ++i) {
+	        width += columns[i].props.width;
+	      }
+	      return width;
 	    };
 
-	    var className = cx({
-	      'fixedDataTableRowLayout/main': true,
-	      'public/fixedDataTableRow/main': true,
-	      'public/fixedDataTableRow/highlighted': this.props.index % 2 === 1,
-	      'public/fixedDataTableRow/odd': this.props.index % 2 === 1,
-	      'public/fixedDataTableRow/even': this.props.index % 2 === 0
-	    });
+	    this._renderColumnsShadow = /*number*/function (left) /*?object*/{
+	      if (left > 0) {
+	        var className = cx({
+	          'fixedDataTableRowLayout/fixedColumnsDivider': true,
+	          'fixedDataTableRowLayout/columnsShadow': _this.props.scrollLeft > 0,
+	          'public/fixedDataTableRow/fixedColumnsDivider': true,
+	          'public/fixedDataTableRow/columnsShadow': _this.props.scrollLeft > 0
+	        });
+	        var style = {
+	          left: left,
+	          height: _this.props.height
+	        };
+	        return React.createElement('div', { className: className, style: style });
+	      }
+	    };
 
-	    var fixedColumnsWidth = this._getColumnsWidth(this.props.fixedColumns);
-	    var fixedColumns = React.createElement(FixedDataTableCellGroup, {
-	      key: 'fixed_cells',
-	      isScrolling: this.props.isScrolling,
-	      height: this.props.height,
-	      left: 0,
-	      width: fixedColumnsWidth,
-	      zIndex: 2,
-	      columns: this.props.fixedColumns,
-	      onColumnResize: this.props.onColumnResize,
-	      rowHeight: this.props.height,
-	      rowIndex: this.props.index
-	    });
-	    var columnsShadow = this._renderColumnsShadow(fixedColumnsWidth);
-	    var scrollableColumns = React.createElement(FixedDataTableCellGroup, {
-	      key: 'scrollable_cells',
-	      isScrolling: this.props.isScrolling,
-	      height: this.props.height,
-	      left: this.props.scrollLeft,
-	      offsetLeft: fixedColumnsWidth,
-	      width: this.props.width - fixedColumnsWidth,
-	      zIndex: 0,
-	      columns: this.props.scrollableColumns,
-	      onColumnResize: this.props.onColumnResize,
-	      rowHeight: this.props.height,
-	      rowIndex: this.props.index
-	    });
+	    this._onClick = /*object*/function (event) {
+	      _this.props.onClick(event, _this.props.index);
+	    };
 
-	    return React.createElement(
-	      'div',
-	      {
-	        className: joinClasses(className, this.props.className),
-	        onClick: this.props.onClick ? this._onClick : null,
-	        onDoubleClick: this.props.onDoubleClick ? this._onDoubleClick : null,
-	        onMouseDown: this.props.onMouseDown ? this._onMouseDown : null,
-	        onMouseEnter: this.props.onMouseEnter ? this._onMouseEnter : null,
-	        onMouseLeave: this.props.onMouseLeave ? this._onMouseLeave : null,
-	        style: style },
-	      React.createElement(
-	        'div',
-	        { className: cx('fixedDataTableRowLayout/body') },
-	        fixedColumns,
-	        scrollableColumns,
-	        columnsShadow
-	      )
-	    );
-	  },
+	    this._onDoubleClick = /*object*/function (event) {
+	      _this.props.onDoubleClick(event, _this.props.index);
+	    };
 
-	  _getColumnsWidth: function _getColumnsWidth( /*array*/columns) /*number*/{
-	    var width = 0;
-	    for (var i = 0; i < columns.length; ++i) {
-	      width += columns[i].props.width;
-	    }
-	    return width;
-	  },
+	    this._onMouseDown = /*object*/function (event) {
+	      _this.props.onMouseDown(event, _this.props.index);
+	    };
 
-	  _renderColumnsShadow: function _renderColumnsShadow( /*number*/left) /*?object*/{
-	    if (left > 0) {
-	      var className = cx({
-	        'fixedDataTableRowLayout/fixedColumnsDivider': true,
-	        'fixedDataTableRowLayout/columnsShadow': this.props.scrollLeft > 0,
-	        'public/fixedDataTableRow/fixedColumnsDivider': true,
-	        'public/fixedDataTableRow/columnsShadow': this.props.scrollLeft > 0
-	      });
+	    this._onMouseEnter = /*object*/function (event) {
+	      _this.props.onMouseEnter(event, _this.props.index);
+	    };
+
+	    this._onMouseLeave = /*object*/function (event) {
+	      _this.props.onMouseLeave(event, _this.props.index);
+	    };
+	  }
+
+	  _createClass(FixedDataTableRowImpl, [{
+	    key: 'render',
+	    value: function render() /*object*/{
 	      var style = {
-	        left: left,
+	        width: this.props.width,
 	        height: this.props.height
 	      };
-	      return React.createElement('div', { className: className, style: style });
+
+	      var className = cx({
+	        'fixedDataTableRowLayout/main': true,
+	        'public/fixedDataTableRow/main': true,
+	        'public/fixedDataTableRow/highlighted': this.props.index % 2 === 1,
+	        'public/fixedDataTableRow/odd': this.props.index % 2 === 1,
+	        'public/fixedDataTableRow/even': this.props.index % 2 === 0
+	      });
+
+	      var fixedColumnsWidth = this._getColumnsWidth(this.props.fixedColumns);
+	      var fixedColumns = React.createElement(FixedDataTableCellGroup, {
+	        key: 'fixed_cells',
+	        isScrolling: this.props.isScrolling,
+	        height: this.props.height,
+	        left: 0,
+	        width: fixedColumnsWidth,
+	        zIndex: 2,
+	        columns: this.props.fixedColumns,
+	        onColumnResize: this.props.onColumnResize,
+	        rowHeight: this.props.height,
+	        rowIndex: this.props.index
+	      });
+	      var columnsShadow = this._renderColumnsShadow(fixedColumnsWidth);
+	      var scrollableColumns = React.createElement(FixedDataTableCellGroup, {
+	        key: 'scrollable_cells',
+	        isScrolling: this.props.isScrolling,
+	        height: this.props.height,
+	        left: this.props.scrollLeft,
+	        offsetLeft: fixedColumnsWidth,
+	        width: this.props.width - fixedColumnsWidth,
+	        zIndex: 0,
+	        columns: this.props.scrollableColumns,
+	        onColumnResize: this.props.onColumnResize,
+	        rowHeight: this.props.height,
+	        rowIndex: this.props.index
+	      });
+
+	      return React.createElement(
+	        'div',
+	        {
+	          className: joinClasses(className, this.props.className),
+	          onClick: this.props.onClick ? this._onClick : null,
+	          onDoubleClick: this.props.onDoubleClick ? this._onDoubleClick : null,
+	          onMouseDown: this.props.onMouseDown ? this._onMouseDown : null,
+	          onMouseEnter: this.props.onMouseEnter ? this._onMouseEnter : null,
+	          onMouseLeave: this.props.onMouseLeave ? this._onMouseLeave : null,
+	          style: style },
+	        React.createElement(
+	          'div',
+	          { className: cx('fixedDataTableRowLayout/body') },
+	          fixedColumns,
+	          scrollableColumns,
+	          columnsShadow
+	        )
+	      );
 	    }
-	  },
+	  }], [{
+	    key: 'propTypes',
+	    value: {
 
-	  _onClick: function _onClick( /*object*/event) {
-	    this.props.onClick(event, this.props.index);
-	  },
+	      isScrolling: PropTypes.bool,
 
-	  _onDoubleClick: function _onDoubleClick( /*object*/event) {
-	    this.props.onDoubleClick(event, this.props.index);
-	  },
+	      /**
+	       * Array of <FixedDataTableColumn /> for the fixed columns.
+	       */
+	      fixedColumns: PropTypes.array.isRequired,
 
-	  _onMouseDown: function _onMouseDown( /*object*/event) {
-	    this.props.onMouseDown(event, this.props.index);
-	  },
+	      /**
+	       * Height of the row.
+	       */
+	      height: PropTypes.number.isRequired,
 
-	  _onMouseEnter: function _onMouseEnter( /*object*/event) {
-	    this.props.onMouseEnter(event, this.props.index);
-	  },
+	      /**
+	       * The row index.
+	       */
+	      index: PropTypes.number.isRequired,
 
-	  _onMouseLeave: function _onMouseLeave( /*object*/event) {
-	    this.props.onMouseLeave(event, this.props.index);
+	      /**
+	       * Array of <FixedDataTableColumn /> for the scrollable columns.
+	       */
+	      scrollableColumns: PropTypes.array.isRequired,
+
+	      /**
+	       * The distance between the left edge of the table and the leftmost portion
+	       * of the row currently visible in the table.
+	       */
+	      scrollLeft: PropTypes.number.isRequired,
+
+	      /**
+	       * Width of the row.
+	       */
+	      width: PropTypes.number.isRequired,
+
+	      /**
+	       * Fire when a row is clicked.
+	       */
+	      onClick: PropTypes.func,
+
+	      /**
+	       * Fire when a row is double clicked.
+	       */
+	      onDoubleClick: PropTypes.func,
+
+	      /**
+	       * Callback for when resizer knob (in FixedDataTableCell) is clicked
+	       * to initialize resizing. Please note this is only on the cells
+	       * in the header.
+	       * @param number combinedWidth
+	       * @param number leftOffset
+	       * @param number cellWidth
+	       * @param number|string columnKey
+	       * @param object event
+	       */
+	      onColumnResize: PropTypes.func
+	    },
+	    enumerable: true
+	  }]);
+
+	  return FixedDataTableRowImpl;
+	})(React.Component);
+
+	var FixedDataTableRow = (function (_React$Component2) {
+	  _inherits(FixedDataTableRow, _React$Component2);
+
+	  function FixedDataTableRow() {
+	    _classCallCheck(this, FixedDataTableRow);
+
+	    _get(Object.getPrototypeOf(FixedDataTableRow.prototype), 'constructor', this).apply(this, arguments);
 	  }
-	});
 
-	var FixedDataTableRow = React.createClass({
-	  displayName: 'FixedDataTableRow',
+	  _createClass(FixedDataTableRow, [{
+	    key: 'render',
+	    value: function render() /*object*/{
+	      var style = {
+	        width: this.props.width,
+	        height: this.props.height,
+	        zIndex: this.props.zIndex ? this.props.zIndex : 0
+	      };
+	      translateDOMPositionXY(style, 0, this.props.offsetTop);
 
-	  propTypes: {
+	      return React.createElement(
+	        'div',
+	        {
+	          style: style,
+	          className: cx('fixedDataTableRowLayout/rowWrapper') },
+	        React.createElement(FixedDataTableRowImpl, _extends({}, this.props, {
+	          offsetTop: undefined,
+	          zIndex: undefined
+	        }))
+	      );
+	    }
+	  }], [{
+	    key: 'propTypes',
+	    value: {
 
-	    isScrolling: PropTypes.bool,
+	      isScrolling: PropTypes.bool,
 
-	    /**
-	     * Height of the row.
-	     */
-	    height: PropTypes.number.isRequired,
+	      /**
+	       * Height of the row.
+	       */
+	      height: PropTypes.number.isRequired,
 
-	    /**
-	     * Z-index on which the row will be displayed. Used e.g. for keeping
-	     * header and footer in front of other rows.
-	     */
-	    zIndex: PropTypes.number,
+	      /**
+	       * Z-index on which the row will be displayed. Used e.g. for keeping
+	       * header and footer in front of other rows.
+	       */
+	      zIndex: PropTypes.number,
 
-	    /**
-	     * The vertical position where the row should render itself
-	     */
-	    offsetTop: PropTypes.number.isRequired,
+	      /**
+	       * The vertical position where the row should render itself
+	       */
+	      offsetTop: PropTypes.number.isRequired,
 
-	    /**
-	     * Width of the row.
-	     */
-	    width: PropTypes.number.isRequired
-	  },
+	      /**
+	       * Width of the row.
+	       */
+	      width: PropTypes.number.isRequired
+	    },
+	    enumerable: true
+	  }]);
 
-	  render: function render() /*object*/{
-	    var style = {
-	      width: this.props.width,
-	      height: this.props.height,
-	      zIndex: this.props.zIndex ? this.props.zIndex : 0
-	    };
-	    translateDOMPositionXY(style, 0, this.props.offsetTop);
-
-	    return React.createElement(
-	      'div',
-	      {
-	        style: style,
-	        className: cx('fixedDataTableRowLayout/rowWrapper') },
-	      React.createElement(FixedDataTableRowImpl, _extends({}, this.props, {
-	        offsetTop: undefined,
-	        zIndex: undefined
-	      }))
-	    );
-	  }
-	});
+	  return FixedDataTableRow;
+	})(React.Component);
 
 	module.exports = FixedDataTableRow;
 
-/***/ },
-/* 59 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 72 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -4718,19 +7016,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-	var FixedDataTableHelper = __webpack_require__(60);
-	var React = __webpack_require__(27);
-	var FixedDataTableCell = __webpack_require__(64);
+	var FixedDataTableHelper = __webpack_require__(73);
+	var PropTypes = __webpack_require__(27);
+	var React = __webpack_require__(34);
+	var createReactClass = __webpack_require__(37);
+	var FixedDataTableCell = __webpack_require__(77);
 
-	var cx = __webpack_require__(47);
-	var translateDOMPositionXY = __webpack_require__(48);
-
-	var PropTypes = React.PropTypes;
+	var cx = __webpack_require__(60);
+	var translateDOMPositionXY = __webpack_require__(61);
 
 	var DIR_SIGN = FixedDataTableHelper.DIR_SIGN;
 
-	var FixedDataTableCellGroupImpl = React.createClass({
-	  displayName: 'FixedDataTableCellGroupImpl',
+	var FixedDataTableCellGroupImpl = createReactClass({
+	  displayName: "FixedDataTableCellGroupImpl",
 
 	  /**
 	   * PropTypes are disabled in this component, because having them on slows
@@ -4831,8 +7129,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 
-	var FixedDataTableCellGroup = React.createClass({
-	  displayName: 'FixedDataTableCellGroup',
+	var FixedDataTableCellGroup = createReactClass({
+	  displayName: "FixedDataTableCellGroup",
 
 	  /**
 	   * PropTypes are disabled in this component, because having them on slows
@@ -4908,9 +7206,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = FixedDataTableCellGroup;
 
-/***/ },
-/* 60 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 73 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -4926,10 +7224,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var Locale = __webpack_require__(61);
-	var React = __webpack_require__(27);
-	var FixedDataTableColumnGroup = __webpack_require__(62);
-	var FixedDataTableColumn = __webpack_require__(63);
+	var Locale = __webpack_require__(74);
+	var React = __webpack_require__(34);
+	var FixedDataTableColumnGroup = __webpack_require__(75);
+	var FixedDataTableColumn = __webpack_require__(76);
 
 	var DIR_SIGN = Locale.isRTL() ? -1 : +1;
 	// A cell up to 5px outside of the visible area will still be considered visible
@@ -5017,9 +7315,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = FixedDataTableHelper;
 
-/***/ },
-/* 61 */
-/***/ function(module, exports) {
+/***/ }),
+/* 74 */
+/***/ (function(module, exports) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -5046,9 +7344,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = Locale;
 
-/***/ },
-/* 62 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -5071,28 +7369,47 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var React = __webpack_require__(27);
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-	var TransitionColumnGroup = React.createClass({
-	  displayName: 'TransitionColumnGroup',
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
-	  statics: {
-	    __TableColumnGroup__: true
-	  },
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	  render: function render() {
-	    if (false) {
-	      throw new Error('Component <TransitionColumnGroup /> should never render');
-	    }
-	    return null;
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var React = __webpack_require__(34);
+
+	var TransitionColumnGroup = (function (_React$Component) {
+	  _inherits(TransitionColumnGroup, _React$Component);
+
+	  function TransitionColumnGroup() {
+	    _classCallCheck(this, TransitionColumnGroup);
+
+	    _get(Object.getPrototypeOf(TransitionColumnGroup.prototype), 'constructor', this).apply(this, arguments);
 	  }
-	});
+
+	  _createClass(TransitionColumnGroup, [{
+	    key: 'render',
+	    value: function render() {
+	      if (false) {
+	        throw new Error('Component <TransitionColumnGroup /> should never render');
+	      }
+	      return null;
+	    }
+	  }], [{
+	    key: '__TableColumnGroup__',
+	    value: true,
+	    enumerable: true
+	  }]);
+
+	  return TransitionColumnGroup;
+	})(React.Component);
 
 	module.exports = TransitionColumnGroup;
 
-/***/ },
-/* 63 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 76 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -5115,28 +7432,47 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var React = __webpack_require__(27);
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-	var TransitionColumn = React.createClass({
-	  displayName: 'TransitionColumn',
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
-	  statics: {
-	    __TableColumn__: true
-	  },
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	  render: function render() {
-	    if (false) {
-	      throw new Error('Component <TransitionColumn /> should never render');
-	    }
-	    return null;
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var React = __webpack_require__(34);
+
+	var TransitionColumn = (function (_React$Component) {
+	  _inherits(TransitionColumn, _React$Component);
+
+	  function TransitionColumn() {
+	    _classCallCheck(this, TransitionColumn);
+
+	    _get(Object.getPrototypeOf(TransitionColumn.prototype), 'constructor', this).apply(this, arguments);
 	  }
-	});
+
+	  _createClass(TransitionColumn, [{
+	    key: 'render',
+	    value: function render() {
+	      if (false) {
+	        throw new Error('Component <TransitionColumn /> should never render');
+	      }
+	      return null;
+	    }
+	  }], [{
+	    key: '__TableColumn__',
+	    value: true,
+	    enumerable: true
+	  }]);
+
+	  return TransitionColumn;
+	})(React.Component);
 
 	module.exports = TransitionColumn;
 
-/***/ },
-/* 64 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 77 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -5154,23 +7490,23 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-	var FixedDataTableCellDefault = __webpack_require__(65);
-	var FixedDataTableHelper = __webpack_require__(60);
-	var React = __webpack_require__(27);
-	var cx = __webpack_require__(47);
-	var joinClasses = __webpack_require__(66);
+	var FixedDataTableCellDefault = __webpack_require__(78);
+	var FixedDataTableHelper = __webpack_require__(73);
+	var PropTypes = __webpack_require__(27);
+	var React = __webpack_require__(34);
+	var createReactClass = __webpack_require__(37);
+	var cx = __webpack_require__(60);
+	var joinClasses = __webpack_require__(79);
 
 	var DIR_SIGN = FixedDataTableHelper.DIR_SIGN;
-
-	var PropTypes = React.PropTypes;
 
 	var DEFAULT_PROPS = {
 	  align: 'left',
 	  highlighted: false
 	};
 
-	var FixedDataTableCell = React.createClass({
-	  displayName: 'FixedDataTableCell',
+	var FixedDataTableCell = createReactClass({
+	  displayName: "FixedDataTableCell",
 
 	  /**
 	   * PropTypes are disabled in this component, because having them on slows
@@ -5309,10 +7645,25 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = FixedDataTableCell;
 
-/***/ },
-/* 65 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 78 */
+/***/ (function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var PropTypes = __webpack_require__(27);
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
 	 * All rights reserved.
@@ -5325,18 +7676,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @typechecks
 	 */
 
-	'use strict';
+	var React = __webpack_require__(34);
 
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-	var React = __webpack_require__(27);
-
-	var cx = __webpack_require__(47);
-	var joinClasses = __webpack_require__(66);
-
-	var PropTypes = React.PropTypes;
+	var cx = __webpack_require__(60);
+	var joinClasses = __webpack_require__(79);
 
 	/**
 	 * Component that handles default cell layout and styling.
@@ -5361,72 +7704,86 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * );
 	 * ```
 	 */
-	var FixedDataTableCellDefault = React.createClass({
-	  displayName: 'FixedDataTableCellDefault',
 
-	  propTypes: {
+	var FixedDataTableCellDefault = (function (_React$Component) {
+	  _inherits(FixedDataTableCellDefault, _React$Component);
 
-	    /**
-	     * Outer height of the cell.
-	     */
-	    height: PropTypes.number,
+	  function FixedDataTableCellDefault() {
+	    _classCallCheck(this, FixedDataTableCellDefault);
 
-	    /**
-	     * Outer width of the cell.
-	     */
-	    width: PropTypes.number,
+	    _get(Object.getPrototypeOf(FixedDataTableCellDefault.prototype), 'constructor', this).apply(this, arguments);
+	  }
 
-	    /**
-	     * Optional prop that if specified on the `Column` will be passed to the
-	     * cell. It can be used to uniquely identify which column is the cell is in.
-	     */
-	    columnKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-	  },
+	  _createClass(FixedDataTableCellDefault, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var height = _props.height;
+	      var width = _props.width;
+	      var style = _props.style;
+	      var className = _props.className;
+	      var children = _props.children;
 
-	  render: function render() {
-	    var _props = this.props;
-	    var height = _props.height;
-	    var width = _props.width;
-	    var style = _props.style;
-	    var className = _props.className;
-	    var children = _props.children;
+	      var props = _objectWithoutProperties(_props, ['height', 'width', 'style', 'className', 'children']);
 
-	    var props = _objectWithoutProperties(_props, ['height', 'width', 'style', 'className', 'children']);
+	      var innerStyle = _extends({
+	        height: height,
+	        width: width
+	      }, style);
 
-	    var innerStyle = _extends({
-	      height: height,
-	      width: width
-	    }, style);
-
-	    return React.createElement(
-	      'div',
-	      _extends({}, props, {
-	        className: joinClasses(cx('fixedDataTableCellLayout/wrap1'), cx('public/fixedDataTableCell/wrap1'), className),
-	        style: innerStyle }),
-	      React.createElement(
+	      return React.createElement(
 	        'div',
-	        {
-	          className: joinClasses(cx('fixedDataTableCellLayout/wrap2'), cx('public/fixedDataTableCell/wrap2')) },
+	        _extends({}, props, {
+	          className: joinClasses(cx('fixedDataTableCellLayout/wrap1'), cx('public/fixedDataTableCell/wrap1'), className),
+	          style: innerStyle }),
 	        React.createElement(
 	          'div',
 	          {
-	            className: joinClasses(cx('fixedDataTableCellLayout/wrap3'), cx('public/fixedDataTableCell/wrap3')) },
+	            className: joinClasses(cx('fixedDataTableCellLayout/wrap2'), cx('public/fixedDataTableCell/wrap2')) },
 	          React.createElement(
 	            'div',
-	            { className: cx('public/fixedDataTableCell/cellContent') },
-	            children
+	            {
+	              className: joinClasses(cx('fixedDataTableCellLayout/wrap3'), cx('public/fixedDataTableCell/wrap3')) },
+	            React.createElement(
+	              'div',
+	              { className: cx('public/fixedDataTableCell/cellContent') },
+	              children
+	            )
 	          )
 	        )
-	      )
-	    );
-	  }
-	});
+	      );
+	    }
+	  }], [{
+	    key: 'propTypes',
+	    value: {
+
+	      /**
+	       * Outer height of the cell.
+	       */
+	      height: PropTypes.number,
+
+	      /**
+	       * Outer width of the cell.
+	       */
+	      width: PropTypes.number,
+
+	      /**
+	       * Optional prop that if specified on the `Column` will be passed to the
+	       * cell. It can be used to uniquely identify which column is the cell is in.
+	       */
+	      columnKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+	    },
+	    enumerable: true
+	  }]);
+
+	  return FixedDataTableCellDefault;
+	})(React.Component);
 
 	module.exports = FixedDataTableCellDefault;
 
-/***/ },
-/* 66 */
-/***/ function(module, exports) {
+/***/ }),
+/* 79 */
+/***/ (function(module, exports) {
 
 	/**
 	 * Copyright 2013-2015, Facebook, Inc.
@@ -5468,9 +7825,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = joinClasses;
 
-/***/ },
-/* 67 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 80 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -5490,19 +7847,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var DOMMouseMoveTracker = __webpack_require__(40);
-	var Locale = __webpack_require__(61);
-	var React = __webpack_require__(27);
-	var ReactComponentWithPureRenderMixin = __webpack_require__(30);
+	var DOMMouseMoveTracker = __webpack_require__(53);
+	var Locale = __webpack_require__(74);
+	var PropTypes = __webpack_require__(27);
+	var React = __webpack_require__(34);
+	var createReactClass = __webpack_require__(37);
+	var ReactComponentWithPureRenderMixin = __webpack_require__(43);
 
-	var clamp = __webpack_require__(57);
-	var cx = __webpack_require__(47);
+	var clamp = __webpack_require__(70);
+	var cx = __webpack_require__(60);
 
-	var PropTypes = React.PropTypes;
-
-	var FixedDataTableColumnResizeHandle = React.createClass({
-	  displayName: 'FixedDataTableColumnResizeHandle',
-
+	var FixedDataTableColumnResizeHandle = createReactClass({
+	  displayName: "FixedDataTableColumnResizeHandle",
 	  mixins: [ReactComponentWithPureRenderMixin],
 
 	  propTypes: {
@@ -5633,9 +7989,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = FixedDataTableColumnResizeHandle;
 
-/***/ },
-/* 68 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 81 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -5655,8 +8011,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var PrefixIntervalTree = __webpack_require__(69);
-	var clamp = __webpack_require__(57);
+	var PrefixIntervalTree = __webpack_require__(82);
+	var clamp = __webpack_require__(70);
 
 	var BUFFER_ROWS = 5;
 	var NO_ROWS_SCROLL_RESULT = {
@@ -5938,9 +8294,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = FixedDataTableScrollHelper;
 
-/***/ },
-/* 69 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 82 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -5961,7 +8317,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var invariant = __webpack_require__(52);
+	var invariant = __webpack_require__(65);
 
 	var parent = function parent(node) {
 	  return Math.floor(node / 2);
@@ -6202,9 +8558,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
-/***/ },
-/* 70 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 83 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -6220,7 +8576,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var React = __webpack_require__(27);
+	var React = __webpack_require__(34);
 
 	function getTotalWidth( /*array*/columns) /*number*/{
 	  var totalWidth = 0;
@@ -6340,9 +8696,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = FixedDataTableWidthHelper;
 
-/***/ },
-/* 71 */
-/***/ function(module, exports) {
+/***/ }),
+/* 84 */
+/***/ (function(module, exports) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -6412,9 +8768,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = debounce;
 
-/***/ },
-/* 72 */
-/***/ function(module, exports) {
+/***/ }),
+/* 85 */
+/***/ (function(module, exports) {
 
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
@@ -6467,10 +8823,21 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = shallowEqual;
 
-/***/ },
-/* 73 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 86 */
+/***/ (function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var PropTypes = __webpack_require__(27);
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
 	 * All rights reserved.
@@ -6483,178 +8850,199 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @typechecks
 	 */
 
-	'use strict';
-
-	var React = __webpack_require__(27);
-
-	var PropTypes = React.PropTypes;
+	var React = __webpack_require__(34);
 
 	/**
 	 * Component that defines the attributes of table column.
 	 */
-	var FixedDataTableColumn = React.createClass({
-	  displayName: 'FixedDataTableColumn',
 
-	  statics: {
-	    __TableColumn__: true
-	  },
+	var FixedDataTableColumn = (function (_React$Component) {
+			_inherits(FixedDataTableColumn, _React$Component);
 
-	  propTypes: {
-	    /**
-	     * The horizontal alignment of the table cell content.
-	     */
-	    align: PropTypes.oneOf(['left', 'center', 'right']),
+			function FixedDataTableColumn() {
+					_classCallCheck(this, FixedDataTableColumn);
 
-	    /**
-	     * Controls if the column is fixed when scrolling in the X axis.
-	     */
-	    fixed: PropTypes.bool,
+					_get(Object.getPrototypeOf(FixedDataTableColumn.prototype), 'constructor', this).apply(this, arguments);
+			}
 
-	    /**
-	     * The header cell for this column.
-	     * This can either be a string a React element, or a function that generates
-	     * a React Element. Passing in a string will render a default header cell
-	     * with that string. By default, the React element passed in can expect to
-	     * receive the following props:
-	     *
-	     * ```
-	     * props: {
-	     *   columnKey: string // (of the column, if given)
-	     *   height: number // (supplied from the Table or rowHeightGetter)
-	     *   width: number // (supplied from the Column)
-	     * }
-	     * ```
-	     *
-	     * Because you are passing in your own React element, you can feel free to
-	     * pass in whatever props you may want or need.
-	     *
-	     * If you pass in a function, you will receive the same props object as the
-	     * first argument.
-	     */
-	    header: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+			_createClass(FixedDataTableColumn, [{
+					key: 'render',
+					value: function render() {
+							if (false) {
+									throw new Error('Component <FixedDataTableColumn /> should never render');
+							}
+							return null;
+					}
+			}], [{
+					key: '__TableColumn__',
+					value: true,
+					enumerable: true
+			}, {
+					key: 'propTypes',
+					value: {
+							/**
+	      * The horizontal alignment of the table cell content.
+	      */
+							align: PropTypes.oneOf(['left', 'center', 'right']),
 
-	    /**
-	     * This is the body cell that will be cloned for this column.
-	     * This can either be a string a React element, or a function that generates
-	     * a React Element. Passing in a string will render a default header cell
-	     * with that string. By default, the React element passed in can expect to
-	     * receive the following props:
-	     *
-	     * ```
-	     * props: {
-	     *   rowIndex; number // (the row index of the cell)
-	     *   columnKey: string // (of the column, if given)
-	     *   height: number // (supplied from the Table or rowHeightGetter)
-	     *   width: number // (supplied from the Column)
-	     * }
-	     * ```
-	     *
-	     * Because you are passing in your own React element, you can feel free to
-	     * pass in whatever props you may want or need.
-	     *
-	     * If you pass in a function, you will receive the same props object as the
-	     * first argument.
-	     */
-	    cell: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+							/**
+	      * Controls if the column is fixed when scrolling in the X axis.
+	      */
+							fixed: PropTypes.bool,
 
-	    /**
-	     * This is the footer cell for this column.
-	     * This can either be a string a React element, or a function that generates
-	     * a React Element. Passing in a string will render a default header cell
-	     * with that string. By default, the React element passed in can expect to
-	     * receive the following props:
-	     *
-	     * ```
-	     * props: {
-	     *   columnKey: string // (of the column, if given)
-	     *   height: number // (supplied from the Table or rowHeightGetter)
-	     *   width: number // (supplied from the Column)
-	     * }
-	     * ```
-	     *
-	     * Because you are passing in your own React element, you can feel free to
-	     * pass in whatever props you may want or need.
-	     *
-	     * If you pass in a function, you will receive the same props object as the
-	     * first argument.
-	     */
-	    footer: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+							/**
+	      * The header cell for this column.
+	      * This can either be a string a React element, or a function that generates
+	      * a React Element. Passing in a string will render a default header cell
+	      * with that string. By default, the React element passed in can expect to
+	      * receive the following props:
+	      *
+	      * ```
+	      * props: {
+	      *   columnKey: string // (of the column, if given)
+	      *   height: number // (supplied from the Table or rowHeightGetter)
+	      *   width: number // (supplied from the Column)
+	      * }
+	      * ```
+	      *
+	      * Because you are passing in your own React element, you can feel free to
+	      * pass in whatever props you may want or need.
+	      *
+	      * If you pass in a function, you will receive the same props object as the
+	      * first argument.
+	      */
+							header: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
 
-	    /**
-	     * This is used to uniquely identify the column, and is not required unless
-	     * you a resizing columns. This will be the key given in the
-	     * `onColumnResizeEndCallback` on the Table.
-	     */
-	    columnKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+							/**
+	      * This is the body cell that will be cloned for this column.
+	      * This can either be a string a React element, or a function that generates
+	      * a React Element. Passing in a string will render a default header cell
+	      * with that string. By default, the React element passed in can expect to
+	      * receive the following props:
+	      *
+	      * ```
+	      * props: {
+	      *   rowIndex; number // (the row index of the cell)
+	      *   columnKey: string // (of the column, if given)
+	      *   height: number // (supplied from the Table or rowHeightGetter)
+	      *   width: number // (supplied from the Column)
+	      * }
+	      * ```
+	      *
+	      * Because you are passing in your own React element, you can feel free to
+	      * pass in whatever props you may want or need.
+	      *
+	      * If you pass in a function, you will receive the same props object as the
+	      * first argument.
+	      */
+							cell: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
 
-	    /**
-	     * The pixel width of the column.
-	     */
-	    width: PropTypes.number.isRequired,
+							/**
+	      * This is the footer cell for this column.
+	      * This can either be a string a React element, or a function that generates
+	      * a React Element. Passing in a string will render a default header cell
+	      * with that string. By default, the React element passed in can expect to
+	      * receive the following props:
+	      *
+	      * ```
+	      * props: {
+	      *   columnKey: string // (of the column, if given)
+	      *   height: number // (supplied from the Table or rowHeightGetter)
+	      *   width: number // (supplied from the Column)
+	      * }
+	      * ```
+	      *
+	      * Because you are passing in your own React element, you can feel free to
+	      * pass in whatever props you may want or need.
+	      *
+	      * If you pass in a function, you will receive the same props object as the
+	      * first argument.
+	      */
+							footer: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
 
-	    /**
-	     * If this is a resizable column this is its minimum pixel width.
-	     */
-	    minWidth: PropTypes.number,
+							/**
+	      * This is used to uniquely identify the column, and is not required unless
+	      * you a resizing columns. This will be the key given in the
+	      * `onColumnResizeEndCallback` on the Table.
+	      */
+							columnKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
-	    /**
-	     * If this is a resizable column this is its maximum pixel width.
-	     */
-	    maxWidth: PropTypes.number,
+							/**
+	      * The pixel width of the column.
+	      */
+							width: PropTypes.number.isRequired,
 
-	    /**
-	     * The grow factor relative to other columns. Same as the flex-grow API
-	     * from http://www.w3.org/TR/css3-flexbox/. Basically, take any available
-	     * extra width and distribute it proportionally according to all columns'
-	     * flexGrow values. Defaults to zero (no-flexing).
-	     */
-	    flexGrow: PropTypes.number,
+							/**
+	      * If this is a resizable column this is its minimum pixel width.
+	      */
+							minWidth: PropTypes.number,
 
-	    /**
-	     * Whether the column can be resized with the
-	     * FixedDataTableColumnResizeHandle. Please note that if a column
-	     * has a flex grow, once you resize the column this will be set to 0.
-	     *
-	     * This property only provides the UI for the column resizing. If this
-	     * is set to true, you will need to set the onColumnResizeEndCallback table
-	     * property and render your columns appropriately.
-	     */
-	    isResizable: PropTypes.bool,
+							/**
+	      * If this is a resizable column this is its maximum pixel width.
+	      */
+							maxWidth: PropTypes.number,
 
-	    /**
-	     * Whether cells in this column can be removed from document when outside
-	     * of viewport as a result of horizontal scrolling.
-	     * Setting this property to true allows the table to not render cells in
-	     * particular column that are outside of viewport for visible rows. This
-	     * allows to create table with many columns and not have vertical scrolling
-	     * performance drop.
-	     * Setting the property to false will keep previous behaviour and keep
-	     * cell rendered if the row it belongs to is visible.
-	     */
-	    allowCellsRecycling: PropTypes.bool
-	  },
+							/**
+	      * The grow factor relative to other columns. Same as the flex-grow API
+	      * from http://www.w3.org/TR/css3-flexbox/. Basically, take any available
+	      * extra width and distribute it proportionally according to all columns'
+	      * flexGrow values. Defaults to zero (no-flexing).
+	      */
+							flexGrow: PropTypes.number,
 
-	  getDefaultProps: function getDefaultProps() /*object*/{
-	    return {
-	      allowCellsRecycling: false,
-	      fixed: false
-	    };
-	  },
+							/**
+	      * Whether the column can be resized with the
+	      * FixedDataTableColumnResizeHandle. Please note that if a column
+	      * has a flex grow, once you resize the column this will be set to 0.
+	      *
+	      * This property only provides the UI for the column resizing. If this
+	      * is set to true, you will need to set the onColumnResizeEndCallback table
+	      * property and render your columns appropriately.
+	      */
+							isResizable: PropTypes.bool,
 
-	  render: function render() {
-	    if (false) {
-	      throw new Error('Component <FixedDataTableColumn /> should never render');
-	    }
-	    return null;
-	  }
-	});
+							/**
+	      * Whether cells in this column can be removed from document when outside
+	      * of viewport as a result of horizontal scrolling.
+	      * Setting this property to true allows the table to not render cells in
+	      * particular column that are outside of viewport for visible rows. This
+	      * allows to create table with many columns and not have vertical scrolling
+	      * performance drop.
+	      * Setting the property to false will keep previous behaviour and keep
+	      * cell rendered if the row it belongs to is visible.
+	      */
+							allowCellsRecycling: PropTypes.bool
+					},
+					enumerable: true
+			}, {
+					key: 'defaultProps',
+					value: {
+							allowCellsRecycling: false,
+							fixed: false
+					},
+					enumerable: true
+			}]);
+
+			return FixedDataTableColumn;
+	})(React.Component);
 
 	module.exports = FixedDataTableColumn;
 
-/***/ },
-/* 74 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 87 */
+/***/ (function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var PropTypes = __webpack_require__(27);
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
 	 * All rights reserved.
@@ -6667,76 +9055,99 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @typechecks
 	 */
 
-	'use strict';
-
-	var React = __webpack_require__(27);
-
-	var PropTypes = React.PropTypes;
+	var React = __webpack_require__(34);
 
 	/**
 	 * Component that defines the attributes of a table column group.
 	 */
-	var FixedDataTableColumnGroup = React.createClass({
-	  displayName: 'FixedDataTableColumnGroup',
 
-	  statics: {
-	    __TableColumnGroup__: true
-	  },
+	var FixedDataTableColumnGroup = (function (_React$Component) {
+	  _inherits(FixedDataTableColumnGroup, _React$Component);
 
-	  propTypes: {
-	    /**
-	     * The horizontal alignment of the table cell content.
-	     */
-	    align: PropTypes.oneOf(['left', 'center', 'right']),
+	  function FixedDataTableColumnGroup() {
+	    _classCallCheck(this, FixedDataTableColumnGroup);
 
-	    /**
-	     * Controls if the column group is fixed when scrolling in the X axis.
-	     */
-	    fixed: PropTypes.bool,
-
-	    /**
-	     * This is the header cell for this column group.
-	     * This can either be a string or a React element. Passing in a string
-	     * will render a default footer cell with that string. By default, the React
-	     * element passed in can expect to receive the following props:
-	     *
-	     * ```
-	     * props: {
-	     *   height: number // (supplied from the groupHeaderHeight)
-	     *   width: number // (supplied from the Column)
-	     * }
-	     * ```
-	     *
-	     * Because you are passing in your own React element, you can feel free to
-	     * pass in whatever props you may want or need.
-	     *
-	     * You can also pass in a function that returns a react elemnt, with the
-	     * props object above passed in as the first parameter.
-	     */
-	    header: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
-
-	  },
-
-	  getDefaultProps: function getDefaultProps() /*object*/{
-	    return {
-	      fixed: false
-	    };
-	  },
-
-	  render: function render() {
-	    if (false) {
-	      throw new Error('Component <FixedDataTableColumnGroup /> should never render');
-	    }
-	    return null;
+	    _get(Object.getPrototypeOf(FixedDataTableColumnGroup.prototype), 'constructor', this).apply(this, arguments);
 	  }
-	});
+
+	  _createClass(FixedDataTableColumnGroup, [{
+	    key: 'render',
+	    value: function render() {
+	      if (false) {
+	        throw new Error('Component <FixedDataTableColumnGroup /> should never render');
+	      }
+	      return null;
+	    }
+	  }], [{
+	    key: '__TableColumnGroup__',
+	    value: true,
+	    enumerable: true
+	  }, {
+	    key: 'propTypes',
+	    value: {
+	      /**
+	       * The horizontal alignment of the table cell content.
+	       */
+	      align: PropTypes.oneOf(['left', 'center', 'right']),
+
+	      /**
+	       * Controls if the column group is fixed when scrolling in the X axis.
+	       */
+	      fixed: PropTypes.bool,
+
+	      /**
+	       * This is the header cell for this column group.
+	       * This can either be a string or a React element. Passing in a string
+	       * will render a default footer cell with that string. By default, the React
+	       * element passed in can expect to receive the following props:
+	       *
+	       * ```
+	       * props: {
+	       *   height: number // (supplied from the groupHeaderHeight)
+	       *   width: number // (supplied from the Column)
+	       * }
+	       * ```
+	       *
+	       * Because you are passing in your own React element, you can feel free to
+	       * pass in whatever props you may want or need.
+	       *
+	       * You can also pass in a function that returns a react elemnt, with the
+	       * props object above passed in as the first parameter.
+	       */
+	      header: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+
+	    },
+	    enumerable: true
+	  }, {
+	    key: 'defaultProps',
+	    value: {
+	      fixed: false
+	    },
+	    enumerable: true
+	  }]);
+
+	  return FixedDataTableColumnGroup;
+	})(React.Component);
 
 	module.exports = FixedDataTableColumnGroup;
 
-/***/ },
-/* 75 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 88 */
+/***/ (function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var PropTypes = __webpack_require__(27);
 	/**
 	 * Copyright (c) 2015, Facebook, Inc.
 	 * All rights reserved.
@@ -6756,183 +9167,192 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * FixedDataTableCellNew.react and dependency in FixedDataTableCellGroup.react
 	 */
 
-	'use strict';
+	var React = __webpack_require__(34);
 
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	var cx = __webpack_require__(60);
+	var joinClasses = __webpack_require__(79);
+	var shallowEqual = __webpack_require__(85);
 
-	var React = __webpack_require__(27);
-	var PropTypes = React.PropTypes;
+	var CellDefault = __webpack_require__(78);
 
-	var cx = __webpack_require__(47);
-	var joinClasses = __webpack_require__(66);
-	var shallowEqual = __webpack_require__(72);
+	var TransitionCell = (function (_React$Component) {
+	  _inherits(TransitionCell, _React$Component);
 
-	var CellDefault = __webpack_require__(65);
+	  function TransitionCell() {
+	    _classCallCheck(this, TransitionCell);
 
-	var TransitionCell = React.createClass({
-	  displayName: 'TransitionCell',
+	    _get(Object.getPrototypeOf(TransitionCell.prototype), 'constructor', this).apply(this, arguments);
 
-	  propTypes: {
-	    label: PropTypes.string, // header, footer
-	    className: PropTypes.string,
-	    rowIndex: PropTypes.number,
-	    rowGetter: PropTypes.func, // cell
-	    dataKey: PropTypes.oneOfType([// cell, footer
-	    PropTypes.string, PropTypes.number]),
-	    cellRenderer: PropTypes.func,
-	    cellDataGetter: PropTypes.func,
-	    footerDataGetter: PropTypes.func, // footer
-	    footerData: PropTypes.any, // footer
-	    columnData: PropTypes.any, // cell, header
-	    width: PropTypes.number,
-	    height: PropTypes.number,
-	    isHeaderCell: PropTypes.bool, // header
-	    isFooterCell: PropTypes.bool },
+	    this._getCellData = function (props) {
+	      var dataKey = props.dataKey;
+	      if (dataKey == null) {
+	        return null;
+	      }
 
-	  // footer
-	  shouldComponentUpdate: function shouldComponentUpdate( /*object*/nextProps) {
-	    var update = false;
-	    var rowData;
-	    if (nextProps.rowGetter) {
-	      rowData = nextProps.rowGetter(nextProps.rowIndex);
-	      if (this._rowData !== rowData) {
+	      var rowData;
+	      if (props.rowGetter) {
+	        rowData = props.rowGetter(props.rowIndex);
+	      }
+
+	      if (props.cellDataGetter) {
+	        return props.cellDataGetter(dataKey, rowData);
+	      }
+
+	      if (rowData) {
+	        return rowData[dataKey];
+	      }
+
+	      if (props.footerDataGetter) {
+	        return props.footerDataGetter()[dataKey];
+	      }
+
+	      if (props.footerData) {
+	        return props.footerData[dataKey];
+	      }
+
+	      if (props.headerDataGetter) {
+	        return props.headerDataGetter[dataKey];
+	      }
+	    };
+
+	    this._getRowData = function (props) {
+	      if (props.rowGetter) {
+	        return props.rowGetter(props.rowIndex) || {};
+	      }
+
+	      if (props.footerDataGetter) {
+	        return props.footerDataGetter() || {};
+	      }
+
+	      if (props.footerData) {
+	        return props.footerData || {};
+	      }
+
+	      return {};
+	    };
+	  }
+
+	  _createClass(TransitionCell, [{
+	    key: 'shouldComponentUpdate',
+	    // footer
+	    value: function shouldComponentUpdate( /*object*/nextProps) {
+	      var update = false;
+	      var rowData;
+	      if (nextProps.rowGetter) {
+	        rowData = nextProps.rowGetter(nextProps.rowIndex);
+	        if (this._rowData !== rowData) {
+	          update = true;
+	        }
+	      }
+
+	      var cellData;
+	      if (nextProps.dataKey != null) {
+	        if (nextProps.cellDataGetter) {
+	          cellData = nextProps.cellDataGetter(nextProps.dataKey, rowData);
+	        }
+	        if (!cellData && rowData) {
+	          cellData = rowData[nextProps.dataKey];
+	        }
+	      }
+	      if (this._cellData !== cellData) {
 	        update = true;
 	      }
+	      this._rowData = rowData;
+	      this._cellData = cellData;
+
+	      return update || !shallowEqual(nextProps, this.props);
 	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var props = this.props;
 
-	    var cellData;
-	    if (nextProps.dataKey != null) {
-	      if (nextProps.cellDataGetter) {
-	        cellData = nextProps.cellDataGetter(nextProps.dataKey, rowData);
-	      }
-	      if (!cellData && rowData) {
-	        cellData = rowData[nextProps.dataKey];
-	      }
-	    }
-	    if (this._cellData !== cellData) {
-	      update = true;
-	    }
-	    this._rowData = rowData;
-	    this._cellData = cellData;
+	      var cellData = this._getCellData(props);
+	      var content = cellData;
+	      var rowData = this._getRowData(props);
+	      var usingRenderer = !!(props.cellRenderer || props.groupHeaderRenderer);
 
-	    return update || !shallowEqual(nextProps, this.props);
-	  },
-
-	  _getCellData: function _getCellData(props) {
-	    var dataKey = props.dataKey;
-	    if (dataKey == null) {
-	      return null;
-	    }
-
-	    var rowData;
-	    if (props.rowGetter) {
-	      rowData = props.rowGetter(props.rowIndex);
-	    }
-
-	    if (props.cellDataGetter) {
-	      return props.cellDataGetter(dataKey, rowData);
-	    }
-
-	    if (rowData) {
-	      return rowData[dataKey];
-	    }
-
-	    if (props.footerDataGetter) {
-	      return props.footerDataGetter()[dataKey];
-	    }
-
-	    if (props.footerData) {
-	      return props.footerData[dataKey];
-	    }
-
-	    if (props.headerDataGetter) {
-	      return props.headerDataGetter[dataKey];
-	    }
-	  },
-
-	  _getRowData: function _getRowData(props) {
-	    if (props.rowGetter) {
-	      return props.rowGetter(props.rowIndex) || {};
-	    }
-
-	    if (props.footerDataGetter) {
-	      return props.footerDataGetter() || {};
-	    }
-
-	    if (props.footerData) {
-	      return props.footerData || {};
-	    }
-
-	    return {};
-	  },
-
-	  render: function render() {
-	    var props = this.props;
-
-	    var cellData = this._getCellData(props);
-	    var content = cellData;
-	    var rowData = this._getRowData(props);
-	    var usingRenderer = !!(props.cellRenderer || props.groupHeaderRenderer);
-
-	    if (props.isHeaderCell || props.isFooterCell) {
-	      content = content || props.label;
-	    }
-
-	    if (props.cellRenderer) {
 	      if (props.isHeaderCell || props.isFooterCell) {
-	        content = props.cellRenderer(props.label, props.dataKey, props.columnData, rowData, props.width) || props.label;
-	      } else {
-	        content = props.cellRenderer(cellData, props.dataKey, rowData, props.rowIndex, props.columnData, props.width);
+	        content = content || props.label;
 	      }
-	    }
 
-	    if (props.groupHeaderRenderer) {
-	      content = props.groupHeaderRenderer(props.label, props.dataKey, // index in children
-	      props.groupHeaderData, props.groupHeaderLabels, props.width) || content;
-	    }
+	      if (props.cellRenderer) {
+	        if (props.isHeaderCell || props.isFooterCell) {
+	          content = props.cellRenderer(props.label, props.dataKey, props.columnData, rowData, props.width) || props.label;
+	        } else {
+	          content = props.cellRenderer(cellData, props.dataKey, rowData, props.rowIndex, props.columnData, props.width);
+	        }
+	      }
 
-	    var contentClass = cx('public/fixedDataTableCell/cellContent');
+	      if (props.groupHeaderRenderer) {
+	        content = props.groupHeaderRenderer(props.label, props.dataKey, // index in children
+	        props.groupHeaderData, props.groupHeaderLabels, props.width) || content;
+	      }
 
-	    if (React.isValidElement(content) && usingRenderer) {
-	      content = React.cloneElement(content, {
-	        className: joinClasses(content.props.className, contentClass)
-	      });
-	    } else {
+	      var contentClass = cx('public/fixedDataTableCell/cellContent');
+
+	      if (React.isValidElement(content) && usingRenderer) {
+	        content = React.cloneElement(content, {
+	          className: joinClasses(content.props.className, contentClass)
+	        });
+	      } else {
+	        return React.createElement(
+	          CellDefault,
+	          props,
+	          content
+	        );
+	      }
+
+	      var innerStyle = _extends({
+	        height: props.height,
+	        width: props.width
+	      }, props.style);
+
 	      return React.createElement(
-	        CellDefault,
-	        props,
-	        content
-	      );
-	    }
-
-	    var innerStyle = _extends({
-	      height: props.height,
-	      width: props.width
-	    }, props.style);
-
-	    return React.createElement(
-	      'div',
-	      _extends({}, this.props, {
-	        className: joinClasses(cx('fixedDataTableCellLayout/wrap1'), cx('public/fixedDataTableCell/wrap1'), this.props.className),
-	        style: innerStyle }),
-	      React.createElement(
 	        'div',
-	        {
-	          className: joinClasses(cx('fixedDataTableCellLayout/wrap2'), cx('public/fixedDataTableCell/wrap2')) },
+	        _extends({}, this.props, {
+	          className: joinClasses(cx('fixedDataTableCellLayout/wrap1'), cx('public/fixedDataTableCell/wrap1'), this.props.className),
+	          style: innerStyle }),
 	        React.createElement(
 	          'div',
 	          {
-	            className: joinClasses(cx('fixedDataTableCellLayout/wrap3'), cx('public/fixedDataTableCell/wrap3')) },
-	          content
+	            className: joinClasses(cx('fixedDataTableCellLayout/wrap2'), cx('public/fixedDataTableCell/wrap2')) },
+	          React.createElement(
+	            'div',
+	            {
+	              className: joinClasses(cx('fixedDataTableCellLayout/wrap3'), cx('public/fixedDataTableCell/wrap3')) },
+	            content
+	          )
 	        )
-	      )
-	    );
-	  }
-	});
+	      );
+	    }
+	  }], [{
+	    key: 'propTypes',
+	    value: {
+	      label: PropTypes.string, // header, footer
+	      className: PropTypes.string,
+	      rowIndex: PropTypes.number,
+	      rowGetter: PropTypes.func, // cell
+	      dataKey: PropTypes.oneOfType([// cell, footer
+	      PropTypes.string, PropTypes.number]),
+	      cellRenderer: PropTypes.func,
+	      cellDataGetter: PropTypes.func,
+	      footerDataGetter: PropTypes.func, // footer
+	      footerData: PropTypes.any, // footer
+	      columnData: PropTypes.any, // cell, header
+	      width: PropTypes.number,
+	      height: PropTypes.number,
+	      isHeaderCell: PropTypes.bool, // header
+	      isFooterCell: PropTypes.bool },
+	    enumerable: true
+	  }]);
+
+	  return TransitionCell;
+	})(React.Component);
 
 	module.exports = TransitionCell;
 
-/***/ }
+/***/ })
 /******/ ])
 });
 ;

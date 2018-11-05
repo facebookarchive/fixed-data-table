@@ -1,5 +1,5 @@
 /**
- * FixedDataTable v0.7.2 
+ * FixedDataTable v0.7.5 
  *
  * Copyright (c) 2015, Facebook, Inc.
  * All rights reserved.
@@ -21,8 +21,7 @@
  */
 
 .fixedDataTableCellGroupLayout_cellGroup {
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
+  backface-visibility: hidden;
   left: 0;
   overflow: hidden;
   position: absolute;
@@ -222,8 +221,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
 }
 
 .fixedDataTableRowLayout_fixedColumnsDivider {
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
+  backface-visibility: hidden;
   border-left-style: solid;
   border-left-width: 1px;
   left: 0;
@@ -256,10 +254,8 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   outline: none;
   overflow: hidden;
   position: absolute;
-  -webkit-transition-duration: 250ms;
-          transition-duration: 250ms;
-  -webkit-transition-timing-function: ease;
-          transition-timing-function: ease;
+  transition-duration: 250ms;
+  transition-timing-function: ease;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -270,8 +266,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   bottom: 0;
   right: 0;
   top: 0;
-  -webkit-transition-property: background-color width;
-          transition-property: background-color width;
+  transition-property: background-color width;
   width: 15px;
 }
 
@@ -284,8 +279,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   bottom: 0;
   height: 15px;
   left: 0;
-  -webkit-transition-property: background-color height;
-          transition-property: background-color height;
+  transition-property: background-color height;
 }
 
 /* Touching the scroll-track directly makes the scroll-track bolder */
@@ -312,8 +306,7 @@ body[dir="rtl"] .fixedDataTableColumnResizerLineLayout_main {
   content: '';
   display: block;
   position: absolute;
-  -webkit-transition: background-color 250ms ease;
-          transition: background-color 250ms ease;
+  transition: background-color 250ms ease;
 }
 
 .ScrollbarLayout_faceHorizontal {
