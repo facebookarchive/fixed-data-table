@@ -556,7 +556,7 @@ var FixedDataTable = createReactClass({
             cx("fixedDataTableLayout/topShadow"),
             cx("public/fixedDataTable/topShadow")
           )}
-          style={{ ...topShadowStyle, top: bodyOffsetTop }}
+          style={{ ...props.topShadowStyle, top: bodyOffsetTop }}
         />
       );
     }

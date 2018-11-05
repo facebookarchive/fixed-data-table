@@ -1,5 +1,5 @@
 /**
- * FixedDataTable v0.7.6 
+ * FixedDataTable v0.7.7 
  *
  * Copyright (c) 2015, Facebook, Inc.
  * All rights reserved.
@@ -2328,7 +2328,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (state.scrollY) {
 	      topShadow = React.createElement("div", {
 	        className: joinClasses(cx("fixedDataTableLayout/topShadow"), cx("public/fixedDataTable/topShadow")),
-	        style: _extends({}, topShadowStyle, { top: bodyOffsetTop })
+	        style: _extends({}, props.topShadowStyle, { top: bodyOffsetTop })
 	      });
 	    }
 
