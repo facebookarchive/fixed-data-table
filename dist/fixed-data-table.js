@@ -1,5 +1,5 @@
 /**
- * FixedDataTable v0.7.5 
+ * FixedDataTable v0.7.6 
  *
  * Copyright (c) 2015, Facebook, Inc.
  * All rights reserved.
@@ -2100,7 +2100,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      groupHeaderHeight: 0,
 	      headerHeight: 0,
 	      scrollLeft: 0,
-	      scrollTop: 0
+	      scrollTop: 0,
+	      topShadowStyle: {}
 	    };
 	  },
 

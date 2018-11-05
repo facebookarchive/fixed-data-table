@@ -266,7 +266,8 @@ var FixedDataTable = createReactClass({
       groupHeaderHeight: 0,
       headerHeight: 0,
       scrollLeft: 0,
-      scrollTop: 0
+      scrollTop: 0,
+      topShadowStyle: {}
     };
   },
 
