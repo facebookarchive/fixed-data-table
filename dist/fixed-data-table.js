@@ -1,5 +1,5 @@
 /**
- * FixedDataTable v0.7.7 
+ * FixedDataTable v0.7.8 
  *
  * Copyright (c) 2015, Facebook, Inc.
  * All rights reserved.
@@ -2091,7 +2091,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * CSS style props to pass to the box shadow that shows up on the fixed
 	     * header while scrolling
 	     */
-	    topShadowStyle: PropTypes.object
+	    topShadowStyle: PropTypes.object,
+
+	    /**
+	     * CSS style props to pass to the horizontal scrollbar
+	     */
+	    horizontalScrollbarStyle: PropTypes.object
 	  },
 
 	  getDefaultProps: function getDefaultProps() /*object*/{
@@ -2101,7 +2106,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      headerHeight: 0,
 	      scrollLeft: 0,
 	      scrollTop: 0,
-	      topShadowStyle: {}
+	      topShadowStyle: {},
+	      horizontalScrollbarStyle: {}
 	    };
 	  },
 
@@ -2272,7 +2278,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        offset: bottomSectionOffset,
 	        onScroll: this._onHorizontalScroll,
 	        position: state.scrollX,
-	        size: scrollbarXWidth
+	        size: scrollbarXWidth,
+	        horizontalScrollbarStyle: props.horizontalScrollbarStyle
 	      });
 	    }
 
@@ -2780,10 +2787,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  render: function render() /*object*/{
-	    var outerContainerStyle = {
+	    var outerContainerStyle = _extends({
 	      height: Scrollbar.SIZE,
 	      width: this.props.size
-	    };
+	    }, this.props.horizontalScrollbarStyle);
 	    var innerContainerStyle = {
 	      height: Scrollbar.SIZE,
 	      position: "absolute",

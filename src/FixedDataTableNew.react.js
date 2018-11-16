@@ -257,7 +257,12 @@ var FixedDataTable = createReactClass({
      * CSS style props to pass to the box shadow that shows up on the fixed
      * header while scrolling
      */
-    topShadowStyle: PropTypes.object
+    topShadowStyle: PropTypes.object,
+
+    /**
+     * CSS style props to pass to the horizontal scrollbar
+     */
+    horizontalScrollbarStyle: PropTypes.object,
   },
 
   getDefaultProps() /*object*/ {
@@ -267,7 +272,8 @@ var FixedDataTable = createReactClass({
       headerHeight: 0,
       scrollLeft: 0,
       scrollTop: 0,
-      topShadowStyle: {}
+      topShadowStyle: {},
+      horizontalScrollbarStyle: {},
     };
   },
 
@@ -484,6 +490,7 @@ var FixedDataTable = createReactClass({
           onScroll={this._onHorizontalScroll}
           position={state.scrollX}
           size={scrollbarXWidth}
+          horizontalScrollbarStyle={props.horizontalScrollbarStyle}
         />
       );
     }
@@ -1102,13 +1109,14 @@ var HorizontalScrollbar = createReactClass({
   render() /*object*/ {
     var outerContainerStyle = {
       height: Scrollbar.SIZE,
-      width: this.props.size
+      width: this.props.size,
+      ...this.props.horizontalScrollbarStyle,
     };
     var innerContainerStyle = {
       height: Scrollbar.SIZE,
       position: "absolute",
       overflow: "hidden",
-      width: this.props.size
+      width: this.props.size,
     };
     translateDOMPositionXY(innerContainerStyle, 0, this.props.offset);
 
