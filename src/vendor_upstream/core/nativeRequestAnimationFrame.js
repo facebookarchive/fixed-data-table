@@ -9,6 +9,11 @@
  * @providesModule nativeRequestAnimationFrame
  */
 
+if (requestAnimationFrame) {
+    global.requestAnimationFrame = requestAnimationFrame.bind(null);
+}
+
+
 var nativeRequestAnimationFrame =
   global.requestAnimationFrame       ||
   global.webkitRequestAnimationFrame ||
